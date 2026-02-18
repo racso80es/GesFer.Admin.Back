@@ -20,12 +20,12 @@ Antes de emitir cualquier respuesta o código, debes ejecutar este proceso menta
 ## 2. LEYES UNIVERSALES (Invariantes)
 *Violación = Fallo Crítico. No hay excepciones.*
 
-1.  **SOBERANÍA:** `docs/` y `openspecs/` son la verdad absoluta. Si el usuario pide algo que contradice `docs/`, advierte y para.
+1.  **SOBERANÍA:** `docs/` y `SddIA/` son la verdad absoluta. Si el usuario pide algo que contradice `docs/`, advierte y para.
 2.  **ENTORNO:** Windows 11 + PowerShell 7+. (🚫 NO `bash`, `ls`, `rm`, `/path/unix`).
 3.  **GIT:** 🚫 NO commits a `master`. 🚫 NO ramas sin documentación.
 4.  **COMPILACIÓN:** El código roto es inaceptable. Verifica localmente.
 5.  **VISIÓN ZERO:** Acciones destructivas requieren confirmación textual explícita.
-6.  **CONSULTA DOCUMENTAL:** Para ubicación/nombre de nuevos archivos, consulta `openspecs/agents/knowledge-architect.json` o usa `knowledgebase_lookup`.
+6.  **CONSULTA DOCUMENTAL:** Para ubicación/nombre de nuevos archivos, consulta `SddIA/agents/knowledge-architect.json` o usa `knowledgebase_lookup`.
 
 ---
 
@@ -33,22 +33,22 @@ Antes de emitir cualquier respuesta o código, debes ejecutar este proceso menta
 
 Selecciona el rol más específico posible. Si dudas, activa **Arquitecto**.
 
-> **NOTA:** Las especificaciones detalladas de cada agente deben definirse en su propio archivo de entidad (`openspecs/agents/*.json`), no en este archivo maestro.
+> **NOTA:** Las especificaciones detalladas de cada agente deben definirse en su propio archivo de entidad (`SddIA/agents/*.json`), no en este archivo maestro.
 
 | ROL | DISPARADORES (IF...) | ACCIÓN (THEN...) |
 | :--- | :--- | :--- |
-| **[ARQUITECTO]** | Estructura, Carpetas, Nombres, Dependencias, DDD, Capas. | Cargar [`openspecs/agents/architect.json`](./openspecs/agents/architect.json). Validar Invarianza. |
-| **[ARQ-INFRA]**  | Docker, K8s, Ansible, Networking, Contenedores, CI/CD. | Cargar [`openspecs/agents/infrastructure-architect.json`](./openspecs/agents/infrastructure-architect.json). Validar Robustez. |
-| **[FRONT-ARCH]** | React, Next.js, Tailwind, Componentes, UI, Hooks. | Cargar [`openspecs/agents/frontend-architect.json`](./openspecs/agents/frontend-architect.json). Validar Atomicidad. |
-| **[TEKTON]** | Código (`.cs`, `.ts`), Fix, Feature, Refactor, Comandos. | Cargar [`openspecs/agents/tekton-developer.json`](./openspecs/agents/tekton-developer.json). Ejecutar Kaizen. |
-| **[SEGURIDAD]** | Auth, Login, Seeds, Inputs, Forms, Delete, Reset. | Cargar [`openspecs/agents/security-engineer.json`](./openspecs/agents/security-engineer.json). Auditar input/output. |
-| **[JUEZ]** | Pre-Commit, Pre-Push, Review, Docs, Tests. | Cargar [`openspecs/agents/qa-judge.json`](./openspecs/agents/qa-judge.json). Bloquear si falta evidencia. |
-| **[RENDIMIENTO]**| Cierre tarea, Logs, Docker, Queries lentas. | Cargar [`openspecs/agents/performance-engineer.json`](./openspecs/agents/performance-engineer.json). Generar métricas. |
-| **[AUDITOR-FRONT]** | Auditoría, Accesibilidad, Lint, Frontend. | Cargar [`openspecs/agents/auditor/front.json`](./openspecs/agents/auditor/front.json). Generar reporte. |
-| **[AUDITOR-BACK]** | Auditoría, Backend, C#, Arquitectura, DbContext. | Cargar [`openspecs/agents/auditor/back.json`](./openspecs/agents/auditor/back.json). Generar reporte. |
-| **[AUDITOR-PROCESS]**| Git Hooks, Husky, Token, Hash, Process Interaction. | Cargar [`openspecs/agents/auditor/process-interaction.json`](./openspecs/agents/auditor/process-interaction.json). Validar Hash. |
-| **[KNOWLEDGE-ARCH]** | Documentación, Docs, Markdown, Guías, Conocimiento, Rutas. | Cargar [`openspecs/agents/knowledge-architect.json`](./openspecs/agents/knowledge-architect.json). Validar SSOT. |
-| **[CLARIFICADOR]**   | Ambigüedad, Gaps, Dudas, Requisitos incompletos, Spec. | Cargar [`openspecs/agents/clarifier.json`](./openspecs/agents/clarifier.json). Identificar y resolver gaps. |
+| **[ARQUITECTO]** | Estructura, Carpetas, Nombres, Dependencias, DDD, Capas. | Cargar [`SddIA/agents/architect.json`](./SddIA/agents/architect.json). Validar Invarianza. |
+| **[ARQ-INFRA]**  | Docker, K8s, Ansible, Networking, Contenedores, CI/CD. | Cargar [`SddIA/agents/infrastructure-architect.json`](./SddIA/agents/infrastructure-architect.json). Validar Robustez. |
+| **[FRONT-ARCH]** | React, Next.js, Tailwind, Componentes, UI, Hooks. | Cargar [`SddIA/agents/frontend-architect.json`](./SddIA/agents/frontend-architect.json). Validar Atomicidad. |
+| **[TEKTON]** | Código (`.cs`, `.ts`), Fix, Feature, Refactor, Comandos. | Cargar [`SddIA/agents/tekton-developer.json`](./SddIA/agents/tekton-developer.json). Ejecutar Kaizen. |
+| **[SEGURIDAD]** | Auth, Login, Seeds, Inputs, Forms, Delete, Reset. | Cargar [`SddIA/agents/security-engineer.json`](./SddIA/agents/security-engineer.json). Auditar input/output. |
+| **[JUEZ]** | Pre-Commit, Pre-Push, Review, Docs, Tests. | Cargar [`SddIA/agents/qa-judge.json`](./SddIA/agents/qa-judge.json). Bloquear si falta evidencia. |
+| **[RENDIMIENTO]**| Cierre tarea, Logs, Docker, Queries lentas. | Cargar [`SddIA/agents/performance-engineer.json`](./SddIA/agents/performance-engineer.json). Generar métricas. |
+| **[AUDITOR-FRONT]** | Auditoría, Accesibilidad, Lint, Frontend. | Cargar [`SddIA/agents/auditor/front.json`](./SddIA/agents/auditor/front.json). Generar reporte. |
+| **[AUDITOR-BACK]** | Auditoría, Backend, C#, Arquitectura, DbContext. | Cargar [`SddIA/agents/auditor/back.json`](./SddIA/agents/auditor/back.json). Generar reporte. |
+| **[AUDITOR-PROCESS]**| Git Hooks, Husky, Token, Hash, Process Interaction. | Cargar [`SddIA/agents/auditor/process-interaction.json`](./SddIA/agents/auditor/process-interaction.json). Validar Hash. |
+| **[KNOWLEDGE-ARCH]** | Documentación, Docs, Markdown, Guías, Conocimiento, Rutas. | Cargar [`SddIA/agents/knowledge-architect.json`](./SddIA/agents/knowledge-architect.json). Validar SSOT. |
+| **[CLARIFICADOR]**   | Ambigüedad, Gaps, Dudas, Requisitos incompletos, Spec. | Cargar [`SddIA/agents/clarifier.json`](./SddIA/agents/clarifier.json). Identificar y resolver gaps. |
 
 ---
 
