@@ -1,0 +1,97 @@
+{
+  "mode": "pr_analysis",
+  "timestamp": "2026-02-17T00:00:00Z",
+  "branch": "main",
+  "base_branch": "origin/main",
+  "persist": null,
+  "warning": "No hay documentación de tarea ({persist}); validación ejecutada en modo análisis de cambios de PR.",
+  "pr_changes": {
+    "files_modified": [
+      "AGENTS.md",
+      "SddIA/actions/clarify.md",
+      "SddIA/actions/execution.md",
+      "SddIA/actions/spec.md",
+      "SddIA/agents/architect.json",
+      "SddIA/agents/clarifier.json",
+      "SddIA/agents/cumulo.json",
+      "SddIA/agents/qa-judge.json",
+      "SddIA/agents/security-engineer.json",
+      "SddIA/agents/tekton-developer.json",
+      "SddIA/constitution.json",
+      "docs/PROJECT_STATUS.md"
+    ],
+    "files_deleted": [
+      "SddIA/actions/feature.md",
+      "SddIA/plans/PLAN-20260209-0920-PLAN_CORRECCION_TESTS_2026_02_09.json",
+      "SddIA/plans/PLAN-20260209-0920-PLAN_CORRECCION_TESTS_2026_02_09.md",
+      "SddIA/plans/PLAN-ACCESIBILIDAD-ELECTRON-002.md",
+      "SddIA/plans/PLAN-ACCESIBILIDAD-ELECTRON-003.md",
+      "SddIA/plans/PLAN-COMPANY-MANAGED-BY-ADMIN.md",
+      "SddIA/plans/PLAN-CONSOLA-ACCION-1-FRONT-OPTIMIZACION.json",
+      "SddIA/plans/PLAN-E2E-PRODUCT-BACK-MOCKED.md",
+      "SddIA/plans/PLAN-KALMA2-E2E-TESTS.md",
+      "SddIA/plans/PLAN-KALMA2-UNIT-TESTS.md",
+      "SddIA/plans/PROPUESTA_MEJORA_CALIDAD_S_PLUS.md",
+      "SddIA/plans/iota-rebased-audit.md",
+      "SddIA/plans/mejorar-accesibilidad-electron-plan.md",
+      "SddIA/specs/SPEC-20260213-1200-Gate-Smoke-Tests-CI.md",
+      "SddIA/specs/SPEC-ACCESIBILIDAD-ELECTRON-002.md",
+      "SddIA/specs/SPEC-ACCESIBILIDAD-ELECTRON-002_CLARIFICATIONS.md",
+      "SddIA/specs/SPEC-ACCESIBILIDAD-ELECTRON-003.md",
+      "SddIA/specs/SPEC-ACCESIBILIDAD-ELECTRON-003_CLARIFICATIONS.md",
+      "SddIA/specs/SPEC-COMPANY-MANAGED-BY-ADMIN.md",
+      "SddIA/specs/SPEC-KALMA2-E2E-TESTS.md",
+      "SddIA/specs/SPEC-KALMA2-E2E-TESTS_CLARIFICATIONS.md",
+      "SddIA/specs/SPEC-KALMA2-UNIT-TESTS.md",
+      "SddIA/specs/SPEC-KALMA2-UNIT-TESTS_CLARIFICATIONS.md",
+      "SddIA/specs/SPEC-LOGGING-INTERACTION-001.md",
+      "SddIA/specs/SPEC-REFACTOR-PRODUCT-NO-COMPANY.md",
+      "SddIA/specs/e2e-product-back-mocked.md",
+      "SddIA/specs/e2e-product-back-mocked_CLARIFICATIONS.md",
+      "SddIA/specs/launcher-desktop.md",
+      "SddIA/specs/launcher-desktop_CLARIFICATIONS.md",
+      "SddIA/specs/mejorar-accesibilidad-electron.md",
+      "SddIA/specs/mejorar-accesibilidad-electron_CLARIFICATIONS_20260207-1115.md"
+    ],
+    "files_added": [
+      "SddIA/actions/finalize.md",
+      "SddIA/actions/validate.md",
+      "SddIA/process/README.md",
+      "SddIA/process/feature.md",
+      "SddIA/process/bug-fix-specialist.json"
+    ],
+    "summary_by_category": {
+      "SddIA_process": { "modified": 0, "added": 4, "deleted": 0 },
+      "SddIA_actions": { "modified": 3, "added": 2, "deleted": 1 },
+      "SddIA_agents": { "modified": 6, "added": 0, "deleted": 0 },
+      "SddIA_specs_plans": { "modified": 0, "added": 0, "deleted": 28 },
+      "docs": { "modified": 1, "added": 0, "deleted": 0 },
+      "root": { "modified": 1, "added": 0, "deleted": 0 }
+    }
+  },
+  "checks": [
+    {
+      "name": "build",
+      "result": "fail",
+      "message": "La solución depende de proyectos externos (Shared/Back) fuera del repositorio. dotnet build falla por GesFer.Shared.Back.Domain no encontrado.",
+      "detail": "Proyectos en src/ referencian ..\\..\\..\\Shared\\Back\\*.csproj; en el repo aislado GesFer.Admin.Back esas rutas no existen."
+    },
+    {
+      "name": "test",
+      "result": "skip",
+      "message": "Tests no ejecutados: build falló."
+    },
+    {
+      "name": "documentation",
+      "result": "warn",
+      "message": "Modo sin documentación: no existe {persist}. Cambios analizados por diff frente a rama base."
+    },
+    {
+      "name": "git_branch",
+      "result": "warn",
+      "message": "Rama actual es main. Según Ley GIT el trabajo debería estar en feat/ o fix/."
+    }
+  ],
+  "global": "fail",
+  "blocking": true
+}

@@ -82,15 +82,11 @@ Existen dos jerarquías de tests, una válida y una obsoleta.
 
 ## 4. Análisis de Documentación y Agentes
 
-**Auditor:** Knowledge Architect
+**Auditor:** Cúmulo (agente documental; `SddIA/agents/cumulo.json`).
 
 ### Situación Actual
-El sistema multi-agente (`AGENTS.md`) apuntaba a una ruta inexistente (`openspecs/`).
-
-*   **Corrección Realizada:** Se ha actualizado `AGENTS.md` para apuntar a `SddIA/`.
-*   **Faltantes:**
-    *   El archivo de especificación `SddIA/agents/knowledge-architect.json` **no existe**, aunque es referenciado en `AGENTS.md`. Esto impide que el agente de documentación opere bajo sus propias reglas estrictas.
+El sistema multi-agente (`AGENTS.md`) apunta a `SddIA/`. La autoridad documental y rutas de persistencia están en **Cúmulo** (`SddIA/agents/cumulo.json`). Los procesos de tarea (feature, bug-fix) están definidos en **`SddIA/process/`**.
 
 ### Acción Requerida
-1.  **Crear/Restaurar** `SddIA/agents/knowledge-architect.json`.
-2.  **Mantener** `docs/` como fuente de verdad.
+1.  **Mantener** `docs/` como fuente de verdad.
+2.  Para iniciar una tarea, elegir un proceso en `SddIA/process/` (feature o bug-fix).

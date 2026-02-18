@@ -2,7 +2,7 @@
 
 ## Propósito
 
-La acción **execution** (ejecución) aplica al código los cambios definidos en el documento de implementación. Transforma los ítems del `implementation.json` (o del documento IMPL asociado) en modificaciones reales en el repositorio: crear, modificar o eliminar archivos según la propuesta de cada ítem. No define qué cambiar —eso ya está en la fase de implementation— sino que **ejecuta** esos cambios de forma ordenada y registra el resultado para trazabilidad.
+La acción **execution** (ejecución) aplica al código los cambios definidos en el documento de implementación. Transforma los ítems del `implementation.json` (o del documento IMPL asociado) en modificaciones reales en el repositorio: crear, modificar o eliminar archivos según la propuesta de cada ítem. No define qué cambiar —eso ya está en la fase de implementation— sino que **ejecuta** esos cambios de forma ordenada, realizando tareas agrupadas en commits y registra el resultado para trazabilidad.
 
 ## Principio
 

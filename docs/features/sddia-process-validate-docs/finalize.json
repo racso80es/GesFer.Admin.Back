@@ -1,0 +1,7 @@
+{
+  "branch": "feat/sddia-process-validate-docs",
+  "persist": "docs/features/sddia-process-validate-docs/",
+  "timestamp": "2026-02-17",
+  "pr_url": "",
+  "note": "PR debe crearse manualmente hacia main. Descripción: enlazar a docs/features/sddia-process-validate-docs/."
+}

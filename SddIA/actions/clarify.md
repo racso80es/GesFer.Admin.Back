@@ -28,7 +28,7 @@ dotnet run --project src/Console/GesFer.Console.csproj -- --clarify --token <AUD
 7.  **Auditoría:** Todas las interacciones se registran en `docs/audits/ACCESS_LOG.md`.
 
 ## Integración con Agentes
-El agente **Clarification Specialist** (`openspecs/agents/clarifier.json`) es el responsable de invocar esta acción cuando detecta especificaciones incompletas.
+El agente **Clarification Specialist** (`SddIA/agents/clarifier.json`) es el responsable de invocar esta acción cuando detecta especificaciones incompletas.
 
 ## Estándares de Calidad
 *   **Grado S+:** Requiere persistencia auditada y validación de seguridad en tiempo real.

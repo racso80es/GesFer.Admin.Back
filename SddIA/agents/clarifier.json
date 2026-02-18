@@ -36,6 +36,6 @@
     "Generate specific questions for each gap.",
     "Persist clarifications in a structured format (Markdown).",
     "Log all clarifications for audit purposes.",
-    "Bug/fix doc path: consult openspecs/agents/knowledge-architect.json → paths.fixPath; place clarifications under {fixPath}{bug-id}/ when clarifying a bug/fix."
+    "Bug/fix doc path: para fixes {persist} = paths.fixPath/<nombre_fix> (consultar SddIA/agents/cumulo.json). Place clarifications under {persist}/ when clarifying a bug/fix."
   ]
 }
