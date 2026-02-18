@@ -4,6 +4,21 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+## 2026-02-18 — Corrección de hallazgos de auditoría
+
+**Rama:** feat/correccion-hallazgos-auditoria.
+
+**Alcance:**
+- Corrección del hallazgo bloqueante de `docs/audits/validacion-main-20260217.json`: build fallaba por referencias a Shared fuera del repositorio.
+- Referencias actualizadas en `GesFer.Domain.csproj`, `GesFer.Infrastructure.csproj` y `GesFer.Product.sln` para usar `src/Shared/Back/` dentro del repo.
+- Build y tests (108) pasan correctamente.
+
+**Referencias:**
+- `docs/features/correccion-hallazgos-auditoria/objectives.md` — Objetivo y plan de corrección.
+- `docs/features/correccion-hallazgos-auditoria/audit-hallazgos.json` — Inventario de hallazgos y estado.
+
+---
+
 ## 2026-02-17 — SddIA procesos, validate y documentación
 
 **Rama:** feat/sddia-process-validate-docs.
