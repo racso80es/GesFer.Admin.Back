@@ -660,7 +660,7 @@ public class JsonDataSeeder
                     var randomPwd = _sanitizer.GenerateRandomPassword();
                     passwordHash = BCrypt.Net.BCrypt.HashPassword(randomPwd);
                     // IMPORTANTE: En entorno real, esto debería comunicarse de forma segura.
-                    // Aquí lo logueamos como Warning para que el desarrollador lo vea en la consola al iniciar.
+                    // Aquí lo logueamos como Warning para que el desarrollador lo vea en los logs al iniciar.
                     _logger.LogWarning("[SEED SECURE] 🔐 Generated RANDOM password for user '{Username}': {Password}", userData.Username, randomPwd);
                 }
                 else

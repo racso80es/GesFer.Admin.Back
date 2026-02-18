@@ -33,11 +33,7 @@ La acción **execution** (ejecución) aplica al código los cambios definidos en
 
 ## Implementación técnica (opcional)
 
-Si se implementa como comando de consola, por ejemplo:
-
-```powershell
-dotnet run --project src/Console/GesFer.Console.csproj -- --execution --implementation <IMPL_OR_JSON_PATH> [--persist <FEATURE_PATH>] [--token <AUDITOR_TOKEN>]
-```
+Puede ejecutarse mediante scripts o el agente Tekton que consuma el documento de implementación. Parámetros típicos:
 
 - `--implementation`: ruta a `implementation.json` o al documento IMPL.
 - `--persist`: ruta base de la feature (ej. `docs/features/<nombre_feature>/`); donde se escribirá `execution.json`.

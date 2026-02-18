@@ -16,19 +16,19 @@ namespace GesFer.IntegrationTests.Services;
 
 /// <summary>
 /// Tests para validar que JsonDataSeeder puede encontrar los archivos JSON de seeds
-/// desde diferentes contextos de ejecución (API, Consola, etc.)
+/// desde diferentes contextos de ejecución (API u otros hosts).
 /// </summary>
 public class JsonDataSeederTests
 {
     /// <summary>
     /// Valida que JsonDataSeeder puede encontrar los archivos JSON de seeds
-    /// cuando se ejecuta desde el contexto de la consola.
+    /// cuando se ejecuta desde cualquier contexto de host (API, tests, etc.).
     /// 
     /// IMPORTANTE: Este test DEBE FALLAR si los archivos no se encuentran.
-    /// Si el test pasa, significa que la consola puede encontrar los archivos JSON correctamente.
+    /// Si el test pasa, significa que el seeder puede encontrar los archivos JSON correctamente.
     /// </summary>
     [Fact]
-    public async Task JsonDataSeeder_ShouldFindSeedsFiles_WhenExecutedFromConsole()
+    public async Task JsonDataSeeder_ShouldFindSeedsFiles_WhenExecutedFromAnyHost()
     {
         // Arrange
         var services = new ServiceCollection();
@@ -86,7 +86,7 @@ public class JsonDataSeederTests
 
     /// <summary>
     /// Valida que JsonDataSeeder puede encontrar los archivos incluso cuando se ejecuta
-    /// desde un contexto diferente (simulando ejecución desde la consola)
+    /// desde un contexto de ejecución distinto (p. ej. tests en lugar de la API).
     /// </summary>
     [Fact]
     public async Task JsonDataSeeder_ShouldNotThrow_WhenExecutedFromDifferentContext()

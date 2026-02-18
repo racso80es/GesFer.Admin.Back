@@ -38,22 +38,11 @@ Los datos se cargan automáticamente mediante:
 
 1. **API (Development)**: Al iniciar la API en modo Development, `DbInitializer` aplica migraciones y carga datos desde JSON.
 
-2. **Consola (Opción 1)**: La opción "Inicialización completa" de la consola ejecuta `DbInitializer` que:
-   - Aplica todas las migraciones pendientes
-   - Carga datos desde `master-data.json`
-   - Carga datos desde `demo-data.json`
-
-3. **Consola (Opción 6)**: Menú de seeds que permite ejecutar:
-   - Solo datos maestros
-   - Solo datos de muestra
-   - Solo datos de prueba
-   - Todos los seeds
-
 ## Características del Sistema JSON
 
 ✅ **Idempotente**: Puede ejecutarse múltiples veces sin duplicar datos
 ✅ **Mantenible**: Fácil de editar y versionar
-✅ **Consistente**: Mismo sistema para API, Consola y Tests
+✅ **Consistente**: Mismo sistema para API y Tests
 ✅ **Automático**: Se carga automáticamente en Development
 
 ## Cómo Añadir Nuevos Datos
@@ -85,7 +74,7 @@ Si necesitas recuperar y migrar datos desde scripts SQL antiguos:
 1. Busca el script SQL en el historial de Git.
 2. Identifica los datos a migrar.
 3. Añádelos al archivo JSON correspondiente (`master-data.json`, `demo-data.json` o `test-data.json`).
-4. Ejecuta la opción 1 de la consola o reinicia la API en Development.
+4. Reinicia la API en Development para que cargue los nuevos datos.
 
 ## Documentación Técnica
 
