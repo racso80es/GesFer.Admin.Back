@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
@@ -31,7 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la soluciÃƒ�
 		docker-stop.ps1 = docker-stop.ps1
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GesFer.Shared.Back.Domain", "..\..\Shared\Back\GesFer.Shared.Back.Domain.csproj", "{F85FD985-5835-0669-3C59-05EB2AD309E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GesFer.Shared.Back.Domain", "Shared\Back\GesFer.Shared.Back.Domain.csproj", "{F85FD985-5835-0669-3C59-05EB2AD309E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

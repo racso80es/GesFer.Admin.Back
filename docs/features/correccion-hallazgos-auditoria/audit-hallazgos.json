@@ -1,0 +1,41 @@
+{
+  "source": "docs/audits/validacion-main-20260217.json",
+  "timestamp": "2026-02-18",
+  "persist": "docs/features/correccion-hallazgos-auditoria/",
+  "hallazgos": [
+    {
+      "id": "build-shared-refs",
+      "check": "build",
+      "result": "fail",
+      "blocking": true,
+      "accion": "Corregir referencias ProjectReference en .csproj: usar src/Shared/Back dentro del repo en lugar de ../../../Shared/Back",
+      "estado": "cumplido",
+      "touchpoints": ["src/domain/GesFer.Domain.csproj", "src/Infrastructure/GesFer.Infrastructure.csproj", "src/GesFer.Product.sln"],
+      "estado": "aplicado"
+    },
+    {
+      "id": "test-skip",
+      "check": "test",
+      "result": "skip",
+      "blocking": false,
+      "accion": "Se desbloquea al corregir build; no acción directa",
+      "estado": "cumplido"
+    },
+    {
+      "id": "documentation-warn",
+      "check": "documentation",
+      "result": "warn",
+      "blocking": false,
+      "accion": "Cumplido: esta feature tiene {persist} definido",
+      "estado": "cumplido"
+    },
+    {
+      "id": "git-branch-warn",
+      "check": "git_branch",
+      "result": "warn",
+      "blocking": false,
+      "accion": "Trabajo en rama feat/correccion-hallazgos-auditoria",
+      "estado": "cumplido"
+    }
+  ]
+}
