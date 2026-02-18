@@ -25,15 +25,37 @@ Antes de emitir cualquier respuesta o código, debes ejecutar este proceso menta
 3.  **GIT:** 🚫 NO commits a `master`. 🚫 NO ramas sin documentación.
 4.  **COMPILACIÓN:** El código roto es inaceptable. Verifica localmente.
 5.  **VISIÓN ZERO:** Acciones destructivas requieren confirmación textual explícita.
-6.  **CONSULTA DOCUMENTAL:** Para ubicación/nombre de nuevos archivos, consulta `SddIA/agents/Cumulo.json`.
+6.  **CONSULTA DOCUMENTAL:** La **única fuente de rutas** para documentación de tareas es el agente **Cúmulo** (`SddIA/agents/cumulo.json`). Consultar `paths.featurePath`, `paths.fixPath`, `paths.logPath` según el tipo de tarea; no usar rutas literales (p. ej. `docs/features/`, `docs/bugs/`) sin derivarlas de Cúmulo.
 
 ---
 
-## 3. ACTIVACIÓN DE ROLES (Algoritmo)
+## 3. INICIO DE TAREA (Procesos)
+
+Al **empezar una tarea** se debe elegir un **proceso**. Los procesos definen el ciclo completo (rama, documentación, especificación, implementación, validación y cierre). Las **rutas de persistencia** se obtienen siempre de **Cúmulo** (`SddIA/agents/cumulo.json` → `paths`).
+
+| Proceso | Descripción | {persist} (fuente: Cúmulo) | Definición |
+| :--- | :--- | :--- | :--- |
+| **feature** | Funcionalidad nueva: rama `feat/<nombre_feature>`. | `paths.featurePath/<nombre_feature>` | [`SddIA/process/feature.md`](./SddIA/process/feature.md) |
+| **bug-fix** | Corrección de bug: rama `fix/<nombre_fix>`. Alcance mínimo. | `paths.fixPath/<nombre_fix>` | [`SddIA/process/bug-fix-specialist.json`](./SddIA/process/bug-fix-specialist.json) |
+
+Índice de procesos: [`SddIA/process/README.md`](./SddIA/process/README.md).
+
+### 3.1. Interfaz de procesos (normas para agentes de proceso)
+
+Todo elemento que actúe como **proceso** (o agente de proceso) debe cumplir una **interfaz** que exige la existencia y uso de artefactos en formatos fijos:
+
+- **`.md`** — Documentación legible (objetivos, spec, clarificaciones, plan, resúmenes). El proceso debe **solicitar o generar** al menos un fichero `.md` por tarea (p. ej. `objectives.md`, `spec.md`, `clarify.md`).
+- **`.json`** — Metadatos y resultados machine-readable (spec, clarificaciones, implementación, validación). El proceso debe **solicitar o generar** al menos un fichero `.json` por tarea (p. ej. `spec.json`, `clarify.json`, `implementation.json`, `validacion.json`).
+
+Cumplimiento: cada proceso en `SddIA/process/` debe documentar qué artefactos `{nombre}.md` y `{nombre}.json` requiere o produce en `{persist}/`, y los agentes que orquestan el proceso deben respetar esa interfaz.
+
+---
+
+## 4. ACTIVACIÓN DE ROLES (Algoritmo)
 
 Selecciona el rol más específico posible. Si dudas, activa **Arquitecto**.
 
-> **NOTA:** Las especificaciones detalladas de cada agente deben definirse en su propio archivo de entidad (`SddIA/agents/*.json`), no en este archivo maestro.
+> **NOTA:** Rutas de agentes: consultar Cúmulo cuando aplique; por convención, definiciones en `SddIA/agents/*.json` y agentes de proceso en `SddIA/process/*.json`. Las rutas de documentación de tareas ({persist}) vienen siempre de Cúmulo (`paths.featurePath`, `paths.fixPath`).
 
 | ROL | DISPARADORES (IF...) | ACCIÓN (THEN...) |
 | :--- | :--- | :--- |
@@ -48,11 +70,12 @@ Selecciona el rol más específico posible. Si dudas, activa **Arquitecto**.
 | **[AUDITOR-BACK]** | Auditoría, Backend, C#, Arquitectura, DbContext. | Cargar [`SddIA/agents/auditor/back.json`](./SddIA/agents/auditor/back.json). Generar reporte. |
 | **[AUDITOR-PROCESS]**| Git Hooks, Husky, Token, Hash, Process Interaction. | Cargar [`SddIA/agents/auditor/process-interaction.json`](./SddIA/agents/auditor/process-interaction.json). Validar Hash. |
 | **[CUMULO]** | Documentación, Docs, Markdown, Guías, Conocimiento, Rutas. | Cargar [`SddIA/agents/cumulo.json`](./SddIA/agents/cumulo.json). Validar SSOT. |
-| **[CLARIFICADOR]**   | Ambigüedad, Gaps, Dudas, Requisitos incompletos, Spec. | Cargar [`SddIA/agents/clarifier.json`](./SddIA/agents/clarifier.json). Identificar y resolver gaps. |
+| **[FEATURE]**   | tareas, acciones, objetivos | Cargar [`SddIA/process/feature.json`](./SddIA/process/feature.json). Orquestra ciclo de una feature. |
+| **[BUG-FIX]** | Bug, Fix, Incidencia, Corrección, Reproducción. | Cargar [`SddIA/process/bug-fix-specialist.json`](./SddIA/process/bug-fix-specialist.json). Orquestar ciclo del fix. |
 
 ---
 
-## 4. INSTRUCCIONES DE AUTO-CORRECCIÓN
+## 5. INSTRUCCIONES DE AUTO-CORRECCIÓN
 Si detectas que has generado código que viola una regla:
 1.  **DETENTE.**
 2.  Escribe: `[AUTO-CORRECCIÓN]: He detectado una violación de <Regla>. Corrigiendo...`

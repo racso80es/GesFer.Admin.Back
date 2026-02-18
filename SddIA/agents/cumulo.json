@@ -25,10 +25,17 @@
     "logPath": "./docs/logs/",
     "featurePath": "./docs/features/"
   },
+  "process_interface": {
+    "description": "Elementos de proceso deben cumplir esta interfaz.",
+    "required_artefacts": [
+      { "ext": ".md", "purpose": "Documentación legible. Solicitar o generar al menos un {nombre}.md en {persist}/." },
+      { "ext": ".json", "purpose": "Metadatos machine-readable. Solicitar o generar al menos un {nombre}.json en {persist}/." }
+    ]
+  },
   "instructions": [
     "Map [EVO] -> docs/evolution/",
     "Map [AUD] -> docs/audits/",
-    "Map [BUG]/[FIX] -> docs/bugs/{bug}/ (base: paths.fixPath)",
+    "Map [BUG]/[FIX] -> {persist}/ con {persist} = paths.fixPath/<nombre_fix> (base: paths.fixPath; ej. docs/bugs/<nombre_fix>/)",
     "Map [TEC] -> docs/architecture/ & docs/infrastructure/",
     "Map [DEBT] -> docs/DeudaTecnica/",
     "Map [OPS] -> docs/tasks/",

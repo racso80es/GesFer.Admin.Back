@@ -43,7 +43,7 @@
     {
       "id": "L6_CONSULTATION",
       "rule": "Knowledge Lookup",
-      "description": "Consult openspecs/agents/knowledge-architect.json for file paths/names.",
+      "description": "Consult SddIA/agents/cumulo.json for file paths/names.",
       "severity": "HIGH"
     }
   ],

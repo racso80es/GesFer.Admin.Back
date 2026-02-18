@@ -48,6 +48,6 @@
     "Invarianza de Dominio: Logica de negocio de metales -> Product/domain. Gestion de usuarios sistema -> Admin/domain.",
     "Chequeo: ¿El cambio respeta la frontera Admin/Product?",
     "Chequeo: ¿Se usan ValueObjects (Email, TaxId) en lugar de strings?",
-    "Bug/fix doc path: consult openspecs/agents/knowledge-architect.json → paths.fixPath; place under {fixPath}{bug-id}/."
+    "Bug/fix doc path: para fixes {persist} = paths.fixPath/<nombre_fix> (consultar SddIA/agents/cumulo.json). Place under {persist}/."
   ]
 }
