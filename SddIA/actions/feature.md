@@ -2,21 +2,63 @@
 
 ## Propósito
 
-La acción **feature** define el procedimiento formal de ciclo completo para desarrollar una funcionalidad o tarea: desde la creación de la rama hasta el cierre y la apertura del Pull Request. Orquesta las acciones **spec**, **clarify** y **plan** en secuencia, fija la ubicación de la documentación de la tarea y garantiza trazabilidad en los logs de evolución.
+La acción **feature** define el procedimiento formal de ciclo completo para desarrollar una funcionalidad o tarea: desde la creación de la rama hasta el cierre y la apertura del Pull Request. Orquesta las acciones **spec**, **clarify**, **planning**, **implementation.md**, **validate.md**, **finish.md** en secuencia, fija. la ubicación de la documentación de la tarea y garantiza trazabilidad en los logs de evolución.
 
-Proporciona un flujo repetible y auditado, alineado con las Leyes Universales (soberanía documental en `docs/`, no commits en `master`, entorno Windows + PowerShell).
+Proporciona un flujo repetible y auditado, alineado con las Leyes Universales (soberanía documental en AGENTE_CUMULO, no commits en `master`).
 
 ## Alcance del procedimiento
 
+{persist} = AGENTE_CUMULO.featurePath/<nombre_feature>
+
 | Fase | Nombre | Descripción |
 | :--- | :--- | :--- |
-| **0** | Preparar entorno | Crear rama `feat/<nombre-feature>` (o `fix/` si aplica) desde `master`. No trabajar en `master`. |
-| **1** | Documentación con objetivos | Documentar objetivo, alcance y ley aplicada. La documentación de la tarea se ubica en **`docs/Feature/<nombre_feature>/`**. |
-| **2** | Especificación | Ejecutar o generar SPEC (acción **spec**). Entrada: requerimiento o borrador; salida: especificación técnica en `openspecs/specs/` y copia/canon en `docs/Feature/<nombre_feature>/`. |
-| **3** | Clarificación | Ejecutar o generar clarificaciones (acción **clarify**). Cerrar gaps y decisiones; persistir en `openspecs/specs/` y en `docs/Feature/<nombre_feature>/`. |
-| **4** | Planificación | Ejecutar o generar plan (acción **plan**). Entrada: SPEC + Clarificaciones; salida: roadmap de tareas en `openspecs/plans/` y en `docs/Feature/<nombre_feature>/`. |
-| **5** | Implementación | Ejecutar el plan (Tekton Developer). Verificación: `dotnet build` / `npm run build` y tests según corresponda. |
-| **6** | Cierre y PR | Commits atómicos en la rama; actualización de **Evolution Logs**; push de la rama y creación del Pull Request hacia `master`. En la descripción del PR, enlazar a `docs/Feature/<nombre_feature>/`. |
+| **0** | Preparar entorno | Crear rama {persist} (o `fix/` si aplica) desde `master`. No trabajar en `master`. |
+| **1** | Documentación con objetivos | Documentar objetivo, alcance y ley aplicada. La documentación de la tarea se ubica en **{persist}**/objectives.md. |
+| **2** | Especificación | Ejecutar o generar SPEC (acción **spec**). Entrada: requerimiento o borrador, {persist}/objectives.md; salida: especificación técnica en `SddAI/actions/spec.md` y copia/canon en {persist}/spec.md y {persist}/spec.json |
+
+| **3** | Clarificación | Ejecutar o generar clarificaciones (acción **clarify**). Cerrar gaps y decisiones; 
+especificación técnica : `SddAI/actions/clarify.md`
+Entrada: [
+    {persist}/objectives.md,
+    {persist}/spec.json]
+requerimiento o borrador; 
+salida: [
+    {persist}/clarify.md 
+    {persist}/clarify.json] |
+
+| **4** | Planificación | Ejecutar o generar plan (acción **plan**). 
+Entrada:[Especificación, Clarificacion]
+salida: 
+    {persist}/clarify.md 
+    {persist}/clarify.json]|
+
+| **5** | Implementación | Ejecutar el plan (Tekton Developer). |
+especificación técnica : `SddAI/actions/implentation.md`
+Entrada: [
+    {persist}/objectives.md,
+    {persist}/spec.json,
+    {persist}/clarify.json]
+salida: [
+    {persist}/implementation.md 
+    {persist}/implementation.json] |
+
+**6** | Ejecución | Ejecutar el plan (Tekton Developer). Aplicar adaptaciones al codigo según implementación |
+especificación técnica : `SddAI/actions/ejecution.md`
+Entrada: [{persist}/implementation.json]
+salida: [{persist}/ejecution.json] |
+
+
+**7** | Validar | Ejecutar el plan (Tekton Developer). Aplicar adaptaciones al codigo según implementación |
+especificación técnica : `SddAI/actions/validate.md`
+Entrada: [{persist}/]
+salida: [{persist}/validacion.json] |
+
+**8** | Finalizar | Cierre y pr. |
+especificación técnica : `SddAI/actions/finalize.md`
+Entrada: [{persist}/]
+salida: [{persist}/validacion.json] |
+
+| **7** | Cierre y PR | Commits atómicos en la rama; actualización de **Evolution Logs**; push de la rama y creación del Pull Request hacia `master`. En la descripción del PR, enlazar a `docs/Feature/<nombre_feature>/`. |
 
 ## Implementación
 

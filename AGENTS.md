@@ -25,7 +25,7 @@ Antes de emitir cualquier respuesta o código, debes ejecutar este proceso menta
 3.  **GIT:** 🚫 NO commits a `master`. 🚫 NO ramas sin documentación.
 4.  **COMPILACIÓN:** El código roto es inaceptable. Verifica localmente.
 5.  **VISIÓN ZERO:** Acciones destructivas requieren confirmación textual explícita.
-6.  **CONSULTA DOCUMENTAL:** Para ubicación/nombre de nuevos archivos, consulta `SddIA/agents/knowledge-architect.json` o usa `knowledgebase_lookup`.
+6.  **CONSULTA DOCUMENTAL:** Para ubicación/nombre de nuevos archivos, consulta `SddIA/agents/Cumulo.json`.
 
 ---
 
@@ -47,7 +47,7 @@ Selecciona el rol más específico posible. Si dudas, activa **Arquitecto**.
 | **[AUDITOR-FRONT]** | Auditoría, Accesibilidad, Lint, Frontend. | Cargar [`SddIA/agents/auditor/front.json`](./SddIA/agents/auditor/front.json). Generar reporte. |
 | **[AUDITOR-BACK]** | Auditoría, Backend, C#, Arquitectura, DbContext. | Cargar [`SddIA/agents/auditor/back.json`](./SddIA/agents/auditor/back.json). Generar reporte. |
 | **[AUDITOR-PROCESS]**| Git Hooks, Husky, Token, Hash, Process Interaction. | Cargar [`SddIA/agents/auditor/process-interaction.json`](./SddIA/agents/auditor/process-interaction.json). Validar Hash. |
-| **[KNOWLEDGE-ARCH]** | Documentación, Docs, Markdown, Guías, Conocimiento, Rutas. | Cargar [`SddIA/agents/knowledge-architect.json`](./SddIA/agents/knowledge-architect.json). Validar SSOT. |
+| **[CUMULO]** | Documentación, Docs, Markdown, Guías, Conocimiento, Rutas. | Cargar [`SddIA/agents/cumulo.json`](./SddIA/agents/cumulo.json). Validar SSOT. |
 | **[CLARIFICADOR]**   | Ambigüedad, Gaps, Dudas, Requisitos incompletos, Spec. | Cargar [`SddIA/agents/clarifier.json`](./SddIA/agents/clarifier.json). Identificar y resolver gaps. |
 
 ---
