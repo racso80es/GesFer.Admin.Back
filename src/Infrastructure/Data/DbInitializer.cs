@@ -299,7 +299,7 @@ public static class DbInitializer
 
     /// <summary>
     /// Carga datos iniciales desde archivos JSON de forma idempotente (orden interno: master → demo/test).
-    /// Para orden completo (master → admin → product) usar desde consola los métodos públicos en secuencia.
+    /// Para orden completo (master → admin → product) invocar los métodos públicos en secuencia desde el host que ejecute el inicializador.
     /// </summary>
     private static async Task SeedDataFromJsonAsync(
         ApplicationDbContext context,

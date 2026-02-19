@@ -57,7 +57,7 @@ Write-Host "   Estructura de base de datos recreada" -ForegroundColor Green
 
 # Nota: Los datos iniciales ahora se cargan desde archivos JSON mediante DbInitializer
 # No es necesario ejecutar scripts SQL manualmente. Los datos se cargan automáticamente
-# cuando se ejecuta la aplicación o la consola con la opción 1 (Inicialización completa)
+# cuando se ejecuta la aplicación (por ejemplo, la API en Development)
 Write-Host "4. Datos iniciales..." -ForegroundColor Yellow
 Write-Host "   NOTA: Los datos iniciales ahora se cargan desde archivos JSON" -ForegroundColor Cyan
 Write-Host "   ubicados en src/Product/Back/Infrastructure/Data/Seeds/" -ForegroundColor Cyan

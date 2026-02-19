@@ -38,10 +38,9 @@ La acción **implementation** (implementación) no realiza cambios en el código
 6. **Auditoría:** Registrar la generación en `docs/audits/ACCESS_LOG.md` (opcional pero recomendado).
 
 ## Implementación técnica (opcional)
-Si se implementa como comando de consola, por ejemplo:
-```bash
-dotnet run --project src/Console/GesFer.Console.csproj -- --implementation --plan <PLAN_PATH> [--spec <SPEC_PATH>] [--output <IMPL_DOC_PATH>] [--token <AUDITOR_TOKEN>]
-```
+
+Puede implementarse mediante scripts o el agente que genere el documento IMPL a partir del plan. Parámetros típicos:
+
 - `--plan`: ruta al documento PLAN (.md).
 - `--spec`: (opcional) ruta a la SPEC.
 - `--output`: (opcional) ruta del documento de implementación generado; si no se indica, derivar del nombre del plan (ej. mismo directorio, nombre `IMPL-ARTICLE-FAMILY-CRUD.md`).

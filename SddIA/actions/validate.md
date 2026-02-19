@@ -76,17 +76,11 @@ Cuando **no existe** carpeta de tarea (`{persist}` vacía o no proporcionada):
 
 ## Implementación técnica (opcional)
 
-Si se implementa como comando de consola, por ejemplo:
+La validación puede ejecutarse mediante scripts existentes (ej. `validate-pr.ps1`) y un agente que interprete la salida y genere `validacion.json`. Parámetros típicos:
 
-```powershell
-dotnet run --project src/Console/GesFer.Console.csproj -- --validate [--persist <FEATURE_PATH>] [--base-branch <BRANCH>] [--token <AUDITOR_TOKEN>]
-```
-
-- `--persist`: (opcional) ruta de la carpeta de la feature/fix (ej. `docs/features/<nombre_feature>/`). Si no se indica, se usa modo sin documentación.
-- `--base-branch`: (opcional) rama de referencia para el diff (por defecto `main` o `master`). La validación de cambios git siempre se ejecuta contra esta rama.
+- `--persist` (o equivalente): ruta de la carpeta de la feature/fix (ej. `docs/features/<nombre_feature>/`). Si no se indica, se usa modo sin documentación.
+- `--base-branch`: rama de referencia para el diff (por defecto `main` o `master`). La validación de cambios git siempre se ejecuta contra esta rama.
 - `--token`: (opcional) token de auditoría.
-
-Alternativamente, la validación puede ejecutarse mediante scripts existentes (ej. `validate-pr.ps1`) y un agente que interprete la salida y genere `validacion.json`.
 
 ## Integración con agentes
 

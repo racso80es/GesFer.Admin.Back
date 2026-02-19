@@ -2,7 +2,7 @@
   "spec_version": "1.0.0",
   "skill_id": "frontend-build",
   "name": "Frontend Build (Next.js)",
-  "description": "Scripts y comandos para compilar los frontends Product y Admin sin depender del binario next (dist/bin/next). Usar cuando la acción 1 de consola [4/12] o [5/12] falle con MODULE_NOT_FOUND.",
+  "description": "Scripts y comandos para compilar los frontends Product y Admin sin depender del binario next (dist/bin/next). Usar cuando el build del frontend [4/12] o [5/12] falle con MODULE_NOT_FOUND.",
   "owner": "tekton-developer",
   "status": "Active",
   "scripts": [

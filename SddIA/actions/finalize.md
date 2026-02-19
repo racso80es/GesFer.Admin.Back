@@ -41,11 +41,7 @@ La acción **finalize** (finalizar) cierra el ciclo de la feature: asegura commi
 
 ## Implementación técnica (opcional)
 
-Si se implementa como comando de consola, por ejemplo:
-
-```powershell
-dotnet run --project src/Console/GesFer.Console.csproj -- --finalize --persist <FEATURE_PATH> [--no-pr] [--token <AUDITOR_TOKEN>]
-```
+Puede implementarse mediante scripts (PowerShell o equivalente) que ejecuten los pasos de cierre. Parámetros típicos:
 
 - `--persist`: ruta de la carpeta de la feature.
 - `--no-pr`: solo actualizar logs y push; no crear el PR (útil si el PR se abre manualmente).

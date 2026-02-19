@@ -28,12 +28,9 @@ Proporciona un flujo repetible y auditado, alineado con las Leyes Universales (s
 
 ## Implementación
 
-Este proceso **no** dispone de un único comando de consola; se implementa como **procedimiento** que combina:
+Este proceso se implementa como **procedimiento** que combina:
 
-*   **Comandos opcionales de consola** (cuando se requiera trazabilidad con token de auditor):
-    *   `GesFer.Console --spec --token <AUDITOR_TOKEN> [--prompt <TEXT>] [--title <TITLE>]`
-    *   `GesFer.Console --clarify --token <AUDITOR_TOKEN> [--spec-path <PATH>] [--context <TEXT>]`
-    *   `GesFer.Console --plan --token <AUDITOR_TOKEN> --spec <PATH> [--clarify <PATH>]`
+*   **Scripts y agentes** para spec, clarify y plan (cuando se requiera trazabilidad con token de auditor), según las acciones definidas en `SddIA/actions/`.
 *   **Ubicación obligatoria de la documentación de la tarea:** `docs/features/<nombre_feature>/` (o `docs/Feature/<nombre_feature>/` según convención del proyecto).
 
 ### Contenido mínimo de `docs/features/<nombre_feature>/`
