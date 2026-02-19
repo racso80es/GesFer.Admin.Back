@@ -8,7 +8,8 @@
   "skills": [
     "documentation",
     "filesystem-ops",
-    "dotnet-development"
+    "dotnet-development",
+    "iniciar-rama"
   ],
   "paths": {
     "fixPath": "./docs/bugs/",
@@ -43,7 +44,7 @@
     }
   ],
   "instructions": [
-    "Obtener o definir nombre_fix (ej. admin-back-repeated-failures). Definir {persist} = AGENTE_CUMULO.fixPath/<nombre_fix>. Crear rama fix/<nombre_fix> desde master.",
+    "Obtener o definir nombre_fix (ej. admin-back-repeated-failures). Definir {persist} = AGENTE_CUMULO.fixPath/<nombre_fix>. Crear rama fix/<nombre_fix> desde master actualizado: skill iniciar-rama o script scripts/skills/Iniciar-Rama.ps1 -BranchType fix -BranchName <nombre_fix>.",
     "Crear carpeta {persist}/ si no existe. Dentro: objectives.md (objetivo del fix, pasos de reproducción, causa raíz conocida o hipótesis).",
     "Generar SPEC del fix con GesFer.Console --spec --context {persist}/ para formalizar el qué se corrige.",
     "Si hay ambigüedades, invocar clarificación (Clarifier) y persistir bajo {persist}/.",

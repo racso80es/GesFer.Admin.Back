@@ -16,7 +16,7 @@ Proporciona un flujo repetible y auditado, alineado con las Leyes Universales (s
 
 | Fase | Nombre | Descripción |
 | :--- | :--- | :--- |
-| **0** | Preparar entorno | Crear rama feat/<nombre_feature> (o `fix/` si aplica) desde `master`. No trabajar en `master`. |
+| **0** | Preparar entorno | Crear rama feat/<nombre_feature> (o `fix/` si aplica) desde `master` actualizado. No trabajar en `master`. **Skill:** `iniciar-rama` — invocar `scripts/skills/Iniciar-Rama.ps1 -BranchType feat -BranchName "<nombre_feature>"` (o fix/ si aplica). Ver `SddIA/skills/iniciar-rama.md`. |
 | **1** | Documentación con objetivos | Documentar objetivo, alcance y ley aplicada. La documentación de la tarea se ubica en **{persist}**/objectives.md. |
 | **2** | Especificación | Ejecutar o generar SPEC (acción **spec**). Entrada: requerimiento o borrador, {persist}/objectives.md; salida: especificación técnica en `SddIA/actions/spec.md` y copia/canon en {persist}/spec.md y {persist}/spec.json |
 | **3** | Clarificación | Ejecutar o generar clarificaciones (acción **clarify**). Especificación técnica: `SddIA/actions/clarify.md`. Entrada: {persist}/objectives.md, {persist}/spec.json; salida: {persist}/clarify.md, {persist}/clarify.json |

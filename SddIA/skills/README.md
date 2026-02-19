@@ -23,6 +23,7 @@ Las acciones en `SddIA/actions/` pueden **referenciar** uno o más skills por `s
 
 | skill_id | Descripción breve |
 | :--- | :--- |
+| `iniciar-rama` | Crea una rama nueva (feat/ o fix/) actualizada con master/main y posiciona el repo en ella; para el inicio de una acción. |
 | `finalizar-git` | Centraliza las interacciones con git para aceptar PR a master, unificar, eliminar rama unificada y volver a master. |
 | `git-operations` | Uso seguro y semántico de Git (ramas feat/fix, commits convencionales, pre-push). |
 | `documentation` | Estándares SSOT y gestión de documentación (Markdown, jerarquía, Evolution Log). |

@@ -92,3 +92,19 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 - `docs/audits/AUDITORIA_CARPETA_SCRIPTS_20260219.md` — Informe de auditoría.
 - `scripts/skills/Merge-To-Master-Cleanup.ps1` — Script de cierre post-merge.
 - `SddIA/skills/finalizar-git.md`, `SddIA/actions/finalize.md` — Integración del script.
+
+---
+
+## 2026-02-19 — Skill iniciar-rama (main)
+
+**Rama:** main.
+
+**Alcance:**
+- **Skill iniciar-rama:** `SddIA/skills/iniciar-rama.md` y `SddIA/skills/iniciar-rama.json`. Objetivo: inicio de una acción en una rama nueva (feat/ o fix/) actualizada con master/main.
+- **Script:** `scripts/skills/Iniciar-Rama.ps1`. Parámetros: BranchType (feat|fix), BranchName (slug), MainBranch (opcional), SkipPull (opcional). Flujo: fetch, checkout troncal, pull, checkout -b; si la rama existe, checkout y merge con troncal.
+- **Integración:** Proceso feature (fase 0) y proceso bug-fix referencian la skill y el script. Bug Fix Specialist añade skill iniciar-rama. Listado en `SddIA/skills/README.md`.
+
+**Referencias:**
+- `SddIA/skills/iniciar-rama.md`, `SddIA/skills/iniciar-rama.json` — Definición del skill.
+- `scripts/skills/Iniciar-Rama.ps1` — Script de inicio de rama.
+- `SddIA/process/feature.md`, `SddIA/process/bug-fix-specialist.json` — Consumidores.
