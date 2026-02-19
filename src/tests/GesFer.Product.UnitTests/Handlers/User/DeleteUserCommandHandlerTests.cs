@@ -1,7 +1,7 @@
 using FluentAssertions;
-using GesFer.Application.Commands.User;
-using GesFer.Application.Handlers.User;
-using GesFer.Infrastructure.Data;
+using GesFer.Admin.Back.Application.Commands.User;
+using GesFer.Admin.Back.Application.Handlers.User;
+using GesFer.Admin.Back.Infrastructure.Data;
 using GesFer.Product.Back.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
