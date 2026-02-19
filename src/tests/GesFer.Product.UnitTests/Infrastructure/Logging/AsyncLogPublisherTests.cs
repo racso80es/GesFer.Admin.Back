@@ -1,6 +1,6 @@
 using System.Net;
 using System.Text.Json;
-using GesFer.Infrastructure.Logging;
+using GesFer.Admin.Back.Infrastructure.Logging;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Moq;

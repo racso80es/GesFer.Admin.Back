@@ -38,3 +38,7 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 - `SddIA/process/README.md` — Índice de procesos.
 - `SddIA/actions/validate.md` — Definición de la acción validate (validación git siempre).
 - `AGENTS.md` — Inicio de tarea y roles.
+## [2026-02-19] Estandarización de Nomenclatura (feat/standardize-nomenclature)
+**Alcance**: Renombrado de solución, proyectos, carpetas y namespaces a `GesFer.Admin.Back`.
+**Resultado**: Compilación y tests exitosos.
+**Referencia**: [docs/features/standardize-nomenclature/objectives.md](docs/features/standardize-nomenclature/objectives.md)

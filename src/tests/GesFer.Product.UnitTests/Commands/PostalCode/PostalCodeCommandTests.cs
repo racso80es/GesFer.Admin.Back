@@ -1,5 +1,5 @@
-using GesFer.Application.Commands.PostalCode;
-using GesFer.Application.DTOs.PostalCode;
+using GesFer.Admin.Back.Application.Commands.PostalCode;
+using GesFer.Admin.Back.Application.DTOs.PostalCode;
 using FluentAssertions;
 using Xunit;
 

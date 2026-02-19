@@ -1,9 +1,9 @@
 using FluentAssertions;
-using GesFer.Application.Commands.TaxTypes;
-using GesFer.Application.Handlers.TaxTypes;
+using GesFer.Admin.Back.Application.Commands.TaxTypes;
+using GesFer.Admin.Back.Application.Handlers.TaxTypes;
 using GesFer.Product.Application.DTOs.TaxTypes;
 using GesFer.Product.Back.Domain.Entities;
-using GesFer.Infrastructure.Data;
+using GesFer.Admin.Back.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
