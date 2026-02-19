@@ -1,9 +1,9 @@
 {
-  "feature": "estandarizacion-gesfer-admin-back",
   "branch": "feat/estandarizacion-gesfer-admin-back",
   "timestamp": "2026-02-19",
+  "phase": "pre_pr",
+  "skill_used": "finalizar-git",
+  "pr_url": "Crear PR hacia master desde el remoto; descripción debe enlazar a docs/features/estandarizacion-gesfer-admin-back/",
   "evolution_log_updated": true,
-  "pr_url": null,
-  "pr_creation_url": "https://github.com/racso80es/GesFer.Admin.Back/pull/new/feat/estandarizacion-gesfer-admin-back",
-  "pr_description": "## Estandarización GesFer.Admin.Back\n\nAlcance Admin: solo CRUD empresas, get/update empresa, logs y auditorías. Shared reubicado en Admin y eliminado. Nomenclatura unificada; Persistence → Repository.\n\n**Documentación canónica:** `docs/features/estandarizacion-gesfer-admin-back/`"
+  "push_done": true
 }
