@@ -1,0 +1,16 @@
+{
+  "feature": "prepare-full-env",
+  "implementation_date": "2026-02-19",
+  "deliverables": [
+    "scripts/tools/Prepare-FullEnv.bat",
+    "scripts/tools/Prepare-FullEnv.ps1",
+    "scripts/tools/prepare-env.json",
+    "scripts/tools/prepare-env.md"
+  ],
+  "documentation": [
+    "docs/features/prepare-full-env/objectives.md",
+    "docs/features/prepare-full-env/spec.md",
+    "docs/features/prepare-full-env/spec.json"
+  ],
+  "status": "done"
+}
