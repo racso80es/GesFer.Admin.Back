@@ -1,6 +1,6 @@
 using FluentAssertions;
 using GesFer.Admin.Api.Controllers;
-using GesFer.Admin.Back.Domain.Entities;
+using GesFer.Admin.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

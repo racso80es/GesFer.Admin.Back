@@ -1,8 +1,7 @@
-using GesFer.Admin.Back.Domain.Entities;
+using GesFer.Admin.Domain.Entities;
 using GesFer.Admin.Infrastructure.Data;
-using GesFer.Shared.Back.Domain.Entities;
-using GesFer.Shared.Back.Domain.Services;
-using GesFer.Shared.Back.Domain.ValueObjects;
+using GesFer.Admin.Domain.Services;
+using GesFer.Admin.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Hosting;

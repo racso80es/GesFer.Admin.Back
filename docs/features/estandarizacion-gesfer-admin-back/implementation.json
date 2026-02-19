@@ -1,0 +1,13 @@
+{
+  "feature": "estandarizacion-gesfer-admin-back",
+  "completed": true,
+  "summary": "Código innecesario eliminado; Shared reubicado en Admin y directorio Shared eliminado; nomenclatura unificada a GesFer.Admin.*; solución y tests adecuados.",
+  "touchpoints": [
+    "Eliminados: DashboardController, ProductApiClient, DashboardSummaryDto, DashboardControllerTests, ProductApiClientTests, carpeta GesFer.Product.UnitTests",
+    "Reubicados en Domain: BaseEntity, Company, City, State, Country, Language, PostalCode, TaxId, Email, ISensitiveDataSanitizer, SensitiveDataSanitizer, ISequentialGuidGenerator, MySqlSequentialGuidGenerator",
+    "Reubicados en Infrastructure.Repository: SequentialGuidValueGenerator, DbContextExtensions (ConfigureAdminEntities, UpdateAdminAuditFields); namespace Persistence renombrado a Repository",
+    "Namespaces unificados a GesFer.Admin.Domain.* y GesFer.Admin.Infrastructure.* (coherente con proyecto; no se usó prefijo Back en código)",
+    "Solution actualizada: rutas reales (Api, application, domain, Infrastructure, IntegrationTests, tests/GesFer.Admin.UnitTests); eliminados proyectos inexistentes (Architecture.Tests, Domain.UnitTests con rutas antiguas)",
+    "Eliminado directorio src/Shared"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "feature": "estandarizacion-gesfer-admin-back",
+  "validatedAt": "2026-02-19",
+  "build": "OK",
+  "unitTests": { "total": 46, "passed": 46, "failed": 0 },
+  "integrationTests": { "total": 24, "passed": 24, "failed": 0 },
+  "criteria": [
+    "No existe DashboardController ni ProductApiClient ni DashboardSummaryDto",
+    "No existe carpeta Shared ni referencias a GesFer.Shared",
+    "Entidades y value objects en GesFer.Admin.Domain",
+    "Namespaces unificados GesFer.Admin.*",
+    "Solution compila con rutas correctas",
+    "Tests unitarios e integración Admin pasan"
+  ]
+}

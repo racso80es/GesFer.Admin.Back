@@ -1,4 +1,4 @@
-using GesFer.Admin.Back.Infrastructure.Data;
+using GesFer.Admin.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

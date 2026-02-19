@@ -1,0 +1,44 @@
+{
+  "feature": "estandarizacion-gesfer-admin-back",
+  "persist": "docs/features/estandarizacion-gesfer-admin-back",
+  "version": "1.0",
+  "sections": [
+    "codigo_innecesario",
+    "unificacion_shared",
+    "nomenclatura",
+    "proyectos_y_tests"
+  ],
+  "codigo_innecesario": {
+    "eliminar": [
+      "DashboardController",
+      "IProductApiClient",
+      "ProductApiClient",
+      "DashboardSummaryDto_Application",
+      "DashboardSummaryDto_Infrastructure",
+      "GesFer.Product.UnitTests",
+      "GesFer.Product.IntegrationTests",
+      "referencias_GesFer.Api_Product_en_tests"
+    ]
+  },
+  "unificacion_shared": {
+    "reubicar": [
+      "BaseEntity -> GesFer.Admin.Domain.Common",
+      "Company_City_State_Country_Language_PostalCode -> GesFer.Admin.Domain.Entities",
+      "TaxId_Email -> GesFer.Admin.Domain.ValueObjects",
+      "ISensitiveDataSanitizer_SensitiveDataSanitizer -> Domain o Infrastructure",
+      "ISequentialGuidGenerator_MySqlSequentialGuidGenerator -> Infrastructure",
+      "SequentialGuidValueGenerator_DbContextExtensions -> Infrastructure.Persistence"
+    ],
+    "eliminar_despues": "src/Shared"
+  },
+  "nomenclatura": {
+    "namespace_prefix": "GesFer.Admin.Back",
+    "proyecto_infrastructure": "GesFer.Admin.Back.Infrastructure",
+    "unificar_Infra_vs_Infrastructure": "usar Infrastructure en nombre y namespace"
+  },
+  "proyectos_y_tests": {
+    "solution_incluye": [ "Api", "Application", "Domain", "Infrastructure", "IntegrationTests", "UnitTests_Admin", "scripts_opcional" ],
+    "solution_excluye": [ "GesFer.Product.UnitTests", "GesFer.Shared.Back.*", "GesFer.Architecture.Tests_Shared" ],
+    "architecture_tests": "un solo proyecto, solo Admin"
+  }
+}

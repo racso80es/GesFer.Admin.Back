@@ -1,8 +1,6 @@
-using GesFer.Admin.Back.Domain.Entities;
-using GesFer.Shared.Back.Domain.Entities;
-using GesFer.Shared.Back.Infrastructure.Persistence;
+using GesFer.Admin.Domain.Entities;
+using GesFer.Admin.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 
 namespace GesFer.Admin.Infrastructure.Data;
 
@@ -16,6 +14,11 @@ public class AdminDbContext : DbContext
     public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
     public DbSet<Log> Logs => Set<Log>();
     public DbSet<Company> Companies => Set<Company>();
+    public DbSet<City> Cities => Set<City>();
+    public DbSet<State> States => Set<State>();
+    public DbSet<Country> Countries => Set<Country>();
+    public DbSet<Language> Languages => Set<Language>();
+    public DbSet<PostalCode> PostalCodes => Set<PostalCode>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -32,19 +35,18 @@ public class AdminDbContext : DbContext
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
         });
 
-        // Configurar Shared Entities (Sequential GUIDs + Soft Delete)
-        modelBuilder.ConfigureSharedEntities();
+        modelBuilder.ConfigureAdminEntities();
     }
 
     public override int SaveChanges()
     {
-        ChangeTracker.UpdateSharedAuditFields();
+        ChangeTracker.UpdateAdminAuditFields();
         return base.SaveChanges();
     }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        ChangeTracker.UpdateSharedAuditFields();
+        ChangeTracker.UpdateAdminAuditFields();
         return base.SaveChangesAsync(cancellationToken);
     }
 }

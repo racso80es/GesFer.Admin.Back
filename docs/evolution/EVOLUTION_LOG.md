@@ -42,3 +42,20 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 **Alcance**: Renombrado de solución, proyectos, carpetas y namespaces a `GesFer.Admin.Back`.
 **Resultado**: Compilación y tests exitosos.
 **Referencia**: [docs/features/standardize-nomenclature/objectives.md](docs/features/standardize-nomenclature/objectives.md)
+
+---
+
+## 2026-02-19 — Estandarización GesFer.Admin.Back (feat/estandarizacion-gesfer-admin-back)
+
+**Rama:** feat/estandarizacion-gesfer-admin-back.
+
+**Alcance:**
+- Alcance Admin limitado a: CRUD empresas, get/update empresa concreta, logs y auditorías. Eliminados Dashboard, ProductApiClient, DashboardSummaryDto y tests asociados; eliminada carpeta GesFer.Product.UnitTests.
+- Directorio Shared reubicado en Admin: entidades, value objects y servicios en GesFer.Admin.Domain; SequentialGuidValueGenerator y DbContextExtensions en GesFer.Admin.Infrastructure.Repository. Eliminado directorio src/Shared.
+- Nomenclatura unificada a GesFer.Admin.* (Domain, Infrastructure, Application, Api). Namespace Persistence renombrado a Repository.
+- Solución actualizada con rutas reales de proyectos; tests unitarios e integración (70) pasan.
+
+**Referencias:**
+- `docs/features/estandarizacion-gesfer-admin-back/objectives.md` — Objetivo y alcance.
+- `docs/features/estandarizacion-gesfer-admin-back/spec.md` — Especificación técnica.
+- `docs/features/estandarizacion-gesfer-admin-back/validacion.json` — Resultado de validación.

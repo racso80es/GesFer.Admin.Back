@@ -1,4 +1,4 @@
-using GesFer.Admin.Back.Domain.Entities;
+using GesFer.Admin.Domain.Entities;
 
 namespace GesFer.Admin.Infrastructure.Services;
 

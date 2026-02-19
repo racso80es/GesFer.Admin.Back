@@ -1,10 +1,11 @@
 using GesFer.Admin.Application.Commands.Company;
 using GesFer.Admin.Application.DTOs.Company;
 using GesFer.Admin.Infrastructure.Data;
-using GesFer.Shared.Back.Domain.Entities;
-using GesFer.Shared.Back.Domain.ValueObjects;
+using GesFer.Admin.Domain.Entities;
+using GesFer.Admin.Domain.ValueObjects;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using CompanyEntity = GesFer.Admin.Domain.Entities.Company;
 
 namespace GesFer.Admin.Application.Handlers.Company;
 
@@ -40,7 +41,7 @@ public class CreateCompanyHandler : IRequestHandler<CreateCompanyCommand, Compan
             email = Email.Create(request.Dto.Email);
         }
 
-        var company = new GesFer.Shared.Back.Domain.Entities.Company
+        var company = new CompanyEntity
         {
             Name = request.Dto.Name,
             TaxId = taxId,
