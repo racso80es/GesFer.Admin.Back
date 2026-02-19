@@ -1,5 +1,5 @@
-using GesFer.Product.Back.Domain.Entities;
-using GesFer.Product.Back.Infrastructure.Services;
+using GesFer.Domain.Entities;
+using GesFer.Infrastructure.Services;
 using GesFer.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using BCrypt.Net;

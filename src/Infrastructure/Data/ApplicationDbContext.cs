@@ -1,5 +1,5 @@
-using GesFer.Product.Back.Domain.Entities;
-using GesFer.Shared.Back.Infrastructure.Persistence;
+using GesFer.Domain.Entities;
+using GesFer.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace GesFer.Infrastructure.Data;
@@ -14,7 +14,7 @@ public class ApplicationDbContext : DbContext
     }
 
     // DbSets - Solo entidades del dominio Product
-    public DbSet<GesFer.Product.Back.Domain.Entities.Company> Companies => Set<GesFer.Product.Back.Domain.Entities.Company>();
+    public DbSet<GesFer.Domain.Entities.Company> Companies => Set<GesFer.Domain.Entities.Company>();
     public DbSet<User> Users => Set<User>();
     public DbSet<Group> Groups => Set<Group>();
     public DbSet<Permission> Permissions => Set<Permission>();
@@ -34,11 +34,11 @@ public class ApplicationDbContext : DbContext
     public DbSet<SalesDeliveryNote> SalesDeliveryNotes => Set<SalesDeliveryNote>();
     public DbSet<SalesDeliveryNoteLine> SalesDeliveryNoteLines => Set<SalesDeliveryNoteLine>();
     public DbSet<SalesInvoice> SalesInvoices => Set<SalesInvoice>();
-    public DbSet<GesFer.Shared.Back.Domain.Entities.Country> Countries => Set<GesFer.Shared.Back.Domain.Entities.Country>();
-    public DbSet<GesFer.Shared.Back.Domain.Entities.Language> Languages => Set<GesFer.Shared.Back.Domain.Entities.Language>();
-    public DbSet<GesFer.Shared.Back.Domain.Entities.State> States => Set<GesFer.Shared.Back.Domain.Entities.State>();
-    public DbSet<GesFer.Shared.Back.Domain.Entities.City> Cities => Set<GesFer.Shared.Back.Domain.Entities.City>();
-    public DbSet<GesFer.Shared.Back.Domain.Entities.PostalCode> PostalCodes => Set<GesFer.Shared.Back.Domain.Entities.PostalCode>();
+    public DbSet<GesFer.Domain.Entities.Country> Countries => Set<GesFer.Domain.Entities.Country>();
+    public DbSet<GesFer.Domain.Entities.Language> Languages => Set<GesFer.Domain.Entities.Language>();
+    public DbSet<GesFer.Domain.Entities.State> States => Set<GesFer.Domain.Entities.State>();
+    public DbSet<GesFer.Domain.Entities.City> Cities => Set<GesFer.Domain.Entities.City>();
+    public DbSet<GesFer.Domain.Entities.PostalCode> PostalCodes => Set<GesFer.Domain.Entities.PostalCode>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -1,6 +1,6 @@
 using GesFer.Application.Commands.TaxTypes;
 using GesFer.Application.Common.Interfaces;
-using GesFer.Product.Back.Domain.Entities;
+using GesFer.Domain.Entities;
 using GesFer.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 

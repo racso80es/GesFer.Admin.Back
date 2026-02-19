@@ -1,7 +1,7 @@
 using GesFer.Application.Commands.SalesDeliveryNote;
 using GesFer.Application.Common.Interfaces;
-using GesFer.Product.Back.Domain.Entities;
-using GesFer.Product.Back.Domain.Services;
+using GesFer.Domain.Entities;
+using GesFer.Domain.Services;
 using GesFer.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +10,7 @@ namespace GesFer.Application.Handlers.SalesDeliveryNote;
 /// <summary>
 /// Handler para crear un albarán de venta
 /// </summary>
-public class CreateSalesDeliveryNoteCommandHandler : ICommandHandler<CreateSalesDeliveryNoteCommand, Product.Back.Domain.Entities.SalesDeliveryNote>
+public class CreateSalesDeliveryNoteCommandHandler : ICommandHandler<CreateSalesDeliveryNoteCommand, GesFer.Domain.Entities.SalesDeliveryNote>
 {
     private readonly ApplicationDbContext _context;
     private readonly IStockService _stockService;
@@ -23,7 +23,7 @@ public class CreateSalesDeliveryNoteCommandHandler : ICommandHandler<CreateSales
         _stockService = stockService;
     }
 
-    public async Task<Product.Back.Domain.Entities.SalesDeliveryNote> HandleAsync(CreateSalesDeliveryNoteCommand command, CancellationToken cancellationToken = default)
+    public async Task<GesFer.Domain.Entities.SalesDeliveryNote> HandleAsync(CreateSalesDeliveryNoteCommand command, CancellationToken cancellationToken = default)
     {
         // Validar que el cliente existe y pertenece a la empresa
         var customer = await _context.Customers
@@ -58,7 +58,7 @@ public class CreateSalesDeliveryNoteCommandHandler : ICommandHandler<CreateSales
         }
 
         // Crear el albarán
-        var deliveryNote = new Product.Back.Domain.Entities.SalesDeliveryNote
+        var deliveryNote = new GesFer.Domain.Entities.SalesDeliveryNote
         {
             CompanyId = command.CompanyId,
             CustomerId = command.CustomerId,
@@ -116,7 +116,7 @@ public class CreateSalesDeliveryNoteCommandHandler : ICommandHandler<CreateSales
     /// <summary>
     /// Obtiene el precio de la tarifa del cliente o del artículo base
     /// </summary>
-    private decimal GetPriceFromTariffOrArticle(Product.Back.Domain.Entities.Customer customer, Article article)
+    private decimal GetPriceFromTariffOrArticle(GesFer.Domain.Entities.Customer customer, Article article)
     {
         // Si el cliente tiene una tarifa de venta, buscar el precio en la tarifa
         if (customer.SellTariffId.HasValue && customer.SellTariff != null)

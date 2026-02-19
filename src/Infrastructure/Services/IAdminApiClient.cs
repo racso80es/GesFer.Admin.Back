@@ -1,6 +1,6 @@
-using GesFer.Product.Back.Infrastructure.DTOs;
+using GesFer.Infrastructure.DTOs;
 
-namespace GesFer.Product.Back.Infrastructure.Services;
+namespace GesFer.Infrastructure.Services;
 
 /// <summary>
 /// Interfaz para comunicarse con el API de Admin

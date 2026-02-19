@@ -3,7 +3,7 @@ using GesFer.Api.Services;
 using GesFer.Infrastructure.Data;
 using GesFer.Infrastructure.Services;
 using GesFer.IntegrationTests.Helpers;
-using GesFer.Product.Back.Infrastructure.Services;
+using GesFer.Infrastructure.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;

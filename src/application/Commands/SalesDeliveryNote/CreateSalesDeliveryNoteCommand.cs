@@ -1,12 +1,12 @@
 using GesFer.Application.Common.Interfaces;
-using GesFer.Product.Back.Domain.Entities;
+using GesFer.Domain.Entities;
 
 namespace GesFer.Application.Commands.SalesDeliveryNote;
 
 /// <summary>
 /// Comando para crear un albarán de venta
 /// </summary>
-public class CreateSalesDeliveryNoteCommand : ICommand<Product.Back.Domain.Entities.SalesDeliveryNote>
+public class CreateSalesDeliveryNoteCommand : ICommand<GesFer.Domain.Entities.SalesDeliveryNote>
 {
     public Guid CompanyId { get; set; }
     public Guid CustomerId { get; set; }

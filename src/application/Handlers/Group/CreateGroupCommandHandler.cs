@@ -1,7 +1,7 @@
 using GesFer.Application.Commands.Group;
 using GesFer.Application.Common.Interfaces;
 using GesFer.Application.DTOs.Group;
-using GesFer.Product.Back.Domain.Entities;
+using GesFer.Domain.Entities;
 using GesFer.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,7 +25,7 @@ public class CreateGroupCommandHandler : ICommandHandler<CreateGroupCommand, Gro
         if (existingGroup != null)
             throw new InvalidOperationException($"Ya existe un grupo con el nombre '{command.Dto.Name}'");
 
-        var group = new Product.Back.Domain.Entities.Group
+        var group = new GesFer.Domain.Entities.Group
         {
             Name = command.Dto.Name,
             Description = command.Dto.Description,

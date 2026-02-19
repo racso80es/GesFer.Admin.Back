@@ -2,7 +2,7 @@ using GesFer.Application.Commands.Supplier;
 using GesFer.Application.Common.Interfaces;
 using GesFer.Application.DTOs.Supplier;
 using GesFer.Infrastructure.Data;
-using GesFer.Product.Back.Infrastructure.Services;
+using GesFer.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace GesFer.Application.Handlers.Supplier;
@@ -73,7 +73,7 @@ public class CreateSupplierCommandHandler : ICommandHandler<CreateSupplierComman
                 throw new InvalidOperationException($"No se encontró el país con ID {command.Dto.CountryId.Value}");
         }
 
-        var supplier = new Product.Back.Domain.Entities.Supplier
+        var supplier = new GesFer.Domain.Entities.Supplier
         {
             CompanyId = command.Dto.CompanyId,
             Name = command.Dto.Name,

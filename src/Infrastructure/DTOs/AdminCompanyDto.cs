@@ -1,4 +1,4 @@
-namespace GesFer.Product.Back.Infrastructure.DTOs;
+namespace GesFer.Infrastructure.DTOs;
 
 public class AdminCompanyDto
 {

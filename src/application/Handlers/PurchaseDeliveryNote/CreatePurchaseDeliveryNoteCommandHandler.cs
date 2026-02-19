@@ -1,7 +1,7 @@
 using GesFer.Application.Commands.PurchaseDeliveryNote;
 using GesFer.Application.Common.Interfaces;
-using GesFer.Product.Back.Domain.Entities;
-using GesFer.Product.Back.Domain.Services;
+using GesFer.Domain.Entities;
+using GesFer.Domain.Services;
 using GesFer.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +10,7 @@ namespace GesFer.Application.Handlers.PurchaseDeliveryNote;
 /// <summary>
 /// Handler para crear un albarán de compra
 /// </summary>
-public class CreatePurchaseDeliveryNoteCommandHandler : ICommandHandler<CreatePurchaseDeliveryNoteCommand, Product.Back.Domain.Entities.PurchaseDeliveryNote>
+public class CreatePurchaseDeliveryNoteCommandHandler : ICommandHandler<CreatePurchaseDeliveryNoteCommand, GesFer.Domain.Entities.PurchaseDeliveryNote>
 {
     private readonly ApplicationDbContext _context;
     private readonly IStockService _stockService;
@@ -23,7 +23,7 @@ public class CreatePurchaseDeliveryNoteCommandHandler : ICommandHandler<CreatePu
         _stockService = stockService;
     }
 
-    public async Task<Product.Back.Domain.Entities.PurchaseDeliveryNote> HandleAsync(CreatePurchaseDeliveryNoteCommand command, CancellationToken cancellationToken = default)
+    public async Task<GesFer.Domain.Entities.PurchaseDeliveryNote> HandleAsync(CreatePurchaseDeliveryNoteCommand command, CancellationToken cancellationToken = default)
     {
         // Validar que el proveedor existe y pertenece a la empresa
         var supplier = await _context.Suppliers
@@ -35,7 +35,7 @@ public class CreatePurchaseDeliveryNoteCommandHandler : ICommandHandler<CreatePu
             throw new InvalidOperationException($"El proveedor con ID {command.SupplierId} no existe o no pertenece a la empresa");
 
         // Crear el albarán
-        var deliveryNote = new Product.Back.Domain.Entities.PurchaseDeliveryNote
+        var deliveryNote = new GesFer.Domain.Entities.PurchaseDeliveryNote
         {
             CompanyId = command.CompanyId,
             SupplierId = command.SupplierId,
@@ -101,7 +101,7 @@ public class CreatePurchaseDeliveryNoteCommandHandler : ICommandHandler<CreatePu
     /// <summary>
     /// Obtiene el precio de la tarifa del proveedor o del artículo base
     /// </summary>
-    private decimal GetPriceFromTariffOrArticle(Product.Back.Domain.Entities.Supplier supplier, Article article)
+    private decimal GetPriceFromTariffOrArticle(GesFer.Domain.Entities.Supplier supplier, Article article)
     {
         // Si el proveedor tiene una tarifa de compra, buscar el precio en la tarifa
         if (supplier.BuyTariffId.HasValue && supplier.BuyTariff != null)

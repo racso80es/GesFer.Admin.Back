@@ -3,12 +3,12 @@ using GesFer.Application.Common.Interfaces;
 using GesFer.Application.Handlers.Auth;
 using GesFer.Application.Handlers.PurchaseDeliveryNote;
 using GesFer.Application.Handlers.SalesDeliveryNote;
-using GesFer.Product.Back.Domain.Services;
+using GesFer.Domain.Services;
 using GesFer.Infrastructure.Data;
-using GesFer.Shared.Back.Domain.Services;
+using GesFer.Domain.Services;
 using GesFer.Infrastructure.Repositories;
 using GesFer.Infrastructure.Services;
-using GesFer.Product.Back.Infrastructure.Services;
+using GesFer.Infrastructure.Services;
 using GesFer.Infrastructure.Logging;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql;
@@ -85,7 +85,7 @@ public static class DependencyInjection
         else
         {
             var adminApiBaseUrl = configuration["AdminApi:BaseUrl"] ?? "http://localhost:5010";
-            services.AddHttpClient<IAdminApiClient, GesFer.Product.Back.Infrastructure.Services.AdminApiClient>(client =>
+            services.AddHttpClient<IAdminApiClient, GesFer.Infrastructure.Services.AdminApiClient>(client =>
             {
                 client.BaseAddress = new Uri(adminApiBaseUrl);
                 client.Timeout = TimeSpan.FromSeconds(5);
