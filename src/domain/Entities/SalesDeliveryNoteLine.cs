@@ -1,6 +1,6 @@
-using GesFer.Shared.Back.Domain.Common;
+using GesFer.Domain.Common;
 
-namespace GesFer.Product.Back.Domain.Entities;
+namespace GesFer.Domain.Entities;
 
 /// <summary>
 /// Línea de un albarán de venta

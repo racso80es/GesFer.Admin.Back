@@ -1,9 +1,9 @@
 using GesFer.Application.Commands.Customer;
 using GesFer.Application.Common.Interfaces;
 using GesFer.Application.DTOs.Customer;
-using GesFer.Shared.Back.Domain.ValueObjects;
+using GesFer.Domain.ValueObjects;
 using GesFer.Infrastructure.Data;
-using GesFer.Product.Back.Infrastructure.Services;
+using GesFer.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace GesFer.Application.Handlers.Customer;
@@ -88,7 +88,7 @@ public class CreateCustomerCommandHandler : ICommandHandler<CreateCustomerComman
             email = Email.Create(command.Dto.Email);
         }
 
-        var customer = new Product.Back.Domain.Entities.Customer
+        var customer = new GesFer.Domain.Entities.Customer
         {
             CompanyId = command.Dto.CompanyId,
             Name = command.Dto.Name,

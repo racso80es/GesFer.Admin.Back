@@ -22,7 +22,7 @@ namespace GesFer.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "8.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.Article", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.Article", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -93,7 +93,7 @@ namespace GesFer.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.ArticleFamily", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.ArticleFamily", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -141,7 +141,7 @@ namespace GesFer.Infrastructure.Migrations
                     b.ToTable("ArticleFamilies", (string)null);
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.Company", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.Company", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -213,7 +213,7 @@ namespace GesFer.Infrastructure.Migrations
                     b.ToTable("Companies", (string)null);
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.Customer", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.Customer", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -287,7 +287,7 @@ namespace GesFer.Infrastructure.Migrations
                     b.ToTable("Customers", (string)null);
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.Group", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.Group", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -322,7 +322,7 @@ namespace GesFer.Infrastructure.Migrations
                     b.ToTable("Groups", (string)null);
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.GroupPermission", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.GroupPermission", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -356,7 +356,7 @@ namespace GesFer.Infrastructure.Migrations
                     b.ToTable("GroupPermissions", (string)null);
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.Permission", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.Permission", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -392,7 +392,7 @@ namespace GesFer.Infrastructure.Migrations
                     b.ToTable("Permissions", (string)null);
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.PurchaseDeliveryNote", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.PurchaseDeliveryNote", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -442,7 +442,7 @@ namespace GesFer.Infrastructure.Migrations
                     b.ToTable("PurchaseDeliveryNotes", (string)null);
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.PurchaseDeliveryNoteLine", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.PurchaseDeliveryNoteLine", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -500,7 +500,7 @@ namespace GesFer.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.PurchaseInvoice", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.PurchaseInvoice", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -554,7 +554,7 @@ namespace GesFer.Infrastructure.Migrations
                     b.ToTable("PurchaseInvoices", (string)null);
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.SalesDeliveryNote", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.SalesDeliveryNote", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -604,7 +604,7 @@ namespace GesFer.Infrastructure.Migrations
                     b.ToTable("SalesDeliveryNotes", (string)null);
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.SalesDeliveryNoteLine", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.SalesDeliveryNoteLine", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -662,7 +662,7 @@ namespace GesFer.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.SalesInvoice", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.SalesInvoice", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -716,7 +716,7 @@ namespace GesFer.Infrastructure.Migrations
                     b.ToTable("SalesInvoices", (string)null);
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.Supplier", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.Supplier", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -790,7 +790,7 @@ namespace GesFer.Infrastructure.Migrations
                     b.ToTable("Suppliers", (string)null);
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.Tariff", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.Tariff", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -830,7 +830,7 @@ namespace GesFer.Infrastructure.Migrations
                     b.ToTable("Tariffs", (string)null);
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.TariffItem", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.TariffItem", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -871,7 +871,7 @@ namespace GesFer.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.TaxType", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.TaxType", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -924,7 +924,7 @@ namespace GesFer.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.User", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1010,7 +1010,7 @@ namespace GesFer.Infrastructure.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.UserGroup", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.UserGroup", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1044,7 +1044,7 @@ namespace GesFer.Infrastructure.Migrations
                     b.ToTable("UserGroups", (string)null);
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.UserPermission", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.UserPermission", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1078,7 +1078,7 @@ namespace GesFer.Infrastructure.Migrations
                     b.ToTable("UserPermissions", (string)null);
                 });
 
-            modelBuilder.Entity("GesFer.Shared.Back.Domain.Entities.City", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.City", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1114,7 +1114,7 @@ namespace GesFer.Infrastructure.Migrations
                     b.ToTable("Cities", (string)null);
                 });
 
-            modelBuilder.Entity("GesFer.Shared.Back.Domain.Entities.Country", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.Country", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1157,7 +1157,7 @@ namespace GesFer.Infrastructure.Migrations
                     b.ToTable("Countries", (string)null);
                 });
 
-            modelBuilder.Entity("GesFer.Shared.Back.Domain.Entities.Language", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.Language", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1199,7 +1199,7 @@ namespace GesFer.Infrastructure.Migrations
                     b.ToTable("Languages", (string)null);
                 });
 
-            modelBuilder.Entity("GesFer.Shared.Back.Domain.Entities.PostalCode", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.PostalCode", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1237,7 +1237,7 @@ namespace GesFer.Infrastructure.Migrations
                     b.ToTable("PostalCodes", (string)null);
                 });
 
-            modelBuilder.Entity("GesFer.Shared.Back.Domain.Entities.State", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.State", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1277,15 +1277,15 @@ namespace GesFer.Infrastructure.Migrations
                     b.ToTable("States", (string)null);
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.Article", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.Article", b =>
                 {
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.ArticleFamily", "ArticleFamily")
+                    b.HasOne("GesFer.Domain.Entities.ArticleFamily", "ArticleFamily")
                         .WithMany()
                         .HasForeignKey("ArticleFamilyId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.Company", "Company")
+                    b.HasOne("GesFer.Domain.Entities.Company", "Company")
                         .WithMany("Articles")
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -1296,15 +1296,15 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.ArticleFamily", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.ArticleFamily", b =>
                 {
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.Company", "Company")
+                    b.HasOne("GesFer.Domain.Entities.Company", "Company")
                         .WithMany()
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.TaxType", "TaxType")
+                    b.HasOne("GesFer.Domain.Entities.TaxType", "TaxType")
                         .WithMany()
                         .HasForeignKey("TaxTypeId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -1315,29 +1315,29 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("TaxType");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.Company", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.Company", b =>
                 {
-                    b.HasOne("GesFer.Shared.Back.Domain.Entities.City", "City")
+                    b.HasOne("GesFer.Domain.Entities.City", "City")
                         .WithMany()
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("GesFer.Shared.Back.Domain.Entities.Country", "Country")
+                    b.HasOne("GesFer.Domain.Entities.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("GesFer.Shared.Back.Domain.Entities.Language", "Language")
+                    b.HasOne("GesFer.Domain.Entities.Language", "Language")
                         .WithMany()
                         .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("GesFer.Shared.Back.Domain.Entities.PostalCode", "PostalCode")
+                    b.HasOne("GesFer.Domain.Entities.PostalCode", "PostalCode")
                         .WithMany()
                         .HasForeignKey("PostalCodeId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("GesFer.Shared.Back.Domain.Entities.State", "State")
+                    b.HasOne("GesFer.Domain.Entities.State", "State")
                         .WithMany()
                         .HasForeignKey("StateId")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -1353,35 +1353,35 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("State");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.Customer", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.Customer", b =>
                 {
-                    b.HasOne("GesFer.Shared.Back.Domain.Entities.City", "City")
+                    b.HasOne("GesFer.Domain.Entities.City", "City")
                         .WithMany()
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.Company", "Company")
+                    b.HasOne("GesFer.Domain.Entities.Company", "Company")
                         .WithMany("Customers")
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("GesFer.Shared.Back.Domain.Entities.Country", "Country")
+                    b.HasOne("GesFer.Domain.Entities.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("GesFer.Shared.Back.Domain.Entities.PostalCode", "PostalCode")
+                    b.HasOne("GesFer.Domain.Entities.PostalCode", "PostalCode")
                         .WithMany()
                         .HasForeignKey("PostalCodeId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.Tariff", "SellTariff")
+                    b.HasOne("GesFer.Domain.Entities.Tariff", "SellTariff")
                         .WithMany("Customers")
                         .HasForeignKey("SellTariffId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("GesFer.Shared.Back.Domain.Entities.State", "State")
+                    b.HasOne("GesFer.Domain.Entities.State", "State")
                         .WithMany()
                         .HasForeignKey("StateId")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -1399,15 +1399,15 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("State");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.GroupPermission", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.GroupPermission", b =>
                 {
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.Group", "Group")
+                    b.HasOne("GesFer.Domain.Entities.Group", "Group")
                         .WithMany("GroupPermissions")
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.Permission", "Permission")
+                    b.HasOne("GesFer.Domain.Entities.Permission", "Permission")
                         .WithMany("GroupPermissions")
                         .HasForeignKey("PermissionId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1418,20 +1418,20 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("Permission");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.PurchaseDeliveryNote", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.PurchaseDeliveryNote", b =>
                 {
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.Company", "Company")
+                    b.HasOne("GesFer.Domain.Entities.Company", "Company")
                         .WithMany()
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.PurchaseInvoice", "PurchaseInvoice")
+                    b.HasOne("GesFer.Domain.Entities.PurchaseInvoice", "PurchaseInvoice")
                         .WithMany("PurchaseDeliveryNotes")
                         .HasForeignKey("PurchaseInvoiceId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.Supplier", "Supplier")
+                    b.HasOne("GesFer.Domain.Entities.Supplier", "Supplier")
                         .WithMany("PurchaseDeliveryNotes")
                         .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -1444,15 +1444,15 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("Supplier");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.PurchaseDeliveryNoteLine", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.PurchaseDeliveryNoteLine", b =>
                 {
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.Article", "Article")
+                    b.HasOne("GesFer.Domain.Entities.Article", "Article")
                         .WithMany("PurchaseDeliveryNoteLines")
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.PurchaseDeliveryNote", "PurchaseDeliveryNote")
+                    b.HasOne("GesFer.Domain.Entities.PurchaseDeliveryNote", "PurchaseDeliveryNote")
                         .WithMany("Lines")
                         .HasForeignKey("PurchaseDeliveryNoteId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1463,9 +1463,9 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("PurchaseDeliveryNote");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.PurchaseInvoice", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.PurchaseInvoice", b =>
                 {
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.Company", "Company")
+                    b.HasOne("GesFer.Domain.Entities.Company", "Company")
                         .WithMany()
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -1474,21 +1474,21 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.SalesDeliveryNote", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.SalesDeliveryNote", b =>
                 {
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.Company", "Company")
+                    b.HasOne("GesFer.Domain.Entities.Company", "Company")
                         .WithMany()
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.Customer", "Customer")
+                    b.HasOne("GesFer.Domain.Entities.Customer", "Customer")
                         .WithMany("SalesDeliveryNotes")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.SalesInvoice", "SalesInvoice")
+                    b.HasOne("GesFer.Domain.Entities.SalesInvoice", "SalesInvoice")
                         .WithMany("SalesDeliveryNotes")
                         .HasForeignKey("SalesInvoiceId")
                         .OnDelete(DeleteBehavior.SetNull);
@@ -1500,15 +1500,15 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("SalesInvoice");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.SalesDeliveryNoteLine", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.SalesDeliveryNoteLine", b =>
                 {
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.Article", "Article")
+                    b.HasOne("GesFer.Domain.Entities.Article", "Article")
                         .WithMany("SalesDeliveryNoteLines")
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.SalesDeliveryNote", "SalesDeliveryNote")
+                    b.HasOne("GesFer.Domain.Entities.SalesDeliveryNote", "SalesDeliveryNote")
                         .WithMany("Lines")
                         .HasForeignKey("SalesDeliveryNoteId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1519,9 +1519,9 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("SalesDeliveryNote");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.SalesInvoice", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.SalesInvoice", b =>
                 {
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.Company", "Company")
+                    b.HasOne("GesFer.Domain.Entities.Company", "Company")
                         .WithMany()
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -1530,35 +1530,35 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.Supplier", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.Supplier", b =>
                 {
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.Tariff", "BuyTariff")
+                    b.HasOne("GesFer.Domain.Entities.Tariff", "BuyTariff")
                         .WithMany("Suppliers")
                         .HasForeignKey("BuyTariffId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("GesFer.Shared.Back.Domain.Entities.City", "City")
+                    b.HasOne("GesFer.Domain.Entities.City", "City")
                         .WithMany()
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.Company", "Company")
+                    b.HasOne("GesFer.Domain.Entities.Company", "Company")
                         .WithMany("Suppliers")
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("GesFer.Shared.Back.Domain.Entities.Country", "Country")
+                    b.HasOne("GesFer.Domain.Entities.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("GesFer.Shared.Back.Domain.Entities.PostalCode", "PostalCode")
+                    b.HasOne("GesFer.Domain.Entities.PostalCode", "PostalCode")
                         .WithMany()
                         .HasForeignKey("PostalCodeId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("GesFer.Shared.Back.Domain.Entities.State", "State")
+                    b.HasOne("GesFer.Domain.Entities.State", "State")
                         .WithMany()
                         .HasForeignKey("StateId")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -1576,9 +1576,9 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("State");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.Tariff", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.Tariff", b =>
                 {
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.Company", "Company")
+                    b.HasOne("GesFer.Domain.Entities.Company", "Company")
                         .WithMany("Tariffs")
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -1587,15 +1587,15 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.TariffItem", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.TariffItem", b =>
                 {
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.Article", "Article")
+                    b.HasOne("GesFer.Domain.Entities.Article", "Article")
                         .WithMany("TariffItems")
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.Tariff", "Tariff")
+                    b.HasOne("GesFer.Domain.Entities.Tariff", "Tariff")
                         .WithMany("TariffItems")
                         .HasForeignKey("TariffId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1606,9 +1606,9 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("Tariff");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.TaxType", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.TaxType", b =>
                 {
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.Company", "Company")
+                    b.HasOne("GesFer.Domain.Entities.Company", "Company")
                         .WithMany()
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -1617,35 +1617,35 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.User", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.User", b =>
                 {
-                    b.HasOne("GesFer.Shared.Back.Domain.Entities.City", "City")
+                    b.HasOne("GesFer.Domain.Entities.City", "City")
                         .WithMany()
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.Company", "Company")
+                    b.HasOne("GesFer.Domain.Entities.Company", "Company")
                         .WithMany("Users")
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("GesFer.Shared.Back.Domain.Entities.Country", "Country")
+                    b.HasOne("GesFer.Domain.Entities.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("GesFer.Shared.Back.Domain.Entities.Language", "Language")
+                    b.HasOne("GesFer.Domain.Entities.Language", "Language")
                         .WithMany()
                         .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("GesFer.Shared.Back.Domain.Entities.PostalCode", "PostalCode")
+                    b.HasOne("GesFer.Domain.Entities.PostalCode", "PostalCode")
                         .WithMany()
                         .HasForeignKey("PostalCodeId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("GesFer.Shared.Back.Domain.Entities.State", "State")
+                    b.HasOne("GesFer.Domain.Entities.State", "State")
                         .WithMany()
                         .HasForeignKey("StateId")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -1663,15 +1663,15 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("State");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.UserGroup", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.UserGroup", b =>
                 {
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.Group", "Group")
+                    b.HasOne("GesFer.Domain.Entities.Group", "Group")
                         .WithMany("UserGroups")
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.User", "User")
+                    b.HasOne("GesFer.Domain.Entities.User", "User")
                         .WithMany("UserGroups")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1682,15 +1682,15 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.UserPermission", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.UserPermission", b =>
                 {
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.Permission", "Permission")
+                    b.HasOne("GesFer.Domain.Entities.Permission", "Permission")
                         .WithMany("UserPermissions")
                         .HasForeignKey("PermissionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GesFer.Product.Back.Domain.Entities.User", "User")
+                    b.HasOne("GesFer.Domain.Entities.User", "User")
                         .WithMany("UserPermissions")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1701,9 +1701,9 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("GesFer.Shared.Back.Domain.Entities.City", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.City", b =>
                 {
-                    b.HasOne("GesFer.Shared.Back.Domain.Entities.State", "State")
+                    b.HasOne("GesFer.Domain.Entities.State", "State")
                         .WithMany("Cities")
                         .HasForeignKey("StateId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -1712,9 +1712,9 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("State");
                 });
 
-            modelBuilder.Entity("GesFer.Shared.Back.Domain.Entities.Country", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.Country", b =>
                 {
-                    b.HasOne("GesFer.Shared.Back.Domain.Entities.Language", "Language")
+                    b.HasOne("GesFer.Domain.Entities.Language", "Language")
                         .WithMany("Countries")
                         .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -1723,9 +1723,9 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("Language");
                 });
 
-            modelBuilder.Entity("GesFer.Shared.Back.Domain.Entities.PostalCode", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.PostalCode", b =>
                 {
-                    b.HasOne("GesFer.Shared.Back.Domain.Entities.City", "City")
+                    b.HasOne("GesFer.Domain.Entities.City", "City")
                         .WithMany("PostalCodes")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -1734,9 +1734,9 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("City");
                 });
 
-            modelBuilder.Entity("GesFer.Shared.Back.Domain.Entities.State", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.State", b =>
                 {
-                    b.HasOne("GesFer.Shared.Back.Domain.Entities.Country", "Country")
+                    b.HasOne("GesFer.Domain.Entities.Country", "Country")
                         .WithMany("States")
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -1745,7 +1745,7 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("Country");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.Article", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.Article", b =>
                 {
                     b.Navigation("PurchaseDeliveryNoteLines");
 
@@ -1754,7 +1754,7 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("TariffItems");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.Company", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.Company", b =>
                 {
                     b.Navigation("Articles");
 
@@ -1767,51 +1767,51 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.Customer", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.Customer", b =>
                 {
                     b.Navigation("SalesDeliveryNotes");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.Group", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.Group", b =>
                 {
                     b.Navigation("GroupPermissions");
 
                     b.Navigation("UserGroups");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.Permission", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.Permission", b =>
                 {
                     b.Navigation("GroupPermissions");
 
                     b.Navigation("UserPermissions");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.PurchaseDeliveryNote", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.PurchaseDeliveryNote", b =>
                 {
                     b.Navigation("Lines");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.PurchaseInvoice", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.PurchaseInvoice", b =>
                 {
                     b.Navigation("PurchaseDeliveryNotes");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.SalesDeliveryNote", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.SalesDeliveryNote", b =>
                 {
                     b.Navigation("Lines");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.SalesInvoice", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.SalesInvoice", b =>
                 {
                     b.Navigation("SalesDeliveryNotes");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.Supplier", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.Supplier", b =>
                 {
                     b.Navigation("PurchaseDeliveryNotes");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.Tariff", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.Tariff", b =>
                 {
                     b.Navigation("Customers");
 
@@ -1820,29 +1820,29 @@ namespace GesFer.Infrastructure.Migrations
                     b.Navigation("TariffItems");
                 });
 
-            modelBuilder.Entity("GesFer.Product.Back.Domain.Entities.User", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.User", b =>
                 {
                     b.Navigation("UserGroups");
 
                     b.Navigation("UserPermissions");
                 });
 
-            modelBuilder.Entity("GesFer.Shared.Back.Domain.Entities.City", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.City", b =>
                 {
                     b.Navigation("PostalCodes");
                 });
 
-            modelBuilder.Entity("GesFer.Shared.Back.Domain.Entities.Country", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.Country", b =>
                 {
                     b.Navigation("States");
                 });
 
-            modelBuilder.Entity("GesFer.Shared.Back.Domain.Entities.Language", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.Language", b =>
                 {
                     b.Navigation("Countries");
                 });
 
-            modelBuilder.Entity("GesFer.Shared.Back.Domain.Entities.State", b =>
+            modelBuilder.Entity("GesFer.Domain.Entities.State", b =>
                 {
                     b.Navigation("Cities");
                 });

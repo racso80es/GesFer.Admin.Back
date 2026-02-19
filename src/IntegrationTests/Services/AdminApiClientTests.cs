@@ -1,6 +1,6 @@
 using FluentAssertions;
-using GesFer.Product.Back.Infrastructure.DTOs;
-using GesFer.Product.Back.Infrastructure.Services;
+using GesFer.Infrastructure.DTOs;
+using GesFer.Infrastructure.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Net;

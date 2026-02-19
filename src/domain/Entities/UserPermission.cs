@@ -1,6 +1,6 @@
-using GesFer.Shared.Back.Domain.Common;
+using GesFer.Domain.Common;
 
-namespace GesFer.Product.Back.Domain.Entities;
+namespace GesFer.Domain.Entities;
 
 /// <summary>
 /// Tabla de relación Many-to-Many entre User y Permission (permisos directos)

@@ -1,9 +1,9 @@
 using System.Net.Http.Json;
-using GesFer.Product.Back.Infrastructure.DTOs;
+using GesFer.Infrastructure.DTOs;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace GesFer.Product.Back.Infrastructure.Services;
+namespace GesFer.Infrastructure.Services;
 
 public class AdminApiClient : IAdminApiClient
 {

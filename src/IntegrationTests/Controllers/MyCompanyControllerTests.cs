@@ -1,7 +1,7 @@
 using FluentAssertions;
 using GesFer.Application.DTOs.Auth;
 using GesFer.IntegrationTests.Helpers;
-using GesFer.Product.Back.Infrastructure.DTOs;
+using GesFer.Infrastructure.DTOs;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;

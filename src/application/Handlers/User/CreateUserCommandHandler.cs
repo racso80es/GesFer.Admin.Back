@@ -1,10 +1,10 @@
 using GesFer.Application.Commands.User;
 using GesFer.Application.Common.Interfaces;
 using GesFer.Application.DTOs.User;
-using GesFer.Product.Back.Domain.Entities;
-using GesFer.Shared.Back.Domain.ValueObjects;
+using GesFer.Domain.Entities;
+using GesFer.Domain.ValueObjects;
 using GesFer.Infrastructure.Data;
-using GesFer.Product.Back.Infrastructure.Services;
+using GesFer.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace GesFer.Application.Handlers.User;
@@ -87,7 +87,7 @@ public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, UserD
             email = Email.Create(command.Dto.Email);
         }
 
-        var user = new Product.Back.Domain.Entities.User
+        var user = new GesFer.Domain.Entities.User
         {
             CompanyId = command.Dto.CompanyId,
             Username = command.Dto.Username,
