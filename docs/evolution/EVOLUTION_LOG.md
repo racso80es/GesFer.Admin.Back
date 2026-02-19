@@ -108,3 +108,20 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 - `SddIA/skills/iniciar-rama.md`, `SddIA/skills/iniciar-rama.json` — Definición del skill.
 - `scripts/skills/Iniciar-Rama.ps1` — Script de inicio de rama.
 - `SddIA/process/feature.md`, `SddIA/process/bug-fix-specialist.json` — Consumidores.
+
+---
+
+## 2026-02-19 — Herramientas entorno y seeds (feat/tools-env-and-seeds)
+
+**Rama:** feat/tools-env-and-seeds.
+
+**Alcance:**
+- **Prepare-FullEnv:** Script y .bat en `scripts/tools/` que levanta Docker (gesfer-db, cache, adminer), espera MySQL y opcionalmente la Admin API y clientes. Config: `prepare-env.json`; documentación: `prepare-env.md`. Salida JSON y feedback por fases (contrato tools).
+- **Contrato de herramientas:** `SddIA/tools/tools-contract.json` y `tools-contract.md`. Define salida JSON obligatoria (toolId, exitCode, success, timestamp, message, feedback[], data) y reglas de feedback adecuado (fases, niveles info/warning/error).
+- **Invoke-MySqlSeeds:** Herramienta que comprueba MySQL (contenedor gesfer_db), ejecuta `dotnet ef database update` y los seeds de Admin mediante variable de entorno RUN_SEEDS_ONLY=1 en la API. Config: `mysql-seeds-config.json`; documentación: `mysql-seeds.md`. Modo RUN_SEEDS_ONLY añadido en `src/Api/Program.cs` para ejecutar migraciones y seeds sin levantar el servidor HTTP.
+
+**Referencias:**
+- `docs/features/prepare-full-env/` — Especificación Prepare-FullEnv.
+- `docs/features/tools-env-and-seeds/objectives.md` — Objetivos de la feature.
+- `SddIA/tools/tools-contract.json` — Contrato de herramientas.
+- `scripts/tools/` — Prepare-FullEnv.*, Invoke-MySqlSeeds.*, prepare-env.*, mysql-seeds.*.
