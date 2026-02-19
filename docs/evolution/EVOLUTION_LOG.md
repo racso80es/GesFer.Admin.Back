@@ -59,3 +59,19 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 - `docs/features/estandarizacion-gesfer-admin-back/objectives.md` — Objetivo y alcance.
 - `docs/features/estandarizacion-gesfer-admin-back/spec.md` — Especificación técnica.
 - `docs/features/estandarizacion-gesfer-admin-back/validacion.json` — Resultado de validación.
+
+---
+
+## 2026-02-19 — Gestión y uso de skills SddIA (feat/estandarizacion-gesfer-admin-back)
+
+**Rama:** feat/estandarizacion-gesfer-admin-back.
+
+**Alcance:**
+- **Contrato de skills:** `SddIA/skills/README.md` y `SddIA/skills/skills-contract.json`: todo skill debe disponer de artefacto `.md` (documentación) y `.json` (metadatos); consumibles por acciones y agentes.
+- **Skill finalizar-git:** `SddIA/skills/finalizar-git.md` y `SddIA/skills/finalizar-git.json`. Centraliza interacciones Git: fase pre_pr (push, creación PR a master) y fase post_pr (checkout master, pull, eliminar rama local/remota). Especificación aplicada (entradas, salidas, flujo, reglas).
+- **Integración en finalize:** La acción `SddIA/actions/finalize.md` referencia y utiliza la skill `finalizar-git` para los pasos Git de cierre; skill declarada como obligatoria en la tabla del agente responsable.
+
+**Referencias:**
+- `SddIA/skills/README.md` — Contrato e índice de skills.
+- `SddIA/skills/finalizar-git.md` — Especificación de la skill finalizar-git.
+- `SddIA/actions/finalize.md` — Acción finalize (usa skill finalizar-git).

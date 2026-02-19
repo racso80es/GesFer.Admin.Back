@@ -1,0 +1,45 @@
+{
+  "spec_version": "1.0.0",
+  "skill_id": "finalizar-git",
+  "name": "Finalizar Git",
+  "description": "Centraliza las interacciones con Git para aceptar PR a master, unificar, eliminar rama unificada y volver a master. Consumible por la acción finalize.",
+  "owner": "tekton-developer",
+  "status": "Active",
+  "phases": [
+    {
+      "id": "pre_pr",
+      "name": "Pre-PR",
+      "description": "Push de la rama y creación del PR hacia master.",
+      "steps": [
+        "Comprobar rama actual != master",
+        "Commit pendientes con mensaje convencional si aplica",
+        "git push origin <rama_actual>",
+        "Crear PR hacia master (API o instrucciones); descripción enlaza a {persist}"
+      ]
+    },
+    {
+      "id": "post_pr",
+      "name": "Post-PR",
+      "description": "Tras merge del PR en remoto: actualizar master local, eliminar rama, volver a master.",
+      "steps": [
+        "Verificar PR mergeado en master (remoto)",
+        "git checkout master",
+        "git pull origin master",
+        "git branch -d <rama_actual>",
+        "Opcional: git push origin --delete <rama_actual>",
+        "Comprobar git status y git branch -vv"
+      ]
+    }
+  ],
+  "rules": [
+    "Nunca commit directo en master; todo en feat/ o fix/ y merge vía PR",
+    "Mensajes de commit: Conventional Commits (feat:, fix:, chore:)",
+    "Pre-push: validación (validacion.json pass) cuando lo exija el proceso"
+  ],
+  "common_workflows": {
+    "push_and_open_pr": "git push origin <branch>; luego crear PR hacia master",
+    "after_pr_merged": "git checkout master; git pull origin master; git branch -d <branch>; opcional: git push origin --delete <branch>"
+  },
+  "related_artefacts": ["SddIA/actions/finalize.md"],
+  "related_agents": ["tekton-developer", "finalizer", "release-agent"]
+}

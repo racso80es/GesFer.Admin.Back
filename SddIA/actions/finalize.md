@@ -24,6 +24,10 @@ La acción **finalize** (finalizar) cierra el ciclo de la feature: asegura commi
 - **Pull Request:** Creado hacia `master`, con descripción que enlace a la documentación de la feature (ej. `docs/features/<nombre_feature>/`).
 - **Opcional:** Referencia al PR o estado en `{persist}/validacion.json` o en un artefacto `{persist}/finalize.json` (ej. URL del PR, timestamp de cierre).
 
+## Skill de referencia: finalizar-git
+
+La acción finalize **utiliza la skill** `finalizar-git` (`SddIA/skills/finalizar-git.md` y `SddIA/skills/finalizar-git.json`) para centralizar todas las interacciones con Git. El ejecutor debe aplicar los pasos y reglas definidos en esa skill para las fases **pre_pr** (push y creación del PR) y, cuando corresponda, **post_pr** (tras aceptar el PR: unificar, eliminar rama unificada, volver a master). La skill es la única fuente de verdad para los comandos y flujos git de cierre.
+
 ## Flujo de ejecución (propuesto)
 
 1. **Comprobación de precondiciones:**
@@ -34,10 +38,12 @@ La acción **finalize** (finalizar) cierra el ciclo de la feature: asegura commi
 3. **Actualización de Evolution Logs:**
    - Añadir entrada en `docs/EVOLUTION_LOG.md`.
    - Añadir sección en `docs/evolution/EVOLUTION_LOG.md` con resumen y enlace a la carpeta de la feature.
-4. **Push de la rama:** `git push origin <rama>` (mediante invoke-command o script autorizado).
-5. **Creación del PR:** Usando la API del proveedor (GitHub, Azure DevOps, etc.) o instrucciones claras para crearlo manualmente; la descripción del PR debe incluir la ruta a `docs/features/<nombre_feature>/`.
-6. **Persistencia opcional:** Escribir `{persist}/finalize.json` con { "pr_url": "...", "branch": "...", "timestamp": "..." }.
-7. **Auditoría:** Registrar el evento de finalización en `docs/audits/ACCESS_LOG.md` o equivalente.
+4. **Pasos Git (skill finalizar-git, fase pre_pr):** Aplicar la skill `finalizar-git`:
+   - Push de la rama: `git push origin <rama>` (mediante invoke-command o script autorizado).
+   - Creación del PR hacia `master` usando la API del proveedor (GitHub, Azure DevOps, etc.) o instrucciones claras para crearlo manualmente; la descripción del PR debe incluir la ruta a `docs/features/<nombre_feature>/`.
+5. **Persistencia opcional:** Escribir `{persist}/finalize.json` con { "pr_url": "...", "branch": "...", "timestamp": "..." }.
+6. **Auditoría:** Registrar el evento de finalización en `docs/audits/ACCESS_LOG.md` o equivalente.
+7. **Post-PR (skill finalizar-git, fase post_pr):** Una vez el PR esté aceptado/mergeado en el remoto, el ejecutor (o el usuario) puede aplicar la fase **post_pr** de la skill `finalizar-git`: checkout a master, pull, eliminar rama local (y opcionalmente remota), comprobar estado. Ver `SddIA/skills/finalizar-git.md`.
 
 ## Implementación técnica (opcional)
 
@@ -59,7 +65,7 @@ Puede implementarse mediante scripts (PowerShell o equivalente) que ejecuten los
 | :--- | :--- |
 | **Id sugerido** | `tekton-developer` (cierre y PR) o un agente dedicado `finalizer` / `release-agent` si se desea separar responsabilidades. |
 | **Rol** | Cierre: commits atómicos, actualización de Evolution Logs, push, creación del PR. Respetar Ley GIT y SSOT. |
-| **Skills necesarios** | `git-operations`, `documentation`, `invoke-command` (y posiblemente integración con API del repositorio para crear PR). |
+| **Skills necesarios** | `finalizar-git` (obligatorio para pasos Git de cierre), `git-operations`, `documentation`, `invoke-command` (y posiblemente integración con API del repositorio para crear PR). |
 | **Restricciones** | Nunca commit en master; toda operación git/comando vía invoke-command; descripción del PR debe enlazar a docs/features/<nombre_feature>/.**
 
 Si se desea un agente nuevo para no mezclar “escribir código” con “cerrar y hacer PR”, se puede definir:
