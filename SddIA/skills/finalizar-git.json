@@ -23,12 +23,10 @@
       "description": "Tras merge del PR en remoto: actualizar master local, eliminar rama, volver a master.",
       "steps": [
         "Verificar PR mergeado en master (remoto)",
-        "git checkout master",
-        "git pull origin master",
-        "git branch -d <rama_actual>",
-        "Opcional: git push origin --delete <rama_actual>",
+        "Invocar scripts/skills/Merge-To-Master-Cleanup.ps1 -BranchName <rama_actual> -DeleteRemote (o comandos git equivalentes)",
         "Comprobar git status y git branch -vv"
-      ]
+      ],
+      "script": "scripts/skills/Merge-To-Master-Cleanup.ps1"
     }
   ],
   "rules": [
@@ -38,7 +36,11 @@
   ],
   "common_workflows": {
     "push_and_open_pr": "git push origin <branch>; luego crear PR hacia master",
-    "after_pr_merged": "git checkout master; git pull origin master; git branch -d <branch>; opcional: git push origin --delete <branch>"
+    "after_pr_merged": "Invocar Merge-To-Master-Cleanup.ps1 -BranchName <branch> -DeleteRemote; o comandos git equivalentes"
+  },
+  "scripts": {
+    "pre_pr": "scripts/skills/Unificar-Rama.ps1",
+    "post_pr": "scripts/skills/Merge-To-Master-Cleanup.ps1"
   },
   "related_artefacts": ["SddIA/actions/finalize.md"],
   "related_agents": ["tekton-developer", "finalizer", "release-agent"]

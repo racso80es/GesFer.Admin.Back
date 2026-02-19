@@ -75,3 +75,20 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 - `SddIA/skills/README.md` — Contrato e índice de skills.
 - `SddIA/skills/finalizar-git.md` — Especificación de la skill finalizar-git.
 - `SddIA/actions/finalize.md` — Acción finalize (usa skill finalizar-git).
+
+---
+
+## 2026-02-19 — Auditoría carpeta scripts y script post-merge (main)
+
+**Rama:** main.
+
+**Alcance:**
+- **Auditoría de `scripts/`:** Inventario y valoración de todos los scripts (raíz, skills/, auditor/, Propuesta/). Eliminados los scripts deprecados: validate-pr.ps1/sh.deprecated, validate-commit.ps1/sh/bat.deprecated.
+- **Nuevo script:** `scripts/skills/Merge-To-Master-Cleanup.ps1`. Ejecuta la fase post_pr de finalizar-git: checkout a master/main, pull origin, eliminar rama local ya mergeada y opcionalmente remota (-DeleteRemote). Solo post-merge (PR ya aceptado en remoto); Ley GIT respetada.
+- **Integración en finalize:** La skill `finalizar-git` (md y json) y la acción `finalize.md` referencian e invocan Merge-To-Master-Cleanup.ps1 para la fase post_pr. Tabla de scripts en finalizar-git: pre_pr → Unificar-Rama.ps1, post_pr → Merge-To-Master-Cleanup.ps1.
+- **Documentación:** `docs/audits/AUDITORIA_CARPETA_SCRIPTS_20260219.md` con recomendaciones (refinar Unificar-Rama.ps1 con docs/features/, revisar commit-skill.sh).
+
+**Referencias:**
+- `docs/audits/AUDITORIA_CARPETA_SCRIPTS_20260219.md` — Informe de auditoría.
+- `scripts/skills/Merge-To-Master-Cleanup.ps1` — Script de cierre post-merge.
+- `SddIA/skills/finalizar-git.md`, `SddIA/actions/finalize.md` — Integración del script.

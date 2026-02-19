@@ -43,7 +43,7 @@ La acción finalize **utiliza la skill** `finalizar-git` (`SddIA/skills/finaliza
    - Creación del PR hacia `master` usando la API del proveedor (GitHub, Azure DevOps, etc.) o instrucciones claras para crearlo manualmente; la descripción del PR debe incluir la ruta a `docs/features/<nombre_feature>/`.
 5. **Persistencia opcional:** Escribir `{persist}/finalize.json` con { "pr_url": "...", "branch": "...", "timestamp": "..." }.
 6. **Auditoría:** Registrar el evento de finalización en `docs/audits/ACCESS_LOG.md` o equivalente.
-7. **Post-PR (skill finalizar-git, fase post_pr):** Una vez el PR esté aceptado/mergeado en el remoto, el ejecutor (o el usuario) puede aplicar la fase **post_pr** de la skill `finalizar-git`: checkout a master, pull, eliminar rama local (y opcionalmente remota), comprobar estado. Ver `SddIA/skills/finalizar-git.md`.
+7. **Post-PR (skill finalizar-git, fase post_pr):** Una vez el PR esté aceptado/mergeado en el remoto, el ejecutor (o el usuario) aplica la fase **post_pr** de la skill `finalizar-git` invocando el script `scripts/skills/Merge-To-Master-Cleanup.ps1` (desde la raíz del repo): posiciona en master/main, sincroniza con origin y elimina la rama mergeada (local y opcionalmente remota). Ver `SddIA/skills/finalizar-git.md`.
 
 ## Implementación técnica (opcional)
 

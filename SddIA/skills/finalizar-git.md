@@ -41,12 +41,16 @@ Centralizar todas las interacciones con Git necesarias para el cierre de una fea
 
 #### Fase `post_pr` (después de aceptar/mergear el PR en el remoto)
 
-1. Asegurarse de que el PR ya está mergeado en `master` en el remoto.
-2. Checkout a `master`: `git checkout master` (o `main` según configuración).
-3. Actualizar `master` local: `git pull origin master` (o `git pull origin main`).
-4. Eliminar la rama local ya fusionada: `git branch -d <rama_actual>` (o `-D` si es necesario).
-5. (Opcional) Eliminar la rama remota: `git push origin --delete <rama_actual>`.
-6. Comprobar estado final: `git status`, `git branch -vv` (working tree limpio, en master).
+1. Asegurarse de que el PR ya está mergeado en `master` (o `main`) en el remoto.
+2. **Script recomendado:** Invocar `scripts/skills/Merge-To-Master-Cleanup.ps1` desde la raíz del repo (PowerShell):
+
+   ```powershell
+   .\scripts\skills\Merge-To-Master-Cleanup.ps1 -BranchName "<rama_actual>" -DeleteRemote
+   ```
+
+   Si no se indica `-BranchName`, se usa la rama actual. El script: hace checkout a master/main, ejecuta `git pull origin <troncal>`, elimina la rama local ya fusionada y, con `-DeleteRemote`, la rama remota.
+
+3. **Alternativa manual:** Si el script no se usa, ejecutar en orden: `git checkout master` (o `main`), `git pull origin master`, `git branch -d <rama_actual>`, opcionalmente `git push origin --delete <rama_actual>`, y comprobar con `git status` y `git branch -vv`.
 
 ### Reglas (Ley GIT)
 
@@ -56,13 +60,12 @@ Centralizar todas las interacciones con Git necesarias para el cierre de una fea
 
 ### Integración con scripts
 
-Si existe `scripts/skills/Unificar-Rama.ps1` (o equivalente), puede invocarse para certificar la rama antes del merge (build, documentación de rama, commit). En Windows PowerShell desde la raíz del repo:
+| Fase    | Script | Uso |
+|--------|--------|-----|
+| **pre_pr**  | `scripts/skills/Unificar-Rama.ps1` | Certificar rama antes del merge (build, documentación, commit). Desde la raíz: `.\scripts\skills\Unificar-Rama.ps1 -BranchName "<rama_actual>" -CommitMessage "chore: finalizar tarea"`. |
+| **post_pr** | `scripts/skills/Merge-To-Master-Cleanup.ps1` | Tras aceptar el PR: posicionar en master/main, sincronizar y eliminar la rama mergeada (local y opcionalmente remota). Desde la raíz: `.\scripts\skills\Merge-To-Master-Cleanup.ps1 -BranchName "<rama_actual>" -DeleteRemote`. |
 
-```powershell
-.\scripts\skills\Unificar-Rama.ps1 -BranchName "<rama_actual>" -CommitMessage "chore: finalizar tarea"
-```
-
-Si el script no existe, los pasos de esta skill se realizan con comandos git estándar.
+Si algún script no existe, los pasos de la skill se realizan con comandos git estándar.
 
 ### Consumidores
 
