@@ -1,4 +1,4 @@
-using GesFer.Admin.Back.Domain.Entities;
+using GesFer.Admin.Domain.Entities;
 using GesFer.Admin.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;

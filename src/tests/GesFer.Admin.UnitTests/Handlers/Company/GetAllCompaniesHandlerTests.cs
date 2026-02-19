@@ -5,7 +5,7 @@ using GesFer.Admin.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
-using CompanyEntity = GesFer.Shared.Back.Domain.Entities.Company;
+using CompanyEntity = GesFer.Admin.Domain.Entities.Company;
 
 namespace GesFer.Admin.UnitTests.Handlers.Company;
 

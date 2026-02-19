@@ -1,7 +1,7 @@
 
 using GesFer.Admin.Infrastructure.Services;
 using GesFer.Admin.Infrastructure.Data;
-using GesFer.Shared.Back.Domain.Services;
+using GesFer.Admin.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql;
 
@@ -60,15 +60,6 @@ public static class DependencyInjection
         // Registrar MediatR para manejar comandos/queries
         // Escanear el ensamblado de Application
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GesFer.Admin.Application.DTOs.Company.CompanyDto).Assembly));
-
-        // Registrar cliente de Product API (Dashboard Stats Aggregation)
-        services.AddHttpClient<IProductApiClient, ProductApiClient>(client =>
-        {
-            // Usar configuración ProductApi:BaseUrl o default a 5002
-            var productApiBaseUrl = configuration["ProductApi:BaseUrl"] ?? "http://localhost:5002";
-            client.BaseAddress = new Uri(productApiBaseUrl);
-            client.Timeout = TimeSpan.FromSeconds(5);
-        });
 
         return services;
     }

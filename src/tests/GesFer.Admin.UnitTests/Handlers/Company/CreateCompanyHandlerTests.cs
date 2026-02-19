@@ -3,11 +3,11 @@ using GesFer.Admin.Application.DTOs.Company;
 using GesFer.Admin.Application.Handlers.Company;
 using GesFer.Admin.Application.Commands.Company;
 using GesFer.Admin.Infrastructure.Data;
-using GesFer.Shared.Back.Domain.Entities;
+using GesFer.Admin.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
-using CompanyEntity = GesFer.Shared.Back.Domain.Entities.Company;
+using CompanyEntity = GesFer.Admin.Domain.Entities.Company;
 
 namespace GesFer.Admin.UnitTests.Handlers.Company;
 

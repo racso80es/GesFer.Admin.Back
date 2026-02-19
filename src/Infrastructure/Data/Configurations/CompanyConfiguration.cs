@@ -1,5 +1,5 @@
-using GesFer.Shared.Back.Domain.Entities;
-using GesFer.Shared.Back.Domain.ValueObjects;
+using GesFer.Admin.Domain.Entities;
+using GesFer.Admin.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using GesFer.Admin.Api;
 using GesFer.Admin.Infrastructure.Data;
 using GesFer.Admin.Infrastructure.Services;
-using GesFer.Shared.Back.Domain.Services;
+using GesFer.Admin.Domain.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;

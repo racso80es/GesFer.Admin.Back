@@ -1,7 +1,7 @@
 using GesFer.Admin.Application.Commands.Company;
 using GesFer.Admin.Application.DTOs.Company;
 using GesFer.Admin.Infrastructure.Data;
-using GesFer.Shared.Back.Domain.ValueObjects;
+using GesFer.Admin.Domain.ValueObjects;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

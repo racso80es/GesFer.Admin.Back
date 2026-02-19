@@ -1,0 +1,23 @@
+{
+  "contract_version": "1.0.0",
+  "scope": "SddIA/skills/",
+  "description": "Contrato que todo skill debe cumplir para ser consumible por acciones y agentes.",
+  "required_artefacts": [
+    {
+      "ext": ".md",
+      "naming": "<skill-id>.md",
+      "purpose": "Documentación legible: objetivo, entradas/salidas, flujo, reglas. Idioma: es-ES."
+    },
+    {
+      "ext": ".json",
+      "naming": "<skill-id>.json",
+      "purpose": "Metadatos machine-readable: skill_id, name, description, rules, workflows, parámetros."
+    }
+  ],
+  "constraints": [
+    "skill-id debe estar en kebab-case",
+    "Un skill sin ambos artefactos no se considera completo",
+    "Las acciones resuelven el .md para flujo y el .json para parámetros y reglas"
+  ],
+  "consumers": ["SddIA/actions/", "SddIA/agents/*.json"]
+}

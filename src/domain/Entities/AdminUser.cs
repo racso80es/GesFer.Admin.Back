@@ -1,6 +1,6 @@
-using GesFer.Shared.Back.Domain.Common;
+using GesFer.Admin.Domain.Common;
 
-namespace GesFer.Admin.Back.Domain.Entities;
+namespace GesFer.Admin.Domain.Entities;
 
 /// <summary>
 /// Entidad que representa un usuario administrativo del sistema
