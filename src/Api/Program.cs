@@ -179,6 +179,22 @@ try
 
     var app = builder.Build();
 
+    // Modo solo seeds: ejecutar migraciones + seeds y salir (para scripts/tools/Invoke-MySqlSeeds.ps1)
+    if (Environment.GetEnvironmentVariable("RUN_SEEDS_ONLY") == "1")
+    {
+        using (var scope = app.Services.CreateScope())
+        {
+            var services = scope.ServiceProvider;
+            var context = services.GetRequiredService<AdminDbContext>();
+            await context.Database.MigrateAsync();
+            var seeder = services.GetRequiredService<AdminJsonDataSeeder>();
+            await seeder.SeedCompaniesAsync();
+            await seeder.SeedAdminUsersAsync();
+        }
+        Log.Information("Seeds ejecutados. Saliendo (RUN_SEEDS_ONLY).");
+        Environment.Exit(0);
+    }
+
     // Inicializar base de datos y seeds (Se ejecuta siempre para garantizar consistencia)
     using (var scope = app.Services.CreateScope())
     {
