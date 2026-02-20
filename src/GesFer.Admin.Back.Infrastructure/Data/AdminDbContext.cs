@@ -54,4 +54,8 @@ public class AdminDbContext : DbContext, IApplicationDbContext
     DbSet<Log> IApplicationDbContext.Logs => Logs;
     DbSet<AuditLog> IApplicationDbContext.AuditLogs => AuditLogs;
     DbSet<Company> IApplicationDbContext.Companies => Companies;
+    DbSet<Country> IApplicationDbContext.Countries => Countries;
+    DbSet<State> IApplicationDbContext.States => States;
+    DbSet<City> IApplicationDbContext.Cities => Cities;
+    DbSet<Language> IApplicationDbContext.Languages => Languages;
 }

@@ -1,5 +1,9 @@
 {
+<<<<<<< feat/skills-encapsulation
   "contract_version": "1.1.0",
+=======
+  "contract_version": "1.0.1",
+>>>>>>> main
   "scope": "SddIA/skills/",
   "description": "Contrato que todo skill debe cumplir: definición en paths.skillsDefinitionPath/<skill-id>/, implementación en paths.skillCapsules[skill-id]. Implementación por defecto en Rust.",
   "default_implementation": {
@@ -22,6 +26,9 @@
     { "ext": ".bat", "purpose": "Launcher en cápsula: binario en bin/ si existe, si no .ps1." },
     { "ext": ".json", "naming": "manifest", "purpose": "Manifest de la cápsula: skillId, components, contract_ref." },
     { "ext": ".md", "purpose": "Documentación en la cápsula. es-ES." }
+  ],
+  "implementation_requirements": [
+    "El ejecutable o script sugerido para la implementación de la skill debe ser desarrollado en Rust (localizado en scripts/tools-rs/)."
   ],
   "constraints": [
     "skill-id en kebab-case.",

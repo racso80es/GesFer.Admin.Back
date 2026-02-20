@@ -8,5 +8,9 @@ public interface IApplicationDbContext
     DbSet<Log> Logs { get; }
     DbSet<AuditLog> AuditLogs { get; }
     DbSet<Company> Companies { get; }
+    DbSet<Country> Countries { get; }
+    DbSet<State> States { get; }
+    DbSet<City> Cities { get; }
+    DbSet<Language> Languages { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
