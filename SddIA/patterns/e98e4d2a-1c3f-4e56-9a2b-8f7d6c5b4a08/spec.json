@@ -1,0 +1,18 @@
+{
+  "id": "e98e4d2a-1c3f-4e56-9a2b-8f7d6c5b4a08",
+  "title": "CQRS (Command Query Responsibility Segregation)",
+  "category": "Arquitectura de Software",
+  "tags": [
+    "Lectura/Escritura",
+    "Modelos",
+    "Desacoplamiento"
+  ],
+  "metadata": {
+    "difficulty": "Advanced",
+    "status": "Published"
+  },
+  "interested_agents": [
+    "architect",
+    "infrastructure-architect"
+  ]
+}
