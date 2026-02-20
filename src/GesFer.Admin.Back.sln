@@ -5,23 +5,23 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{81034408-37C8-1011-444E-4C15C2FADA8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GesFer.Admin.Api", "Api\GesFer.Admin.Api.csproj", "{3A317BB5-6EDE-4BE2-9D90-5FAEA4186F71}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GesFer.Admin.Back.Api", "GesFer.Admin.Back.Api\GesFer.Admin.Back.Api.csproj", "{3A317BB5-6EDE-4BE2-9D90-5FAEA4186F71}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "application", "application", "{22BAF98C-8415-17C4-B26A-D537657BC863}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GesFer.Admin.Application", "application\GesFer.Admin.Application.csproj", "{7122E8E0-2B71-4BD5-A6AD-BC26E12AE9E4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GesFer.Admin.Back.Application", "GesFer.Admin.Back.Application\GesFer.Admin.Back.Application.csproj", "{7122E8E0-2B71-4BD5-A6AD-BC26E12AE9E4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{9048EB7F-3875-A59E-E36B-5BD4C6F2A282}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GesFer.Admin.Infra", "Infrastructure\GesFer.Admin.Infra.csproj", "{27B0F397-D8F3-4C00-81B8-2AC66FEA8FAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GesFer.Admin.Back.Infrastructure", "GesFer.Admin.Back.Infrastructure\GesFer.Admin.Back.Infrastructure.csproj", "{27B0F397-D8F3-4C00-81B8-2AC66FEA8FAE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "domain", "domain", "{8B290487-4C16-E85E-E807-F579CBE9FC4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GesFer.Admin.Domain", "domain\GesFer.Admin.Domain.csproj", "{6D93F195-AB7B-4DB7-98C4-2898286372CF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GesFer.Admin.Back.Domain", "GesFer.Admin.Back.Domain\GesFer.Admin.Back.Domain.csproj", "{6D93F195-AB7B-4DB7-98C4-2898286372CF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationTests", "IntegrationTests", "{7D34DBFB-C4F8-474C-F6E0-5117905D81D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GesFer.Admin.IntegrationTests", "IntegrationTests\GesFer.Admin.IntegrationTests.csproj", "{699080CB-41D3-4CB0-8035-B99307958C5B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GesFer.Admin.Back.IntegrationTests", "GesFer.Admin.Back.IntegrationTests\GesFer.Admin.Back.IntegrationTests.csproj", "{699080CB-41D3-4CB0-8035-B99307958C5B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la soluciÃƒÂ³n", "Elementos de la soluciÃƒÂ³n", "{D107F4C8-89CC-BEA8-D3D7-CA6B7733353D}"
 	ProjectSection(SolutionItems) = preProject
@@ -33,7 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la soluciÃƒ�
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{2F646680-91A4-F107-74F4-9BF3126A0F16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GesFer.Admin.UnitTests", "tests\GesFer.Admin.UnitTests\GesFer.Admin.UnitTests.csproj", "{0A926B76-7ADF-47B6-A9AA-12B2FA57C541}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GesFer.Admin.Back.UnitTests", "GesFer.Admin.Back.UnitTests\GesFer.Admin.Back.UnitTests.csproj", "{0A926B76-7ADF-47B6-A9AA-12B2FA57C541}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
