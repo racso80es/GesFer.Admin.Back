@@ -14,11 +14,11 @@
 
 1. **Reconocer** que el usuario quiere ver o elegir una skill del proyecto.
 2. **Sugerir las skills existentes** listando `skill_id` y descripción breve.
-3. **Fuente del listado:** `SddIA/skills/README.md` (tabla de skills) y/o las carpetas en **paths.skillsDefinitionPath** (Cúmulo). Para skills con implementación ejecutable: **paths.skillsIndexPath** o **paths.skillCapsules** (Cúmulo).
+3. **Fuente del listado:** paths.skillsDefinitionPath (README.md, tabla de skills) y/o las carpetas en **paths.skillsDefinitionPath** (Cúmulo). Para skills con implementación ejecutable: **paths.skillsIndexPath** o **paths.skillCapsules** (Cúmulo).
 4. **Formato de respuesta:** Tabla o lista clara en español; indicar cuáles tienen cápsula (paths.skillCapsules) y cuáles son solo definición.
 5. **Cierre:** Ofrecer seguir con una skill concreta: *"¿Con cuál quieres trabajar o qué necesitas hacer?"* Detalle: paths.skillsDefinitionPath/<skill-id>/ (spec.md, spec.json); implementación en paths.skillCapsules[skill-id].
 
-### Listado de referencia (actualizar si cambia SddIA/skills/)
+### Listado de referencia (actualizar si cambia paths.skillsDefinitionPath)
 
 | skill_id | Descripción | Cápsula |
 |----------|-------------|---------|
@@ -47,7 +47,7 @@
 4. **Formato de respuesta:** Tabla o lista clara en español con action_id y propósito.
 5. **Cierre:** Ofrecer seguir con una acción concreta: *"¿Cuál quieres ejecutar o sobre cuál necesitas detalle?"* Detalle de cada acción: paths.actionsPath/<action>.md.
 
-### Listado de referencia (actualizar si cambia SddIA/actions/)
+### Listado de referencia (actualizar si cambia paths.actionsPath)
 
 | action_id | Descripción |
 |-----------|-------------|
@@ -73,7 +73,7 @@
 4. **Formato de respuesta:** Tabla o lista clara en español con process_id y propósito; indicar definición (.md / .json).
 5. **Cierre:** Ofrecer seguir con un proceso: *"¿Con cuál quieres iniciar una tarea o necesitas detalle?"* Detalle: paths.processPath/README.md y fichero de definición de cada proceso.
 
-### Listado de referencia (actualizar si cambia SddIA/process/)
+### Listado de referencia (actualizar si cambia paths.processPath)
 
 | process_id | Descripción | Definición |
 |------------|-------------|------------|

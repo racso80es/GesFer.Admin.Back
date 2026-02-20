@@ -3,7 +3,7 @@
   "skill_id": "frontend-build",
   "name": "Frontend Build (Next.js)",
   "description": "Scripts y comandos para compilar los frontends Product y Admin sin depender del binario next (dist/bin/next). Usar cuando el build del frontend falle con MODULE_NOT_FOUND.",
-  "contract_ref": "SddIA/skills/skills-contract.json",
+  "contract_ref": "paths.skillsDefinitionPath/skills-contract.json (Cúmulo)",
   "owner": "tekton-developer",
   "status": "Active",
   "scripts": [

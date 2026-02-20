@@ -24,4 +24,4 @@ Reglas seguras de manipulación de archivos en entorno Windows/PowerShell.
 Skill de definición únicamente. Consumido por agentes para operaciones de archivo en Windows.
 
 ---
-*Definición en paths.skillsDefinitionPath/filesystem-ops/ (contrato SddIA/skills/skills-contract.md).*
+*Definición en paths.skillsDefinitionPath/filesystem-ops/ (contrato paths.skillsDefinitionPath/skills-contract.md).*

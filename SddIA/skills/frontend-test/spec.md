@@ -13,4 +13,4 @@ Comandos estandarizados para ejecutar tests unitarios en proyectos Frontend (Des
 - test-desktop-e2e: Playwright E2E (npm run e2e; requiere Display/Xvfb)
 
 ---
-*Definición en paths.skillsDefinitionPath/frontend-test/ (contrato SddIA/skills/skills-contract.md).*
+*Definición en paths.skillsDefinitionPath/frontend-test/ (contrato paths.skillsDefinitionPath/skills-contract.md).*

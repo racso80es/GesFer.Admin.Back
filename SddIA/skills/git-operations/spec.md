@@ -24,4 +24,4 @@ Uso seguro y semántico de Git: ramas feat/fix, commits convencionales, pre-push
 Skill de definición únicamente (sin cápsula ejecutable). Consumido por agentes y procesos (feature, bug-fix).
 
 ---
-*Definición en paths.skillsDefinitionPath/git-operations/ (contrato SddIA/skills/skills-contract.md).*
+*Definición en paths.skillsDefinitionPath/git-operations/ (contrato paths.skillsDefinitionPath/skills-contract.md).*

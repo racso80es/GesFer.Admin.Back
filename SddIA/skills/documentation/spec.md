@@ -19,4 +19,4 @@ Estándares para mantener la Single Source of Truth (SSOT) en documentación y c
 Skill de definición únicamente (sin implementación ejecutable en cápsula). Consumido por agentes y acciones para aplicar estándares de documentación.
 
 ---
-*Definición en paths.skillsDefinitionPath/documentation/ (contrato SddIA/skills/skills-contract.md).*
+*Definición en paths.skillsDefinitionPath/documentation/ (contrato paths.skillsDefinitionPath/skills-contract.md).*

@@ -1,6 +1,6 @@
 # Proceso: Creación de herramientas (create-tool)
 
-Este documento define el **proceso de tarea** para crear una nueva herramienta (tool) en el proyecto. Está ubicado en `SddIA/process/create-tool.md`. Las rutas de herramientas se obtienen de **Cúmulo** (`SddIA/agents/cumulo.json` → **paths.toolsPath**, **paths.toolCapsules**, **paths.toolsIndexPath**).
+Este documento define el **proceso de tarea** para crear una nueva herramienta (tool) en el proyecto. Está ubicado en paths.processPath/create-tool.md (Cúmulo). Las rutas de herramientas se obtienen de **Cúmulo** (paths.toolsPath, paths.toolCapsules, paths.toolsIndexPath).
 
 **Interfaz de proceso:** Cumple la interfaz en Cúmulo (`process_interface`): la tarea de creación genera en **{persist}** (documentación de la tarea) al menos un **`.md`** (objectives.md, spec.md, implementation.md) y al menos un **`.json`** (spec.json, implementation.json, validacion.json). El **resultado ejecutable** es la cápsula en **paths.toolCapsules[&lt;tool-id&gt;]** con todos los artefactos requeridos por el contrato de herramientas.
 
@@ -60,7 +60,7 @@ Tras crear la herramienta, paths.toolsIndexPath debe incluir la nueva entrada en
 ## Referencias
 
 - Contrato: `SddIA/tools/tools-contract.json`, `SddIA/tools/tools-contract.md`.
-- Cúmulo: `SddIA/agents/cumulo.json` → paths.toolsDefinitionPath, paths.toolsPath, paths.toolCapsules, paths.toolsIndexPath.
+- Cúmulo: paths.toolsDefinitionPath, paths.toolsPath, paths.toolCapsules, paths.toolsIndexPath.
 - Definición por herramienta: **paths.toolsDefinitionPath**/&lt;tool-id&gt;/ (spec.md, spec.json con implementation_path_ref).
 - Índice: **paths.toolsIndexPath** (listado de herramientas).
 - Proceso machine-readable: `SddIA/process/create-tool.json`.

@@ -63,7 +63,7 @@ Así se mantiene un **feedback adecuado** tanto para humanos (mensajes claros) c
 - **Launcher:** dentro de la cápsula, el `.bat` invoca el `.exe` en `bin/` si existe; en caso contrario, fallback al script `.ps1` de la cápsula.
 - **Config** (`.json`), **documentación** (`.md`) y **manifest.json** (toolId, components, contract_ref) son obligatorios en la cápsula. **Rutas canónicas:** Cúmulo `SddIA/agents/cumulo.json` → **paths.toolsPath**, **paths.toolCapsules**. En documentación .md no usar rutas literales; referenciar vía Cúmulo.
 
-Referencia: agente Security Engineer (`SddIA/agents/security-engineer.json`).
+Referencia: agente Security Engineer (paths (Cúmulo) o agente Security Engineer).
 
 ## 4. Artefactos por herramienta
 

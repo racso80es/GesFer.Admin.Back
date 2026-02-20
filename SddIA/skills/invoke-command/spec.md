@@ -33,4 +33,4 @@ Uso (desde la raíz del repo):
 Prohibido ejecutar comandos directamente en el shell sin pasar por esta skill.
 
 ---
-*Definición en paths.skillsDefinitionPath/invoke-command/ (contrato SddIA/skills/skills-contract.md).*
+*Definición en paths.skillsDefinitionPath/invoke-command/ (contrato paths.skillsDefinitionPath/skills-contract.md).*

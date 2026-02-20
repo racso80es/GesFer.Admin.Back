@@ -8,7 +8,7 @@
     "delivery": [
       "Cada skill con ejecutable reside en una cápsula paths.skillCapsules[skill-id]. Los ejecutables se construyen en paths.skillsRustPath (Cúmulo) y se copian a <cápsula>/bin/.",
       "Launcher .bat en la cápsula invoca el .exe en bin/ si existe; si no, fallback a PowerShell (.ps1).",
-      "manifest.json, documentación .md obligatorios en la cápsula. Rutas canónicas: SddIA/agents/cumulo.json paths.skillCapsules."
+      "manifest.json, documentación .md obligatorios en la cápsula. Rutas canónicas: Cúmulo paths.skillCapsules."
     ]
   },
   "definition_artefacts": [

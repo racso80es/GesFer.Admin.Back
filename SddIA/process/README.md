@@ -1,6 +1,6 @@
 # Procesos de tarea (SddIA/process)
 
-Al iniciar una tarea se debe elegir un **proceso**. Cada proceso define el ciclo completo (rama, documentación, especificación, implementación, validación y cierre) y la ubicación de persistencia (`{persist}`) según el agente **Cúmulo** (`SddIA/agents/cumulo.json`).
+Al iniciar una tarea se debe elegir un **proceso**. Cada proceso define el ciclo completo (rama, documentación, especificación, implementación, validación y cierre) y la ubicación de persistencia (`{persist}`) según el agente **Cúmulo** (paths; ver paths.processPath).
 
 ## Procesos disponibles
 
@@ -12,15 +12,15 @@ Al iniciar una tarea se debe elegir un **proceso**. Cada proceso define el ciclo
 
 ## Uso
 
-1. **Feature:** Seguir las fases descritas en `SddIA/process/feature.md`. {persist} = Cúmulo.featurePath/<nombre_feature>.
-2. **Bug-fix:** Seguir las instrucciones del agente en `SddIA/process/bug-fix-specialist.json`. {persist} = Cúmulo.fixPath/<nombre_fix>.
-3. **Create-tool:** Seguir las fases en `SddIA/process/create-tool.md` y artefactos en `create-tool.json`. {persist} = Cúmulo.featurePath/create-tool-&lt;tool-id&gt;. Entregable: cápsula en paths.toolsPath/&lt;tool-id&gt;/; actualizar index.json y Cúmulo paths.toolCapsules.
+1. **Feature:** Seguir las fases descritas en paths.processPath/feature.md. {persist} = Cúmulo.featurePath/<nombre_feature>.
+2. **Bug-fix:** Seguir las instrucciones del agente en paths.processPath/bug-fix-specialist.json. {persist} = Cúmulo.fixPath/<nombre_fix>.
+3. **Create-tool:** Seguir las fases en paths.processPath/create-tool.md y create-tool.json. {persist} = Cúmulo.featurePath/create-tool-&lt;tool-id&gt;. Entregable: cápsula en paths.toolsPath/&lt;tool-id&gt;/; actualizar index.json y Cúmulo paths.toolCapsules.
 
-Las **acciones** (spec, clarify, plan, implementation, execution, validate, finalize) siguen en `SddIA/actions/` y son invocadas por los procesos.
+Las **acciones** (spec, clarify, plan, implementation, execution, validate, finalize) siguen en paths.actionsPath (Cúmulo) y son invocadas por los procesos.
 
 ## Interfaz de procesos (norma para agentes)
 
-Todo proceso debe cumplir la **interfaz** definida en Cúmulo (`SddIA/agents/cumulo.json` → `process_interface`): solicitar o generar en `{persist}/` artefactos con las extensiones:
+Todo proceso debe cumplir la **interfaz** definida en Cúmulo (Cúmulo → process_interface): solicitar o generar en `{persist}/` artefactos con las extensiones:
 
 | Extensión | Uso |
 | :--- | :--- |

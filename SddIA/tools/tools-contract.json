@@ -8,7 +8,7 @@
     "delivery": [
       "Cada herramienta reside en una capsula paths.toolsPath (Cúmulo) /<tool-id>/ con manifest.json. Los ejecutables se construyen en paths.toolsRustPath (Cúmulo) y se copian a paths.toolsPath (Cúmulo) /<tool-id>/bin/.",
       "Launcher .bat/.ps1 en la capsula invoca el .exe en bin/ si existe; si no, fallback a PowerShell. Wrappers .bat en paths.toolsPath (Cúmulo) / delegan a la capsula.",
-      "Config (.json), documentacion (.md) y manifest.json obligatorios en la capsula. Rutas canonicas: SddIA/agents/cumulo.json paths.toolCapsules."
+      "Config (.json), documentacion (.md) y manifest.json obligatorios en la capsula. Rutas canonicas: Cúmulo paths.toolCapsules."
     ]
   },
   "output": {

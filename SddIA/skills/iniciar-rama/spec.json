@@ -4,7 +4,7 @@
   "name": "Iniciar Rama",
   "description": "Crea una rama nueva (feat/ o fix/) actualizada con master/main y posiciona el repo en ella. Para el inicio de una acción o tarea.",
   "implementation_path_ref": "paths.skillCapsules.iniciar-rama",
-  "contract_ref": "SddIA/skills/skills-contract.json",
+  "contract_ref": "paths.skillsDefinitionPath/skills-contract.json (Cúmulo)",
   "owner": "tekton-developer",
   "status": "Active",
   "phases": [

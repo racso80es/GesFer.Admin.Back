@@ -23,4 +23,4 @@ Scripts y comandos para compilar los frontends Product y Admin sin depender del 
 - build_admin: Set-Location src/Admin/Front; npm run build
 
 ---
-*Definición en paths.skillsDefinitionPath/frontend-build/ (contrato SddIA/skills/skills-contract.md).*
+*Definición en paths.skillsDefinitionPath/frontend-build/ (contrato paths.skillsDefinitionPath/skills-contract.md).*

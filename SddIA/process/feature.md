@@ -1,6 +1,6 @@
 # Proceso: Feature
 
-Este documento define el **proceso de tarea** para desarrollar una funcionalidad. Está ubicado en `SddIA/process/feature.md`. Las acciones que orquesta están en paths.actionsPath (Cúmulo). La ruta de persistencia **{persist}** se obtiene de **Cúmulo** (`SddIA/agents/cumulo.json` → `paths.featurePath/<nombre_feature>`).
+Este documento define el **proceso de tarea** para desarrollar una funcionalidad. Está ubicado en paths.processPath/feature.md (Cúmulo). Las acciones que orquesta están en paths.actionsPath (Cúmulo). La ruta de persistencia **{persist}** se obtiene de **Cúmulo** (Cúmulo → paths.featurePath/<nombre_feature>).
 
 **Interfaz de proceso:** Cumple la interfaz en Cúmulo (`process_interface`): solicita/genera en `{persist}/` al menos un **`.md`** (objectives.md, spec.md, clarify.md, plan, etc.) y al menos un **`.json`** (spec.json, clarify.json, implementation.json, validacion.json, etc.).
 
@@ -85,7 +85,7 @@ El mismo patrón de persistencia se aplica a correcciones de bugs mediante el pr
 
 - Rama: `fix/<nombre_fix>` (nunca `master`).
 - En la descripción del PR y en Evolution Logs, la referencia canónica es **paths.fixPath/<nombre_fix>/** (Cúmulo) (SSOT para ese fix).
-- El agente **Bug Fix Specialist** (`SddIA/process/bug-fix-specialist.json`) orquesta el ciclo del fix y asegura que toda la documentación viva en **{persist}/**.
+- El agente **Bug Fix Specialist** (paths.processPath/bug-fix-specialist.json) orquesta el ciclo del fix y asegura que toda la documentación viva en **{persist}/**.
 
 ## Referencia de ejecución
 

@@ -1,6 +1,6 @@
 # Contrato de skills (Cúmulo: paths.skillsPath / paths.skillCapsules)
 
-**Alcance:** Todas las entidades en **paths.skillsPath** y en cada **paths.skillCapsules[&lt;skill-id&gt;]** (Cúmulo, `Cúmulo (SddIA/agents/cumulo.json)`) que actúen como skills con implementación ejecutable. Listado: **paths.skillsIndexPath** (índice en raíz de skills).
+**Alcance:** Todas las entidades en **paths.skillsPath** y en cada **paths.skillCapsules[&lt;skill-id&gt;]** (Cúmulo (SddIA/agents/cumulo.json) que actúen como skills con implementación ejecutable. Listado: **paths.skillsIndexPath** (índice en raíz de skills).
 
 **Desacoplamiento definición / implementación:** La **definición** (qué hace el skill, contrato, entradas/salidas) está en **paths.skillsDefinitionPath**/&lt;skill-id&gt;/ (paths.skillsDefinitionPath/&lt;skill-id&gt;/) en formato spec.md y spec.json. La **implementación** (scripts, config, ejecutables) está en **paths.skillCapsules[&lt;skill-id&gt;]** (scripts). La raíz del path de implementación la indica Cúmulo; en la definición (spec.json) debe indicarse **implementation_path_ref** (ej. `paths.skillCapsules.&lt;skill-id&gt;`) para resolver la ruta desde Cúmulo sin duplicar rutas literales.
 

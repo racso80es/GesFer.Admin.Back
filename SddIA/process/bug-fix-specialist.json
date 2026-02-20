@@ -15,7 +15,7 @@
     "fixPath_ref": "paths.fixPath (Cúmulo)",
     "bugPath_ref": "paths.bugPath (Cúmulo)"
   },
-  "process_interface_compliance": "Cumple SddIA/agents/cumulo.json → process_interface. Solicita/genera en {persist}/: al menos un .md (p. ej. objectives.md, spec.md, clarify.md) y al menos un .json (p. ej. spec.json, clarify.json, validacion.json).",
+  "process_interface_compliance": "Cumple Cúmulo (paths) → process_interface. Solicita/genera en {persist}/: al menos un .md (p. ej. objectives.md, spec.md, clarify.md) y al menos un .json (p. ej. spec.json, clarify.json, validacion.json).",
   "triggers": [
     "Reporte de bug o incidencia",
     "Fallo en CI o tests que indica regresión",
@@ -39,7 +39,7 @@
       "severity": "HIGH"
     },
     {
-      "rule": "Ruta de persistencia: Toda documentación del bug/fix en {persist}/. Consultar SddIA/agents/cumulo.json → paths.fixPath; {persist} = fixPath/<nombre_fix>.",
+      "rule": "Ruta de persistencia: Toda documentación del bug/fix en {persist}/. Consultar Cúmulo (paths) → paths.fixPath; {persist} = fixPath/<nombre_fix>.",
       "severity": "CRITICAL"
     }
   ],
