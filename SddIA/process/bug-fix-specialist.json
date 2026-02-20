@@ -1,5 +1,5 @@
 {
-  "spec_version": "1.0.0",
+  "spec_version": "1.0.1",
   "agent_id": "bug-fix-specialist",
   "name": "Bug Fix Specialist",
   "role_type": "Remediator",
@@ -21,10 +21,7 @@
     "Fallo en CI o tests que indica regresión",
     "Solicitud de fix con bug-id o título"
   ],
-  "tools": [
-    "GesFer.Console --spec (con --context {persist}/)",
-    "GesFer.Console --clarify (cuando la spec del bug requiera aclaraciones)"
-  ],
+  "tools": [],
   "constraints": [
     {
       "rule": "Branching: Todo trabajo de fix en rama fix/<nombre_fix>, nunca en master.",
@@ -46,7 +43,7 @@
   "instructions": [
     "Obtener o definir nombre_fix (ej. admin-back-repeated-failures). Definir {persist} = AGENTE_CUMULO.fixPath/<nombre_fix>. Crear rama fix/<nombre_fix> desde master actualizado: skill iniciar-rama (cápsula paths.skillCapsules.iniciar-rama): scripts/skills/iniciar-rama/Iniciar-Rama.bat fix <nombre_fix> o Iniciar-Rama.ps1 -BranchType fix -BranchName <nombre_fix>.",
     "Crear carpeta {persist}/ si no existe. Dentro: objectives.md (objetivo del fix, pasos de reproducción, causa raíz conocida o hipótesis).",
-    "Generar SPEC del fix con GesFer.Console --spec --context {persist}/ para formalizar el qué se corrige.",
+    "Generar SPEC del fix manualmente en {persist}/ para formalizar el qué se corrige.",
     "Si hay ambigüedades, invocar clarificación (Clarifier) y persistir bajo {persist}/.",
     "Coordinar con Tekton Developer: el plan de implementación y el código del fix deben ceñirse a la SPEC y al alcance mínimo.",
     "Tras el fix: asegurar que QA Judge valide (tests, compilación) y que la documentación en {persist}/ esté completa antes del PR.",

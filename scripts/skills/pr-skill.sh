@@ -68,7 +68,7 @@ build_ok=0
 
 while [ $attempt -le "$RETRY_MAX" ]; do
     echo "Intento de compilación #$attempt..."
-    if dotnet build -nologo -v q; then
+    if dotnet build src/GesFer.Admin.Back.sln -nologo -v q; then
         build_ok=1
         echo "Compilación exitosa."
         break
@@ -117,7 +117,7 @@ fi
 
 # --- Suite completa de tests ---
 echo "🧪 [SKILL] Ejecutando SUITE COMPLETA de Tests..."
-if dotnet run --project src/Console/GesFer.Console.csproj --no-build -- 11; then
+if cargo run --manifest-path scripts/skills-rs/Cargo.toml --bin run_tests; then
     log_entry "SUCCESS" "Suite Completa validada"
     echo "✅ PR Skill Verificado."
     exit 0

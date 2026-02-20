@@ -252,6 +252,6 @@ public class LogControllerTests
         result!.PageSize.Should().Be(10);
         result.PageNumber.Should().Be(1);
         result.Logs.Should().NotBeNull();
-        result.Logs!.Count.Should().BeLessThanOrEqualTo(10);
+        result.Logs!.Count().Should().BeLessThanOrEqualTo(10);
     }
 }

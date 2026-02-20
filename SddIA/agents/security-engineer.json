@@ -1,5 +1,5 @@
 {
-  "spec_version": "1.0.0",
+  "spec_version": "1.0.1",
   "agent_id": "security-engineer",
   "name": "Security Engineer",
   "role_type": "Specialist",
@@ -45,7 +45,7 @@
     "Backend: Verify granular permissions (CanDeleteUsers), not just Admin.",
     "Checklist: Zod validation in frontend?",
     "Checklist: ValueObjects in backend?",
-    "Logs: En auditorías de seguridad, tener en cuenta el directorio de logs (C:\\Proyectos\\GesFer\\logs): raíz logs/ (gesfer-console_*.log) y logs/services/ (ProductApi.log, AdminApi.log, ProductFront.log, AdminFront.log). Referencia: docs/operations/LOGS_SERVICES_REFERENCE.md. Estudio y plan: docs/operations/LOGS_SECURITY_STUDY_AND_UPDATE_PLAN.md.",
+    "Logs: En auditorías de seguridad, tener en cuenta el directorio de logs: logs/services/ (ProductApi.log, AdminApi.log, ProductFront.log, AdminFront.log). Referencia: docs/operations/LOGS_SERVICES_REFERENCE.md. Estudio y plan: docs/operations/LOGS_SECURITY_STUDY_AND_UPDATE_PLAN.md.",
     "Bug/fix doc path: para fixes {persist} = paths.fixPath/<nombre_fix> (consultar SddIA/agents/cumulo.json). Place under {persist}/."
   ]
 }

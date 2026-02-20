@@ -23,9 +23,9 @@ Describir de forma sucinta qué se quiere lograr y qué problema resuelve.
 
 ### 3.1. Componentes Afectados
 Identificar qué partes del sistema GesFer serán modificadas:
-*   `src/Core`: Entidades de dominio o VOs.
-*   `src/Infrastructure`: Repositorios o persistencia.
-*   `src/Console`: Comandos y lógica de interfaz.
+*   `src/GesFer.Admin.Back.Domain`: Entidades de dominio o VOs.
+*   `src/GesFer.Admin.Back.Infrastructure`: Repositorios o persistencia.
+*   `src/GesFer.Admin.Back.Api`: Controladores y lógica de interfaz.
 
 ### 3.2. Modelo de Datos / Lógica
 Si aplica, incluir definiciones de tipos o cambios en el esquema.
@@ -57,5 +57,5 @@ Lista de etiquetas que se usarán en la fase de implementación:
 ## 7. Trazabilidad de Auditoría
 
 *   **Fecha de Creación:** YYYY-MM-DD hh:mm
-*   **Evento:** Generación inicial mediante `GesFer.Console --spec`.
+*   **Evento:** Generación manual.
 *   **Referencia de Log:** `docs/audits/ACCESS_LOG.md`

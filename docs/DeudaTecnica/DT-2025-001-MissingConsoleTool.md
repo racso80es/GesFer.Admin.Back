@@ -1,23 +1,20 @@
-# DT-2025-001: Herramienta GesFer.Console Faltante
+# DT-2025-001: Herramienta GesFer.Console Faltante (OBSOLETO)
 
+**Estado:** CERRADO - RESUELTO
 **Fecha:** 2026-05-22
-**Estado:** Abierta
-**Impacto:** Medio
-**Área:** Herramientas de Desarrollo / Automatización
 
-## Descripción
-La documentación de procesos en `SddIA/actions/spec.md` y `SddIA/actions/clarify.md` hace referencia a una herramienta de línea de comandos llamada `GesFer.Console` (`src/Console/GesFer.Console.csproj`) para automatizar la creación de especificaciones y clarificaciones.
+## Descripción Original
+La documentación de procesos en `SddIA/actions/spec.md` y `SddIA/actions/clarify.md` hacía referencia a una herramienta de línea de comandos llamada `GesFer.Console` para automatizar la creación de especificaciones y clarificaciones. Esta herramienta no existía en el código fuente.
 
-Sin embargo, esta herramienta no existe en el código fuente actual (`src/`).
+## Resolución
+Se ha tomado la decisión de **descatalogar** la herramienta `GesFer.Console` y no proceder con su desarrollo.
+- Las acciones de `spec`, `clarify` y `planning` se realizarán de forma manual siguiendo las plantillas documentadas.
+- La ejecución de tests, que dependía de esta herramienta en `pr-skill.sh`, ha sido reemplazada por una herramienta específica en Rust: `run_tests`.
+- Se han actualizado todas las referencias en `SddIA/actions/` y `SddIA/agents/` para reflejar el proceso manual.
 
-## Consecuencias
-- Los procesos de especificación y clarificación deben realizarse manualmente, lo que aumenta el riesgo de inconsistencias y reduce la eficiencia.
-- La automatización prometida en `SddIA` no se cumple.
+## Acciones Realizadas
+1.  Eliminación de referencias a `GesFer.Console` en documentación.
+2.  Creación de `scripts/skills-rs/src/bin/run_tests.rs`.
+3.  Actualización de `scripts/skills/pr-skill.sh`.
 
-## Acción Correctiva
-1.  Desarrollar la herramienta `GesFer.Console` según las especificaciones en `SddIA/actions`.
-2.  O bien, actualizar la documentación de `SddIA` para reflejar el proceso manual actual si la herramienta no se va a implementar.
-
-## Referencias
-- `SddIA/actions/spec.md`
-- `SddIA/actions/clarify.md`
+Esta deuda técnica se considera saldada.

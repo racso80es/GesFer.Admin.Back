@@ -6,7 +6,7 @@
 
 ## Clarificaciones Generales
 - **Nombre Raíz:** `GesFer.Admin.Back` se ha confirmado como el nombre estándar para todos los proyectos, directorios y namespaces.
-- **Herramienta Faltante:** La herramienta `GesFer.Console` no está presente en el código fuente. Se ha creado la deuda técnica `DT-2025-001` y se está realizando la documentación manualmente.
+- **Herramienta Faltante:** La herramienta `GesFer.Console` ha sido eliminada del proceso (ver `docs/DeudaTecnica/DT-2025-001-MissingConsoleTool.md`).
 - **Carpeta 'Infra':** Se ha clarificado que la carpeta `Infrastructure` se debe renombrar a `GesFer.Admin.Back.Infrastructure`, manteniendo la consistencia con el nombre del proyecto.
 - **Docker:** El archivo `Dockerfile` en `src/` debe ser actualizado para reflejar la nueva ruta del proyecto `GesFer.Admin.Back.Api` y el cambio de nombre del archivo `.csproj`.
 

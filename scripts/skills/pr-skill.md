@@ -13,7 +13,7 @@ El **PR Skill** es la barrera de calidad y seguridad antes de cada **push** (loc
 1. **Token de proceso** válido (solo local; en CI se omite).
 2. **Compilación** correcta del proyecto (.NET), con reintentos.
 3. **Documentación de rama** presente para ramas que no sean `master`/`main`.
-4. **Suite completa de tests** (opción 11 de la Consola) ejecutada con éxito.
+4. **Suite completa de tests** ejecutada con éxito mediante herramienta Rust.
 
 Si cualquier paso falla, el push/PR se **bloquea** y se registra en el log de auditoría.
 
@@ -38,7 +38,7 @@ La ejecución debe hacerse **siempre desde la raíz del repositorio** (pre-push 
 3. [Solo local] Validación de Token de Proceso (process-token-manager.sh Validate)
 4. Escudo de compilación (dotnet build, máx. 7 intentos)
 5. Certificación documentación de rama (obligatoria si rama ≠ master/main)
-6. Suite completa de tests (dotnet run ... -- 11)
+6. Suite completa de tests (cargo run ... run_tests)
 7. Registro en docs/audits/ACCESS_LOG.md y salida (éxito/fallo)
 ```
 
@@ -51,6 +51,7 @@ La ejecución debe hacerse **siempre desde la raíz del repositorio** (pre-push 
 - **Bash** (script con shebang `#!/bin/bash`).
 - **`dotnet`** (SDK .NET 8.0) en PATH.
 - **`git`** para nombre de rama y usuario (local).
+- **`cargo`** (Rust) para ejecutar la herramienta de tests.
 
 ### 4.2 Scripts del repositorio
 
@@ -59,12 +60,11 @@ La ejecución debe hacerse **siempre desde la raíz del repositorio** (pre-push 
 | `scripts/auditor/process-token-manager.sh` | Comandos `Validate` y `Generate` para el token de proceso (solo local). |
 | `scripts/skills/security-validation-skill.sh` | Validación del bypass con `BYPASS_AUDIT=1` (solo local). |
 
-### 4.3 Proyecto .NET
+### 4.3 Proyecto .NET y Rust
 
-- **Consola:** `src/Console/GesFer.Console.csproj`
+- **Tests Tool:** `scripts/skills-rs/src/bin/run_tests.rs`
 - El script ejecuta:  
-  `dotnet run --project src/Console/GesFer.Console.csproj --no-build -- 11`  
-  El argumento **`11`** corresponde a la opción del menú “Ejecutar tests” (suite completa).
+  `cargo run --manifest-path scripts/skills-rs/Cargo.toml --bin run_tests`
 
 ### 4.4 Estructura de documentación
 
@@ -129,11 +129,9 @@ Para desarrollo local en Windows, mantener Git Bash instalado y asegurarse de qu
 | Aspecto | Estado |
 |---------|--------|
 | Ruta del script | Correcta: `scripts/skills/pr-skill.sh` (no existe `pr-skill.ps1`). |
-| Dependencias (process-token-manager, security-validation-skill) | Presentes y utilizadas según modo local/CI. |
+| Dependencias | Presentes y utilizadas según modo local/CI. |
 | Compilación | Reintentos y log de diagnóstico coherentes. |
 | Documentación de rama | Comprueba slug exacto y slug limpio; coherente con `docs/branches/`. |
-| Suite de tests | Invoca correctamente la Consola con argumento `11`. |
+| Suite de tests | Invoca correctamente herramienta Rust. |
 | Log de auditoría | Crea/actualiza `docs/audits/ACCESS_LOG.md` con formato esperado. |
 | CI (pr-skill.yml) | Ejecuta el script desde la raíz con .NET 8.0; no valida token. |
-
-El script está alineado con el flujo definido (Token → Compilación → Doc rama → Tests) y con las referencias en `openspecs`, documentación de ramas y auditorías.

@@ -22,3 +22,7 @@ path = "src/bin/merge_to_master_cleanup.rs"
 [[bin]]
 name = "invoke_command"
 path = "src/bin/invoke_command.rs"
+
+[[bin]]
+name = "run_tests"
+path = "src/bin/run_tests.rs"

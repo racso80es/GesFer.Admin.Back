@@ -1,36 +1,31 @@
 # Action: Clarify
 
 ## Propósito
-La acción **clarify** tiene como objetivo resolver ambigüedades, identificar "gaps" de información y mitigar riesgos en las especificaciones (`SPECS`) antes de pasar a la fase de planificación o implementación. Actúa como un mecanismo de control de calidad proactivo.
+La acción **clarify** (clarificación) es la fase crítica de eliminación de ambigüedades. Su objetivo es interrogar la especificación (`SPEC`) para detectar "gaps", suposiciones no verificadas o riesgos técnicos antes de que se escriba una sola línea de código.
 
 ## Implementación
-Esta acción se implementa mediante el comando `GesFer.Console --clarify`.
+Esta acción se realiza de forma **manual** mediante revisión y discusión (o auto-reflexión del agente).
 
-### Sintaxis
-```bash
-dotnet run --project src/Console/GesFer.Console.csproj -- --clarify --token <AUDITOR_TOKEN> --spec <SPEC_PATH> [--input <CONTENT> | --context <CONTENT>]
-```
+### Procedimiento
+1.  **Análisis**: Revisar la especificación (`SPEC`) existente.
+2.  **Identificación de Gaps**: Listar preguntas, dudas o puntos ambiguos.
+3.  **Resolución**: Responder a las preguntas mediante investigación o consulta con el usuario.
+4.  **Documentación**:
+    -   Crear un archivo `CLARIFY-{Titulo}.md` (o `clarify.md` dentro de la carpeta de la feature/fix).
+    -   Incluir las preguntas y respuestas.
+    -   Incluir las decisiones tomadas.
 
-### Argumentos
-*   `--token`: Token de autorización del auditor (`AUDITOR-PROCESS`).
-*   `--spec`: Ruta relativa o absoluta del archivo de especificación (.md) a clarificar.
-*   `--input` (o `--context`): Contenido de la clarificación, dudas o gaps identificados.
-
-### Flujo de Ejecución
-1.  **Validación de Token:** Se verifica el token del auditor (`AUDITOR-PROCESS`).
-2.  **Validación de Ruta:** Se verifica que el archivo especificado en `--spec` exista.
-3.  **Determinación de Contexto:**
-    *   Si la especificación pertenece a una Feature (`Kalma2/Docs/Feature/`), se asegura que exista una carpeta dedicada para la feature (e.g., `Kalma2/Docs/Feature/{SpecName}/`).
-    *   Si no existe, se crea y se mueve el archivo original allí (migración automática).
-4.  **Generación de Clarificaciones:** Se crea un archivo `{SpecName}_CLARIFICATIONS.md` en la misma carpeta que la especificación original.
-5.  **Escaneo de Seguridad:** Cada entrada del usuario es analizada por el `SecurityScanner` para prevenir inyecciones o fugas de datos sensibles.
-6.  **Persistencia:** El contenido de la clarificación se añade al archivo generado.
-7.  **Auditoría:** Todas las interacciones se registran en `docs/audits/ACCESS_LOG.md`.
+### Flujo de Ejecución (Manual)
+1.  **Lectura Profunda**: El agente Clarifier lee la especificación.
+2.  **Generación de Preguntas**: Se formulan preguntas tipo "¿Qué pasa si...?", "¿Cómo se maneja el error X?", etc.
+3.  **Iteración**: Se resuelven las dudas.
+4.  **Persistencia**: Se guarda el resultado en la carpeta correspondiente (`docs/features/...` o `docs/bugs/...`).
+5.  **Auditoría**: Registrar la acción en `docs/audits/ACCESS_LOG.md`.
 
 ## Integración con Agentes
-El agente **Clarification Specialist** (`SddIA/agents/clarifier.json`) es el responsable de invocar esta acción cuando detecta especificaciones incompletas.
+*   **Clarification Specialist:** Ejecuta esta acción.
+*   **Spec Architect:** Provee la especificación base.
+*   **Tekton Developer:** Utiliza las clarificaciones para ajustar la implementación.
 
 ## Estándares de Calidad
-*   **Grado S+:** Requiere persistencia auditada y validación de seguridad en tiempo real.
-*   **Knowledge-Arch:** Los resultados alimentan directamente la "consciencia" del proyecto, evitando re-trabajo.
-*   **Estructura de Directorios:** En Features, cada especificación debe residir en su propia carpeta, indicada por sub agente de coumentacion: `./Feature/{SpecName}/{SpecName}.md` y `./Feature/{SpecName}/{SpecName}_CLARIFICATIONS.md`.
+*   **Zero-Ambiguity Rule:** No deben quedar preguntas abiertas críticas antes de pasar a planificación.
