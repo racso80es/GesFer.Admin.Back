@@ -1,0 +1,91 @@
+# Normas de interacción: disparadores de usuario
+
+**Alcance:** Comportamiento del agente cuando el usuario escribe ciertos **disparadores** en el mensaje. El dominio **SddIA** define este comportamiento; el agente debe consultar estas normas y aplicarlas.
+
+**Fuente canónica:** Este documento y su equivalente machine-readable `interaction-triggers.json`. Las rutas de skills y tools se resuelven desde **Cúmulo** (`SddIA/agents/cumulo.json`).
+
+---
+
+## Disparador: #Skill
+
+**Cuándo:** El usuario escribe `#Skill` (solo o dentro de un mensaje).
+
+**Comportamiento:**
+
+1. **Reconocer** que el usuario quiere ver o elegir una skill del proyecto.
+2. **Sugerir las skills existentes** listando `skill_id` y descripción breve.
+3. **Fuente del listado:** `SddIA/skills/README.md` (tabla de skills) y/o las carpetas en **paths.skillsDefinitionPath** (`SddIA/skills/<skill-id>/`). Para skills con implementación ejecutable: **paths.skillsIndexPath** (`scripts/skills/index.json`) o **paths.skillCapsules** (Cúmulo).
+4. **Formato de respuesta:** Tabla o lista clara en español; indicar cuáles tienen cápsula (implementación en scripts/skills/) y cuáles son solo definición.
+5. **Cierre:** Ofrecer seguir con una skill concreta: *"¿Con cuál quieres trabajar o qué necesitas hacer?"* Detalle de cada skill: `SddIA/skills/<skill-id>/spec.md` y `spec.json`; implementación en paths.skillCapsules[skill-id].
+
+### Listado de referencia (actualizar si cambia SddIA/skills/)
+
+| skill_id | Descripción | Cápsula |
+|----------|-------------|---------|
+| iniciar-rama | Crea rama feat/ o fix/ actualizada con master/main. Inicio de acción. | paths.skillCapsules.iniciar-rama |
+| finalizar-git | Aceptar PR a master, unificar, eliminar rama, volver a master. | paths.skillCapsules.finalizar-git |
+| invoke-command | Interceptor de comandos de sistema (git, dotnet, npm, pwsh). | paths.skillCapsules.invoke-command |
+| git-operations | Uso seguro de Git (ramas feat/fix, commits convencionales). | — |
+| documentation | Estándares SSOT y gestión de documentación. | — |
+| filesystem-ops | Operaciones de archivo seguras (PowerShell). | — |
+| dotnet-development | Estándares .NET (build, test, logging). | — |
+| frontend-build | Build Next.js (Product, Admin) fallback. | — |
+| frontend-test | Tests unitarios y E2E frontend. | — |
+| security-audit | Auditoría y hooks pre-commit/pre-push. | — |
+
+---
+
+## Disparador: #Action
+
+**Cuándo:** El usuario escribe `#Action` (solo o dentro de un mensaje).
+
+**Comportamiento:**
+
+1. **Reconocer** que el usuario quiere ver o elegir una acción del ciclo de desarrollo.
+2. **Sugerir las acciones existentes** listando el identificador (nombre del fichero sin .md) y descripción breve.
+3. **Fuente del listado:** `SddIA/actions/` — cada fichero `.md` es una acción (spec, clarify, planning, implementation, execution, validate, finalize). Orden típico en el proceso feature: spec → clarify → planning → implementation → execution → validate → finalize.
+4. **Formato de respuesta:** Tabla o lista clara en español con action_id y propósito.
+5. **Cierre:** Ofrecer seguir con una acción concreta: *"¿Cuál quieres ejecutar o sobre cuál necesitas detalle?"* Detalle de cada acción: `SddIA/actions/<action>.md`.
+
+### Listado de referencia (actualizar si cambia SddIA/actions/)
+
+| action_id | Descripción |
+|-----------|-------------|
+| spec | Especificación: transformar requerimientos en SPEC técnico formal. Entrada del ciclo. |
+| clarify | Clarificación: resolver ambigüedades y gaps en SPECs antes de planificación. |
+| planning | Plan: convertir spec y clarificaciones en hoja de ruta técnica ejecutable. |
+| implementation | Implementación (doc): indicar touchpoints en código y documento de implementación; no modifica código. |
+| execution | Ejecución: aplicar al código los cambios del documento de implementación. |
+| validate | Validación: comprobar calidad antes del PR (git diff, build, tests, docs); generar validacion.json. |
+| finalize | Finalizar: cierre del ciclo (commits, Evolution Logs, push, PR a master). Usa skill finalizar-git. |
+
+---
+
+## Disparador: #Process
+
+**Cuándo:** El usuario escribe `#Process` (solo o dentro de un mensaje).
+
+**Comportamiento:**
+
+1. **Reconocer** que el usuario quiere ver o elegir un proceso de tarea.
+2. **Sugerir los procesos existentes** listando el identificador y descripción breve.
+3. **Fuente del listado:** `SddIA/process/README.md` y los ficheros en **SddIA/process/** (feature.md, bug-fix-specialist.json, create-tool.md, create-tool.json). Cada proceso define el ciclo (rama, documentación, spec, implementación, validación, cierre) y {persist} según Cúmulo.
+4. **Formato de respuesta:** Tabla o lista clara en español con process_id y propósito; indicar definición (.md / .json).
+5. **Cierre:** Ofrecer seguir con un proceso: *"¿Con cuál quieres iniciar una tarea o necesitas detalle?"* Detalle: `SddIA/process/README.md` y el fichero de definición de cada proceso.
+
+### Listado de referencia (actualizar si cambia SddIA/process/)
+
+| process_id | Descripción | Definición |
+|------------|-------------|------------|
+| feature | Desarrollo de una funcionalidad: rama feat/&lt;nombre_feature&gt;, documentación en docs/features/&lt;nombre_feature&gt;/. | feature.md |
+| bug-fix | Corrección de un bug: rama fix/&lt;nombre_fix&gt;, documentación en docs/bugs/&lt;nombre_fix&gt;/. Alcance mínimo. | bug-fix-specialist.json |
+| create-tool | Creación de una nueva herramienta: rama feat/create-tool-&lt;tool-id&gt;, cápsula en paths.toolCapsules, índice y Cúmulo actualizados. | create-tool.md, create-tool.json |
+
+---
+
+## Otros disparadores (reservado)
+
+En este documento se podrán añadir más disparadores (p. ej. `#Tool`) con el mismo formato: cuándo, comportamiento, fuente del listado.
+
+---
+*El comportamiento del agente ante el usuario lo define el dominio SddIA. Referencia: AGENTS.md (protocolo maestro).*

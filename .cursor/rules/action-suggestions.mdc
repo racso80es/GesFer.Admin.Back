@@ -1,0 +1,32 @@
+---
+description: Al escribir #Action, sugerir las acciones existentes del ciclo (SddIA/actions)
+alwaysApply: true
+---
+
+# Sugerencia de acciones (#Action)
+
+Cuando el usuario escriba **#Action** (solo o en un mensaje), responde sugiriendo las acciones existentes del ciclo de desarrollo (SddIA/actions).
+
+## Comportamiento
+
+1. **Reconocer el disparador:** Si en el mensaje aparece `#Action`, interpretar que el usuario quiere ver o elegir una acción.
+2. **Listar acciones existentes** con formato claro: `action_id` y propósito breve.
+3. **Fuente:** `SddIA/actions/` (cada .md es una acción). Orden en el proceso feature: spec → clarify → planning → implementation → execution → validate → finalize.
+
+## Listado canónico (fuente: SddIA/actions/)
+
+| action_id | Descripción |
+|-----------|-------------|
+| **spec** | Especificación: transformar requerimientos en SPEC técnico formal. |
+| **clarify** | Clarificación: resolver ambigüedades y gaps en SPECs. |
+| **planning** | Plan: convertir spec y clarificaciones en hoja de ruta ejecutable. |
+| **implementation** | Implementación (doc): touchpoints en código; no modifica código. |
+| **execution** | Ejecución: aplicar al código los cambios del documento de implementación. |
+| **validate** | Validación: calidad pre-PR (build, tests, docs); validacion.json. |
+| **finalize** | Finalizar: cierre (commits, Evolution Logs, push, PR). Usa skill finalizar-git. |
+
+## Respuesta sugerida
+
+Ofrecer el listado en español y añadir: *"¿Cuál quieres ejecutar o sobre cuál necesitas detalle?"* Detalle: `SddIA/actions/<action_id>.md`.
+
+Listado canónico en **SddIA/norms/interaction-triggers.md** (disparador #Action).

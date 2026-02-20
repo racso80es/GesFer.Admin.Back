@@ -1,0 +1,25 @@
+{
+  "spec_version": "1.0.0",
+  "skill_id": "finalizar-git",
+  "name": "Finalizar Git",
+  "description": "Centraliza las interacciones con Git para aceptar PR a master, unificar, eliminar rama unificada y volver a master. Consumible por la acción finalize.",
+  "implementation_path_ref": "paths.skillCapsules.finalizar-git",
+  "contract_ref": "SddIA/skills/skills-contract.json",
+  "owner": "tekton-developer",
+  "status": "Active",
+  "phases": [
+    { "id": "pre_pr", "name": "Pre-PR", "description": "Push de la rama (Push-And-CreatePR.ps1) y creación del PR con gh pr create si está disponible; si no, URL/instrucciones." },
+    { "id": "post_pr", "name": "Post-PR", "description": "Tras merge del PR en remoto: actualizar master local, eliminar rama, volver a master." }
+  ],
+  "rules": [
+    "Nunca commit directo en master; todo en feat/ o fix/ y merge vía PR",
+    "Mensajes de commit: Conventional Commits (feat:, fix:, chore:)",
+    "Pre-push: validación (validacion.json pass) cuando lo exija el proceso"
+  ],
+  "common_workflows": {
+    "push_and_open_pr": "Push-And-CreatePR.ps1 -Persist docs/features/<nombre_feature>/ (push + gh pr create o URL manual)",
+    "after_pr_merged": "Invocar Merge-To-Master-Cleanup (cápsula) -BranchName <branch> -DeleteRemote; o comandos git equivalentes"
+  },
+  "related_artefacts": ["SddIA/actions/finalize.md"],
+  "related_agents": ["tekton-developer", "finalizer", "release-agent"]
+}
