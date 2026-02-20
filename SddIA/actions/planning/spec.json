@@ -6,5 +6,6 @@
   "outputs": ["{SpecName}_PLAN.md en carpeta de la spec"],
   "flow_steps": ["Validación token", "Extracción contexto", "Análisis requisitos", "Generación plan", "Auditoría"],
   "contract_ref": "actions-contract.json",
-  "principles_ref": "paths.principlesPath"
+  "principles_ref": "paths.principlesPath",
+  "patterns_ref": "paths.patternsPath"
 }

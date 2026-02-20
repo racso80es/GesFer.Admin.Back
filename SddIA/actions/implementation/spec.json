@@ -6,5 +6,6 @@
   "outputs": ["IMPL-{FeatureId}.md en carpeta de tarea (Cúmulo)"],
   "flow_steps": ["Validación", "Análisis plan", "Resolución rutas", "Unificación", "Persistencia", "Auditoría"],
   "contract_ref": "actions-contract.json",
-  "principles_ref": "paths.principlesPath"
+  "principles_ref": "paths.principlesPath",
+  "patterns_ref": "paths.patternsPath"
 }
