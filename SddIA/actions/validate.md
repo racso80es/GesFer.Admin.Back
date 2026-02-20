@@ -12,13 +12,13 @@ La acción **validate** (validación) comprueba que la feature cumple los criter
 
 ## Entradas
 
-- **Carpeta de la feature (persist):** Ruta `{persist}` (ej. paths.featurePath/<nombre_feature>/ o paths.fixPath/<nombre_fix>/, obtenida de Cúmulo). Opcional: si no existe documentación de tarea, se aplica el **modo sin documentación** (véase más abajo).
+- **Carpeta de la feature:** Ruta obtenida de Cúmulo (ej. paths.featurePath/<nombre_feature>/ o paths.fixPath/<nombre_fix>/). Opcional: si no existe documentación de tarea, se aplica el **modo sin documentación** (véase más abajo).
   - Se usan como contexto: `objectives.md`, `spec.json`, `clarify.json`, `implementation.json`, `execution.json` (si existen) para saber alcance y qué se ha tocado.
 - **Rama actual:** La validación se ejecuta sobre la rama de la feature/fix (feat/ o fix/), nunca sobre `master`. En modo sin documentación, la rama actual y el diff frente a la base definen el alcance.
 
 ## Salidas
 
-- **Informe de validación:** `{persist}/validacion.json` si existe `{persist}`; si no, paths.auditsPath + validacion-<rama>-<timestamp>.json.
+- **Informe de validación:** validacion.json en la carpeta de la tarea (Cúmulo) si existe; si no, paths.auditsPath + validacion-<rama>-<timestamp>.json.
   - Estructura mínima (siempre):
     - **timestamp**, **branch**, **base_branch** (rama de referencia para el diff).
     - **git_changes:** resultado de la validación de cambios git (obligatorio en toda ejecución). Ver más abajo.
@@ -50,28 +50,28 @@ Estructura sugerida de **git_changes** en el informe:
 }
 ```
 
-## Modo sin documentación (cuando no existe {persist})
+## Modo sin documentación (cuando no hay carpeta de tarea)
 
-Cuando **no existe** carpeta de tarea (`{persist}` vacía o no proporcionada):
+Cuando **no existe** carpeta de tarea (ruta no proporcionada o vacía):
 
 1. La **validación de cambios git** se ejecuta igual (es obligatoria siempre).
 2. El informe se persiste en **paths.auditsPath + validacion-<rama>-<timestamp>.json**.
-3. El check **documentación** puede figurar como **warn** en lugar de fail, con mensaje explícito de que no hay documentación de tarea en `{persist}`. La compilación y los tests siguen siendo obligatorios (pass/fail).
+3. El check **documentación** puede figurar como **warn** en lugar de fail, con mensaje explícito de que no hay documentación de tarea (Cúmulo). La compilación y los tests siguen siendo obligatorios (pass/fail).
 4. En el informe puede añadirse **mode:** `"no_persist"` para indicar que no había carpeta de feature/fix.
 
 ## Flujo de ejecución (propuesto)
 
 1. **Validación de cambios git (siempre):** Obtener rama actual y rama base; ejecutar `git diff --name-status <base_branch>` (y considerar cambios no commiteados). Construir `git_changes` (files_added, files_modified, files_deleted, summary_by_category, opcionalmente shortstat). Registrar check `git_changes` = pass si el análisis se completó.
-2. **Contexto:** Resolver `{persist}` (por parámetro o por convención desde el nombre de la rama). Si no hay `{persist}`, activar **modo sin documentación** (persistir en paths.auditsPath, documentación = warn).
+2. **Contexto:** Resolver la carpeta de la tarea (por parámetro o por convención desde el nombre de la rama; Cúmulo). Si no hay carpeta de tarea, activar **modo sin documentación** (persistir en paths.auditsPath, documentación = warn).
 3. **Comprobaciones obligatorias (mínimo):**
    - **Compilación:** `dotnet build` (backend) y, si aplica, build del frontend.
    - **Tests:** `dotnet test` (y tests E2E/linting si están definidos en el proyecto).
-   - **Documentación:** Existencia y completitud mínima de `objectives.md` en `{persist}/` (y opcionalmente spec, clarify, plan). En modo sin documentación: resultado warn.
+   - **Documentación:** Existencia y completitud mínima de `objectives.md` en la carpeta de la tarea (Cúmulo) (y opcionalmente spec, clarify, plan). En modo sin documentación: resultado warn.
    - **Ley GIT:** La rama actual no es `master`/`main` (trabajo en feat/ o fix/).
 4. **Comprobaciones opcionales (según proyecto):**
    - Script de validación de PR: según skill o herramienta (Cúmulo).
    - Reglas de seguridad (Security Engineer) o rendimiento (Performance Engineer).
-5. **Generación de informe:** Construir el objeto de resultado incluyendo **siempre** `git_changes` y todos los checks; persistir en `{persist}/validacion.json` o en paths.auditsPath + validacion-<rama>-<timestamp>.json si no hay {persist}.
+5. **Generación de informe:** Construir el objeto de resultado incluyendo **siempre** `git_changes` y todos los checks; persistir en validacion.json en la carpeta de la tarea (Cúmulo) o en paths.auditsPath + validacion-<rama>-<timestamp>.json si no hay carpeta de tarea.
 6. **Auditoría:** Registrar la ejecución de validate en paths.auditsPath + paths.accessLogFile o en log de evolución (paths.evolutionPath).
 
 ## Implementación técnica (opcional)
@@ -104,7 +104,7 @@ No se requiere un agente nuevo: **QA Judge** asume la fase de validación. Si se
 - **Grado S+:** Trazabilidad desde execution hasta validacion.json; el PR solo se considera listo si `validacion.json` indica global pass y no blocking.
 - **Validación git obligatoria:** Todo informe incluye `git_changes`; no hay ejecución de validate sin análisis de diff frente a la rama base.
 - **Reproducibilidad:** Misma rama y mismo contexto deben producir el mismo resultado de validación (salvo flakiness de tests).
-- **Single Source of Truth:** Para el estado de la feature antes del PR, el artefacto canónico es `{persist}/validacion.json` (o el generado en paths.auditsPath si no hay persist).
+- **Single Source of Truth:** Para el estado de la feature antes del PR, el artefacto canónico es validacion.json en la carpeta de la tarea (Cúmulo) (o el generado en paths.auditsPath si no hay carpeta de tarea).
 
 ## Dependencias con otras acciones
 
@@ -114,8 +114,8 @@ No se requiere un agente nuevo: **QA Judge** asume la fase de validación. Si se
 ## Resumen
 
 - **Validación de cambios git:** Se ejecuta **siempre**; el informe incluye en toda ejecución la sección `git_changes` (diff frente a rama base: archivos añadidos, modificados, eliminados y resumen por categoría).
-- Con `{persist}`: además de git_changes, checks de build, test y documentación; salida en `{persist}/validacion.json`.
-- Sin `{persist}`: mismo flujo; salida en paths.auditsPath + validacion-<rama>-<timestamp>.json; el check de documentación es warn en lugar de fail.
+- Con carpeta de tarea (Cúmulo): además de git_changes, checks de build, test y documentación; salida en validacion.json en esa carpeta.
+- Sin carpeta de tarea: mismo flujo; salida en paths.auditsPath + validacion-<rama>-<timestamp>.json; el check de documentación es warn en lugar de fail.
 
 ---
 *Documento de definición de la acción Validate. Corresponde a la fase 7 del procedimiento feature (validar antes de cierre y PR).*

@@ -1,7 +1,7 @@
 # Feature: Encapsulamiento de skills (patrón tools)
 
 **Rama:** feat/skill.Token  
-**{persist}:** docs/features/skill.Token/ (Cúmulo: paths.featurePath/skill.Token)
+**Ruta (Cúmulo):** paths.featurePath/skill.Token
 
 ## Objetivo
 
@@ -27,7 +27,7 @@ Reestructurar **SddIA/skills** y **scripts/skills** para que cada skill esté en
 |------|--------|
 | 0 | Rama feat/skill.Token (skill iniciar-rama) |
 | 1 | Documentación objetivos (este documento) |
-| 2 | Spec (spec.md, spec.json en {persist}/) |
+| 2 | Spec (spec.md, spec.json en carpeta de la tarea / Cúmulo) |
 | 3–6 | Clarificación, plan, implementación, ejecución |
 | 7 | Validación (validacion.json) |
 | 8 | Cierre y PR |

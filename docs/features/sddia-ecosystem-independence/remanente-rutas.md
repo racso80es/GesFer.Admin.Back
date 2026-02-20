@@ -8,7 +8,7 @@
 
 | Literal | Sustituir por |
 |---------|----------------|
-| docs/features/\<nombre_feature\>/ | paths.featurePath/\<nombre_feature\>/ o {persist} |
+| docs/features/\<nombre_feature\>/ | paths.featurePath/\<nombre_feature\>/ (Cúmulo) |
 | docs/bugs/\<nombre_fix\>/ | paths.fixPath/\<nombre_fix\>/ |
 | docs/evolution/, docs/evolution/EVOLUTION_LOG.md | paths.evolutionPath; paths.evolutionPath + paths.evolutionLogFile |
 | docs/audits/, docs/audits/ACCESS_LOG.md | paths.auditsPath; paths.auditsPath + paths.accessLogFile |

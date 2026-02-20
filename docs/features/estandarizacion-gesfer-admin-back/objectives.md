@@ -2,7 +2,7 @@
 
 **Proceso:** Feature (SddIA/process/feature.md)  
 **Rama:** feat/estandarizacion-gesfer-admin-back  
-**{persist}:** docs/features/estandarizacion-gesfer-admin-back (Cúmulo: featurePath)
+**Ruta (Cúmulo):** paths.featurePath/estandarizacion-gesfer-admin-back
 
 ## Objetivo
 

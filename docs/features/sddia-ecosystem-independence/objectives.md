@@ -1,7 +1,7 @@
 # Feature: Independencia de ecosistema SddIA (comportamiento IA)
 
 **Rama:** feat/sddia-ecosystem-independence  
-**{persist}:** docs/features/sddia-ecosystem-independence/ (Cúmulo: paths.featurePath/sddia-ecosystem-independence)
+**Ruta (Cúmulo):** paths.featurePath/sddia-ecosystem-independence
 
 ## Objetivo
 
@@ -27,7 +27,7 @@ Desacoplar la **ejecución de comandos** de las **acciones** (#acciones) y del r
 |------|--------|
 | 0 | Rama feat/sddia-ecosystem-independence (skill iniciar-rama) |
 | 1 | Documentación objetivos (este documento) |
-| 2 | Spec (spec.md, spec.json en {persist}/) |
+| 2 | Spec (spec.md, spec.json en carpeta de la tarea / Cúmulo) |
 | 3–6 | Clarificación, plan, implementación, ejecución |
 | 7 | Validación (validacion.json) |
 | 8 | Cierre y PR (skill finalizar-git) |

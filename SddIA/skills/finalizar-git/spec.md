@@ -38,9 +38,9 @@ Centralizar todas las interacciones con Git necesarias para el cierre de una fea
 2. Comprobar estado: cambios sin commitear → commit atómico con mensaje convencional.
 3. **Push y creación del PR:** ejecutar el componente **Push-And-CreatePR.ps1** de la cápsula:
    - Hace `git push origin <rama_actual>`.
-   - Si **GitHub CLI (gh)** está instalado y autenticado, ejecuta `gh pr create --base master|main --head <rama> --title <título> --body "Documentación: {persist}"`.
+   - Si **GitHub CLI (gh)** está instalado y autenticado, ejecuta `gh pr create --base master|main --head <rama> --title <título> --body "Documentación: <ruta Cúmulo>"`.
    - Si no hay `gh`, muestra la URL para crear el PR manualmente (GitHub) o instrucciones para otro proveedor.
-4. La descripción del PR debe enlazar a `{persist}` si se pasa el parámetro `-Persist`.
+4. La descripción del PR debe enlazar a la ruta de documentación (Cúmulo) si se pasa el parámetro `-Persist`.
 
 #### Fase `post_pr` (después de aceptar/mergear el PR en el remoto)
 

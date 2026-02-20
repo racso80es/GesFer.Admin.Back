@@ -1,6 +1,6 @@
 # Procesos de tarea (SddIA/process)
 
-Al iniciar una tarea se debe elegir un **proceso**. Cada proceso define el ciclo completo (rama, documentación, especificación, implementación, validación y cierre) y la ubicación de persistencia (`{persist}`) según el agente **Cúmulo** (paths; ver paths.processPath).
+Al iniciar una tarea se debe elegir un **proceso**. Cada proceso define el ciclo completo (rama, documentación, especificación, implementación, validación y cierre) y la ubicación de persistencia según el agente **Cúmulo** (paths; ver paths.processPath).
 
 ## Procesos disponibles
 
@@ -8,19 +8,21 @@ Al iniciar una tarea se debe elegir un **proceso**. Cada proceso define el ciclo
 | :---         | :---                                                                        | :---                                             | :---                    |
 | **feature**  | Desarrollo de una funcionalidad: rama `feat/<nombre_feature>`, documentación en paths.featurePath/<nombre_feature>/ (Cúmulo). | [feature.md](./feature.md)                       | Arquitecto, Tekton      |
 | **bug-fix**  | Corrección de un bug: rama `fix/<nombre_fix>`, documentación en paths.fixPath/<nombre_fix>/ (Cúmulo). Alcance mínimo, sin refactor en la misma rama. | [bug-fix-specialist.json](./bug-fix-specialist.json) | Bug Fix Specialist      |
+| **refactorization** | Refactorización: rama `feat/refactorization-<nombre_refactor>`, documentación en paths.featurePath/refactorization-&lt;nombre_refactor&gt;/ (Cúmulo). Mismo ciclo que feature, adaptado a refactor. | [refactorization.md](./refactorization.md) | Arquitecto, Tekton      |
 | **create-tool** | Creación de una nueva herramienta: rama `feat/create-tool-<tool-id>`, cápsula en paths.toolCapsules[&lt;tool-id&gt;], índice y Cúmulo actualizados. | [create-tool.md](./create-tool.md), [create-tool.json](./create-tool.json) | Tekton, Arquitecto      |
 
 ## Uso
 
-1. **Feature:** Seguir las fases descritas en paths.processPath/feature.md. {persist} = Cúmulo.featurePath/<nombre_feature>.
-2. **Bug-fix:** Seguir las instrucciones del agente en paths.processPath/bug-fix-specialist.json. {persist} = Cúmulo.fixPath/<nombre_fix>.
-3. **Create-tool:** Seguir las fases en paths.processPath/create-tool.md y create-tool.json. {persist} = Cúmulo.featurePath/create-tool-&lt;tool-id&gt;. Entregable: cápsula en paths.toolsPath/&lt;tool-id&gt;/; actualizar index.json y Cúmulo paths.toolCapsules.
+1. **Feature:** Seguir las fases descritas en paths.processPath/feature.md. Ruta: Cúmulo (paths.featurePath/<nombre_feature>).
+2. **Bug-fix:** Seguir las instrucciones del agente en paths.processPath/bug-fix-specialist.json. Ruta: Cúmulo (paths.fixPath/<nombre_fix>).
+3. **Refactorization:** Seguir las fases en paths.processPath/refactorization.md. Ruta: Cúmulo (paths.featurePath/refactorization-&lt;nombre_refactor&gt;).
+4. **Create-tool:** Seguir las fases en paths.processPath/create-tool.md y create-tool.json. Ruta: Cúmulo (paths.featurePath/create-tool-&lt;tool-id&gt;). Entregable: cápsula en paths.toolsPath/&lt;tool-id&gt;/; actualizar index.json y Cúmulo paths.toolCapsules.
 
 Las **acciones** (spec, clarify, plan, implementation, execution, validate, finalize) siguen en paths.actionsPath (Cúmulo) y son invocadas por los procesos.
 
 ## Interfaz de procesos (norma para agentes)
 
-Todo proceso debe cumplir la **interfaz** definida en Cúmulo (Cúmulo → process_interface): solicitar o generar en `{persist}/` artefactos con las extensiones:
+Todo proceso debe cumplir la **interfaz** definida en Cúmulo (Cúmulo → process_interface): solicitar o generar en la carpeta de la tarea (Cúmulo) artefactos con las extensiones:
 
 | Extensión | Uso |
 | :--- | :--- |

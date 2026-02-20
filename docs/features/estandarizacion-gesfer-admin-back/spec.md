@@ -1,7 +1,7 @@
 # Especificación técnica: Estandarización GesFer.Admin.Back
 
 **Feature:** estandarizacion-gesfer-admin-back  
-**{persist}:** docs/features/estandarizacion-gesfer-admin-back
+**Ruta (Cúmulo):** paths.featurePath/estandarizacion-gesfer-admin-back
 
 ## 1. Código innecesario (eliminar)
 

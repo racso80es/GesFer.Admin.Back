@@ -69,7 +69,7 @@
 
 1. **Reconocer** que el usuario quiere ver o elegir un proceso de tarea.
 2. **Sugerir los procesos existentes** listando el identificador y descripción breve.
-3. **Fuente del listado:** paths.processPath (Cúmulo: README.md y ficheros de proceso) (feature.md, bug-fix-specialist.json, create-tool.md, create-tool.json). Cada proceso define el ciclo (rama, documentación, spec, implementación, validación, cierre) y {persist} según Cúmulo.
+3. **Fuente del listado:** paths.processPath (Cúmulo: README.md y ficheros de proceso) (feature.md, bug-fix-specialist.json, create-tool.md, create-tool.json). Cada proceso define el ciclo (rama, documentación, spec, implementación, validación, cierre); la ruta de la tarea viene de Cúmulo.
 4. **Formato de respuesta:** Tabla o lista clara en español con process_id y propósito; indicar definición (.md / .json).
 5. **Cierre:** Ofrecer seguir con un proceso: *"¿Con cuál quieres iniciar una tarea o necesitas detalle?"* Detalle: paths.processPath/README.md y fichero de definición de cada proceso.
 
@@ -79,6 +79,7 @@
 |------------|-------------|------------|
 | feature | Desarrollo de una funcionalidad: rama feat/&lt;nombre_feature&gt;, documentación en paths.featurePath/&lt;nombre_feature&gt;/ (Cúmulo). | feature.md |
 | bug-fix | Corrección de un bug: rama fix/&lt;nombre_fix&gt;, documentación en paths.fixPath/&lt;nombre_fix&gt;/ (Cúmulo). Alcance mínimo. | bug-fix-specialist.json |
+| refactorization | Refactorización: rama feat/refactorization-&lt;nombre_refactor&gt;, documentación en paths.featurePath/refactorization-&lt;nombre_refactor&gt;/ (Cúmulo). Reflejo de feature, adaptado a refactor. | refactorization.md |
 | create-tool | Creación de una nueva herramienta: rama feat/create-tool-&lt;tool-id&gt;, cápsula en paths.toolCapsules, índice y Cúmulo actualizados. | create-tool.md, create-tool.json |
 
 ---

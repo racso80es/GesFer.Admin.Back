@@ -1,7 +1,7 @@
 # Especificación: Independencia de ecosistema SddIA (inyección de dependencias)
 
 **Feature:** sddia-ecosystem-independence  
-**{persist}:** docs/features/sddia-ecosystem-independence/
+**Ruta (Cúmulo):** paths.featurePath/sddia-ecosystem-independence/
 
 ## 1. Principio: ejecución por referencia
 
