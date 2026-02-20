@@ -7,6 +7,7 @@
   "cumulo_paths_ref": "SddIA/agents/cumulo.json",
   "paths": {
     "toolsPath": "./scripts/tools/",
+    "toolsDefinitionPath": "./SddIA/tools/",
     "toolsIndexPath": "./scripts/tools/index.json",
     "featurePath": "./docs/features/",
     "toolCapsulesRef": "paths.toolCapsules"
@@ -28,6 +29,11 @@
     "task_docs": {
       "persist": "paths.featurePath/create-tool-<tool-id>/",
       "files": ["objectives.md", "spec.md", "spec.json", "implementation.md", "implementation.json", "validacion.json"]
+    },
+    "definition": {
+      "path": "paths.toolsDefinitionPath/<tool-id>/",
+      "files": ["spec.md", "spec.json"],
+      "spec_json_required": "implementation_path_ref: paths.toolCapsules.<tool-id>"
     },
     "capsule": {
       "path": "paths.toolsPath/<tool-id>/",
@@ -89,6 +95,7 @@
     "Obtener o definir tool_id en kebab-case. Definir {persist} = paths.featurePath/create-tool-<tool-id> para documentación de la tarea.",
     "Crear rama feat/create-tool-<tool_id> desde main (skill iniciar-rama o Iniciar-Rama.ps1 -BranchType feat -BranchName create-tool-<tool_id>).",
     "Crear {persist}/ con objectives.md y spec (spec.md, spec.json): objetivo de la herramienta, entradas/salidas, fases, formato JSON según tools-contract.",
+    "Crear definición en paths.toolsDefinitionPath/<tool_id>/: spec.md y spec.json con implementation_path_ref: paths.toolCapsules.<tool_id>.",
     "Crear cápsula en paths.toolsPath/<tool_id>/: manifest.json (toolId, components, contract_ref), <ToolName>.ps1 (lógica + salida JSON contrato), <ToolName>.bat (launcher), <tool_id>-config.json, <tool_id>.md, bin/.gitkeep.",
     "Crear wrapper .bat en paths.toolsPath que delegue a la cápsula (call %SCRIPT_DIR%<tool_id>\\<ToolName>.bat).",
     "Actualizar scripts/tools/index.json: añadir en array tools entrada { toolId, path, manifest, wrapper_bat, description }.",

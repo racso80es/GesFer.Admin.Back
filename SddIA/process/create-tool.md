@@ -11,12 +11,14 @@ El proceso **create-tool** define el procedimiento para incorporar una nueva her
 ## Alcance del procedimiento
 
 - **{persist}** = documentación de la tarea = **paths.featurePath**/create-tool-&lt;tool-id&gt;/ (opcional pero recomendado para trazabilidad).
-- **Cápsula** = **paths.toolsPath**/&lt;tool-id&gt;/ = **paths.toolCapsules[&lt;tool-id&gt;]** (tras actualizar Cúmulo).
+- **Definición (SddIA):** **paths.toolsDefinitionPath**/&lt;tool-id&gt;/ = SddIA/tools/&lt;tool-id&gt;/ con spec.md y spec.json (implementation_path_ref obligatorio; raíz de implementación vía Cúmulo).
+- **Cápsula (implementación):** **paths.toolsPath**/&lt;tool-id&gt;/ = **paths.toolCapsules[&lt;tool-id&gt;]** (tras actualizar Cúmulo).
 
 | Fase | Nombre | Descripción |
 | :--- | :--- | :--- |
 | **0** | Preparar entorno | Rama feat/create-tool-&lt;tool-id&gt; desde main/master. Skill: `iniciar-rama` con BranchName create-tool-&lt;tool-id&gt;. |
 | **1** | Objetivos y especificación | En {persist}/: objectives.md (objetivo de la herramienta, alcance, contrato). spec.md / spec.json (entrada/salida, fases, parámetros, formato JSON de salida según tools-contract). |
+| **1b** | Definición en SddIA | Crear **paths.toolsDefinitionPath**/&lt;tool-id&gt;/ con spec.md y spec.json. En spec.json incluir **implementation_path_ref**: `paths.toolCapsules.&lt;tool-id&gt;` (ruta de implementación se resuelve desde Cúmulo; no usar ruta literal). |
 | **2** | Estructura de la cápsula | Crear **paths.toolsPath**/&lt;tool-id&gt;/ con: manifest.json, &lt;ToolName&gt;.ps1, &lt;ToolName&gt;.bat, &lt;tool-id&gt;-config.json (o equivalente), &lt;tool-id&gt;.md, directorio bin/ (.gitkeep si no hay exe aún). |
 | **3** | Manifest y documentación | manifest.json con toolId, version, description, contract_ref, components (launcher_bat, launcher_ps1, config, doc, bin), env. Documentación .md en la cápsula: uso, parámetros, configuración, salida JSON. |
 | **4** | Scripts PowerShell y launcher | .ps1: lógica de la herramienta, salida JSON según contrato (toolId, exitCode, success, timestamp, message, feedback[], data, duration_ms). .bat en la cápsula: invocar bin/&lt;tool_bin&gt;.exe si existe, si no el .ps1. |
@@ -26,9 +28,16 @@ El proceso **create-tool** define el procedimiento para incorporar una nueva her
 | **8** | Validación | Comprobar que la herramienta cumple tools-contract.json (salida JSON, feedback, artefactos). Generar {persist}/validacion.json si existe {persist}. |
 | **9** | Cierre | PR, Evolution Logs, referencia a {persist}/ o a la cápsula en docs. |
 
-## Artefactos obligatorios por herramienta (contrato)
+## Artefactos obligatorios por herramienta
 
-Según `SddIA/tools/tools-contract.json` y Cúmulo, cada cápsula debe contener:
+**Definición (SddIA, paths.toolsDefinitionPath/&lt;tool-id&gt;/):**
+
+| Artefacto | Descripción |
+| :--- | :--- |
+| **spec.md** | Especificación legible: objetivo, entradas, salidas, fases. |
+| **spec.json** | Especificación machine-readable; debe incluir **implementation_path_ref** (ej. paths.toolCapsules.&lt;tool-id&gt;) para que la ruta de implementación se resuelva desde Cúmulo. |
+
+**Implementación (cápsula, paths.toolCapsules[&lt;tool-id&gt;]):** Según `SddIA/tools/tools-contract.json` y Cúmulo, cada cápsula debe contener:
 
 | Artefacto | Ubicación | Descripción |
 | :--- | :--- | :--- |
@@ -51,6 +60,7 @@ Tras crear la herramienta, **scripts/tools/index.json** debe incluir la nueva en
 ## Referencias
 
 - Contrato: `SddIA/tools/tools-contract.json`, `SddIA/tools/tools-contract.md`.
-- Cúmulo: `SddIA/agents/cumulo.json` → paths.toolsPath, paths.toolCapsules, paths.toolsIndexPath.
+- Cúmulo: `SddIA/agents/cumulo.json` → paths.toolsDefinitionPath, paths.toolsPath, paths.toolCapsules, paths.toolsIndexPath.
+- Definición por herramienta: **paths.toolsDefinitionPath**/&lt;tool-id&gt;/ (spec.md, spec.json con implementation_path_ref).
 - Índice: **paths.toolsIndexPath** (listado de herramientas).
 - Proceso machine-readable: `SddIA/process/create-tool.json`.

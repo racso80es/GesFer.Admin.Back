@@ -2,6 +2,8 @@
 
 **Alcance:** Todas las entidades en **paths.toolsPath** y en cada **paths.toolCapsules[&lt;tool-id&gt;]** (Cúmulo, `SddIA/agents/cumulo.json`) que actúen como herramientas ejecutables. Listado de herramientas: **paths.toolsIndexPath** (índice en raíz de tools).
 
+**Desacoplamiento definición / implementación:** La **definición** (qué hace la herramienta, contrato, entradas/salidas) está en **paths.toolsDefinitionPath**/&lt;tool-id&gt;/ (SddIA/tools/&lt;tool-id&gt;/) en formato .md y .json. La **implementación** (scripts, config, ejecutables) está en **paths.toolCapsules[&lt;tool-id&gt;]** (scripts). La raíz del path de implementación la indica Cúmulo; en la definición (spec.json) debe indicarse **implementation_path_ref** (ej. `paths.toolCapsules.&lt;tool-id&gt;`) para resolver la ruta desde Cúmulo sin duplicar rutas literales.
+
 **Objetivo:** Unificar la salida en JSON adecuada al fin de cada herramienta y garantizar un **feedback adecuado** (trazable, por fases y niveles).
 
 ---

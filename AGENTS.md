@@ -25,7 +25,7 @@ Antes de emitir cualquier respuesta o código, debes ejecutar este proceso menta
 3.  **GIT:** 🚫 NO commits a `master`. 🚫 NO ramas sin documentación.
 4.  **COMPILACIÓN:** El código roto es inaceptable. Verifica localmente.
 5.  **VISIÓN ZERO:** Acciones destructivas requieren confirmación textual explícita.
-6.  **CONSULTA DOCUMENTAL:** La **única fuente de rutas** para documentación de tareas y herramientas es el agente **Cúmulo** (`SddIA/agents/cumulo.json`). Consultar `paths.featurePath`, `paths.fixPath`, `paths.logPath` según el tipo de tarea; para herramientas: `paths.toolsPath`, `paths.toolCapsules[<tool-id>]`. No usar rutas literales (p. ej. `docs/features/`, `scripts/tools/prepare-full-env/`) sin derivarlas de Cúmulo.
+6.  **CONSULTA DOCUMENTAL:** La **única fuente de rutas** para documentación de tareas y herramientas es el agente **Cúmulo** (`SddIA/agents/cumulo.json`). Consultar `paths.featurePath`, `paths.fixPath`, `paths.logPath` según el tipo de tarea; para herramientas: `paths.toolsPath`, `paths.toolsDefinitionPath`, `paths.toolCapsules[<tool-id>]`. No usar rutas literales (p. ej. `docs/features/`, `scripts/tools/prepare-full-env/`) sin derivarlas de Cúmulo.
 
 ---
 

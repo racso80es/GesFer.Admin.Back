@@ -25,6 +25,7 @@
     "logPath": "./docs/logs/",
     "featurePath": "./docs/features/",
     "toolsPath": "./scripts/tools/",
+    "toolsDefinitionPath": "./SddIA/tools/",
     "toolsIndexPath": "./scripts/tools/index.json",
     "toolCapsules": {
       "invoke-mysql-seeds": "./scripts/tools/invoke-mysql-seeds/",
@@ -55,7 +56,8 @@
     "Map [DEP] -> {paths.featurePath}/{feature-name}/{deployment-name}/", 
     "Map [MON] -> {paths.featurePath}/{feature-name}/{monitoring-name}/", 
     "Map [LOG] -> {paths.logPath}/{log-name}.json",
-    "Map [TOOL] -> {paths.toolsPath}/{tool-id}/ (capsula con manifest.json; paths.toolCapsules[tool-id] para ruta canonica). Listado de herramientas: paths.toolsIndexPath.", 
+    "Map [TOOL] -> {paths.toolsPath}/{tool-id}/ (capsula con manifest.json; paths.toolCapsules[tool-id] para ruta canonica). Listado de herramientas: paths.toolsIndexPath.",
+    "Map [TOOL-DEF] -> {paths.toolsDefinitionPath}/{tool-id}/ (definicion .md y .json de la herramienta; capa SddIA). Implementacion tecnica (scripts) en paths.toolCapsules[tool-id]; la raiz del path de implementacion la indica Cumulo (paths.toolsPath / paths.toolCapsules).", 
     "Audit documentation dispersion.",
     "Consolidate audit reports into history."
   ]
