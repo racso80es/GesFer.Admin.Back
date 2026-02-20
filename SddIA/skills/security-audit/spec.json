@@ -3,7 +3,7 @@
   "skill_id": "security-audit",
   "name": "Security Audit Automation & Git Hooks",
   "description": "Specification for automated security audits during commit and PR/push events, enforcing the Auditor Process and ensuring compliance with project governance.",
-  "contract_ref": "SddIA/skills/skills-contract.json",
+  "contract_ref": "paths.skillsDefinitionPath/skills-contract.json (Cúmulo)",
   "owner": "auditor.process",
   "status": "Active",
   "implementation": {
