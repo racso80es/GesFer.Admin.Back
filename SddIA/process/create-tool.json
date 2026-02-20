@@ -1,0 +1,100 @@
+{
+  "spec_version": "1.0.0",
+  "process_id": "create-tool",
+  "name": "Create Tool",
+  "description": "Proceso para la creación de una nueva herramienta (tool) en paths.toolsPath: cápsula con manifest, scripts, config, documentación e índice actualizado. Cumple SddIA/tools/tools-contract.json y Cúmulo.",
+  "process_doc_ref": "SddIA/process/create-tool.md",
+  "cumulo_paths_ref": "SddIA/agents/cumulo.json",
+  "paths": {
+    "toolsPath": "./scripts/tools/",
+    "toolsIndexPath": "./scripts/tools/index.json",
+    "featurePath": "./docs/features/",
+    "toolCapsulesRef": "paths.toolCapsules"
+  },
+  "contract_ref": "SddIA/tools/tools-contract.json",
+  "process_interface_compliance": "Genera en {persist}/ (paths.featurePath/create-tool-<tool-id>/) al menos un .md (objectives.md, spec.md, implementation.md) y al menos un .json (spec.json, implementation.json, validacion.json). Entrega ejecutable: cápsula en paths.toolsPath/<tool-id>/ con artefactos requeridos por el contrato.",
+  "triggers": [
+    "Crear nueva herramienta en scripts/tools",
+    "Nueva tool que cumpla el contrato de herramientas",
+    "Solicitud de creación de herramienta con tool-id"
+  ],
+  "inputs": {
+    "tool_id": "Identificador en kebab-case (ej. my-new-tool). Obligatorio.",
+    "description": "Descripción breve de la herramienta. Obligatorio.",
+    "config_schema": "Opcional. Campos esperados en el JSON de configuración.",
+    "phases": "Opcional. Fases o pasos que la herramienta ejecutará (para feedback)."
+  },
+  "output_artefacts": {
+    "task_docs": {
+      "persist": "paths.featurePath/create-tool-<tool-id>/",
+      "files": ["objectives.md", "spec.md", "spec.json", "implementation.md", "implementation.json", "validacion.json"]
+    },
+    "capsule": {
+      "path": "paths.toolsPath/<tool-id>/",
+      "files": [
+        "manifest.json",
+        "<ToolName>.ps1",
+        "<ToolName>.bat",
+        "<tool-id>-config.json",
+        "<tool-id>.md",
+        "bin/.gitkeep"
+      ],
+      "manifest_schema": {
+        "toolId": "string (kebab-case)",
+        "version": "string (semver)",
+        "description": "string",
+        "contract_ref": "SddIA/tools/tools-contract.json",
+        "components": {
+          "launcher_bat": "string",
+          "launcher_ps1": "string",
+          "config": "string",
+          "doc": "string",
+          "bin": "string"
+        },
+        "env": "array of strings"
+      }
+    },
+    "tools_root": {
+      "path": "paths.toolsPath",
+      "files": ["<ToolName>.bat (wrapper que delega a cápsula)"]
+    },
+    "index_update": {
+      "file": "paths.toolsIndexPath",
+      "action": "Añadir a array 'tools' entrada con toolId, path, manifest, wrapper_bat, description"
+    },
+    "cumulo_update": {
+      "file": "SddIA/agents/cumulo.json",
+      "action": "Añadir en paths.toolCapsules la clave <tool-id> con valor ./scripts/tools/<tool-id>/"
+    }
+  },
+  "constraints": [
+    {
+      "rule": "Branching: Rama feat/create-tool-<tool-id>, nunca commit en main.",
+      "severity": "CRITICAL"
+    },
+    {
+      "rule": "toolId en kebab-case. Contrato tools (salida JSON, feedback) obligatorio.",
+      "severity": "CRITICAL"
+    },
+    {
+      "rule": "Rutas de herramientas solo desde Cúmulo (paths.toolsPath, paths.toolCapsules, paths.toolsIndexPath).",
+      "severity": "CRITICAL"
+    },
+    {
+      "rule": "Entorno: Windows 11, PowerShell 7+. No bash.",
+      "severity": "HIGH"
+    }
+  ],
+  "instructions": [
+    "Obtener o definir tool_id en kebab-case. Definir {persist} = paths.featurePath/create-tool-<tool-id> para documentación de la tarea.",
+    "Crear rama feat/create-tool-<tool_id> desde main (skill iniciar-rama o Iniciar-Rama.ps1 -BranchType feat -BranchName create-tool-<tool_id>).",
+    "Crear {persist}/ con objectives.md y spec (spec.md, spec.json): objetivo de la herramienta, entradas/salidas, fases, formato JSON según tools-contract.",
+    "Crear cápsula en paths.toolsPath/<tool_id>/: manifest.json (toolId, components, contract_ref), <ToolName>.ps1 (lógica + salida JSON contrato), <ToolName>.bat (launcher), <tool_id>-config.json, <tool_id>.md, bin/.gitkeep.",
+    "Crear wrapper .bat en paths.toolsPath que delegue a la cápsula (call %SCRIPT_DIR%<tool_id>\\<ToolName>.bat).",
+    "Actualizar scripts/tools/index.json: añadir en array tools entrada { toolId, path, manifest, wrapper_bat, description }.",
+    "Actualizar SddIA/agents/cumulo.json: en paths.toolCapsules añadir \"<tool_id>\": \"./scripts/tools/<tool_id>/\".",
+    "Opcional: implementación Rust en scripts/tools-rs/src/bin/<tool_bin>.rs y copia en install.ps1 a cápsula/bin/.",
+    "Validar cumplimiento de SddIA/tools/tools-contract.json. Generar validacion.json en {persist}/ si existe.",
+    "Cierre: PR, Evolution Logs, referencia a documentación o cápsula."
+  ]
+}
