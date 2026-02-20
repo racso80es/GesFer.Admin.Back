@@ -83,6 +83,21 @@
 
 ---
 
+## Disparador: subir (acción ejecutable)
+
+**Cuándo:** El usuario escribe **subir**, **subir la rama**, **subir a la nube** o pide explícitamente publicar la rama en el remoto (en el contexto de finalize o cierre).
+
+**Comportamiento:**
+
+1. **Reconocer** que el usuario quiere que la rama actual se publique en el remoto (`origin`).
+2. **Ejecutar el push:** Desde la raíz del repo, en PowerShell: obtener la rama actual con `git branch --show-current`, luego ejecutar `git push -u origin <rama_actual>`. Entorno: Windows, PowerShell; no usar bash.
+3. **Comprobar resultado:** Leer la salida del comando. Si hay error (credenciales, red, rama rechazada), informar al usuario con el mensaje de error. Si hay éxito (ej. `branch '...' set up to track 'origin/...'` o `Everything up-to-date`), confirmar que la rama está subida.
+4. **No sustituir por documentación:** El agente no debe limitarse a decir que «el paso es subir»; debe **ejecutar** el comando de push y reportar el resultado.
+
+**Relación con finalize:** La acción finalize (paths.actionsPath/finalize.md) incluye este paso como obligatorio; cuando el usuario pide «subir» o «finalizar» (y se aplica el cierre), el agente debe ejecutar el push.
+
+---
+
 ## Otros disparadores (reservado)
 
 En este documento se podrán añadir más disparadores (p. ej. `#Tool`) con el mismo formato: cuándo, comportamiento, fuente del listado.

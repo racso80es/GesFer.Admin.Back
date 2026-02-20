@@ -23,6 +23,13 @@
       "behavior": "Sugerir los procesos existentes de tarea",
       "list_source": "paths.processPath (Cúmulo)",
       "response": "Listar process_id y descripción; ofrecer elegir un proceso o pedir detalle."
+    },
+    {
+      "trigger": "subir",
+      "when": "El usuario pide subir, subir la rama o subir a la nube (publicar rama en origin)",
+      "behavior": "Ejecutar git push: git branch --show-current luego git push -u origin <rama>. PowerShell. Reportar éxito o error. No solo documentar; ejecutar.",
+      "list_source": "—",
+      "response": "Ejecutar push y confirmar resultado."
     }
   ],
   "cumulo_ref": "SddIA/agents/cumulo.json",
