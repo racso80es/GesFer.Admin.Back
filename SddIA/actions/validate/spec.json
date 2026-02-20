@@ -1,0 +1,9 @@
+{
+  "action_id": "validate",
+  "name": "Validate",
+  "purpose": "Comprobar calidad pre-PR: git_changes, build, test, documentación; genera validacion.json.",
+  "inputs": ["Carpeta tarea (Cúmulo)", "Rama actual"],
+  "outputs": ["validacion.json en carpeta tarea o paths.auditsPath"],
+  "flow_steps": ["Validación git (siempre)", "Contexto", "Checks obligatorios", "Opcionales", "Informe", "Auditoría"],
+  "contract_ref": "actions-contract.json"
+}

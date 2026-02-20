@@ -1,0 +1,9 @@
+{
+  "action_id": "planning",
+  "name": "Plan",
+  "purpose": "Transformar spec y clarificaciones en hoja de ruta técnica ejecutable (Roadmap).",
+  "inputs": ["--token", "--spec"],
+  "outputs": ["{SpecName}_PLAN.md en carpeta de la spec"],
+  "flow_steps": ["Validación token", "Extracción contexto", "Análisis requisitos", "Generación plan", "Auditoría"],
+  "contract_ref": "actions-contract.json"
+}

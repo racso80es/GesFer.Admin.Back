@@ -1,0 +1,9 @@
+{
+  "action_id": "implementation",
+  "name": "Implementation",
+  "purpose": "Indicar touchpoints en código y unificar en documento IMPL; no modifica código.",
+  "inputs": ["Plan (obligatorio)", "SPEC (opcional)", "Clarificaciones (opcional)"],
+  "outputs": ["IMPL-{FeatureId}.md en carpeta de tarea (Cúmulo)"],
+  "flow_steps": ["Validación", "Análisis plan", "Resolución rutas", "Unificación", "Persistencia", "Auditoría"],
+  "contract_ref": "actions-contract.json"
+}

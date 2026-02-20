@@ -20,6 +20,6 @@
     "push_and_open_pr": "Push-And-CreatePR.ps1 -Persist paths.featurePath/<nombre_feature>/ (push + gh pr create o URL manual)",
     "after_pr_merged": "Invocar Merge-To-Master-Cleanup (cápsula) -BranchName <branch> -DeleteRemote; o comandos git equivalentes"
   },
-  "related_artefacts": ["paths.actionsPath/finalize.md"],
+  "related_artefacts": ["paths.actionsPath/finalize/"],
   "related_agents": ["tekton-developer", "finalizer", "release-agent"]
 }

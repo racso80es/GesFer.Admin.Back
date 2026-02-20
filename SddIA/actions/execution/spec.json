@@ -1,0 +1,9 @@
+{
+  "action_id": "execution",
+  "name": "Execution",
+  "purpose": "Aplicar al código los cambios del documento de implementación; produce execution.json.",
+  "inputs": ["implementation.json o IMPL (carpeta tarea, Cúmulo)"],
+  "outputs": ["execution.json en carpeta de tarea (Cúmulo)"],
+  "flow_steps": ["Validación entrada", "Carga ítems", "Por cada ítem aplicar", "Persistencia", "Auditoría"],
+  "contract_ref": "actions-contract.json"
+}

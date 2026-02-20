@@ -52,7 +52,7 @@ Puede implementarse mediante scripts o el agente que genere el documento IMPL a 
 
 ## Estándares de calidad
 - **Exhaustividad:** Toda tarea del plan que implique tocar código debe tener al menos un ítem en el documento de implementación.
-- **Unicidad:** Una sola fuente de verdad para “qué cambiar y dónde” en esta feature (el documento IMPL).
+- **Unicidad:** Una sola fuente de verdad para "qué cambiar y dónde" en esta feature (el documento IMPL).
 - **Trazabilidad:** Cada ítem del IMPL referencia la tarea del PLAN (y opcionalmente la SPEC).
 
 ## Ejemplo de ítem en el documento generado

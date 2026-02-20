@@ -59,8 +59,8 @@ Desde la raíz del repo (ejemplo con launcher en cápsula):
 
 ### Consumidores
 
-- **Proceso feature (fase 0):** Preparar entorno = crear rama feat/<nombre_feature> desde master actualizado. Ver paths.processPath/feature.md.
-- **Proceso bug-fix:** Crear rama fix/<nombre_fix> desde master. Ver paths.processPath/bug-fix-specialist.json.
+- **Proceso feature (fase 0):** Preparar entorno = crear rama feat/<nombre_feature> desde master actualizado. Ver paths.processPath/feature/.
+- **Proceso bug-fix:** Crear rama fix/<nombre_fix> desde master. Ver paths.processPath/bug-fix/.
 - **Agentes:** Tekton Developer, Arquitecto, Bug Fix Specialist (al iniciar una tarea).
 
 ---

@@ -1,0 +1,22 @@
+{
+  "spec_version": "1.0.0",
+  "process_id": "create-tool",
+  "name": "Create Tool",
+  "description": "Proceso para la creación de una nueva herramienta (tool) en paths.toolsPath: cápsula con manifest, scripts, config, documentación e índice actualizado. Cumple SddIA/tools/tools-contract.json y Cúmulo.",
+  "process_doc_ref": "paths.processPath/create-tool/",
+  "contract_ref": "paths.processPath/process-contract.json",
+  "tools_contract_ref": "SddIA/tools/tools-contract.json",
+  "persist_ref": "paths.featurePath/create-tool-<tool-id>",
+  "paths": {
+    "toolsPath_ref": "paths.toolsPath (Cúmulo)",
+    "toolsDefinitionPath": "./SddIA/tools/",
+    "toolsIndexPath_ref": "paths.toolsIndexPath (Cúmulo)",
+    "featurePath_ref": "paths.featurePath (Cúmulo)",
+    "toolCapsulesRef": "paths.toolCapsules"
+  },
+  "process_interface_compliance": "Genera en carpeta de la tarea al menos un .md y un .json; entrega ejecutable: cápsula en paths.toolsPath/<tool-id>/.",
+  "triggers": ["Crear nueva herramienta en paths.toolsPath", "Solicitud de creación de herramienta con tool-id"],
+  "inputs": { "tool_id": "kebab-case. Obligatorio.", "description": "Descripción breve. Obligatorio." },
+  "related_actions": ["spec", "implementation", "validate", "finalize"],
+  "related_skills": ["iniciar-rama"]
+}

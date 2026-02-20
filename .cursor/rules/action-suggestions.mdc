@@ -11,7 +11,7 @@ Cuando el usuario escriba **#Action** (solo o en un mensaje), responde sugiriend
 
 1. **Reconocer el disparador:** Si en el mensaje aparece `#Action`, interpretar que el usuario quiere ver o elegir una acción.
 2. **Listar acciones existentes** con formato claro: `action_id` y propósito breve.
-3. **Fuente:** paths.actionsPath (Cúmulo); cada .md es una acción. Orden en el proceso feature: spec → clarify → planning → implementation → execution → validate → finalize. Incluye sddia-difusion (difusión de SddIA a gestores IA).
+3. **Fuente:** paths.actionsPath (Cúmulo); cada acción en carpeta paths.actionsPath/<action-id>/ (spec.md, spec.json). Orden en el proceso feature: spec → clarify → planning → implementation → execution → validate → finalize. Incluye sddia-difusion.
 
 ## Listado canónico (fuente: SddIA/actions/)
 
@@ -28,6 +28,6 @@ Cuando el usuario escriba **#Action** (solo o en un mensaje), responde sugiriend
 
 ## Respuesta sugerida
 
-Ofrecer el listado en español y añadir: *"¿Cuál quieres ejecutar o sobre cuál necesitas detalle?"* Detalle: paths.actionsPath/\<action_id\>.md (Cúmulo).
+Ofrecer el listado en español y añadir: *"¿Cuál quieres ejecutar o sobre cuál necesitas detalle?"* Detalle: paths.actionsPath/\<action_id\>/ (spec.md, spec.json). Contrato: actions-contract.json.
 
 Listado canónico en **SddIA/norms/interaction-triggers.md** (disparador #Action).

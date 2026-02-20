@@ -4,7 +4,7 @@
 
 ## Objetivo
 
-Centralizar todas las interacciones con Git necesarias para el cierre de una feature o fix: desde la rama de trabajo hasta **aceptar el PR en master**, **unificar** la rama, **eliminar la rama unificada** (local y opcionalmente remota) y **volver a master** con el repositorio limpio. Esta skill es consumible por la acción **finalize** (paths.actionsPath/finalize.md, Cúmulo) y por agentes que ejecuten el cierre del ciclo.
+Centralizar todas las interacciones con Git necesarias para el cierre de una feature o fix: desde la rama de trabajo hasta **aceptar el PR en master**, **unificar** la rama, **eliminar la rama unificada** (local y opcionalmente remota) y **volver a master** con el repositorio limpio. Esta skill es consumible por la acción **finalize** (paths.actionsPath/finalize/, Cúmulo) y por agentes que ejecuten el cierre del ciclo.
 
 ## Alcance
 
@@ -83,7 +83,7 @@ Si `gh` no está disponible, el script muestra la URL para crear el PR manualmen
 ### Consumidores
 
 - **Acción finalize:** Usa esta skill para los pasos de Git (push, PR y, si aplica, pasos post-pr).
-- **Agentes:** Tekton Developer, Finalizer / Release Agent (según paths.actionsPath/finalize.md).
+- **Agentes:** Tekton Developer, Finalizer / Release Agent (según paths.actionsPath/finalize/).
 
 ---
 *Especificación del skill Finalizar Git. Definición en paths.skillsDefinitionPath/finalizar-git/ (contrato paths.skillsDefinitionPath/skills-contract.md).*

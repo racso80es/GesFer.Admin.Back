@@ -1,0 +1,14 @@
+{
+  "contract_version": "1.0.0",
+  "scope": "paths.actionsPath (SddIA/actions/)",
+  "description": "Contrato que toda acción del ciclo debe cumplir: definición en paths.actionsPath/<action-id>/ con spec.md y spec.json. Entrada/salida y flujo documentados.",
+  "definition_artefacts": [
+    { "ext": ".md", "naming": "spec.md", "path": "paths.actionsPath/<action-id>/", "purpose": "Especificación legible: propósito, entradas, salidas, flujo. es-ES." },
+    { "ext": ".json", "naming": "spec.json", "path": "paths.actionsPath/<action-id>/", "purpose": "Metadatos machine-readable: action_id, name, purpose, inputs, outputs, flow_steps, contract_ref." }
+  ],
+  "constraints": [
+    "action_id en kebab-case.",
+    "Rutas canónicas solo desde Cúmulo (paths.actionsPath, paths.processPath, paths.featurePath, paths.fixPath)."
+  ],
+  "consumers": ["paths.processPath", "SddIA/agents/*.json", "SddIA/norms/interaction-triggers.md", ".cursor/rules"]
+}

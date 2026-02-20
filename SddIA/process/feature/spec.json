@@ -1,0 +1,21 @@
+{
+  "spec_version": "1.0.0",
+  "process_id": "feature",
+  "name": "Feature",
+  "description": "Proceso de tarea para desarrollar una funcionalidad: rama feat, documentación en paths.featurePath. Ciclo completo desde objetivos hasta PR.",
+  "contract_ref": "paths.processPath/process-contract.json",
+  "persist_ref": "paths.featurePath/<nombre_feature>",
+  "phases": [
+    { "id": "0", "name": "Preparar entorno", "description": "Rama feat desde master; skill iniciar-rama." },
+    { "id": "1", "name": "Documentación con objetivos", "description": "objectives.md en carpeta de la tarea." },
+    { "id": "2", "name": "Especificación", "description": "Acción spec; salida spec.md, spec.json." },
+    { "id": "3", "name": "Clarificación", "description": "Acción clarify; clarify.md, clarify.json." },
+    { "id": "4", "name": "Planificación", "description": "Acción planning; plan." },
+    { "id": "5", "name": "Implementación (doc)", "description": "Acción implementation; implementation.md, implementation.json." },
+    { "id": "6", "name": "Ejecución", "description": "Acción execution; execution.json." },
+    { "id": "7", "name": "Validar", "description": "Acción validate; validacion.json." },
+    { "id": "8", "name": "Finalizar", "description": "Acción finalize; Evolution Logs, PR." }
+  ],
+  "related_actions": ["spec", "clarify", "planning", "implementation", "execution", "validate", "finalize"],
+  "related_skills": ["iniciar-rama", "finalizar-git"]
+}
