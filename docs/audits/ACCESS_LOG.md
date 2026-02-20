@@ -12,3 +12,4 @@ Registro de ejecución de acciones y eventos de cierre.
 | 2026-02-18  | finalize  | feat/correccion-hallazgos-auditoria | PR creado: https://github.com/racso80es/GesFer.Admin.Back/pull/3 . Documentación en docs/features/correccion-hallazgos-auditoria/. Evolution Logs actualizados. |
 | 2026-02-19  | finalize  | main     | Cierre tarea auditoría scripts: Merge-To-Master-Cleanup.ps1 integrado en finalizar-git y finalize; scripts deprecados eliminados; Evolution Logs y docs/audits/AUDITORIA_CARPETA_SCRIPTS_20260219.md actualizados. |
 | 2026-02-19  | finalize  | main     | Cierre tarea skill iniciar-rama: script Iniciar-Rama.ps1, skill .md/.json, integración en feature (fase 0) y bug-fix. Repo en main; sin rama a mergear (trabajo en main). |
+| 2026-02-20  | finalize  | feat/sddia-paths-cumulo | Evolution Logs actualizados; push origin; PR #17 creado (https://github.com/racso80es/GesFer.Admin.Back/pull/17). Documentación en docs/features/sddia-ecosystem-independence/. |
