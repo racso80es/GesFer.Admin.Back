@@ -1,5 +1,5 @@
 ---
-description: Al escribir #Action, sugerir las acciones existentes del ciclo (SddIA/actions)
+description: Al escribir #Action, sugerir las acciones existentes del ciclo (SddIA/actions). Difusión de SddIA.
 alwaysApply: true
 ---
 
@@ -11,7 +11,7 @@ Cuando el usuario escriba **#Action** (solo o en un mensaje), responde sugiriend
 
 1. **Reconocer el disparador:** Si en el mensaje aparece `#Action`, interpretar que el usuario quiere ver o elegir una acción.
 2. **Listar acciones existentes** con formato claro: `action_id` y propósito breve.
-3. **Fuente:** `SddIA/actions/` (cada .md es una acción). Orden en el proceso feature: spec → clarify → planning → implementation → execution → validate → finalize.
+3. **Fuente:** paths.actionsPath (Cúmulo); cada .md es una acción. Orden en el proceso feature: spec → clarify → planning → implementation → execution → validate → finalize. Incluye sddia-difusion (difusión de SddIA a gestores IA).
 
 ## Listado canónico (fuente: SddIA/actions/)
 
@@ -24,9 +24,10 @@ Cuando el usuario escriba **#Action** (solo o en un mensaje), responde sugiriend
 | **execution** | Ejecución: aplicar al código los cambios del documento de implementación. |
 | **validate** | Validación: calidad pre-PR (build, tests, docs); validacion.json. |
 | **finalize** | Finalizar: cierre (commits, Evolution Logs, push, PR). Usa skill finalizar-git. |
+| **sddia-difusion** | Difusión de SddIA: mantener .cursor/rules, .github y otros gestores IA alineados con AGENTS y SddIA/norms. |
 
 ## Respuesta sugerida
 
-Ofrecer el listado en español y añadir: *"¿Cuál quieres ejecutar o sobre cuál necesitas detalle?"* Detalle: `SddIA/actions/<action_id>.md`.
+Ofrecer el listado en español y añadir: *"¿Cuál quieres ejecutar o sobre cuál necesitas detalle?"* Detalle: paths.actionsPath/\<action_id\>.md (Cúmulo).
 
 Listado canónico en **SddIA/norms/interaction-triggers.md** (disparador #Action).

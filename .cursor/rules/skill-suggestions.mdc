@@ -1,25 +1,25 @@
 ---
-description: Al escribir #Skill, sugerir las skills existentes del proyecto (SddIA/skills)
+description: Al escribir #Skill, sugerir las skills existentes del proyecto (SddIA/skills). Difusión de SddIA.
 alwaysApply: true
 ---
 
 # Sugerencia de skills (#Skill)
 
-Cuando el usuario escriba **#Skill** (solo o en un mensaje), responde sugiriendo las skills existentes del proyecto.
+Cuando el usuario escriba **#Skill** (solo o en un mensaje), responde sugiriendo las skills existentes del proyecto. **Fuente canónica:** SddIA/norms/interaction-triggers.md; esta regla es difusión para Cursor.
 
 ## Comportamiento
 
 1. **Reconocer el disparador:** Si en el mensaje aparece `#Skill`, interpretar que el usuario quiere ver o elegir una skill.
 2. **Listar skills existentes** con formato claro: `skill_id` y descripción breve.
-3. **Incluir** tanto skills con implementación ejecutable (cápsula en scripts/skills/) como skills solo de definición (SddIA/skills/).
+3. **Incluir** tanto skills con implementación ejecutable (cápsula: Cúmulo paths.skillCapsules[skill-id]) como skills solo de definición (paths.skillsDefinitionPath).
 
-## Listado canónico (fuente: SddIA/skills/ y scripts/skills/index.json)
+## Listado canónico (fuente: SddIA/skills y Cúmulo paths.skillCapsules / paths.skillsDefinitionPath)
 
 | skill_id | Descripción |
 |----------|-------------|
-| **iniciar-rama** | Crea rama feat/ o fix/ actualizada con master/main. Inicio de acción o tarea. Cápsula: scripts/skills/iniciar-rama/ |
-| **finalizar-git** | Aceptar PR a master, unificar, eliminar rama, volver a master. Pre-pr: Unificar-Rama.ps1; post_pr: Merge-To-Master-Cleanup. Cápsula: scripts/skills/finalizar-git/ |
-| **invoke-command** | Interceptor de comandos de sistema (git, dotnet, npm, pwsh). Telemetría y registro por rama. Cápsula: scripts/skills/invoke-command/ |
+| **iniciar-rama** | Crea rama feat/ o fix/ actualizada con master/main. Inicio de acción o tarea. Cápsula: paths.skillCapsules.iniciar-rama |
+| **finalizar-git** | Aceptar PR a master, unificar, eliminar rama, volver a master. Pre-pr / post_pr. Cápsula: paths.skillCapsules.finalizar-git |
+| **invoke-command** | Interceptor de comandos de sistema (git, dotnet, npm, pwsh). Telemetría y registro por rama. Cápsula: paths.skillCapsules.invoke-command |
 | **git-operations** | Uso seguro de Git (ramas feat/fix, commits convencionales). Solo definición. |
 | **documentation** | Estándares SSOT y gestión de documentación. Solo definición. |
 | **filesystem-ops** | Operaciones de archivo seguras (PowerShell). Solo definición. |
@@ -30,6 +30,6 @@ Cuando el usuario escriba **#Skill** (solo o en un mensaje), responde sugiriendo
 
 ## Respuesta sugerida
 
-Ofrecer el listado en español y añadir, si aplica: *"¿Con cuál quieres trabajar o qué necesitas hacer?"* Para más detalle de una skill: definición en `SddIA/skills/<skill-id>/spec.md` y `spec.json`; implementación en Cúmulo `paths.skillCapsules[skill-id]` (scripts/skills/).
+Ofrecer el listado en español y añadir, si aplica: *"¿Con cuál quieres trabajar o qué necesitas hacer?"* Para más detalle: definición en paths.skillsDefinitionPath/\<skill-id\>/ (spec.md, spec.json); implementación en paths.skillCapsules[skill-id] (Cúmulo).
 
-Si se añaden o cambian skills, el listado canónico está en **SddIA/skills/README.md** y en las carpetas **SddIA/skills/\<skill-id\>/**.
+Listado canónico en **SddIA/norms/interaction-triggers.md** (disparador #Skill) y **SddIA/skills/**.

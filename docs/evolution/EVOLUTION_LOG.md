@@ -4,18 +4,21 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
-## 2026-02-20 — Refactorización SddIA: eliminar {persist}, proceso refactorization (feat/refactorization-sddia-decouple-scripts)
+## 2026-02-20 — Refactorización SddIA: eliminar {persist}, proceso refactorization, difusión y .github (feat/refactorization-sddia-decouple-scripts)
 
 **Rama:** feat/refactorization-sddia-decouple-scripts.
 
 **Alcance:**
 - **Proceso refactorization:** SddIA/process/refactorization.md y documentación de la tarea en docs/features/refactorization-sddia-decouple-scripts/ (objectives, spec).
-- **Eliminación de {persist}:** El término `{persist}` se ha eliminado de todos los .md del repo. La ruta de la tarea (carpeta de documentación) se obtiene exclusivamente de **Cúmulo** (paths.featurePath, paths.fixPath, etc.). Referencias unificadas: "carpeta de la tarea (Cúmulo)", "Ruta (Cúmulo)".
-- **Archivos afectados:** AGENTS.md, SddIA/process (README, feature.md, refactorization.md, create-tool.md), SddIA/actions (finalize, validate, spec, execution), SddIA/norms (interaction-triggers), SddIA/skills/finalizar-git/spec.md, docs/features/* (objectives y spec de varias features).
+- **Eliminación de {persist}:** El término `{persist}` se ha eliminado de todos los .md del repo. La ruta de la tarea se obtiene exclusivamente de **Cúmulo** (paths.featurePath, paths.fixPath, etc.).
+- **Difusión de SddIA:** Acción SddIA/actions/sddia-difusion.md; regla .cursor/rules/sddia-ssot.mdc (SddIA como SSOT); .cursor/rules alineados con SddIA (process, action, skill, subir); SddIA/norms/touchpoints-ia.md. Gestores IA (Cursor, .github) respetan normas en AGENTS y SddIA.
+- **Réplica .github:** .github/PULL_REQUEST_TEMPLATE.md y .github/README.md referencian AGENTS.md y SddIA; touchpoint documentado en touchpoints-ia.md.
+- **Archivos afectados:** AGENTS.md, AGENTS.norms.md, SddIA/process, SddIA/actions, SddIA/norms, SddIA/skills/finalizar-git, .cursor/rules, .github, docs/features/*.
 
 **Referencias:**
-- `docs/features/refactorization-sddia-decouple-scripts/objectives.md` — Objetivo y alcance de la refactorización.
+- `docs/features/refactorization-sddia-decouple-scripts/objectives.md` — Objetivo y alcance.
 - `docs/features/refactorization-sddia-decouple-scripts/spec.md` — Especificación desacople SddIA / eliminación {persist}.
+- `SddIA/actions/sddia-difusion.md` — Acción difusión; `SddIA/norms/touchpoints-ia.md` — Touchpoints IA.
 
 ---
 
