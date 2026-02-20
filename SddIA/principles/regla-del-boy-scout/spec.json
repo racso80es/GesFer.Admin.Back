@@ -1,0 +1,12 @@
+{
+  "id": "c1f7a01b-9a8c-4d3b-8f2e-1e3d4a5b6c70",
+  "principle_id": "regla-del-boy-scout",
+  "title": "Regla del Boy Scout",
+  "category": "Clean Code",
+  "tags": ["Clean Code", "Refactoring", "Buenas Prácticas", "Deuda Técnica"],
+  "metadata": {
+    "difficulty": "Beginner",
+    "status": "Published"
+  },
+  "contract_ref": "paths.principlesPath/principles-contract.json"
+}

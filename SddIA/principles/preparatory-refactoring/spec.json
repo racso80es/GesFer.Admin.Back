@@ -1,0 +1,12 @@
+{
+  "id": "c1f7a01b-9a8c-4d3b-8f2e-1e3d4a5b6c71",
+  "principle_id": "preparatory-refactoring",
+  "title": "Preparatory Refactoring",
+  "category": "Clean Code",
+  "tags": ["Refactoring", "Clean Code", "Diseño Evolutivo"],
+  "metadata": {
+    "difficulty": "Intermediate",
+    "status": "Published"
+  },
+  "contract_ref": "paths.principlesPath/principles-contract.json"
+}

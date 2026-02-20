@@ -1,0 +1,12 @@
+{
+  "id": "c1f7a01b-9a8c-4d3b-8f2e-1e3d4a5b6c74",
+  "principle_id": "evitar-magic-numbers",
+  "title": "Evitar Magic Numbers",
+  "category": "Clean Code",
+  "tags": ["Naming", "Clean Code", "Constantes"],
+  "metadata": {
+    "difficulty": "Beginner",
+    "status": "Published"
+  },
+  "contract_ref": "paths.principlesPath/principles-contract.json"
+}
