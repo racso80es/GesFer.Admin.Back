@@ -1,0 +1,12 @@
+{
+  "id": "c1f7a01b-9a8c-4d3b-8f2e-1e3d4a5b6c81",
+  "principle_id": "eventos-de-dominio-domain-events",
+  "title": "Eventos de Dominio (Domain Events)",
+  "category": "Domain-Driven Design",
+  "tags": ["DDD", "Arquitectura Orientada a Eventos", "Desacoplamiento"],
+  "metadata": {
+    "difficulty": "Advanced",
+    "status": "Published"
+  },
+  "contract_ref": "paths.principlesPath/principles-contract.json"
+}

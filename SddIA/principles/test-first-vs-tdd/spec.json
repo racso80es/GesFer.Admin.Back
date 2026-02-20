@@ -1,0 +1,12 @@
+{
+  "id": "c1f7a01b-9a8c-4d3b-8f2e-1e3d4a5b6c88",
+  "principle_id": "test-first-vs-tdd",
+  "title": "Test-First vs TDD",
+  "category": "Testing",
+  "tags": ["TDD", "Test-First", "Metodologías", "Diseño de Software"],
+  "metadata": {
+    "difficulty": "Advanced",
+    "status": "Published"
+  },
+  "contract_ref": "paths.principlesPath/principles-contract.json"
+}

@@ -1,0 +1,12 @@
+{
+  "id": "c1f7a01b-9a8c-4d3b-8f2e-1e3d4a5b6c84",
+  "principle_id": "read-models-y-proyecciones",
+  "title": "Read Models y Proyecciones",
+  "category": "Arquitectura de Software",
+  "tags": ["CQRS", "Proyecciones", "Read Models", "Rendimiento"],
+  "metadata": {
+    "difficulty": "Advanced",
+    "status": "Published"
+  },
+  "contract_ref": "paths.principlesPath/principles-contract.json"
+}

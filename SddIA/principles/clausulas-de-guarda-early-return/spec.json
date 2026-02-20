@@ -1,0 +1,12 @@
+{
+  "id": "c1f7a01b-9a8c-4d3b-8f2e-1e3d4a5b6c73",
+  "principle_id": "clausulas-de-guarda-early-return",
+  "title": "Cláusulas de Guarda (Early Return)",
+  "category": "Clean Code",
+  "tags": ["Clean Code", "Legibilidad", "Control de Flujo"],
+  "metadata": {
+    "difficulty": "Beginner",
+    "status": "Published"
+  },
+  "contract_ref": "paths.principlesPath/principles-contract.json"
+}

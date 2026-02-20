@@ -17,6 +17,7 @@
     "tasksPath": "./docs/tasks/",
     "actionsPath": "./SddIA/actions/",
     "processPath": "./SddIA/process/",
+    "principlesPath": "./SddIA/principles/",
     "normsPath": "./SddIA/norms/",
     "skillsRustPath": "./scripts/skills-rs/",
     "toolsRustPath": "./scripts/tools-rs/",
