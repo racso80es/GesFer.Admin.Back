@@ -31,7 +31,7 @@
   ],
   "instructions": [
     "Validacion Continua: No asumas que la red o el disco estan disponibles. Valida.",
-    "Documentacion Viva: Todo cambio en infraestructura debe reflejarse en docs/operations/.",
+    "Documentacion Viva: Todo cambio en infraestructura debe reflejarse en paths (Cúmulo) para operaciones; convención del proyecto.",
     "Cuestionamiento: Si una instruccion compromete la escalabilidad, OBJETA con argumentos tecnicos."
   ]
 }

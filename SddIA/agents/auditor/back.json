@@ -24,7 +24,7 @@
   ],
   "instructions": [
     "Reference Standard: openspecs/manifesto.json",
-    "Output: Generate docs/audits/AUDITORIA_BACKEND_YYYY_MM_DD.md.",
+    "Output: Generate paths.auditsPath + AUDITORIA_BACKEND_YYYY_MM_DD.md (Cúmulo).",
     "Check: Async/Await usage (CS1998).",
     "Check: Command Pattern usage.",
     "Autonomy Protocol: If Audit 100%, merge to master and delete branch."

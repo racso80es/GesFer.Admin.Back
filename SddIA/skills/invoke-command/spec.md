@@ -20,7 +20,7 @@ Skill obligatoria para ejecutar comandos de sistema (git, dotnet, npm, pwsh, etc
 
 ## Integración con la cápsula
 
-**Implementación:** Cápsula en paths.skillCapsules[\"invoke-command\"] (Cúmulo). Launcher en la cápsula: Invoke-Command.bat (bin/invoke_command.exe si existe, si no Invoke-Command.ps1). Ejecutable por defecto en Rust (scripts/skills-rs).
+**Implementación:** Cápsula en paths.skillCapsules[\"invoke-command\"] (Cúmulo). Launcher en la cápsula: Invoke-Command.bat (bin/invoke_command.exe si existe, si no Invoke-Command.ps1). Ejecutable por defecto en Rust (paths.skillsRustPath (Cúmulo)).
 
 Uso (desde la raíz del repo):
 

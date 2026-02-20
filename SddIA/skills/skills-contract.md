@@ -1,14 +1,14 @@
 # Contrato de skills (Cúmulo: paths.skillsPath / paths.skillCapsules)
 
-**Alcance:** Todas las entidades en **paths.skillsPath** y en cada **paths.skillCapsules[&lt;skill-id&gt;]** (Cúmulo, `SddIA/agents/cumulo.json`) que actúen como skills con implementación ejecutable. Listado: **paths.skillsIndexPath** (índice en raíz de skills).
+**Alcance:** Todas las entidades en **paths.skillsPath** y en cada **paths.skillCapsules[&lt;skill-id&gt;]** (Cúmulo, `Cúmulo (SddIA/agents/cumulo.json)`) que actúen como skills con implementación ejecutable. Listado: **paths.skillsIndexPath** (índice en raíz de skills).
 
-**Desacoplamiento definición / implementación:** La **definición** (qué hace el skill, contrato, entradas/salidas) está en **paths.skillsDefinitionPath**/&lt;skill-id&gt;/ (SddIA/skills/&lt;skill-id&gt;/) en formato spec.md y spec.json. La **implementación** (scripts, config, ejecutables) está en **paths.skillCapsules[&lt;skill-id&gt;]** (scripts). La raíz del path de implementación la indica Cúmulo; en la definición (spec.json) debe indicarse **implementation_path_ref** (ej. `paths.skillCapsules.&lt;skill-id&gt;`) para resolver la ruta desde Cúmulo sin duplicar rutas literales.
+**Desacoplamiento definición / implementación:** La **definición** (qué hace el skill, contrato, entradas/salidas) está en **paths.skillsDefinitionPath**/&lt;skill-id&gt;/ (paths.skillsDefinitionPath/&lt;skill-id&gt;/) en formato spec.md y spec.json. La **implementación** (scripts, config, ejecutables) está en **paths.skillCapsules[&lt;skill-id&gt;]** (scripts). La raíz del path de implementación la indica Cúmulo; en la definición (spec.json) debe indicarse **implementation_path_ref** (ej. `paths.skillCapsules.&lt;skill-id&gt;`) para resolver la ruta desde Cúmulo sin duplicar rutas literales.
 
 **Objetivo:** Unificar la estructura de skills con encapsulamiento por carpeta (igual que tools) y garantizar que el **ejecutable sugerido** sea en Rust cuando el skill tenga implementación invocable.
 
 ---
 
-## 1. Definición por skill (SddIA/skills/&lt;skill-id&gt;/)
+## 1. Definición por skill (paths.skillsDefinitionPath/&lt;skill-id&gt;/)
 
 Cada skill debe tener en **paths.skillsDefinitionPath**/&lt;skill-id&gt;/:
 
@@ -22,11 +22,11 @@ Cada skill debe tener en **paths.skillsDefinitionPath**/&lt;skill-id&gt;/:
 **Las implementaciones por defecto de los scripts de skills (y de las herramientas tools) han de ser en Rust.**
 
 - **Motivo:** rendimiento, seguridad de memoria, portabilidad y distribución como binario único.
-- **Entrega:** cada skill con ejecutable reside en una **cápsula** **paths.skillCapsules[&lt;skill-id&gt;]** (Cúmulo). Los ejecutables se construyen en `scripts/skills-rs` y se copian a `&lt;cápsula&gt;/bin/`. Opcional: launcher `.bat` en la cápsula que delegue al binario en `bin/` o al script `.ps1` como fallback.
+- **Entrega:** cada skill con ejecutable reside en una **cápsula** **paths.skillCapsules[&lt;skill-id&gt;]** (Cúmulo). Los ejecutables se construyen en paths.skillsRustPath (Cúmulo) y se copian a `&lt;cápsula&gt;/bin/`. Opcional: launcher `.bat` en la cápsula que delegue al binario en `bin/` o al script `.ps1` como fallback.
 - **Launcher:** dentro de la cápsula, el `.bat` invoca el `.exe` en `bin/` si existe; en caso contrario, fallback al script `.ps1` de la cápsula.
-- **manifest.json** (skillId, components, contract_ref), **documentación** (`.md`) son obligatorios en la cápsula. **Rutas canónicas:** Cúmulo `SddIA/agents/cumulo.json` → **paths.skillsPath**, **paths.skillCapsules**. En documentación .md no usar rutas literales; referenciar vía Cúmulo.
+- **manifest.json** (skillId, components, contract_ref), **documentación** (`.md`) son obligatorios en la cápsula. **Rutas canónicas:** Cúmulo `Cúmulo (SddIA/agents/cumulo.json)` → **paths.skillsPath**, **paths.skillCapsules**. En documentación .md no usar rutas literales; referenciar vía Cúmulo.
 
-Referencia: mismo patrón que `SddIA/tools/tools-contract.md` (Implementación por defecto: Rust).
+Referencia: mismo patrón que `paths.toolsDefinitionPath/tools-contract.md` (Implementación por defecto: Rust).
 
 ## 3. Artefactos por skill (con ejecutable)
 
@@ -44,7 +44,7 @@ Cada skill con implementación invocable reside en una **cápsula** **paths.skil
 
 - skill-id en kebab-case.
 - Rutas canónicas solo desde Cúmulo (paths.skillsDefinitionPath, paths.skillCapsules, paths.skillsIndexPath).
-- Skills sin implementación ejecutable: solo definición en SddIA/skills/&lt;skill-id&gt;/ (spec.md, spec.json).
+- Skills sin implementación ejecutable: solo definición en paths.skillsDefinitionPath/&lt;skill-id&gt;/ (spec.md, spec.json).
 
 ---
 
@@ -52,4 +52,4 @@ Cada skill con implementación invocable reside en una **cápsula** **paths.skil
 
 El contrato permite que acciones, agentes y procesos (feature, bug-fix) consuman skills mediante rutas resueltas desde Cúmulo y launcher en la cápsula.
 
-**Referencia machine-readable:** `SddIA/skills/skills-contract.json`.
+**Referencia machine-readable:** `paths.skillsDefinitionPath/skills-contract.json`.

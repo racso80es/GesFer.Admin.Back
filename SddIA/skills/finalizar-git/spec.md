@@ -4,7 +4,7 @@
 
 ## Objetivo
 
-Centralizar todas las interacciones con Git necesarias para el cierre de una feature o fix: desde la rama de trabajo hasta **aceptar el PR en master**, **unificar** la rama, **eliminar la rama unificada** (local y opcionalmente remota) y **volver a master** con el repositorio limpio. Esta skill es consumible por la acción **finalize** (`SddIA/actions/finalize.md`) y por agentes que ejecuten el cierre del ciclo.
+Centralizar todas las interacciones con Git necesarias para el cierre de una feature o fix: desde la rama de trabajo hasta **aceptar el PR en master**, **unificar** la rama, **eliminar la rama unificada** (local y opcionalmente remota) y **volver a master** con el repositorio limpio. Esta skill es consumible por la acción **finalize** (paths.actionsPath/finalize.md, Cúmulo) y por agentes que ejecuten el cierre del ciclo.
 
 ## Alcance
 
@@ -18,7 +18,7 @@ Centralizar todas las interacciones con Git necesarias para el cierre de una fea
 | Entrada | Tipo | Descripción |
 | :--- | :--- | :--- |
 | Rama actual | string | Nombre de la rama de trabajo (ej. `feat/nombre-feature` o `fix/nombre-fix`). |
-| Persist | string | (Opcional) Ruta de la carpeta de la feature/fix (ej. `docs/features/<nombre_feature>/`) para trazabilidad. |
+| Persist | string | (Opcional) Ruta de la carpeta de la feature/fix (ej. paths.featurePath/<nombre_feature>/) para trazabilidad. |
 | Fase | enum | `pre_pr` (push y preparación de PR) o `post_pr` (post-merge: unificar local, limpiar, volver a master). |
 
 ### Salidas
@@ -45,7 +45,7 @@ Centralizar todas las interacciones con Git necesarias para el cierre de una fea
 #### Fase `post_pr` (después de aceptar/mergear el PR en el remoto)
 
 1. Asegurarse de que el PR ya está mergeado en `master` (o `main`) en el remoto.
-2. **Implementación:** Cápsula paths.skillCapsules[\"finalizar-git\"]: launcher `Merge-To-Master-Cleanup.bat` (o .ps1). Ejecutable por defecto en Rust (scripts/skills-rs) en bin/ si existe.
+2. **Implementación:** Cápsula paths.skillCapsules[\"finalizar-git\"]: launcher `Merge-To-Master-Cleanup.bat` (o .ps1). Ejecutable por defecto en Rust (paths.skillsRustPath, Cúmulo) en bin/ si existe.
 
    Desde la raíz del repo:
    ```powershell
@@ -66,7 +66,7 @@ Centralizar todas las interacciones con Git necesarias para el cierre de una fea
 | Fase    | Componente en cápsula | Uso |
 |--------|------------------------|-----|
 | **pre_pr**  | Unificar-Rama.ps1 | Certificar rama (build, documentación, commit). |
-| **pre_pr**  | **Push-And-CreatePR.ps1** | Push de la rama y **crear el PR** (GitHub CLI `gh pr create` si está disponible; si no, URL/instrucciones). Parámetros: `-BranchName`, `-Persist` (ruta docs/features/...), `-Title` opcional. |
+| **pre_pr**  | **Push-And-CreatePR.ps1** | Push de la rama y **crear el PR** (GitHub CLI `gh pr create` si está disponible; si no, URL/instrucciones). Parámetros: `-BranchName`, `-Persist` (ruta paths.featurePath/...), `-Title` opcional. |
 | **post_pr** | Merge-To-Master-Cleanup.bat (.exe en bin/ o .ps1) | Tras aceptar el PR: posicionar en master/main, sincronizar y eliminar la rama mergeada (local y opcionalmente remota). |
 
 Ruta canónica de la cápsula: Cúmulo paths.skillCapsules[\"finalizar-git\"].
@@ -83,7 +83,7 @@ Si `gh` no está disponible, el script muestra la URL para crear el PR manualmen
 ### Consumidores
 
 - **Acción finalize:** Usa esta skill para los pasos de Git (push, PR y, si aplica, pasos post-pr).
-- **Agentes:** Tekton Developer, Finalizer / Release Agent (según `SddIA/actions/finalize.md`).
+- **Agentes:** Tekton Developer, Finalizer / Release Agent (según paths.actionsPath/finalize.md).
 
 ---
-*Especificación del skill Finalizar Git. Definición en paths.skillsDefinitionPath/finalizar-git/ (contrato SddIA/skills/skills-contract.md).*
+*Especificación del skill Finalizar Git. Definición en paths.skillsDefinitionPath/finalizar-git/ (contrato paths.skillsDefinitionPath/skills-contract.md).*

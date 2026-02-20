@@ -59,7 +59,7 @@ Así se mantiene un **feedback adecuado** tanto para humanos (mensajes claros) c
 **Las implementaciones por defecto de las herramientas (y de los scripts de skills) han de ser en Rust.**
 
 - **Motivo:** rendimiento, seguridad de memoria, portabilidad y distribución como binario único.
-- **Entrega:** cada herramienta reside en una **cápsula** **paths.toolCapsules[&lt;tool-id&gt;]** (Cúmulo). Los ejecutables se construyen en `scripts/tools-rs` y se copian a `&lt;cápsula&gt;/bin/`. Opcional: wrapper `.bat` en **paths.toolsPath** que delegue a la cápsula.
+- **Entrega:** cada herramienta reside en una **cápsula** **paths.toolCapsules[&lt;tool-id&gt;]** (Cúmulo). Los ejecutables se construyen en paths.toolsRustPath (Cúmulo) y se copian a `&lt;cápsula&gt;/bin/`. Opcional: wrapper `.bat` en **paths.toolsPath** que delegue a la cápsula.
 - **Launcher:** dentro de la cápsula, el `.bat` invoca el `.exe` en `bin/` si existe; en caso contrario, fallback al script `.ps1` de la cápsula.
 - **Config** (`.json`), **documentación** (`.md`) y **manifest.json** (toolId, components, contract_ref) son obligatorios en la cápsula. **Rutas canónicas:** Cúmulo `SddIA/agents/cumulo.json` → **paths.toolsPath**, **paths.toolCapsules**. En documentación .md no usar rutas literales; referenciar vía Cúmulo.
 

@@ -7,7 +7,7 @@
 ## Estado
 
 - **Hecho:** Cúmulo (paths + instructions), finalize.md, feature.md, norms (interaction-triggers, paths-via-cumulo.md), AGENTS.md, clarify.json (decisiones resueltas).
-- **Pendiente:** Resto de actions, process, skills, agents, tools, templates (ver remanente-rutas.md).
+- **Hecho (fases 1-8):** Cúmulo, actions, process, skills, agents, tools, norms, templates; guía remanente-rutas.md; implementation.json y validacion.json actualizados.
 
 ## Fases del plan
 

@@ -1,13 +1,13 @@
 {
   "contract_version": "1.1.0",
-  "scope": "scripts/tools/",
-  "description": "Contrato que toda herramienta (tool) en scripts/tools/ debe cumplir: salida JSON adecuada al fin de la herramienta y feedback estructurado.",
+  "scope": "paths.toolsPath (Cúmulo)",
+  "description": "Contrato que toda herramienta (tool) en paths.toolsPath (Cúmulo) debe cumplir: salida JSON adecuada al fin de la herramienta y feedback estructurado.",
   "default_implementation": {
     "language": "rust",
     "rationale": "Rendimiento, seguridad de memoria, portabilidad y distribución como binario. Las implementaciones por defecto de tools y de scripts de skills han de ser en Rust.",
     "delivery": [
-      "Cada herramienta reside en una capsula scripts/tools/<tool-id>/ con manifest.json. Los ejecutables se construyen en scripts/tools-rs y se copian a scripts/tools/<tool-id>/bin/.",
-      "Launcher .bat/.ps1 en la capsula invoca el .exe en bin/ si existe; si no, fallback a PowerShell. Wrappers .bat en scripts/tools/ delegan a la capsula.",
+      "Cada herramienta reside en una capsula paths.toolsPath (Cúmulo) /<tool-id>/ con manifest.json. Los ejecutables se construyen en paths.toolsRustPath (Cúmulo) y se copian a paths.toolsPath (Cúmulo) /<tool-id>/bin/.",
+      "Launcher .bat/.ps1 en la capsula invoca el .exe en bin/ si existe; si no, fallback a PowerShell. Wrappers .bat en paths.toolsPath (Cúmulo) / delegan a la capsula.",
       "Config (.json), documentacion (.md) y manifest.json obligatorios en la capsula. Rutas canonicas: SddIA/agents/cumulo.json paths.toolCapsules."
     ]
   },
@@ -50,10 +50,10 @@
     }
   },
   "required_artefacts_per_tool": [
-    { "ext": ".rs", "path": "scripts/tools-rs/src/bin", "purpose": "Implementación por defecto en Rust." },
-    { "ext": "binary", "path": "scripts/tools/<tool-id>/bin/<tool_bin>.exe", "purpose": "Ejecutable Rust en la capsula (copiado desde tools-rs/install.ps1)." },
+    { "ext": ".rs", "path": "paths.toolsRustPath (Cúmulo)/src/bin", "purpose": "Implementación por defecto en Rust." },
+    { "ext": "binary", "path": "paths.toolsPath (Cúmulo) /<tool-id>/bin/<tool_bin>.exe", "purpose": "Ejecutable Rust en la capsula (copiado desde tools-rs/install.ps1)." },
     { "ext": ".ps1", "purpose": "Fallback cuando no exista binario Rust." },
-    { "ext": ".bat", "purpose": "Launcher en capsula: binario en bin/ si existe, si no .ps1. Opcional: wrapper en scripts/tools/ que delegue a la capsula." },
+    { "ext": ".bat", "purpose": "Launcher en capsula: binario en bin/ si existe, si no .ps1. Opcional: wrapper en paths.toolsPath (Cúmulo) / que delegue a la capsula." },
     { "ext": ".json", "naming": "manifest", "purpose": "Manifest de la capsula: toolId, components, contract_ref (obligatorio en cada capsula)." },
     { "ext": ".json", "naming": "<tool-id>-config", "purpose": "Configuración machine-readable." },
     { "ext": ".md", "naming": "<tool-id>.md", "purpose": "Documentación. Idioma: es-ES." }
@@ -64,5 +64,5 @@
     "No escribir feedback sensible (contraseñas, tokens) en message ni en data.",
     "exitCode 0 únicamente cuando success es true; en caso de fallo, success false y exitCode != 0."
   ],
-  "consumers": ["SddIA/actions/", "SddIA/agents/*.json", "scripts/", "CI/CD"]
+  "consumers": ["paths.actionsPath", "SddIA/agents/*.json", "paths.toolsPath", "CI/CD"]
 }
