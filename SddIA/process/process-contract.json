@@ -8,7 +8,13 @@
   ],
   "principles_validation": "Los procesos deben validar que las fases de diseño e implementación sean coherentes con paths.principlesPath (principles-contract). En spec.json puede declararse principles_ref: paths.principlesPath.",
   "process_interface_ref": "Cúmulo (SddIA/agents/cumulo.json) → process_interface: al menos un .md y un .json en la carpeta de la tarea (paths.featurePath, paths.fixPath).",
+  "security_model": {
+    "required_token": "Karma2Token",
+    "token_ref": "SddIA/Tokens/Karma2Token.json",
+    "description": "Todo proceso debe orquestarse bajo el contexto de un Karma2Token válido."
+  },
   "constraints": [
+    "Cumplimiento obligatorio de Karma2Token para trazabilidad y seguridad.",
     "process_id en kebab-case (feature, bug-fix, refactorization, create-tool).",
     "Rutas canónicas solo desde Cúmulo (paths.processPath, paths.featurePath, paths.fixPath, paths.actionsPath, paths.principlesPath).",
     "Un proceso sin spec.md y spec.json en su carpeta no se considera completo.",

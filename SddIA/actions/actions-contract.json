@@ -7,10 +7,16 @@
     { "ext": ".json", "naming": "spec.json", "path": "paths.actionsPath/<action-id>/", "purpose": "Metadatos machine-readable: action_id, name, purpose, inputs, outputs, flow_steps, contract_ref, principles_applicable (opcional)." }
   ],
   "principles_validation": "Las acciones que afecten diseño o implementación (spec, planning, implementation, execution) deben validar coherencia con paths.principlesPath (principles-contract.json). En spec.json puede declararse principles_applicable (array de principle_id) o principles_ref: paths.principlesPath.",
+  "security_model": {
+    "required_token": "Karma2Token",
+    "token_ref": "SddIA/Tokens/Karma2Token.json",
+    "description": "Toda acción debe ser invocada bajo el contexto de un Karma2Token válido."
+  },
   "constraints": [
     "action_id en kebab-case.",
     "Rutas canónicas solo desde Cúmulo (paths.actionsPath, paths.processPath, paths.featurePath, paths.fixPath, paths.principlesPath).",
-    "Acciones de diseño/implementación: validar principios según principles-contract."
+    "Acciones de diseño/implementación: validar principios según principles-contract.",
+    "Cumplimiento obligatorio de Karma2Token para trazabilidad y seguridad."
   ],
   "consumers": ["paths.processPath", "SddIA/agents/*.json", "SddIA/norms/interaction-triggers.md", ".cursor/rules"]
 }
