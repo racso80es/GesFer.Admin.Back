@@ -1,0 +1,25 @@
+{
+  "feature_id": "sddia-ecosystem-independence",
+  "scope": "sddia-paths-cumulo",
+  "branch": "feat/sddia-paths-cumulo",
+  "persist": "docs/features/sddia-ecosystem-independence/",
+  "source": "alcance-rutas.md",
+  "decisions_pending": [
+    "paths nuevos en Cúmulo: evolutionPath, auditsPath (mínimo); architecturePath, infrastructurePath/debtPath/tasksPath, actionsPath, processPath, normsPath, skillsRustPath, toolsRustPath (opcional/completo)",
+    "evolutionLogFile / accessLogFile como claves explícitas o convención sobre path base",
+    "Rutas SddIA internas (actions, process, norms): ¿añadir actionsPath/processPath/normsPath (Opción B) o mantener como contexto (Opción A)?",
+    "Orden de fases: 1 Cúmulo+instructions, 2 actions, 3 process, 4 skills+agents, 5 norms+tools",
+    "Feature única (extensión sddia-ecosystem-independence) vs feature nueva (sddia-paths-cumulo con su persist)"
+  ],
+  "recommendations": {
+    "paths_phase1": ["evolutionPath", "auditsPath"],
+    "sddia_internal": "Opción A (mantener SddIA/actions/ etc. como contexto)",
+    "feature_scope": "Opción A (extensión misma feature, misma persist)"
+  },
+  "open_questions": [
+    "Ficheros concretos (EVOLUTION_LOG.md, ACCESS_LOG.md) como claves en Cúmulo o path + convención",
+    "Incluir sustitución en AGENTS.md en esta tarea o posterior",
+    "Norma explícita en SddIA/norms en esta feature o posterior"
+  ],
+  "next_step": "Confirmar decisiones → planning (plan por fases) → implementation"
+}
