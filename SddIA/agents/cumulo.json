@@ -30,6 +30,14 @@
     "toolCapsules": {
       "invoke-mysql-seeds": "./scripts/tools/invoke-mysql-seeds/",
       "prepare-full-env": "./scripts/tools/prepare-full-env/"
+    },
+    "skillsPath": "./scripts/skills/",
+    "skillsDefinitionPath": "./SddIA/skills/",
+    "skillsIndexPath": "./scripts/skills/index.json",
+    "skillCapsules": {
+      "iniciar-rama": "./scripts/skills/iniciar-rama/",
+      "finalizar-git": "./scripts/skills/finalizar-git/",
+      "invoke-command": "./scripts/skills/invoke-command/"
     }
   },
   "process_interface": {
@@ -57,7 +65,9 @@
     "Map [MON] -> {paths.featurePath}/{feature-name}/{monitoring-name}/", 
     "Map [LOG] -> {paths.logPath}/{log-name}.json",
     "Map [TOOL] -> {paths.toolsPath}/{tool-id}/ (capsula con manifest.json; paths.toolCapsules[tool-id] para ruta canonica). Listado de herramientas: paths.toolsIndexPath.",
-    "Map [TOOL-DEF] -> {paths.toolsDefinitionPath}/{tool-id}/ (definicion .md y .json de la herramienta; capa SddIA). Implementacion tecnica (scripts) en paths.toolCapsules[tool-id]; la raiz del path de implementacion la indica Cumulo (paths.toolsPath / paths.toolCapsules).", 
+    "Map [TOOL-DEF] -> {paths.toolsDefinitionPath}/{tool-id}/ (definicion .md y .json de la herramienta; capa SddIA). Implementacion tecnica (scripts) en paths.toolCapsules[tool-id]; la raiz del path de implementacion la indica Cumulo (paths.toolsPath / paths.toolCapsules).",
+    "Map [SKILL] -> {paths.skillsPath}/{skill-id}/ (capsula con manifest.json; paths.skillCapsules[skill-id]). Listado: paths.skillsIndexPath.",
+    "Map [SKILL-DEF] -> {paths.skillsDefinitionPath}/{skill-id}/ (spec.md y spec.json). Implementacion en paths.skillCapsules[skill-id]. Ejecutable por defecto en Rust (bin/ en capsula).",
     "Audit documentation dispersion.",
     "Consolidate audit reports into history."
   ]

@@ -45,16 +45,17 @@ Encargarse del **inicio de una acción**: crear una rama nueva adecuada (feat/ o
 - **Nunca trabajar en master/main:** El inicio de una acción debe dejar el repo en una rama feat/ o fix/.
 - **Troncal actualizada:** La nueva rama se crea desde la troncal ya actualizada con origin para evitar desvíos innecesarios.
 
-### Integración con scripts
+### Integración con la cápsula
 
-**Script recomendado:** `scripts/skills/Iniciar-Rama.ps1` (PowerShell). Desde la raíz del repo:
+**Implementación:** Cápsula en paths.skillCapsules[\"iniciar-rama\"] (Cúmulo). Launcher: `Iniciar-Rama.bat` en la cápsula; invoca `bin/iniciar_rama.exe` si existe, si no `Iniciar-Rama.ps1`. Ejecutable por defecto en Rust (scripts/skills-rs).
+
+Desde la raíz del repo (ejemplo con launcher en cápsula):
 
 ```powershell
-.\scripts\skills\Iniciar-Rama.ps1 -BranchType feat -BranchName "mi-feature"
-.\scripts\skills\Iniciar-Rama.ps1 -BranchType fix -BranchName "correccion-timeout"
+.\scripts\skills\iniciar-rama\Iniciar-Rama.bat feat mi-feature
+# o vía PowerShell fallback:
+.\scripts\skills\iniciar-rama\Iniciar-Rama.ps1 -BranchType feat -BranchName "mi-feature"
 ```
-
-Si la rama ya existe, el script hace checkout a ella y la actualiza con la troncal (merge).
 
 ### Consumidores
 
@@ -63,4 +64,4 @@ Si la rama ya existe, el script hace checkout a ella y la actualiza con la tronc
 - **Agentes:** Tekton Developer, Arquitecto, Bug Fix Specialist (al iniciar una tarea).
 
 ---
-*Especificación del skill Iniciar Rama. Artefacto obligatorio según contrato en `SddIA/skills/README.md`.*
+*Especificación del skill Iniciar Rama. Definición en paths.skillsDefinitionPath/iniciar-rama/ (contrato SddIA/skills/skills-contract.md).*

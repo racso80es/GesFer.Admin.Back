@@ -1,23 +1,33 @@
 {
-  "contract_version": "1.0.0",
+  "contract_version": "1.1.0",
   "scope": "SddIA/skills/",
-  "description": "Contrato que todo skill debe cumplir para ser consumible por acciones y agentes.",
-  "required_artefacts": [
-    {
-      "ext": ".md",
-      "naming": "<skill-id>.md",
-      "purpose": "Documentación legible: objetivo, entradas/salidas, flujo, reglas. Idioma: es-ES."
-    },
-    {
-      "ext": ".json",
-      "naming": "<skill-id>.json",
-      "purpose": "Metadatos machine-readable: skill_id, name, description, rules, workflows, parámetros."
-    }
+  "description": "Contrato que todo skill debe cumplir: definición en paths.skillsDefinitionPath/<skill-id>/, implementación en paths.skillCapsules[skill-id]. Implementación por defecto en Rust.",
+  "default_implementation": {
+    "language": "rust",
+    "rationale": "Rendimiento, seguridad de memoria, portabilidad y distribución como binario. Las implementaciones por defecto de scripts de skills (y de tools) han de ser en Rust.",
+    "delivery": [
+      "Cada skill con ejecutable reside en una cápsula paths.skillCapsules[skill-id]. Los ejecutables se construyen en scripts/skills-rs y se copian a <cápsula>/bin/.",
+      "Launcher .bat en la cápsula invoca el .exe en bin/ si existe; si no, fallback a PowerShell (.ps1).",
+      "manifest.json, documentación .md obligatorios en la cápsula. Rutas canónicas: SddIA/agents/cumulo.json paths.skillCapsules."
+    ]
+  },
+  "definition_artefacts": [
+    { "ext": ".md", "naming": "spec.md", "path": "paths.skillsDefinitionPath/<skill-id>/", "purpose": "Especificación legible: objetivo, entradas/salidas, flujo, reglas. es-ES." },
+    { "ext": ".json", "naming": "spec.json", "path": "paths.skillsDefinitionPath/<skill-id>/", "purpose": "Metadatos machine-readable; implementation_path_ref si tiene cápsula." }
+  ],
+  "required_artefacts_capsule": [
+    { "ext": ".rs", "path": "scripts/skills-rs/src/bin", "purpose": "Implementación por defecto en Rust." },
+    { "ext": "binary", "path": "<cápsula>/bin/<skill_bin>.exe", "purpose": "Ejecutable Rust en la cápsula (copiado desde skills-rs/install.ps1)." },
+    { "ext": ".ps1", "purpose": "Fallback cuando no exista binario Rust." },
+    { "ext": ".bat", "purpose": "Launcher en cápsula: binario en bin/ si existe, si no .ps1." },
+    { "ext": ".json", "naming": "manifest", "purpose": "Manifest de la cápsula: skillId, components, contract_ref." },
+    { "ext": ".md", "purpose": "Documentación en la cápsula. es-ES." }
   ],
   "constraints": [
-    "skill-id debe estar en kebab-case",
-    "Un skill sin ambos artefactos no se considera completo",
-    "Las acciones resuelven el .md para flujo y el .json para parámetros y reglas"
+    "skill-id en kebab-case.",
+    "Rutas canónicas solo desde Cúmulo (paths.skillsDefinitionPath, paths.skillCapsules, paths.skillsIndexPath).",
+    "Un skill sin spec.md y spec.json en su carpeta no se considera completo.",
+    "Las acciones y agentes resuelven la definición en SddIA y la implementación vía Cúmulo."
   ],
-  "consumers": ["SddIA/actions/", "SddIA/agents/*.json"]
+  "consumers": ["SddIA/actions/", "SddIA/agents/*.json", "SddIA/process/"]
 }

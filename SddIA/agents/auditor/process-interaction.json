@@ -31,7 +31,7 @@
   "instructions": [
     "Reference Standard: openspecs/manifesto.json",
     "Action: Enforce Spec Generation via `GesFer.Console --spec`.",
-    "Action: Intercept Git Hooks (pre-commit, pre-push) via scripts/skills/.",
+    "Action: Intercept Git Hooks (pre-commit, pre-push) via paths.skillCapsules (scripts/skills/<skill-id>/).",
     "Action: Enforce Commit Skill (Token + Unit Tests).",
     "Action: Enforce PR Skill (Token + All Tests).",
     "Action: If Hash is missing/invalid, block action.",

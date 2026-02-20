@@ -1,0 +1,15 @@
+{
+  "feature_id": "skills-encapsulation",
+  "validated_at": "2026-02-20",
+  "checks": [
+    "Cúmulo actualizado con skillsPath, skillsDefinitionPath, skillsIndexPath, skillCapsules",
+    "SddIA/skills: skills-contract.md y skills-contract.json con norma Rust y encapsulamiento",
+    "SddIA/skills/<skill-id>/ con spec.md y spec.json por cada skill (iniciar-rama, finalizar-git, invoke-command, documentation, git-operations, filesystem-ops, dotnet-development, frontend-build, frontend-test, security-audit)",
+    "scripts/skills/index.json y cápsulas iniciar-rama, finalizar-git, invoke-command con manifest, .bat, .ps1, doc, bin/",
+    "scripts/skills-rs: Cargo.toml, src/bin (iniciar_rama, merge_to_master_cleanup, invoke_command), install.ps1, README.md",
+    "Referencias en feature.md, bug-fix-specialist.json, finalize.md, tekton-developer.json, process-interaction.json actualizadas a cápsulas/Cúmulo",
+    "constitution.json: configuration.paths_ref añadido para tools y skills"
+  ],
+  "pending": null,
+  "install_completed": "2026-02-20. Ejecutables Rust generados y copiados: iniciar-rama/bin/iniciar_rama.exe, finalizar-git/bin/merge_to_master_cleanup.exe, invoke-command/bin/invoke_command.exe."
+}

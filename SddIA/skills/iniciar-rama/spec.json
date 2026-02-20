@@ -3,6 +3,8 @@
   "skill_id": "iniciar-rama",
   "name": "Iniciar Rama",
   "description": "Crea una rama nueva (feat/ o fix/) actualizada con master/main y posiciona el repo en ella. Para el inicio de una acción o tarea.",
+  "implementation_path_ref": "paths.skillCapsules.iniciar-rama",
+  "contract_ref": "SddIA/skills/skills-contract.json",
   "owner": "tekton-developer",
   "status": "Active",
   "phases": [
@@ -14,8 +16,7 @@
         "Normalizar slug del nombre de rama",
         "Si rama existe: checkout y merge origin/troncal; si no: fetch, checkout troncal, pull, checkout -b nueva rama",
         "Comprobar git status y git branch -vv"
-      ],
-      "script": "scripts/skills/Iniciar-Rama.ps1"
+      ]
     }
   ],
   "parameters": {
@@ -29,11 +30,8 @@
     "La nueva rama se crea desde la troncal actualizada con origin"
   ],
   "common_workflows": {
-    "start_feature": "Iniciar-Rama.ps1 -BranchType feat -BranchName <slug>",
-    "start_fix": "Iniciar-Rama.ps1 -BranchType fix -BranchName <slug>"
-  },
-  "scripts": {
-    "create_branch": "scripts/skills/Iniciar-Rama.ps1"
+    "start_feature": "Iniciar-Rama.bat o .ps1 -BranchType feat -BranchName <slug>",
+    "start_fix": "Iniciar-Rama.bat o .ps1 -BranchType fix -BranchName <slug>"
   },
   "related_artefacts": ["SddIA/process/feature.md", "SddIA/process/bug-fix-specialist.json"],
   "related_agents": ["tekton-developer", "architect", "bug-fix-specialist"]

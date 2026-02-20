@@ -43,7 +43,7 @@ $capsules = @(
 )
 foreach ($cap in $capsules) {
     $src = Join-Path $releaseDir "$($cap.exe).exe"
-    $binDir = Join-Path $toolsDir $cap.capsule "bin"
+    $binDir = Join-Path (Join-Path $toolsDir $cap.capsule) "bin"
     if (Test-Path $src) {
         if (-not (Test-Path $binDir)) { New-Item -ItemType Directory -Path $binDir -Force | Out-Null }
         Copy-Item -Path $src -Destination (Join-Path $binDir "$($cap.exe).exe") -Force

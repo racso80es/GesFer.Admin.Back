@@ -42,13 +42,13 @@ Centralizar todas las interacciones con Git necesarias para el cierre de una fea
 #### Fase `post_pr` (después de aceptar/mergear el PR en el remoto)
 
 1. Asegurarse de que el PR ya está mergeado en `master` (o `main`) en el remoto.
-2. **Script recomendado:** Invocar `scripts/skills/Merge-To-Master-Cleanup.ps1` desde la raíz del repo (PowerShell):
+2. **Implementación:** Cápsula paths.skillCapsules[\"finalizar-git\"]: launcher `Merge-To-Master-Cleanup.bat` (o .ps1). Ejecutable por defecto en Rust (scripts/skills-rs) en bin/ si existe.
 
+   Desde la raíz del repo:
    ```powershell
-   .\scripts\skills\Merge-To-Master-Cleanup.ps1 -BranchName "<rama_actual>" -DeleteRemote
+   .\scripts\skills\finalizar-git\Merge-To-Master-Cleanup.bat "<rama_actual>" -DeleteRemote
+   # o .ps1: -BranchName "<rama_actual>" -DeleteRemote
    ```
-
-   Si no se indica `-BranchName`, se usa la rama actual. El script: hace checkout a master/main, ejecuta `git pull origin <troncal>`, elimina la rama local ya fusionada y, con `-DeleteRemote`, la rama remota.
 
 3. **Alternativa manual:** Si el script no se usa, ejecutar en orden: `git checkout master` (o `main`), `git pull origin master`, `git branch -d <rama_actual>`, opcionalmente `git push origin --delete <rama_actual>`, y comprobar con `git status` y `git branch -vv`.
 
@@ -58,14 +58,14 @@ Centralizar todas las interacciones con Git necesarias para el cierre de una fea
 - **Mensajes convencionales:** Los commits deben seguir Conventional Commits (ej. `feat:`, `fix:`, `chore:`).
 - **Pre-push:** Ejecutar validación local (build/tests) antes de push cuando lo exija el proceso (validacion.json pass antes de finalize).
 
-### Integración con scripts
+### Integración con la cápsula
 
-| Fase    | Script | Uso |
-|--------|--------|-----|
-| **pre_pr**  | `scripts/skills/Unificar-Rama.ps1` | Certificar rama antes del merge (build, documentación, commit). Desde la raíz: `.\scripts\skills\Unificar-Rama.ps1 -BranchName "<rama_actual>" -CommitMessage "chore: finalizar tarea"`. |
-| **post_pr** | `scripts/skills/Merge-To-Master-Cleanup.ps1` | Tras aceptar el PR: posicionar en master/main, sincronizar y eliminar la rama mergeada (local y opcionalmente remota). Desde la raíz: `.\scripts\skills\Merge-To-Master-Cleanup.ps1 -BranchName "<rama_actual>" -DeleteRemote`. |
+| Fase    | Componente en cápsula | Uso |
+|--------|------------------------|-----|
+| **pre_pr**  | Unificar-Rama.ps1 / unificar_rama.exe | Certificar rama antes del merge (build, documentación, commit). |
+| **post_pr** | Merge-To-Master-Cleanup.bat (.exe en bin/ o .ps1) | Tras aceptar el PR: posicionar en master/main, sincronizar y eliminar la rama mergeada (local y opcionalmente remota). |
 
-Si algún script no existe, los pasos de la skill se realizan con comandos git estándar.
+Ruta canónica de la cápsula: Cúmulo paths.skillCapsules[\"finalizar-git\"].
 
 ### Consumidores
 
@@ -73,4 +73,4 @@ Si algún script no existe, los pasos de la skill se realizan con comandos git e
 - **Agentes:** Tekton Developer, Finalizer / Release Agent (según `SddIA/actions/finalize.md`).
 
 ---
-*Especificación del skill Finalizar Git. Artefacto obligatorio según contrato en `SddIA/skills/README.md`.*
+*Especificación del skill Finalizar Git. Definición en paths.skillsDefinitionPath/finalizar-git/ (contrato SddIA/skills/skills-contract.md).*

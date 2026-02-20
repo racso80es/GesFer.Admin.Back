@@ -2,6 +2,7 @@
   "skill_id": "documentation",
   "name": "Documentation & Knowledge Management",
   "description": "Standards for maintaining the Single Source of Truth (SSOT).",
+  "contract_ref": "SddIA/skills/skills-contract.json",
   "rules": [
     "Format: All documentation must be in Markdown (.md).",
     "Hierarchy: No docs in root (except AGENTS.md). Use categories: [GOB], [EVO], [AUD], [TEC], [OPS], [SPEC].",

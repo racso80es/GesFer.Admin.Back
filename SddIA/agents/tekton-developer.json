@@ -13,7 +13,7 @@
     "invoke-command"
   ],
   "execution_contract": {
-    "system_commands": "All system command execution MUST go through the invoke-command skill. Scope: every agent-triggered command (git status/add/commit/push/pull/branch/checkout, dotnet, npm, pwsh). No exceptions. Implementation: scripts/skills/Invoke-Command.ps1. Contract: scripts/skills/Invoke-Command.json. Direct shell execution for such commands is forbidden."
+    "system_commands": "All system command execution MUST go through the invoke-command skill. Scope: every agent-triggered command (git status/add/commit/push/pull/branch/checkout, dotnet, npm, pwsh). No exceptions. Implementation: cápsula paths.skillCapsules.invoke-command (scripts/skills/invoke-command/Invoke-Command.ps1 o .bat). Contract: SddIA/skills/invoke-command/spec.json. Direct shell execution for such commands is forbidden."
   },
   "constraints": [
     {
@@ -25,7 +25,7 @@
       "severity": "CRITICAL"
     },
     {
-      "rule": "System commands (including git): Execute ONLY via scripts/skills/Invoke-Command.ps1. No direct shell. Contract: scripts/skills/Invoke-Command.json. Applies to every git/dotnet/npm/pwsh invocation.",
+      "rule": "System commands (including git): Execute ONLY via skill invoke-command (cápsula scripts/skills/invoke-command/: Invoke-Command.ps1 o .bat). No direct shell. Contract: SddIA/skills/invoke-command/spec.json. Applies to every git/dotnet/npm/pwsh invocation.",
       "severity": "CRITICAL"
     },
     {
