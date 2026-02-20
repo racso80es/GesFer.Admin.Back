@@ -1,0 +1,18 @@
+{
+  "feature_id": "sddia-ecosystem-independence",
+  "scope": "sddia-paths-cumulo",
+  "branch": "feat/sddia-paths-cumulo",
+  "persist": "docs/features/sddia-ecosystem-independence/",
+  "plan_artifact": "plan.md",
+  "phases": [
+    { "phase": 1, "name": "Guía remanente", "deliverable": "remanente-rutas.md", "status": "done" },
+    { "phase": 2, "name": "Actions (validate, execution, clarify, spec, planning, implementation)", "deliverable": "SddIA/actions/*.md sin literales", "status": "done" },
+    { "phase": 3, "name": "Process (bug-fix, create-tool, README)", "deliverable": "SddIA/process/* sin literales", "status": "done" },
+    { "phase": 4, "name": "Skills (contract, finalizar-git, invoke-command, iniciar-rama, security-audit, documentation)", "deliverable": "SddIA/skills/* sin literales", "status": "pending" },
+    { "phase": 5, "name": "Agents (tekton, qa-judge, auditor, performance)", "deliverable": "SddIA/agents/* sin literales", "status": "pending" },
+    { "phase": 6, "name": "Tools (contract, README)", "deliverable": "SddIA/tools/* sin literales", "status": "pending" },
+    { "phase": 7, "name": "Templates", "deliverable": "SddIA/templates/* sin literales", "status": "pending" },
+    { "phase": 8, "name": "Validación", "deliverable": "validacion.json", "status": "pending" }
+  ],
+  "reference": "remanente-rutas.md (tabla de sustitución y archivos pendientes)"
+}

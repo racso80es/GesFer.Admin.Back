@@ -6,8 +6,8 @@ Al iniciar una tarea se debe elegir un **proceso**. Cada proceso define el ciclo
 
 | Proceso      | Descripción                                                                 | Definición                                      | Agente principal        |
 | :---         | :---                                                                        | :---                                             | :---                    |
-| **feature**  | Desarrollo de una funcionalidad: rama `feat/<nombre_feature>`, documentación en `docs/features/<nombre_feature>/`. | [feature.md](./feature.md)                       | Arquitecto, Tekton      |
-| **bug-fix**  | Corrección de un bug: rama `fix/<nombre_fix>`, documentación en `docs/bugs/<nombre_fix>/`. Alcance mínimo, sin refactor en la misma rama. | [bug-fix-specialist.json](./bug-fix-specialist.json) | Bug Fix Specialist      |
+| **feature**  | Desarrollo de una funcionalidad: rama `feat/<nombre_feature>`, documentación en paths.featurePath/<nombre_feature>/ (Cúmulo). | [feature.md](./feature.md)                       | Arquitecto, Tekton      |
+| **bug-fix**  | Corrección de un bug: rama `fix/<nombre_fix>`, documentación en paths.fixPath/<nombre_fix>/ (Cúmulo). Alcance mínimo, sin refactor en la misma rama. | [bug-fix-specialist.json](./bug-fix-specialist.json) | Bug Fix Specialist      |
 | **create-tool** | Creación de una nueva herramienta: rama `feat/create-tool-<tool-id>`, cápsula en paths.toolCapsules[&lt;tool-id&gt;], índice y Cúmulo actualizados. | [create-tool.md](./create-tool.md), [create-tool.json](./create-tool.json) | Tekton, Arquitecto      |
 
 ## Uso

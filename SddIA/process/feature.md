@@ -54,7 +54,7 @@ Al cierre de la feature (fase 8):
 *   **Arquitecto / Spec Architect:** Puede iniciar el procedimiento y asegurar que la fase 1 (documentación con objetivos) y la ubicación paths.featurePath/<nombre_feature>/ (Cúmulo) se respeten.
 *   **Clarifier:** Responsable de la fase 3 (clarificación) y de persistir decisiones en el SPEC y en la carpeta de la feature.
 *   **Tekton Developer:** Ejecuta las fases 4 (plan), 5 (implementación), 6 (ejecución), 7 (validación) y 8 (cierre/PR); aplica la SPEC como marco legal.
-*   **Cúmulo:** Valida que la documentación de la tarea esté en `docs/features/<nombre_feature>/` como SSOT para esa feature.
+*   **Cúmulo:** Valida que la documentación de la tarea esté en paths.featurePath/<nombre_feature>/ como SSOT para esa feature.
 
 ## Dependencias con otras acciones
 
@@ -73,7 +73,7 @@ El mismo patrón de persistencia se aplica a correcciones de bugs mediante el pr
 
 **{persist} = AGENTE_CUMULO.fixPath/<nombre_fix>**
 
-(En este repositorio `fixPath` = `./docs/bugs/`, por tanto **{persist}** = `docs/bugs/<nombre_fix>/`.)
+(En este repositorio `fixPath` = `./docs/bugs/`, por tanto **{persist}** = paths.fixPath/<nombre_fix>/.)
 
 | Documento en {persist}/ | Contenido |
 | :--- | :--- |

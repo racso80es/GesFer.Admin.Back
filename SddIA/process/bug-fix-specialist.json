@@ -12,8 +12,8 @@
     "iniciar-rama"
   ],
   "paths": {
-    "fixPath": "./docs/bugs/",
-    "bugPath": "./docs/bugs/"
+    "fixPath_ref": "paths.fixPath (Cúmulo)",
+    "bugPath_ref": "paths.bugPath (Cúmulo)"
   },
   "process_interface_compliance": "Cumple SddIA/agents/cumulo.json → process_interface. Solicita/genera en {persist}/: al menos un .md (p. ej. objectives.md, spec.md, clarify.md) y al menos un .json (p. ej. spec.json, clarify.json, validacion.json).",
   "triggers": [
@@ -44,12 +44,12 @@
     }
   ],
   "instructions": [
-    "Obtener o definir nombre_fix (ej. admin-back-repeated-failures). Definir {persist} = AGENTE_CUMULO.fixPath/<nombre_fix>. Crear rama fix/<nombre_fix> desde master actualizado: skill iniciar-rama (cápsula paths.skillCapsules.iniciar-rama): scripts/skills/iniciar-rama/Iniciar-Rama.bat fix <nombre_fix> o Iniciar-Rama.ps1 -BranchType fix -BranchName <nombre_fix>.",
+    "Obtener o definir nombre_fix (ej. admin-back-repeated-failures). Definir {persist} = AGENTE_CUMULO.fixPath/<nombre_fix>. Crear rama fix/<nombre_fix> desde master actualizado: skill iniciar-rama (paths.skillCapsules.iniciar-rama). Parámetros: BranchType fix, BranchName <nombre_fix>. Tekton invoca la implementación.",
     "Crear carpeta {persist}/ si no existe. Dentro: objectives.md (objetivo del fix, pasos de reproducción, causa raíz conocida o hipótesis).",
     "Generar SPEC del fix con GesFer.Console --spec --context {persist}/ para formalizar el qué se corrige.",
     "Si hay ambigüedades, invocar clarificación (Clarifier) y persistir bajo {persist}/.",
     "Coordinar con Tekton Developer: el plan de implementación y el código del fix deben ceñirse a la SPEC y al alcance mínimo.",
     "Tras el fix: asegurar que QA Judge valide (tests, compilación) y que la documentación en {persist}/ esté completa antes del PR.",
-    "En la descripción del PR, enlazar a la referencia canónica docs/bugs/<nombre_fix>/ (SSOT para ese fix). Actualizar Evolution Logs al cerrar el fix."
+    "En la descripción del PR, enlazar a la referencia canónica paths.fixPath/<nombre_fix>/ (SSOT para ese fix). Actualizar Evolution Logs al cerrar el fix."
   ]
 }
