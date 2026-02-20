@@ -12,8 +12,8 @@ En `SddIA/agents/cumulo.json` → `paths` están definidos:
 
 | Clave | Valor actual | Uso |
 |-------|--------------|-----|
-| featurePath | ./docs/features/ | {persist} para features |
-| fixPath, bugPath | ./docs/bugs/ | {persist} para fixes |
+| featurePath | ./docs/features/ | Carpeta de la tarea para features (Cúmulo) |
+| fixPath, bugPath | ./docs/bugs/ | Carpeta de la tarea para fixes (Cúmulo) |
 | logPath | ./docs/logs/ | Logs |
 | toolsPath | ./scripts/tools/ | Raíz herramientas |
 | toolsDefinitionPath | ./SddIA/tools/ | Definición tools |
@@ -73,7 +73,7 @@ En `SddIA/agents/cumulo.json` → `paths` están definidos:
 | Artefacto | Rutas literales hoy | Acción recomendada |
 |-----------|---------------------|---------------------|
 | **SddIA/actions/** (finalize, validate, execution, spec, clarify, planning, implementation) | docs/features/..., docs/evolution/..., docs/audits/..., scripts/skills/... | Sustituir por paths.featurePath, paths.evolutionPath, paths.auditsPath, paths.skillCapsules; Cúmulo ampliado con evolutionPath, auditsPath (y opc. accessLogFile, evolutionLogFile). |
-| **SddIA/process/** (feature.md, bug-fix-specialist.json, create-tool) | docs/features/..., docs/bugs/..., scripts/skills/..., scripts/tools/... | Idem: solo referencias a paths.*; procesos obtienen {persist} y rutas de logs/audits desde Cúmulo. |
+| **SddIA/process/** (feature.md, bug-fix-specialist.json, create-tool) | docs/features/..., docs/bugs/..., scripts/skills/..., scripts/tools/... | Idem: solo referencias a paths.*; procesos obtienen la ruta de la tarea y rutas de logs/audits desde Cúmulo. |
 | **SddIA/skills/** (specs, skills-contract) | scripts/skills-rs, scripts/skills/..., paths.skillCapsules ya usado en parte | Eliminar literales scripts/skills/...; solo paths.skillCapsules, paths.skillsDefinitionPath; opcional paths.skillsRustPath. |
 | **SddIA/agents/** (tekton, qa-judge, auditor/*, performance, security-engineer) | docs/audits/..., scripts/skills/... | Referencias a paths.auditsPath, paths.skillCapsules; sin rutas literales. |
 | **SddIA/norms/** (interaction-triggers) | docs/features/..., docs/bugs/..., SddIA/... | Usar paths.featurePath, paths.fixPath; list_source puede ser "paths.actionsPath", "paths.processPath" si se añaden. |

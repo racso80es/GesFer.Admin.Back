@@ -1,7 +1,7 @@
 # Especificación: Encapsulamiento de skills
 
 **Feature:** skill.Token  
-**{persist}:** docs/features/skill.Token/
+**Ruta (Cúmulo):** paths.featurePath/skill.Token/
 
 ## 1. Patrón a replicar (tools)
 

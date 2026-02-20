@@ -36,7 +36,7 @@ Antes de emitir cualquier respuesta o código, debes ejecutar este proceso menta
 
 Al **empezar una tarea** se debe elegir un **proceso**. Los procesos definen el ciclo completo (rama, documentación, especificación, implementación, validación y cierre). Las **rutas de persistencia** se obtienen siempre de **Cúmulo** (`SddIA/agents/cumulo.json` → `paths`).
 
-| Proceso | Descripción | {persist} (fuente: Cúmulo) | Definición |
+| Proceso | Descripción | Ruta (Cúmulo) | Definición |
 | :--- | :--- | :--- | :--- |
 | **feature** | Funcionalidad nueva: rama `feat/<nombre_feature>`. | `paths.featurePath/<nombre_feature>` | [`SddIA/process/feature.md`](./SddIA/process/feature.md) |
 | **bug-fix** | Corrección de bug: rama `fix/<nombre_fix>`. Alcance mínimo. | `paths.fixPath/<nombre_fix>` | [`SddIA/process/bug-fix-specialist.json`](./SddIA/process/bug-fix-specialist.json) |
@@ -51,7 +51,7 @@ Todo elemento que actúe como **proceso** (o agente de proceso) debe cumplir una
 - **`.md`** — Documentación legible (objetivos, spec, clarificaciones, plan, resúmenes). El proceso debe **solicitar o generar** al menos un fichero `.md` por tarea (p. ej. `objectives.md`, `spec.md`, `clarify.md`).
 - **`.json`** — Metadatos y resultados machine-readable (spec, clarificaciones, implementación, validación). El proceso debe **solicitar o generar** al menos un fichero `.json` por tarea (p. ej. `spec.json`, `clarify.json`, `implementation.json`, `validacion.json`).
 
-Cumplimiento: cada proceso en `SddIA/process/` debe documentar qué artefactos `{nombre}.md` y `{nombre}.json` requiere o produce en `{persist}/`, y los agentes que orquestan el proceso deben respetar esa interfaz.
+Cumplimiento: cada proceso en `SddIA/process/` debe documentar qué artefactos `{nombre}.md` y `{nombre}.json` requiere o produce en la carpeta de la tarea (Cúmulo), y los agentes que orquestan el proceso deben respetar esa interfaz.
 
 ---
 
@@ -59,7 +59,7 @@ Cumplimiento: cada proceso en `SddIA/process/` debe documentar qué artefactos `
 
 Selecciona el rol más específico posible. Si dudas, activa **Arquitecto**.
 
-> **NOTA:** Rutas de agentes: consultar Cúmulo cuando aplique; por convención, definiciones en `SddIA/agents/*.json` y agentes de proceso en `SddIA/process/*.json`. Las rutas de documentación de tareas ({persist}) vienen siempre de Cúmulo (`paths.featurePath`, `paths.fixPath`).
+> **NOTA:** Rutas de agentes: consultar Cúmulo cuando aplique; por convención, definiciones en `SddIA/agents/*.json` y agentes de proceso en `SddIA/process/*.json`. Las rutas de documentación de tareas vienen siempre de Cúmulo (`paths.featurePath`, `paths.fixPath`).
 
 | ROL | DISPARADORES (IF...) | ACCIÓN (THEN...) |
 | :--- | :--- | :--- |

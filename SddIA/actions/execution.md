@@ -12,11 +12,11 @@ La acción **execution** (ejecución) aplica al código los cambios definidos en
 
 ## Entradas
 
-- **Documento de implementación** (obligatorio): ruta a `{persist}/implementation.json` o al documento IMPL (p. ej. `{persist}/implementation.md`). Contiene los ítems con Id, Acción, Ruta, Ubicación, Propuesta y Dependencias.
+- **Documento de implementación** (obligatorio): ruta a implementation.json o al documento IMPL en la carpeta de la tarea (Cúmulo) (p. ej. implementation.md). Contiene los ítems con Id, Acción, Ruta, Ubicación, Propuesta y Dependencias.
 
 ## Salidas
 
-- **Registro de ejecución:** `{persist}/execution.json` (o `ejecution.json` si se mantiene nomenclatura de feature).
+- **Registro de ejecución:** execution.json en la carpeta de la tarea (Cúmulo) (o `ejecution.json` si se mantiene nomenclatura de feature).
   - Debe incluir: por cada ítem aplicado, id del ítem, ruta del archivo, acción realizada (Crear | Modificar | Eliminar), estado (OK | Error), mensaje opcional y timestamp.
   - En caso de error en un ítem: registro del fallo y decisión (detener o continuar según criterio del agente).
 
@@ -28,7 +28,7 @@ La acción **execution** (ejecución) aplica al código los cambios definidos en
    - Resolver la ruta del archivo (existente para Modificar/Eliminar; no existente para Crear).
    - Aplicar la propuesta (crear archivo, editar bloque, eliminar bloque/archivo).
    - Registrar el resultado en la estructura de salida.
-4. **Persistencia:** Escribir `{persist}/execution.json` con el registro completo.
+4. **Persistencia:** Escribir execution.json en la carpeta de la tarea (Cúmulo) con el registro completo.
 5. **Auditoría:** Opcionalmente registrar en paths.auditsPath + paths.accessLogFile que se ejecutó la acción execution para la feature.
 
 ## Implementación técnica (opcional)

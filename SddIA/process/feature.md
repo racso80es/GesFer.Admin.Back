@@ -1,8 +1,8 @@
 # Proceso: Feature
 
-Este documento define el **proceso de tarea** para desarrollar una funcionalidad. Está ubicado en paths.processPath/feature.md (Cúmulo). Las acciones que orquesta están en paths.actionsPath (Cúmulo). La ruta de persistencia **{persist}** se obtiene de **Cúmulo** (Cúmulo → paths.featurePath/<nombre_feature>).
+Este documento define el **proceso de tarea** para desarrollar una funcionalidad. Está ubicado en paths.processPath/feature.md (Cúmulo). Las acciones que orquesta están en paths.actionsPath (Cúmulo). La ruta de persistencia se obtiene de **Cúmulo** (paths.featurePath/<nombre_feature>).
 
-**Interfaz de proceso:** Cumple la interfaz en Cúmulo (`process_interface`): solicita/genera en `{persist}/` al menos un **`.md`** (objectives.md, spec.md, clarify.md, plan, etc.) y al menos un **`.json`** (spec.json, clarify.json, implementation.json, validacion.json, etc.).
+**Interfaz de proceso:** Cumple la interfaz en Cúmulo (`process_interface`): solicita/genera en la carpeta de la tarea (Cúmulo) al menos un **`.md`** (objectives.md, spec.md, clarify.md, plan, etc.) y al menos un **`.json`** (spec.json, clarify.json, implementation.json, validacion.json, etc.).
 
 ## Propósito
 
@@ -12,19 +12,19 @@ Proporciona un flujo repetible y auditado, alineado con las Leyes Universales (s
 
 ## Alcance del procedimiento
 
-{persist} = AGENTE_CUMULO.featurePath/<nombre_feature>
+Ruta de la tarea: Cúmulo (paths.featurePath/<nombre_feature>).
 
 | Fase | Nombre | Descripción |
 | :--- | :--- | :--- |
 | **0** | Preparar entorno | Crear rama feat/<nombre_feature> (o `fix/` si aplica) desde `master` actualizado. No trabajar en `master`. **Skill:** iniciar-rama — invocar según contrato (paths.skillsDefinitionPath/iniciar-rama/). Tekton invoca la implementación (paths.skillCapsules[\"iniciar-rama\"]). Parámetros: BranchType feat, BranchName <nombre_feature>. |
-| **1** | Documentación con objetivos | Documentar objetivo, alcance y ley aplicada. La documentación de la tarea se ubica en **{persist}**/objectives.md. |
-| **2** | Especificación | Ejecutar o generar SPEC (acción **spec**). Entrada: requerimiento o borrador, {persist}/objectives.md; salida: especificación técnica en paths.actionsPath (spec.md) y copia/canon en {persist}/spec.md y {persist}/spec.json |
-| **3** | Clarificación | Ejecutar o generar clarificaciones (acción **clarify**). Especificación técnica: paths.actionsPath/clarify.md. Entrada: {persist}/objectives.md, {persist}/spec.json; salida: {persist}/clarify.md, {persist}/clarify.json |
-| **4** | Planificación | Ejecutar o generar plan (acción **plan**). Entrada: Especificación, Clarificación. Salida: {persist}/plan (y/o clarify según convención). |
-| **5** | Implementación | Generar documento de implementación. Especificación técnica: paths.actionsPath/implementation.md. Entrada: {persist}/objectives.md, {persist}/spec.json, {persist}/clarify.json; salida: {persist}/implementation.md, {persist}/implementation.json |
-| **6** | Ejecución | Aplicar el plan al código (Tekton Developer). Especificación técnica: paths.actionsPath/execution.md. Entrada: {persist}/implementation.json; salida: {persist}/execution.json |
-| **7** | Validar | Ejecutar validación pre-PR. Especificación técnica: paths.actionsPath/validate.md. Entrada: {persist}/; salida: {persist}/validacion.json |
-| **8** | Finalizar | Cierre y PR. Especificación técnica: paths.actionsPath/finalize.md. Entrada: {persist}/; salida: Evolution Logs y Pull Request. |
+| **1** | Documentación con objetivos | Documentar objetivo, alcance y ley aplicada. La documentación de la tarea se ubica en la carpeta de la tarea (Cúmulo)/objectives.md. |
+| **2** | Especificación | Ejecutar o generar SPEC (acción **spec**). Entrada: requerimiento o borrador, carpeta de la tarea (Cúmulo)/objectives.md; salida: especificación técnica en paths.actionsPath (spec.md) y copia/canon en carpeta de la tarea (Cúmulo)/spec.md y spec.json |
+| **3** | Clarificación | Ejecutar o generar clarificaciones (acción **clarify**). Especificación técnica: paths.actionsPath/clarify.md. Entrada: carpeta de la tarea (Cúmulo)/objectives.md, spec.json; salida: carpeta de la tarea (Cúmulo)/clarify.md, clarify.json |
+| **4** | Planificación | Ejecutar o generar plan (acción **plan**). Entrada: Especificación, Clarificación. Salida: carpeta de la tarea (Cúmulo)/plan (y/o clarify según convención). |
+| **5** | Implementación | Generar documento de implementación. Especificación técnica: paths.actionsPath/implementation.md. Entrada: carpeta de la tarea (Cúmulo)/objectives.md, spec.json, clarify.json; salida: carpeta de la tarea (Cúmulo)/implementation.md, implementation.json |
+| **6** | Ejecución | Aplicar el plan al código (Tekton Developer). Especificación técnica: paths.actionsPath/execution.md. Entrada: carpeta de la tarea (Cúmulo)/implementation.json; salida: carpeta de la tarea (Cúmulo)/execution.json |
+| **7** | Validar | Ejecutar validación pre-PR. Especificación técnica: paths.actionsPath/validate.md. Entrada: carpeta de la tarea (Cúmulo); salida: carpeta de la tarea (Cúmulo)/validacion.json |
+| **8** | Finalizar | Cierre y PR. Especificación técnica: paths.actionsPath/finalize.md. Entrada: carpeta de la tarea (Cúmulo); salida: Evolution Logs y Pull Request. |
 
 ## Implementación
 
@@ -33,7 +33,7 @@ Este proceso se implementa como **procedimiento** que combina:
 *   **Scripts y agentes** para spec, clarify y plan (cuando se requiera trazabilidad con token de auditor), según las acciones definidas en paths.actionsPath (Cúmulo).
 *   **Ubicación obligatoria de la documentación de la tarea:** paths.featurePath/<nombre_feature>/ (Cúmulo).
 
-### Contenido mínimo de {persist} (paths.featurePath/<nombre_feature>/)
+### Contenido mínimo de la carpeta de la tarea (Cúmulo: paths.featurePath/<nombre_feature>/)
 
 | Documento | Contenido |
 | :--- | :--- |
@@ -47,7 +47,7 @@ Este proceso se implementa como **procedimiento** que combina:
 Al cierre de la feature (fase 8):
 
 *   **docs/EVOLUTION_LOG.md o paths.evolutionPath + paths.evolutionLogFile:** Añadir una línea con formato `[YYYY-MM-DD] [feat/<nombre>] [Descripción breve del resultado.] [Estado].`
-*   **paths.evolutionPath + paths.evolutionLogFile:** Añadir una sección con fecha y título de la feature, resumen y referencia a {persist}/objectives.md.
+*   **paths.evolutionPath + paths.evolutionLogFile:** Añadir una sección con fecha y título de la feature, resumen y referencia a la carpeta de la tarea (Cúmulo)/objectives.md.
 
 ## Integración con Agentes
 
@@ -69,23 +69,19 @@ Al cierre de la feature (fase 8):
 
 ## Alcance para Fix (bug)
 
-El mismo patrón de persistencia se aplica a correcciones de bugs mediante el proceso **bug-fix**. La variable de persistencia y la ubicación de la documentación se obtienen del agente Cúmulo:
+El mismo patrón de persistencia se aplica a correcciones de bugs mediante el proceso **bug-fix**. La ubicación de la documentación se obtiene del agente Cúmulo (paths.fixPath/<nombre_fix>; en este repositorio fixPath = ./docs/bugs/).
 
-**{persist} = AGENTE_CUMULO.fixPath/<nombre_fix>**
-
-(En este repositorio `fixPath` = `./docs/bugs/`, por tanto **{persist}** = paths.fixPath/<nombre_fix>/.)
-
-| Documento en {persist}/ | Contenido |
+| Documento en carpeta de la tarea (Cúmulo)/ | Contenido |
 | :--- | :--- |
 | **objectives.md** | Objetivo del fix, pasos de reproducción, causa raíz (o hipótesis), ley aplicada. |
-| **spec.md / spec.json** | Especificación técnica del fix (generada con `--spec --context {persist}`). |
+| **spec.md / spec.json** | Especificación técnica del fix (generada con `--spec --context` y la ruta de Cúmulo). |
 | **clarify.md / clarify.json** | Clarificaciones y decisiones (si aplica). |
 | **implementation.md / implementation.json** | Touchpoints y plan de implementación del fix. |
 | **validacion.json** | Resultado de la validación pre-PR. |
 
 - Rama: `fix/<nombre_fix>` (nunca `master`).
 - En la descripción del PR y en Evolution Logs, la referencia canónica es **paths.fixPath/<nombre_fix>/** (Cúmulo) (SSOT para ese fix).
-- El agente **Bug Fix Specialist** (paths.processPath/bug-fix-specialist.json) orquesta el ciclo del fix y asegura que toda la documentación viva en **{persist}/**.
+- El agente **Bug Fix Specialist** (paths.processPath/bug-fix-specialist.json) orquesta el ciclo del fix y asegura que toda la documentación viva en la carpeta de la tarea (Cúmulo).
 
 ## Referencia de ejecución
 
