@@ -1,0 +1,32 @@
+{
+  "spec_version": "1.0.0",
+  "description": "Disparadores de interacción: comportamiento del agente ante ciertos textos del usuario. El dominio SddIA define este comportamiento.",
+  "source": "SddIA/norms/interaction-triggers.md",
+  "triggers": [
+    {
+      "trigger": "#Skill",
+      "when": "El usuario escribe #Skill (solo o en el mensaje)",
+      "behavior": "Sugerir las skills existentes del proyecto",
+      "list_source": "SddIA/skills/README.md y paths.skillsDefinitionPath (SddIA/skills/<skill-id>/); paths.skillsIndexPath o paths.skillCapsules para implementación",
+      "response": "Listar skill_id y descripción; indicar cápsula si aplica; ofrecer elegir una skill o indicar qué necesita hacer"
+    },
+    {
+      "trigger": "#Action",
+      "when": "El usuario escribe #Action (solo o en el mensaje)",
+      "behavior": "Sugerir las acciones existentes del ciclo de desarrollo",
+      "list_source": "SddIA/actions/ (spec, clarify, planning, implementation, execution, validate, finalize)",
+      "response": "Listar action_id y propósito; ofrecer elegir una acción o pedir detalle."
+    },
+    {
+      "trigger": "#Process",
+      "when": "El usuario escribe #Process (solo o en el mensaje)",
+      "behavior": "Sugerir los procesos existentes de tarea",
+      "list_source": "SddIA/process/README.md y SddIA/process/ (feature.md, bug-fix-specialist.json, create-tool.md, create-tool.json)",
+      "response": "Listar process_id y descripción; ofrecer elegir un proceso o pedir detalle."
+    }
+  ],
+  "cumulo_ref": "SddIA/agents/cumulo.json",
+  "skills_list_ref": "SddIA/skills/README.md",
+  "actions_list_ref": "SddIA/actions/",
+  "process_list_ref": "SddIA/process/README.md"
+}

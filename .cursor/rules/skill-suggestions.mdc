@@ -1,0 +1,35 @@
+---
+description: Al escribir #Skill, sugerir las skills existentes del proyecto (SddIA/skills)
+alwaysApply: true
+---
+
+# Sugerencia de skills (#Skill)
+
+Cuando el usuario escriba **#Skill** (solo o en un mensaje), responde sugiriendo las skills existentes del proyecto.
+
+## Comportamiento
+
+1. **Reconocer el disparador:** Si en el mensaje aparece `#Skill`, interpretar que el usuario quiere ver o elegir una skill.
+2. **Listar skills existentes** con formato claro: `skill_id` y descripción breve.
+3. **Incluir** tanto skills con implementación ejecutable (cápsula en scripts/skills/) como skills solo de definición (SddIA/skills/).
+
+## Listado canónico (fuente: SddIA/skills/ y scripts/skills/index.json)
+
+| skill_id | Descripción |
+|----------|-------------|
+| **iniciar-rama** | Crea rama feat/ o fix/ actualizada con master/main. Inicio de acción o tarea. Cápsula: scripts/skills/iniciar-rama/ |
+| **finalizar-git** | Aceptar PR a master, unificar, eliminar rama, volver a master. Pre-pr: Unificar-Rama.ps1; post_pr: Merge-To-Master-Cleanup. Cápsula: scripts/skills/finalizar-git/ |
+| **invoke-command** | Interceptor de comandos de sistema (git, dotnet, npm, pwsh). Telemetría y registro por rama. Cápsula: scripts/skills/invoke-command/ |
+| **git-operations** | Uso seguro de Git (ramas feat/fix, commits convencionales). Solo definición. |
+| **documentation** | Estándares SSOT y gestión de documentación. Solo definición. |
+| **filesystem-ops** | Operaciones de archivo seguras (PowerShell). Solo definición. |
+| **dotnet-development** | Estándares .NET (build, test, logging). Solo definición. |
+| **frontend-build** | Build Next.js (Product, Admin) fallback. Solo definición. |
+| **frontend-test** | Tests unitarios y E2E frontend. Solo definición. |
+| **security-audit** | Auditoría y hooks pre-commit/pre-push. Solo definición. |
+
+## Respuesta sugerida
+
+Ofrecer el listado en español y añadir, si aplica: *"¿Con cuál quieres trabajar o qué necesitas hacer?"* Para más detalle de una skill: definición en `SddIA/skills/<skill-id>/spec.md` y `spec.json`; implementación en Cúmulo `paths.skillCapsules[skill-id]` (scripts/skills/).
+
+Si se añaden o cambian skills, el listado canónico está en **SddIA/skills/README.md** y en las carpetas **SddIA/skills/\<skill-id\>/**.

@@ -68,6 +68,7 @@
     "Map [TOOL-DEF] -> {paths.toolsDefinitionPath}/{tool-id}/ (definicion .md y .json de la herramienta; capa SddIA). Implementacion tecnica (scripts) en paths.toolCapsules[tool-id]; la raiz del path de implementacion la indica Cumulo (paths.toolsPath / paths.toolCapsules).",
     "Map [SKILL] -> {paths.skillsPath}/{skill-id}/ (capsula con manifest.json; paths.skillCapsules[skill-id]). Listado: paths.skillsIndexPath.",
     "Map [SKILL-DEF] -> {paths.skillsDefinitionPath}/{skill-id}/ (spec.md y spec.json). Implementacion en paths.skillCapsules[skill-id]. Ejecutable por defecto en Rust (bin/ en capsula).",
+    "Map [NORMS] -> SddIA/norms/ (normas de interaccion: disparadores como #Skill; comportamiento del agente definido por SddIA). interaction-triggers.md y interaction-triggers.json.",
     "Audit documentation dispersion.",
     "Consolidate audit reports into history."
   ]
