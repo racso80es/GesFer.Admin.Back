@@ -1,7 +1,7 @@
 # Especificación: Encapsulamiento de skills
 
-**Feature:** skills-encapsulation  
-**{persist}:** docs/features/skills-encapsulation/
+**Feature:** skill.Token  
+**{persist}:** docs/features/skill.Token/
 
 ## 1. Patrón a replicar (tools)
 
