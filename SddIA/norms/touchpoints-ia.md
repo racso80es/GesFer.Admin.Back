@@ -2,7 +2,7 @@
 
 **Objetivo:** Mantener los distintos gestores de IA (Cursor, Jules, etc.) y artefactos (.cursor/rules, .github) alineados con las normas definidas en **SddIA** (AGENTS.md, SddIA/norms/). SddIA es la única fuente de verdad; los touchpoints son **difusión** de esas normas.
 
-Acción que orquesta la revisión y actualización: **SddIA/actions/sddia-difusion.md**.
+Acción que orquesta la revisión y actualización: **paths.actionsPath/sddia-difusion/ (SddIA/actions/sddia-difusion/)**.
 
 ---
 
@@ -31,4 +31,4 @@ Acción que orquesta la revisión y actualización: **SddIA/actions/sddia-difusi
 3. **Revisión al cambiar SddIA:** Si se añade un proceso (p. ej. refactorization), una acción (p. ej. sddia-difusion) o un disparador, actualizar los touchpoints afectados (acción sddia-difusion).
 
 ---
-*Referencia: SddIA/actions/sddia-difusion.md. Actualizar esta tabla al añadir o quitar gestores.*
+*Referencia: paths.actionsPath/sddia-difusion/ (SddIA/actions/sddia-difusion/). Actualizar esta tabla al añadir o quitar gestores.*

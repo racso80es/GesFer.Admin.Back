@@ -4,6 +4,21 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+## 2026-02-20 — Kaizen: restructuración process y actions por carpetas (feat/kaizen-process-actions-restructure)
+
+**Rama:** feat/kaizen-process-actions-restructure.
+
+**Alcance:**
+- **Process:** Cada proceso en carpeta paths.processPath/\<process-id\>/ con spec.md y spec.json. Contrato process-contract.json/.md. Procesos: feature, refactorization, create-tool, bug-fix. Eliminados .md/.json sueltos en raíz de process.
+- **Actions:** Cada acción en carpeta paths.actionsPath/\<action-id\>/ con spec.md y spec.json. Contrato actions-contract.json/.md. Acciones: spec, clarify, planning, implementation, execution, validate, finalize, sddia-difusion. Eliminados .md sueltos en raíz de actions.
+- **Referencias:** SddIA/norms/interaction-triggers.md (#Process, #Action), .cursor/rules (process-suggestions, action-suggestions, sddia-ssot, subir-push), AGENTS.md, finalizar-git, iniciar-rama, .github/README.md, touchpoints-ia.
+
+**Referencias:**
+- `docs/features/kaizen-process-actions-restructure/` — Objetivos, spec, clarify, plan, implementation, execution.json.
+- `SddIA/process/README.md`, `SddIA/actions/README.md` — Índices por carpeta.
+
+---
+
 ## 2026-02-20 — Refactorización SddIA: eliminar {persist}, proceso refactorization, difusión y .github (feat/refactorization-sddia-decouple-scripts)
 
 **Rama:** feat/refactorization-sddia-decouple-scripts.

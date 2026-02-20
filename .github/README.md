@@ -6,4 +6,4 @@ Los artefactos en esta carpeta (templates, workflows) son **difusión** de las n
 - **Normas de interacción:** [SddIA/norms/](../SddIA/norms/) (interaction-triggers, paths-via-cumulo).
 - **Touchpoints:** [SddIA/norms/touchpoints-ia.md](../SddIA/norms/touchpoints-ia.md).
 
-Al modificar .github, mantener coherencia con SddIA (rutas vía Cúmulo, procesos feature/bug-fix/refactorization/create-tool). Acción de revisión: [SddIA/actions/sddia-difusion.md](../SddIA/actions/sddia-difusion.md).
+Al modificar .github, mantener coherencia con SddIA (rutas vía Cúmulo, procesos feature/bug-fix/refactorization/create-tool). Acción de revisión: [SddIA/actions/sddia-difusion/](../SddIA/actions/sddia-difusion/).

@@ -1,0 +1,9 @@
+{
+  "action_id": "spec",
+  "name": "Spec",
+  "purpose": "Transformar requerimientos brutos en SPECs técnicas formales. Punto de entrada del ciclo.",
+  "inputs": ["--token", "--title", "--input", "--context (Cúmulo)"],
+  "outputs": ["SPEC-*.md", "metadata JSON en carpeta de tarea (Cúmulo)"],
+  "flow_steps": ["Validación token", "Ingesta y análisis", "Contexto vía --context", "Normalización OpenSpecs", "SecurityScanner", "Persistencia", "Auditoría"],
+  "contract_ref": "actions-contract.json"
+}

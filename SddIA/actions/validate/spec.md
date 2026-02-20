@@ -46,7 +46,7 @@ Estructura sugerida de **git_changes** en el informe:
   "files_modified": [],
   "files_deleted": [],
   "summary_by_category": {},
-  "shortstat": "+n -m" 
+  "shortstat": "+n -m"
 }
 ```
 
@@ -84,7 +84,7 @@ La validación puede ejecutarse mediante scripts existentes (ej. `validate-pr.ps
 
 ## Integración con agentes
 
-- **QA Judge (validador principal):** Responsable de ejecutar esta acción. Aplica la política “asumir que está roto”; exige tests y documentación; bloquea el proceso si faltan evidencias o la compilación falla. Genera `validacion.json` y, en caso de fallo repetido, puede generar `AUDIT_FAIL.md` y solicitar intervención humana.
+- **QA Judge (validador principal):** Responsable de ejecutar esta acción. Aplica la política "asumir que está roto"; exige tests y documentación; bloquea el proceso si faltan evidencias o la compilación falla. Genera `validacion.json` y, en caso de fallo repetido, puede generar `AUDIT_FAIL.md` y solicitar intervención humana.
 - **Tekton Developer:** Puede invocar validate tras execution para comprobar que sus cambios no rompen nada antes de pedir el PR.
 - **Security Engineer / Performance Engineer:** Pueden aportar comprobaciones adicionales cuyos resultados se integren en el mismo `validacion.json` o en informes vinculados.
 
@@ -97,7 +97,7 @@ La validación puede ejecutarse mediante scripts existentes (ej. `validate-pr.ps
 | **Skills necesarios** | `dotnet-development`, `git-operations`, `documentation`, y acceso a scripts de validación (invoke-command si ejecuta scripts). |
 | **Restricciones** | Bloquear si falta documentación de rama; bloquear si faltan tests para lógica nueva; bloquear si la compilación falla. Circuit breaker tras N fallos. |
 
-No se requiere un agente nuevo: **QA Judge** asume la fase de validación. Si se desea un agente dedicado solo a “ejecutar checks y rellenar validacion.json”, podría definirse un **Validation Runner** que delegue en QA Judge la decisión de bloqueo.
+No se requiere un agente nuevo: **QA Judge** asume la fase de validación. Si se desea un agente dedicado solo a "ejecutar checks y rellenar validacion.json", podría definirse un **Validation Runner** que delegue en QA Judge la decisión de bloqueo.
 
 ## Estándares de calidad
 

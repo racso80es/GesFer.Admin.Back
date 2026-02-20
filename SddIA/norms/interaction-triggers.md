@@ -42,10 +42,10 @@
 **Comportamiento:**
 
 1. **Reconocer** que el usuario quiere ver o elegir una acción del ciclo de desarrollo.
-2. **Sugerir las acciones existentes** listando el identificador (nombre del fichero sin .md) y descripción breve.
-3. **Fuente del listado:** paths.actionsPath (Cúmulo) — cada fichero `.md` es una acción (spec, clarify, planning, implementation, execution, validate, finalize). Orden típico en el proceso feature: spec → clarify → planning → implementation → execution → validate → finalize.
+2. **Sugerir las acciones existentes** listando action_id y descripción breve.
+3. **Fuente del listado:** paths.actionsPath (Cúmulo) — cada acción en carpeta paths.actionsPath/<action-id>/ (spec.md, spec.json). Orden típico en el proceso feature: spec → clarify → planning → implementation → execution → validate → finalize.
 4. **Formato de respuesta:** Tabla o lista clara en español con action_id y propósito.
-5. **Cierre:** Ofrecer seguir con una acción concreta: *"¿Cuál quieres ejecutar o sobre cuál necesitas detalle?"* Detalle de cada acción: paths.actionsPath/<action>.md.
+5. **Cierre:** Ofrecer seguir con una acción concreta: *"¿Cuál quieres ejecutar o sobre cuál necesitas detalle?"* Detalle: paths.actionsPath/<action-id>/ (spec.md, spec.json).
 
 ### Listado de referencia (actualizar si cambia paths.actionsPath)
 
@@ -70,18 +70,18 @@
 
 1. **Reconocer** que el usuario quiere ver o elegir un proceso de tarea.
 2. **Sugerir los procesos existentes** listando el identificador y descripción breve.
-3. **Fuente del listado:** paths.processPath (Cúmulo: README.md y ficheros de proceso) (feature.md, bug-fix-specialist.json, create-tool.md, create-tool.json). Cada proceso define el ciclo (rama, documentación, spec, implementación, validación, cierre); la ruta de la tarea viene de Cúmulo.
-4. **Formato de respuesta:** Tabla o lista clara en español con process_id y propósito; indicar definición (.md / .json).
-5. **Cierre:** Ofrecer seguir con un proceso: *"¿Con cuál quieres iniciar una tarea o necesitas detalle?"* Detalle: paths.processPath/README.md y fichero de definición de cada proceso.
+3. **Fuente del listado:** paths.processPath (Cúmulo: README.md y carpetas por proceso). Cada proceso tiene carpeta &lt;process-id&gt;/ con spec.md y spec.json (contrato: process-contract.json).
+4. **Formato de respuesta:** Tabla o lista clara en español con process_id y propósito; indicar definición: paths.processPath/&lt;process-id&gt;/.
+5. **Cierre:** Ofrecer seguir con un proceso: *"¿Con cuál quieres iniciar una tarea o necesitas detalle?"* Detalle: paths.processPath/README.md y paths.processPath/&lt;process-id&gt;/ (spec.md, spec.json).
 
 ### Listado de referencia (actualizar si cambia paths.processPath)
 
 | process_id | Descripción | Definición |
 |------------|-------------|------------|
-| feature | Desarrollo de una funcionalidad: rama feat/&lt;nombre_feature&gt;, documentación en paths.featurePath/&lt;nombre_feature&gt;/ (Cúmulo). | feature.md |
-| bug-fix | Corrección de un bug: rama fix/&lt;nombre_fix&gt;, documentación en paths.fixPath/&lt;nombre_fix&gt;/ (Cúmulo). Alcance mínimo. | bug-fix-specialist.json |
-| refactorization | Refactorización: rama feat/refactorization-&lt;nombre_refactor&gt;, documentación en paths.featurePath/refactorization-&lt;nombre_refactor&gt;/ (Cúmulo). Reflejo de feature, adaptado a refactor. | refactorization.md |
-| create-tool | Creación de una nueva herramienta: rama feat/create-tool-&lt;tool-id&gt;, cápsula en paths.toolCapsules, índice y Cúmulo actualizados. | create-tool.md, create-tool.json |
+| feature | Desarrollo de una funcionalidad: rama feat/&lt;nombre_feature&gt;, documentación en paths.featurePath/&lt;nombre_feature&gt;/ (Cúmulo). | paths.processPath/feature/ |
+| bug-fix | Corrección de un bug: rama fix/&lt;nombre_fix&gt;, documentación en paths.fixPath/&lt;nombre_fix&gt;/ (Cúmulo). Alcance mínimo. | paths.processPath/bug-fix/ |
+| refactorization | Refactorización: rama feat/refactorization-&lt;nombre_refactor&gt;, documentación en paths.featurePath/refactorization-&lt;nombre_refactor&gt;/ (Cúmulo). | paths.processPath/refactorization/ |
+| create-tool | Creación de una nueva herramienta: rama feat/create-tool-&lt;tool-id&gt;, cápsula en paths.toolCapsules, índice y Cúmulo actualizados. | paths.processPath/create-tool/ |
 
 ---
 
@@ -96,7 +96,7 @@
 3. **Comprobar resultado:** Leer la salida del comando. Si hay error (credenciales, red, rama rechazada), informar al usuario con el mensaje de error. Si hay éxito (ej. `branch '...' set up to track 'origin/...'` o `Everything up-to-date`), confirmar que la rama está subida.
 4. **No sustituir por documentación:** El agente no debe limitarse a decir que «el paso es subir»; debe **ejecutar** el comando de push y reportar el resultado.
 
-**Relación con finalize:** La acción finalize (paths.actionsPath/finalize.md) incluye este paso como obligatorio; cuando el usuario pide «subir» o «finalizar» (y se aplica el cierre), el agente debe ejecutar el push.
+**Relación con finalize:** La acción finalize (paths.actionsPath/finalize/) incluye este paso como obligatorio; cuando el usuario pide «subir» o «finalizar» (y se aplica el cierre), el agente debe ejecutar el push.
 
 ---
 

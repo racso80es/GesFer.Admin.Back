@@ -53,7 +53,7 @@ Puede ejecutarse mediante scripts o el agente Tekton que consuma el documento de
 | **Skills necesarios** | `dotnet-development`, `filesystem-ops`, `git-operations`, `invoke-command`. |
 | **Restricciones** | No trabajar en `master`; commits atómicos; todo comando de sistema vía invoke-command. |
 
-No se requiere un agente nuevo: **Tekton Developer** asume la fase de ejecución. Si en el futuro se desea separar “planificador de cambios” de “aplicador”, podría definirse un agente **Execution Runner** que solo aplique IMPL y genere `execution.json`, invocado por Tekton.
+No se requiere un agente nuevo: **Tekton Developer** asume la fase de ejecución. Si en el futuro se desea separar "planificador de cambios" de "aplicador", podría definirse un agente **Execution Runner** que solo aplique IMPL y genere `execution.json`, invocado por Tekton.
 
 ## Estándares de calidad
 

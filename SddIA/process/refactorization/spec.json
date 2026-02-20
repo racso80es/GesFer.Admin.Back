@@ -1,0 +1,21 @@
+{
+  "spec_version": "1.0.0",
+  "process_id": "refactorization",
+  "name": "Refactorization",
+  "description": "Proceso de tarea para refactorización: rama feat/refactorization-<nombre_refactor>, documentación en paths.featurePath/refactorization-<nombre_refactor>/. Mismo ciclo que feature.",
+  "contract_ref": "paths.processPath/process-contract.json",
+  "persist_ref": "paths.featurePath/refactorization-<nombre_refactor>",
+  "phases": [
+    { "id": "0", "name": "Preparar entorno", "description": "Rama feat/refactorization-<nombre_refactor>; skill iniciar-rama." },
+    { "id": "1", "name": "Documentación con objetivos", "description": "objectives.md." },
+    { "id": "2", "name": "Especificación", "description": "Acción spec." },
+    { "id": "3", "name": "Clarificación", "description": "Acción clarify." },
+    { "id": "4", "name": "Planificación", "description": "Acción planning." },
+    { "id": "5", "name": "Implementación (doc)", "description": "Acción implementation." },
+    { "id": "6", "name": "Ejecución", "description": "Acción execution." },
+    { "id": "7", "name": "Validar", "description": "Acción validate." },
+    { "id": "8", "name": "Finalizar", "description": "Acción finalize." }
+  ],
+  "related_actions": ["spec", "clarify", "planning", "implementation", "execution", "validate", "finalize"],
+  "related_skills": ["iniciar-rama", "finalizar-git"]
+}

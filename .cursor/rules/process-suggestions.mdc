@@ -11,7 +11,7 @@ Cuando el usuario escriba **#Process** (solo o en un mensaje), responde sugirien
 
 1. **Reconocer el disparador:** Si en el mensaje aparece `#Process`, interpretar que el usuario quiere ver o elegir un proceso.
 2. **Listar procesos existentes** con formato claro: `process_id` y descripción breve.
-3. **Fuente:** paths.processPath (Cúmulo): README.md y ficheros (feature.md, bug-fix-specialist.json, refactorization.md, create-tool.md, create-tool.json).
+3. **Fuente:** paths.processPath (Cúmulo): README.md y carpetas por proceso (feature/, bug-fix/, refactorization/, create-tool/), cada una con spec.md y spec.json.
 
 ## Listado canónico (fuente: SddIA/process/ — Cúmulo paths.processPath)
 
@@ -24,6 +24,6 @@ Cuando el usuario escriba **#Process** (solo o en un mensaje), responde sugirien
 
 ## Respuesta sugerida
 
-Ofrecer el listado en español y añadir: *"¿Con cuál quieres iniciar una tarea o necesitas detalle?"* Detalle: paths.processPath/README.md y el fichero de definición de cada proceso.
+Ofrecer el listado en español y añadir: *"¿Con cuál quieres iniciar una tarea o necesitas detalle?"* Detalle: paths.processPath/README.md y paths.processPath/&lt;process-id&gt;/ (spec.md, spec.json).
 
 Listado canónico en **SddIA/norms/interaction-triggers.md** (disparador #Process).

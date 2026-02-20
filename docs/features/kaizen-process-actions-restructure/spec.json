@@ -1,0 +1,34 @@
+{
+  "spec_version": "1.0.0",
+  "feature_id": "kaizen-process-actions-restructure",
+  "title": "Restructuración process y actions al patrón skills/tools",
+  "description": "Reestructurar SddIA/process y SddIA/actions para cumplir patrón de skills/tools: contrato en raíz, carpeta por ítem, spec.md y spec.json por ítem.",
+  "context_ref": "paths.featurePath/kaizen-process-actions-restructure",
+  "objectives_ref": "objectives.md",
+  "analysis_ref": "SddIA/process/analisis-restructuracion-patron-skills-tools.md",
+  "scope": {
+    "process": {
+      "add_contract": ["process-contract.json", "process-contract.md"],
+      "folders": ["feature", "bug-fix", "refactorization", "create-tool"],
+      "artefacts_per_folder": ["spec.md", "spec.json"],
+      "remove_after_migration": ["feature.md", "refactorization.md", "create-tool.md", "create-tool.json", "bug-fix-specialist.json"]
+    },
+    "actions": {
+      "add_contract": ["actions-contract.json", "actions-contract.md"],
+      "folders": ["spec", "clarify", "planning", "implementation", "execution", "validate", "finalize", "sddia-difusion"],
+      "artefacts_per_folder": ["spec.md", "spec.json"],
+      "remove_after_migration": ["spec.md", "clarify.md", "planning.md", "implementation.md", "execution.md", "validate.md", "finalize.md", "sddia-difusion.md"]
+    }
+  },
+  "acceptance_criteria": [
+    "process-contract y actions-contract existen en SddIA",
+    "Cada proceso en carpeta con spec.md y spec.json; raíz process sin ficheros sueltos de proceso",
+    "Cada acción en carpeta con spec.md y spec.json; raíz actions sin .md sueltos",
+    "Referencias (interaction-triggers, README, .cursor) actualizadas a rutas por carpeta",
+    "Listados #Process y #Action operativos"
+  ],
+  "references": {
+    "cumulo_paths": "paths.processPath, paths.actionsPath",
+    "contracts_reference": "SddIA/skills/skills-contract.json, SddIA/tools/tools-contract.json"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "spec_version": "1.0.0",
+  "process_id": "bug-fix",
+  "name": "Bug Fix",
+  "description": "Proceso de tarea para corrección de bugs: rama fix/<nombre_fix>, documentación en paths.fixPath/<nombre_fix>/. Alcance mínimo, trazabilidad en carpeta de la tarea.",
+  "contract_ref": "paths.processPath/process-contract.json",
+  "persist_ref": "paths.fixPath/<nombre_fix>",
+  "paths": { "fixPath_ref": "paths.fixPath (Cúmulo)", "bugPath_ref": "paths.bugPath (Cúmulo)" },
+  "process_interface_compliance": "Solicita/genera en carpeta de la tarea al menos un .md (objectives.md, spec.md, clarify.md) y al menos un .json (spec.json, clarify.json, validacion.json).",
+  "triggers": ["Reporte de bug", "Fallo en CI o tests", "Solicitud de fix con bug-id o título"],
+  "skills": ["documentation", "filesystem-ops", "dotnet-development", "iniciar-rama"],
+  "constraints": ["Rama fix/<nombre_fix>, nunca master.", "Documentación obligatoria en paths.fixPath/<nombre_fix>.", "Alcance mínimo: causa raíz; no refactor en la misma rama."],
+  "related_actions": ["spec", "clarify", "implementation", "execution", "validate", "finalize"],
+  "related_skills": ["iniciar-rama"]
+}

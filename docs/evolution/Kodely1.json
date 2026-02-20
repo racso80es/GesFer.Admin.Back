@@ -1,0 +1,135 @@
+[
+  {
+    "id": "d8b5a037-1e5f-4a3b-8f19-3f0a4a6b0c11",
+    "title": "Arquitectura Hexagonal y Clean Architecture",
+    "category": "Arquitectura de Software",
+    "tags": ["Clean Architecture", "Hexagonal", "Vertical Slicing", "Screaming Architecture", "Diseño de Software"],
+    "metadata": {
+      "difficulty": "Advanced",
+      "status": "Published",
+      "last_updated": "2026-02-20"
+    },
+    "abstract": "Definición de las capas de Arquitectura Hexagonal, reglas de dependencia y cómo organizarlo en carpetas mediante Vertical Slicing.",
+    "content": "# Arquitectura Hexagonal y Clean Architecture\n\nLa Arquitectura Hexagonal es un patrón englobado dentro de las \"Clean Architectures\" que se caracteriza por separar la lógica de nuestro dominio de cualquier detalle de infraestructura. Su objetivo principal es conseguir un código altamente mantenible, escalable y testable.\n\n## Capas y Regla de Dependencia\nEl sistema se divide conceptualmente en tres capas concéntricas, y la regla de oro es que la dependencia siempre fluye **de fuera hacia adentro**:\n1. **Infraestructura (Exterior):** Todo lo que toca entrada/salida (bases de datos, APIs de terceros, UI, controladores HTTP de frameworks).\n2. **Aplicación (Intermedia):** Contiene los Casos de Uso (ej. registrar un usuario, publicar un curso), orquestando la lógica sin acoplarse a cómo llega la petición. \n3. **Dominio (Interior):** Es el corazón del software. Contiene las reglas de negocio, entidades y los contratos (interfaces). El dominio solo puede conocerse a sí mismo.\n\n## Vertical Slicing y Screaming Architecture\nAplicar la arquitectura estructurando en tres grandes carpetas raíz (`Application`, `Domain`, `Infrastructure`) suele ser un error que escala mal y rompe la cohesión. \nLa solución es aplicar **Vertical Slicing**: dividir primero la arquitectura como si fuera un pastel, creando carpetas o módulos por concepto de negocio (ej. `Auth`, `Courses`, `Users`). Dentro de cada módulo, se aplican las tres capas de la arquitectura hexagonal.\n\nSi lo complementamos con **Screaming Architecture**, el código nos \"gritará\" qué hace el sistema con solo mirar las carpetas (ej. carpetas llamadas `AuthenticateUser` o `CreateCourse`), favoreciendo la navegación y legibilidad."
+  },
+  {
+    "id": "e1f9a56c-2d3b-4c4e-b5a1-7c9e0d1f2a3b",
+    "title": "Fundamentos de Domain-Driven Design (DDD)",
+    "category": "Domain-Driven Design",
+    "tags": ["DDD", "Bounded Context", "Aggregates", "Value Objects", "Domain Events"],
+    "metadata": {
+      "difficulty": "Advanced",
+      "status": "Published",
+      "last_updated": "2026-02-20"
+    },
+    "abstract": "Conceptos clave de diseño guiado por el dominio, incluyendo Agregados, Value Objects, y Eventos de Dominio.",
+    "content": "# Fundamentos de Domain-Driven Design (DDD)\n\nDomain-Driven Design (DDD) es un enfoque para el desarrollo de software que centra el diseño en el conocimiento del dominio del negocio.\n\n## Patrones Estratégicos y Tácticos\n*   **Bounded Contexts:** Son límites lógicos y organizacionales. Permiten separar diferentes áreas de la empresa (ej. el contexto del `Backoffice` frente al contexto de la `Plataforma` de usuarios) para que los modelos no colisionen.\n*   **Agregados (Aggregates) y Entidades:** Las entidades tienen un identificador único y pueden mutar en el tiempo. Un Agregado es una agrupación conceptual de entidades y Value Objects que se tratan como una unidad transaccional. Todo acceso a los elementos internos debe pasar obligatoriamente por el punto de entrada principal, conocido como *Aggregate Root*.\n*   **Value Objects:** Son objetos inmutables que encapsulan un valor o tipo de dato primitivo (ej. `UserEmail`, `UserId`). Su mayor beneficio es que centralizan las reglas de validación (restricciones de integridad) en el momento de la instanciación; si se crea el objeto, es porque el valor es válido.\n*   **Domain Events (Eventos de Dominio):** Representan algo que ya ha ocurrido en el sistema en el pasado (ej. \"El usuario se ha registrado\"). Son inmutables y permiten desacoplar el caso de uso principal de las acciones derivadas (como enviar un email de bienvenida), respetando los principios SOLID."
+  },
+  {
+    "id": "f5c6b7a8-3e4d-5f6a-c7b8-8d9e0f1a2b3c",
+    "title": "Patrones de Diseño Avanzados en Backend",
+    "category": "Patrones de Diseño",
+    "tags": ["Repository", "DAO", "Criteria", "Specification", "Mediator", "Command Bus"],
+    "metadata": {
+      "difficulty": "Intermediate",
+      "status": "Published",
+      "last_updated": "2026-02-20"
+    },
+    "abstract": "Diferencias entre patrones de acceso a datos (Repository y DAO) y abstracción de búsquedas complejas mediante el patrón Criteria.",
+    "content": "# Patrones de Diseño Avanzados en Backend\n\nLa implementación de patrones de diseño nos ayuda a solucionar problemas recurrentes empleando abstracciones y promoviendo el bajo acoplamiento.\n\n## Repository vs DAO\nAunque a veces se confunden, la principal diferencia radica en su enfoque conceptual:\n*   **DAO (Data Access Object):** Se centra en el modelo de base de datos. Si hay 4 tablas para crear un usuario, un enfoque DAO típicamente usará 4 DAOs diferentes (orientado a la estructura de datos).\n*   **Repository:** Actúa como una colección en memoria de nuestros objetos de dominio, aislando y ocultando los detalles de infraestructura (SQL, ORMs, endpoints externos). Favorece el hablar en lenguaje de dominio y puede encapsular inserciones en múltiples tablas para persistir un solo agregado de forma transparente.\n\n## Patrón Criteria (o Specification)\nCuando en un *Repository* tenemos múltiples combinaciones de búsquedas (por nombre, por fecha, activos, inactivos), el código puede volverse inmanejable por la explosión de métodos.\nEl patrón **Criteria** abstrae múltiples filtros, ordenaciones y paginaciones (limit/offset) en un solo objeto de dominio. Luego, un *Converter* específico de infraestructura se encarga de traducir ese lenguaje de dominio (DSL) a la consulta nativa de SQL, ElasticSearch, etc.. Esto respeta el principio *Open/Closed*, permitiendo añadir nuevos filtros sin modificar el repositorio central.\n\n## Patrón Command y Mediator\nAl mezclar el patrón *Command* (que encapsula en un objeto los datos de una acción) con el patrón *Mediator* (que rutea ese comando hacia su *Handler* correspondiente), obtenemos lo que comúnmente llamamos *Command Bus*. Esto permite enviar acciones a nuestro sistema de forma desacoplada."
+  },
+  {
+    "id": "a1b2c3d4-4e5f-6a7b-8c9d-0e1f2a3b4c5d",
+    "title": "Clean Code y Refactoring",
+    "category": "Clean Code",
+    "tags": ["Boy Scout Rule", "Refactoring", "Either", "Result", "Composición", "Code Smells"],
+    "metadata": {
+      "difficulty": "Intermediate",
+      "status": "Published",
+      "last_updated": "2026-02-20"
+    },
+    "abstract": "Estrategias prácticas de Clean Code, incluyendo la regla del Boy Scout, alternativas a las excepciones usando tipos funcionales y cómo favorecer la composición sobre la herencia.",
+    "content": "# Clean Code y Refactoring\n\nMantener un código limpio y tolerante al cambio es fundamental para la supervivencia a largo plazo de cualquier proyecto de software. Más allá del formato, implica aplicar técnicas sistemáticas de refactorización y decisiones de diseño conscientes.\n\n## La Regla del Boy Scout\nEl principio fundamental es dejar el código mejor de lo que te lo encontraste. Esto se puede abordar mediante dos estrategias principales:\n*   **Preparatory Refactoring:** Hacer \"hueco\" en el código antes de implementar la nueva funcionalidad, lo que simplifica la integración y reduce el margen de error.\n*   **Post-implementation Refactoring:** Implementar la feature primero y, una vez en verde y testeada, aplicar la mejora de diseño.\n\n## Composición sobre Herencia\nEl uso abusivo de clases abstractas base (por ejemplo, `BaseUseCase` o `BaseController`) suele derivar en un alto acoplamiento, provocando que métodos compartidos crezcan de forma descontrolada y el código sea difícil de testear y mantener. Para evitarlo, es preferible favorecer la composición inyectando dependencias pequeñas y específicas en lugar de heredar comportamientos.\n\n## Gestión de Errores: Either, Result y Optional\nSe recomienda evitar el uso de excepciones genéricas, ya que hacen que los contratos sean frágiles y ocultan los flujos de error a los clientes. En su lugar, el uso de mónadas o estructuras funcionales como `Result` o `Either` permite definir explícitamente los posibles errores en la firma del método, obligando en tiempo de compilación a que el desarrollador gestione tanto el caso de éxito como el de fallo.\n\n## Code Smells\nUn \"olor\" en el código (Code Smell) no significa necesariamente que haya un error técnico, sino que es un síntoma o indicador de un diseño potencialmente deficiente que requiere la evaluación humana para decidir si amerita una refactorización."
+  },
+  {
+    "id": "b2c3d4e5-5f6a-7b8c-9d0e-1f2a3b4c5d6e",
+    "title": "Principios SOLID en la Arquitectura Moderna",
+    "category": "Principios SOLID",
+    "tags": ["SOLID", "SRP", "OCP", "DIP", "Alta Cohesión", "Bajo Acoplamiento"],
+    "metadata": {
+      "difficulty": "Intermediate",
+      "status": "Published",
+      "last_updated": "2026-02-20"
+    },
+    "abstract": "Análisis de los principios SRP, OCP y DIP aplicados al desarrollo real, destacando la importancia de los Eventos de Dominio para desbloquear su verdadero potencial.",
+    "content": "# Principios SOLID en la Arquitectura Moderna\n\nLos principios SOLID establecen las bases para crear software tolerante al cambio, altamente cohesivo y con bajo acoplamiento.\n\n## Single Responsibility Principle (SRP)\nSe suele definir como \"tener una única razón para cambiar\". En la práctica, significa fomentar la cohesión agrupando aquellas cosas que cambian juntas y separando las que cambian por diferentes motivos. Para evitar que un caso de uso asuma múltiples responsabilidades (como registrar al usuario y, además, enviarle un email), el uso de Eventos de Dominio es clave.\n\n## Open/Closed Principle (OCP)\nEl software debe estar abierto a la extensión, pero cerrado a la modificación. Al combinar patrones como *Command* u *Observer* para implementar un Bus de Eventos, podemos añadir nuevas acciones derivadas (nuevos *subscribers*) sin necesidad de alterar el código del caso de uso original que desencadenó la acción.\n\n## Dependency Inversion Principle (DIP)\nDebemos depender de abstracciones (interfaces que viven en nuestra capa de dominio) y no de implementaciones concretas. Al invertir el control e inyectar implementaciones concretas de infraestructura (bases de datos, APIs de terceros), ganamos tolerancia al cambio y habilitamos la posibilidad de usar \"Test Doubles\" (mocks o stubs) para aislar nuestra lógica de negocio durante los tests."
+  },
+  {
+    "id": "c3d4e5f6-6a7b-8c9d-0e1f-2a3b4c5d6e7f",
+    "title": "Estrategias de Testing y TDD",
+    "category": "Testing",
+    "tags": ["TDD", "Test-First", "Pirámide de Testing", "Object Mother", "Tests Unitarios", "Tests de Integración"],
+    "metadata": {
+      "difficulty": "Intermediate",
+      "status": "Published",
+      "last_updated": "2026-02-20"
+    },
+    "abstract": "Fundamentos del testing moderno, metodologías como TDD, proporciones recomendadas en la pirámide de testing y el uso del patrón Object Mother para limpiar código de test.",
+    "content": "# Estrategias de Testing y Test-Driven Development (TDD)\n\nEl testing automatizado no busca solo aumentar la métrica de cobertura, sino proveer confianza real al equipo para poder realizar despliegues rápidos y seguros.\n\n## TDD y Test-First\nEscribir el test antes de la implementación (*Test-First*) ayuda a mantener el foco exclusivamente en la funcionalidad requerida y sirve como herramienta para validar el diseño de nuestras clases o APIs desde el punto de vista del cliente. Test-Driven Development (TDD) va más allá al aplicar el ciclo completo de *Red* (test fallando), *Green* (implementación básica) y *Refactor* (mejora de diseño) iterativamente.\n\n## La Pirámide de Testing\nPara equilibrar confianza y velocidad de ejecución de nuestra suite de pruebas, la estrategia recomendada es la pirámide de testing:\n1.  **Unitarios (Base):** Deben componer la gran mayoría de la suite. Aíslan el sistema de cualquier entrada/salida (bases de datos, peticiones HTTP) para ejecutarse en milisegundos y testear de forma atómica la lógica de negocio.\n2.  **Integración (Medio):** Verifican cómo nuestro código interactúa con elementos externos (APIs, Base de datos real).\n3.  **Aceptación / End-to-End (Cúspide):** Aportan la máxima confianza comprobando el flujo completo de la aplicación levantando el sistema real, pero son muy lentos, por lo que deben reservarse para el *Happy Path* y escenarios críticos.\n\n## Patrón Object Mother\nEn los tests unitarios y de aceptación, la fase de *Arrange* (preparación) puede volverse inmanejable si creamos entidades a mano. El patrón **Object Mother** centraliza la creación de estos objetos con datos aleatorios o controlados, ocultando el \"ruido\" de instanciación en los tests para que el desarrollador pueda centrarse exclusivamente en la aserción."
+  },
+  {
+    "id": "1e5b2a8d-4f3c-4a9b-8e1d-7c2f6a9b4d3e",
+    "title": "Arquitectura de Sistemas Distribuidos y Migración Legacy",
+    "category": "Sistemas Distribuidos",
+    "tags": ["Microservicios", "Legacy", "CDC", "API Gateway", "Kafka", "RabbitMQ"],
+    "metadata": {
+      "difficulty": "Advanced",
+      "status": "Published"
+    },
+    "content": "# Arquitectura de Sistemas Distribuidos y Migración Legacy\n\nEn ecosistemas complejos, la comunicación entre servicios y la migración progresiva de sistemas legacy requieren estrategias que minimicen el acoplamiento y mejoren el rendimiento.\n\n## Estrategias de Migración Legacy\nMoverse de un sistema monolítico o legacy a una arquitectura basada en eventos no implica reescribir todo el código de golpe. Se pueden utilizar *triggers* en la base de datos para capturar mutaciones y publicarlas como eventos de dominio. Alternativamente, patrones como *Change Data Capture* (CDC) con herramientas como Debezium permiten engancharse al log binario de la base de datos para emitir eventos sin alterar el código antiguo.\n\n## API Gateways y el patrón BFF\nPara evitar que un cliente (como una app móvil) tenga que hacer múltiples peticiones HTTP a distintos microservicios para componer una pantalla, se utiliza el patrón Backend For Frontend (BFF) o una API Gateway. Herramientas como KrakenD permiten orquestar y agrupar de forma declarativa las respuestas de varios servicios, devolviendo un único JSON al cliente.\n\n## Message Brokers: Kafka vs RabbitMQ\nLa elección del sistema de mensajería cambia el paradigma arquitectónico:\n*   **RabbitMQ / SQS (Smart Broker):** Orientado a colas. Una vez que un consumidor procesa un mensaje y envía un *Acknowledge* (ACK), el mensaje se borra de la memoria del broker. \n*   **Kafka (Dumb Broker, Smart Consumer):** Basado en logs inmutables donde los mensajes no se borran tras leerse. Los consumidores utilizan un *offset* (puntero) para saber por dónde van leyendo, lo que permite reprocesar eventos del pasado o utilizar *compacted topics* para almacenar solo la última foto (snapshot) del estado."
+  },
+  {
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    "title": "Domain-Driven Design (DDD): Conceptos Avanzados",
+    "category": "Domain-Driven Design",
+    "tags": ["Shared Kernel", "UUID", "Proyecciones", "Read Model", "CQRS"],
+    "metadata": {
+      "difficulty": "Advanced",
+      "status": "Published"
+    },
+    "content": "# Domain-Driven Design (DDD): Conceptos Avanzados\n\nProfundizando en las arquitecturas limpias y DDD, existen decisiones tácticas críticas para mantener la cohesión del sistema y optimizar la lectura de datos.\n\n## El peligro del módulo `Shared`\nEl módulo compartido o `Shared Kernel` es útil, pero muy peligroso si no se gestiona bien. Las reglas de oro dictan que dentro de `Shared` solo debe haber código de Dominio puro (conceptos genéricos como el tipado de UUIDs) o Infraestructura genérica (conexiones a base de datos, bus de eventos). Nunca debe contener lógica de Aplicación o Casos de Uso, ya que esto destruiría el *Vertical Slicing* y generaría un alto acoplamiento.\n\n## Identificadores Universales desde el Frontend (UUIDs)\nDelegar la generación de identificadores al motor de base de datos (auto-incrementales) complica el testing y bloquea operaciones asíncronas. Promover la generación de UUIDs o NanoIDs desde el cliente (Frontend) permite el modo offline, facilita la inserciones masivas en lotes y elimina el problema de no conocer el ID tras una operación reactiva.\n\n## Read Models: Proyecciones vs Vistas Materializadas\nPara optimizar consultas complejas:\n*   **Vistas Materializadas SQL:** Delegan el cómputo y la redundancia a la infraestructura de la base de datos, requiriendo mantenimientos (refrescos) manuales o mediante triggers.\n*   **Proyecciones en Aplicación:** Se mantienen a nivel de aplicación escuchando eventos de dominio asíncronos. Aumentan la complejidad, pero permiten un aislamiento total de la base de datos (incluso usando motores distintos como ElasticSearch) y otorgan independencia a los equipos."
+  },
+  {
+    "id": "3a8b4c2d-9e1f-4d5a-b6c7-8d9e0f1a2b3c",
+    "title": "Refactoring Avanzado y Manejo Explícito de Errores",
+    "category": "Clean Code",
+    "tags": ["Rule of Three", "Split Phase Refactoring", "Either", "Result", "Error Handling"],
+    "metadata": {
+      "difficulty": "Intermediate",
+      "status": "Published"
+    },
+    "content": "# Refactoring Avanzado y Manejo Explícito de Errores\n\nMejorar el diseño interno del código sin alterar su comportamiento externo requiere de reglas claras y patrones estructurados.\n\n## Rule of Three (La regla del 3)\nLa extracción prematura de código es uno de los mayores *code smells*. La \"Regla del 3\" establece que no se debe abstraer código duplicado hasta que no aparezca en, al menos, tres sitios diferentes. Es preferible mantener código duplicado que introducir una mala abstracción que acople flujos que evolucionarán por separado.\n\n## Split Phase Refactoring\nPara métodos o *scripts* excesivamente largos y procedimentales, esta técnica propone dividir el algoritmo en fases claras y secuenciales. Por ejemplo: aislar primero el *parseo* y la obtención de recursos en una estructura de datos neutra, aplicar después la lógica de negocio puramente en el dominio, y finalmente realizar la serialización de salida.\n\n## Gestión de Errores: Either y Result\nEl uso de excepciones genéricas (`try/catch`) oculta los flujos alternativos y utiliza las excepciones para el control de flujo. Alternativamente, el uso de estructuras monádicas como `Either` (Left/Right) o `Result` permite que la firma del método revele explícitamente tanto los casos de éxito como los de fallo, obligando al desarrollador a gestionar todos los escenarios en tiempo de compilación."
+  },
+  {
+    "id": "7f8e9d0c-1b2a-4c3d-8e9f-0a1b2c3d4e5f",
+    "title": "Metodologías de Testing y Arquitectura TDD",
+    "category": "Testing",
+    "tags": ["TDD", "Test-First", "Triangulación", "Object Mother", "Unit Testing"],
+    "metadata": {
+      "difficulty": "Advanced",
+      "status": "Published"
+    },
+    "content": "# Metodologías de Testing y Arquitectura TDD\n\nEl testing debe proveer confianza y ser tolerante al cambio, evitando la fragilidad que se genera al acoplar las pruebas a detalles de implementación.\n\n## La verdadera unidad en el Unit Testing\nAsociar un test unitario a una sola clase (un test por cada clase de forma estricta) fomenta el acoplamiento y genera tests frágiles. En una arquitectura orientada a casos de uso, la verdadera \"unidad\" testeable es el propio Caso de Uso completo (la lógica de negocio atómica). Esto permite refactorizar las clases internas del dominio sin romper los tests.\n\n## TDD y Triangulación\n*Test-First* simplemente asegura escribir el test antes del código de producción, lo cual aporta foco. *Test-Driven Development* (TDD) es una herramienta de diseño más amplia que aplica el ciclo iterativo *Red-Green-Refactor*. La \"Triangulación\" dentro de este ciclo consiste en añadir nuevos escenarios de prueba para forzar que la implementación pase de devolver un valor en duro (hardcodeado) a un algoritmo de negocio real.\n\n## Patrón Object Mother vs Builders\nPara evitar ruido en los tests unitarios, el patrón *Object Mother* centraliza la creación de datos aleatorios o de prueba. Mientras un patrón *Builder* provee una interfaz fluida para construir paso a paso, el *Object Mother* provee métodos de factoría explícitos (ej. `UserMother.random()`) para retornar instancias válidas del dominio, garantizando testabilidad sin ensuciar la aserción."
+  },
+  {
+    "id": "b1a2c3d4-e5f6-4a5b-8c7d-9e0f1a2b3c4d",
+    "title": "Infraestructura como Código, Optimizaciones e IA",
+    "category": "Infraestructura y Rendimiento",
+    "tags": ["RAG", "Embeddings", "pgvector", "Keyset Pagination", "Terraform", "GitOps"],
+    "metadata": {
+      "difficulty": "Advanced",
+      "status": "Published"
+    },
+    "content": "# Infraestructura como Código, Optimizaciones e IA\n\nEl desarrollo full-stack actual requiere habilidades de optimización de bases de datos, despliegues infraestructurales y la integración de Inteligencia Artificial en productos propios.\n\n## RAG y Bases de Datos Vectoriales\nLas alucinaciones de los LLMs se pueden solucionar usando *Retrieval-Augmented Generation* (RAG) para inyectar contexto privado. En lugar de herramientas NoSQL complejas, bases relacionales tradicionales como PostgreSQL soportan vectores nativos mediante la extensión `pgvector`. Esto permite convertir datos en *Embeddings* y ordenarlos por similitud matemática (distancia del coseno) directamente en la base de datos.\n\n## Paginación eficiente: Cursor (Keyset) vs Offset\nEn bases de datos de alto volumen, usar `LIMIT` y `OFFSET` penaliza gravemente la CPU porque el motor debe recorrer y descartar miles de filas secuencialmente. Además genera inconsistencias visuales si hay borrados concurrentes. La alternativa óptima es la paginación basada en Cursor (Keyset Pagination), donde se pide la siguiente página a partir del último ID o Timestamp visto (`WHERE id > ultimo_id`).\n\n## Infraestructura como Código (IaC) y GitOps\nHerramientas como Terraform permiten declarar la infraestructura en ficheros. Al unirlo con flujos GitOps, la infraestructura evoluciona mediante Pull Requests en repositorios Git. Esto habilita la ejecución de tests automatizados de infraestructura, validaciones de seguridad, y la estimación de costes financieros en la propia pipeline antes de desplegar nada usando utilidades como *Infracost*."
+  }
+]

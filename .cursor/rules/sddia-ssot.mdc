@@ -18,7 +18,7 @@ Las **normas de comportamiento** del asistente en este repositorio las define el
 ## Comportamiento
 
 1. Si una regla en `.cursor/rules` contradice AGENTS.md o SddIA/norms, **prevalece SddIA**.
-2. Al añadir o cambiar procesos, acciones o disparadores en SddIA, actualizar también las reglas de Cursor (acción **sddia-difusion**: SddIA/actions/sddia-difusion.md).
+2. Al añadir o cambiar procesos, acciones o disparadores en SddIA, actualizar también las reglas de Cursor (acción **sddia-difusion**: SddIA/actions/sddia-difusion/).
 3. Entorno: Windows 11 + PowerShell 7+. No bash ni rutas Unix en comandos.
 
 ---

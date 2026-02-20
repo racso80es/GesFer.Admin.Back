@@ -1,0 +1,9 @@
+{
+  "action_id": "sddia-difusion",
+  "name": "Difusión de SddIA",
+  "purpose": "Mantener touchpoints (.cursor/rules, .github) alineados con SddIA (SSOT).",
+  "inputs": ["Estado SddIA", "Estado touchpoints"],
+  "outputs": [".cursor/rules actualizados", "Documentación touchpoints"],
+  "flow_steps": ["Comprobar fuentes canónicas", "Comparar .cursor/rules", "Actualizar reglas", "Documentar .github y otros"],
+  "contract_ref": "actions-contract.json"
+}

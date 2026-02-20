@@ -38,9 +38,9 @@ Al **empezar una tarea** se debe elegir un **proceso**. Los procesos definen el 
 
 | Proceso | Descripción | Ruta (Cúmulo) | Definición |
 | :--- | :--- | :--- | :--- |
-| **feature** | Funcionalidad nueva: rama `feat/<nombre_feature>`. | `paths.featurePath/<nombre_feature>` | [`SddIA/process/feature.md`](./SddIA/process/feature.md) |
-| **bug-fix** | Corrección de bug: rama `fix/<nombre_fix>`. Alcance mínimo. | `paths.fixPath/<nombre_fix>` | [`SddIA/process/bug-fix-specialist.json`](./SddIA/process/bug-fix-specialist.json) |
-| **create-tool** | Creación de herramienta: rama `feat/create-tool-<tool-id>`. Entregable: cápsula en paths.toolCapsules. | `paths.featurePath/create-tool-<tool-id>` (doc); entregable en `paths.toolsPath/<tool-id>/` | [`SddIA/process/create-tool.md`](./SddIA/process/create-tool.md), [`SddIA/process/create-tool.json`](./SddIA/process/create-tool.json) |
+| **feature** | Funcionalidad nueva: rama `feat/<nombre_feature>`. | `paths.featurePath/<nombre_feature>` | [`SddIA/process/feature/`](./SddIA/process/feature/) |
+| **bug-fix** | Corrección de bug: rama `fix/<nombre_fix>`. Alcance mínimo. | `paths.fixPath/<nombre_fix>` | [`SddIA/process/bug-fix/`](./SddIA/process/bug-fix/) |
+| **create-tool** | Creación de herramienta: rama `feat/create-tool-<tool-id>`. Entregable: cápsula en paths.toolCapsules. | `paths.featurePath/create-tool-<tool-id>` (doc); entregable en `paths.toolsPath/<tool-id>/` | [`SddIA/process/create-tool/`](./SddIA/process/create-tool/) |
 
 Índice de procesos: [`SddIA/process/README.md`](./SddIA/process/README.md).
 
@@ -75,8 +75,8 @@ Selecciona el rol más específico posible. Si dudas, activa **Arquitecto**.
 | **[AUDITOR-PROCESS]**| Git Hooks, Husky, Token, Hash, Process Interaction. | Cargar [`SddIA/agents/auditor/process-interaction.json`](./SddIA/agents/auditor/process-interaction.json). Validar Hash. |
 | **[CUMULO]** | Documentación, Docs, Markdown, Guías, Conocimiento, Rutas. | Cargar [`SddIA/agents/cumulo.json`](./SddIA/agents/cumulo.json). Validar SSOT. |
 | **[FEATURE]**   | tareas, acciones, objetivos | Cargar [`SddIA/process/feature.json`](./SddIA/process/feature.json). Orquestra ciclo de una feature. |
-| **[BUG-FIX]** | Bug, Fix, Incidencia, Corrección, Reproducción. | Cargar [`SddIA/process/bug-fix-specialist.json`](./SddIA/process/bug-fix-specialist.json). Orquestar ciclo del fix. |
-| **[CREATE-TOOL]** | Herramienta, Tool, Crear herramienta, Nueva tool. | Cargar [`SddIA/process/create-tool.json`](./SddIA/process/create-tool.json). Orquestar ciclo de creación de herramienta (cápsula, índice, Cúmulo). Ver [`create-tool.md`](./SddIA/process/create-tool.md). |
+| **[BUG-FIX]** | Bug, Fix, Incidencia, Corrección, Reproducción. | Cargar [`SddIA/process/bug-fix/`](./SddIA/process/bug-fix/) (spec.md, spec.json). Orquestar ciclo del fix. |
+| **[CREATE-TOOL]** | Herramienta, Tool, Crear herramienta, Nueva tool. | Cargar [`SddIA/process/create-tool/`](./SddIA/process/create-tool/). Orquestar ciclo de creación de herramienta (cápsula, índice, Cúmulo). |
 
 ---
 

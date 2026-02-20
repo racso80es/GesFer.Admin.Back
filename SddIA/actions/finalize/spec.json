@@ -1,0 +1,9 @@
+{
+  "action_id": "finalize",
+  "name": "Finalize",
+  "purpose": "Cierre: commits, Evolution Logs, push, PR. Usa skill finalizar-git.",
+  "inputs": ["Carpeta feature (Cúmulo)", "Rama feat/ o fix/"],
+  "outputs": ["Rama en origin", "Evolution Logs", "PR", "finalize.json opcional"],
+  "flow_steps": ["Precondiciones", "Commits atómicos", "Evolution Logs", "Push", "pre_pr finalizar-git", "finalize.json", "Auditoría", "post_pr opcional"],
+  "contract_ref": "actions-contract.json"
+}

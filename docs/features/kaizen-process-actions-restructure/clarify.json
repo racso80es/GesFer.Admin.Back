@@ -1,0 +1,51 @@
+{
+  "spec_version": "1.0.0",
+  "feature_id": "kaizen-process-actions-restructure",
+  "context_ref": "paths.featurePath/kaizen-process-actions-restructure",
+  "spec_ref": "spec.json",
+  "decisions": [
+    {
+      "id": "entry_convention",
+      "summary": "Definición por carpeta <id>/; entrada canónica spec.md y spec.json",
+      "rationale": "Alineado con skills/tools"
+    },
+    {
+      "id": "cumulo_paths_unchanged",
+      "summary": "paths.processPath y paths.actionsPath no cambian valor; convención de uso pasa a carpetas",
+      "rationale": "Evitar cambios en Cúmulo y consumidores que solo leen raíz"
+    },
+    {
+      "id": "process_interface_kept",
+      "summary": "process_interface en cumulo.json se mantiene; process-contract en SddIA define forma de definición",
+      "rationale": "Separación definición (SddIA) vs interfaz de tarea (Cúmulo)"
+    },
+    {
+      "id": "migration_order",
+      "summary": "Migrar primero process (feature, refactorization, create-tool, bug-fix), luego actions",
+      "rationale": "Menos ítems y dependencias en process"
+    },
+    {
+      "id": "listing_resolution",
+      "summary": "Listados #Process/#Action resuelven a paths.processPath/<id>/ y paths.actionsPath/<id>/",
+      "rationale": "Compatibilidad con comportamiento actual; implementación por índice o escaneo"
+    }
+  ],
+  "resolved_questions": [
+    {
+      "q": "¿Eliminar análisis tras migración?",
+      "a": "No; mantener como referencia (SddIA/process/analisis-restructuracion-patron-skills-tools.md)"
+    },
+    {
+      "q": "¿README en actions?",
+      "a": "Sí; SddIA/actions/README.md con tabla de acciones y rutas"
+    },
+    {
+      "q": "¿Schema fijo en spec.json por acción?",
+      "a": "Sí; action_id, name, purpose, inputs, outputs, flow_steps, contract_ref"
+    }
+  ],
+  "open_for_later": [
+    "Índice machine-readable (process-index.json, actions-index.json)",
+    "Compatibilidad temporal: enlaces feature.md → feature/spec.md en README"
+  ]
+}
