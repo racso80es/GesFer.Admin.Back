@@ -4,7 +4,7 @@
   "branch": "feat/sddia-paths-cumulo",
   "persist": "docs/features/sddia-ecosystem-independence/",
   "source": "alcance-rutas.md",
-  "decisions_pending": [
+  "decisions_resolved":{"paths":"Todos","sddia_internal":"Opción B","order":"Fases 1-5 ok","feature_scope":"ok","ficheros_claves":"sí","AGENTS_md":"sí","norma_SddIA":"sí"},"decisions_pending": [
     "paths nuevos en Cúmulo: evolutionPath, auditsPath (mínimo); architecturePath, infrastructurePath/debtPath/tasksPath, actionsPath, processPath, normsPath, skillsRustPath, toolsRustPath (opcional/completo)",
     "evolutionLogFile / accessLogFile como claves explícitas o convención sobre path base",
     "Rutas SddIA internas (actions, process, norms): ¿añadir actionsPath/processPath/normsPath (Opción B) o mantener como contexto (Opción A)?",
@@ -21,5 +21,5 @@
     "Incluir sustitución en AGENTS.md en esta tarea o posterior",
     "Norma explícita en SddIA/norms en esta feature o posterior"
   ],
-  "next_step": "Confirmar decisiones → planning (plan por fases) → implementation"
+  "next_step": "implementation (Cúmulo + sustitución + norma)"
 }

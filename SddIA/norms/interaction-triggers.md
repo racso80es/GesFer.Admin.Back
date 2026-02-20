@@ -14,9 +14,9 @@
 
 1. **Reconocer** que el usuario quiere ver o elegir una skill del proyecto.
 2. **Sugerir las skills existentes** listando `skill_id` y descripción breve.
-3. **Fuente del listado:** `SddIA/skills/README.md` (tabla de skills) y/o las carpetas en **paths.skillsDefinitionPath** (`SddIA/skills/<skill-id>/`). Para skills con implementación ejecutable: **paths.skillsIndexPath** (`scripts/skills/index.json`) o **paths.skillCapsules** (Cúmulo).
-4. **Formato de respuesta:** Tabla o lista clara en español; indicar cuáles tienen cápsula (implementación en scripts/skills/) y cuáles son solo definición.
-5. **Cierre:** Ofrecer seguir con una skill concreta: *"¿Con cuál quieres trabajar o qué necesitas hacer?"* Detalle de cada skill: `SddIA/skills/<skill-id>/spec.md` y `spec.json`; implementación en paths.skillCapsules[skill-id].
+3. **Fuente del listado:** `SddIA/skills/README.md` (tabla de skills) y/o las carpetas en **paths.skillsDefinitionPath** (Cúmulo). Para skills con implementación ejecutable: **paths.skillsIndexPath** o **paths.skillCapsules** (Cúmulo).
+4. **Formato de respuesta:** Tabla o lista clara en español; indicar cuáles tienen cápsula (paths.skillCapsules) y cuáles son solo definición.
+5. **Cierre:** Ofrecer seguir con una skill concreta: *"¿Con cuál quieres trabajar o qué necesitas hacer?"* Detalle: paths.skillsDefinitionPath/<skill-id>/ (spec.md, spec.json); implementación en paths.skillCapsules[skill-id].
 
 ### Listado de referencia (actualizar si cambia SddIA/skills/)
 
@@ -43,9 +43,9 @@
 
 1. **Reconocer** que el usuario quiere ver o elegir una acción del ciclo de desarrollo.
 2. **Sugerir las acciones existentes** listando el identificador (nombre del fichero sin .md) y descripción breve.
-3. **Fuente del listado:** `SddIA/actions/` — cada fichero `.md` es una acción (spec, clarify, planning, implementation, execution, validate, finalize). Orden típico en el proceso feature: spec → clarify → planning → implementation → execution → validate → finalize.
+3. **Fuente del listado:** paths.actionsPath (Cúmulo) — cada fichero `.md` es una acción (spec, clarify, planning, implementation, execution, validate, finalize). Orden típico en el proceso feature: spec → clarify → planning → implementation → execution → validate → finalize.
 4. **Formato de respuesta:** Tabla o lista clara en español con action_id y propósito.
-5. **Cierre:** Ofrecer seguir con una acción concreta: *"¿Cuál quieres ejecutar o sobre cuál necesitas detalle?"* Detalle de cada acción: `SddIA/actions/<action>.md`.
+5. **Cierre:** Ofrecer seguir con una acción concreta: *"¿Cuál quieres ejecutar o sobre cuál necesitas detalle?"* Detalle de cada acción: paths.actionsPath/<action>.md.
 
 ### Listado de referencia (actualizar si cambia SddIA/actions/)
 
@@ -69,16 +69,16 @@
 
 1. **Reconocer** que el usuario quiere ver o elegir un proceso de tarea.
 2. **Sugerir los procesos existentes** listando el identificador y descripción breve.
-3. **Fuente del listado:** `SddIA/process/README.md` y los ficheros en **SddIA/process/** (feature.md, bug-fix-specialist.json, create-tool.md, create-tool.json). Cada proceso define el ciclo (rama, documentación, spec, implementación, validación, cierre) y {persist} según Cúmulo.
+3. **Fuente del listado:** paths.processPath (Cúmulo: README.md y ficheros de proceso) (feature.md, bug-fix-specialist.json, create-tool.md, create-tool.json). Cada proceso define el ciclo (rama, documentación, spec, implementación, validación, cierre) y {persist} según Cúmulo.
 4. **Formato de respuesta:** Tabla o lista clara en español con process_id y propósito; indicar definición (.md / .json).
-5. **Cierre:** Ofrecer seguir con un proceso: *"¿Con cuál quieres iniciar una tarea o necesitas detalle?"* Detalle: `SddIA/process/README.md` y el fichero de definición de cada proceso.
+5. **Cierre:** Ofrecer seguir con un proceso: *"¿Con cuál quieres iniciar una tarea o necesitas detalle?"* Detalle: paths.processPath/README.md y fichero de definición de cada proceso.
 
 ### Listado de referencia (actualizar si cambia SddIA/process/)
 
 | process_id | Descripción | Definición |
 |------------|-------------|------------|
-| feature | Desarrollo de una funcionalidad: rama feat/&lt;nombre_feature&gt;, documentación en docs/features/&lt;nombre_feature&gt;/. | feature.md |
-| bug-fix | Corrección de un bug: rama fix/&lt;nombre_fix&gt;, documentación en docs/bugs/&lt;nombre_fix&gt;/. Alcance mínimo. | bug-fix-specialist.json |
+| feature | Desarrollo de una funcionalidad: rama feat/&lt;nombre_feature&gt;, documentación en paths.featurePath/&lt;nombre_feature&gt;/ (Cúmulo). | feature.md |
+| bug-fix | Corrección de un bug: rama fix/&lt;nombre_fix&gt;, documentación en paths.fixPath/&lt;nombre_fix&gt;/ (Cúmulo). Alcance mínimo. | bug-fix-specialist.json |
 | create-tool | Creación de una nueva herramienta: rama feat/create-tool-&lt;tool-id&gt;, cápsula en paths.toolCapsules, índice y Cúmulo actualizados. | create-tool.md, create-tool.json |
 
 ---
