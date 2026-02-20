@@ -1,6 +1,6 @@
+using GesFer.Admin.Back.Application.Common.Interfaces;
 using GesFer.Admin.Back.Application.Commands.Company;
 using GesFer.Admin.Back.Application.DTOs.Company;
-using GesFer.Admin.Back.Infrastructure.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,9 +8,9 @@ namespace GesFer.Admin.Back.Application.Handlers.Company;
 
 public class GetAllCompaniesHandler : IRequestHandler<GetAllCompaniesCommand, List<CompanyDto>>
 {
-    private readonly AdminDbContext _context;
+    private readonly IApplicationDbContext _context;
 
-    public GetAllCompaniesHandler(AdminDbContext context)
+    public GetAllCompaniesHandler(IApplicationDbContext context)
     {
         _context = context;
     }

@@ -1,10 +1,11 @@
+using GesFer.Admin.Back.Application.Common.Interfaces;
 using GesFer.Admin.Back.Domain.Entities;
 using GesFer.Admin.Back.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace GesFer.Admin.Back.Infrastructure.Data;
 
-public class AdminDbContext : DbContext
+public class AdminDbContext : DbContext, IApplicationDbContext
 {
     public AdminDbContext(DbContextOptions<AdminDbContext> options) : base(options)
     {
@@ -49,4 +50,8 @@ public class AdminDbContext : DbContext
         ChangeTracker.UpdateAdminAuditFields();
         return base.SaveChangesAsync(cancellationToken);
     }
+
+    DbSet<Log> IApplicationDbContext.Logs => Logs;
+    DbSet<AuditLog> IApplicationDbContext.AuditLogs => AuditLogs;
+    DbSet<Company> IApplicationDbContext.Companies => Companies;
 }

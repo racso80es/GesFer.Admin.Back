@@ -2,6 +2,7 @@
 using GesFer.Admin.Back.Infrastructure.Services;
 using GesFer.Admin.Back.Infrastructure.Data;
 using GesFer.Admin.Back.Domain.Services;
+using GesFer.Admin.Back.Application.Common.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql;
 
@@ -46,6 +47,9 @@ public static class DependencyInjection
                 options.EnableDetailedErrors();
             }
         });
+
+        // Registrar IApplicationDbContext apuntando a AdminDbContext
+        services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<AdminDbContext>());
 
         // Servicios de infraestructura Admin
         services.AddScoped<IAdminAuthService, AdminAuthService>();

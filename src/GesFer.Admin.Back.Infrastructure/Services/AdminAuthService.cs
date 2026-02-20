@@ -1,3 +1,4 @@
+using GesFer.Admin.Back.Application.Common.Interfaces;
 using GesFer.Admin.Back.Domain.Entities;
 using GesFer.Admin.Back.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;

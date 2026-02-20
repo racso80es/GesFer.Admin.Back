@@ -1,0 +1,95 @@
+{
+  "feature": "resolve-audit-debt",
+  "plan": "docs/features/resolve-audit-debt/plan.md",
+  "timestamp": "2026-02-21T10:00:00Z",
+  "items": [
+    {
+      "id": "1.1",
+      "action": "Create",
+      "path": "src/GesFer.Admin.Back.Application/DTOs/Logs/CreateLogDto.cs",
+      "status": "OK"
+    },
+    {
+      "id": "1.2",
+      "action": "Create",
+      "path": "src/GesFer.Admin.Back.Application/DTOs/Logs/CreateAuditLogDto.cs",
+      "status": "OK"
+    },
+    {
+      "id": "1.3",
+      "action": "Create",
+      "path": "src/GesFer.Admin.Back.Application/DTOs/Logs/LogDto.cs",
+      "status": "OK"
+    },
+    {
+      "id": "1.4",
+      "action": "Create",
+      "path": "src/GesFer.Admin.Back.Application/DTOs/Logs/LogsPagedResponseDto.cs",
+      "status": "OK"
+    },
+    {
+      "id": "1.5",
+      "action": "Create",
+      "path": "src/GesFer.Admin.Back.Application/DTOs/Logs/PurgeLogsResponseDto.cs",
+      "status": "OK"
+    },
+    {
+      "id": "2.1",
+      "action": "Create",
+      "path": "src/GesFer.Admin.Back.Application/Common/Interfaces/IApplicationDbContext.cs",
+      "status": "OK"
+    },
+    {
+      "id": "2.2",
+      "action": "Create",
+      "path": "src/GesFer.Admin.Back.Application/Common/Interfaces/IAdminAuthService.cs",
+      "status": "OK"
+    },
+    {
+      "id": "2.2b",
+      "action": "Create",
+      "path": "src/GesFer.Admin.Back.Application/Common/Interfaces/IAdminJwtService.cs",
+      "status": "OK"
+    },
+    {
+      "id": "2.2c",
+      "action": "Create",
+      "path": "src/GesFer.Admin.Back.Application/Common/Interfaces/IAuditLogService.cs",
+      "status": "OK"
+    },
+    {
+      "id": "2.3",
+      "action": "Modify",
+      "path": "src/GesFer.Admin.Back.Infrastructure/Data/AdminDbContext.cs",
+      "status": "OK",
+      "details": "Implemented IApplicationDbContext"
+    },
+    {
+      "id": "2.4",
+      "action": "Modify",
+      "path": "src/GesFer.Admin.Back.Application/GesFer.Admin.Back.Application.csproj",
+      "status": "OK",
+      "details": "Removed Infrastructure reference, added EntityFrameworkCore"
+    },
+    {
+      "id": "2.5",
+      "action": "Modify",
+      "path": "src/GesFer.Admin.Back.Infrastructure/GesFer.Admin.Back.Infrastructure.csproj",
+      "status": "OK",
+      "details": "Added Application reference"
+    },
+    {
+      "id": "3.1",
+      "action": "Modify",
+      "path": "src/GesFer.Admin.Back.Api/Controllers/LogController.cs",
+      "status": "OK",
+      "details": "Injected IApplicationDbContext"
+    },
+    {
+      "id": "4.1",
+      "action": "Delete",
+      "path": "src/tests/",
+      "status": "OK"
+    }
+  ]
+}

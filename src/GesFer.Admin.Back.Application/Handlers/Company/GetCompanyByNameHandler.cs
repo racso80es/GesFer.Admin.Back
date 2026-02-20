@@ -1,6 +1,6 @@
+using GesFer.Admin.Back.Application.Common.Interfaces;
 using GesFer.Admin.Back.Application.Commands.Company;
 using GesFer.Admin.Back.Application.DTOs.Company;
-using GesFer.Admin.Back.Infrastructure.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,9 +11,9 @@ namespace GesFer.Admin.Back.Application.Handlers.Company;
 /// </summary>
 public class GetCompanyByNameHandler : IRequestHandler<GetCompanyByNameCommand, CompanyDto?>
 {
-    private readonly AdminDbContext _context;
+    private readonly IApplicationDbContext _context;
 
-    public GetCompanyByNameHandler(AdminDbContext context)
+    public GetCompanyByNameHandler(IApplicationDbContext context)
     {
         _context = context;
     }
