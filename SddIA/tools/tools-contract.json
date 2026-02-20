@@ -58,7 +58,13 @@
     { "ext": ".json", "naming": "<tool-id>-config", "purpose": "Configuración machine-readable." },
     { "ext": ".md", "naming": "<tool-id>.md", "purpose": "Documentación. Idioma: es-ES." }
   ],
+  "security_model": {
+    "required_token": "Karma2Token",
+    "token_ref": "SddIA/Tokens/Karma2Token.json",
+    "description": "Toda tool debe ejecutarse bajo el contexto de un Karma2Token válido."
+  },
   "constraints": [
+    "Cumplimiento obligatorio de Karma2Token para trazabilidad y seguridad.",
     "toolId en kebab-case.",
     "El JSON de salida debe ser válido y codificado en UTF-8.",
     "No escribir feedback sensible (contraseñas, tokens) en message ni en data.",

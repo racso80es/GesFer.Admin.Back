@@ -26,7 +26,13 @@
   "implementation_requirements": [
     "El ejecutable o script sugerido para la implementación de la skill debe ser desarrollado en Rust (localizado en paths.toolsRustPath (Cúmulo))."
   ],
+  "security_model": {
+    "required_token": "Karma2Token",
+    "token_ref": "SddIA/Tokens/Karma2Token.json",
+    "description": "Todo skill debe ser invocado bajo el contexto de un Karma2Token válido."
+  },
   "constraints": [
+    "Cumplimiento obligatorio de Karma2Token para trazabilidad y seguridad.",
     "skill-id en kebab-case.",
     "Rutas canónicas solo desde Cúmulo (paths.skillsDefinitionPath, paths.skillCapsules, paths.skillsIndexPath).",
     "Un skill sin spec.md y spec.json en su carpeta no se considera completo.",

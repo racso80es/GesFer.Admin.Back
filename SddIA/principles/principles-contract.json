@@ -16,7 +16,13 @@
       "purpose": "Metadatos machine-readable: id, principle_id, title, category, tags, metadata (difficulty, status), contract_ref."
     }
   ],
+  "security_model": {
+    "required_token": "Karma2Token",
+    "token_ref": "SddIA/Tokens/Karma2Token.json",
+    "description": "La aplicación o modificación de un principio requiere un contexto de Karma2Token válido."
+  },
   "constraints": [
+    "Cumplimiento obligatorio de Karma2Token para trazabilidad y seguridad.",
     "principle_id en kebab-case.",
     "Rutas canónicas solo desde Cúmulo (paths.principlesPath).",
     "Un principio sin spec.md y spec.json en su carpeta no se considera completo."
