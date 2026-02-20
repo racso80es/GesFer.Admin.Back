@@ -4,6 +4,23 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+## 2026-02-20 — Desacople Cúmulo paths e instructions (feat/cumulo-desacople)
+
+**Rama:** feat/cumulo-desacople.
+
+**Alcance:**
+- **Cúmulo:** paths e instructions extraídos a contratos; cumulo.json solo referencia pathsContract e instructionsContract.
+- **cumulo.paths.json:** contrato de rutas (paths) — SSOT para todas las rutas del proyecto.
+- **cumulo.instructions.json:** contrato de instrucciones de mapeo (EVO, FEA, TOOL, SKILL, etc.).
+- **Norma:** SddIA/norms/paths-via-cumulo.md actualizada para indicar resolución vía contrato de paths (pathsContract → cumulo.paths.json).
+
+**Referencias:**
+- `SddIA/agents/cumulo.json` — Referencias a contratos.
+- `SddIA/agents/cumulo.paths.json` — Contrato de paths.
+- `SddIA/agents/cumulo.instructions.json` — Contrato de instructions.
+
+---
+
 ## 2026-02-20 — Rutas vía Cúmulo (feat/sddia-paths-cumulo)
 
 **Rama:** feat/sddia-paths-cumulo.
