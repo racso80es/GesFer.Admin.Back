@@ -1,5 +1,5 @@
 {
-  "contract_version": "1.0.0",
+  "contract_version": "1.0.1",
   "scope": "SddIA/skills/",
   "description": "Contrato que todo skill debe cumplir para ser consumible por acciones y agentes.",
   "required_artefacts": [
@@ -13,6 +13,9 @@
       "naming": "<skill-id>.json",
       "purpose": "Metadatos machine-readable: skill_id, name, description, rules, workflows, parámetros."
     }
+  ],
+  "implementation_requirements": [
+    "El ejecutable o script sugerido para la implementación de la skill debe ser desarrollado en Rust (localizado en scripts/tools-rs/)."
   ],
   "constraints": [
     "skill-id debe estar en kebab-case",
