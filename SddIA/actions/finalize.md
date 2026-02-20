@@ -2,7 +2,7 @@
 
 ## Propósito
 
-La acción **finalize** (finalizar) cierra el ciclo de la feature: asegura commits atómicos en la rama, actualiza los Evolution Logs, hace push de la rama y crea el Pull Request hacia `master`. Solo debe ejecutarse cuando la validación ha pasado; en caso contrario, debe advertir o bloquear. Proporciona trazabilidad y cierre formal alineado con las Leyes Universales (no commit en master, documentación en paths.featurePath según Cúmulo).
+La acción **finalize** (finalizar) cierra el ciclo de la feature: asegura commits atómicos en la rama, actualiza los Evolution Logs, **sube la rama al remoto (push)** y crea el Pull Request hacia `master`. Solo debe ejecutarse cuando la validación ha pasado; en caso contrario, debe advertir o bloquear. **Comportamiento obligatorio:** al realizar finalize, el ejecutor debe comprender e incluir el paso de **subir (push)**: publicar la rama actual en `origin` antes de crear el PR; sin este paso el cierre no está completo. Proporciona trazabilidad y cierre formal alineado con las Leyes Universales (no commit en master, documentación en paths.featurePath según Cúmulo).
 
 ## Principio
 
@@ -18,6 +18,7 @@ La acción **finalize** (finalizar) cierra el ciclo de la feature: asegura commi
 
 ## Salidas
 
+- **Rama publicada (subir / push):** La rama actual debe quedar subida en `origin`; es una salida obligatoria de finalize antes de considerar el PR creado.
 - **Evolution Logs actualizados:**
   - paths.evolutionPath + paths.evolutionLogFile (raíz docs: docs/EVOLUTION_LOG.md según proyecto): una línea con formato `[YYYY-MM-DD] [feat/<nombre>] [Descripción breve del resultado.] [Estado].`
   - paths.evolutionPath + paths.evolutionLogFile: una sección con fecha, título de la feature, resumen de acción/alcance/resultado y referencia a {persist}/objectives.md (persist = paths.featurePath/<nombre_feature>/).
@@ -38,10 +39,11 @@ La acción finalize **utiliza la skill** `finalizar-git` (definición en paths.s
 3. **Actualización de Evolution Logs:**
    - Añadir entrada en docs/EVOLUTION_LOG.md (raíz) o paths.evolutionPath + paths.evolutionLogFile.
    - Añadir sección en paths.evolutionPath + paths.evolutionLogFile con resumen y enlace a la carpeta de la feature.
-4. **Pasos Git (skill finalizar-git, fase pre_pr):** Invocar **Push-And-CreatePR.ps1** de la cápsula finalizar-git (paths.skillCapsules[\"finalizar-git\"]): desde la raíz del repo, la skill finalizar-git (paths.skillCapsules[\"finalizar-git\"]): parámetro -Persist con valor paths.featurePath/<nombre_feature>/ (resolver vía Cúmulo). Tekton invoca la implementación. El script hace push de la rama y crea el PR: si **GitHub CLI (gh)** está instalado y autenticado, ejecuta `gh pr create`; si no, muestra la URL para crear el PR manualmente. La descripción del PR enlaza a la carpeta de la feature (paths.featurePath/<nombre_feature>/).
-5. **Persistencia opcional:** Escribir `{persist}/finalize.json` con { "pr_url": "...", "branch": "...", "timestamp": "..." }.
-6. **Auditoría:** Registrar el evento de finalización en paths.auditsPath + paths.accessLogFile (Cúmulo).
-7. **Post-PR (skill finalizar-git, fase post_pr):** Una vez el PR esté aceptado/mergeado en el remoto, el ejecutor (o el usuario) aplica la fase **post_pr** de la skill `finalizar-git` invocando la skill finalizar-git (paths.skillCapsules[\"finalizar-git\"]). Tekton invoca la implementación (fase post_pr). Ver paths.skillsDefinitionPath/finalizar-git/spec.md.
+4. **Subir la rama (push):** Publicar la rama actual en el remoto. **El agente debe ejecutar el comando**, no solo documentarlo: en PowerShell desde la raíz del repo, `git push -u origin <rama_actual>` (obtener rama con `git branch --show-current`). Comprobar la salida: debe aparecer confirmación de envío a `origin` (ej. `branch 'feat/...' set up to track 'origin/feat/...'` o `Everything up-to-date`). Si el usuario pide «subir» sin más contexto, ejecutar este paso: push de la rama actual a origin. Sin este paso ejecutado con éxito, el cierre no está completo.
+5. **Crear Pull Request (skill finalizar-git, fase pre_pr):** Invocar **Push-And-CreatePR.ps1** de la cápsula finalizar-git (paths.skillCapsules[\"finalizar-git\"]): desde la raíz del repo, parámetro -Persist con valor paths.featurePath/<nombre_feature>/ (resolver vía Cúmulo). Si **GitHub CLI (gh)** está instalado y autenticado, ejecuta `gh pr create`; si no, muestra la URL para crear el PR manualmente. La descripción del PR enlaza a la carpeta de la feature (paths.featurePath/<nombre_feature>/). (Nota: el script puede incluir el push; si ya se ejecutó el paso 4, el push redundante es idempotente.)
+6. **Persistencia opcional:** Escribir `{persist}/finalize.json` con { "pr_url": "...", "branch": "...", "timestamp": "..." }.
+7. **Auditoría:** Registrar el evento de finalización en paths.auditsPath + paths.accessLogFile (Cúmulo).
+8. **Post-PR (skill finalizar-git, fase post_pr):** Una vez el PR esté aceptado/mergeado en el remoto, el ejecutor (o el usuario) aplica la fase **post_pr** de la skill `finalizar-git` invocando la skill finalizar-git (paths.skillCapsules[\"finalizar-git\"]). Tekton invoca la implementación (fase post_pr). Ver paths.skillsDefinitionPath/finalizar-git/spec.md.
 
 ## Implementación técnica (opcional)
 
