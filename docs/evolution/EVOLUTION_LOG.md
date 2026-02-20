@@ -4,7 +4,7 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
-## 2026-02-20 — Encapsulamiento de skills (feat/skills-encapsulation)
+## 2026-02-20 — Encapsulamiento de skills (feature skill.Token, rama feat/skills-encapsulation)
 
 **Rama:** feat/skills-encapsulation.
 
@@ -17,9 +17,9 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 - **Agents y constitution:** referencias a cápsulas y Cúmulo; paths_ref en constitution.
 
 **Referencias:**
-- `docs/features/skills-encapsulation/objectives.md` — Objetivo y alcance.
-- `docs/features/skills-encapsulation/spec.md` — Especificación.
-- `docs/features/skills-encapsulation/validacion.json` — Validación.
+- `docs/features/skill.Token/objectives.md` — Objetivo y alcance.
+- `docs/features/skill.Token/spec.md` — Especificación.
+- `docs/features/skill.Token/validacion.json` — Validación.
 - `AGENTS.norms.md` — Tabla de disparadores.
 
 ---

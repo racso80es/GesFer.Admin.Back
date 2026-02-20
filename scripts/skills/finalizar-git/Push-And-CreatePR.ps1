@@ -7,13 +7,13 @@
 .PARAMETER BranchName
     Rama a pushear (por defecto: rama actual).
 .PARAMETER Persist
-    Ruta de documentación para el body del PR (ej. docs/features/skills-encapsulation/).
+    Ruta de documentación para el body del PR (ej. docs/features/skill.Token/).
 .PARAMETER Title
     Título del PR (opcional; por defecto se deriva del nombre de rama).
 .PARAMETER BaseBranch
     Rama base del PR: master o main (por defecto se detecta con git symbolic-ref origin/HEAD).
 .EXAMPLE
-    .\Push-And-CreatePR.ps1 -Persist "docs/features/skills-encapsulation/"
+    .\Push-And-CreatePR.ps1 -Persist "docs/features/skill.Token/"
 #>
 [CmdletBinding()]
 param(
