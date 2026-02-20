@@ -4,7 +4,7 @@ Registro cronológico de cierres de tareas y PR. Formato por línea: `[YYYY-MM-D
 
 ---
 
-[2026-02-20] [feat/skills-encapsulation] Encapsulamiento de skills (patrón tools): Cúmulo paths skills, SddIA/skills por carpeta, cápsulas scripts/skills, skills-rs (Rust), normas #Skill/#Action/#Process en SddIA/norms y AGENTS.norms.md. Documentación en docs/features/skills-encapsulation/. [PR pendiente]
+[2026-02-20] [feat/skills-encapsulation] Encapsulamiento de skills (patrón tools): Cúmulo paths skills, SddIA/skills por carpeta, cápsulas scripts/skills, skills-rs (Rust), normas #Skill/#Action/#Process, finalizar-git con Push-And-CreatePR (gh). Documentación en docs/features/skills-encapsulation/. [PR #13]
 [2026-02-21] [feat/resolve-audit-debt] Resolución de deuda técnica de auditoría: compilación (DTOs), arquitectura (Inversión de dependencias, API desacoplada) y limpieza (src/tests borrado). Documentación en docs/features/resolve-audit-debt/. [PR pendiente]
 [2026-02-18] [feat/correccion-hallazgos-auditoria] Corrección de hallazgos de auditoría: referencias Shared dentro del repo, build y tests pasan. Documentación en docs/features/correccion-hallazgos-auditoria/. [PR #3]
 [2026-02-17] [feat/sddia-process-validate-docs] SddIA: procesos (feature, bug-fix), validate con validación git obligatoria, Cúmulo como fuente de paths, interfaz .md/.json. Documentación en docs/features/sddia-process-validate-docs/. [PR pendiente]

@@ -5,6 +5,6 @@
   "persist": "docs/features/skills-encapsulation/",
   "evolution_log_updated": true,
   "pushed": true,
-  "pr_url": null,
-  "notes": "Crear PR hacia master manualmente; descripción debe enlazar a docs/features/skills-encapsulation/"
+  "pr_url": "https://github.com/racso80es/GesFer.Admin.Back/pull/13",
+  "notes": "PR creado con Push-And-CreatePR.ps1 (gh pr create). Base: main."
 }
