@@ -1,0 +1,12 @@
+{
+  "feature": "tool-capsule",
+  "version": "1.0.0",
+  "objectives_ref": "objectives.md",
+  "summary": "Refactorizar scripts/tools a cápsulas atómicas por herramienta con manifest.json, bin/ y documentación local.",
+  "artefacts": [
+    { "path": "scripts/tools/invoke-mysql-seeds/", "type": "capsule", "toolId": "invoke-mysql-seeds" },
+    { "path": "scripts/tools/prepare-full-env/", "type": "capsule", "toolId": "prepare-full-env" }
+  ],
+  "contract_ref": "SddIA/tools/tools-contract.json",
+  "cumulo_update": "paths.toolsPath, paths.toolCapsules"
+}

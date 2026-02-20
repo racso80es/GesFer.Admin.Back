@@ -5,6 +5,7 @@
     Comprueba que MySQL este disponible, aplica dotnet ef database update y ejecuta
     los seeds (companies, admin-users) mediante RUN_SEEDS_ONLY=1 en la API.
     Cumple SddIA/tools/tools-contract.json: salida JSON y feedback adecuado.
+    Capsula: scripts/tools/invoke-mysql-seeds/
 .PARAMETER SkipMigrations
     No ejecutar dotnet ef database update; solo seeds.
 .PARAMETER SkipSeeds
@@ -27,7 +28,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 $scriptDir = $PSScriptRoot
-$repoRoot = (Resolve-Path (Join-Path $scriptDir "..\..")).Path
+$repoRoot = (Resolve-Path (Join-Path $scriptDir "..\..\..")).Path
 $startTime = Get-Date
 $toolId = "mysql-seeds"
 $feedbackList = [System.Collections.Generic.List[object]]::new()

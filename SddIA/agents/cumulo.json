@@ -23,7 +23,12 @@
     "fixPath": "./docs/bugs/",
     "bugPath": "./docs/bugs/",
     "logPath": "./docs/logs/",
-    "featurePath": "./docs/features/"
+    "featurePath": "./docs/features/",
+    "toolsPath": "./scripts/tools/",
+    "toolCapsules": {
+      "invoke-mysql-seeds": "./scripts/tools/invoke-mysql-seeds/",
+      "prepare-full-env": "./scripts/tools/prepare-full-env/"
+    }
   },
   "process_interface": {
     "description": "Elementos de proceso deben cumplir esta interfaz.",
@@ -48,7 +53,8 @@
     "Map [TEST] -> {paths.featurePath}/{feature-name}/{test-name}/", 
     "Map [DEP] -> {paths.featurePath}/{feature-name}/{deployment-name}/", 
     "Map [MON] -> {paths.featurePath}/{feature-name}/{monitoring-name}/", 
-    "Map [LOG] -> {paths.logPath}/{log-name}.json", 
+    "Map [LOG] -> {paths.logPath}/{log-name}.json",
+    "Map [TOOL] -> {paths.toolsPath}/{tool-id}/ (capsula con manifest.json; paths.toolCapsules[tool-id] para ruta canonica)", 
     "Audit documentation dispersion.",
     "Consolidate audit reports into history."
   ]

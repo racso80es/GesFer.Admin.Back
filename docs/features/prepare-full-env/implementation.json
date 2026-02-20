@@ -2,10 +2,13 @@
   "feature": "prepare-full-env",
   "implementation_date": "2026-02-19",
   "deliverables": [
-    "scripts/tools/Prepare-FullEnv.bat",
-    "scripts/tools/Prepare-FullEnv.ps1",
-    "scripts/tools/prepare-env.json",
-    "scripts/tools/prepare-env.md"
+    "scripts/tools/Prepare-FullEnv.bat (wrapper)",
+    "scripts/tools/prepare-full-env/Prepare-FullEnv.bat",
+    "scripts/tools/prepare-full-env/Prepare-FullEnv.ps1",
+    "scripts/tools/prepare-full-env/prepare-env.json",
+    "scripts/tools/prepare-full-env/prepare-env.md",
+    "scripts/tools/prepare-full-env/manifest.json",
+    "scripts/tools/prepare-full-env/bin/ (opcional .exe)"
   ],
   "documentation": [
     "docs/features/prepare-full-env/objectives.md",

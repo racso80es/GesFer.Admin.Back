@@ -2,12 +2,14 @@
   "feature": "prepare-full-env",
   "version": "1.0.0",
   "artefacts": {
+    "capsule": "scripts/tools/prepare-full-env/",
     "executable": "scripts/tools/Prepare-FullEnv.bat",
-    "script": "scripts/tools/Prepare-FullEnv.ps1",
-    "config": "scripts/tools/prepare-env.json",
-    "doc": "scripts/tools/prepare-env.md"
+    "script": "scripts/tools/prepare-full-env/Prepare-FullEnv.ps1",
+    "config": "scripts/tools/prepare-full-env/prepare-env.json",
+    "doc": "scripts/tools/prepare-full-env/prepare-env.md",
+    "manifest": "scripts/tools/prepare-full-env/manifest.json"
   },
-  "inputs": ["prepare-env.json", "optional CLI args"],
+  "inputs": ["prepare-env.json (en capsula)", "optional CLI args"],
   "outputs": ["Docker services running", "optional API/clients running", "logs in logs/services/"],
   "constraints": ["Windows/PowerShell only", "no bash", "repo-relative paths"]
 }

@@ -1,25 +1,25 @@
 # Especificación técnica: Prepare-FullEnv
 
 **Feature:** prepare-full-env  
-**Ubicación scripts:** `scripts/tools/`
+**Ubicación (cápsula):** **paths.toolCapsules['prepare-full-env']** (Cúmulo, `SddIA/agents/cumulo.json`).
 
 ## 1. Entrada
 
-- Configuración en `scripts/tools/prepare-env.json` (servicios a levantar, rutas, puertos).
+- Configuración en la cápsula: `prepare-env.json` (servicios a levantar, rutas, puertos).
 - Parámetros opcionales por línea de comandos (por ejemplo `-DockerOnly`, `-StartApi`, `-StartClients`).
 
 ## 2. Componentes
 
 ### 2.1 Ejecutable de entrada
 
-- **`Prepare-FullEnv.bat`**: script batch que invoca PowerShell 7+ con el script `.ps1` desde la raíz del repositorio, con política de ejecución adecuada. Debe poder ejecutarse con doble clic o desde terminal.
+- **`Prepare-FullEnv.bat`**: en la raíz de tools hay un wrapper que delega a la cápsula. Dentro de la cápsula, el `.bat` invoca el binario Rust en `bin/` si existe; si no, PowerShell 7+ con el script `.ps1`. Ejecutable con doble clic o desde terminal.
 
 ### 2.2 Script principal PowerShell
 
-- **`Prepare-FullEnv.ps1`**:
+- **Prepare-FullEnv.ps1** (en la cápsula **paths.toolCapsules['prepare-full-env']**):
   1. Comprobar que Docker está en ejecución (`docker info`).
-  2. Resolver ruta raíz del repo (por encima de `scripts/tools/`).
-  3. Cargar opciones desde `prepare-env.json` (con valores por defecto si no existe).
+  2. Resolver ruta raíz del repo (por encima de **paths.toolsPath**).
+  3. Cargar opciones desde `prepare-env.json` en la cápsula (con valores por defecto si no existe).
   4. Levantar servicios Docker indicados (`docker-compose up -d` para los servicios configurados, p. ej. `gesfer-db`, `cache`, `adminer`).
   5. Esperar a que MySQL esté listo (healthcheck o `mysqladmin ping` contra el contenedor correcto, p. ej. `gesfer_db`).
   6. Opcionalmente: levantar Admin API en local (`dotnet run` en el directorio de la API) y/o clientes indicados en el JSON, usando si existe `scripts/run-service-with-log.ps1` para logs.
@@ -27,7 +27,7 @@
 
 ### 2.3 Configuración JSON
 
-- **`prepare-env.json`** (machine-readable):
+- **prepare-env.json** (en la cápsula; machine-readable):
   - `dockerServices`: lista de servicios de docker-compose a levantar (o `"default"` = db, cache, adminer).
   - `startApi`: booleano o objeto con `enabled`, `workingDir`, `command` (ej. `dotnet run`).
   - `startClients`: array de entradas con `name`, `workingDir`, `command` (ej. npm run dev).
@@ -36,7 +36,7 @@
 
 ### 2.4 Documentación
 
-- **`prepare-env.md`**: descripción del objetivo, requisitos (Docker Desktop, .NET SDK, Node si aplica), uso del `.bat` y del `.ps1`, parámetros, estructura del JSON y troubleshooting.
+- **prepare-env.md** (en la cápsula): descripción del objetivo, requisitos (Docker Desktop, .NET SDK, Node si aplica), uso del `.bat` y del `.ps1`, parámetros, estructura del JSON y troubleshooting. La cápsula incluye además `manifest.json` (toolId, components, contract_ref).
 
 ## 3. Salida
 

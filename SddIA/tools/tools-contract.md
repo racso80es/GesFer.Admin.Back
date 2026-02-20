@@ -1,6 +1,6 @@
-# Contrato de herramientas (scripts/tools/)
+# Contrato de herramientas (Cúmulo: paths.toolsPath / paths.toolCapsules)
 
-**Alcance:** Todas las entidades en `scripts/tools/` que actúen como herramientas ejecutables.
+**Alcance:** Todas las entidades en **paths.toolsPath** y en cada **paths.toolCapsules[&lt;tool-id&gt;]** (Cúmulo, `SddIA/agents/cumulo.json`) que actúen como herramientas ejecutables.
 
 **Objetivo:** Unificar la salida en JSON adecuada al fin de cada herramienta y garantizar un **feedback adecuado** (trazable, por fases y niveles).
 
@@ -57,21 +57,22 @@ Así se mantiene un **feedback adecuado** tanto para humanos (mensajes claros) c
 **Las implementaciones por defecto de las herramientas (y de los scripts de skills) han de ser en Rust.**
 
 - **Motivo:** rendimiento, seguridad de memoria, portabilidad y distribución como binario único.
-- **Entrega:** todos los ejecutables en **scripts/tools/** (ej. `prepare_full_env.exe`, `invoke_mysql_seeds.exe`). Se construyen en `scripts/tools-rs` y se copian a `scripts/tools/`.
-- **Launcher:** el `.bat` o `.ps1` en `scripts/tools/` invoca el `.exe` de la misma carpeta si existe; en caso contrario, fallback al script PowerShell.
-- **Config** (`.json`) y **documentación** (`.md`) siguen siendo obligatorios.
+- **Entrega:** cada herramienta reside en una **cápsula** **paths.toolCapsules[&lt;tool-id&gt;]** (Cúmulo). Los ejecutables se construyen en `scripts/tools-rs` y se copian a `&lt;cápsula&gt;/bin/`. Opcional: wrapper `.bat` en **paths.toolsPath** que delegue a la cápsula.
+- **Launcher:** dentro de la cápsula, el `.bat` invoca el `.exe` en `bin/` si existe; en caso contrario, fallback al script `.ps1` de la cápsula.
+- **Config** (`.json`), **documentación** (`.md`) y **manifest.json** (toolId, components, contract_ref) son obligatorios en la cápsula. **Rutas canónicas:** Cúmulo `SddIA/agents/cumulo.json` → **paths.toolsPath**, **paths.toolCapsules**. En documentación .md no usar rutas literales; referenciar vía Cúmulo.
 
 Referencia: agente Security Engineer (`SddIA/agents/security-engineer.json`).
 
 ## 4. Artefactos por herramienta
 
-Cada herramienta en `scripts/tools/` debe contar con:
+Cada herramienta reside en una **cápsula** **paths.toolCapsules[&lt;tool-id&gt;]** (Cúmulo) y debe contar con:
 
-- **Implementación Rust:** código en `scripts/tools-rs/src/bin/<tool_id>.rs`; binario final en **scripts/tools/** (copiado tras `cargo build --release`).
-- **Fallback:** script `.ps1` cuando no exista o no se compile el binario Rust.
-- **Launcher:** `.bat` que invoque Rust si existe, si no `.ps1`.
-- **Configuración:** cuando sea parametrizable, un `.json` de configuración.
-- **Documentación:** un `.md` que describa uso, parámetros y formato de la salida JSON. Idioma: es-ES.
+- **Implementación Rust:** código en `scripts/tools-rs/src/bin/&lt;tool_bin&gt;.rs`; binario final en `&lt;cápsula&gt;/bin/` (copiado tras `scripts/tools-rs/install.ps1`).
+- **Fallback:** script `.ps1` en la cápsula cuando no exista o no se compile el binario Rust.
+- **Launcher:** `.bat` en la cápsula que invoque el binario en `bin/` si existe, si no el `.ps1`. Opcional: wrapper `.bat` en **paths.toolsPath** que delegue a la cápsula.
+- **manifest.json:** toolId, components (launcher_bat, launcher_ps1, config, doc, bin), contract_ref.
+- **Configuración:** cuando sea parametrizable, un `.json` de configuración en la cápsula.
+- **Documentación:** un `.md` en la cápsula que describa uso, parámetros y formato de la salida JSON. Idioma: es-ES.
 
 ---
 
@@ -86,6 +87,6 @@ Cada herramienta en `scripts/tools/` debe contar con:
 
 ## 6. Consumidores
 
-El contrato permite que acciones, agentes, otros scripts y pipelines (CI/CD) consuman un resultado uniforme y un feedback estructurado de todas las herramientas en `scripts/tools/`.
+El contrato permite que acciones, agentes, otros scripts y pipelines (CI/CD) consuman un resultado uniforme y un feedback estructurado de todas las herramientas en **paths.toolsPath** y en cada cápsula **paths.toolCapsules[&lt;tool-id&gt;]** (Cúmulo).
 
 **Referencia machine-readable:** `SddIA/tools/tools-contract.json`.

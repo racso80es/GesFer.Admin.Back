@@ -13,20 +13,26 @@ Herramienta para dejar listo todo el entorno de desarrollo: Docker (MySQL, Memca
 
 ### Ejecutable (recomendado)
 
-Desde la **raíz del repositorio** o desde `scripts/tools/`:
+Desde la **raíz del repositorio** o mediante el launcher en **paths.toolsPath** (Cúmulo):
+
+```powershell
+.\scripts\tools\prepare-full-env\Prepare-FullEnv.bat
+```
+
+o
 
 ```powershell
 .\scripts\tools\Prepare-FullEnv.bat
 ```
 
-El `.bat` usa `prepare_full_env.exe` de esta misma carpeta (`scripts/tools/`) si existe (build Rust + `scripts/tools-rs/install.ps1`); si no, ejecuta el script PowerShell.
+El `.bat` usa `bin\prepare_full_env.exe` dentro de la cápsula si existe (build Rust + `scripts/tools-rs/install.ps1`); si no, ejecuta el script PowerShell.
 
 ### PowerShell directo
 
 Desde la raíz del repo:
 
 ```powershell
-& .\scripts\tools\Prepare-FullEnv.ps1
+& .\scripts\tools\prepare-full-env\Prepare-FullEnv.ps1
 ```
 
 Parámetros opcionales:
@@ -43,13 +49,13 @@ Parámetros opcionales:
 Ejemplos:
 
 ```powershell
-.\scripts\tools\Prepare-FullEnv.ps1 -DockerOnly
-.\scripts\tools\Prepare-FullEnv.ps1 -StartApi
+.\scripts\tools\prepare-full-env\Prepare-FullEnv.ps1 -DockerOnly
+.\scripts\tools\prepare-full-env\Prepare-FullEnv.ps1 -StartApi
 ```
 
 ## Configuración: `prepare-env.json`
 
-Ubicación: `scripts/tools/prepare-env.json`.
+Ubicación: en esta cápsula, `prepare-env.json`. Ruta canónica (Cúmulo): **paths.toolCapsules['prepare-full-env']** (`SddIA/agents/cumulo.json`).
 
 | Campo                  | Descripción |
 |------------------------|-------------|
@@ -89,11 +95,10 @@ La herramienta cumple `SddIA/tools/tools-contract.json`. Al finalizar produce un
 Ejemplo de uso con salida a fichero y por stdout:
 
 ```powershell
-.\scripts\tools\Prepare-FullEnv.ps1 -OutputPath "logs\prepare-env-result.json" -OutputJson
+.\scripts\tools\prepare-full-env\Prepare-FullEnv.ps1 -OutputPath "logs\prepare-env-result.json" -OutputJson
 ```
 
 ## Referencia
 
 - Contrato de herramientas: `SddIA/tools/tools-contract.json`, `SddIA/tools/tools-contract.md`.
-- Especificación de la feature: `docs/features/prepare-full-env/spec.md`.
-- Metadatos: `docs/features/prepare-full-env/spec.json`.
+- Manifest de la cápsula: `manifest.json` en esta carpeta.

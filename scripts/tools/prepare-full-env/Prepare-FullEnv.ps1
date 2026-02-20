@@ -2,10 +2,10 @@
 .SYNOPSIS
     Prepara todo el entorno: Docker (DB, cache, Adminer) y opcionalmente API y clientes.
 .DESCRIPTION
-    Lee scripts/tools/prepare-env.json, levanta servicios Docker configurados,
+    Lee prepare-env.json de la capsula, levanta servicios Docker configurados,
     espera a MySQL y opcionalmente inicia la Admin API y clientes indicados.
     Cumple SddIA/tools/tools-contract.json: salida JSON y feedback adecuado.
-    Documentacion: scripts/tools/prepare-env.md
+    Capsula: scripts/tools/prepare-full-env/
 .PARAMETER DockerOnly
     Solo levanta Docker (no API ni clientes).
 .PARAMETER StartApi
@@ -13,7 +13,7 @@
 .PARAMETER NoDocker
     No levanta Docker; solo API/clientes si estan habilitados.
 .PARAMETER ConfigPath
-    Ruta al JSON de configuracion (por defecto scripts/tools/prepare-env.json respecto a la raiz).
+    Ruta al JSON de configuracion (por defecto prepare-env.json en la capsula).
 .PARAMETER OutputPath
     Ruta de fichero donde escribir el resultado JSON (contrato tools).
 .PARAMETER OutputJson
@@ -31,7 +31,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 $scriptDir = $PSScriptRoot
-$repoRoot = (Resolve-Path (Join-Path $scriptDir "..\..")).Path
+$repoRoot = (Resolve-Path (Join-Path $scriptDir "..\..\..")).Path
 $startTime = Get-Date
 $toolId = "prepare-full-env"
 $feedbackList = [System.Collections.Generic.List[object]]::new()

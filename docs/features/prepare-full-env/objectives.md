@@ -6,14 +6,14 @@
 
 ## Objetivo
 
-Disponer de un único punto de entrada ejecutable (`.bat`/PowerShell) en `scripts/tools/` que prepare todo el entorno de desarrollo: Docker (DB, cache, Adminer), y opcionalmente la API Admin y los clientes indicados en configuración, con documentación y metadatos en formato `.md` y `.json`.
+Disponer de un único punto de entrada ejecutable (`.bat`/PowerShell) en **paths.toolsPath** (Cúmulo) que prepare todo el entorno de desarrollo: Docker (DB, cache, Adminer), y opcionalmente la API Admin y los clientes indicados en configuración, con documentación y metadatos en formato `.md` y `.json` en la cápsula.
 
 ## Alcance
 
-- **Script ejecutable:** `scripts/tools/Prepare-FullEnv.bat` que invoque el script PowerShell principal.
-- **Script principal:** `scripts/tools/Prepare-FullEnv.ps1`: comprobar Docker, levantar servicios vía `docker-compose`, esperar salud de DB/cache, y opcionalmente levantar API (y clientes indicados) en local o vía Docker.
-- **Configuración:** `scripts/tools/prepare-env.json`: qué servicios levantar (Docker y/o API/clientes), puertos y rutas.
-- **Documentación:** `scripts/tools/prepare-env.md`: uso, parámetros, requisitos y troubleshooting.
+- **Script ejecutable (wrapper):** **paths.toolsPath** + `Prepare-FullEnv.bat` (delega a la cápsula). Fuente: Cúmulo.
+- **Cápsula:** **paths.toolCapsules['prepare-full-env']** (Cúmulo). Script principal: `Prepare-FullEnv.ps1` (comprobar Docker, levantar servicios vía `docker-compose`, esperar salud de DB/cache, y opcionalmente levantar API y clientes). Binario Rust opcional en `bin/prepare_full_env.exe`.
+- **Configuración:** en la cápsula, `prepare-env.json`: qué servicios levantar (Docker y/o API/clientes), puertos y rutas.
+- **Documentación:** en la cápsula, `prepare-env.md` y `manifest.json`.
 - **Documentación de la feature:** `docs/features/prepare-full-env/` con objectives.md, spec.md, spec.json.
 
 ## Resumen del proceso (fases 0–8)
@@ -30,6 +30,6 @@ Disponer de un único punto de entrada ejecutable (`.bat`/PowerShell) en `script
 
 ## Referencias
 
-- Cúmulo: `SddIA/agents/cumulo.json` → `paths.featurePath` = `./docs/features/`.
+- Cúmulo: `SddIA/agents/cumulo.json` → `paths.featurePath`, `paths.toolsPath`, `paths.toolCapsules`.
 - Proceso feature: `SddIA/process/feature.md`.
 - Docker actual: `docker-compose.yml` (servicios gesfer-db, cache, adminer; Admin API según contexto repo).

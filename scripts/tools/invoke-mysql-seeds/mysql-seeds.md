@@ -14,15 +14,21 @@ Herramienta que comprueba MySQL, aplica migraciones EF Core y ejecuta los seeds 
 Desde la **raíz del repositorio**:
 
 ```powershell
+.\scripts\tools\invoke-mysql-seeds\Invoke-MySqlSeeds.bat
+```
+
+O desde la cápsula (compatibilidad con launcher en raíz de tools):
+
+```powershell
 .\scripts\tools\Invoke-MySqlSeeds.bat
 ```
 
-El `.bat` usa `invoke_mysql_seeds.exe` de esta misma carpeta (`scripts/tools/`) si existe (build Rust + `scripts/tools-rs/install.ps1`); si no, ejecuta el script PowerShell.
+El `.bat` usa `bin\invoke_mysql_seeds.exe` dentro de la cápsula si existe (build Rust + `scripts/tools-rs/install.ps1`); si no, ejecuta el script PowerShell.
 
 En PowerShell directo:
 
 ```powershell
-.\scripts\tools\Invoke-MySqlSeeds.ps1
+.\scripts\tools\invoke-mysql-seeds\Invoke-MySqlSeeds.ps1
 ```
 
 | Parámetro          | Descripción |
@@ -36,11 +42,13 @@ En PowerShell directo:
 Ejemplos:
 
 ```powershell
-.\scripts\tools\Invoke-MySqlSeeds.ps1 -OutputJson
-.\scripts\tools\Invoke-MySqlSeeds.ps1 -SkipMigrations -OutputPath logs\mysql-seeds-result.json
+.\scripts\tools\invoke-mysql-seeds\Invoke-MySqlSeeds.ps1 -OutputJson
+.\scripts\tools\invoke-mysql-seeds\Invoke-MySqlSeeds.ps1 -SkipMigrations -OutputPath logs\mysql-seeds-result.json
 ```
 
 ## Configuración: `mysql-seeds-config.json`
+
+Ubicación: en esta cápsula, `mysql-seeds-config.json`. Ruta canónica (Cúmulo): **paths.toolCapsules['invoke-mysql-seeds']** (`SddIA/agents/cumulo.json`).
 
 | Campo                  | Descripción |
 |------------------------|-------------|
@@ -67,3 +75,4 @@ Cumple `SddIA/tools/tools-contract.json`: `toolId`, `exitCode`, `success`, `time
 
 - Contrato de herramientas: `SddIA/tools/tools-contract.json`.
 - Seeds Admin: `src/Infrastructure/Data/Seeds/README.md`, `AdminJsonDataSeeder`.
+- Manifest de la cápsula: `manifest.json` en esta carpeta.

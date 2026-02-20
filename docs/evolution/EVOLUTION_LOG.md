@@ -116,12 +116,12 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 **Rama:** feat/tools-env-and-seeds.
 
 **Alcance:**
-- **Prepare-FullEnv:** Script y .bat en `scripts/tools/` que levanta Docker (gesfer-db, cache, adminer), espera MySQL y opcionalmente la Admin API y clientes. Config: `prepare-env.json`; documentación: `prepare-env.md`. Salida JSON y feedback por fases (contrato tools).
+- **Prepare-FullEnv:** Cápsula **paths.toolCapsules['prepare-full-env']** (Cúmulo): script .ps1, prepare-env.json, prepare-env.md, manifest.json, opcional bin/. Launcher wrapper en **paths.toolsPath** (Prepare-FullEnv.bat). Levanta Docker (gesfer-db, cache, adminer), espera MySQL y opcionalmente la Admin API y clientes. Salida JSON y feedback por fases (contrato tools).
 - **Contrato de herramientas:** `SddIA/tools/tools-contract.json` y `tools-contract.md`. Define salida JSON obligatoria (toolId, exitCode, success, timestamp, message, feedback[], data) y reglas de feedback adecuado (fases, niveles info/warning/error).
-- **Invoke-MySqlSeeds:** Herramienta que comprueba MySQL (contenedor gesfer_db), ejecuta `dotnet ef database update` y los seeds de Admin mediante variable de entorno RUN_SEEDS_ONLY=1 en la API. Config: `mysql-seeds-config.json`; documentación: `mysql-seeds.md`. Modo RUN_SEEDS_ONLY añadido en `src/Api/Program.cs` para ejecutar migraciones y seeds sin levantar el servidor HTTP.
+- **Invoke-MySqlSeeds:** Cápsula **paths.toolCapsules['invoke-mysql-seeds']** (Cúmulo): script .ps1, mysql-seeds-config.json, mysql-seeds.md, manifest.json, opcional bin/. Launcher wrapper en **paths.toolsPath** (Invoke-MySqlSeeds.bat). Comprueba MySQL (contenedor gesfer_db), ejecuta `dotnet ef database update` y los seeds de Admin (RUN_SEEDS_ONLY=1 en la API). Modo RUN_SEEDS_ONLY en `src/Api/Program.cs`.
 
 **Referencias:**
-- `docs/features/prepare-full-env/` — Especificación Prepare-FullEnv.
-- `docs/features/tools-env-and-seeds/objectives.md` — Objetivos de la feature.
+- **paths.featurePath** prepare-full-env — Especificación Prepare-FullEnv.
+- **paths.featurePath** tools-env-and-seeds — objectives.md.
 - `SddIA/tools/tools-contract.json` — Contrato de herramientas.
-- `scripts/tools/` — Prepare-FullEnv.*, Invoke-MySqlSeeds.*, prepare-env.*, mysql-seeds.*.
+- Rutas de herramientas (Cúmulo): **paths.toolsPath**, **paths.toolCapsules** (`SddIA/agents/cumulo.json`).

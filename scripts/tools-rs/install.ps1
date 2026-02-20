@@ -37,13 +37,19 @@ if ($LASTEXITCODE -ne 0) {
 }
 $toolsDir = Join-Path $scriptDir "..\tools"
 $releaseDir = Join-Path $scriptDir "target\release"
-foreach ($name in @("prepare_full_env", "invoke_mysql_seeds")) {
-    $src = Join-Path $releaseDir "$name.exe"
+$capsules = @(
+    @{ exe = "prepare_full_env"; capsule = "prepare-full-env" },
+    @{ exe = "invoke_mysql_seeds"; capsule = "invoke-mysql-seeds" }
+)
+foreach ($cap in $capsules) {
+    $src = Join-Path $releaseDir "$($cap.exe).exe"
+    $binDir = Join-Path $toolsDir $cap.capsule "bin"
     if (Test-Path $src) {
-        Copy-Item -Path $src -Destination (Join-Path $toolsDir "$name.exe") -Force
-        Write-Host "  Copiado: scripts/tools/$name.exe" -ForegroundColor Cyan
+        if (-not (Test-Path $binDir)) { New-Item -ItemType Directory -Path $binDir -Force | Out-Null }
+        Copy-Item -Path $src -Destination (Join-Path $binDir "$($cap.exe).exe") -Force
+        Write-Host "  Copiado: scripts/tools/$($cap.capsule)/bin/$($cap.exe).exe" -ForegroundColor Cyan
     }
 }
-Write-Host "OK. Ejecutables en: scripts/tools/" -ForegroundColor Green
-Write-Host "  - prepare_full_env.exe" -ForegroundColor White
-Write-Host "  - invoke_mysql_seeds.exe" -ForegroundColor White
+Write-Host "OK. Ejecutables en capsulas (scripts/tools/<tool>/bin/):" -ForegroundColor Green
+Write-Host "  - prepare-full-env/bin/prepare_full_env.exe" -ForegroundColor White
+Write-Host "  - invoke-mysql-seeds/bin/invoke_mysql_seeds.exe" -ForegroundColor White
