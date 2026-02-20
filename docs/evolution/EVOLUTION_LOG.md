@@ -4,6 +4,26 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+## 2026-02-20 — Encapsulamiento de skills (feat/skills-encapsulation)
+
+**Rama:** feat/skills-encapsulation.
+
+**Alcance:**
+- **Cúmulo:** paths skillsPath, skillsDefinitionPath, skillsIndexPath, skillCapsules (iniciar-rama, finalizar-git, invoke-command).
+- **SddIA/skills:** contrato v1.1 (Rust por defecto), definición por carpeta \<skill-id\>/ con spec.md y spec.json; skills-contract.md.
+- **scripts/skills:** índice index.json y cápsulas con manifest, .bat, .ps1, doc, bin/ (ejecutables Rust).
+- **scripts/skills-rs:** binarios iniciar_rama, merge_to_master_cleanup, invoke_command; install.ps1.
+- **Normas de interacción:** SddIA/norms/ (interaction-triggers.md|.json) y disparadores #Skill, #Action, #Process; AGENTS.norms.md; .cursor/rules para sugerencias.
+- **Agents y constitution:** referencias a cápsulas y Cúmulo; paths_ref en constitution.
+
+**Referencias:**
+- `docs/features/skills-encapsulation/objectives.md` — Objetivo y alcance.
+- `docs/features/skills-encapsulation/spec.md` — Especificación.
+- `docs/features/skills-encapsulation/validacion.json` — Validación.
+- `AGENTS.norms.md` — Tabla de disparadores.
+
+---
+
 ## 2026-02-21 — Resolución de Deuda Técnica (feat/resolve-audit-debt)
 
 **Rama:** feat/resolve-audit-debt.

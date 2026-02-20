@@ -1,0 +1,10 @@
+{
+  "feature_id": "skills-encapsulation",
+  "branch": "feat/skills-encapsulation",
+  "timestamp": "2026-02-20T00:00:00Z",
+  "persist": "docs/features/skills-encapsulation/",
+  "evolution_log_updated": true,
+  "pushed": true,
+  "pr_url": null,
+  "notes": "Crear PR hacia master manualmente; descripción debe enlazar a docs/features/skills-encapsulation/"
+}
