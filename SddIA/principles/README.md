@@ -38,6 +38,7 @@ Cada principio debe tener en su carpeta **spec.md** (contenido legible, aplicaci
 | caso-de-uso-como-unidad-de-testing | Caso de Uso como Unidad de Testing | Testing |
 | test-first-vs-tdd | Test-First vs TDD | Testing |
 | base-de-datos-como-cola-de-mensajeria | Base de Datos como Cola de Mensajería | Sistemas Distribuidos |
+| nomenclatura | Norma de Nomenclatura (Cúmulo) | Normas SddIA (bloqueante para PR) |
 
 ## Referencias
 

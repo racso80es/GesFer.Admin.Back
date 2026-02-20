@@ -13,7 +13,7 @@
       "ext": ".json",
       "naming": "spec.json",
       "path": "paths.principlesPath/<principle-id>/",
-      "purpose": "Metadatos machine-readable: id, principle_id, title, category, tags, metadata (difficulty, status), contract_ref."
+      "purpose": "Metadatos machine-readable: id, principle_id, title, category, tags, metadata (difficulty, status), contract_ref. Opcionales: blocking_for_pr (boolean), defined_by_agent (ej. cumulo). Si blocking_for_pr es true, validate debe incluir check de este principio y el PR no debe aprobarse si falla."
     }
   ],
   "security_model": {
@@ -25,7 +25,8 @@
     "Cumplimiento obligatorio de Karma2Token para trazabilidad y seguridad.",
     "principle_id en kebab-case.",
     "Rutas canónicas solo desde Cúmulo (paths.principlesPath).",
-    "Un principio sin spec.md y spec.json en su carpeta no se considera completo."
+    "Un principio sin spec.md y spec.json en su carpeta no se considera completo.",
+    "Principios con blocking_for_pr: true son obligatorios en validate; si el check falla, global fail y blocking true (PR no debe aprobarse)."
   ],
   "consumers": [
     "SddIA/agents/architect.json",

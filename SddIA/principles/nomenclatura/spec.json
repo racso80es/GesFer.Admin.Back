@@ -1,0 +1,11 @@
+{
+  "id": "d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f80",
+  "principle_id": "nomenclatura",
+  "title": "Norma de Nomenclatura",
+  "category": "Normas SddIA",
+  "tags": ["Nomenclatura", "Convenciones", "Cúmulo", "PR", "Validación"],
+  "metadata": { "difficulty": "Beginner", "status": "Published" },
+  "contract_ref": "paths.principlesPath/principles-contract.json",
+  "blocking_for_pr": true,
+  "defined_by_agent": "cumulo"
+}

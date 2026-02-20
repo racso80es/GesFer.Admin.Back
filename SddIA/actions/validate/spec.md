@@ -68,6 +68,7 @@ Cuando **no existe** carpeta de tarea (ruta no proporcionada o vacía):
    - **Tests:** `dotnet test` (y tests E2E/linting si están definidos en el proyecto).
    - **Documentación:** Existencia y completitud mínima de `objectives.md` en la carpeta de la tarea (Cúmulo) (y opcionalmente spec, clarify, plan). En modo sin documentación: resultado warn.
    - **Ley GIT:** La rama actual no es `master`/`main` (trabajo en feat/ o fix/).
+   - **Nomenclatura (principio bloqueante):** Check según paths.principlesPath/nomenclatura/ (principle_id: nomenclatura, definido por Cúmulo). Comprobar nombre de rama (prefijo feat/ o fix/, resto en kebab-case) y, cuando aplique, formato de commits. Si falla: **blocking: true**; el PR no debe aprobarse. Ver spec.json de validate: `blocking_principles: ["nomenclatura"]`.
 4. **Comprobaciones opcionales (según proyecto):**
    - Script de validación de PR: según skill o herramienta (Cúmulo).
    - Reglas de seguridad (Security Engineer) o rendimiento (Performance Engineer).
