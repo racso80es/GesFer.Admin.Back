@@ -4,7 +4,7 @@ Registro cronológico de cierres de tareas y PR. Formato por línea: `[YYYY-MM-D
 
 ---
 
-[2026-02-20] [feat/sddia-paths-cumulo] Rutas vía Cúmulo: Cúmulo ampliado con paths; actions, process, skills, agents, norms, tools y templates usan paths.*; norma paths-via-cumulo.md. Documentación en docs/features/sddia-ecosystem-independence/. [PR pendiente]
+[2026-02-20] [feat/sddia-paths-cumulo] Rutas vía Cúmulo: Cúmulo ampliado con paths; actions, process, skills, agents, norms, tools y templates usan paths.*; norma paths-via-cumulo.md. Documentación en docs/features/sddia-ecosystem-independence/. [PR #17]
 [2026-02-20] [feat/skills-encapsulation] Encapsulamiento de skills (patrón tools, feature skill.Token): Cúmulo paths skills, SddIA/skills por carpeta, cápsulas scripts/skills, skills-rs (Rust), normas #Skill/#Action/#Process, finalizar-git con Push-And-CreatePR (gh). Documentación en docs/features/skill.Token/. [PR #13]
 [2026-02-20] [feat/skill.Token] Refactor: renombrar feature skills-encapsulation a skill.Token; docs en docs/features/skill.Token/. [PR #14]
 [2026-02-20] [feat/sddia-ecosystem-independence] Independencia ecosistema SddIA: acción referencia contrato de skill; Tekton responsable de indicar e invocar implementación. Documentación en docs/features/sddia-ecosystem-independence/. [PR #15]
