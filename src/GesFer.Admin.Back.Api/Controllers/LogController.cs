@@ -1,7 +1,7 @@
 using GesFer.Admin.Back.Api.Attributes;
+using GesFer.Admin.Back.Application.Common.Interfaces;
 using GesFer.Admin.Back.Application.DTOs.Logs;
 using GesFer.Admin.Back.Domain.Entities;
-using GesFer.Admin.Back.Infrastructure.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,11 +16,11 @@ namespace GesFer.Admin.Back.Api.Controllers;
 [Route("api/admin/logs")]
 public class LogController : ControllerBase
 {
-    private readonly AdminDbContext _context;
+    private readonly IApplicationDbContext _context;
     private readonly ILogger<LogController> _logger;
 
     public LogController(
-        AdminDbContext context,
+        IApplicationDbContext context,
         ILogger<LogController> logger)
     {
         _context = context;

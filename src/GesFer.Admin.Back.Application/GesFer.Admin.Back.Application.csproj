@@ -9,10 +9,12 @@
 
   <ItemGroup>
     <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GesFer.Admin.Back.Infrastructure\GesFer.Admin.Back.Infrastructure.csproj" />
+    <ProjectReference Include="..\GesFer.Admin.Back.Domain\GesFer.Admin.Back.Domain.csproj" />
   </ItemGroup>
+
 
 </Project>

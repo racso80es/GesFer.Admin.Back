@@ -23,6 +23,7 @@
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
 
     <ProjectReference Include="..\GesFer.Admin.Back.Domain\GesFer.Admin.Back.Domain.csproj" />
+    <ProjectReference Include="..\GesFer.Admin.Back.Application\GesFer.Admin.Back.Application.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,6 +4,29 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+## 2026-02-21 — Resolución de Deuda Técnica (feat/resolve-audit-debt)
+
+**Rama:** feat/resolve-audit-debt.
+
+**Alcance:**
+- **Compilación:** Creación de DTOs faltantes en `Application/DTOs/Logs/` para solucionar errores de build en `LogController`.
+- **Arquitectura Limpia:**
+  - Definición de `IApplicationDbContext` e interfaces de servicios (`IAdminAuthService`, etc.) en `Application/Common/Interfaces`.
+  - Implementación de estas interfaces en `Infrastructure`.
+  - Inversión de dependencias: `Application` ya no referencia a `Infrastructure`; `Infrastructure` referencia a `Application`.
+  - Desacoplamiento de API: `LogController` y `AdminAuthController` dependen de interfaces, no de implementaciones concretas.
+- **Limpieza:** Eliminación de carpeta legacy `src/tests`.
+
+**Referencias:**
+- `docs/features/resolve-audit-debt/objectives.md` — Objetivo y alcance.
+- `docs/features/resolve-audit-debt/spec.md` — Especificación técnica.
+- `docs/features/resolve-audit-debt/plan.md` — Plan de implementación.
+- `docs/features/resolve-audit-debt/implementation.md` — Detalle de cambios en código.
+- `docs/features/resolve-audit-debt/execution.json` — Registro de ejecución.
+- `docs/features/resolve-audit-debt/validacion.json` — Resultado de validación.
+
+---
+
 ## 2026-02-18 — Corrección de hallazgos de auditoría
 
 **Rama:** feat/correccion-hallazgos-auditoria.

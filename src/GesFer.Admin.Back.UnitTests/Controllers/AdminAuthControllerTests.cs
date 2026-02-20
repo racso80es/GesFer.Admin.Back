@@ -1,11 +1,11 @@
 using FluentAssertions;
 using GesFer.Admin.Back.Api.Controllers;
+using GesFer.Admin.Back.Application.Common.Interfaces;
 using GesFer.Admin.Back.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
-using GesFer.Admin.Back.Infrastructure.Services;
 using Xunit;
 
 namespace GesFer.Admin.Back.UnitTests.Controllers;
