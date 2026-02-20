@@ -26,32 +26,11 @@ services:
     networks:
       - gesfer_network
 
-  # Product API
-  gesfer-product-api:
-    build:
-      context: .
-      dockerfile: src/Product/Back/Dockerfile
-    container_name: gesfer_product_api
-    restart: unless-stopped
-    ports:
-      - "5000:5000"
-      - "5001:5001"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:5000
-      - ConnectionStrings__DefaultConnection=Server=gesfer-db;Port=3306;Database=ScrapDb;User=scrapuser;Password=scrappassword;CharSet=utf8mb4;AllowUserVariables=True;AllowLoadLocalInfile=True;
-      - AdminApi__BaseUrl=http://gesfer-admin-api:5010
-    depends_on:
-      gesfer-db:
-        condition: service_healthy
-    networks:
-      - gesfer_network
-
   # Admin API
   gesfer-admin-api:
     build:
       context: .
-      dockerfile: src/Admin/Back/Dockerfile
+      dockerfile: src/Dockerfile
     container_name: gesfer_admin_api
     restart: unless-stopped
     ports:
@@ -64,42 +43,6 @@ services:
     depends_on:
       gesfer-db:
         condition: service_healthy
-    networks:
-      - gesfer_network
-
-  # Product Frontend
-  gesfer-product-front:
-    build:
-      context: .
-      dockerfile: src/Product/Front/Dockerfile
-    container_name: gesfer_product_front
-    restart: unless-stopped
-    ports:
-      - "3000:3000"
-    environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:5000
-      - API_URL=http://gesfer-product-api:5000
-      - AUTH_SECRET=your-secret-key-change-in-production
-    depends_on:
-      - gesfer-product-api
-    networks:
-      - gesfer_network
-
-  # Admin Frontend
-  gesfer-admin-front:
-    build:
-      context: .
-      dockerfile: src/Admin/Front/Dockerfile
-    container_name: gesfer_admin_front
-    restart: unless-stopped
-    ports:
-      - "3001:3001"
-    environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:5010
-      - ADMIN_API_URL=http://gesfer-admin-api:5010
-      - AUTH_SECRET=your-secret-key-change-in-production
-    depends_on:
-      - gesfer-admin-api
     networks:
       - gesfer_network
 
