@@ -24,6 +24,23 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+## 2026-02-20 — Independencia de ecosistema SddIA (feat/sddia-ecosystem-independence)
+
+**Rama:** feat/sddia-ecosystem-independence.
+
+**Alcance:**
+- **Norma:** En la acción solo se referencia el **contrato** de la skill (SddIA/skills/\<skill-id\>/). El agente **Tekton** es responsable de indicar e invocar la **implementación** (resolver cápsula vía Cúmulo, ejecutar launcher).
+- **Actions/process:** Referencian skill por contrato (paths.skillsDefinitionPath); sin rutas a scripts ni paths.skillCapsules en la acción.
+- **Tekton:** Definido como ejecutor que resuelve implementación (Cúmulo) e invoca launcher según contrato.
+- **Pendiente:** Aplicar cambios en SddIA/actions (finalize, validate, execution), process (feature.md), agents (Tekton), norms.
+
+**Referencias:**
+- `docs/features/sddia-ecosystem-independence/objectives.md` — Objetivo y alcance.
+- `docs/features/sddia-ecosystem-independence/spec.md` — Especificación (acción→contrato, Tekton→implementación).
+- `docs/features/sddia-ecosystem-independence/validacion.json` — Validación.
+
+---
+
 ## 2026-02-21 — Resolución de Deuda Técnica (feat/resolve-audit-debt)
 
 **Rama:** feat/resolve-audit-debt.
