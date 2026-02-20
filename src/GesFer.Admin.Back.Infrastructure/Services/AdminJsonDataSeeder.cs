@@ -76,7 +76,8 @@ public class AdminJsonDataSeeder
             if (solutionDir != null)
             {
                 // Ruta canónica desde la raíz de la solución
-                var canonicalPath = Path.Combine(solutionDir.FullName, "src", "Admin", "Back", "Infrastructure", "Data", "Seeds");
+                // Ajustado a GesFer.Admin.Back.Infrastructure
+                var canonicalPath = Path.Combine(solutionDir.FullName, "src", "GesFer.Admin.Back.Infrastructure", "Data", "Seeds");
                 if (Directory.Exists(canonicalPath))
                 {
                     foundPath = canonicalPath;
@@ -99,27 +100,223 @@ public class AdminJsonDataSeeder
     private static bool HasAnySeedJson(string directoryPath)
     {
         return File.Exists(Path.Combine(directoryPath, "admin-users.json"))
-            || File.Exists(Path.Combine(directoryPath, "companies.json"));
+            || File.Exists(Path.Combine(directoryPath, "companies.json"))
+            || File.Exists(Path.Combine(directoryPath, "languages.json"));
     }
 
     /// <summary>
-    /// Carga todos los seeds de Admin en orden: companies.json y luego admin-users.json.
+    /// Carga todos los seeds de Admin en orden: Languages -> Countries -> States -> Cities -> Companies -> AdminUsers.
     /// Responsabilidad única: carga conjunta de datos Admin para BD compartida.
     /// </summary>
     public async Task<AdminSeedResult> SeedAllAsync()
     {
         var result = new AdminSeedResult();
+
+        // 1. Languages
+        var languagesResult = await SeedLanguagesAsync();
+        if (languagesResult.Loaded)
+        {
+            result.Loaded = true;
+            result.Entities.AddRange(languagesResult.Entities);
+        }
+
+        // 2. Countries
+        var countriesResult = await SeedCountriesAsync();
+        if (countriesResult.Loaded)
+        {
+            result.Loaded = true;
+            result.Entities.AddRange(countriesResult.Entities);
+        }
+
+        // 3. States
+        var statesResult = await SeedStatesAsync();
+        if (statesResult.Loaded)
+        {
+            result.Loaded = true;
+            result.Entities.AddRange(statesResult.Entities);
+        }
+
+        // 4. Cities
+        var citiesResult = await SeedCitiesAsync();
+        if (citiesResult.Loaded)
+        {
+            result.Loaded = true;
+            result.Entities.AddRange(citiesResult.Entities);
+        }
+
+        // 5. Companies
         var companiesResult = await SeedCompaniesAsync();
         if (companiesResult.Loaded)
         {
             result.Loaded = true;
             result.Entities.AddRange(companiesResult.Entities);
         }
+
+        // 6. Users
         var usersResult = await SeedAdminUsersAsync();
         if (usersResult.Loaded)
         {
             result.Loaded = true;
             result.Entities.AddRange(usersResult.Entities);
+        }
+        return result;
+    }
+
+    public async Task<AdminSeedResult> SeedLanguagesAsync()
+    {
+        var result = new AdminSeedResult();
+        var filePath = Path.Combine(_seedsPath, "languages.json");
+        if (!File.Exists(filePath)) return result;
+
+        _logger.LogInformation("Cargando languages desde {Path}", filePath);
+        var json = await File.ReadAllTextAsync(filePath);
+        var languages = JsonSerializer.Deserialize<List<LanguageSeed>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+        if (languages == null || !languages.Any()) return result;
+
+        int count = 0;
+        foreach (var item in languages)
+        {
+            var id = Guid.Parse(item.Id);
+            var existing = await _context.Languages.IgnoreQueryFilters().FirstOrDefaultAsync(x => x.Id == id);
+            if (existing == null)
+            {
+                _context.Languages.Add(new Language
+                {
+                    Id = id,
+                    Name = item.Name,
+                    Code = item.Code,
+                    Description = item.Description,
+                    CreatedAt = DateTime.UtcNow,
+                    IsActive = true
+                });
+                count++;
+            }
+        }
+        if (count > 0)
+        {
+            await _context.SaveChangesAsync();
+            result.Loaded = true;
+            result.Entities.Add($"{count} Languages created");
+        }
+        return result;
+    }
+
+    public async Task<AdminSeedResult> SeedCountriesAsync()
+    {
+        var result = new AdminSeedResult();
+        var filePath = Path.Combine(_seedsPath, "countries.json");
+        if (!File.Exists(filePath)) return result;
+
+        _logger.LogInformation("Cargando countries desde {Path}", filePath);
+        var json = await File.ReadAllTextAsync(filePath);
+        var countries = JsonSerializer.Deserialize<List<CountrySeed>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+        if (countries == null || !countries.Any()) return result;
+
+        int count = 0;
+        foreach (var item in countries)
+        {
+            var id = Guid.Parse(item.Id);
+            var existing = await _context.Countries.IgnoreQueryFilters().FirstOrDefaultAsync(x => x.Id == id);
+            if (existing == null)
+            {
+                _context.Countries.Add(new Country
+                {
+                    Id = id,
+                    Name = item.Name,
+                    Code = item.Code,
+                    LanguageId = Guid.Parse(item.LanguageId),
+                    CreatedAt = DateTime.UtcNow,
+                    IsActive = true
+                });
+                count++;
+            }
+        }
+        if (count > 0)
+        {
+            await _context.SaveChangesAsync();
+            result.Loaded = true;
+            result.Entities.Add($"{count} Countries created");
+        }
+        return result;
+    }
+
+    public async Task<AdminSeedResult> SeedStatesAsync()
+    {
+        var result = new AdminSeedResult();
+        var filePath = Path.Combine(_seedsPath, "states.json");
+        if (!File.Exists(filePath)) return result;
+
+        _logger.LogInformation("Cargando states desde {Path}", filePath);
+        var json = await File.ReadAllTextAsync(filePath);
+        var states = JsonSerializer.Deserialize<List<StateSeed>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+        if (states == null || !states.Any()) return result;
+
+        int count = 0;
+        foreach (var item in states)
+        {
+            var id = Guid.Parse(item.Id);
+            var existing = await _context.States.IgnoreQueryFilters().FirstOrDefaultAsync(x => x.Id == id);
+            if (existing == null)
+            {
+                _context.States.Add(new State
+                {
+                    Id = id,
+                    CountryId = Guid.Parse(item.CountryId),
+                    Name = item.Name,
+                    Code = item.Code,
+                    CreatedAt = DateTime.UtcNow,
+                    IsActive = true
+                });
+                count++;
+            }
+        }
+        if (count > 0)
+        {
+            await _context.SaveChangesAsync();
+            result.Loaded = true;
+            result.Entities.Add($"{count} States created");
+        }
+        return result;
+    }
+
+    public async Task<AdminSeedResult> SeedCitiesAsync()
+    {
+        var result = new AdminSeedResult();
+        var filePath = Path.Combine(_seedsPath, "cities.json");
+        if (!File.Exists(filePath)) return result;
+
+        _logger.LogInformation("Cargando cities desde {Path}", filePath);
+        var json = await File.ReadAllTextAsync(filePath);
+        var cities = JsonSerializer.Deserialize<List<CitySeed>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+        if (cities == null || !cities.Any()) return result;
+
+        int count = 0;
+        foreach (var item in cities)
+        {
+            var id = Guid.Parse(item.Id);
+            var existing = await _context.Cities.IgnoreQueryFilters().FirstOrDefaultAsync(x => x.Id == id);
+            if (existing == null)
+            {
+                _context.Cities.Add(new City
+                {
+                    Id = id,
+                    StateId = Guid.Parse(item.StateId),
+                    Name = item.Name,
+                    CreatedAt = DateTime.UtcNow,
+                    IsActive = true
+                });
+                count++;
+            }
+        }
+        if (count > 0)
+        {
+            await _context.SaveChangesAsync();
+            result.Loaded = true;
+            result.Entities.Add($"{count} Cities created");
         }
         return result;
     }
@@ -372,5 +569,36 @@ public class AdminJsonDataSeeder
         public string LastName { get; set; } = string.Empty;
         public string? Email { get; set; }
         public string? Role { get; set; }
+    }
+
+    private class LanguageSeed
+    {
+        public string Id { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
+        public string Code { get; set; } = string.Empty;
+        public string? Description { get; set; }
+    }
+
+    private class CountrySeed
+    {
+        public string Id { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
+        public string Code { get; set; } = string.Empty;
+        public string LanguageId { get; set; } = string.Empty;
+    }
+
+    private class StateSeed
+    {
+        public string Id { get; set; } = string.Empty;
+        public string CountryId { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
+        public string? Code { get; set; }
+    }
+
+    private class CitySeed
+    {
+        public string Id { get; set; } = string.Empty;
+        public string StateId { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
     }
 }
