@@ -19,7 +19,7 @@ Desde la **raíz del repositorio** o desde `scripts/tools/`:
 .\scripts\tools\Prepare-FullEnv.bat
 ```
 
-O doble clic sobre `Prepare-FullEnv.bat` (debe ejecutarse con la raíz del repo como directorio de trabajo si el script no la resuelve).
+El `.bat` usa `prepare_full_env.exe` de esta misma carpeta (`scripts/tools/`) si existe (build Rust + `scripts/tools-rs/install.ps1`); si no, ejecuta el script PowerShell.
 
 ### PowerShell directo
 

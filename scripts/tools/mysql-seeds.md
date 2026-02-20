@@ -17,7 +17,9 @@ Desde la **raíz del repositorio**:
 .\scripts\tools\Invoke-MySqlSeeds.bat
 ```
 
-O en PowerShell:
+El `.bat` usa `invoke_mysql_seeds.exe` de esta misma carpeta (`scripts/tools/`) si existe (build Rust + `scripts/tools-rs/install.ps1`); si no, ejecuta el script PowerShell.
+
+En PowerShell directo:
 
 ```powershell
 .\scripts\tools\Invoke-MySqlSeeds.ps1

@@ -52,17 +52,30 @@ Así se mantiene un **feedback adecuado** tanto para humanos (mensajes claros) c
 
 ---
 
-## 3. Artefactos por herramienta
+## 3. Implementación por defecto: Rust
+
+**Las implementaciones por defecto de las herramientas (y de los scripts de skills) han de ser en Rust.**
+
+- **Motivo:** rendimiento, seguridad de memoria, portabilidad y distribución como binario único.
+- **Entrega:** todos los ejecutables en **scripts/tools/** (ej. `prepare_full_env.exe`, `invoke_mysql_seeds.exe`). Se construyen en `scripts/tools-rs` y se copian a `scripts/tools/`.
+- **Launcher:** el `.bat` o `.ps1` en `scripts/tools/` invoca el `.exe` de la misma carpeta si existe; en caso contrario, fallback al script PowerShell.
+- **Config** (`.json`) y **documentación** (`.md`) siguen siendo obligatorios.
+
+Referencia: agente Security Engineer (`SddIA/agents/security-engineer.json`).
+
+## 4. Artefactos por herramienta
 
 Cada herramienta en `scripts/tools/` debe contar con:
 
-- **Ejecutable:** script `.ps1` (o `.bat` que invoque un `.ps1`).
-- **Configuración:** cuando sea parametrizable, un `.json` de configuración (p. ej. `prepare-env.json`).
+- **Implementación Rust:** código en `scripts/tools-rs/src/bin/<tool_id>.rs`; binario final en **scripts/tools/** (copiado tras `cargo build --release`).
+- **Fallback:** script `.ps1` cuando no exista o no se compile el binario Rust.
+- **Launcher:** `.bat` que invoque Rust si existe, si no `.ps1`.
+- **Configuración:** cuando sea parametrizable, un `.json` de configuración.
 - **Documentación:** un `.md` que describa uso, parámetros y formato de la salida JSON. Idioma: es-ES.
 
 ---
 
-## 4. Restricciones
+## 5. Restricciones
 
 - `toolId` en kebab-case.
 - JSON de salida válido y UTF-8.
@@ -71,7 +84,7 @@ Cada herramienta en `scripts/tools/` debe contar con:
 
 ---
 
-## 5. Consumidores
+## 6. Consumidores
 
 El contrato permite que acciones, agentes, otros scripts y pipelines (CI/CD) consuman un resultado uniforme y un feedback estructurado de todas las herramientas en `scripts/tools/`.
 

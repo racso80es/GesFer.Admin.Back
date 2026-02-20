@@ -1,7 +1,16 @@
 {
-  "contract_version": "1.0.0",
+  "contract_version": "1.1.0",
   "scope": "scripts/tools/",
   "description": "Contrato que toda herramienta (tool) en scripts/tools/ debe cumplir: salida JSON adecuada al fin de la herramienta y feedback estructurado.",
+  "default_implementation": {
+    "language": "rust",
+    "rationale": "Rendimiento, seguridad de memoria, portabilidad y distribución como binario. Las implementaciones por defecto de tools y de scripts de skills han de ser en Rust.",
+    "delivery": [
+      "Todos los ejecutables en scripts/tools/ (ej. prepare_full_env.exe, invoke_mysql_seeds.exe). Se construyen en scripts/tools-rs y se copian a scripts/tools/.",
+      "Launcher .bat/.ps1 en scripts/tools/ invoca el .exe de la misma carpeta si existe; si no, fallback a PowerShell.",
+      "Config (.json) y documentación (.md) obligatorios en scripts/tools/."
+    ]
+  },
   "output": {
     "description": "Toda herramienta debe producir al finalizar un resultado en formato JSON, adecuado a su propósito.",
     "required_fields": {
@@ -41,9 +50,12 @@
     }
   },
   "required_artefacts_per_tool": [
-    { "ext": ".ps1", "purpose": "Script PowerShell principal (o .bat que invoque .ps1)." },
-    { "ext": ".json", "naming": "<tool-id>-config o prepare-env según herramienta", "purpose": "Configuración machine-readable cuando la herramienta sea parametrizable." },
-    { "ext": ".md", "naming": "prepare-env.md o <tool-id>.md", "purpose": "Documentación de uso, parámetros y salida JSON. Idioma: es-ES." }
+    { "ext": ".rs", "path": "scripts/tools-rs/src/bin", "purpose": "Implementación por defecto en Rust." },
+    { "ext": "binary", "path": "scripts/tools/<tool>.exe", "purpose": "Ejecutable Rust en scripts/tools/ (copiado desde tools-rs tras build)." },
+    { "ext": ".ps1", "purpose": "Fallback cuando no exista binario Rust." },
+    { "ext": ".bat", "purpose": "Launcher: binario Rust si existe, si no .ps1." },
+    { "ext": ".json", "naming": "<tool-id>-config", "purpose": "Configuración machine-readable." },
+    { "ext": ".md", "naming": "<tool-id>.md", "purpose": "Documentación. Idioma: es-ES." }
   ],
   "constraints": [
     "toolId en kebab-case.",

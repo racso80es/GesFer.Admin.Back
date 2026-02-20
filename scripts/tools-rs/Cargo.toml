@@ -1,0 +1,20 @@
+[package]
+name = "gesfer-tools"
+version = "0.1.0"
+edition = "2021"
+description = "Herramientas GesFer (contrato tools): implementación por defecto en Rust"
+authors = ["GesFer"]
+license = "UNLICENSED"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+chrono = { version = "0.4", features = ["serde"] }
+
+[[bin]]
+name = "prepare_full_env"
+path = "src/bin/prepare_full_env.rs"
+
+[[bin]]
+name = "invoke_mysql_seeds"
+path = "src/bin/invoke_mysql_seeds.rs"

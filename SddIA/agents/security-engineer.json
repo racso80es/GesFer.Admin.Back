@@ -33,9 +33,14 @@
     {
       "rule": "Default CRUD permissions: 1=Consult (read), 2=Manage (create, edit, delete). Maestros use these two by default.",
       "severity": "HIGH"
+    },
+    {
+      "rule": "Tools and skills scripts: Default implementations for scripts/tools and SddIA skills must be in Rust. Fallback to PowerShell only when Rust binary is not available. Contract: SddIA/tools/tools-contract.json.",
+      "severity": "HIGH"
     }
   ],
   "instructions": [
+    "Tools/skills: Implementaciones por defecto de herramientas (scripts/tools) y de scripts de skills han de ser en Rust. Ver SddIA/tools/tools-contract.json (default_implementation).",
     "Frontend: Destructive actions must use <DestructiveActionConfirm>.",
     "Backend: Verify granular permissions (CanDeleteUsers), not just Admin.",
     "Checklist: Zod validation in frontend?",

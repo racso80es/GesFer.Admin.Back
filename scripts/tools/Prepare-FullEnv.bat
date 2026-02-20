@@ -1,15 +1,20 @@
 @echo off
 setlocal
-REM Prepare-FullEnv.bat - Prepara entorno: Docker + API/clientes segun scripts/tools/prepare-env.json
-REM Ejecutar desde la raiz del repositorio o desde scripts/tools (el .ps1 resuelve la raiz).
+REM Prepare-FullEnv.bat - Prepara entorno: Docker + API/clientes (contrato tools, Rust por defecto)
+REM Ejecutar desde la raiz del repositorio.
 
 set "SCRIPT_DIR=%~dp0"
+set "REPO_ROOT=%SCRIPT_DIR%..\.."
+cd /d "%REPO_ROOT%"
+
+set "RUST_EXE=%SCRIPT_DIR%prepare_full_env.exe"
+if exist "%RUST_EXE%" (
+    "%RUST_EXE%" %*
+    endlocal
+    exit /b %ERRORLEVEL%
+)
+
 set "PS_SCRIPT=%SCRIPT_DIR%Prepare-FullEnv.ps1"
-
-REM Ir a la raiz del repo (dos niveles arriba de scripts/tools)
-cd /d "%SCRIPT_DIR%..\.."
-
-REM Invocar PowerShell 7+ si esta en path; si no, usar pwsh o powershell
 where pwsh >nul 2>&1
 if %ERRORLEVEL% equ 0 (
     pwsh -NoProfile -ExecutionPolicy Bypass -File "%PS_SCRIPT%" %*
