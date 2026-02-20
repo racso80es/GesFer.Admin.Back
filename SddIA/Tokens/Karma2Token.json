@@ -1,0 +1,73 @@
+{
+  "token_definition": {
+    "name": "Karma2Token",
+    "version": "1.0.0",
+    "description": "Contenedor conceptual de seguridad y contexto para todos los items de SddIA (Actions, Skills, Tools, Processes, Patterns). Garantiza trazabilidad, autorización y cumplimiento de auditoría.",
+    "purpose": "Asegurar que cada ejecución de un item en el sistema tenga un contexto de seguridad validado y trazable.",
+    "fields": {
+      "identity": {
+        "issuer": {
+          "type": "string",
+          "description": "ID del Agente o Usuario que emite la orden."
+        },
+        "subject": {
+          "type": "string",
+          "description": "ID del Item (Action, Skill, Tool, Process) que se ejecuta."
+        },
+        "role": {
+          "type": "string",
+          "description": "Rol bajo el cual se ejecuta la acción (ej. Architect, Tekton)."
+        }
+      },
+      "context": {
+        "environment": {
+          "type": "string",
+          "enum": ["dev", "test", "prod", "local"],
+          "description": "Entorno de ejecución."
+        },
+        "session_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "ID de la sesión de trabajo actual."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Momento de creación del token."
+        }
+      },
+      "security": {
+        "hash": {
+          "type": "string",
+          "description": "Firma SHA256 del contenido o parámetros de ejecución para integridad."
+        },
+        "permissions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Scopes o permisos requeridos para esta ejecución."
+        },
+        "audit_ref": {
+          "type": "string",
+          "description": "Referencia al registro de auditoría (paths.auditsPath)."
+        }
+      },
+      "lifecycle": {
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Opcional. Para tokens efímeros."
+        }
+      }
+    },
+    "validation_rules": [
+      "Debe estar firmado por un Emisor válido (Agent ID registrado).",
+      "Debe tener una referencia de auditoría válida en paths.auditsPath.",
+      "El hash debe coincidir con el contenido del item ejecutado.",
+      "Los permisos del Emisor deben cubrir los requeridos por el Item."
+    ]
+  }
+}

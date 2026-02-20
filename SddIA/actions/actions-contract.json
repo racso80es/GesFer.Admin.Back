@@ -6,9 +6,15 @@
     { "ext": ".md", "naming": "spec.md", "path": "paths.actionsPath/<action-id>/", "purpose": "Especificación legible: propósito, entradas, salidas, flujo. es-ES." },
     { "ext": ".json", "naming": "spec.json", "path": "paths.actionsPath/<action-id>/", "purpose": "Metadatos machine-readable: action_id, name, purpose, inputs, outputs, flow_steps, contract_ref." }
   ],
+  "security_model": {
+    "required_token": "Karma2Token",
+    "token_ref": "SddIA/Tokens/Karma2Token.json",
+    "description": "Toda acción debe ser invocada bajo el contexto de un Karma2Token válido."
+  },
   "constraints": [
     "action_id en kebab-case.",
-    "Rutas canónicas solo desde Cúmulo (paths.actionsPath, paths.processPath, paths.featurePath, paths.fixPath)."
+    "Rutas canónicas solo desde Cúmulo (paths.actionsPath, paths.processPath, paths.featurePath, paths.fixPath).",
+    "Cumplimiento obligatorio de Karma2Token para trazabilidad y seguridad."
   ],
   "consumers": ["paths.processPath", "SddIA/agents/*.json", "SddIA/norms/interaction-triggers.md", ".cursor/rules"]
 }
