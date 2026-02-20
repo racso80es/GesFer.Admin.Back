@@ -4,6 +4,21 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+## 2026-02-20 — Refactorización SddIA: eliminar {persist}, proceso refactorization (feat/refactorization-sddia-decouple-scripts)
+
+**Rama:** feat/refactorization-sddia-decouple-scripts.
+
+**Alcance:**
+- **Proceso refactorization:** SddIA/process/refactorization.md y documentación de la tarea en docs/features/refactorization-sddia-decouple-scripts/ (objectives, spec).
+- **Eliminación de {persist}:** El término `{persist}` se ha eliminado de todos los .md del repo. La ruta de la tarea (carpeta de documentación) se obtiene exclusivamente de **Cúmulo** (paths.featurePath, paths.fixPath, etc.). Referencias unificadas: "carpeta de la tarea (Cúmulo)", "Ruta (Cúmulo)".
+- **Archivos afectados:** AGENTS.md, SddIA/process (README, feature.md, refactorization.md, create-tool.md), SddIA/actions (finalize, validate, spec, execution), SddIA/norms (interaction-triggers), SddIA/skills/finalizar-git/spec.md, docs/features/* (objectives y spec de varias features).
+
+**Referencias:**
+- `docs/features/refactorization-sddia-decouple-scripts/objectives.md` — Objetivo y alcance de la refactorización.
+- `docs/features/refactorization-sddia-decouple-scripts/spec.md` — Especificación desacople SddIA / eliminación {persist}.
+
+---
+
 ## 2026-02-20 — Desacople Cúmulo paths e instructions (feat/cumulo-desacople)
 
 **Rama:** feat/cumulo-desacople.
