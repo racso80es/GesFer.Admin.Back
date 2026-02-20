@@ -4,6 +4,8 @@
   "purpose": "Comprobar calidad pre-PR: git_changes, build, test, documentación; genera validacion.json.",
   "inputs": ["Carpeta tarea (Cúmulo)", "Rama actual"],
   "outputs": ["validacion.json en carpeta tarea o paths.auditsPath"],
-  "flow_steps": ["Validación git (siempre)", "Contexto", "Checks obligatorios", "Opcionales", "Informe", "Auditoría"],
+  "flow_steps": ["Validación git (siempre)", "Contexto", "Checks obligatorios (incl. nomenclatura)", "Opcionales", "Informe", "Auditoría"],
+  "blocking_principles": ["nomenclatura"],
+  "principles_ref": "paths.principlesPath",
   "contract_ref": "actions-contract.json"
 }

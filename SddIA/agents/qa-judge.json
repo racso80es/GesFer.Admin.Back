@@ -22,6 +22,10 @@
     {
       "rule": "Block Process if Compilation fails.",
       "severity": "CRITICAL"
+    },
+    {
+      "rule": "Block Process if principle nomenclatura (paths.principlesPath/nomenclatura) fails. PR must not pass.",
+      "severity": "CRITICAL"
     }
   ],
   "instructions": [
