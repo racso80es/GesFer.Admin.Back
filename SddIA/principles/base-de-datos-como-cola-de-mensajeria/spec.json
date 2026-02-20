@@ -1,0 +1,12 @@
+{
+  "id": "c1f7a01b-9a8c-4d3b-8f2e-1e3d4a5b6c89",
+  "principle_id": "base-de-datos-como-cola-de-mensajeria",
+  "title": "Base de Datos como Cola de Mensajería",
+  "category": "Sistemas Distribuidos",
+  "tags": ["Event-Driven", "Message Brokers", "PostgreSQL", "Outbox Pattern"],
+  "metadata": {
+    "difficulty": "Advanced",
+    "status": "Published"
+  },
+  "contract_ref": "paths.principlesPath/principles-contract.json"
+}

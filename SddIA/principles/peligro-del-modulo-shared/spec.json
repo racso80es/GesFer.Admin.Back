@@ -1,0 +1,12 @@
+{
+  "id": "c1f7a01b-9a8c-4d3b-8f2e-1e3d4a5b6c85",
+  "principle_id": "peligro-del-modulo-shared",
+  "title": "El Peligro del Módulo Shared",
+  "category": "Arquitectura de Software",
+  "tags": ["Clean Architecture", "Shared Kernel", "Cohesión", "Acoplamiento"],
+  "metadata": {
+    "difficulty": "Intermediate",
+    "status": "Published"
+  },
+  "contract_ref": "paths.principlesPath/principles-contract.json"
+}

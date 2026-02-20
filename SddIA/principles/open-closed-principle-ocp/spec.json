@@ -1,0 +1,12 @@
+{
+  "id": "c1f7a01b-9a8c-4d3b-8f2e-1e3d4a5b6c76",
+  "principle_id": "open-closed-principle-ocp",
+  "title": "Open/Closed Principle (OCP)",
+  "category": "Principios SOLID",
+  "tags": ["SOLID", "Extensibilidad", "Eventos"],
+  "metadata": {
+    "difficulty": "Advanced",
+    "status": "Published"
+  },
+  "contract_ref": "paths.principlesPath/principles-contract.json"
+}

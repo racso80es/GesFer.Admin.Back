@@ -1,0 +1,36 @@
+{
+  "contract_version": "1.0.0",
+  "scope": "paths.principlesPath (SddIA/principles/)",
+  "description": "Contrato que todo principio técnico debe cumplir: definición en paths.principlesPath/<principle-id>/ con spec.md y spec.json. Principios consumidos por Arquitecto y Tekton en tareas de diseño e implementación.",
+  "definition_artefacts": [
+    {
+      "ext": ".md",
+      "naming": "spec.md",
+      "path": "paths.principlesPath/<principle-id>/",
+      "purpose": "Especificación legible: título, categoría, contenido del principio, aplicación para arquitectos/tekton, referencias. es-ES."
+    },
+    {
+      "ext": ".json",
+      "naming": "spec.json",
+      "path": "paths.principlesPath/<principle-id>/",
+      "purpose": "Metadatos machine-readable: id, principle_id, title, category, tags, metadata (difficulty, status), contract_ref."
+    }
+  ],
+  "security_model": {
+    "required_token": "Karma2Token",
+    "token_ref": "SddIA/Tokens/Karma2Token.json",
+    "description": "La aplicación o modificación de un principio requiere un contexto de Karma2Token válido."
+  },
+  "constraints": [
+    "Cumplimiento obligatorio de Karma2Token para trazabilidad y seguridad.",
+    "principle_id en kebab-case.",
+    "Rutas canónicas solo desde Cúmulo (paths.principlesPath).",
+    "Un principio sin spec.md y spec.json en su carpeta no se considera completo."
+  ],
+  "consumers": [
+    "SddIA/agents/architect.json",
+    "SddIA/agents/tekton-developer.json",
+    "paths.actionsPath",
+    "paths.processPath"
+  ]
+}
