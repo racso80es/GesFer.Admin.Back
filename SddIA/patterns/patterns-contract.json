@@ -1,0 +1,29 @@
+{
+  "contract_version": "1.0.0",
+  "scope": "SddIA/patterns/",
+  "description": "Contrato que cada patrón de diseño debe cumplir en SddIA/patterns.",
+  "required_files": [
+    { "name": "spec.md", "required": true, "format": "markdown", "language": "es-ES" },
+    { "name": "spec.json", "required": true, "format": "json" }
+  ],
+  "json_schema": {
+    "type": "object",
+    "properties": {
+      "id": { "type": "string", "description": "UUID v4 del patrón" },
+      "title": { "type": "string" },
+      "category": { "type": "string" },
+      "tags": { "type": "array", "items": { "type": "string" } },
+      "metadata": {
+        "type": "object",
+        "properties": {
+          "difficulty": { "type": "string", "enum": ["Basic", "Intermediate", "Advanced"] },
+          "status": { "type": "string", "enum": ["Draft", "Published", "Deprecated"] }
+        },
+        "required": ["difficulty", "status"]
+      },
+      "interested_agents": { "type": "array", "items": { "type": "string" }, "description": "Lista de agentes de SddIA que deben conocer este patrón." }
+    },
+    "required": ["id", "title", "category", "tags", "metadata", "interested_agents"]
+  },
+  "folder_structure": "Cada patrón debe residir en una carpeta nombrada con su UUID: SddIA/patterns/<uuid>/"
+}
