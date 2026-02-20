@@ -28,7 +28,7 @@
   ],
   "security_model": {
     "required_token": "Karma2Token",
-    "token_ref": "SddIA/Tokens/Karma2Token.json",
+    "token_ref": "SddIA/tokens/karma2-token/spec.json",
     "description": "Todo skill debe ser invocado bajo el contexto de un Karma2Token válido."
   },
   "constraints": [

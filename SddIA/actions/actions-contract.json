@@ -10,7 +10,7 @@
   "patterns_validation": "Las acciones planning, implementation y execution deben consultar paths.patternsPath para referenciar patrones en el PLAN, en ítems IMPL (pattern_id) y en ejecución. Norma: SddIA/norms/patterns-in-planning-implementation-execution.md.",
   "security_model": {
     "required_token": "Karma2Token",
-    "token_ref": "SddIA/Tokens/Karma2Token.json",
+    "token_ref": "SddIA/tokens/karma2-token/spec.json",
     "description": "Toda acción debe ser invocada bajo el contexto de un Karma2Token válido."
   },
   "constraints": [

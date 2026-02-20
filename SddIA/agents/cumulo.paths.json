@@ -19,6 +19,7 @@
     "processPath": "./SddIA/process/",
     "patternsPath": "./SddIA/patterns/",
     "principlesPath": "./SddIA/principles/",
+    "tokensPath": "./SddIA/tokens/",
     "normsPath": "./SddIA/norms/",
     "skillsRustPath": "./scripts/skills-rs/",
     "toolsRustPath": "./scripts/tools-rs/",

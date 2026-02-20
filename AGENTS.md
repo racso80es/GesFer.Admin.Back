@@ -98,7 +98,7 @@ Si detectas que has generado código que viola una regla:
 
 ## 7. CONTEXTO DE SEGURIDAD (Karma2Token)
 Todo item (Acción, Skill, Tool, Proceso, Patrón) que se ejecute o defina en el sistema debe operar bajo el contexto de un **Karma2Token**.
-*   **Definición:** `SddIA/Tokens/Karma2Token.json`.
+*   **Definición:** paths.tokensPath (Cúmulo); Karma2Token en `SddIA/tokens/karma2-token/spec.json`.
 *   **Propósito:** Garantizar identidad, trazabilidad, y contexto de seguridad validado.
 *   **Obligatoriedad:** Los agentes deben verificar la existencia y validez del token en cualquier interacción técnica.
 

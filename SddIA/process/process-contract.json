@@ -10,7 +10,7 @@
   "process_interface_ref": "Cúmulo (SddIA/agents/cumulo.json) → process_interface: al menos un .md y un .json en la carpeta de la tarea (paths.featurePath, paths.fixPath).",
   "security_model": {
     "required_token": "Karma2Token",
-    "token_ref": "SddIA/Tokens/Karma2Token.json",
+    "token_ref": "SddIA/tokens/karma2-token/spec.json",
     "description": "Todo proceso debe orquestarse bajo el contexto de un Karma2Token válido."
   },
   "constraints": [

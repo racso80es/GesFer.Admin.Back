@@ -18,7 +18,7 @@
   ],
   "security_model": {
     "required_token": "Karma2Token",
-    "token_ref": "SddIA/Tokens/Karma2Token.json",
+    "token_ref": "SddIA/tokens/karma2-token/spec.json",
     "description": "La aplicación o modificación de un principio requiere un contexto de Karma2Token válido."
   },
   "constraints": [

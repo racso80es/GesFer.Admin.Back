@@ -27,7 +27,7 @@
       "severity": "CRITICAL"
     },
     {
-      "rule": "Karma2Token Compliance: All technical interactions (Scripts, Tools) must be validated by a Karma2Token (SddIA/Tokens/).",
+      "rule": "Karma2Token Compliance: All technical interactions (Scripts, Tools) must be validated by a Karma2Token (paths.tokensPath, SddIA/tokens/).",
       "severity": "CRITICAL"
     },
     {
