@@ -1,6 +1,6 @@
 # Contrato de herramientas (Cúmulo: paths.toolsPath / paths.toolCapsules)
 
-**Alcance:** Todas las entidades en **paths.toolsPath** y en cada **paths.toolCapsules[&lt;tool-id&gt;]** (Cúmulo, `SddIA/agents/cumulo.json`) que actúen como herramientas ejecutables.
+**Alcance:** Todas las entidades en **paths.toolsPath** y en cada **paths.toolCapsules[&lt;tool-id&gt;]** (Cúmulo, `SddIA/agents/cumulo.json`) que actúen como herramientas ejecutables. Listado de herramientas: **paths.toolsIndexPath** (índice en raíz de tools).
 
 **Objetivo:** Unificar la salida en JSON adecuada al fin de cada herramienta y garantizar un **feedback adecuado** (trazable, por fases y niveles).
 
