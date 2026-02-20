@@ -2,31 +2,31 @@
 
 ## Propósito
 
-La acción **finalize** (finalizar) cierra el ciclo de la feature: asegura commits atómicos en la rama, actualiza los Evolution Logs, hace push de la rama y crea el Pull Request hacia `master`. Solo debe ejecutarse cuando la validación ha pasado; en caso contrario, debe advertir o bloquear. Proporciona trazabilidad y cierre formal alineado con las Leyes Universales (no commit en master, documentación en `docs/Feature/` o `docs/features/`).
+La acción **finalize** (finalizar) cierra el ciclo de la feature: asegura commits atómicos en la rama, actualiza los Evolution Logs, hace push de la rama y crea el Pull Request hacia `master`. Solo debe ejecutarse cuando la validación ha pasado; en caso contrario, debe advertir o bloquear. Proporciona trazabilidad y cierre formal alineado con las Leyes Universales (no commit en master, documentación en paths.featurePath según Cúmulo).
 
 ## Principio
 
 - **No tocar master:** Todo el trabajo permanece en la rama feat/ o fix/; el merge se hace vía PR, no con commit directo en master.
-- **Documentación como SSOT:** La descripción del PR y los logs hacen referencia a la carpeta de la feature (ej. `docs/features/<nombre_feature>/`).
+- **Documentación como SSOT:** La descripción del PR y los logs hacen referencia a la carpeta de la feature (ej. paths.featurePath/<nombre_feature>/).
 - **Auditoría:** Toda finalización queda registrada en Evolution Logs y, opcionalmente, en auditoría.
 
 ## Entradas
 
-- **Carpeta de la feature (persist):** Ruta `{persist}` (ej. `docs/features/<nombre_feature>/`).
+- **Carpeta de la feature (persist):** Ruta `{persist}` (ej. paths.featurePath/<nombre_feature>/).
   - Se espera que existan al menos: `objectives.md`, y preferiblemente `validacion.json` con resultado global pass.
 - **Rama actual:** Rama feat/ o fix/ con todos los cambios ya commiteados (o la acción puede incluir un paso de “commit pendientes” según criterio del proyecto).
 
 ## Salidas
 
 - **Evolution Logs actualizados:**
-  - `docs/EVOLUTION_LOG.md`: una línea con formato `[YYYY-MM-DD] [feat/<nombre>] [Descripción breve del resultado.] [Estado].`
-  - `docs/evolution/EVOLUTION_LOG.md` (o equivalente): una sección con fecha, título de la feature, resumen de acción/alcance/resultado y referencia a `docs/features/<nombre_feature>/OBJETIVO.md` o `objectives.md`.
-- **Pull Request:** Creado hacia `master`, con descripción que enlace a la documentación de la feature (ej. `docs/features/<nombre_feature>/`).
+  - paths.evolutionPath + paths.evolutionLogFile (raíz docs: docs/EVOLUTION_LOG.md según proyecto): una línea con formato `[YYYY-MM-DD] [feat/<nombre>] [Descripción breve del resultado.] [Estado].`
+  - paths.evolutionPath + paths.evolutionLogFile: una sección con fecha, título de la feature, resumen de acción/alcance/resultado y referencia a {persist}/objectives.md (persist = paths.featurePath/<nombre_feature>/).
+- **Pull Request:** Creado hacia `master`, con descripción que enlace a la documentación de la feature (ej. paths.featurePath/<nombre_feature>/).
 - **Opcional:** Referencia al PR o estado en `{persist}/validacion.json` o en un artefacto `{persist}/finalize.json` (ej. URL del PR, timestamp de cierre).
 
 ## Skill de referencia: finalizar-git
 
-La acción finalize **utiliza la skill** `finalizar-git` (definición en `SddIA/skills/finalizar-git/spec.md` y `spec.json`; implementación en paths.skillCapsules[\"finalizar-git\"]) para centralizar todas las interacciones con Git. El ejecutor debe aplicar los pasos y reglas definidos en esa skill para las fases **pre_pr** (push y creación del PR) y, cuando corresponda, **post_pr** (tras aceptar el PR: unificar, eliminar rama unificada, volver a master). La skill es la única fuente de verdad para los comandos y flujos git de cierre.
+La acción finalize **utiliza la skill** `finalizar-git` (definición en paths.skillsDefinitionPath/finalizar-git/ (spec.md, spec.json) y `spec.json`; implementación en paths.skillCapsules[\"finalizar-git\"]) para centralizar todas las interacciones con Git. El ejecutor debe aplicar los pasos y reglas definidos en esa skill para las fases **pre_pr** (push y creación del PR) y, cuando corresponda, **post_pr** (tras aceptar el PR: unificar, eliminar rama unificada, volver a master). La skill es la única fuente de verdad para los comandos y flujos git de cierre.
 
 ## Flujo de ejecución (propuesto)
 
@@ -36,12 +36,12 @@ La acción finalize **utiliza la skill** `finalizar-git` (definición en `SddIA/
    - Existe `{persist}/validacion.json` y su resultado global es pass (o se permite finalize con advertencia si el proyecto lo define).
 2. **Commits atómicos:** Si hay cambios sin commitear, el agente puede agruparlos en commits atómicos según convención (un commit por ítem lógico o por fase).
 3. **Actualización de Evolution Logs:**
-   - Añadir entrada en `docs/EVOLUTION_LOG.md`.
-   - Añadir sección en `docs/evolution/EVOLUTION_LOG.md` con resumen y enlace a la carpeta de la feature.
-4. **Pasos Git (skill finalizar-git, fase pre_pr):** Invocar **Push-And-CreatePR.ps1** de la cápsula finalizar-git (paths.skillCapsules[\"finalizar-git\"]): desde la raíz del repo, `.\scripts\skills\finalizar-git\Push-And-CreatePR.ps1 -Persist "docs/features/<nombre_feature>/"`. El script hace push de la rama y crea el PR: si **GitHub CLI (gh)** está instalado y autenticado, ejecuta `gh pr create`; si no, muestra la URL para crear el PR manualmente. La descripción del PR enlaza a `docs/features/<nombre_feature>/`.
+   - Añadir entrada en docs/EVOLUTION_LOG.md (raíz) o paths.evolutionPath + paths.evolutionLogFile.
+   - Añadir sección en paths.evolutionPath + paths.evolutionLogFile con resumen y enlace a la carpeta de la feature.
+4. **Pasos Git (skill finalizar-git, fase pre_pr):** Invocar **Push-And-CreatePR.ps1** de la cápsula finalizar-git (paths.skillCapsules[\"finalizar-git\"]): desde la raíz del repo, la skill finalizar-git (paths.skillCapsules[\"finalizar-git\"]): parámetro -Persist con valor paths.featurePath/<nombre_feature>/ (resolver vía Cúmulo). Tekton invoca la implementación. El script hace push de la rama y crea el PR: si **GitHub CLI (gh)** está instalado y autenticado, ejecuta `gh pr create`; si no, muestra la URL para crear el PR manualmente. La descripción del PR enlaza a la carpeta de la feature (paths.featurePath/<nombre_feature>/).
 5. **Persistencia opcional:** Escribir `{persist}/finalize.json` con { "pr_url": "...", "branch": "...", "timestamp": "..." }.
-6. **Auditoría:** Registrar el evento de finalización en `docs/audits/ACCESS_LOG.md` o equivalente.
-7. **Post-PR (skill finalizar-git, fase post_pr):** Una vez el PR esté aceptado/mergeado en el remoto, el ejecutor (o el usuario) aplica la fase **post_pr** de la skill `finalizar-git` invocando la cápsula (paths.skillCapsules[\"finalizar-git\"]): `scripts/skills/finalizar-git/Merge-To-Master-Cleanup.bat` o `Merge-To-Master-Cleanup.ps1 -BranchName "<rama>" -DeleteRemote` (desde la raíz del repo). Posiciona en master/main, sincroniza con origin y elimina la rama mergeada (local y opcionalmente remota). Ver `SddIA/skills/finalizar-git/spec.md`.
+6. **Auditoría:** Registrar el evento de finalización en paths.auditsPath + paths.accessLogFile (Cúmulo).
+7. **Post-PR (skill finalizar-git, fase post_pr):** Una vez el PR esté aceptado/mergeado en el remoto, el ejecutor (o el usuario) aplica la fase **post_pr** de la skill `finalizar-git` invocando la skill finalizar-git (paths.skillCapsules[\"finalizar-git\"]). Tekton invoca la implementación (fase post_pr). Ver paths.skillsDefinitionPath/finalizar-git/spec.md.
 
 ## Implementación técnica (opcional)
 
@@ -64,7 +64,7 @@ Puede implementarse mediante scripts (PowerShell o equivalente) que ejecuten los
 | **Id sugerido** | `tekton-developer` (cierre y PR) o un agente dedicado `finalizer` / `release-agent` si se desea separar responsabilidades. |
 | **Rol** | Cierre: commits atómicos, actualización de Evolution Logs, push, creación del PR. Respetar Ley GIT y SSOT. |
 | **Skills necesarios** | `finalizar-git` (obligatorio para pasos Git de cierre), `git-operations`, `documentation`, `invoke-command` (y posiblemente integración con API del repositorio para crear PR). |
-| **Restricciones** | Nunca commit en master; toda operación git/comando vía invoke-command; descripción del PR debe enlazar a docs/features/<nombre_feature>/.**
+| **Restricciones** | Nunca commit en master; toda operación git/comando vía invoke-command; descripción del PR debe enlazar a paths.featurePath/<nombre_feature>/ (Cúmulo).**
 
 Si se desea un agente nuevo para no mezclar “escribir código” con “cerrar y hacer PR”, se puede definir:
 
@@ -72,9 +72,9 @@ Si se desea un agente nuevo para no mezclar “escribir código” con “cerrar
 
 ## Estándares de calidad
 
-- **Grado S+:** Trazabilidad completa: rama → docs/features → spec/clarify/plan → implementation → execution → validacion → Evolution Logs → PR.
+- **Grado S+:** Trazabilidad completa: rama → paths.featurePath → spec/clarify/plan → implementation → execution → validacion → Evolution Logs → PR.
 - **Ley GIT:** Ningún commit en master; todo el trabajo en rama feat/ o fix/ con documentación en la carpeta de la feature.
-- **Single Source of Truth:** La referencia en PR y en Evolution Log es la ruta en `docs/features/<nombre_feature>/`.
+- **Single Source of Truth:** La referencia en PR y en Evolution Log es paths.featurePath/<nombre_feature>/ (Cúmulo).
 
 ## Dependencias con otras acciones
 

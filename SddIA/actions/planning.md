@@ -23,7 +23,7 @@ dotnet run --project src/Console/GesFer.Console.csproj -- --plan --token <AUDITO
 3.  **Análisis de Requisitos:** Se combinan ambos documentos para extraer Objetivos, Restricciones y Decisiones Técnicas.
 4.  **Generación de Plan:** Se crea un archivo `{SpecName}_PLAN.md` en la misma carpeta que la especificación original.
     *   Incluye secciones predefinidas: Fases, Tareas Técnicas, Verificación y Seguridad.
-5.  **Auditoría:** El evento de generación y la ruta de los archivos resultantes se registran en `docs/audits/ACCESS_LOG.md`.
+5.  **Auditoría:** El evento de generación y la ruta de los archivos resultantes se registran en paths.auditsPath + paths.accessLogFile (Cúmulo).
 
 ## Integración con Agentes
 El agente **Tekton Developer** (o el Lead Architect) utiliza esta acción para formalizar la estrategia de implementación antes de escribir código.

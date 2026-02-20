@@ -4,6 +4,22 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+## 2026-02-20 — Rutas vía Cúmulo (feat/sddia-paths-cumulo)
+
+**Rama:** feat/sddia-paths-cumulo.
+
+**Alcance:**
+- **Cúmulo:** Ampliación de paths (evolutionPath, evolutionLogFile, auditsPath, accessLogFile, actionsPath, processPath, normsPath, skillsPath, skillsDefinitionPath, skillCapsules, toolsPath, toolsDefinitionPath, toolsIndexPath, toolCapsules, templatesPath).
+- **Sustitución de literales:** actions, process, skills (contract_ref), agents, norms, tools y templates referencian rutas vía Cúmulo (paths.*); sin rutas literales en definiciones.
+- **Norma:** SddIA/norms/paths-via-cumulo.md y actualización de AGENTS.md (L6_CONSULTATION).
+- **Documentación:** Alcance, clarify, plan, implementation, validacion y remanente-rutas en persist.
+
+**Referencias:**
+- `docs/features/sddia-ecosystem-independence/objectives.md` — Objetivo y alcance.
+- `docs/features/sddia-ecosystem-independence/validacion.json` — Validación (pass).
+
+---
+
 ## 2026-02-20 — Encapsulamiento de skills (feature skill.Token, rama feat/skills-encapsulation)
 
 **Rama:** feat/skills-encapsulation.

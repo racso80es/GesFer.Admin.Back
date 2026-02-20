@@ -35,4 +35,4 @@ Así, los consumidores (agentes, procesos) leen la definición en SddIA y obtien
 
 - Contrato global: `tools-contract.json`, `tools-contract.md` (en este directorio).
 - Cúmulo: `SddIA/agents/cumulo.json` → **paths.toolsDefinitionPath**, **paths.toolsPath**, **paths.toolCapsules**.
-- Índice de implementaciones: **paths.toolsIndexPath** (`scripts/tools/index.json`).
+- Índice de implementaciones: **paths.toolsIndexPath** (paths.toolsIndexPath, Cúmulo).

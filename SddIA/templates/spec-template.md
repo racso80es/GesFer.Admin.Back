@@ -43,7 +43,7 @@ Para dar por cerrada esta especificación, se deben cumplir los siguientes punto
 
 - [ ] El código compila sin errores (`dotnet build`).
 - [ ] Se han pasado los tests unitarios correspondientes.
-- [ ] El log de auditoría en `docs/audits/ACCESS_LOG.md` ha sido actualizado.
+- [ ] El log de auditoría en paths.auditsPath + paths.accessLogFile (Cúmulo) ha sido actualizado.
 - [ ] El Audit Log de la rama refleja la evolución.
 
 ## 6. Structured Action Tags (Previstos)
@@ -58,4 +58,4 @@ Lista de etiquetas que se usarán en la fase de implementación:
 
 *   **Fecha de Creación:** YYYY-MM-DD hh:mm
 *   **Evento:** Generación inicial mediante `GesFer.Console --spec`.
-*   **Referencia de Log:** `docs/audits/ACCESS_LOG.md`
+*   **Referencia de Log:** paths.auditsPath + paths.accessLogFile (Cúmulo)

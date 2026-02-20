@@ -25,10 +25,10 @@ dotnet run --project src/Console/GesFer.Console.csproj -- --clarify --token <AUD
 4.  **Generación de Clarificaciones:** Se crea un archivo `{SpecName}_CLARIFICATIONS.md` en la misma carpeta que la especificación original.
 5.  **Escaneo de Seguridad:** Cada entrada del usuario es analizada por el `SecurityScanner` para prevenir inyecciones o fugas de datos sensibles.
 6.  **Persistencia:** El contenido de la clarificación se añade al archivo generado.
-7.  **Auditoría:** Todas las interacciones se registran en `docs/audits/ACCESS_LOG.md`.
+7.  **Auditoría:** Todas las interacciones se registran en paths.auditsPath + paths.accessLogFile (Cúmulo).
 
 ## Integración con Agentes
-El agente **Clarification Specialist** (`SddIA/agents/clarifier.json`) es el responsable de invocar esta acción cuando detecta especificaciones incompletas.
+El agente **Clarification Specialist** (agente Clarifier; definición en SddIA/agents/ por convención del dominio) es el responsable de invocar esta acción cuando detecta especificaciones incompletas.
 
 ## Estándares de Calidad
 *   **Grado S+:** Requiere persistencia auditada y validación de seguridad en tiempo real.

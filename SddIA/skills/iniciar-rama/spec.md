@@ -47,7 +47,7 @@ Encargarse del **inicio de una acción**: crear una rama nueva adecuada (feat/ o
 
 ### Integración con la cápsula
 
-**Implementación:** Cápsula en paths.skillCapsules[\"iniciar-rama\"] (Cúmulo). Launcher: `Iniciar-Rama.bat` en la cápsula; invoca `bin/iniciar_rama.exe` si existe, si no `Iniciar-Rama.ps1`. Ejecutable por defecto en Rust (scripts/skills-rs).
+**Implementación:** Cápsula en paths.skillCapsules[\"iniciar-rama\"] (Cúmulo). Launcher: `Iniciar-Rama.bat` en la cápsula; invoca `bin/iniciar_rama.exe` si existe, si no `Iniciar-Rama.ps1`. Ejecutable por defecto en Rust (paths.skillsRustPath, Cúmulo).
 
 Desde la raíz del repo (ejemplo con launcher en cápsula):
 
@@ -59,9 +59,9 @@ Desde la raíz del repo (ejemplo con launcher en cápsula):
 
 ### Consumidores
 
-- **Proceso feature (fase 0):** Preparar entorno = crear rama feat/<nombre_feature> desde master actualizado. Ver `SddIA/process/feature.md`.
-- **Proceso bug-fix:** Crear rama fix/<nombre_fix> desde master. Ver `SddIA/process/bug-fix-specialist.json`.
+- **Proceso feature (fase 0):** Preparar entorno = crear rama feat/<nombre_feature> desde master actualizado. Ver paths.processPath/feature.md.
+- **Proceso bug-fix:** Crear rama fix/<nombre_fix> desde master. Ver paths.processPath/bug-fix-specialist.json.
 - **Agentes:** Tekton Developer, Arquitecto, Bug Fix Specialist (al iniciar una tarea).
 
 ---
-*Especificación del skill Iniciar Rama. Definición en paths.skillsDefinitionPath/iniciar-rama/ (contrato SddIA/skills/skills-contract.md).*
+*Especificación del skill Iniciar Rama. Definición en paths.skillsDefinitionPath/iniciar-rama/ (contrato paths.skillsDefinitionPath/skills-contract.md).*

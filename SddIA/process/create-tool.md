@@ -1,12 +1,12 @@
 # Proceso: Creación de herramientas (create-tool)
 
-Este documento define el **proceso de tarea** para crear una nueva herramienta (tool) en el proyecto. Está ubicado en `SddIA/process/create-tool.md`. Las rutas de herramientas se obtienen de **Cúmulo** (`SddIA/agents/cumulo.json` → **paths.toolsPath**, **paths.toolCapsules**, **paths.toolsIndexPath**).
+Este documento define el **proceso de tarea** para crear una nueva herramienta (tool) en el proyecto. Está ubicado en paths.processPath/create-tool.md (Cúmulo). Las rutas de herramientas se obtienen de **Cúmulo** (paths.toolsPath, paths.toolCapsules, paths.toolsIndexPath).
 
 **Interfaz de proceso:** Cumple la interfaz en Cúmulo (`process_interface`): la tarea de creación genera en **{persist}** (documentación de la tarea) al menos un **`.md`** (objectives.md, spec.md, implementation.md) y al menos un **`.json`** (spec.json, implementation.json, validacion.json). El **resultado ejecutable** es la cápsula en **paths.toolCapsules[&lt;tool-id&gt;]** con todos los artefactos requeridos por el contrato de herramientas.
 
 ## Propósito
 
-El proceso **create-tool** define el procedimiento para incorporar una nueva herramienta al ecosistema de `scripts/tools/`: desde la definición del objetivo hasta la cápsula lista, el índice actualizado y Cúmulo sincronizado. Garantiza que cada herramienta cumpla `SddIA/tools/tools-contract.json` y que las rutas queden registradas en Cúmulo y en `scripts/tools/index.json`.
+El proceso **create-tool** define el procedimiento para incorporar una nueva herramienta al ecosistema de paths.toolsPath (Cúmulo): desde la definición del objetivo hasta la cápsula lista, el índice actualizado y Cúmulo sincronizado. Garantiza que cada herramienta cumpla `SddIA/tools/tools-contract.json` y que las rutas queden registradas en Cúmulo y en `scripts/tools/index.json`.
 
 ## Alcance del procedimiento
 
@@ -22,9 +22,9 @@ El proceso **create-tool** define el procedimiento para incorporar una nueva her
 | **2** | Estructura de la cápsula | Crear **paths.toolsPath**/&lt;tool-id&gt;/ con: manifest.json, &lt;ToolName&gt;.ps1, &lt;ToolName&gt;.bat, &lt;tool-id&gt;-config.json (o equivalente), &lt;tool-id&gt;.md, directorio bin/ (.gitkeep si no hay exe aún). |
 | **3** | Manifest y documentación | manifest.json con toolId, version, description, contract_ref, components (launcher_bat, launcher_ps1, config, doc, bin), env. Documentación .md en la cápsula: uso, parámetros, configuración, salida JSON. |
 | **4** | Scripts PowerShell y launcher | .ps1: lógica de la herramienta, salida JSON según contrato (toolId, exitCode, success, timestamp, message, feedback[], data, duration_ms). .bat en la cápsula: invocar bin/&lt;tool_bin&gt;.exe si existe, si no el .ps1. |
-| **5** | Wrapper e índice | En **paths.toolsPath**: wrapper .bat que delegue a la cápsula (call %SCRIPT_DIR%&lt;tool-id&gt;\&lt;ToolName&gt;.bat). Actualizar scripts/tools/index.json: añadir entrada en array tools (toolId, path, manifest, wrapper_bat, description). |
-| **6** | Actualizar Cúmulo | En SddIA/agents/cumulo.json, añadir en paths.toolCapsules la entrada "&lt;tool-id&gt;": "./scripts/tools/&lt;tool-id&gt;/". |
-| **7** | Opcional: implementación Rust | Si aplica: scripts/tools-rs/src/bin/&lt;tool_bin&gt;.rs; actualizar install.ps1 para copiar el .exe a la cápsula bin/. |
+| **5** | Wrapper e índice | En **paths.toolsPath**: wrapper .bat que delegue a la cápsula (call %SCRIPT_DIR%&lt;tool-id&gt;\&lt;ToolName&gt;.bat). Actualizar paths.toolsIndexPath (Cúmulo): añadir entrada en array tools (toolId, path, manifest, wrapper_bat, description). |
+| **6** | Actualizar Cúmulo | En Cúmulo (SddIA/agents/cumulo.json), añadir en paths.toolCapsules la entrada "&lt;tool-id&gt;": "./scripts/tools/&lt;tool-id&gt;/". |
+| **7** | Opcional: implementación Rust | Si aplica: paths.toolsRustPath + src/bin/&lt;tool_bin&gt;.rs; actualizar install.ps1 para copiar el .exe a la cápsula bin/. |
 | **8** | Validación | Comprobar que la herramienta cumple tools-contract.json (salida JSON, feedback, artefactos). Generar {persist}/validacion.json si existe {persist}. |
 | **9** | Cierre | PR, Evolution Logs, referencia a {persist}/ o a la cápsula en docs. |
 
@@ -49,7 +49,7 @@ El proceso **create-tool** define el procedimiento para incorporar una nueva her
 | **bin/** | cápsula/bin/ | Opcional: ejecutable Rust copiado por tools-rs/install.ps1. |
 | **Wrapper .bat** | paths.toolsPath/ | Opcional pero recomendado: delega a cápsula. |
 
-Tras crear la herramienta, **scripts/tools/index.json** debe incluir la nueva entrada en `tools` y **Cúmulo** paths.toolCapsules debe incluir el nuevo tool-id.
+Tras crear la herramienta, paths.toolsIndexPath debe incluir la nueva entrada en `tools` y **Cúmulo** paths.toolCapsules debe incluir el nuevo tool-id.
 
 ## Restricciones
 
@@ -60,7 +60,7 @@ Tras crear la herramienta, **scripts/tools/index.json** debe incluir la nueva en
 ## Referencias
 
 - Contrato: `SddIA/tools/tools-contract.json`, `SddIA/tools/tools-contract.md`.
-- Cúmulo: `SddIA/agents/cumulo.json` → paths.toolsDefinitionPath, paths.toolsPath, paths.toolCapsules, paths.toolsIndexPath.
+- Cúmulo: paths.toolsDefinitionPath, paths.toolsPath, paths.toolCapsules, paths.toolsIndexPath.
 - Definición por herramienta: **paths.toolsDefinitionPath**/&lt;tool-id&gt;/ (spec.md, spec.json con implementation_path_ref).
 - Índice: **paths.toolsIndexPath** (listado de herramientas).
 - Proceso machine-readable: `SddIA/process/create-tool.json`.

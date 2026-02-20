@@ -29,14 +29,14 @@ La acción **execution** (ejecución) aplica al código los cambios definidos en
    - Aplicar la propuesta (crear archivo, editar bloque, eliminar bloque/archivo).
    - Registrar el resultado en la estructura de salida.
 4. **Persistencia:** Escribir `{persist}/execution.json` con el registro completo.
-5. **Auditoría:** Opcionalmente registrar en `docs/audits/ACCESS_LOG.md` que se ejecutó la acción execution para la feature.
+5. **Auditoría:** Opcionalmente registrar en paths.auditsPath + paths.accessLogFile que se ejecutó la acción execution para la feature.
 
 ## Implementación técnica (opcional)
 
 Puede ejecutarse mediante scripts o el agente Tekton que consuma el documento de implementación. Parámetros típicos:
 
 - `--implementation`: ruta a `implementation.json` o al documento IMPL.
-- `--persist`: ruta base de la feature (ej. `docs/features/<nombre_feature>/`); donde se escribirá `execution.json`.
+- `--persist`: ruta base de la feature (ej. paths.featurePath/<nombre_feature>/); donde se escribirá `execution.json`.
 - `--token`: (opcional) token de auditoría.
 
 ## Integración con agentes

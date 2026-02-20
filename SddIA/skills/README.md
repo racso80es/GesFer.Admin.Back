@@ -20,7 +20,7 @@ Cada skill tiene en este directorio una carpeta con:
 
 ## Implementación por defecto: Rust
 
-**Las implementaciones por defecto de los scripts de skills (igual que en tools) han de ser en Rust.** Los ejecutables se construyen en `scripts/skills-rs` y se copian a cada cápsula `bin/`. Launcher `.bat` en la cápsula invoca el `.exe` en `bin/` si existe; si no, fallback al script `.ps1`.
+**Las implementaciones por defecto de los scripts de skills (igual que en tools) han de ser en Rust.** Los ejecutables se construyen en paths.skillsRustPath (Cúmulo) y se copian a cada cápsula `bin/`. Launcher `.bat` en la cápsula invoca el `.exe` en `bin/` si existe; si no, fallback al script `.ps1`.
 
 ## Listado de skills
 
@@ -41,4 +41,4 @@ Cada skill tiene en este directorio una carpeta con:
 
 - Contrato global: `skills-contract.json`, `skills-contract.md` (en este directorio).
 - Cúmulo: `SddIA/agents/cumulo.json` → **paths.skillsDefinitionPath**, **paths.skillsPath**, **paths.skillCapsules**, **paths.skillsIndexPath**.
-- Índice de implementaciones: **paths.skillsIndexPath** (`scripts/skills/index.json`).
+- Índice de implementaciones: **paths.skillsIndexPath** (paths.skillsIndexPath, Cúmulo).

@@ -10,7 +10,7 @@
     "documentation"
   ],
   "instructions": [
-    "Telemetry: Register First Shot Accuracy, Refactor Density, Context Leaks in docs/audits/performance/IA_PERF_<branch>.md.",
+    "Telemetry: Register First Shot Accuracy, Refactor Density, Context Leaks in paths.auditsPath + performance/IA_PERF_<branch>.md (Cúmulo).",
     "Logging: Use IAsyncLogPublisher (Fire & Forget).",
     "Optimization: Use Alpine/Distroless docker images.",
     "Optimization: Detect N+1 queries in EF Core logs."

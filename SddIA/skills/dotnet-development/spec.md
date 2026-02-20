@@ -21,4 +21,4 @@ Estándares para desarrollo C#/.NET: build, testing y buenas prácticas.
 - run: dotnet run --project <project_path>
 
 ---
-*Definición en paths.skillsDefinitionPath/dotnet-development/ (contrato SddIA/skills/skills-contract.md).*
+*Definición en paths.skillsDefinitionPath/dotnet-development/ (contrato paths.skillsDefinitionPath/skills-contract.md).*

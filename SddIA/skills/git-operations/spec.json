@@ -2,7 +2,7 @@
   "skill_id": "git-operations",
   "name": "Git Operations Standard",
   "description": "Enforces safe and semantic Git usage.",
-  "contract_ref": "SddIA/skills/skills-contract.json",
+  "contract_ref": "paths.skillsDefinitionPath/skills-contract.json (Cúmulo)",
   "rules": [
     "STRICT PROHIBITION: Never commit directly to 'master' or 'main'.",
     "Mandatory Branching: Work must be done in 'feat/<desc>' or 'fix/<desc>' branches.",

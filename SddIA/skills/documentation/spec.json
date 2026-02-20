@@ -2,12 +2,12 @@
   "skill_id": "documentation",
   "name": "Documentation & Knowledge Management",
   "description": "Standards for maintaining the Single Source of Truth (SSOT).",
-  "contract_ref": "SddIA/skills/skills-contract.json",
+  "contract_ref": "paths.skillsDefinitionPath/skills-contract.json (Cúmulo)",
   "rules": [
     "Format: All documentation must be in Markdown (.md).",
     "Hierarchy: No docs in root (except AGENTS.md). Use categories: [GOB], [EVO], [AUD], [TEC], [OPS], [SPEC].",
     "Language: Spanish (es-ES) exclusively.",
-    "Evolution Log: Update docs/evolution/EVOLUTION_LOG.md for architectural changes.",
-    "Legacy: Move obsolete docs to docs/legacy/ instead of deleting them immediately if unsure."
+    "Evolution Log: Update paths.evolutionPath + paths.evolutionLogFile (Cúmulo) for architectural changes.",
+    "Legacy: Move obsolete docs to paths (Cúmulo) para legacy si existe; si no, convención del proyecto instead of deleting them immediately if unsure."
   ]
 }

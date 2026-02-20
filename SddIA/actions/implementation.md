@@ -35,7 +35,7 @@ La acción **implementation** (implementación) no realiza cambios en el código
 3. **Resolución de rutas:** Usar rutas canónicas del repositorio (p. ej. `src/Product/Back/...`) y verificar que los archivos existan cuando la acción sea "Modificar" o "Eliminar".
 4. **Unificación:** Generar el documento de implementación con todos los ítems, agrupados por fase/tarea o por archivo (según plantilla).
 5. **Persistencia:** Guardar el documento en la ruta acordada.
-6. **Auditoría:** Registrar la generación en `docs/audits/ACCESS_LOG.md` (opcional pero recomendado).
+6. **Auditoría:** Registrar la generación en paths.auditsPath + paths.accessLogFile (opcional pero recomendado).
 
 ## Implementación técnica (opcional)
 
