@@ -60,6 +60,7 @@ Mantener coherencia y trazabilidad en todo el repositorio y en los artefactos de
 - La acción **validate** debe incluir un check **nomenclatura** (o **principle_nomenclatura**) que compruebe, como mínimo:
   - Nombre de rama actual: prefijo `feat/` o `fix/` y resto en kebab-case.
   - Mensajes de commit en el diff: formato convencional cuando aplique.
+- **Implementación ejecutable:** `scripts/validate-nomenclatura.ps1`. Invocar desde el flujo de validate (o desde CI). Parámetros: `-BaseBranch main`, `-CheckCommits` (opcional). Salida JSON con check, result (pass/fail), message, detail. Exit code 0 = pass, 1 = fail.
 - Si el check falla: **global: fail**, **blocking: true** en validacion.json. El PR no debe aprobarse hasta que se cumpla la norma.
 
 ## Referencias
