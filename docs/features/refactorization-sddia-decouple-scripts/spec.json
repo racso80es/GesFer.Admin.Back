@@ -1,0 +1,38 @@
+{
+  "spec_id": "SPEC-REF-2026-001",
+  "refactor_id": "refactorization-sddia-decouple-scripts",
+  "title": "Desacoplar dominio SddIA del uso de scripts",
+  "persist": "docs/features/refactorization-sddia-decouple-scripts/",
+  "branch": "feat/refactorization-sddia-decouple-scripts",
+  "state": "Draft",
+  "principle": "Desde SddIA no existe el script; solo skills (paths.skillsDefinitionPath, paths.skillCapsules) y herramientas (paths.toolsDefinitionPath, paths.toolCapsules). Normas, acciones y procesos referencian solo contratos y paths vía Cúmulo.",
+  "scope": {
+    "included": [
+      "SddIA/norms: cero 'script'; solo skill/herramienta y paths",
+      "SddIA/actions: solo skills/herramientas por contrato; Tekton invoca cápsula",
+      "SddIA/process: feature.md y demás en términos skills/herramientas",
+      "SddIA/skills (definiciones): sin rutas literales; opcional 'implementación en cápsula'",
+      "SddIA/tools (definiciones): implementación = cápsula vía Cúmulo"
+    ],
+    "excluded": [
+      "Cambiar implementación real de cápsulas (scripts/, binarios)",
+      "Añadir nuevas skills o herramientas"
+    ]
+  },
+  "zones": [
+    {"zone": "norms", "files": ["interaction-triggers.md", "interaction-triggers.json", "paths-via-cumulo.md"], "rule": "No 'script'; only skill/tool and paths"},
+    {"zone": "actions", "files": ["finalize.md", "validate.md", "implementation.md", "execution.md"], "rule": "Reference skill/tool by contract; no .ps1/.bat names"},
+    {"zone": "process", "files": ["feature.md"], "rule": "Replace 'Scripts y agentes' with 'skills/herramientas y agentes'"},
+    {"zone": "skills", "files": ["skills-contract.md", "README.md", "finalizar-git/spec.md", "invoke-command/spec.md", "iniciar-rama/spec.md", "security-audit/spec.md"], "rule": "No literal paths; optional 'implementación en cápsula'"},
+    {"zone": "tools", "files": ["tools-contract.md", "README.md", "prepare-full-env/spec.md", "invoke-mysql-seeds/spec.md"], "rule": "Implementation = capsule via Cumulo; no 'scripts' layer"}
+  ],
+  "acceptance_criteria": [
+    "SddIA/norms has no 'script' except in allowed contract-definition context",
+    "SddIA/actions has no .ps1/.bat file names; only skill/tool and Cumulo paths",
+    "SddIA/process/feature.md uses 'skills/herramientas y agentes'",
+    "Skill/tool definitions have no literal .\\scripts\\... examples",
+    "Documentation in {persist} complete; Evolution Log updated on close"
+  ],
+  "source": "objectives.md",
+  "process_ref": "paths.processPath/refactorization.md"
+}
