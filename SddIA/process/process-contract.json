@@ -4,13 +4,15 @@
   "description": "Contrato que todo proceso de tarea debe cumplir: definición en paths.processPath/<process-id>/ con spec.md y spec.json. Cumple process_interface (Cúmulo) para artefactos generados en la carpeta de la tarea.",
   "definition_artefacts": [
     { "ext": ".md", "naming": "spec.md", "path": "paths.processPath/<process-id>/", "purpose": "Especificación legible: propósito, fases, alcance, persist_ref. es-ES." },
-    { "ext": ".json", "naming": "spec.json", "path": "paths.processPath/<process-id>/", "purpose": "Metadatos machine-readable: process_id, name, description, phases, persist_ref, related_actions, contract_ref." }
+    { "ext": ".json", "naming": "spec.json", "path": "paths.processPath/<process-id>/", "purpose": "Metadatos machine-readable: process_id, name, description, phases, persist_ref, related_actions, contract_ref, principles_ref (opcional)." }
   ],
+  "principles_validation": "Los procesos deben validar que las fases de diseño e implementación sean coherentes con paths.principlesPath (principles-contract). En spec.json puede declararse principles_ref: paths.principlesPath.",
   "process_interface_ref": "Cúmulo (SddIA/agents/cumulo.json) → process_interface: al menos un .md y un .json en la carpeta de la tarea (paths.featurePath, paths.fixPath).",
   "constraints": [
     "process_id en kebab-case (feature, bug-fix, refactorization, create-tool).",
-    "Rutas canónicas solo desde Cúmulo (paths.processPath, paths.featurePath, paths.fixPath, paths.actionsPath).",
-    "Un proceso sin spec.md y spec.json en su carpeta no se considera completo."
+    "Rutas canónicas solo desde Cúmulo (paths.processPath, paths.featurePath, paths.fixPath, paths.actionsPath, paths.principlesPath).",
+    "Un proceso sin spec.md y spec.json en su carpeta no se considera completo.",
+    "Fases de diseño/implementación: validar principios según principles-contract."
   ],
   "consumers": ["paths.actionsPath", "SddIA/agents/*.json", "SddIA/norms/interaction-triggers.md", ".cursor/rules"]
 }

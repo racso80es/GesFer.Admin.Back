@@ -12,6 +12,7 @@
   ],
   "pathsContract": "SddIA/agents/cumulo.paths.json",
   "instructionsContract": "SddIA/agents/cumulo.instructions.json",
+  "principlesContract": "SddIA/principles/principles-contract.json",
   "process_interface": {
     "description": "Elementos de proceso deben cumplir esta interfaz.",
     "required_artefacts": [

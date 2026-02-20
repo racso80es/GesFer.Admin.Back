@@ -4,11 +4,13 @@
   "description": "Contrato que toda acción del ciclo debe cumplir: definición en paths.actionsPath/<action-id>/ con spec.md y spec.json. Entrada/salida y flujo documentados.",
   "definition_artefacts": [
     { "ext": ".md", "naming": "spec.md", "path": "paths.actionsPath/<action-id>/", "purpose": "Especificación legible: propósito, entradas, salidas, flujo. es-ES." },
-    { "ext": ".json", "naming": "spec.json", "path": "paths.actionsPath/<action-id>/", "purpose": "Metadatos machine-readable: action_id, name, purpose, inputs, outputs, flow_steps, contract_ref." }
+    { "ext": ".json", "naming": "spec.json", "path": "paths.actionsPath/<action-id>/", "purpose": "Metadatos machine-readable: action_id, name, purpose, inputs, outputs, flow_steps, contract_ref, principles_applicable (opcional)." }
   ],
+  "principles_validation": "Las acciones que afecten diseño o implementación (spec, planning, implementation, execution) deben validar coherencia con paths.principlesPath (principles-contract.json). En spec.json puede declararse principles_applicable (array de principle_id) o principles_ref: paths.principlesPath.",
   "constraints": [
     "action_id en kebab-case.",
-    "Rutas canónicas solo desde Cúmulo (paths.actionsPath, paths.processPath, paths.featurePath, paths.fixPath)."
+    "Rutas canónicas solo desde Cúmulo (paths.actionsPath, paths.processPath, paths.featurePath, paths.fixPath, paths.principlesPath).",
+    "Acciones de diseño/implementación: validar principios según principles-contract."
   ],
   "consumers": ["paths.processPath", "SddIA/agents/*.json", "SddIA/norms/interaction-triggers.md", ".cursor/rules"]
 }

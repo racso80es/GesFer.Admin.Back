@@ -11,5 +11,6 @@
   "skills": ["documentation", "filesystem-ops", "dotnet-development", "iniciar-rama"],
   "constraints": ["Rama fix/<nombre_fix>, nunca master.", "Documentación obligatoria en paths.fixPath/<nombre_fix>.", "Alcance mínimo: causa raíz; no refactor en la misma rama."],
   "related_actions": ["spec", "clarify", "implementation", "execution", "validate", "finalize"],
-  "related_skills": ["iniciar-rama"]
+  "related_skills": ["iniciar-rama"],
+  "principles_ref": "paths.principlesPath"
 }

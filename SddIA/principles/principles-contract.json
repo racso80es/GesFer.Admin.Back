@@ -24,7 +24,9 @@
   "consumers": [
     "SddIA/agents/architect.json",
     "SddIA/agents/tekton-developer.json",
+    "SddIA/agents/cumulo.json",
     "paths.actionsPath",
     "paths.processPath"
-  ]
+  ],
+  "agents_implementation": "Los agentes que aplican principios declaran principlesContract (agents.principles). Norma: SddIA/norms/agents-principles-contract.md."
 }

@@ -60,6 +60,8 @@ Cumplimiento: cada proceso en `SddIA/process/` debe documentar qué artefactos `
 Selecciona el rol más específico posible. Si dudas, activa **Arquitecto**.
 
 > **NOTA:** Rutas de agentes: consultar Cúmulo cuando aplique; por convención, definiciones en `SddIA/agents/*.json` y agentes de proceso en `SddIA/process/*.json`. Las rutas de documentación de tareas vienen siempre de Cúmulo (`paths.featurePath`, `paths.fixPath`).
+>
+> **Contrato de principios (agents.principles):** Los agentes que aplican principios técnicos (Arquitecto, Tekton, Cúmulo) implementan el contrato de la entidad principles mediante el campo **`principlesContract`** en su definición JSON, apuntando a `SddIA/principles/principles-contract.json`. Las acciones y procesos que afecten diseño o implementación deben validar coherencia con ese contrato (paths.principlesPath). Ver SddIA/norms/agents-principles-contract.md.
 
 | ROL | DISPARADORES (IF...) | ACCIÓN (THEN...) |
 | :--- | :--- | :--- |
