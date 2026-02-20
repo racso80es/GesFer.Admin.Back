@@ -58,6 +58,7 @@
 | execution | Ejecución: aplicar al código los cambios del documento de implementación. |
 | validate | Validación: comprobar calidad antes del PR (git diff, build, tests, docs); generar validacion.json. |
 | finalize | Finalizar: cierre del ciclo (commits, Evolution Logs, push, PR a master). Usa skill finalizar-git. |
+| sddia-difusion | Difusión de SddIA: mantener .cursor/rules, .github y otros gestores IA alineados con AGENTS y SddIA/norms. |
 
 ---
 
