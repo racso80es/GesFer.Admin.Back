@@ -36,8 +36,11 @@ Centralizar todas las interacciones con Git necesarias para el cierre de una fea
 
 1. Comprobar que la rama actual no es `master`.
 2. Comprobar estado: cambios sin commitear → commit atómico con mensaje convencional.
-3. Push de la rama: `git push origin <rama_actual>`.
-4. Creación del PR hacia `master` (API del proveedor o instrucciones); descripción del PR debe enlazar a `{persist}` si existe.
+3. **Push y creación del PR:** ejecutar el componente **Push-And-CreatePR.ps1** de la cápsula:
+   - Hace `git push origin <rama_actual>`.
+   - Si **GitHub CLI (gh)** está instalado y autenticado, ejecuta `gh pr create --base master|main --head <rama> --title <título> --body "Documentación: {persist}"`.
+   - Si no hay `gh`, muestra la URL para crear el PR manualmente (GitHub) o instrucciones para otro proveedor.
+4. La descripción del PR debe enlazar a `{persist}` si se pasa el parámetro `-Persist`.
 
 #### Fase `post_pr` (después de aceptar/mergear el PR en el remoto)
 
@@ -62,10 +65,20 @@ Centralizar todas las interacciones con Git necesarias para el cierre de una fea
 
 | Fase    | Componente en cápsula | Uso |
 |--------|------------------------|-----|
-| **pre_pr**  | Unificar-Rama.ps1 / unificar_rama.exe | Certificar rama antes del merge (build, documentación, commit). |
+| **pre_pr**  | Unificar-Rama.ps1 | Certificar rama (build, documentación, commit). |
+| **pre_pr**  | **Push-And-CreatePR.ps1** | Push de la rama y **crear el PR** (GitHub CLI `gh pr create` si está disponible; si no, URL/instrucciones). Parámetros: `-BranchName`, `-Persist` (ruta docs/features/...), `-Title` opcional. |
 | **post_pr** | Merge-To-Master-Cleanup.bat (.exe en bin/ o .ps1) | Tras aceptar el PR: posicionar en master/main, sincronizar y eliminar la rama mergeada (local y opcionalmente remota). |
 
 Ruta canónica de la cápsula: Cúmulo paths.skillCapsules[\"finalizar-git\"].
+
+### Dependencia opcional: GitHub CLI (gh)
+
+Para que **Push-And-CreatePR.ps1** cree el PR automáticamente, debe estar instalado y autenticado **GitHub CLI** (`gh`). Validación:
+
+- `gh --version` — comprobar que está instalado.
+- `gh auth status` — debe mostrar sesión activa en github.com con scope `repo`.
+
+Si `gh` no está disponible, el script muestra la URL para crear el PR manualmente.
 
 ### Consumidores
 

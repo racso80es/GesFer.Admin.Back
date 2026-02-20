@@ -17,7 +17,7 @@
       "path": "finalizar-git/",
       "manifest": "finalizar-git/manifest.json",
       "launcher_bat_post_pr": "finalizar-git/Merge-To-Master-Cleanup.bat",
-      "description": "Post-merge: posicionar en master, sincronizar y eliminar rama (local y opcionalmente remota). Pre-pr: Unificar-Rama.ps1."
+      "description": "Pre-pr: Unificar-Rama.ps1, Push-And-CreatePR.ps1 (push + crear PR con gh). Post-pr: Merge-To-Master-Cleanup."
     },
     {
       "skillId": "invoke-command",

@@ -38,9 +38,7 @@ La acción finalize **utiliza la skill** `finalizar-git` (definición en `SddIA/
 3. **Actualización de Evolution Logs:**
    - Añadir entrada en `docs/EVOLUTION_LOG.md`.
    - Añadir sección en `docs/evolution/EVOLUTION_LOG.md` con resumen y enlace a la carpeta de la feature.
-4. **Pasos Git (skill finalizar-git, fase pre_pr):** Aplicar la skill `finalizar-git`:
-   - Push de la rama: `git push origin <rama>` (mediante invoke-command o script autorizado).
-   - Creación del PR hacia `master` usando la API del proveedor (GitHub, Azure DevOps, etc.) o instrucciones claras para crearlo manualmente; la descripción del PR debe incluir la ruta a `docs/features/<nombre_feature>/`.
+4. **Pasos Git (skill finalizar-git, fase pre_pr):** Invocar **Push-And-CreatePR.ps1** de la cápsula finalizar-git (paths.skillCapsules[\"finalizar-git\"]): desde la raíz del repo, `.\scripts\skills\finalizar-git\Push-And-CreatePR.ps1 -Persist "docs/features/<nombre_feature>/"`. El script hace push de la rama y crea el PR: si **GitHub CLI (gh)** está instalado y autenticado, ejecuta `gh pr create`; si no, muestra la URL para crear el PR manualmente. La descripción del PR enlaza a `docs/features/<nombre_feature>/`.
 5. **Persistencia opcional:** Escribir `{persist}/finalize.json` con { "pr_url": "...", "branch": "...", "timestamp": "..." }.
 6. **Auditoría:** Registrar el evento de finalización en `docs/audits/ACCESS_LOG.md` o equivalente.
 7. **Post-PR (skill finalizar-git, fase post_pr):** Una vez el PR esté aceptado/mergeado en el remoto, el ejecutor (o el usuario) aplica la fase **post_pr** de la skill `finalizar-git` invocando la cápsula (paths.skillCapsules[\"finalizar-git\"]): `scripts/skills/finalizar-git/Merge-To-Master-Cleanup.bat` o `Merge-To-Master-Cleanup.ps1 -BranchName "<rama>" -DeleteRemote` (desde la raíz del repo). Posiciona en master/main, sincroniza con origin y elimina la rama mergeada (local y opcionalmente remota). Ver `SddIA/skills/finalizar-git/spec.md`.
