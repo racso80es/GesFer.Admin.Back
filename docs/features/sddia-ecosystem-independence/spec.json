@@ -1,0 +1,27 @@
+{
+  "feature_id": "sddia-ecosystem-independence",
+  "title": "Independencia de ecosistema SddIA (comportamiento IA)",
+  "persist": "docs/features/sddia-ecosystem-independence/",
+  "principle": "En la acción solo se referencia el contrato de la skill; el agente Tekton es responsable de indicar e invocar la implementación (resolver cápsula y launcher vía Cúmulo).",
+  "roles": {
+    "action": "Referenciar la skill por su contrato (paths.skillsDefinitionPath/<skill-id>/ o SddIA/skills/<skill-id>/); indicar parámetros. No rutas ni comandos.",
+    "tekton": "Responsable de indicar e invocar la implementación: dado el contrato referenciado en la acción, resolver cápsula (Cúmulo paths.skillCapsules), determinar launcher e invocar la ejecución."
+  },
+  "contract": {
+    "action_may": ["reference skill by its contract (skillsDefinitionPath/<skill-id>/)", "specify input parameters for the skill"],
+    "action_must_not": ["write literal script paths", "write paths.skillCapsules or launcher details in the action", "write concrete commands"],
+    "tekton_responsibility": ["resolve implementation path via Cumulo (paths.skillCapsules)", "invoke skill launcher according to contract"]
+  },
+  "deliverables": [
+    "SddIA/actions: referencian solo el contrato de la skill (paths.skillsDefinitionPath/<skill-id>/); Tekton indica implementación",
+    "SddIA/process: referencian contrato de skill; Tekton responsable de invocar implementación",
+    "SddIA/agents: Tekton definido como responsable de indicar e invocar implementación de skills",
+    "SddIA/norms: norma explícita acción→contrato, Tekton→implementación",
+    "Opcional: constitution o skills-contract con principio"
+  ],
+  "constraints": [
+    "La acción no contiene rutas a scripts ni paths.skillCapsules",
+    "Cúmulo es la fuente de rutas para Tekton (paths.skillCapsules, paths.skillsDefinitionPath)",
+    "No cambiar implementación de skills; solo la forma de referencia en la acción y el rol de Tekton"
+  ]
+}
