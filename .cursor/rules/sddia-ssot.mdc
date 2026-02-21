@@ -11,7 +11,7 @@ Las **normas de comportamiento** del asistente en este repositorio las define el
 
 - **AGENTS.md** — Protocolo maestro: leyes universales, procesos, activación de roles, disparadores.
 - **SddIA/norms/** — Normas de interacción (interaction-triggers.md, paths-via-cumulo.md).
-- **SddIA/process/** — Procesos de tarea (feature, bug-fix, refactorization, create-tool).
+- **SddIA/process/** — Procesos de tarea (feature, bug-fix, refactorization, create-tool, correccion-auditorias).
 - **SddIA/actions/** — Acciones del ciclo (spec, clarify, planning, implementation, execution, validate, finalize, sddia-difusion).
 - **Cúmulo** — Rutas del proyecto: `SddIA/agents/cumulo.json` → contrato de paths (paths.featurePath, paths.processPath, paths.skillCapsules, etc.). No usar rutas literales; ver SddIA/norms/paths-via-cumulo.md.
 

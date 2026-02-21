@@ -1,0 +1,23 @@
+{
+  "spec_version": "1.0.0",
+  "process_id": "correccion-auditorias",
+  "name": "Corrección según Auditorías",
+  "description": "Proceso de tarea para corregir hallazgos reportados en auditorías (paths.auditsPath): análisis, priorización, objetivos y ciclo de corrección en paths.featurePath.",
+  "contract_ref": "paths.processPath/process-contract.json",
+  "persist_ref": "paths.featurePath/<nombre_correccion>",
+  "input_ref": "paths.auditsPath",
+  "phases": [
+    { "id": "0", "name": "Análisis de auditorías", "description": "Revisar últimos informes en paths.auditsPath; consolidar hallazgos (críticos/medios/bajos)." },
+    { "id": "1", "name": "Documentación de objetivos", "description": "objectives.md con hallazgos priorizados y criterios de cierre." },
+    { "id": "2", "name": "Especificación", "description": "Acción spec; spec.md, spec.json." },
+    { "id": "3", "name": "Clarificación", "description": "Acción clarify si aplica; clarify.md, clarify.json." },
+    { "id": "4", "name": "Planificación", "description": "Acción planning; plan." },
+    { "id": "5", "name": "Implementación (doc)", "description": "Acción implementation; implementation.md, implementation.json." },
+    { "id": "6", "name": "Ejecución", "description": "Acción execution; execution.json." },
+    { "id": "7", "name": "Validar", "description": "Acción validate; validacion.json." },
+    { "id": "8", "name": "Finalizar", "description": "Acción finalize; Evolution Logs, PR." }
+  ],
+  "related_actions": ["spec", "clarify", "planning", "implementation", "execution", "validate", "finalize"],
+  "related_skills": ["iniciar-rama", "finalizar-git", "documentation", "security-audit"],
+  "principles_ref": "paths.principlesPath"
+}

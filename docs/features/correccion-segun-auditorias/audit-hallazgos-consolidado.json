@@ -1,0 +1,110 @@
+{
+  "source": "docs/audits/AUDITORIA_2026_02_21.md, AUDITORIA_2026_02_20.md, AUDITORIA_2026_02_19.md, AUDITORIA_CARPETA_SCRIPTS_20260219.md",
+  "timestamp": "2026-02-21",
+  "persist": "docs/features/correccion-segun-auditorias/",
+  "process_id": "correccion-auditorias",
+  "hallazgos": [
+    {
+      "id": "C1",
+      "prioridad": "critico",
+      "titulo": "Compilación rota - DTOs Logs faltantes",
+      "descripcion": "Faltan DTOs en Application (CreateLogDto, CreateAuditLogDto, LogDto, LogsPagedResponseDto, PurgeLogsResponseDto). LogController referencia namespace/clases inexistentes.",
+      "ubicacion": "src/GesFer.Admin.Back.Application/, LogController.cs",
+      "auditorias": ["AUDITORIA_2026_02_21", "AUDITORIA_2026_02_20"],
+      "estado": "pendiente",
+      "accion_kaizen": "Crear carpeta DTOs/Logs en Application con los cinco DTOs indicados en la auditoría 2026-02-21."
+    },
+    {
+      "id": "C2",
+      "prioridad": "critico",
+      "titulo": "Credenciales hardcoded",
+      "descripcion": "Cadena de conexión con contraseña en texto plano como fallback en Program.cs.",
+      "ubicacion": "src/GesFer.Admin.Back.Api/Program.cs",
+      "auditorias": ["AUDITORIA_2026_02_21"],
+      "estado": "pendiente",
+      "accion_kaizen": "Eliminar fallback; usar throw InvalidOperationException si ConnectionString no está configurada."
+    },
+    {
+      "id": "C3",
+      "prioridad": "critico",
+      "titulo": "Acoplamiento Api -> Infraestructura",
+      "descripcion": "LogController inyecta y usa AdminDbContext directamente.",
+      "ubicacion": "src/GesFer.Admin.Back.Api/Controllers/LogController.cs",
+      "auditorias": ["AUDITORIA_2026_02_20"],
+      "estado": "pendiente",
+      "accion_kaizen": "Crear Commands/Queries en Application; Handlers con IApplicationDbContext; LogController vía IMediator."
+    },
+    {
+      "id": "C4",
+      "prioridad": "critico",
+      "titulo": "Application referencia Infrastructure",
+      "descripcion": "Violación Dependency Inversion: Application tiene referencia directa a Infrastructure.",
+      "ubicacion": "GesFer.Admin.Back.Application.csproj",
+      "auditorias": ["AUDITORIA_2026_02_20", "AUDITORIA_2026_02_19"],
+      "estado": "pendiente",
+      "accion_kaizen": "Definir IApplicationDbContext en Application; AdminDbContext implementa en Infrastructure; eliminar ref Application->Infrastructure."
+    },
+    {
+      "id": "C5",
+      "prioridad": "critico",
+      "titulo": "Interfaces en Infraestructura",
+      "descripcion": "IAuthService, IJwtService etc. definidas en Infrastructure en lugar de Application.",
+      "ubicacion": "Infrastructure/Services/",
+      "auditorias": ["AUDITORIA_2026_02_19"],
+      "estado": "pendiente",
+      "accion_kaizen": "Mover interfaces a Application (Common/Interfaces); implementaciones en Infrastructure."
+    },
+    {
+      "id": "M1",
+      "prioridad": "medio",
+      "titulo": "Versiones de dependencias",
+      "descripcion": "Coherencia EF Core y MediatR; evitar conflictos transitivos.",
+      "ubicacion": "GesFer.Admin.Back.Infrastructure.csproj",
+      "auditorias": ["AUDITORIA_2026_02_21"],
+      "estado": "pendiente"
+    },
+    {
+      "id": "M2",
+      "prioridad": "medio",
+      "titulo": "Estructura tests y código legacy",
+      "descripcion": "src/tests con GesFer.Product.IntegrationTests; UnitTests en ubicación no estándar.",
+      "ubicacion": "src/tests/",
+      "auditorias": ["AUDITORIA_2026_02_20"],
+      "estado": "pendiente",
+      "accion_kaizen": "Mover UnitTests a src/UnitTests/; eliminar src/tests y referencias a GesFer.Product."
+    },
+    {
+      "id": "M3",
+      "prioridad": "medio",
+      "titulo": "Nomenclatura carpetas",
+      "descripcion": "application y domain en minúsculas; normalizar a PascalCase.",
+      "ubicacion": "src/",
+      "auditorias": ["AUDITORIA_2026_02_20", "AUDITORIA_2026_02_19"],
+      "estado": "pendiente"
+    },
+    {
+      "id": "M4",
+      "prioridad": "medio",
+      "titulo": "Unificar-Rama.ps1 documentación",
+      "descripcion": "Aceptar docs/features/<slug>/objectives.md además de docs/branches/.../OBJETIVO.md.",
+      "ubicacion": "scripts/skills/Unificar-Rama.ps1",
+      "auditorias": ["AUDITORIA_CARPETA_SCRIPTS_20260219"],
+      "estado": "pendiente"
+    },
+    {
+      "id": "M5",
+      "prioridad": "medio",
+      "titulo": "Revisar commit-skill.sh",
+      "descripcion": "Confirmar uso en hooks/CI; si no, archivar o eliminar.",
+      "ubicacion": "scripts/skills/",
+      "auditorias": ["AUDITORIA_CARPETA_SCRIPTS_20260219"],
+      "estado": "pendiente"
+    }
+  ],
+  "resumen": {
+    "criticos": 5,
+    "medios": 5,
+    "bajos": 0,
+    "total_pendientes": 10
+  }
+}

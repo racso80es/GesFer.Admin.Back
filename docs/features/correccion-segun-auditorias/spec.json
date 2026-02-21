@@ -1,0 +1,36 @@
+{
+  "spec_version": "1.0",
+  "process_id": "correccion-auditorias",
+  "task_id": "correccion-segun-auditorias",
+  "title": "Corrección según Auditorías (2026-02)",
+  "created": "2026-02-21",
+  "status": "spec_complete",
+  "branch": "feat/correccion-segun-auditorias",
+  "persist": "docs/features/correccion-segun-auditorias/",
+  "requirements": [
+    "C1: Crear DTOs Logs en Application (CreateLogDto, CreateAuditLogDto, LogDto, LogsPagedResponseDto, PurgeLogsResponseDto)",
+    "C2: Eliminar credenciales hardcoded en Program.cs",
+    "C3: Desacoplar LogController de AdminDbContext (Mediator/IApplicationDbContext)",
+    "C4: Application sin referencia a Infrastructure; IApplicationDbContext en Application",
+    "C5: Interfaces (IAuthService, IJwtService, etc.) en Application/Common/Interfaces"
+  ],
+  "acceptance_criteria": [
+    "dotnet build exitoso",
+    "No credenciales en texto plano en Program.cs",
+    "LogController no depende de AdminDbContext",
+    "Application no referencia Infrastructure",
+    "Interfaces en Application, implementaciones en Infrastructure"
+  ],
+  "out_of_scope": [
+    "M1 versiones dependencias",
+    "M3 nomenclatura carpetas",
+    "M4 Unificar-Rama.ps1",
+    "M5 commit-skill.sh",
+    "B1 scripts/Propuesta"
+  ],
+  "touchpoints": [
+    { "area": "src/GesFer.Admin.Back.Application", "files": ["DTOs/Logs/*.cs", "Common/Interfaces/*.cs"] },
+    { "area": "src/GesFer.Admin.Back.Infrastructure", "files": ["*DbContext*.cs", "Services/*.cs"] },
+    { "area": "src/GesFer.Admin.Back.Api", "files": ["Program.cs", "Controllers/LogController.cs"] }
+  ]
+}
