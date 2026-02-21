@@ -22,3 +22,7 @@ path = "src/bin/merge_to_master_cleanup.rs"
 [[bin]]
 name = "invoke_command"
 path = "src/bin/invoke_command.rs"
+
+[[bin]]
+name = "verify_pr_protocol"
+path = "src/bin/verify_pr_protocol.rs"

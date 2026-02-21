@@ -18,6 +18,12 @@ param(
 
 $ErrorActionPreference = "Stop"
 $branch = git rev-parse --abbrev-ref HEAD 2>$null
+
+# En CI (GitHub Actions), estamos en detached HEAD, asi que usamos GITHUB_HEAD_REF si existe
+if ($env:GITHUB_HEAD_REF) {
+    $branch = $env:GITHUB_HEAD_REF
+}
+
 if (-not $branch) { $branch = "" }
 
 # Kebab-case: solo minúsculas, números y guiones

@@ -1,0 +1,14 @@
+{
+  "status": "in-progress",
+  "files": [
+    "scripts/skills-rs/Cargo.toml",
+    "scripts/skills-rs/src/bin/verify_pr_protocol.rs",
+    "SddIA/norms/pr-acceptance-protocol.md",
+    "AGENTS.norms.md",
+    "SddIA/skills/verify-pr-protocol/spec.md",
+    "SddIA/skills/verify-pr-protocol/spec.json",
+    "SddIA/actions/finalize/spec.md",
+    ".github/workflows/pr-validation.yml",
+    ".cursorrules"
+  ]
+}

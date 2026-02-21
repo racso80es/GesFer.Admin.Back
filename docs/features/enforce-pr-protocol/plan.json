@@ -1,0 +1,39 @@
+{
+  "phases": [
+    {
+      "name": "Rust Skill Implementation",
+      "status": "in-progress",
+      "dependencies": ["dotnet", "cargo"]
+    },
+    {
+      "name": "Protocol Definition",
+      "status": "pending",
+      "dependencies": []
+    },
+    {
+      "name": "Skill Registration",
+      "status": "pending",
+      "dependencies": []
+    },
+    {
+      "name": "Action Update",
+      "status": "pending",
+      "dependencies": ["verify-pr-protocol"]
+    },
+    {
+      "name": "CI/CD Integration",
+      "status": "pending",
+      "dependencies": ["verify-pr-protocol"]
+    },
+    {
+      "name": "Local Enforcement",
+      "status": "pending",
+      "dependencies": ["verify-pr-protocol"]
+    }
+  ],
+  "estimated_time": "1.5 hours",
+  "risks": [
+    "Rust compilation errors on CI.",
+    "Dotnet version mismatch."
+  ]
+}

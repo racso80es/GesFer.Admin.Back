@@ -1,0 +1,21 @@
+{
+  "skill_id": "verify-pr-protocol",
+  "name": "Verify PR Protocol",
+  "description": "Enforces compilation, testing, and nomenclature standards before PR creation.",
+  "implementation_path": "scripts/skills-rs/src/bin/verify_pr_protocol.rs",
+  "language": "rust",
+  "inputs": [],
+  "outputs": [
+    {
+      "name": "Exit Code",
+      "type": "integer",
+      "description": "0 for success, non-zero for failure."
+    }
+  ],
+  "dependencies": [
+    "dotnet",
+    "pwsh",
+    "cargo"
+  ],
+  "security_context": "Karma2Token"
+}

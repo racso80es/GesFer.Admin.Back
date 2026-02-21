@@ -17,5 +17,11 @@ Cuando el usuario escriba uno de los **disparadores** definidos en SddIA, aplica
 
 Listado canónico de disparadores (machine-readable): [`SddIA/norms/interaction-triggers.json`](./SddIA/norms/interaction-triggers.json). Si se añaden disparadores (p. ej. #Tool), documentarlos en `SddIA/norms/` y en esta tabla.
 
+## Protocolos Mandatorios
+
+| Protocolo | Norma | Descripción |
+| :--- | :--- | :--- |
+| **PR Acceptance** | [`SddIA/norms/pr-acceptance-protocol.md`](./SddIA/norms/pr-acceptance-protocol.md) | **OBLIGATORIO:** Compilación, Tests y Nomenclatura deben pasar antes de cualquier PR. |
+
 ---
 *Referencia: AGENTS.md (protocolo maestro).*
