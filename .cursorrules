@@ -4,3 +4,8 @@
 - Este fichero (.cursorrules) no ha de ser manipulado por la IA sin aprobación explícita por parte del usuario.
 
 AGENTS.md
+
+# PR Acceptance Protocol (OBLIGATORIO)
+- Antes de realizar CUALQUIER push o crear un PR, debes ejecutar el protocolo de validación:
+  `cd scripts/skills-rs && cargo run --bin verify_pr_protocol`
+- Si este comando falla, NO debes proceder con el push.

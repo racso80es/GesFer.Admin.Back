@@ -2,32 +2,32 @@
   "phases": [
     {
       "name": "Rust Skill Implementation",
-      "status": "planned",
+      "status": "in-progress",
       "dependencies": ["dotnet", "cargo"]
     },
     {
       "name": "Protocol Definition",
-      "status": "planned",
+      "status": "pending",
       "dependencies": []
     },
     {
       "name": "Skill Registration",
-      "status": "planned",
+      "status": "pending",
       "dependencies": []
     },
     {
       "name": "Action Update",
-      "status": "planned",
+      "status": "pending",
       "dependencies": ["verify-pr-protocol"]
     },
     {
       "name": "CI/CD Integration",
-      "status": "planned",
+      "status": "pending",
       "dependencies": ["verify-pr-protocol"]
     },
     {
       "name": "Local Enforcement",
-      "status": "planned",
+      "status": "pending",
       "dependencies": ["verify-pr-protocol"]
     }
   ],

@@ -1,0 +1,39 @@
+name: PR Validation Protocol
+
+on:
+  pull_request:
+    branches: [ "master", "main" ]
+
+jobs:
+  verify-protocol:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Setup Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        override: true
+
+    - name: Validate Nomenclature
+      shell: pwsh
+      run: ./scripts/validate-nomenclatura.ps1 -BaseBranch origin/${{ github.base_ref }}
+
+    - name: Build Protocol Skill
+      run: |
+        cd scripts/skills-rs
+        cargo build --release --bin verify_pr_protocol
+
+    - name: Execute Protocol Check
+      run: |
+        cd scripts/skills-rs
+        cargo run --release --bin verify_pr_protocol
