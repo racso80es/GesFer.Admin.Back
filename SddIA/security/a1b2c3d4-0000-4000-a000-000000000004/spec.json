@@ -1,0 +1,11 @@
+{
+  "id": "a1b2c3d4-0000-4000-a000-000000000004",
+  "title": "Criptografía Asimétrica en JWT",
+  "category": "Seguridad de Aplicaciones",
+  "tags": ["Criptografía", "Clave Pública", "Clave Privada", "Autenticación descentralizada"],
+  "metadata": {
+    "difficulty": "Advanced",
+    "status": "Published"
+  },
+  "interested_agents": ["architect", "security-engineer", "tekton-developer"]
+}

@@ -1,0 +1,32 @@
+{
+  "feature": "create-security-items",
+  "status": "Validated",
+  "timestamp": "2026-02-21T10:05:00Z",
+  "validations": [
+    {
+      "check": "Feature Documentation Exists",
+      "result": "Pass",
+      "details": "objectives.md, spec.md, spec.json, clarify.md, plan.md exist in docs/features/security-items/"
+    },
+    {
+      "check": "Security Contract Defined",
+      "result": "Pass",
+      "details": "SddIA/security/security-contract.json and .md exist."
+    },
+    {
+      "check": "Items Implementation Count",
+      "result": "Pass",
+      "details": "20 items created in SddIA/security/"
+    },
+    {
+      "check": "Items Content Structure",
+      "result": "Pass",
+      "details": "Each item has spec.md (Markdown) and spec.json (Metadata)."
+    },
+    {
+      "check": "Karma2Token Compliance",
+      "result": "Pass",
+      "details": "security-contract.json requires Karma2Token."
+    }
+  ]
+}

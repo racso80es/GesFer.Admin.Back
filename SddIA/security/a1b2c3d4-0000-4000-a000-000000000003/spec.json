@@ -1,0 +1,11 @@
+{
+  "id": "a1b2c3d4-0000-4000-a000-000000000003",
+  "title": "JSON Web Tokens (JWT) y su Integridad",
+  "category": "Seguridad de Aplicaciones",
+  "tags": ["Autenticación", "JWT", "Tokens", "Identidad"],
+  "metadata": {
+    "difficulty": "Intermediate",
+    "status": "Published"
+  },
+  "interested_agents": ["architect", "security-engineer", "tekton-developer"]
+}

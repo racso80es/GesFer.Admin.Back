@@ -1,0 +1,11 @@
+{
+  "id": "a1b2c3d4-0000-4000-a000-000000000019",
+  "title": "Asegurando APIs con Helmet y CORS",
+  "category": "Seguridad de Aplicaciones",
+  "tags": ["Node.js", "Express", "Cabeceras HTTP", "CORS"],
+  "metadata": {
+    "difficulty": "Beginner",
+    "status": "Published"
+  },
+  "interested_agents": ["architect", "tekton-developer", "security-engineer"]
+}

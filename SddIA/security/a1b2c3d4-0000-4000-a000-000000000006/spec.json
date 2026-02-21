@@ -1,0 +1,11 @@
+{
+  "id": "a1b2c3d4-0000-4000-a000-000000000006",
+  "title": "Centro de Operaciones de Seguridad (SOC)",
+  "category": "DevSecOps",
+  "tags": ["SOC", "Blue Team", "Defensa", "Monitorización"],
+  "metadata": {
+    "difficulty": "Intermediate",
+    "status": "Published"
+  },
+  "interested_agents": ["security-engineer", "infrastructure-architect", "auditor"]
+}

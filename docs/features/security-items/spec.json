@@ -1,0 +1,15 @@
+{
+  "feature_id": "create-security-items",
+  "title": "Creación de Items de Seguridad en SddIA/security",
+  "scope": "SddIA/security/",
+  "version": "1.0.0",
+  "description": "Especificación para la creación de 20 items de seguridad en SddIA/security/ siguiendo el patrón de diseño y contrato Karma2Token.",
+  "status": "In Progress",
+  "contract_ref": "SddIA/security/security-contract.json",
+  "items_count": 20,
+  "interested_agents": ["security-engineer", "architect", "tekton-developer", "auditor"],
+  "security_model": {
+    "required_token": "Karma2Token",
+    "token_ref": "SddIA/Tokens/karma2-token/spec.json"
+  }
+}

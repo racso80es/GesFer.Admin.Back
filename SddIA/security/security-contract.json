@@ -1,0 +1,34 @@
+{
+  "contract_version": "1.0.0",
+  "scope": "SddIA/security/",
+  "description": "Contrato que cada item de seguridad debe cumplir en SddIA/security.",
+  "required_files": [
+    { "name": "spec.md", "required": true, "format": "markdown", "language": "es-ES" },
+    { "name": "spec.json", "required": true, "format": "json" }
+  ],
+  "security_model": {
+    "required_token": "Karma2Token",
+    "token_ref": "SddIA/Tokens/karma2-token/spec.json",
+    "description": "La consulta o aplicación de un item de seguridad requiere un contexto de Karma2Token válido."
+  },
+  "json_schema": {
+    "type": "object",
+    "properties": {
+      "id": { "type": "string", "description": "UUID v4 del item de seguridad" },
+      "title": { "type": "string" },
+      "category": { "type": "string" },
+      "tags": { "type": "array", "items": { "type": "string" } },
+      "metadata": {
+        "type": "object",
+        "properties": {
+          "difficulty": { "type": "string", "enum": ["Beginner", "Intermediate", "Advanced"] },
+          "status": { "type": "string", "enum": ["Draft", "Published", "Deprecated"] }
+        },
+        "required": ["difficulty", "status"]
+      },
+      "interested_agents": { "type": "array", "items": { "type": "string" }, "description": "Lista de agentes de SddIA que deben conocer este item." }
+    },
+    "required": ["id", "title", "category", "tags", "metadata", "interested_agents"]
+  },
+  "folder_structure": "Cada item debe residir en una carpeta nombrada con su UUID: SddIA/security/<uuid>/"
+}

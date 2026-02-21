@@ -1,0 +1,11 @@
+{
+  "id": "a1b2c3d4-0000-4000-a000-000000000001",
+  "title": "SQL Injection (Inyección SQL)",
+  "category": "Ciberseguridad",
+  "tags": ["Seguridad Web", "Base de Datos", "Vulnerabilidades", "SQLi"],
+  "metadata": {
+    "difficulty": "Intermediate",
+    "status": "Published"
+  },
+  "interested_agents": ["security-engineer", "architect", "tekton-developer", "auditor"]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "a1b2c3d4-0000-4000-a000-000000000016",
+  "title": "Rate Limiting y Prevención de Scraping",
+  "category": "Seguridad de Aplicaciones",
+  "tags": ["Rate Limit", "IP Blocking", "Scraping", "APIs"],
+  "metadata": {
+    "difficulty": "Intermediate",
+    "status": "Published"
+  },
+  "interested_agents": ["architect", "security-engineer", "tekton-developer"]
+}
