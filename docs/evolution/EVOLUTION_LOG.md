@@ -4,6 +4,22 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+## 2026-02-21 — Corrección según auditorías (feat/correccion-segun-auditorias)
+
+**Rama:** feat/correccion-segun-auditorias.
+
+**Alcance:**
+- **C1:** DTOs de Logs en Application (CreateLogDto, CreateAuditLogDto, LogDto, LogsPagedResponseDto, PurgeLogsResponseDto). Excepción en src/.gitignore para DTOs/Logs.
+- **C2:** Eliminación de credenciales hardcoded en Program.cs; fallback sustituido por throw InvalidOperationException.
+- **Principios:** Cláusula de guarda en LogController.ReceiveAuditLog (dto == null). Validación Arquitecto/Tekton (principles-validation.md).
+- **Proceso:** correccion-auditorias (SddIA/process/correccion-auditorias/). Documentación: objectives, spec, clarify, plan, implementation, execution, principles-validation, validacion.json.
+- **Verificación:** C3/C4/C5 confirmados (LogController con IApplicationDbContext; Application sin ref Infrastructure). M2 (src/tests) documentado; limpieza opcional.
+
+**Referencias:**
+- `docs/features/correccion-segun-auditorias/` — objectives, spec, clarify, plan, implementation, execution, principles-validation, validacion.json.
+
+---
+
 ## 2026-02-21 — Limpieza referencias consola (feat/refactorization-limpieza-referencias-consola)
 
 **Rama:** feat/refactorization-limpieza-referencias-consola.
