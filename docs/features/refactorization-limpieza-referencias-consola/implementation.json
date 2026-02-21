@@ -1,0 +1,27 @@
+{
+  "spec_version": "1.0",
+  "process_id": "refactorization",
+  "task_id": "limpieza-referencias-consola",
+  "plan_ref": "plan.md",
+  "spec_ref": "spec.md",
+  "branch": "feat/refactorization-limpieza-referencias-consola",
+  "created": "2026-02-21",
+  "status": "ready_for_execution",
+  "items": [
+    { "id": "1.1", "action": "Modificar", "path": "SddIA/actions/spec/spec.md", "phase": "1" },
+    { "id": "1.2", "action": "Modificar", "path": "SddIA/actions/clarify/spec.md", "phase": "1" },
+    { "id": "1.3", "action": "Modificar", "path": "SddIA/actions/planning/spec.md", "phase": "1" },
+    { "id": "2.1", "action": "Modificar", "path": "SddIA/agents/architect.json", "phase": "2" },
+    { "id": "2.2", "action": "Modificar", "path": "SddIA/agents/clarifier.json", "phase": "2" },
+    { "id": "2.3", "action": "Modificar", "path": "SddIA/agents/auditor/process-interaction.json", "phase": "2" },
+    { "id": "2.4", "action": "Modificar", "path": "SddIA/agents/security-engineer.json", "phase": "2" },
+    { "id": "3.1", "action": "Modificar", "path": "SddIA/norms/patterns-in-planning-implementation-execution.md", "phase": "3" },
+    { "id": "3.2", "action": "Modificar", "path": "SddIA/templates/spec-template.md", "phase": "3" },
+    { "id": "4.1", "action": "Modificar", "path": "scripts/skills/pr-skill.md", "phase": "4" },
+    { "id": "4.2", "action": "Modificar", "path": "scripts/skills/pr-skill.sh", "phase": "4" },
+    { "id": "5.1", "action": "Modificar", "path": "SddIA/manifesto.json", "phase": "5" },
+    { "id": "5.2", "action": "Modificar", "path": "docs/DeudaTecnica/DT-2025-001-MissingConsoleTool.md", "phase": "5" }
+  ],
+  "order": "1.1..1.3 -> 2.1..2.4 -> 3.1..3.2 -> 4.1..4.2 -> 5.1..5.2",
+  "verification": ["dotnet build", "dotnet test src/GesFer.Admin.Back.IntegrationTests/GesFer.Admin.Back.IntegrationTests.csproj"]
+}

@@ -1,0 +1,16 @@
+{
+  "spec_version": "1.0",
+  "process_id": "refactorization",
+  "task_id": "limpieza-referencias-consola",
+  "validated_at": "2026-02-21",
+  "status": "validated_with_preexisting_issues",
+  "criteria": [
+    { "id": "no_gesfer_console_ref", "description": "No referencias a GesFer.Console como herramienta CLI", "result": "pass" },
+    { "id": "pr_skill_dotnet_test", "description": "pr-skill.sh ejecuta dotnet test (IntegrationTests)", "result": "pass" },
+    { "id": "actions_skills_tools", "description": "Acciones spec/clarify/planning referencian invoke-command, documentation", "result": "pass" },
+    { "id": "dt_2025_001_cerrada", "description": "DT-2025-001 cerrada con decisión", "result": "pass" },
+    { "id": "build", "description": "dotnet build", "result": "fail", "note": "Preexistente: LogController.cs errores CS0234/CS0246 (DTOs Logs no encontrados). No causado por esta refactorización." },
+    { "id": "tests", "description": "dotnet test IntegrationTests", "result": "skipped", "note": "No ejecutado: build falla. Tests se validarán al corregir LogController/Application." }
+  ],
+  "summary": "Limpieza de referencias consola aplicada. Criterios de documentación y scripts cumplidos. Build falla por deuda preexistente en LogController."
+}

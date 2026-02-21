@@ -30,7 +30,7 @@
   ],
   "instructions": [
     "Reference Standard: openspecs/manifesto.json",
-    "Action: Enforce Spec Generation via `GesFer.Console --spec`.",
+    "Action: Enforce Spec Generation via documentación en carpeta de tarea; validación según invoke-command y documentation (paths.skillCapsules, paths.skillsDefinitionPath).",
     "Action: Intercept Git Hooks (pre-commit, pre-push) via paths.skillCapsules (paths.skillCapsules[skill-id] (Cúmulo)).",
     "Action: Enforce Commit Skill (Token + Unit Tests).",
     "Action: Enforce PR Skill (Token + All Tests).",

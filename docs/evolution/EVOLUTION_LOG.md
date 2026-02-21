@@ -4,6 +4,23 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+## 2026-02-21 — Limpieza referencias consola (feat/refactorization-limpieza-referencias-consola)
+
+**Rama:** feat/refactorization-limpieza-referencias-consola.
+
+**Alcance:**
+- **Acciones SddIA:** spec, clarify, planning referencian invoke-command y documentation (paths.skillCapsules, paths.skillsDefinitionPath); eliminadas referencias a GesFer.Console.
+- **Agentes:** architect.json, clarifier.json, process-interaction.json actualizados (tools/instructions sin GesFer.Console).
+- **Normas y plantillas:** patterns-in-planning-implementation-execution.md, spec-template.md sin GesFer.Console.
+- **PR Skill:** pr-skill.md y pr-skill.sh ejecutan tests vía dotnet test (GesFer.Admin.Back.IntegrationTests); documentación referencia invoke-command y dotnet-development.
+- **Manifesto:** Utils sin "Contains Console".
+- **DT-2025-001:** Cerrada; decisión: documentación actualizada, no se implementa GesFer.Console en Admin.Back.
+
+**Referencias:**
+- `docs/features/refactorization-limpieza-referencias-consola/` — objectives, spec, clarify, plan, implementation, execution.json, validacion.json.
+
+---
+
 ## 2026-02-20 — Kaizen: restructuración process y actions por carpetas (feat/kaizen-process-actions-restructure)
 
 **Rama:** feat/kaizen-process-actions-restructure.

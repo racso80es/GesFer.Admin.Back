@@ -22,7 +22,7 @@ Definir **dónde y cómo** se aplican los patrones de diseño (paths.patternsPat
 
 ### Criterios
 
-- **Consultar paths.patternsPath:** El agente o herramienta que genera el plan (p. ej. GesFer.Console --plan) debe poder resolver la lista de patrones (spec.json por carpeta UUID) para sugerir o validar referencias.
+- **Consultar paths.patternsPath:** El agente o proceso que genera el plan (documentación manual; comandos vía invoke-command, paths.skillCapsules["invoke-command"]) debe poder resolver la lista de patrones (spec.json por carpeta UUID) para sugerir o validar referencias.
 - **interested_agents:** Los patrones declaran `interested_agents` (architect, tekton-developer, etc.); en planificación el **Arquitecto** selecciona qué patrones aplican al roadmap; **Tekton** los usa en implementación/ejecución.
 - **No inventar patrones en el plan:** Las referencias en el PLAN deben ser a patrones existentes en paths.patternsPath (UUID con spec.md y spec.json conforme a patterns-contract).
 

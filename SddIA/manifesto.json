@@ -46,7 +46,7 @@
     "Utils": {
       "purpose": "Orchestration & Master Data.",
       "path": "src/Utils/",
-      "rules": ["Can consume Shared, Product, Admin.", "Contains Console, Seeds, Migrations."]
+      "rules": ["Can consume Shared, Product, Admin.", "Contains Seeds, Migrations."]
     }
   },
   "dependency_rules": {

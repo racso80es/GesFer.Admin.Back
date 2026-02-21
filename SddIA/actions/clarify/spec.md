@@ -4,12 +4,7 @@
 La acción **clarify** tiene como objetivo resolver ambigüedades, identificar "gaps" de información y mitigar riesgos en las especificaciones (`SPECS`) antes de pasar a la fase de planificación o implementación. Actúa como un mecanismo de control de calidad proactivo.
 
 ## Implementación
-Esta acción se implementa mediante el comando `GesFer.Console --clarify`.
-
-### Sintaxis
-```bash
-dotnet run --project src/Console/GesFer.Console.csproj -- --clarify --token <AUDITOR_TOKEN> --spec <SPEC_PATH> [--input <CONTENT> | --context <CONTENT>]
-```
+Esta acción se implementa mediante documentación manual en la carpeta de la tarea. Los comandos de sistema se ejecutan vía skill **invoke-command** (paths.skillCapsules["invoke-command"]). Estándares según skill **documentation** (paths.skillsDefinitionPath/documentation/).
 
 ### Argumentos
 *   `--token`: Token de autorización del auditor (`AUDITOR-PROCESS`).

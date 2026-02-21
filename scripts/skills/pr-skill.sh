@@ -117,7 +117,7 @@ fi
 
 # --- Suite completa de tests ---
 echo "🧪 [SKILL] Ejecutando SUITE COMPLETA de Tests..."
-if dotnet run --project src/Console/GesFer.Console.csproj --no-build -- 11; then
+if dotnet test src/GesFer.Admin.Back.IntegrationTests/GesFer.Admin.Back.IntegrationTests.csproj --no-build -v q; then
     log_entry "SUCCESS" "Suite Completa validada"
     echo "✅ PR Skill Verificado."
     exit 0

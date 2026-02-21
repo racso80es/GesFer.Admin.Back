@@ -25,8 +25,6 @@ Describir de forma sucinta qué se quiere lograr y qué problema resuelve.
 Identificar qué partes del sistema GesFer serán modificadas:
 *   `src/Core`: Entidades de dominio o VOs.
 *   `src/Infrastructure`: Repositorios o persistencia.
-*   `src/Console`: Comandos y lógica de interfaz.
-
 ### 3.2. Modelo de Datos / Lógica
 Si aplica, incluir definiciones de tipos o cambios en el esquema.
 > **Nota de Arquitectura:** Se debe respetar el uso de `company` en lugar de `empresa` en todo el código nuevo.
@@ -57,5 +55,5 @@ Lista de etiquetas que se usarán en la fase de implementación:
 ## 7. Trazabilidad de Auditoría
 
 *   **Fecha de Creación:** YYYY-MM-DD hh:mm
-*   **Evento:** Generación inicial mediante `GesFer.Console --spec`.
+*   **Evento:** Generación inicial mediante proceso documental (invoke-command, documentation; paths.skillCapsules, paths.skillsDefinitionPath).
 *   **Referencia de Log:** paths.auditsPath + paths.accessLogFile (Cúmulo)

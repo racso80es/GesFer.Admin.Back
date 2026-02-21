@@ -1,7 +1,7 @@
 # DT-2025-001: Herramienta GesFer.Console Faltante
 
 **Fecha:** 2026-05-22
-**Estado:** Abierta
+**Estado:** Cerrada
 **Impacto:** Medio
 **Área:** Herramientas de Desarrollo / Automatización
 
@@ -17,6 +17,9 @@ Sin embargo, esta herramienta no existe en el código fuente actual (`src/`).
 ## Acción Correctiva
 1.  Desarrollar la herramienta `GesFer.Console` según las especificaciones en `SddIA/actions`.
 2.  O bien, actualizar la documentación de `SddIA` para reflejar el proceso manual actual si la herramienta no se va a implementar.
+
+## Cierre (2026-02-21)
+Decisión: Documentación actualizada; acciones SddIA referencian skills/tools (invoke-command, documentation). No se implementa GesFer.Console en Admin.Back. Opción 2 del documento original.
 
 ## Referencias
 - `SddIA/actions/spec.md`
