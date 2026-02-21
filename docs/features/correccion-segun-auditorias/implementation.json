@@ -1,0 +1,47 @@
+{
+  "spec_version": "1.0",
+  "process_id": "correccion-auditorias",
+  "task_id": "correccion-segun-auditorias",
+  "plan_ref": "plan.md",
+  "spec_ref": "spec.md",
+  "validation_ref": "principles-validation.md",
+  "branch": "feat/correccion-segun-auditorias",
+  "created": "2026-02-21",
+  "status": "ready_for_execution",
+  "validation_adjustments": [
+    "All system commands (git, dotnet build) via invoke-command (paths.skillCapsules.invoke-command)",
+    "Guard clauses (clausulas-de-guarda-early-return) reinforced in LogController",
+    "Atomic commits per phase: C1, C2, M2"
+  ],
+  "items": [
+    { "id": "1.1", "action": "create", "path": "src/GesFer.Admin.Back.Application/DTOs/Logs/", "phase": "1", "commit_phase": "C1" },
+    { "id": "1.2", "action": "create", "path": "src/GesFer.Admin.Back.Application/DTOs/Logs/CreateLogDto.cs", "phase": "1", "commit_phase": "C1" },
+    { "id": "1.3", "action": "create", "path": "src/GesFer.Admin.Back.Application/DTOs/Logs/CreateAuditLogDto.cs", "phase": "1", "commit_phase": "C1" },
+    { "id": "1.4", "action": "create", "path": "src/GesFer.Admin.Back.Application/DTOs/Logs/LogDto.cs", "phase": "1", "commit_phase": "C1" },
+    { "id": "1.5", "action": "create", "path": "src/GesFer.Admin.Back.Application/DTOs/Logs/LogsPagedResponseDto.cs", "phase": "1", "commit_phase": "C1" },
+    { "id": "1.6", "action": "create", "path": "src/GesFer.Admin.Back.Application/DTOs/Logs/PurgeLogsResponseDto.cs", "phase": "1", "commit_phase": "C1" },
+    { "id": "1.7", "action": "verify", "path": "dotnet build", "phase": "1", "via": "invoke-command", "commit_phase": "C1" },
+    { "id": "2.1", "action": "modify", "path": "src/GesFer.Admin.Back.Api/Program.cs", "phase": "2", "commit_phase": "C2" },
+    { "id": "2.2", "action": "verify", "path": "Program.cs no credentials", "phase": "2", "commit_phase": "C2" },
+    { "id": "2.3", "action": "modify", "path": "src/GesFer.Admin.Back.Api/Controllers/LogController.cs", "phase": "2", "principle": "clausulas-de-guarda-early-return", "commit_phase": "C2" },
+    { "id": "3.1", "action": "verify", "path": "LogController IApplicationDbContext", "phase": "3" },
+    { "id": "3.2", "action": "verify", "path": "src/GesFer.Admin.Back.Application/GesFer.Admin.Back.Application.csproj", "phase": "3" },
+    { "id": "3.3", "action": "verify", "path": "Application/Common/Interfaces", "phase": "3" },
+    { "id": "3.4", "action": "modify", "path": "conditional C4/C5 regression fix", "phase": "3", "condition": "if 3.2 or 3.3 fail" },
+    { "id": "4.1", "action": "check", "path": "src/tests/", "phase": "4", "commit_phase": "M2" },
+    { "id": "4.2", "action": "modify", "path": "src/GesFer.Admin.Back.sln", "phase": "4", "condition": "if UnitTests under src/tests", "commit_phase": "M2" },
+    { "id": "4.3", "action": "delete", "path": "src/tests/ (legacy only)", "phase": "4", "condition": "if applicable", "commit_phase": "M2" },
+    { "id": "4.4", "action": "document", "path": "M2 N/A or verified", "phase": "4" }
+  ],
+  "order": "1.1..1.7 -> 2.1..2.3 -> 3.1..3.4 -> 4.1..4.4",
+  "verification": {
+    "build": "dotnet build (via invoke-command only)",
+    "security": "No Password= or User= in Program.cs",
+    "architecture": "Application no ref Infrastructure; LogController no AdminDbContext"
+  },
+  "atomic_commits": [
+    "C1: feat(deps): add Log DTOs in Application (C1)",
+    "C2: fix(security): remove hardcoded connection string; guard clause ReceiveAuditLog (C2 + principios)",
+    "M2: chore(tests): clean src/tests legacy (M2) [if changes]"
+  ]
+}

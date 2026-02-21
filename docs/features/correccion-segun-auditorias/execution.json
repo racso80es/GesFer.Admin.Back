@@ -1,0 +1,46 @@
+{
+  "spec_version": "1.0",
+  "process_id": "correccion-auditorias",
+  "task_id": "correccion-segun-auditorias",
+  "implementation_ref": "implementation.md",
+  "execution_date": "2026-02-21",
+  "status": "executed",
+  "branch": "feat/correccion-segun-auditorias",
+  "results": [
+    { "id": "1.1", "status": "done", "detail": "Carpeta DTOs/Logs creada" },
+    { "id": "1.2", "status": "done", "detail": "CreateLogDto.cs creado" },
+    { "id": "1.3", "status": "done", "detail": "CreateAuditLogDto.cs creado" },
+    { "id": "1.4", "status": "done", "detail": "LogDto.cs creado" },
+    { "id": "1.5", "status": "done", "detail": "LogsPagedResponseDto.cs creado" },
+    { "id": "1.6", "status": "done", "detail": "PurgeLogsResponseDto.cs creado" },
+    { "id": "1.7", "status": "done", "detail": "dotnet build exitoso (0 errores)" },
+    { "id": "2.1", "status": "done", "detail": "Program.cs: fallback sustituido por throw InvalidOperationException" },
+    { "id": "2.2", "status": "done", "detail": "Sin credenciales en Program.cs" },
+    { "id": "2.3", "status": "done", "detail": "LogController: guarda dto == null en ReceiveAuditLog" },
+    { "id": "3.1", "status": "verified", "detail": "LogController usa solo IApplicationDbContext" },
+    { "id": "3.2", "status": "verified", "detail": "Application.csproj sin ref a Infrastructure" },
+    { "id": "3.3", "status": "verified", "detail": "Interfaces en Application/Common/Interfaces" },
+    { "id": "3.4", "status": "n/a", "detail": "Sin regresión C4/C5" },
+    { "id": "4.1", "status": "checked", "detail": "src/tests existe; sln no referencia proyectos bajo tests/" },
+    { "id": "4.2", "status": "n/a", "detail": "Sln ya apunta a GesFer.Admin.Back.UnitTests en src/" },
+    { "id": "4.3", "status": "deferred", "detail": "Limpieza src/tests opcional para otra iteración" },
+    { "id": "4.4", "status": "documented", "detail": "M2: sln correcta; src/tests legacy sin impacto en build" }
+  ],
+  "build_result": {
+    "exit_code": 0,
+    "errors": 0,
+    "warnings": 6,
+    "note": "Warnings preexistentes (nullable CS8601 en LogController, CS1998 en AuthorizeSystemOrAdminAttribute)"
+  },
+  "verification": {
+    "build_ok": true,
+    "no_credentials_in_program_cs": true,
+    "application_no_ref_infrastructure": true,
+    "log_controller_uses_iapplicationdbcontext": true
+  },
+  "next_steps": [
+    "Commit atómico C1: feat(deps): add Log DTOs in Application (C1)",
+    "Commit atómico C2: fix(security): remove hardcoded connection string; guard clause ReceiveAuditLog (C2 + principios)",
+    "Opcional: acción validate (validacion.json); luego finalize"
+  ]
+}
