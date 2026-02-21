@@ -1,0 +1,31 @@
+{
+  "spec_version": "1.0",
+  "process_id": "refactorization",
+  "task_id": "limpieza-referencias-consola",
+  "clarify_date": "2026-02-21",
+  "status": "clarified",
+  "gaps_resolved": [
+    {
+      "id": "pr-skill-invoke-command",
+      "gap": "pr-skill.sh: ¿invocar invoke-command o dotnet test directo?",
+      "resolution": "pr-skill.sh (Bash) ejecuta dotnet test directamente. pr-skill.md referenciará invoke-command y dotnet-development documentalmente."
+    },
+    {
+      "id": "security-engineer-logs",
+      "gap": "gesfer-console_*.log en security-engineer.json",
+      "resolution": "Mantener; es nombre de archivo de logs, no herramienta GesFer.Console."
+    },
+    {
+      "id": "action-flow",
+      "gap": "¿Mantener flujo completo de acciones?",
+      "resolution": "Sí; sustituir solo implementación por invoke-command + documentation."
+    },
+    {
+      "id": "dt-2025-001",
+      "gap": "Decisión cierre DT-2025-001",
+      "resolution": "Cerrar: documentación actualizada; no se implementa GesFer.Console."
+    }
+  ],
+  "blockers": [],
+  "ready_for_planning": true
+}

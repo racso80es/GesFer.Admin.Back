@@ -1,0 +1,44 @@
+{
+  "spec_version": "1.0",
+  "process_id": "refactorization",
+  "task_id": "limpieza-referencias-consola",
+  "title": "Limpieza de Referencias a Consola (Herencia Monolito)",
+  "created": "2026-02-21",
+  "status": "spec_complete",
+  "requirements": [
+    "Eliminar referencias a GesFer.Console en documentación y scripts",
+    "Sustituir invocaciones obsoletas por dotnet test (vía invoke-command) para suite de tests",
+    "Las acciones SddIA han de referenciar exclusivamente skills o tools (paths.skillCapsules, paths.toolCapsules, paths.skillsDefinitionPath)",
+    "Actualizar manifesto.json (Utils sin Console)",
+    "Cerrar DT-2025-001 con decisión documentada"
+  ],
+  "action_skill_mapping": {
+    "spec": ["invoke-command", "documentation"],
+    "clarify": ["invoke-command", "documentation"],
+    "planning": ["invoke-command", "documentation"],
+    "validate": ["invoke-command", "dotnet-development"],
+    "finalize": ["finalizar-git", "invoke-command"]
+  },
+  "touchpoints": [
+    { "area": "SddIA/actions", "files": ["spec/spec.md", "clarify/spec.md", "planning/spec.md"] },
+    { "area": "SddIA/agents", "files": ["architect.json", "clarifier.json", "auditor/process-interaction.json", "security-engineer.json"] },
+    { "area": "SddIA/norms", "files": ["patterns-in-planning-implementation-execution.md"] },
+    { "area": "SddIA/templates", "files": ["spec-template.md"] },
+    { "area": "scripts/skills", "files": ["pr-skill.md", "pr-skill.sh"] },
+    { "area": "SddIA", "files": ["manifesto.json"] },
+    { "area": "docs/DeudaTecnica", "files": ["DT-2025-001-MissingConsoleTool.md"] }
+  ],
+  "acceptance_criteria": [
+    "No referencias a GesFer.Console como herramienta CLI",
+    "pr-skill.sh usa dotnet test sobre IntegrationTests",
+    "Documentación de acciones describe proceso manual",
+    "DT-2025-001 cerrada",
+    "Build y tests pasan"
+  ],
+  "out_of_scope": [
+    "Serilog.Sinks.Console",
+    "WriteTo.Console()",
+    "Console.WriteLine en scripts",
+    "dotnet test --logger console"
+  ]
+}
