@@ -17,7 +17,7 @@ Esta skill ejecuta de manera atómica todos los pasos requeridos por el **Protoc
 ## Uso
 ```bash
 # Desde la raíz del repositorio
-cargo run --bin verify_pr_protocol
+cargo run --manifest-path scripts/skills-rs/Cargo.toml --bin verify_pr_protocol
 ```
 
 ## Salidas
