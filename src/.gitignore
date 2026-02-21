@@ -108,6 +108,8 @@ docker_data/
 
 ## Logs
 logs/
+# Exception: Application DTOs namespace folder (Logs), not runtime logs
+!GesFer.Admin.Back.Application/DTOs/Logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
