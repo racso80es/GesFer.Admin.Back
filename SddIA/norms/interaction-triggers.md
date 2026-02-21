@@ -82,6 +82,7 @@
 | bug-fix | Corrección de un bug: rama fix/&lt;nombre_fix&gt;, documentación en paths.fixPath/&lt;nombre_fix&gt;/ (Cúmulo). Alcance mínimo. | paths.processPath/bug-fix/ |
 | refactorization | Refactorización: rama feat/refactorization-&lt;nombre_refactor&gt;, documentación en paths.featurePath/refactorization-&lt;nombre_refactor&gt;/ (Cúmulo). | paths.processPath/refactorization/ |
 | create-tool | Creación de una nueva herramienta: rama feat/create-tool-&lt;tool-id&gt;, cápsula en paths.toolCapsules, índice y Cúmulo actualizados. | paths.processPath/create-tool/ |
+| correccion-auditorias | Corrección de hallazgos de auditoría: rama feat/correccion-segun-auditorias o feat/correccion-auditorias-&lt;id&gt;, documentación en paths.featurePath. Entrada: paths.auditsPath. | paths.processPath/correccion-auditorias/ |
 
 ---
 

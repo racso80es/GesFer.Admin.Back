@@ -79,6 +79,9 @@ public class LogController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> ReceiveAuditLog([FromBody] CreateAuditLogDto dto)
     {
+        if (dto == null)
+            return BadRequest(new { message = "El cuerpo de la petición es obligatorio" });
+
         try
         {
             var auditLog = new AuditLog

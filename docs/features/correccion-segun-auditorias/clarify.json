@@ -1,0 +1,37 @@
+{
+  "spec_version": "1.0",
+  "process_id": "correccion-auditorias",
+  "task_id": "correccion-segun-auditorias",
+  "clarify_date": "2026-02-21",
+  "status": "clarified",
+  "gaps_resolved": [
+    {
+      "id": "c1-dtos-source",
+      "gap": "Namespace y definición exacta de DTOs de Logs (C1).",
+      "resolution": "Namespace GesFer.Admin.Back.Application.DTOs.Logs. Definición exacta según docs/audits/AUDITORIA_2026_02_21.md (Acción 1). Cinco archivos en src/GesFer.Admin.Back.Application/DTOs/Logs/."
+    },
+    {
+      "id": "c3-mediator-vs-dbcontext",
+      "gap": "LogController: ¿Mediator o IApplicationDbContext? (C3).",
+      "resolution": "Mantener IApplicationDbContext en LogController. No introducir Mediator para Logs en esta ronda. C3 considerado satisfecho si no hay dependencia de AdminDbContext."
+    },
+    {
+      "id": "c4-c5-current-state",
+      "gap": "Estado actual de C4 (Application→Infra) y C5 (interfaces en Application).",
+      "resolution": "C4 y C5 ya resueltos en código: Application no referencia Infrastructure; interfaces en Application.Common.Interfaces. En implementation solo verificar; sin cambio salvo regresión."
+    },
+    {
+      "id": "c2-no-ambiguity",
+      "gap": "C2 credenciales: comportamiento exacto.",
+      "resolution": "Sustituir fallback por throw InvalidOperationException. Sin variantes."
+    },
+    {
+      "id": "m2-in-scope",
+      "gap": "M2 (src/tests) ¿incluir en esta ronda?",
+      "resolution": "Incluir si tiempo permite; prioridad menor que C1/C2. Mover/eliminar src/tests y actualizar .sln. Si no existe src/tests, marcar M2 N/A o verificado."
+    }
+  ],
+  "blockers": [],
+  "ready_for_planning": true,
+  "implementation_order": ["C1", "C2", "verify_C3_C4_C5", "M2"]
+}

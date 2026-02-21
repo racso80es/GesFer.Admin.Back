@@ -12,6 +12,7 @@ Todo proceso cumple el **contrato** en [process-contract.json](./process-contrac
 | **bug-fix**  | Corrección de un bug: rama `fix/<nombre_fix>`, documentación en paths.fixPath/<nombre_fix>/ (Cúmulo). Alcance mínimo. | [bug-fix/](./bug-fix/)                           | Bug Fix Specialist      |
 | **refactorization** | Refactorización: rama `feat/refactorization-<nombre_refactor>`, documentación en paths.featurePath/refactorization-&lt;nombre_refactor&gt;/ (Cúmulo). | [refactorization/](./refactorization/)           | Arquitecto, Tekton      |
 | **create-tool** | Creación de herramienta: rama `feat/create-tool-<tool-id>`, cápsula en paths.toolCapsules. | [create-tool/](./create-tool/)                   | Tekton, Arquitecto      |
+| **correccion-auditorias** | Corrección de hallazgos de auditoría: rama `feat/correccion-segun-auditorias` o `feat/correccion-auditorias-<id>`, documentación en paths.featurePath. Entrada: paths.auditsPath. | [correccion-auditorias/](./correccion-auditorias/) | Arquitecto, Tekton      |
 | **create-pattern** | Creación de patrón de diseño: carpeta en paths.patternsPath con spec.md y spec.json. | [create-pattern.json](./create-pattern.json)     | Arquitecto              |
 | **create-principle** | Creación de principio técnico: carpeta en paths.principlesPath con spec.md y spec.json. Principios con blocking_for_pr bloquean PR si falla validate. | [create-principle.json](./create-principle.json) | Cúmulo, Arquitecto      |
 
@@ -21,6 +22,7 @@ Todo proceso cumple el **contrato** en [process-contract.json](./process-contrac
 2. **Bug-fix:** paths.processPath/bug-fix/. Ruta: Cúmulo (paths.fixPath/<nombre_fix>).
 3. **Refactorization:** paths.processPath/refactorization/. Ruta: Cúmulo (paths.featurePath/refactorization-&lt;nombre_refactor&gt;).
 4. **Create-tool:** paths.processPath/create-tool/. Ruta: Cúmulo (paths.featurePath/create-tool-&lt;tool-id&gt;). Entregable: cápsula en paths.toolsPath/&lt;tool-id&gt;/.
+5. **Corrección según auditorías:** paths.processPath/correccion-auditorias/. Ruta: Cúmulo (paths.featurePath/&lt;nombre_correccion&gt;). Entrada: paths.auditsPath (informes de auditoría).
 
 Las **acciones** (spec, clarify, plan, implementation, execution, validate, finalize) siguen en paths.actionsPath (Cúmulo) y son invocadas por los procesos.
 

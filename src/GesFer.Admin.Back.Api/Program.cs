@@ -27,7 +27,7 @@ try
 
     // Configurar Serilog
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-        ?? "Server=localhost;Port=3306;Database=ScrapDb;User=scrapuser;Password=scrappassword;CharSet=utf8mb4;AllowUserVariables=True;AllowLoadLocalInfile=True;";
+        ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
     var isDevelopment = builder.Environment.IsDevelopment();
 
