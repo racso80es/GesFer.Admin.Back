@@ -1,0 +1,23 @@
+{
+  "spec_version": "1.0",
+  "process_id": "refactorization",
+  "task_id": "limpieza-referencias-consola",
+  "impl_ref": "implementation.md",
+  "executed_at": "2026-02-21",
+  "status": "executed",
+  "items": [
+    { "id": "1.1", "path": "SddIA/actions/spec/spec.md", "action": "Modificar", "status": "ok" },
+    { "id": "1.2", "path": "SddIA/actions/clarify/spec.md", "action": "Modificar", "status": "ok" },
+    { "id": "1.3", "path": "SddIA/actions/planning/spec.md", "action": "Modificar", "status": "ok" },
+    { "id": "2.1", "path": "SddIA/agents/architect.json", "action": "Modificar", "status": "ok" },
+    { "id": "2.2", "path": "SddIA/agents/clarifier.json", "action": "Modificar", "status": "ok" },
+    { "id": "2.3", "path": "SddIA/agents/auditor/process-interaction.json", "action": "Modificar", "status": "ok" },
+    { "id": "2.4", "path": "SddIA/agents/security-engineer.json", "action": "Modificar", "status": "skipped_optional" },
+    { "id": "3.1", "path": "SddIA/norms/patterns-in-planning-implementation-execution.md", "action": "Modificar", "status": "ok" },
+    { "id": "3.2", "path": "SddIA/templates/spec-template.md", "action": "Modificar", "status": "ok" },
+    { "id": "4.1", "path": "scripts/skills/pr-skill.md", "action": "Modificar", "status": "ok" },
+    { "id": "4.2", "path": "scripts/skills/pr-skill.sh", "action": "Modificar", "status": "ok" },
+    { "id": "5.1", "path": "SddIA/manifesto.json", "action": "Modificar", "status": "ok" },
+    { "id": "5.2", "path": "docs/DeudaTecnica/DT-2025-001-MissingConsoleTool.md", "action": "Modificar", "status": "ok" }
+  ]
+}

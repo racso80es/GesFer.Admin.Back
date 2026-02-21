@@ -4,12 +4,7 @@
 La acción **spec** (especificación) constituye el punto de entrada formal del ciclo de desarrollo. Su objetivo es transformar requerimientos brutos, ideas iniciales o necesidades de negocio en Especificaciones Técnicas Formales (SPECS) estructuradas. Proporciona el "Qué" de forma inequívoca, estableciendo la base sobre la cual actuarán las fases de clarificación y planificación.
 
 ## Implementación
-Esta acción se implementa mediante el comando `GesFer.Console --spec`.
-
-### Sintaxis
-```bash
-dotnet run --project src/Console/GesFer.Console.csproj -- --spec --token <AUDITOR_TOKEN> --title <TITLE> --input <CONTENT> [--context <OUTPUT_PATH>]
-```
+Esta acción se implementa mediante documentación manual en la carpeta de tarea (paths.featurePath o paths.fixPath, Cúmulo). Los comandos de sistema se ejecutan vía skill **invoke-command** (paths.skillCapsules["invoke-command"]). Los estándares de documentación siguen la skill **documentation** (paths.skillsDefinitionPath/documentation/).
 
 ### Argumentos
 *   `--token`: Token de autorización del auditor (`AUDITOR-PROCESS`).

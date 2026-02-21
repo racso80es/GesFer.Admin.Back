@@ -4,12 +4,7 @@
 La acción **plan** tiene como objetivo transformar especificaciones y aclaraciones validadas en hojas de ruta técnicas ejecutables y seguras. Convierte el "qué" (Spec) en el "cómo" (Roadmap), asegurando que cada paso esté validado y libre de ambigüedades.
 
 ## Implementación
-Esta acción se implementa mediante el comando `GesFer.Console --plan`.
-
-### Sintaxis
-```bash
-dotnet run --project src/Console/GesFer.Console.csproj -- --plan --token <AUDITOR_TOKEN> --spec <SPEC_PATH>
-```
+Esta acción se implementa mediante documentación manual (plan en carpeta de tarea). Los comandos de sistema vía skill **invoke-command** (paths.skillCapsules["invoke-command"]). Estándares según skill **documentation** (paths.skillsDefinitionPath/documentation/).
 
 ### Argumentos
 *   `--token`: Token de autorización del auditor (`AUDITOR-PROCESS`).

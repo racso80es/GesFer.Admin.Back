@@ -13,7 +13,7 @@ El **PR Skill** es la barrera de calidad y seguridad antes de cada **push** (loc
 1. **Token de proceso** válido (solo local; en CI se omite).
 2. **Compilación** correcta del proyecto (.NET), con reintentos.
 3. **Documentación de rama** presente para ramas que no sean `master`/`main`.
-4. **Suite completa de tests** (opción 11 de la Consola) ejecutada con éxito.
+4. **Suite completa de tests** (dotnet test del proyecto de IntegrationTests) ejecutada con éxito.
 
 Si cualquier paso falla, el push/PR se **bloquea** y se registra en el log de auditoría.
 
@@ -38,7 +38,7 @@ La ejecución debe hacerse **siempre desde la raíz del repositorio** (pre-push 
 3. [Solo local] Validación de Token de Proceso (process-token-manager.sh Validate)
 4. Escudo de compilación (dotnet build, máx. 7 intentos)
 5. Certificación documentación de rama (obligatoria si rama ≠ master/main)
-6. Suite completa de tests (dotnet run ... -- 11)
+6. Suite completa de tests (dotnet test, proyecto IntegrationTests)
 7. Registro en docs/audits/ACCESS_LOG.md y salida (éxito/fallo)
 ```
 
@@ -59,13 +59,12 @@ La ejecución debe hacerse **siempre desde la raíz del repositorio** (pre-push 
 | `scripts/auditor/process-token-manager.sh` | Comandos `Validate` y `Generate` para el token de proceso (solo local). |
 | `scripts/skills/security-validation-skill.sh` | Validación del bypass con `BYPASS_AUDIT=1` (solo local). |
 
-### 4.3 Proyecto .NET
+### 4.3 Ejecución de tests
 
-- **Consola:** `src/Console/GesFer.Console.csproj`
+- **Tests:** `dotnet test` sobre el proyecto de IntegrationTests (paths según solución).
 - El script ejecuta:  
-  `dotnet run --project src/Console/GesFer.Console.csproj --no-build -- 11`  
-  El argumento **`11`** corresponde a la opción del menú “Ejecutar tests” (suite completa).
-
+  `dotnet test src/GesFer.Admin.Back.IntegrationTests/GesFer.Admin.Back.IntegrationTests.csproj --no-build -v q`  
+  Estándares: skills invoke-command y dotnet-development (paths.skillCapsules, paths.skillsDefinitionPath).
 ### 4.4 Estructura de documentación
 
 - **Log de acceso:** `docs/audits/ACCESS_LOG.md` (se crea si no existe).
@@ -132,7 +131,7 @@ Para desarrollo local en Windows, mantener Git Bash instalado y asegurarse de qu
 | Dependencias (process-token-manager, security-validation-skill) | Presentes y utilizadas según modo local/CI. |
 | Compilación | Reintentos y log de diagnóstico coherentes. |
 | Documentación de rama | Comprueba slug exacto y slug limpio; coherente con `docs/branches/`. |
-| Suite de tests | Invoca correctamente la Consola con argumento `11`. |
+| Suite de tests | Ejecuta dotnet test sobre el proyecto de IntegrationTests. |
 | Log de auditoría | Crea/actualiza `docs/audits/ACCESS_LOG.md` con formato esperado. |
 | CI (pr-skill.yml) | Ejecuta el script desde la raíz con .NET 8.0; no valida token. |
 
