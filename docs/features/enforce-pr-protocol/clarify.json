@@ -1,0 +1,18 @@
+{
+  "status": "clarified",
+  "key_decisions": [
+    {
+      "decision": "Cross-platform Rust binary",
+      "reason": "Must run on Windows (Cursor) and Linux (GitHub Actions)."
+    },
+    {
+      "decision": "No skip flags for V1",
+      "reason": "Strict enforcement is the primary goal."
+    },
+    {
+      "decision": "Inject into finalize action",
+      "reason": "AI Agents must be bound by the same protocol."
+    }
+  ],
+  "pending_questions": []
+}
