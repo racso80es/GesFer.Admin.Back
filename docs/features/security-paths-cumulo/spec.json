@@ -1,0 +1,24 @@
+{
+  "spec_version": "1.0",
+  "process_id": "feature",
+  "task_id": "security-paths-cumulo",
+  "title": "Patrón paths Cúmulo para SddIA/security",
+  "branch": "feat/security-paths-cumulo",
+  "created": "2026-02-21",
+  "status": "spec_complete",
+  "requirements": [
+    "paths.securityPath en cumulo.paths.json",
+    "Map [SEC] en cumulo.instructions.json",
+    "securityContract y pathsContract en security-engineer.json",
+    "security-contract.md referencia paths.securityPath"
+  ],
+  "touchpoints": [
+    { "area": "SddIA/agents", "files": ["cumulo.paths.json", "cumulo.instructions.json", "security-engineer.json"] },
+    { "area": "SddIA/security", "files": ["security-contract.md"] }
+  ],
+  "acceptance_criteria": [
+    "securityPath en Cúmulo",
+    "security-engineer custodio declarado",
+    "sin regresión en items existentes"
+  ]
+}

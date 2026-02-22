@@ -8,7 +8,7 @@
 
 ## 1. Estructura por Item de Seguridad
 
-Cada item de seguridad debe residir en una carpeta nombrada con su **UUID**: `SddIA/security/<uuid>/`.
+Cada item de seguridad debe residir en una carpeta nombrada con su **UUID**: `paths.securityPath/<uuid>/` (Cúmulo). La ruta canónica se obtiene de Cúmulo (paths.securityPath).
 
 ### Archivos Obligatorios
 
@@ -49,4 +49,5 @@ Todos los items de seguridad operan bajo el contexto de `Karma2Token`. Cualquier
 
 ## 4. Referencias
 
-*   **Esquema JSON:** `SddIA/security/security-contract.json`
+*   **Esquema JSON:** paths.securityPath + security-contract.json (Cúmulo)
+*   **Ruta:** paths.securityPath (consultar SddIA/agents/cumulo.paths.json). Custodio: security-engineer.
