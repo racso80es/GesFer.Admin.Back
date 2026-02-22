@@ -1,0 +1,11 @@
+{
+  "id": "a1b2c3d4-0000-4000-a000-000000000007",
+  "title": "Red Team vs Pen Testing",
+  "category": "Ciberseguridad",
+  "tags": ["Ofensiva", "Red Team", "Penetration Testing", "Auditoría"],
+  "metadata": {
+    "difficulty": "Intermediate",
+    "status": "Published"
+  },
+  "interested_agents": ["security-engineer", "auditor"]
+}

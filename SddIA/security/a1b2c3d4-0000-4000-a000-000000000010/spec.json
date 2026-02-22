@@ -1,0 +1,11 @@
+{
+  "id": "a1b2c3d4-0000-4000-a000-000000000010",
+  "title": "Ataques de Supply Chain en Dependencias (npm)",
+  "category": "DevSecOps",
+  "tags": ["Supply Chain", "Dependencias", "Malware", "npm"],
+  "metadata": {
+    "difficulty": "Advanced",
+    "status": "Published"
+  },
+  "interested_agents": ["security-engineer", "tekton-developer", "infrastructure-architect"]
+}

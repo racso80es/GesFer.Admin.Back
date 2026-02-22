@@ -1,0 +1,11 @@
+{
+  "id": "a1b2c3d4-0000-4000-a000-000000000013",
+  "title": "Fuga de Secretos en Repositorios y ficheros .env",
+  "category": "DevSecOps",
+  "tags": ["Secretos", "Variables de Entorno", ".env", "Credenciales"],
+  "metadata": {
+    "difficulty": "Beginner",
+    "status": "Published"
+  },
+  "interested_agents": ["security-engineer", "tekton-developer", "infrastructure-architect", "auditor"]
+}

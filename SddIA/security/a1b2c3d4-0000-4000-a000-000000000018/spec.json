@@ -1,0 +1,11 @@
+{
+  "id": "a1b2c3d4-0000-4000-a000-000000000018",
+  "title": "Modo Vigilante (Vigilant Mode) en GitHub",
+  "category": "Seguridad en Código",
+  "tags": ["GitHub", "Git", "Spoofing", "Verificación"],
+  "metadata": {
+    "difficulty": "Intermediate",
+    "status": "Published"
+  },
+  "interested_agents": ["security-engineer", "tekton-developer", "auditor"]
+}

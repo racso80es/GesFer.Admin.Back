@@ -1,0 +1,11 @@
+{
+  "id": "a1b2c3d4-0000-4000-a000-000000000014",
+  "title": "Gestión de Secretos con Vaults",
+  "category": "Arquitectura de Software",
+  "tags": ["Gestión de Secretos", "Bitwarden", "Vault", "Seguridad"],
+  "metadata": {
+    "difficulty": "Intermediate",
+    "status": "Published"
+  },
+  "interested_agents": ["architect", "infrastructure-architect", "tekton-developer", "security-engineer"]
+}

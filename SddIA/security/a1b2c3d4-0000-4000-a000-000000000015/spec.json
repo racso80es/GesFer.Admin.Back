@@ -1,0 +1,11 @@
+{
+  "id": "a1b2c3d4-0000-4000-a000-000000000015",
+  "title": "Cifrado Físico de Dispositivos",
+  "category": "Políticas de Seguridad",
+  "tags": ["Encriptación", "On-Call", "Robo de Datos", "Hard Drives"],
+  "metadata": {
+    "difficulty": "Beginner",
+    "status": "Published"
+  },
+  "interested_agents": ["security-engineer", "auditor", "infrastructure-architect"]
+}
