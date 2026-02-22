@@ -33,6 +33,17 @@ param(
 
 $ErrorActionPreference = "Stop"
 
+$exe = Join-Path $PSScriptRoot "bin\push_and_create_pr.exe"
+if (Test-Path $exe) {
+    $args = @()
+    if (-not [string]::IsNullOrWhiteSpace($BranchName)) { $args += "--branch"; $args += $BranchName }
+    if (-not [string]::IsNullOrWhiteSpace($Persist)) { $args += "--persist"; $args += $Persist }
+    if (-not [string]::IsNullOrWhiteSpace($Title)) { $args += "--title"; $args += $Title }
+    if (-not [string]::IsNullOrWhiteSpace($BaseBranch)) { $args += "--base"; $args += $BaseBranch }
+    & $exe @args
+    exit $LASTEXITCODE
+}
+
 if ([string]::IsNullOrWhiteSpace($BranchName)) {
     $BranchName = (git branch --show-current).Trim()
 }

@@ -1,0 +1,11 @@
+{
+  "spec_version": "1.0",
+  "process_id": "feature",
+  "task_id": "rust-tools-skills-standard",
+  "plan_date": "2026-02-21",
+  "phases": [
+    {"id": "1", "name": "tools-rs Cargo.toml", "tasks": ["Añadir [[bin]] invoke_mysql_seeds, prepare_full_env"]},
+    {"id": "2", "name": "skills-rs push_and_create_pr", "tasks": ["Crear push_and_create_pr.rs", "Actualizar Cargo.toml e install.ps1"]},
+    {"id": "3", "name": "finalizar-git launcher", "tasks": ["Push-And-CreatePR.bat con binario Rust", "Actualizar manifest"]}
+  ]
+}

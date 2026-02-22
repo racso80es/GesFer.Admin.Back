@@ -1,0 +1,17 @@
+{
+  "spec_version": "1.0",
+  "process_id": "feature",
+  "task_id": "rust-tools-skills-standard",
+  "title": "Estándar Rust para tools y skills",
+  "branch": "feat/rust-tools-skills-standard",
+  "touchpoints": [
+    { "area": "scripts/tools-rs", "files": ["Cargo.toml"] },
+    { "area": "scripts/skills-rs", "files": ["Cargo.toml", "install.ps1", "src/bin/push_and_create_pr.rs"] },
+    { "area": "scripts/skills/finalizar-git", "files": ["Push-And-CreatePR.bat", "manifest.json"] }
+  ],
+  "acceptance_criteria": [
+    "tools-rs: [[bin]] invoke_mysql_seeds y prepare_full_env",
+    "skills-rs: push_and_create_pr; install.ps1 actualizado",
+    "finalizar-git: launcher pre_pr con binario Rust"
+  ]
+}

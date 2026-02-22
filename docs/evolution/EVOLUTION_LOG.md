@@ -4,6 +4,21 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+## 2026-02-21 — Estándar Rust para tools y skills (feat/rust-tools-skills-standard)
+
+**Rama:** feat/rust-tools-skills-standard.
+
+**Alcance:**
+- **tools-rs:** Añadidos [[bin]] invoke_mysql_seeds y prepare_full_env en Cargo.toml.
+- **skills-rs:** Creado push_and_create_pr.rs; actualizado install.ps1 para copiar a finalizar-git/bin/.
+- **finalizar-git:** Push-And-CreatePR.ps1 delega a binario Rust si existe (patrón exe primero, PS1 fallback).
+- **Proceso:** feature. Documentación: objectives, spec, clarify, plan, implementation, validacion.
+
+**Referencias:**
+- `docs/features/rust-tools-skills-standard/` — objectives, spec, clarify, plan, implementation, validacion.
+
+---
+
 ## 2026-02-21 — Corrección según auditorías (feat/correccion-segun-auditorias)
 
 **Rama:** feat/correccion-segun-auditorias.

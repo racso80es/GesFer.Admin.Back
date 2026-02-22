@@ -1,0 +1,10 @@
+{
+  "branch": "feat/rust-tools-skills-standard",
+  "base_branch": "main",
+  "timestamp": "2026-02-21",
+  "validacion_ref": "docs/features/rust-tools-skills-standard/validacion.json",
+  "persist": "docs/features/rust-tools-skills-standard/",
+  "evolution_log_updated": true,
+  "global_result": "pass",
+  "blocking": false
+}
