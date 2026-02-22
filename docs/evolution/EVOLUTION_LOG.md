@@ -4,6 +4,22 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+## 2026-02-21 — Patrón paths Cúmulo para SddIA/security (feat/security-paths-cumulo)
+
+**Rama:** feat/security-paths-cumulo.
+
+**Alcance:**
+- **Cúmulo:** Añadido `securityPath` en cumulo.paths.json; mapeo `Map [SEC]` en cumulo.instructions.json.
+- **Security-engineer:** Declarados securityContract (SddIA/security/security-contract.json) y pathsContract; instrucción "Security items: consultar paths.securityPath".
+- **security-contract.md:** Referencia a paths.securityPath (Cúmulo) y custodio security-engineer.
+- **Proceso:** feature. Documentación: objectives, spec, clarify, plan, implementation, validacion.
+- **Regresión:** Sin modificación de los 20 items existentes en SddIA/security/.
+
+**Referencias:**
+- `docs/features/security-paths-cumulo/` — objectives, spec, clarify, plan, implementation, validacion.json.
+
+---
+
 ## 2026-02-21 — Corrección según auditorías (feat/correccion-segun-auditorias)
 
 **Rama:** feat/correccion-segun-auditorias.
