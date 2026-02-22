@@ -86,11 +86,11 @@ public class LogController : ControllerBase
         {
             var auditLog = new AuditLog
             {
-                CursorId = dto.CursorId,
-                Username = dto.Username,
-                Action = dto.Action,
-                HttpMethod = dto.HttpMethod,
-                Path = dto.Path,
+                CursorId = dto.CursorId ?? string.Empty,
+                Username = dto.Username ?? string.Empty,
+                Action = dto.Action ?? string.Empty,
+                HttpMethod = dto.HttpMethod ?? string.Empty,
+                Path = dto.Path ?? string.Empty,
                 AdditionalData = dto.AdditionalData,
                 ActionTimestamp = dto.ActionTimestamp
             };
@@ -199,17 +199,9 @@ public class LogController : ControllerBase
                 return BadRequest(new { message = "No se pueden eliminar logs de los últimos 7 días" });
             }
 
-            var logsToDelete = await _context.Logs
+            var count = await _context.Logs
                 .Where(l => l.TimeStamp < dateLimit)
-                .ToListAsync();
-
-            var count = logsToDelete.Count;
-
-            if (count > 0)
-            {
-                _context.Logs.RemoveRange(logsToDelete);
-                await _context.SaveChangesAsync();
-            }
+                .ExecuteDeleteAsync();
 
             return Ok(new PurgeLogsResponseDto
             {

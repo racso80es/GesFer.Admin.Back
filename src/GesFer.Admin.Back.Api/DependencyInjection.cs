@@ -20,7 +20,7 @@ public static class DependencyInjection
     {
         // Configurar DbContext - Usar la misma cadena de conexión que Product
         var connectionString = configuration.GetConnectionString("DefaultConnection") 
-            ?? "Server=localhost;Port=3306;Database=ScrapDb;User=scrapuser;Password=scrappassword;CharSet=utf8mb4;AllowUserVariables=True;AllowLoadLocalInfile=True;";
+            ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
         var isDevelopment = environment?.IsDevelopment() ?? false;
 
