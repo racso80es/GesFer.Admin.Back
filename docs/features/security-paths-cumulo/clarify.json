@@ -1,0 +1,32 @@
+{
+  "spec_version": "1.0",
+  "process_id": "feature",
+  "task_id": "security-paths-cumulo",
+  "clarify_date": "2026-02-21",
+  "status": "clarified",
+  "gaps_resolved": [
+    {
+      "id": "security-contract-json-path",
+      "gap": "security-contract.json folder_structure: literal path vs paths.securityPath.",
+      "resolution": "Mantener literal SddIA/security/<uuid>/. security-contract.md referencia paths.securityPath. Sin cambio en JSON."
+    },
+    {
+      "id": "consumers-dynamic-queries",
+      "gap": "Implementar consumidores spec/clarify/validate que consulten items.",
+      "resolution": "Fuera de alcance. Evolución futura."
+    },
+    {
+      "id": "implementation-order",
+      "gap": "Orden de implementación de cambios.",
+      "resolution": "cumulo.paths.json → cumulo.instructions → security-engineer → security-contract.md. Ya aplicado."
+    },
+    {
+      "id": "items-regression",
+      "gap": "Validar regresión en 20 items existentes.",
+      "resolution": "Verificación opcional en validate. Sin modificación de items."
+    }
+  ],
+  "blockers": [],
+  "ready_for_planning": true,
+  "implementation_status": "complete"
+}
