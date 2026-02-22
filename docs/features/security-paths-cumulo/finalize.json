@@ -7,6 +7,7 @@
   "evolution_log_updated": true,
   "global_result": "pass",
   "blocking": false,
-  "push_done": false,
-  "pr_created": false
+  "pr_url": "https://github.com/racso80es/GesFer.Admin.Back/pull/34",
+  "push_done": true,
+  "pr_created": true
 }
