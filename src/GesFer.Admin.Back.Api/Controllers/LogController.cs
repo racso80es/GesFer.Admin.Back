@@ -86,11 +86,11 @@ public class LogController : ControllerBase
         {
             var auditLog = new AuditLog
             {
-                CursorId = dto.CursorId,
-                Username = dto.Username,
-                Action = dto.Action,
-                HttpMethod = dto.HttpMethod,
-                Path = dto.Path,
+                CursorId = dto.CursorId ?? string.Empty,
+                Username = dto.Username ?? string.Empty,
+                Action = dto.Action ?? string.Empty,
+                HttpMethod = dto.HttpMethod ?? string.Empty,
+                Path = dto.Path ?? string.Empty,
                 AdditionalData = dto.AdditionalData,
                 ActionTimestamp = dto.ActionTimestamp
             };
@@ -199,16 +199,29 @@ public class LogController : ControllerBase
                 return BadRequest(new { message = "No se pueden eliminar logs de los últimos 7 días" });
             }
 
-            var logsToDelete = await _context.Logs
-                .Where(l => l.TimeStamp < dateLimit)
-                .ToListAsync();
+            int count;
 
-            var count = logsToDelete.Count;
-
-            if (count > 0)
+            // Si es proveedor relacional (MySQL), usar ExecuteDeleteAsync
+            // Si es InMemory (Tests), usar carga y borrado convencional
+            if (_context.Database.IsRelational())
             {
-                _context.Logs.RemoveRange(logsToDelete);
-                await _context.SaveChangesAsync();
+                count = await _context.Logs
+                    .Where(l => l.TimeStamp < dateLimit)
+                    .ExecuteDeleteAsync();
+            }
+            else
+            {
+                // Fallback para In-Memory database (Integration Tests)
+                var logsToDelete = await _context.Logs
+                    .Where(l => l.TimeStamp < dateLimit)
+                    .ToListAsync();
+
+                count = logsToDelete.Count;
+                if (count > 0)
+                {
+                    _context.Logs.RemoveRange(logsToDelete);
+                    await _context.SaveChangesAsync();
+                }
             }
 
             return Ok(new PurgeLogsResponseDto

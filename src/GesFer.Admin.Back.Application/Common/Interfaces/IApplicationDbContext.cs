@@ -12,5 +12,9 @@ public interface IApplicationDbContext
     DbSet<State> States { get; }
     DbSet<City> Cities { get; }
     DbSet<Language> Languages { get; }
+
+    // Expose Database Facade for direct operations (needed for ExecuteDeleteAsync checks)
+    Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade Database { get; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
