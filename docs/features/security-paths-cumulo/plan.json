@@ -1,0 +1,46 @@
+{
+  "spec_version": "1.0",
+  "process_id": "feature",
+  "task_id": "security-paths-cumulo",
+  "plan_date": "2026-02-21",
+  "status": "planned",
+  "implementation_status": "complete",
+  "phases": [
+    {
+      "id": "1",
+      "name": "Cumulo paths e instructions",
+      "priority": "blocking",
+      "tasks": [
+        {"id": "1.1", "action": "modify", "target": "SddIA/agents/cumulo.paths.json", "description": "Añadir securityPath"},
+        {"id": "1.2", "action": "modify", "target": "SddIA/agents/cumulo.instructions.json", "description": "Añadir Map [SEC]"}
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Security-engineer y contrato",
+      "priority": "high",
+      "tasks": [
+        {"id": "2.1", "action": "modify", "target": "SddIA/agents/security-engineer.json", "description": "Añadir securityContract y pathsContract"},
+        {"id": "2.2", "action": "modify", "target": "SddIA/agents/security-engineer.json", "description": "Añadir instrucción Security items"},
+        {"id": "2.3", "action": "modify", "target": "SddIA/security/security-contract.md", "description": "Referencia paths.securityPath y custodio"}
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Verificación",
+      "priority": "medium",
+      "tasks": [
+        {"id": "3.1", "action": "verify", "target": "SddIA/security/", "description": "Sin modificación de 20 items"}
+      ]
+    }
+  ],
+  "acceptance_criteria": [
+    "securityPath en cumulo.paths.json",
+    "Map [SEC] en cumulo.instructions.json",
+    "security-engineer con securityContract, pathsContract e instrucción",
+    "security-contract.md referencia paths.securityPath",
+    "Sin regresión en items existentes"
+  ],
+  "ready_for_implementation": true,
+  "atomic_commit": "feat(security): patron paths Cumulo para SddIA/security"
+}

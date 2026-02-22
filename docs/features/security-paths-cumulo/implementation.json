@@ -1,0 +1,26 @@
+{
+  "spec_version": "1.0",
+  "process_id": "feature",
+  "task_id": "security-paths-cumulo",
+  "plan_ref": "plan.md",
+  "spec_ref": "spec.md",
+  "clarify_ref": "clarify.md",
+  "branch": "feat/security-paths-cumulo",
+  "created": "2026-02-21",
+  "status": "executed",
+  "items": [
+    {"id": "1.1", "action": "modify", "path": "SddIA/agents/cumulo.paths.json", "phase": "1", "status": "done", "change": "Added securityPath"},
+    {"id": "1.2", "action": "modify", "path": "SddIA/agents/cumulo.instructions.json", "phase": "1", "status": "done", "change": "Added Map [SEC] instruction"},
+    {"id": "2.1", "action": "modify", "path": "SddIA/agents/security-engineer.json", "phase": "2", "status": "done", "change": "Added securityContract and pathsContract"},
+    {"id": "2.2", "action": "modify", "path": "SddIA/agents/security-engineer.json", "phase": "2", "status": "done", "change": "Added Security items instruction"},
+    {"id": "2.3", "action": "modify", "path": "SddIA/security/security-contract.md", "phase": "2", "status": "done", "change": "Referenced paths.securityPath and custodian"},
+    {"id": "3.1", "action": "verify", "path": "SddIA/security/", "phase": "3", "status": "done", "change": "No regression in 20 items"}
+  ],
+  "order": "1.1 -> 1.2 -> 2.1 -> 2.2 -> 2.3 -> 3.1",
+  "verification": {
+    "cumulo": "securityPath and Map [SEC] present",
+    "security_engineer": "securityContract, pathsContract, Security items instruction",
+    "security_contract": "paths.securityPath and custodian referenced"
+  },
+  "atomic_commit": "feat(security): patron paths Cumulo para SddIA/security"
+}
