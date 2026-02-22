@@ -1,0 +1,14 @@
+{
+  "spec_version": "1.0",
+  "process_id": "feature",
+  "task_id": "rust-tools-skills-standard",
+  "clarify_date": "2026-02-21",
+  "status": "clarified",
+  "gaps_resolved": [
+    {"id": "tools-cargo", "gap": "Cargo.toml tools-rs: añadir invoke_mysql_seeds y prepare_full_env.", "resolution": "Añadir [[bin]] para ambos."},
+    {"id": "push-create-pr-api", "gap": "API CLI de push_and_create_pr.", "resolution": "Flags: --branch, --persist, --title, --base."},
+    {"id": "bash-skills", "gap": "Skills bash legacy.", "resolution": "Fuera de alcance; documentar como legacy."}
+  ],
+  "blockers": [],
+  "ready_for_planning": true
+}

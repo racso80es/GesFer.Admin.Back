@@ -1,0 +1,13 @@
+{
+  "spec_version": "1.0",
+  "process_id": "feature",
+  "task_id": "rust-tools-skills-standard",
+  "status": "executed",
+  "items": [
+    {"id": "1.1", "action": "modify", "path": "scripts/tools-rs/Cargo.toml", "phase": "1", "status": "done"},
+    {"id": "2.1", "action": "create", "path": "scripts/skills-rs/src/bin/push_and_create_pr.rs", "phase": "2", "status": "done"},
+    {"id": "2.2", "action": "modify", "path": "scripts/skills-rs/Cargo.toml", "phase": "2", "status": "done"},
+    {"id": "2.3", "action": "modify", "path": "scripts/skills-rs/install.ps1", "phase": "2", "status": "done"},
+    {"id": "3.1", "action": "modify", "path": "scripts/skills/finalizar-git/Push-And-CreatePR.ps1", "phase": "3", "status": "done"}
+  ]
+}
