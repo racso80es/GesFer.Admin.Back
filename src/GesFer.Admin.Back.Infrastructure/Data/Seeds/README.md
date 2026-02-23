@@ -4,8 +4,20 @@ Esta carpeta contiene los archivos de seed data para el dominio Admin. **Admin e
 
 ## Archivos
 
+### Maestro geo (zona España)
+- **languages.json**: Idiomas (ej. Español).
+- **countries.json**: País España (Code ES).
+- **states.json**: Comunidades Autónomas de España (19: Madrid, Andalucía, Aragón, Asturias, Illes Balears, Canarias, Cantabria, Castilla y León, Castilla-La Mancha, Catalunya, Comunitat Valenciana, Extremadura, Galicia, Región de Murcia, Navarra, País Vasco, La Rioja, Ceuta, Melilla) con códigos oficiales (MD, AN, AR, etc.).
+- **cities.json**: Capitales/ciudades principales por comunidad (Madrid, Sevilla, Zaragoza, Barcelona, Valencia, etc.).
+- **postal-codes.json**: Códigos postales (5 dígitos) asociados a cada ciudad; cubre zona geográfica de España.
+
+### Negocio y usuarios
+- **companies.json**: Empresas (Companies). Dependen de Language (y opcionalmente City, Country, State, PostalCode).
 - **admin-users.json**: Usuarios administrativos del sistema.
-- **companies.json**: Empresas (Companies). Cargado por `AdminJsonDataSeeder.SeedCompaniesAsync()` usando `AdminDbContext`.
+
+## Orden de ejecución (SeedAllAsync)
+
+1. Languages → 2. Countries → 3. States → 4. Cities → 5. PostalCodes → 6. Companies → 7. AdminUsers.
 
 ## Orden de ejecución (BD compartida)
 

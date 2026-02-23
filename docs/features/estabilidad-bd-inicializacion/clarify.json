@@ -1,0 +1,30 @@
+{
+  "spec_version": "1.0.0",
+  "feature_id": "estabilidad-bd-inicializacion",
+  "date": "2026-02-23",
+  "base": ["spec.md", "spec.json"],
+  "resolutions": [
+    {
+      "gap": "RF1 idempotencia: CreateTable falla si tabla existe",
+      "resolution": "Up() con SQL raw CREATE TABLE IF NOT EXISTS por tabla; Down() con DROP TABLE en orden inverso (Companies, PostalCode, City, State, Country, Language)"
+    },
+    {
+      "gap": "RF2 registro excepciones: WebAppExtensions no tiene ILogger",
+      "resolution": "Resolver ILogger<WebAppExtensions> del scope; en catch: LogError(ex, ...) y rethrow en RunMigrationsAndSeedsAsync y RunMigrationsAndSeedsThenExitAsync"
+    },
+    {
+      "gap": "RF2 SeedAllAsync y archivos JSON opcionales",
+      "resolution": "No cambiar seeder; archivos Seeds son prerequisito del proyecto; fallo visible por rethrow"
+    },
+    {
+      "gap": "RF3 rutas mysql-seeds-config (seedsPath opcional)",
+      "resolution": "Actualizar efProject, startupProject y seedsPath con rutas en slash; seedsPath = src/GesFer.Admin.Back.Infrastructure/Data/Seeds"
+    }
+  ],
+  "decisions": {
+    "migration_idempotent": "CREATE TABLE IF NOT EXISTS en Up(); Down() DROP en orden inverso",
+    "webbapp_exceptions": "ILogger from scope; LogError + throw",
+    "seeds_prerequisite": "JSON en Data/Seeds son prerequisito; no validación extra en esta feature",
+    "config_paths": "efProject, startupProject, seedsPath con slash"
+  }
+}

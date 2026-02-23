@@ -1,0 +1,36 @@
+{
+  "spec_version": "1.0.0",
+  "feature_id": "estabilidad-bd-inicializacion",
+  "date": "2026-02-23",
+  "base": ["spec.md", "clarify.md"],
+  "phases": [
+    {
+      "phase": 1,
+      "task": "AddAdminCoreAndGeoTables migration",
+      "touchpoint": "src/GesFer.Admin.Back.Infrastructure/Data/Migrations/",
+      "rf": "RF1",
+      "steps": ["Create migration file with Up() using CREATE TABLE IF NOT EXISTS", "Down() DROP TABLE inverse order", "Validate: ef database update"]
+    },
+    {
+      "phase": 2,
+      "task": "WebAppExtensions MigrateAsync + SeedAllAsync + log + rethrow",
+      "touchpoint": "src/GesFer.Admin.Back.Infrastructure/Extensions/WebAppExtensions.cs",
+      "rf": "RF2",
+      "steps": ["RunMigrationsAndSeedsAsync: MigrateAsync, SeedAllAsync, ILogger, catch LogError+throw", "RunMigrationsAndSeedsThenExitAsync: SeedAllAsync, try/catch log+rethrow, Exit(0) only on success"]
+    },
+    {
+      "phase": 3,
+      "task": "Update mysql-seeds-config.json",
+      "touchpoint": "scripts/tools/invoke-mysql-seeds/mysql-seeds-config.json",
+      "rf": "RF3",
+      "steps": ["efProject to GesFer.Admin.Back.Infrastructure", "startupProject to GesFer.Admin.Back.Api", "seedsPath to Infrastructure/Data/Seeds"]
+    }
+  ],
+  "prerequisites": ["Seed JSON files in src/GesFer.Admin.Back.Infrastructure/Data/Seeds/"],
+  "validation_criteria": [
+    "Migration creates 6 tables",
+    "Startup runs MigrateAsync and SeedAllAsync; exceptions logged and rethrown",
+    "Invoke-MySqlSeeds.ps1 succeeds with updated config",
+    "Health, geo, companies, login operational"
+  ]
+}

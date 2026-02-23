@@ -1,0 +1,30 @@
+{
+  "version": "1.0.0",
+  "date": "2026-02-23",
+  "objective": "Estabilidad BD tras inicialización: proyecto estable en local (Docker, MySQL estructura y datos, API 100%)",
+  "observed_state": {
+    "tables_present": ["Logs"],
+    "tables_missing": ["Companies", "AdminUsers", "Country", "State", "City", "Language", "PostalCode", "AuditLogs"]
+  },
+  "root_causes": [
+    "Admin migrations do not create Companies nor geo tables (only AdminUsers, AuditLogs, Logs)",
+    "RunMigrationsAndSeedsAsync does not call MigrateAsync() on normal startup",
+    "Invoke-MySqlSeeds config points to non-existent project paths (GesFer.Admin.Infra, GesFer.Admin.Api)",
+    "Prepare-FullEnv does not run migrations or seeds",
+    "Startup seeds only run SeedCompaniesAsync and SeedAdminUsersAsync, not SeedAllAsync (no Languages/Countries/States/Cities)"
+  ],
+  "recommendations": [
+    "Add Admin migrations for Language, Country, State, City, PostalCode, Companies",
+    "Call context.Database.MigrateAsync() in RunMigrationsAndSeedsAsync before seeds",
+    "Use SeedAllAsync (or run geo seeds before Companies/AdminUsers) in startup and RUN_SEEDS_ONLY flow",
+    "Update mysql-seeds-config.json with correct paths: GesFer.Admin.Back.Infrastructure, GesFer.Admin.Back.Api",
+    "Document or integrate Invoke-MySqlSeeds after Prepare-FullEnv; optionally align InitDatabase with AdminDbContext if used for Admin only"
+  ],
+  "touchpoints": [
+    "src/GesFer.Admin.Back.Infrastructure/Data/Migrations/",
+    "src/GesFer.Admin.Back.Infrastructure/Extensions/WebAppExtensions.cs",
+    "src/GesFer.Admin.Back.Api/Program.cs",
+    "scripts/tools/invoke-mysql-seeds/mysql-seeds-config.json",
+    "scripts/tools/prepare-full-env/"
+  ]
+}

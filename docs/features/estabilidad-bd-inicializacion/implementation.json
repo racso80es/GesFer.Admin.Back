@@ -1,0 +1,33 @@
+{
+  "spec_version": "1.0.0",
+  "feature_id": "estabilidad-bd-inicializacion",
+  "date": "2026-02-23",
+  "phases_completed": [1, 2, 3],
+  "touchpoints": [
+    {
+      "path": "src/GesFer.Admin.Back.Infrastructure/Data/Migrations/20260223100000_AddAdminCoreAndGeoTables.cs",
+      "action": "created",
+      "rf": "RF1"
+    },
+    {
+      "path": "src/GesFer.Admin.Back.Infrastructure/Data/Migrations/20260223100000_AddAdminCoreAndGeoTables.Designer.cs",
+      "action": "created",
+      "rf": "RF1"
+    },
+    {
+      "path": "src/GesFer.Admin.Back.Infrastructure/Extensions/WebAppExtensions.cs",
+      "action": "modified",
+      "rf": "RF2"
+    },
+    {
+      "path": "scripts/tools/invoke-mysql-seeds/mysql-seeds-config.json",
+      "action": "modified",
+      "rf": "RF3"
+    }
+  ],
+  "validation": {
+    "build": "ok",
+    "ef_database_update": "pending",
+    "invoke_mysql_seeds": "pending"
+  }
+}

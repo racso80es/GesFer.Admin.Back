@@ -1,8 +1,21 @@
 [
-  {
-    "Id": "1a2b3c4d-5e6f-7890-1234-567890abcdef",
-    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
-    "Name": "Madrid",
-    "Code": "MD"
-  }
+  {"Id":"1a2b3c4d-5e6f-7890-1234-567890abcdef","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Madrid","Code":"MD"},
+  {"Id":"e1000001-5e6f-7890-1234-567890000001","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Andalucía","Code":"AN"},
+  {"Id":"e1000002-5e6f-7890-1234-567890000002","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Aragón","Code":"AR"},
+  {"Id":"e1000003-5e6f-7890-1234-567890000003","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Asturias","Code":"AS"},
+  {"Id":"e1000004-5e6f-7890-1234-567890000004","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Illes Balears","Code":"IB"},
+  {"Id":"e1000005-5e6f-7890-1234-567890000005","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Canarias","Code":"CN"},
+  {"Id":"e1000006-5e6f-7890-1234-567890000006","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Cantabria","Code":"CB"},
+  {"Id":"e1000007-5e6f-7890-1234-567890000007","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Castilla y León","Code":"CL"},
+  {"Id":"e1000008-5e6f-7890-1234-567890000008","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Castilla-La Mancha","Code":"CM"},
+  {"Id":"e1000009-5e6f-7890-1234-567890000009","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Catalunya","Code":"CT"},
+  {"Id":"e100000a-5e6f-7890-1234-56789000000a","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Comunitat Valenciana","Code":"VC"},
+  {"Id":"e100000b-5e6f-7890-1234-56789000000b","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Extremadura","Code":"EX"},
+  {"Id":"e100000c-5e6f-7890-1234-56789000000c","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Galicia","Code":"GA"},
+  {"Id":"e100000d-5e6f-7890-1234-56789000000d","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Región de Murcia","Code":"MC"},
+  {"Id":"e100000e-5e6f-7890-1234-56789000000e","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Navarra","Code":"NA"},
+  {"Id":"e100000f-5e6f-7890-1234-56789000000f","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"País Vasco","Code":"PV"},
+  {"Id":"e1000010-5e6f-7890-1234-567890000010","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"La Rioja","Code":"LR"},
+  {"Id":"e1000011-5e6f-7890-1234-567890000011","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Ceuta","Code":"CE"},
+  {"Id":"e1000012-5e6f-7890-1234-567890000012","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Melilla","Code":"ML"}
 ]

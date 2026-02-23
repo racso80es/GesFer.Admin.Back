@@ -1,0 +1,19 @@
+{
+  "spec_version": "1.0.0",
+  "feature_id": "estabilidad-bd-inicializacion",
+  "date": "2026-02-23",
+  "validation_criteria": [
+    { "id": "build", "status": "ok", "detail": "dotnet build correcto" },
+    { "id": "migrations", "status": "ok", "detail": "InitialAdmin y AddAdminCoreAndGeoTables aplicadas; tablas creadas" },
+    { "id": "invoke_mysql_seeds", "status": "ok", "detail": "Config rutas OK; migraciones y seeds ejecutados; fix Join-Path -replace" },
+    { "id": "health", "status": "ok", "detail": "GET /health 200" },
+    { "id": "endpoints", "status": "partial", "detail": "Company 401 (existe, requiere auth); geo rutas por verificar" },
+    { "id": "seeds_data", "status": "ok", "detail": "Api.csproj copia Seeds al output; companies.json LanguageId corregido; SeedAllAsync carga todos los datos" }
+  ],
+  "fixes_applied": [
+    "Migration SQL: charset solo a nivel tabla (utf8mb4)",
+    "Invoke-MySqlSeeds.ps1: (Join-Path ...) -replace para seeds",
+    "Api.csproj: copia Infrastructure/Data/Seeds/*.json a output Data/Seeds",
+    "companies.json: languageId alineado con languages.json (FK Language)"
+  ]
+}

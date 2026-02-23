@@ -101,11 +101,12 @@ public class AdminJsonDataSeeder
     {
         return File.Exists(Path.Combine(directoryPath, "admin-users.json"))
             || File.Exists(Path.Combine(directoryPath, "companies.json"))
-            || File.Exists(Path.Combine(directoryPath, "languages.json"));
+            || File.Exists(Path.Combine(directoryPath, "languages.json"))
+            || File.Exists(Path.Combine(directoryPath, "postal-codes.json"));
     }
 
     /// <summary>
-    /// Carga todos los seeds de Admin en orden: Languages -> Countries -> States -> Cities -> Companies -> AdminUsers.
+    /// Carga todos los seeds de Admin en orden: Languages -> Countries -> States -> Cities -> PostalCodes -> Companies -> AdminUsers.
     /// Responsabilidad única: carga conjunta de datos Admin para BD compartida.
     /// </summary>
     public async Task<AdminSeedResult> SeedAllAsync()
@@ -144,7 +145,15 @@ public class AdminJsonDataSeeder
             result.Entities.AddRange(citiesResult.Entities);
         }
 
-        // 5. Companies
+        // 5. PostalCodes
+        var postalCodesResult = await SeedPostalCodesAsync();
+        if (postalCodesResult.Loaded)
+        {
+            result.Loaded = true;
+            result.Entities.AddRange(postalCodesResult.Entities);
+        }
+
+        // 6. Companies
         var companiesResult = await SeedCompaniesAsync();
         if (companiesResult.Loaded)
         {
@@ -152,7 +161,7 @@ public class AdminJsonDataSeeder
             result.Entities.AddRange(companiesResult.Entities);
         }
 
-        // 6. Users
+        // 7. Users
         var usersResult = await SeedAdminUsersAsync();
         if (usersResult.Loaded)
         {
@@ -317,6 +326,48 @@ public class AdminJsonDataSeeder
             await _context.SaveChangesAsync();
             result.Loaded = true;
             result.Entities.Add($"{count} Cities created");
+        }
+        return result;
+    }
+
+    /// <summary>
+    /// Carga códigos postales desde postal-codes.json (maestro geo).
+    /// </summary>
+    public async Task<AdminSeedResult> SeedPostalCodesAsync()
+    {
+        var result = new AdminSeedResult();
+        var filePath = Path.Combine(_seedsPath, "postal-codes.json");
+        if (!File.Exists(filePath)) return result;
+
+        _logger.LogInformation("Cargando códigos postales desde {Path}", filePath);
+        var json = await File.ReadAllTextAsync(filePath);
+        var postalCodes = JsonSerializer.Deserialize<List<PostalCodeSeed>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+        if (postalCodes == null || !postalCodes.Any()) return result;
+
+        int count = 0;
+        foreach (var item in postalCodes)
+        {
+            var id = Guid.Parse(item.Id);
+            var existing = await _context.PostalCodes.IgnoreQueryFilters().FirstOrDefaultAsync(x => x.Id == id);
+            if (existing == null)
+            {
+                _context.PostalCodes.Add(new PostalCode
+                {
+                    Id = id,
+                    CityId = Guid.Parse(item.CityId),
+                    Code = item.Code,
+                    CreatedAt = DateTime.UtcNow,
+                    IsActive = true
+                });
+                count++;
+            }
+        }
+        if (count > 0)
+        {
+            await _context.SaveChangesAsync();
+            result.Loaded = true;
+            result.Entities.Add($"{count} PostalCodes created");
         }
         return result;
     }
@@ -600,5 +651,12 @@ public class AdminJsonDataSeeder
         public string Id { get; set; } = string.Empty;
         public string StateId { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
+    }
+
+    private class PostalCodeSeed
+    {
+        public string Id { get; set; } = string.Empty;
+        public string CityId { get; set; } = string.Empty;
+        public string Code { get; set; } = string.Empty;
     }
 }
