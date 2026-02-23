@@ -18,3 +18,11 @@ anyhow = "1.0"
 [[bin]]
 name = "gesfer_manager"
 path = "src/bin/gesfer_manager.rs"
+
+[[bin]]
+name = "invoke_mysql_seeds"
+path = "src/bin/invoke_mysql_seeds.rs"
+
+[[bin]]
+name = "prepare_full_env"
+path = "src/bin/prepare_full_env.rs"
