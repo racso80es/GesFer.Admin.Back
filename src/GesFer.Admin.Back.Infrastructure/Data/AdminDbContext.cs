@@ -36,6 +36,9 @@ public class AdminDbContext : DbContext, IApplicationDbContext
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
         });
 
+        // Tabla PostalCode (singular) para coincidir con migración; por defecto EF usaría "PostalCodes"
+        modelBuilder.Entity<PostalCode>(entity => entity.ToTable("PostalCode"));
+
         modelBuilder.ConfigureAdminEntities();
     }
 

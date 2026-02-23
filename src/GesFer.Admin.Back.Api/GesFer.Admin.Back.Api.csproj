@@ -28,4 +28,9 @@
     <ProjectReference Include="..\GesFer.Admin.Back.Infrastructure\GesFer.Admin.Back.Infrastructure.csproj" />
   </ItemGroup>
 
+  <!-- Copiar seeds de Infrastructure al output para que AdminJsonDataSeeder los encuentre (Data/Seeds) -->
+  <ItemGroup>
+    <None Include="..\GesFer.Admin.Back.Infrastructure\Data\Seeds\*.json" Link="Data\Seeds\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

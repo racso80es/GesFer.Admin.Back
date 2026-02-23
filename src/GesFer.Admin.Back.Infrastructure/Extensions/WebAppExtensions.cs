@@ -2,6 +2,7 @@ using GesFer.Admin.Back.Infrastructure.Data;
 using GesFer.Admin.Back.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace GesFer.Admin.Back.Infrastructure;
 
@@ -11,22 +12,24 @@ namespace GesFer.Admin.Back.Infrastructure;
 public static class WebAppExtensions
 {
     /// <summary>
-    /// Ejecuta migraciones y seeds de Admin (DbContext y AdminJsonDataSeeder). Llamar desde Program: await app.Services.RunMigrationsAndSeedsAsync().
+    /// Ejecuta migraciones y seeds de Admin (MigrateAsync + SeedAllAsync). Llamar desde Program: await app.Services.RunMigrationsAndSeedsAsync().
     /// </summary>
     public static async Task RunMigrationsAndSeedsAsync(this IServiceProvider serviceProvider)
     {
         using var scope = serviceProvider.CreateScope();
         var services = scope.ServiceProvider;
+        var logger = services.GetRequiredService<ILoggerFactory>().CreateLogger("GesFer.Admin.Back.Infrastructure.WebAppExtensions");
         try
         {
             var context = services.GetRequiredService<AdminDbContext>();
+            await context.Database.MigrateAsync();
             var seeder = services.GetRequiredService<AdminJsonDataSeeder>();
-            await seeder.SeedCompaniesAsync();
-            await seeder.SeedAdminUsersAsync();
+            await seeder.SeedAllAsync();
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            // El llamador (Program) puede registrar el error si dispone de logger.
+            logger.LogError(ex, "Error en migraciones o seeds: {Message}", ex.Message);
+            throw;
         }
     }
 
@@ -37,11 +40,19 @@ public static class WebAppExtensions
     {
         using var scope = serviceProvider.CreateScope();
         var services = scope.ServiceProvider;
-        var context = services.GetRequiredService<AdminDbContext>();
-        await context.Database.MigrateAsync();
-        var seeder = services.GetRequiredService<AdminJsonDataSeeder>();
-        await seeder.SeedCompaniesAsync();
-        await seeder.SeedAdminUsersAsync();
-        Environment.Exit(0);
+        var logger = services.GetRequiredService<ILoggerFactory>().CreateLogger("GesFer.Admin.Back.Infrastructure.WebAppExtensions");
+        try
+        {
+            var context = services.GetRequiredService<AdminDbContext>();
+            await context.Database.MigrateAsync();
+            var seeder = services.GetRequiredService<AdminJsonDataSeeder>();
+            await seeder.SeedAllAsync();
+            Environment.Exit(0);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error en migraciones o seeds (RUN_SEEDS_ONLY): {Message}", ex.Message);
+            throw;
+        }
     }
 }

@@ -4,6 +4,23 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+## 2026-02-23 — Estabilidad BD inicialización y seeds geo España (feat/estabilidad-bd-inicializacion)
+
+**Rama:** feat/estabilidad-bd-inicializacion.
+
+**Alcance:**
+- **Migración AddAdminCoreAndGeoTables:** Tablas Language, Country, State, City, PostalCode, Companies (SQL idempotente CREATE TABLE IF NOT EXISTS).
+- **WebAppExtensions:** MigrateAsync antes de seeds; SeedAllAsync (Languages → Countries → States → Cities → PostalCodes → Companies → AdminUsers); ILogger y rethrow en excepciones; configuración ToTable("PostalCode") en AdminDbContext.
+- **Invoke-MySqlSeeds:** mysql-seeds-config.json con rutas GesFer.Admin.Back; corrección Join-Path en Invoke-MySqlSeeds.ps1.
+- **Seeds:** Api.csproj copia Infrastructure/Data/Seeds/*.json al output; companies.json LanguageId alineado con languages.json; SeedPostalCodesAsync y postal-codes.json.
+- **Maestro geo España:** states.json (19 CCAA), cities.json (capitales/ciudades principales), postal-codes.json (códigos postales 5 dígitos por ciudad). README Seeds actualizado.
+- **Documentación:** docs/features/estabilidad-bd-inicializacion/ (analysis, spec, clarify, plan, implementation, validacion).
+
+**Referencias:**
+- `docs/features/estabilidad-bd-inicializacion/` — analysis, spec, clarify, plan, implementation, validacion.
+
+---
+
 ## 2026-02-23 — Corrección según auditoría 2026-02-23 (feat/correccion-auditorias-20260223)
 
 **Rama:** feat/correccion-auditorias-20260223.

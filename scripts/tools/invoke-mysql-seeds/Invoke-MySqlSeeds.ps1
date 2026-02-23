@@ -157,7 +157,8 @@ if ($runSeeds) {
     $seedStart = Get-Date
     $env:RUN_SEEDS_ONLY = "1"
     try {
-        $proc = Start-Process -FilePath "dotnet" -ArgumentList "run", "--project", (Join-Path $repoRoot $config.startupProject -replace "/", "\") -PassThru -Wait -NoNewWindow -WorkingDirectory $repoRoot
+        $startupProjPath = (Join-Path $repoRoot $config.startupProject) -replace "/", "\"
+        $proc = Start-Process -FilePath "dotnet" -ArgumentList "run", "--project", $startupProjPath -PassThru -Wait -NoNewWindow -WorkingDirectory $repoRoot
         $data.seeds = @{ exitCode = $proc.ExitCode; duration_ms = [int]((Get-Date) - $seedStart).TotalMilliseconds }
         if ($proc.ExitCode -ne 0) {
             Add-Feedback -Phase "seeds" -Level "error" -Message "Seeds fallaron (exit $($proc.ExitCode))."

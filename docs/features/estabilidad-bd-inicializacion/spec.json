@@ -1,0 +1,59 @@
+{
+  "spec_version": "1.0.0",
+  "feature_id": "estabilidad-bd-inicializacion",
+  "date": "2026-02-23",
+  "objective": "Garantizar proyecto estable en local tras inicialización: Docker, MySQL estructura y datos, API 100% funcional",
+  "base_docs": ["analysis.md", "analysis.json"],
+  "scope": {
+    "in_scope": [
+      "Nueva migración EF AddAdminCoreAndGeoTables (Language, Country, State, City, PostalCode, Companies)",
+      "RunMigrationsAndSeedsAsync y RunMigrationsAndSeedsThenExitAsync aplican MigrateAsync y SeedAllAsync",
+      "Corrección mysql-seeds-config.json (efProject, startupProject)"
+    ],
+    "out_scope": [
+      "Cambios en InitDatabase.cs (Product)",
+      "Prepare-FullEnv ejecutando migraciones",
+      "Cambios en docker-compose"
+    ]
+  },
+  "functional_requirements": [
+    {
+      "id": "RF1",
+      "title": "Migración AddAdminCoreAndGeoTables",
+      "description": "Nueva migración que crea Language, Country, State, City, PostalCode, Companies; idempotente",
+      "touchpoint": "src/GesFer.Admin.Back.Infrastructure/Data/Migrations/",
+      "acceptance": "Tras ef database update existen todas las tablas con esquema coherente al snapshot"
+    },
+    {
+      "id": "RF2",
+      "title": "Arranque aplica migraciones y SeedAllAsync",
+      "description": "WebAppExtensions: MigrateAsync antes de seeds; usar SeedAllAsync en ambos flujos; no silenciar excepciones",
+      "touchpoint": "src/GesFer.Admin.Back.Infrastructure/Extensions/WebAppExtensions.cs",
+      "acceptance": "Un arranque con BD vacía deja datos geo + companies + admin users; segundo arranque no falla"
+    },
+    {
+      "id": "RF3",
+      "title": "Invoke-MySqlSeeds con proyectos correctos",
+      "description": "mysql-seeds-config.json con efProject y startupProject de GesFer.Admin.Back",
+      "touchpoint": "scripts/tools/invoke-mysql-seeds/mysql-seeds-config.json",
+      "acceptance": "Invoke-MySqlSeeds.ps1 completa sin error de proyectos no encontrados"
+    }
+  ],
+  "non_functional_requirements": [
+    { "id": "RNF1", "description": "Charset utf8mb4, tipos MySQL 8" },
+    { "id": "RNF2", "description": "No eliminar ni modificar datos en AdminUsers, AuditLogs, Logs" },
+    { "id": "RNF3", "description": "Orden creación tablas respetando FKs" }
+  ],
+  "validation_criteria": [
+    "Tablas Language, Country, State, City, PostalCode, Companies, AdminUsers, AuditLogs, Logs y __EFMigrationsHistory presentes",
+    "GET /health 200",
+    "Endpoints geo y companies sin error de tabla inexistente",
+    "Login con usuario seed funciona",
+    "Invoke-MySqlSeeds.ps1 exit code 0 con config actualizada"
+  ],
+  "references": {
+    "analysis": ["./analysis.md", "./analysis.json"],
+    "snapshot": "src/GesFer.Admin.Back.Infrastructure/Data/Migrations/AdminDbContextModelSnapshot.cs",
+    "seeder": "src/GesFer.Admin.Back.Infrastructure/Services/AdminJsonDataSeeder.cs"
+  }
+}
