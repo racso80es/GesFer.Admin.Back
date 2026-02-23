@@ -1,0 +1,27 @@
+{
+  "spec_version": "1.0.0",
+  "process_id": "create-template",
+  "name": "Create Template",
+  "description": "Proceso para la creación de una nueva plantilla en paths.templatesPath: carpeta con spec.md y spec.json. Cumple SddIA/templates/templates-contract.json y Cúmulo.",
+  "process_doc_ref": "paths.processPath/create-template/",
+  "contract_ref": "paths.processPath/process-contract.json",
+  "templates_contract_ref": "SddIA/templates/templates-contract.json",
+  "persist_ref": "paths.featurePath/create-template-<template-id>",
+  "paths": {
+    "templatesPath_ref": "paths.templatesPath (Cúmulo)",
+    "featurePath_ref": "paths.featurePath (Cúmulo)",
+    "processPath_ref": "paths.processPath (Cúmulo)"
+  },
+  "process_interface_compliance": "Genera en carpeta de la tarea al menos un .md y un .json; entregable: carpeta en paths.templatesPath/<template-id>/ con spec.md y spec.json.",
+  "triggers": [
+    "Crear nueva plantilla en paths.templatesPath",
+    "Solicitud de creación de plantilla con template-id"
+  ],
+  "inputs": {
+    "template_id": "kebab-case. Obligatorio.",
+    "description": "Descripción breve del fin concreto. Obligatorio.",
+    "process_ref": "Proceso que orquesta (feature, correccion-auditorias, etc.). Obligatorio."
+  },
+  "related_actions": ["spec", "validate", "finalize"],
+  "related_skills": ["iniciar-rama", "documentation"]
+}

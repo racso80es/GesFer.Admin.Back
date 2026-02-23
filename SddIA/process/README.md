@@ -15,6 +15,7 @@ Todo proceso cumple el **contrato** en [process-contract.json](./process-contrac
 | **correccion-auditorias** | Corrección de hallazgos de auditoría: rama `feat/correccion-segun-auditorias` o `feat/correccion-auditorias-<id>`, documentación en paths.featurePath. Entrada: paths.auditsPath. | [correccion-auditorias/](./correccion-auditorias/) | Arquitecto, Tekton      |
 | **create-pattern** | Creación de patrón de diseño: carpeta en paths.patternsPath con spec.md y spec.json. | [create-pattern.json](./create-pattern.json)     | Arquitecto              |
 | **create-principle** | Creación de principio técnico: carpeta en paths.principlesPath con spec.md y spec.json. Principios con blocking_for_pr bloquean PR si falla validate. | [create-principle.json](./create-principle.json) | Cúmulo, Arquitecto      |
+| **create-template** | Creación de plantilla: rama feat/create-template-&lt;template-id&gt;, carpeta en paths.templatesPath con spec.md y spec.json. Configuración predefinida de un proceso con fin concreto. | [create-template/](./create-template/)           | Cúmulo, Arquitecto      |
 
 ## Uso
 
@@ -23,6 +24,7 @@ Todo proceso cumple el **contrato** en [process-contract.json](./process-contrac
 3. **Refactorization:** paths.processPath/refactorization/. Ruta: Cúmulo (paths.featurePath/refactorization-&lt;nombre_refactor&gt;).
 4. **Create-tool:** paths.processPath/create-tool/. Ruta: Cúmulo (paths.featurePath/create-tool-&lt;tool-id&gt;). Entregable: cápsula en paths.toolsPath/&lt;tool-id&gt;/.
 5. **Corrección según auditorías:** paths.processPath/correccion-auditorias/. Ruta: Cúmulo (paths.featurePath/&lt;nombre_correccion&gt;). Entrada: paths.auditsPath (informes de auditoría).
+6. **Create-template:** paths.processPath/create-template/. Ruta: Cúmulo (paths.featurePath/create-template-&lt;template-id&gt;). Entregable: paths.templatesPath/&lt;template-id&gt;/ (spec.md, spec.json).
 
 Las **acciones** (spec, clarify, plan, implementation, execution, validate, finalize) siguen en paths.actionsPath (Cúmulo) y son invocadas por los procesos.
 
