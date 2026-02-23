@@ -3,7 +3,8 @@
   "branch": "feat/estabilidad-bd-inicializacion",
   "commit": "feat(admin): estabilidad BD inicializacion y seeds geo Espana",
   "timestamp": "2026-02-23",
-  "status": "commit_done",
-  "pending": ["push", "pr"],
-  "evolution_log_updated": true
+  "status": "pr_created",
+  "pr_url": "https://github.com/racso80es/GesFer.Admin.Back/pull/40",
+  "evolution_log_updated": true,
+  "verify_pr_protocol": "skipped_cargo_not_in_path"
 }
