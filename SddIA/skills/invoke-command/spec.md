@@ -32,6 +32,8 @@ Uso (desde la raíz del repo):
 
 El .bat invoca bin/invoke_command.exe (Rust) si existe; el exe acepta -Command/-Fase y --command-file.
 
+**Rutas con --command-file:** (1) Con el .bat, usar **ruta absoluta** al archivo de comando (p. ej. `--command-file "c:\Proyectos\Repo\docs\features\X\commit_cmd.txt"`) para que el exe resuelva bien desde cualquier directorio. (2) Alternativa: ejecutar el exe directamente desde la **raíz del repo**; entonces las rutas relativas (p. ej. `docs\features\X\commit_cmd.txt`) se resuelven correctamente.
+
 Prohibido ejecutar comandos directamente en el shell sin pasar por esta skill.
 
 ---
