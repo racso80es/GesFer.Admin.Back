@@ -20,5 +20,5 @@
     { "id": "SEC-AUDIT-004", "description": "Execution must be logged to paths.auditsPath + paths.accessLogFile regardless of outcome." },
     { "id": "SEC-AUDIT-005", "description": "Auditor Process Token must be validated before allowing any action." }
   ],
-  "related_agents": ["auditor.process", "auditor.back", "auditor.front"]
+  "related_agents": ["auditor.process", "auditor"]
 }

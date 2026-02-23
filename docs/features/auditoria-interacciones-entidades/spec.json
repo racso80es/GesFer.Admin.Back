@@ -1,0 +1,11 @@
+{
+  "feature_id": "auditoria-interacciones-entidades",
+  "purpose": "Incorporar al agente auditor en los elementos del sistema mediante cambios al contrato de Token; auditar interacciones (ej. veces usada una herramienta, por quién).",
+  "touchpoints": [
+    {"area": "SddIA/tokens/tokens-contract.json", "change": "interaction_audit, auditor como consumidor, constraints"},
+    {"area": "SddIA/tokens/karma2-token/spec.json", "change": "token_definition.interaction_audit, validation_rules"},
+    {"area": "SddIA/agents/auditor/process-interaction.json", "change": "Instruction: consumir interaction_audit para agregación"}
+  ],
+  "interaction_audit_fields": ["entity_type", "entity_id", "invoked_by", "timestamp"],
+  "entity_type_enum": ["skill", "tool", "action", "process"]
+}
