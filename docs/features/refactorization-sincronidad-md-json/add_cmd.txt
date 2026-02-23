@@ -1,0 +1,1 @@
+git add docs/features/refactorization-sincronidad-md-json/ SddIA/norms/ SddIA/actions/validate/ SddIA/actions/sddia-difusion/ SddIA/constitution.json SddIA/principles/principles-contract.json SddIA/security/ AGENTS.md .cursor/rules/sddia-ssot.mdc

@@ -30,5 +30,6 @@
     },
     "required": ["id", "title", "category", "tags", "metadata", "interested_agents"]
   },
-  "folder_structure": "Cada item debe residir en una carpeta nombrada con su UUID: SddIA/security/<uuid>/"
+  "folder_structure": "Cada item debe residir en una carpeta nombrada con su UUID: SddIA/security/<uuid>/",
+  "domain_entities": "Los items de seguridad son entidades de dominio (ecosistema SddIA); integran el contrato Token y deben respetar estructura (spec.md + spec.json) y sincronidad MD/JSON. Norma: SddIA/norms/entidades-dominio-ecosistema-sddia.md."
 }
