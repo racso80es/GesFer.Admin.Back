@@ -1,0 +1,16 @@
+{
+  "process_id": "refactorization",
+  "task_id": "refactorization-sincronidad-md-json",
+  "phase": "execution",
+  "executed_items": [
+    {"id": "1", "area": "SddIA/norms", "files": ["entidades-dominio-ecosistema-sddia.md", "README.md"], "status": "applied"},
+    {"id": "2", "area": "SddIA/actions/validate", "files": ["spec.md", "spec.json"], "status": "applied"},
+    {"id": "3", "area": "SddIA/actions/sddia-difusion", "files": ["spec.md"], "status": "applied"},
+    {"id": "4", "area": "AGENTS.md", "change": "Sección 7: entidades de dominio (ecosistema SddIA)", "status": "applied"},
+    {"id": "5", "area": "SddIA/constitution.json", "change": "L7_DOMAIN_ENTITIES; domain_entities_ref", "status": "applied"},
+    {"id": "6", "area": "SddIA/principles/principles-contract.json", "change": "Constraint entidades de dominio", "status": "applied"},
+    {"id": "7", "area": "SddIA/security", "files": ["security-contract.md", "security-contract.json"], "change": "domain_entities", "status": "applied"},
+    {"id": "8", "area": ".cursor/rules", "files": ["sddia-ssot.mdc"], "change": "Difusión norma entidades de dominio", "status": "applied"}
+  ],
+  "trazabilidad": "MD-JSON-Código atómica según proceso refactorization."
+}

@@ -1,0 +1,25 @@
+{
+  "process_id": "refactorization",
+  "task_id": "refactorization-sincronidad-md-json",
+  "timestamp": "2026-02-23",
+  "branch": "feat/rust-skills-tools-protocol",
+  "certification": "refactorization-sincronidad-md-json",
+  "checks": [
+    {"id": "process_loaded", "name": "Process refactorization cargado", "pass": true},
+    {"id": "entidades_dominio_norm", "name": "Norma entidades de dominio (ecosistema SddIA, Token) definida", "pass": true},
+    {"id": "skills_referenced", "name": "Skills definition paths consultadas", "pass": true},
+    {"id": "actions_linked", "name": "Tareas como Acciones del proceso", "pass": true},
+    {"id": "validate_parity_criterion", "name": "validate: criterio sddia_md_json_parity", "pass": true},
+    {"id": "sddia_difusion_parity_criterion", "name": "sddia-difusion: criterio paridad MD/JSON", "pass": true},
+    {"id": "artefacts_md_json", "name": "Artefactos .md y .json en carpeta tarea", "pass": true},
+    {"id": "ref_sddia_tags", "name": "Marcado TODO [REF-SddIA] en touchpoints", "pass": true},
+    {"id": "agents_entidades", "name": "AGENTS.md sección 7 entidades de dominio", "pass": true},
+    {"id": "constitution_l7", "name": "constitution L7_DOMAIN_ENTITIES y domain_entities_ref", "pass": true},
+    {"id": "principles_constraint", "name": "principles-contract constraint entidades de dominio", "pass": true},
+    {"id": "security_domain_entities", "name": "security-contract domain_entities", "pass": true},
+    {"id": "cursor_rules_difusion", "name": ".cursor/rules difusión entidades de dominio", "pass": true}
+  ],
+  "global_pass": true,
+  "blocking": false,
+  "note": "Certificación de salida ejecutada; ecosistema coherente para gobernanza MD/JSON."
+}

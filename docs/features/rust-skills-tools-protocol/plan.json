@@ -1,0 +1,20 @@
+{
+  "feature_id": "rust-skills-tools-protocol",
+  "tasks": [
+    {"id": "1", "name": "Crear norma commands-via-skills-or-tools.md", "output": "SddIA/norms/commands-via-skills-or-tools.md"},
+    {"id": "2", "name": "Actualizar SddIA/norms/README.md", "output": "Índice normas"},
+    {"id": "3", "name": "Actualizar AGENTS.md referencia norma comandos", "output": "AGENTS.md"},
+    {"id": "4", "name": "Actualizar constitution.json contexto Rust", "output": "SddIA/constitution.json"},
+    {"id": "5", "name": "Actualizar sddia-difusion spec", "output": "SddIA/actions/sddia-difusion/spec.md"},
+    {"id": "6", "name": "Crear .cursor/rules/commands-via-skills-tools.mdc", "output": "Regla Cursor"},
+    {"id": "7", "name": "Opcional: actualizar sddia-ssot.mdc", "output": ".cursor/rules/sddia-ssot.mdc"},
+    {"id": "8", "name": "Validación", "output": "validacion.json"},
+    {"id": "9", "name": "Finalize (skill finalizar-git)", "output": "PR"}
+  ],
+  "validation_criteria": [
+    "cargo build skills-rs y tools-rs OK",
+    "Norma y README normas existentes",
+    "AGENTS y constitution actualizados",
+    "commands-via-skills-tools.mdc existe y coherente"
+  ]
+}

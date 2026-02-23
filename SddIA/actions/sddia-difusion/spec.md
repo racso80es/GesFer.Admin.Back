@@ -51,9 +51,12 @@ Las rutas concretas se resuelven desde **Cúmulo** (paths.actionsPath, paths.pro
 ## Criterios de aceptación
 
 - [ ] Existe una regla en .cursor/rules que declare SddIA como SSOT para comportamiento del asistente (sddia-ssot.mdc).
+- [ ] Existe una regla en .cursor/rules que difunda la norma de ejecución de comandos solo vía skills o tools (commands-via-skills-tools.mdc), alineada con SddIA/norms/commands-via-skills-or-tools.md.
+- [ ] Las reglas de Cursor reflejan que la implementación estándar de skills y tools es Rust (paths.skillsRustPath, paths.toolsRustPath; Cúmulo).
 - [ ] Los listados en .cursor/rules (process, action, skill) coinciden con SddIA/norms e interaction-triggers.
 - [ ] Las reglas de Cursor no usan rutas literales que contradigan paths-via-cumulo (preferir paths.featurePath, paths.skillCapsules, etc.).
 - [ ] Queda documentado cómo mantener alineados .github y otros gestores (Jules) con SddIA (SddIA/norms/touchpoints-ia.md).
+- [ ] **Paridad MD/JSON:** Las definiciones en paths.skillsDefinitionPath y paths.processPath que se difunden (listados, contratos) tienen spec.md y spec.json coherentes; al actualizar un .md de skill o process, se actualiza el .json correspondiente. Ref: refactorization-sincronidad-md-json. // TODO: [REF-SddIA] sddia-difusion — acción refactorization-sincronidad-md-json.
 
 ---
 *Acción de soporte al ciclo: asegura que los gestores de IA respeten las normas indicadas en AGENTS y SddIA.*

@@ -26,7 +26,8 @@
     "principle_id en kebab-case.",
     "Rutas canónicas solo desde Cúmulo (paths.principlesPath).",
     "Un principio sin spec.md y spec.json en su carpeta no se considera completo.",
-    "Principios con blocking_for_pr: true son obligatorios en validate; si el check falla, global fail y blocking true (PR no debe aprobarse)."
+    "Principios con blocking_for_pr: true son obligatorios en validate; si el check falla, global fail y blocking true (PR no debe aprobarse).",
+    "Los principios son entidades de dominio (ecosistema SddIA): integran el contrato Token y deben respetar estructura y sincronidad MD/JSON. Norma: SddIA/norms/entidades-dominio-ecosistema-sddia.md."
   ],
   "consumers": [
     "SddIA/agents/architect.json",
