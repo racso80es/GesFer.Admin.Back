@@ -1,6 +1,7 @@
 //! Skill invoke-command en Rust (contrato skills).
 //! Ejecuta un comando de sistema y registra en docs/diagnostics/<branch>/execution_history.json.
-//! Uso: invoke_command.exe --command "git status" [--fase Accion] [--contexto GesFer]
+//! Uso: invoke_command.exe --command "<comando>" | --command-file <ruta> [--fase Accion] [--contexto GesFer]
+//! Acepta -Command/-Fase (PowerShell) y --command-file para leer comando desde archivo (evita inyección en terminal).
 
 use std::process::Command;
 use std::env;
@@ -15,8 +16,16 @@ fn main() {
     let mut contexto = "GesFer".to_string();
     let mut i = 1;
     while i < args.len() {
-        if args[i] == "--command" && i + 1 < args.len() {
+        if (args[i] == "--command" || args[i] == "-Command") && i + 1 < args.len() {
             command = args[i + 1].clone();
+            i += 2;
+            continue;
+        }
+        if (args[i] == "--command-file" || args[i] == "-CommandFile") && i + 1 < args.len() {
+            let path = args[i + 1].trim_matches('"').trim();
+            if let Ok(s) = fs::read_to_string(path) {
+                command = s.trim().to_string();
+            }
             i += 2;
             continue;
         }
@@ -25,7 +34,7 @@ fn main() {
             i += 2;
             continue;
         }
-        if args[i] == "--contexto" && i + 1 < args.len() {
+        if (args[i] == "--contexto" || args[i] == "-Contexto") && i + 1 < args.len() {
             contexto = args[i + 1].clone();
             i += 2;
             continue;
@@ -33,7 +42,7 @@ fn main() {
         i += 1;
     }
     if command.is_empty() {
-        eprintln!("Uso: {} --command \"<comando>\" [--fase Accion] [--contexto GesFer]", args.get(0).unwrap_or(&"invoke_command".into()));
+        eprintln!("Uso: {} --command \"<comando>\" | --command-file <ruta> [--fase Accion] [--contexto GesFer]", args.get(0).unwrap_or(&"invoke_command".into()));
         std::process::exit(1);
     }
 

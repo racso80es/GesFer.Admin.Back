@@ -1,0 +1,1 @@
+git add docs/features/rust-skills-tools-protocol/ SddIA/skills/invoke-command/ scripts/skills-rs/ scripts/skills/invoke-command/ AGENTS.md

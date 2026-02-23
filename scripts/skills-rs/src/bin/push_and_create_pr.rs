@@ -87,7 +87,7 @@ fn main() {
 
     if let Ok(out) = Command::new("git").args(["config", "--get", "remote.origin.url"]).output() {
         if out.status.success() {
-            let url = String::from_utf8_lossy(&out.stdout).trim();
+            let url = String::from_utf8_lossy(&out.stdout).trim().to_string();
             if let Some(repo) = url.split("github.com").nth(1) {
                 let repo = repo.trim_start_matches(':').trim_start_matches('/').trim_end_matches(".git").trim_end_matches('/');
                 let create_url = format!("https://github.com/{}/compare/{}...{}?expand=1", repo, base_branch, branch_name);
