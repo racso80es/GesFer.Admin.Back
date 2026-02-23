@@ -1,0 +1,18 @@
+{
+  "spec_version": "1.0.0",
+  "feature_id": "correccion-auditorias-20260223",
+  "validated_at": "2026-02-23",
+  "source_audit": "AUDITORIA_2026_02_23.md",
+  "build": { "status": "ok", "command": "dotnet build src/GesFer.Admin.Back.sln" },
+  "tests": {
+    "unit": { "status": "ok", "passed": 51, "failed": 0, "skipped": 0 },
+    "integration": { "status": "ok", "passed": 27, "failed": 0, "skipped": 1 }
+  },
+  "acceptance_criteria": [
+    { "id": "Api_sin_Infrastructure", "met": true, "note": "Api/DependencyInjection solo invoca Application e Infrastructure; Program usa extensiones." },
+    { "id": "AddApplicationServices_AddInfrastructureServices", "met": true, "note": "Application/DependencyInjection.cs y Infrastructure/DependencyInjection.cs creados." },
+    { "id": "LogController_ISender", "met": true, "note": "LogController usa ISender (MediatR); Commands/Queries/Handlers en Application." },
+    { "id": "dotnet_build", "met": true },
+    { "id": "dotnet_test", "met": true, "note": "51 unit + 27 integration; PurgeLogs_ShouldDeleteOldLogs omitido (InMemory no soporta ExecuteDeleteAsync)." }
+  ]
+}

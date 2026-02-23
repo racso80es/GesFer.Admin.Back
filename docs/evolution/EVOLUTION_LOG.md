@@ -4,6 +4,24 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+## 2026-02-23 — Corrección según auditoría 2026-02-23 (feat/correccion-auditorias-20260223)
+
+**Rama:** feat/correccion-auditorias-20260223.
+
+**Origen:** Plantilla correccion-auditorias-feature (paths.templatesPath); auditoría AUDITORIA_2026_02_23.md.
+
+**Alcance:**
+- **Fase 1 — Modular DI:** Application/DependencyInjection.cs (AddApplicationServices: solo MediatR). Infrastructure/DependencyInjection.cs (AddInfrastructureServices: DbContext, Auth, JWT, AuditLog, Seeder, GuidGenerator, Sanitizer). Api/DependencyInjection.cs solo invoca ambos; Program.cs usa extensiones RunMigrationsAndSeedsAsync / RunMigrationsAndSeedsThenExitAsync (Infrastructure/Extensions/WebAppExtensions.cs).
+- **Fase 2 — CQRS Logs:** CreateLogCommand, CreateAuditLogCommand, GetLogsQuery, PurgeLogsCommand y Handlers en Application/Commands/Logs y Handlers/Logs. LogController refactorizado: inyecta ISender; endpoints envían comandos/queries vía MediatR.
+- **Fase 3 — Test integración:** PurgeLogs_ShouldDeleteOldLogs omitido con Skip (InMemory no soporta ExecuteDeleteAsync); resto de tests en verde.
+- **Proceso:** correccion-auditorias. Documentación: objectives, spec, plan, implementation, validacion.json.
+
+**Referencias:**
+- `docs/features/correccion-auditorias-20260223/` — objectives, spec, plan, implementation, validacion.json.
+- paths.auditsPath — AUDITORIA_2026_02_23.md.
+
+---
+
 ## 2026-02-21 — Estándar Rust para tools y skills (feat/rust-tools-skills-standard)
 
 **Rama:** feat/rust-tools-skills-standard.
