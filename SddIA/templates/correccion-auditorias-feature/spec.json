@@ -1,0 +1,18 @@
+{
+  "template_id": "correccion-auditorias-feature",
+  "name": "Feature de corrección según auditorías",
+  "description": "Plantilla para ejecutar el ciclo de vida completo de una feature de corrección de hallazgos de auditoría: origen en paths.auditsPath (o ruta/fichero indicado), análisis con agentes adecuados y ciclo feature (objectives, spec, clarify, planning, implementation, execution, validate, finalize).",
+  "process_ref": "correccion-auditorias",
+  "input_sources": {
+    "audit_origin": "paths.auditsPath (Cúmulo) o ruta parcial/total indicada",
+    "audit_file": "Opcional: fichero o patrón (ej. AUDITORIA_*.md, validacion-*.json)"
+  },
+  "config": {
+    "default_persist": "paths.featurePath/<nombre_correccion>",
+    "default_branch_pattern": "feat/correccion-segun-auditorias | feat/correccion-auditorias-<id>"
+  },
+  "related_actions": ["spec", "clarify", "planning", "implementation", "execution", "validate", "finalize"],
+  "related_skills": ["iniciar-rama", "finalizar-git", "documentation", "security-audit"],
+  "interested_agents": ["architect", "tekton-developer", "auditor-back", "auditor-front", "auditor-process"],
+  "contract_ref": "SddIA/templates/templates-contract.json"
+}

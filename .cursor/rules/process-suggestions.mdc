@@ -22,6 +22,7 @@ Cuando el usuario escriba **#Process** (solo o en un mensaje), responde sugirien
 | **refactorization** | Refactorización: rama feat/refactorization-\<nombre_refactor\>, documentación en paths.featurePath/refactorization-\<nombre_refactor\>/ (Cúmulo). |
 | **create-tool** | Creación de una nueva herramienta: rama feat/create-tool-\<tool-id\>, cápsula en paths.toolCapsules, índice y Cúmulo actualizados. |
 | **correccion-auditorias** | Corrección de hallazgos de auditoría: rama feat/correccion-segun-auditorias; entrada paths.auditsPath; documentación en paths.featurePath. |
+| **create-template** | Creación de plantilla: rama feat/create-template-\<template-id\>, carpeta en paths.templatesPath. Configuración predefinida de proceso con fin concreto. |
 
 ## Respuesta sugerida
 

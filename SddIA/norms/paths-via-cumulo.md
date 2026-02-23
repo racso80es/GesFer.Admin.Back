@@ -13,6 +13,7 @@ En SddIA **no se escriben rutas de ficheros literales** (ej. `docs/features/`, `
 - **Técnico y operativo:** paths.architecturePath, paths.infrastructurePath, paths.debtPath, paths.tasksPath.
 - **SddIA:** paths.actionsPath, paths.processPath, paths.patternsPath, paths.principlesPath, paths.tokensPath, paths.normsPath.
 - **Skills y tools:** paths.skillsDefinitionPath, paths.skillCapsules[skill-id], paths.skillsRustPath; paths.toolsDefinitionPath, paths.toolCapsules[tool-id], paths.toolsRustPath.
+- **Plantillas:** paths.templatesPath (configuraciones predefinidas de procesos).
 
 ## Aplicación
 

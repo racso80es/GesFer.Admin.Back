@@ -1,0 +1,44 @@
+{
+  "contract_version": "1.0.0",
+  "scope": "SddIA/templates/",
+  "description": "Contrato que cada plantilla (template) en SddIA/templates debe cumplir: configuración predefinida de un proceso con fin concreto, orígenes de entrada y artefactos.",
+  "required_files": [
+    { "name": "spec.md", "required": true, "format": "markdown", "language": "es-ES" },
+    { "name": "spec.json", "required": true, "format": "json" }
+  ],
+  "security_model": {
+    "required_token": "Karma2Token",
+    "token_ref": "SddIA/tokens/karma2-token/spec.json",
+    "description": "La ejecución de una plantilla requiere un contexto de Karma2Token válido."
+  },
+  "json_schema": {
+    "type": "object",
+    "properties": {
+      "template_id": { "type": "string", "description": "Identificador de la plantilla en kebab-case." },
+      "name": { "type": "string", "description": "Nombre legible de la plantilla." },
+      "description": { "type": "string", "description": "Descripción breve del fin concreto y del procedimiento." },
+      "process_ref": { "type": "string", "description": "Proceso que orquesta la tarea (feature, correccion-auditorias, bug-fix, etc.). Referencia: paths.processPath/<process-id>." },
+      "input_sources": {
+        "type": "object",
+        "description": "Orígenes de entrada: rutas Cúmulo, parciales, totales o ficheros.",
+        "additionalProperties": { "type": "string" }
+      },
+      "config": {
+        "type": "object",
+        "description": "Parámetros opcionales por defecto (rama, carpeta de persistencia, etc.)."
+      },
+      "related_actions": { "type": "array", "items": { "type": "string" }, "description": "Acciones del ciclo que aplican (spec, clarify, planning, implementation, execution, validate, finalize)." },
+      "related_skills": { "type": "array", "items": { "type": "string" }, "description": "Skills recomendadas (iniciar-rama, finalizar-git, documentation, etc.)." },
+      "interested_agents": { "type": "array", "items": { "type": "string" }, "description": "Agentes que orquestan o consumen esta plantilla (architect, tekton-developer, etc.)." },
+      "contract_ref": { "type": "string", "description": "Referencia al contrato: SddIA/templates/templates-contract.json" }
+    },
+    "required": ["template_id", "name", "description", "process_ref", "related_actions", "contract_ref"]
+  },
+  "folder_structure": "Cada plantilla en SddIA/templates/<template-id>/ con spec.md y spec.json.",
+  "constraints": [
+    "template_id en kebab-case.",
+    "Rutas en input_sources deben poder resolverse vía Cúmulo cuando sean canónicas.",
+    "process_ref debe existir en paths.processPath."
+  ],
+  "consumers": ["paths.actionsPath", "SddIA/agents/*.json", "paths.processPath", ".cursor/rules"]
+}

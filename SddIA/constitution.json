@@ -54,6 +54,6 @@
       "configuration": "json"
     },
     "shell": "pwsh",
-    "paths_ref": "Cumulo (SddIA/agents/cumulo.json) is the single source for paths: tools (paths.toolCapsules), skills (paths.skillCapsules)."
+    "paths_ref": "Cumulo (SddIA/agents/cumulo.json) is the single source for paths: tools (paths.toolCapsules), skills (paths.skillCapsules), templates (paths.templatesPath)."
   }
 }
