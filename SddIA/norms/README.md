@@ -8,6 +8,7 @@ Este directorio contiene **normas de comportamiento** del agente definidas en el
 | **interaction-triggers.json** | Versión machine-readable de los disparadores. |
 | **paths-via-cumulo.md** | Rutas solo desde Cúmulo (contrato de paths); no rutas literales. |
 | **git-via-skills-or-process.md** | La IA nunca ejecuta git directamente; solo vía skill, herramienta, acción o proceso. |
+| **commands-via-skills-or-tools.md** | La IA nunca ejecuta comandos de sistema directamente; solo vía skill, herramienta, acción o proceso. Implementación estándar: Rust (paths.skillsRustPath, paths.toolsRustPath). |
 | **agents-principles-contract.md** | Implementación del contrato de principios en agentes (principlesContract). |
 | **patterns-in-planning-implementation-execution.md** | Aplicación de patrones en planning, implementation, execution. |
 

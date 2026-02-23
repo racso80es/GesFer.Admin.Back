@@ -1,0 +1,10 @@
+{
+  "feature_id": "rust-skills-tools-protocol",
+  "decisions": [
+    "Norma comandos-via-skills-or-tools generaliza a todo comando; git-via-skills-or-process se mantiene como especifica",
+    "Contexto Rust en constitution.json configuration",
+    "sddia-difusion actualizada con criterios norma y Rust",
+    "Regla .cursor: commands-via-skills-tools.mdc preferida como fichero dedicado"
+  ],
+  "gaps_closed": []
+}

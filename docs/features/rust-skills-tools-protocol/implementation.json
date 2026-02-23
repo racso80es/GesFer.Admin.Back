@@ -1,0 +1,14 @@
+{
+  "feature_id": "rust-skills-tools-protocol",
+  "branch": "feat/rust-skills-tools-protocol",
+  "touchpoints": [
+    {"area": "SddIA/norms", "file": "commands-via-skills-or-tools.md", "action": "created"},
+    {"area": "SddIA/norms", "file": "README.md", "action": "updated"},
+    {"area": "AGENTS.md", "action": "updated"},
+    {"area": "SddIA/constitution.json", "action": "updated"},
+    {"area": "SddIA/actions/sddia-difusion/spec.md", "action": "updated"},
+    {"area": ".cursor/rules/commands-via-skills-tools.mdc", "action": "created"},
+    {"area": ".cursor/rules/sddia-ssot.mdc", "action": "updated"}
+  ],
+  "code_changes": false
+}

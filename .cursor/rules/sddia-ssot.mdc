@@ -13,7 +13,7 @@ Las **normas de comportamiento** del asistente en este repositorio las define el
 - **SddIA/norms/** — Normas de interacción (interaction-triggers.md, paths-via-cumulo.md).
 - **SddIA/process/** — Procesos de tarea (feature, bug-fix, refactorization, create-tool, correccion-auditorias).
 - **SddIA/actions/** — Acciones del ciclo (spec, clarify, planning, implementation, execution, validate, finalize, sddia-difusion).
-- **Cúmulo** — Rutas del proyecto: `SddIA/agents/cumulo.json` → contrato de paths (paths.featurePath, paths.processPath, paths.skillCapsules, etc.). No usar rutas literales; ver SddIA/norms/paths-via-cumulo.md.
+- **Cúmulo** — Rutas del proyecto: `SddIA/agents/cumulo.json` → contrato de paths (paths.featurePath, paths.processPath, paths.skillCapsules, paths.skillsRustPath, paths.toolsRustPath, etc.). No usar rutas literales; ver SddIA/norms/paths-via-cumulo.md. Implementación estándar de skills y tools: Rust (SddIA/constitution.json → configuration.skills_tools_implementation).
 
 ## Comportamiento
 
