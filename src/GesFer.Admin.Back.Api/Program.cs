@@ -1,6 +1,5 @@
 using GesFer.Admin.Back.Api;
-using GesFer.Admin.Back.Infrastructure.Data;
-using GesFer.Admin.Back.Infrastructure.Services;
+using GesFer.Admin.Back.Infrastructure;
 using Serilog.Sinks.MySQL;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -182,40 +181,11 @@ try
     // Modo solo seeds: ejecutar migraciones + seeds y salir (para scripts/tools/Invoke-MySqlSeeds.ps1)
     if (Environment.GetEnvironmentVariable("RUN_SEEDS_ONLY") == "1")
     {
-        using (var scope = app.Services.CreateScope())
-        {
-            var services = scope.ServiceProvider;
-            var context = services.GetRequiredService<AdminDbContext>();
-            await context.Database.MigrateAsync();
-            var seeder = services.GetRequiredService<AdminJsonDataSeeder>();
-            await seeder.SeedCompaniesAsync();
-            await seeder.SeedAdminUsersAsync();
-        }
-        Log.Information("Seeds ejecutados. Saliendo (RUN_SEEDS_ONLY).");
-        Environment.Exit(0);
+        await app.Services.RunMigrationsAndSeedsThenExitAsync();
     }
 
-    // Inicializar base de datos y seeds (Se ejecuta siempre para garantizar consistencia)
-    using (var scope = app.Services.CreateScope())
-    {
-        var services = scope.ServiceProvider;
-        try
-        {
-            // Ejecutar migraciones si es necesario (o usar EnsureCreated si es InMemory/Dev)
-            var context = services.GetRequiredService<AdminDbContext>();
-            // En producción idealmente se usa 'dotnet ef database update', pero aquí simplificamos
-            // await context.Database.MigrateAsync();
-
-            var seeder = services.GetRequiredService<AdminJsonDataSeeder>();
-            await seeder.SeedCompaniesAsync();
-            await seeder.SeedAdminUsersAsync();
-            Log.Information("Seeds de Admin ejecutados correctamente.");
-        }
-        catch (Exception ex)
-        {
-            Log.Error(ex, "Ocurrió un error al ejecutar los seeds de Admin.");
-        }
-    }
+    // Inicializar base de datos y seeds (se ejecuta siempre para garantizar consistencia)
+    await app.Services.RunMigrationsAndSeedsAsync();
 
     // Configurar el pipeline HTTP
     if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Testing"))

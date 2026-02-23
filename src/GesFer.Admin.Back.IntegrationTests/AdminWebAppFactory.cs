@@ -29,7 +29,8 @@ public class AdminWebAppFactory : WebApplicationFactory<Program>, IAsyncLifetime
             var dbContextDescriptors = services.Where(d => d.ServiceType == typeof(AdminDbContext)).ToList();
             foreach (var descriptor in dbContextDescriptors) services.Remove(descriptor);
 
-            // Add new DbContext for AdminDbContext
+            // InMemory: ExecuteDeleteAsync no está soportado (PurgeLogs devuelve 500 en este entorno).
+            // Para test relacional de PurgeLogs usar Testcontainers o SQLite con conexión compartida.
             services.AddDbContext<AdminDbContext>((serviceProvider, options) =>
             {
                 options.UseInMemoryDatabase(_inMemoryDbName);

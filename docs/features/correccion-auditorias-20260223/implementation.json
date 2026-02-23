@@ -1,0 +1,18 @@
+{
+  "spec_version": "1.0.0",
+  "feature_id": "correccion-auditorias-20260223",
+  "implementation_ref": "implementation.md",
+  "touchpoints": [
+    { "phase": "1", "file": "src/GesFer.Admin.Back.Application/DependencyInjection.cs", "action": "create" },
+    { "phase": "1", "file": "src/GesFer.Admin.Back.Infrastructure/DependencyInjection.cs", "action": "create" },
+    { "phase": "1", "file": "src/GesFer.Admin.Back.Api/DependencyInjection.cs", "action": "replace" },
+    { "phase": "1", "file": "src/GesFer.Admin.Back.Api/Program.cs", "action": "modify" },
+    { "phase": "2", "file": "src/GesFer.Admin.Back.Application/Commands/Logs/CreateLogCommand.cs", "action": "create" },
+    { "phase": "2", "file": "src/GesFer.Admin.Back.Application/Commands/Logs/CreateAuditLogCommand.cs", "action": "create" },
+    { "phase": "2", "file": "src/GesFer.Admin.Back.Application/Commands/Logs/GetLogsQuery.cs", "action": "create" },
+    { "phase": "2", "file": "src/GesFer.Admin.Back.Application/Commands/Logs/PurgeLogsCommand.cs", "action": "create" },
+    { "phase": "2", "file": "src/GesFer.Admin.Back.Application/Handlers/Logs/LogHandlers.cs", "action": "create" },
+    { "phase": "2", "file": "src/GesFer.Admin.Back.Api/Controllers/LogController.cs", "action": "replace" },
+    { "phase": "3", "file": "src/GesFer.Admin.Back.IntegrationTests/AdminWebAppFactory.cs", "action": "modify" }
+  ]
+}

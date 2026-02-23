@@ -1,0 +1,27 @@
+{
+  "spec_version": "1.0.0",
+  "feature_id": "correccion-auditorias-20260223",
+  "title": "Corrección según auditoría 2026-02-23",
+  "description": "Modularizar DI (Application/Infrastructure), CQRS en Logs (MediatR), corregir test integración PurgeLogs. Alcance según AUDITORIA_2026_02_23.md.",
+  "context_ref": "paths.featurePath/correccion-auditorias-20260223",
+  "objectives_ref": "objectives.md",
+  "source_audit": "paths.auditsPath/AUDITORIA_2026_02_23.md",
+  "process_ref": "correccion-auditorias",
+  "scope": {
+    "C1_modular_di": "Application/DependencyInjection.cs, Infrastructure/DependencyInjection.cs, Api/DependencyInjection.cs y .csproj sin ref a Infrastructure",
+    "C2_cqrs_logs": "Commands/Queries/Handlers en Application; LogController solo ISender",
+    "C3_integration_test": "PurgeLogs_ShouldDeleteOldLogs en verde (200 OK)"
+  },
+  "acceptance_criteria": [
+    "Api sin using GesFer.Admin.Back.Infrastructure.*",
+    "Registro por AddApplicationServices y AddInfrastructureServices",
+    "LogController sin IApplicationDbContext; uso de ISender (MediatR)",
+    "dotnet build exitoso",
+    "dotnet test 100% (unitarios + integración)",
+    "validacion.json en carpeta de tarea"
+  ],
+  "references": {
+    "auditsPath": "paths.auditsPath",
+    "processPath": "paths.processPath/correccion-auditorias"
+  }
+}
