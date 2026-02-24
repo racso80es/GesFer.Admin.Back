@@ -4,6 +4,23 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+## 2026-02-24 — Auditor unificado y auditoría de interacciones (feat/auditor-unificado-kaizen)
+
+**Rama:** feat/auditor-unificado-kaizen.
+
+**Alcance:**
+- **Auditor unificado:** Unificación de auditor back y front en SddIA/agents/auditor/auditor.json; eliminación de back.json y front.json. AGENTS.md y referencias (tokens, security-audit, implementation sddia-ecosystem) actualizados.
+- **Auditoría de interacciones entre entidades de modelo:** Contrato de Token (interaction_audit, entity_type_definition, entidades de modelo); Karma2Token 1.1.0 con interaction_audit; spec, clarify, plan, implementation, execution y validacion en paths.featurePath/auditoria-interacciones-entidades/.
+- **Reporte pre-commit:** Schema (interaction-report-schema.md/.json), contrato de lectura (data-source-contract.md), script Generate-InteractionsReport.ps1 (scripts/audits/), hook pre-commit (scripts/git-hooks/pre-commit → .git/hooks). Salida en paths.auditsPath (INTERACCIONES_*.json y .md).
+- **sddia-difusion:** Regla .cursor/rules/auditoria-interacciones.mdc; hook activado en .git/hooks/pre-commit.
+
+**Referencias:**
+- `docs/features/auditoria-interacciones-entidades/` — objectives, spec, clarify, plan, implementation, execution, validacion.
+- SddIA/agents/auditor/ — auditor.json (unificado), process-interaction.json, README.md.
+- SddIA/tokens/ — tokens-contract.json, karma2-token/spec.json.
+
+---
+
 ## 2026-02-23 — Estabilidad BD inicialización y seeds geo España (feat/estabilidad-bd-inicializacion)
 
 **Rama:** feat/estabilidad-bd-inicializacion.

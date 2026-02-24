@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "InteractionReport",
+  "description": "Reporte de interacciones entre entidades de modelo (paths.auditsPath, INTERACCIONES_*.json)",
+  "type": "object",
+  "required": ["generated_at", "branch", "aggregations"],
+  "properties": {
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Momento de generación del reporte (ISO 8601)"
+    },
+    "branch": {
+      "type": "string",
+      "description": "Rama de git en el momento de generación"
+    },
+    "aggregations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["entity_type", "entity_id", "invoked_by", "count", "last_timestamp"],
+        "properties": {
+          "entity_type": {
+            "type": "string",
+            "description": "Tipo de entidad de modelo (skill, tool, action, process)"
+          },
+          "entity_id": {
+            "type": "string",
+            "description": "ID de la entidad (skill_id, tool_id, etc.)"
+          },
+          "invoked_by": {
+            "type": "string",
+            "description": "Identidad o agente que invocó"
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Número de invocaciones en la ventana"
+          },
+          "last_timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp de la última interacción"
+          }
+        }
+      }
+    }
+  }
+}

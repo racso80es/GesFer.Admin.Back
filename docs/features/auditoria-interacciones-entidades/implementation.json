@@ -1,0 +1,20 @@
+{
+  "spec_version": "1.0.0",
+  "feature_id": "auditoria-interacciones-entidades",
+  "context_ref": "paths.featurePath/auditoria-interacciones-entidades",
+  "plan_ref": "plan.md",
+  "spec_ref": "spec.md",
+  "items": [
+    {"id": "1.1", "action": "Crear", "path": "docs/features/auditoria-interacciones-entidades/interaction-report-schema.md", "location": "nuevo", "proposal": "Anexo campos JSON y formato MD reporte interacciones.", "dependencies": []},
+    {"id": "1.2", "action": "Crear", "path": "docs/features/auditoria-interacciones-entidades/interaction-report-schema.json", "location": "nuevo", "proposal": "JSON Schema INTERACCIONES_*.json.", "dependencies": ["1.1"]},
+    {"id": "2.1", "action": "Crear", "path": "docs/features/auditoria-interacciones-entidades/data-source-contract.md", "location": "nuevo", "proposal": "Contrato lectura fuente datos.", "dependencies": ["1.2"]},
+    {"id": "2.2", "action": "Modificar", "path": "docs/features/auditoria-interacciones-entidades/spec.md", "location": "Auditor", "proposal": "Ref data-source-contract.md.", "dependencies": ["2.1"]},
+    {"id": "3.1", "action": "Crear", "path": "scripts/audits/Generate-InteractionsReport.ps1", "location": "nuevo", "proposal": "Script PowerShell generador reporte.", "dependencies": ["2.1", "1.2"]},
+    {"id": "3.2", "action": "Modificar", "path": "SddIA/agents/cumulo.paths.json", "location": "paths", "proposal": "auditsPath; opcional interactionReportScript.", "dependencies": []},
+    {"id": "4.1", "action": "Crear", "path": ".husky/pre-commit", "location": "nuevo", "proposal": "Hook invocar generador pre-commit.", "dependencies": ["3.1"]},
+    {"id": "4.2", "action": "Modificar", "path": "docs/features/auditoria-interacciones-entidades/plan.md", "location": "Fase 4", "proposal": "Decisión bloqueo commit si falla.", "dependencies": ["4.1"]},
+    {"id": "5.1", "action": "Crear", "path": "docs/features/auditoria-interacciones-entidades/validacion.json", "location": "nuevo", "proposal": "Checks pre_commit_generates_interactions_report.", "dependencies": ["4.1"]},
+    {"id": "5.2", "action": "Modificar", "path": "docs/features/auditoria-interacciones-entidades/plan.json", "location": "phases", "proposal": "Marcar fase 4 done tras prueba.", "dependencies": ["5.1"]}
+  ],
+  "order_phases": ["1", "2", "3", "4", "5"]
+}

@@ -1,35 +1,31 @@
-# CLARIFY: Auditoría de Interacciones entre Entidades
+# Clarificación: Auditoría de interacciones entre entidades
 
-**Feature:** auditoria-interacciones-entidades
-**Fecha:** 2026-02-24
-**Autor:** Jules (Agent)
+**Feature:** auditoria-interacciones-entidades  
+**Ruta (Cúmulo):** paths.featurePath/auditoria-interacciones-entidades/  
+**Fase:** Especificación + Clarificación
 
-## Entendimiento del Requerimiento
+## Alcance cerrado
 
-El objetivo es implementar la auditoría de interacciones entre entidades del ecosistema SddIA (skills, tools, actions, process) y corregir las deficiencias arquitecturales y de compilación detectadas en el reporte de auditoría `AUDITORIA_2026_02_24.md`.
+- **Entidades de modelo:** Definición general adoptada. Son entidades de modelo las que implementan el contrato de Token (paths.tokensPath); todas han de implementarlo. Instancias: skill, tool, action, process. No se depende de una enumeración fija sino del contrato.
+- **Contrato de Token:** interaction_audit con purpose, required_fields, entity_type_definition (tipo de entidad de modelo), entity_type_enum (valores ej.), interaction_log_ref, auditor_consumer. Constraints: tokens con auditoría incluyen interaction_audit; toda entidad de modelo ha de implementar contrato de Token.
+- **Salida pre-commit:** Antes de cada commit, generar en paths.auditsPath un fichero documental con la información de interacciones contabilizada, en formato JSON y MD (mismo nombre base, ej. INTERACCIONES_YYYY-MM-DD_HHmm).
+- **Auditor:** Responsabilidad de registro de interacciones y generación de ficheros documentales (auditor.json unificado y process-interaction.json) alineada con la definición de entidades de modelo.
 
-### Puntos Clave
+## Gaps resueltos
 
-1.  **The Wall (Compilación):** El backend `GesFer.Admin.Back` no compila debido a la falta de comandos y queries CQRS (`CreateLogCommand`, `CreateAuditLogCommand`, `GetLogsQuery`, `PurgeLogsCommand`) que son invocados en `LogController`.
-2.  **Violación de Clean Architecture:** El proyecto `Api` referencia directamente a `Infrastructure` y paquetes de implementación de base de datos y logging (`Serilog.Sinks.MySQL`, `Pomelo.EntityFrameworkCore.MySql`). Esto debe ser refactorizado para invertir las dependencias.
-3.  **Fuga de Lógica:** El controlador `LogController` contiene lógica de negocio que debe residir en la capa de Aplicación (Handlers/Validators).
-4.  **Feature Auditoría:** La implementación de estos comandos y la refactorización habilitarán la funcionalidad de auditoría de interacciones descrita en `spec.md`.
+| Gap / Ambigüedad | Resolución |
+|------------------|------------|
+| Enumeración fija (skills, tools, actions, process) vs definición extensible | Sustituida por **entidades de modelo** (implementan contrato de Token). La enumeración queda como valores de ejemplo en entity_type. |
+| Dónde y en qué formato se persiste el resumen pre-commit | paths.auditsPath; formato JSON y MD (mismo nombre base). |
+| Quién genera el fichero pre-commit | SddIA / agente auditor (unificado y process-interaction); instrucciones explícitas en ambos. |
 
-## Suposiciones Confirmadas
+## Pendiente / Abierto
 
-1.  Se deben crear los artefactos de documentación faltantes (`clarify.md`, `plan.md`) en `docs/features/auditoria-interacciones-entidades/`.
-2.  Se deben corregir los puntos detectados en `AUDITORIA_2026_02_24.md`.
-3.  El objetivo final es tener el backend compilando y respetando Clean Architecture.
+- **Implementación técnica del pre-commit:** El cómo (hook pre-commit, invocación desde invoke-command, o script dedicado) que genere los ficheros INTERACCIONES_*.json y .md queda para fase de planificación/implementación.
+- **Estructura exacta del JSON/MD:** Campos mínimos (entity_type, entity_id, invoked_by, timestamp, agregaciones); formato de tabla en MD. Puede fijarse en planning o en un anexo del spec.
 
-## Riesgos
+## Referencias
 
--   **Regresiones:** Al mover la configuración de Serilog y la base de datos a `Infrastructure`, se debe asegurar que la aplicación siga iniciando correctamente y conectando a los servicios.
--   **Dependencias:** Asegurar que todos los paquetes necesarios estén disponibles en `Infrastructure` y eliminados de `Api`.
-
-## Criterios de Aceptación
-
--   `GesFer.Admin.Back.sln` compila sin errores.
--   `LogController` no contiene lógica de negocio ni referencias directas a entidades o `DbContext`.
--   `GesFer.Admin.Back.Api` no tiene referencia a `GesFer.Admin.Back.Infrastructure` en su `.csproj`.
--   La configuración de Serilog y base de datos se realiza en la capa de `Infrastructure` y se expone vía métodos de extensión.
--   Los comandos `CreateLogCommand`, `CreateAuditLogCommand`, `PurgeLogsCommand` y la query `GetLogsQuery` están implementados en `Application`.
+- SPEC: spec.md, spec.json
+- Contrato: SddIA/tokens/tokens-contract.json (interaction_audit)
+- Agentes: SddIA/agents/auditor/auditor.json, process-interaction.json

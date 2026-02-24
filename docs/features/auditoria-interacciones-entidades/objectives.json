@@ -1,13 +1,13 @@
 {
   "feature_id": "auditoria-interacciones-entidades",
   "objectives": [
-    "Auditar interacciones entre entidades (ej.: veces usada una herramienta, por quién)",
+    "Auditar interacciones entre entidades de modelo (implementan contrato de Token; ej.: veces usada una entidad, por quién)",
     "Incorporar al agente auditor en los elementos del sistema",
     "Aplicar cambios al contrato de Token para soportar auditoría de interacciones"
   ],
   "success_criteria": [
     "Contrato Token con campos auditoría de interacciones y auditor como consumidor",
-    "Karma2Token con campos entity_type, entity_id, invoked_by, timestamp (o equivalentes)",
+    "Karma2Token con campos entity_type (entidad de modelo), entity_id, invoked_by, timestamp (o equivalentes)",
     "Auditor puede agregar/consultar interacciones (paths.auditsPath o definido en contrato)"
   ],
   "touchpoints": [

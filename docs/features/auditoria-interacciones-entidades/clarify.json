@@ -1,0 +1,40 @@
+{
+  "feature_id": "auditoria-interacciones-entidades",
+  "action_id": "clarify",
+  "phase": "specification_clarification",
+  "scope_closed": [
+    "model_entities_definition",
+    "token_contract_interaction_audit",
+    "pre_commit_output_json_md",
+    "auditor_responsibilities"
+  ],
+  "gaps_resolved": [
+    {
+      "gap": "enumeration_vs_general_definition",
+      "resolution": "Replaced fixed enumeration by model entities (implement token contract). entity_type_enum kept as example values."
+    },
+    {
+      "gap": "pre_commit_output_location_format",
+      "resolution": "paths.auditsPath; JSON and MD, same base name (e.g. INTERACCIONES_YYYY-MM-DD_HHmm)."
+    },
+    {
+      "gap": "who_generates_pre_commit_file",
+      "resolution": "SddIA / auditor agent (unified and process-interaction); explicit instructions in both."
+    }
+  ],
+  "open_pending": [
+    {
+      "item": "pre_commit_implementation",
+      "description": "How to generate INTERACCIONES_*.json and .md (hook, invoke-command, or dedicated script) — for planning/implementation."
+    },
+    {
+      "item": "json_md_structure",
+      "description": "Exact structure of JSON/MD (fields, aggregations, MD table format) — to be fixed in planning or spec annex."
+    }
+  ],
+  "references": {
+    "spec": "spec.md, spec.json",
+    "contract": "SddIA/tokens/tokens-contract.json",
+    "agents": "SddIA/agents/auditor/auditor.json, process-interaction.json"
+  }
+}

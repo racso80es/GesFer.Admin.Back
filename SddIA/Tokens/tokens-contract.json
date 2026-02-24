@@ -10,7 +10,7 @@
     "token_id en kebab-case.",
     "Rutas canónicas solo desde Cúmulo (paths.tokensPath).",
     "Un token sin spec.json en su carpeta no se considera completo.",
-    "Los tokens que soporten auditoría de interacciones deben incluir los campos interaction_audit (entity_type, entity_id, invoked_by, timestamp) según este contrato."
+    "Los tokens que soporten auditoría de interacciones deben incluir los campos interaction_audit (entity_type, entity_id, invoked_by, timestamp) según este contrato. Toda entidad de modelo ha de implementar contrato de Token."
   ],
   "consumers": [
     "paths.actionsPath",
@@ -24,8 +24,9 @@
     "SddIA/agents/security-engineer.json"
   ],
   "interaction_audit": {
-    "purpose": "Auditar interacciones entre entidades: quién utilizó qué entidad (skill, tool, action, process) y cuándo; permite agregación (ej. veces usada una herramienta, por quién).",
+    "purpose": "Auditar interacciones entre entidades de modelo (implementan contrato de Token): quién utilizó qué entidad de modelo y cuándo; permite agregación (ej. veces usada una entidad, por quién).",
     "required_fields": ["entity_type", "entity_id", "invoked_by", "timestamp"],
+    "entity_type_definition": "Tipo de entidad de modelo (implementa contrato de Token). Valores ej.: skill, tool, action, process.",
     "entity_type_enum": ["skill", "tool", "action", "process"],
     "interaction_log_ref": "paths.auditsPath (Cúmulo); paths.accessLogFile o subcarpeta interactions/; cada registro de token debe ser accesible por el auditor.",
     "auditor_consumer": "El agente auditor (SddIA/agents/auditor/) es consumidor formal del contrato de Token: debe poder consultar y agregar datos de interacciones a partir de los registros asociados a cada token (invoked_by = identity.issuer, entity_id = identity.subject, entity_type, context.timestamp)."
