@@ -35,6 +35,7 @@
     "Action: Enforce Commit Skill (Token + Unit Tests).",
     "Action: Enforce PR Skill (Token + All Tests).",
     "Action: If Hash is missing/invalid, block action.",
-    "Output: Log all interactions (Success, Failure, Bypass) to paths.auditsPath + paths.accessLogFile (Cúmulo)."
+    "Output: Log all interactions (Success, Failure, Bypass) to paths.auditsPath + paths.accessLogFile (Cúmulo).",
+    "Action: Consumir interaction_audit del contrato de Token (paths.tokensPath/tokens-contract.json): consultar y agregar datos de interacciones (entity_type, entity_id, invoked_by, timestamp) para reportes de auditoría (ej. veces utilizada una herramienta, por quién)."
   ]
 }

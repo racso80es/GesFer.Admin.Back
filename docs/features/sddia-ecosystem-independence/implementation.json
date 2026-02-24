@@ -10,7 +10,7 @@
     "actions": "finalize, validate, execution, clarify, spec, planning, implementation",
     "process": "feature.md, bug-fix-specialist.json, create-tool.md, create-tool.json, README.md",
     "skills": "skills-contract, finalizar-git, security-audit, documentation, invoke-command, iniciar-rama, README",
-    "agents": "process-interaction, tekton-developer, qa-judge, auditor/front, auditor/back, performance-engineer, security-engineer, infrastructure-architect",
+    "agents": "process-interaction, tekton-developer, qa-judge, auditor (unificado), performance-engineer, security-engineer, infrastructure-architect",
     "tools": "tools-contract.md, tools-contract.json, README.md",
     "norms": "interaction-triggers.md, interaction-triggers.json, paths-via-cumulo.md",
     "templates": "spec-template.md"

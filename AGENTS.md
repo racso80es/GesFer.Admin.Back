@@ -74,8 +74,7 @@ Selecciona el rol más específico posible. Si dudas, activa **Arquitecto**.
 | **[SEGURIDAD]** | Auth, Login, Seeds, Inputs, Forms, Delete, Reset. | Cargar [`SddIA/agents/security-engineer.json`](./SddIA/agents/security-engineer.json). Auditar input/output. |
 | **[JUEZ]** | Pre-Commit, Pre-Push, Review, Docs, Tests. | Cargar [`SddIA/agents/qa-judge.json`](./SddIA/agents/qa-judge.json). Bloquear si falta evidencia. |
 | **[RENDIMIENTO]**| Cierre tarea, Logs, Docker, Queries lentas. | Cargar [`SddIA/agents/performance-engineer.json`](./SddIA/agents/performance-engineer.json). Generar métricas. |
-| **[AUDITOR-FRONT]** | Auditoría, Accesibilidad, Lint, Frontend. | Cargar [`SddIA/agents/auditor/front.json`](./SddIA/agents/auditor/front.json). Generar reporte. |
-| **[AUDITOR-BACK]** | Auditoría, Backend, C#, Arquitectura, DbContext. | Cargar [`SddIA/agents/auditor/back.json`](./SddIA/agents/auditor/back.json). Generar reporte. |
+| **[AUDITOR]** | Auditoría, Accesibilidad, Lint, Frontend, Backend, C#, Arquitectura, DbContext. | Cargar [`SddIA/agents/auditor/auditor.json`](./SddIA/agents/auditor/auditor.json). Generar reporte (backend y/o frontend según contexto). |
 | **[AUDITOR-PROCESS]**| Git Hooks, Husky, Token, Hash, Process Interaction. | Cargar [`SddIA/agents/auditor/process-interaction.json`](./SddIA/agents/auditor/process-interaction.json). Validar Hash. |
 | **[CUMULO]** | Documentación, Docs, Markdown, Guías, Conocimiento, Rutas. | Cargar [`SddIA/agents/cumulo.json`](./SddIA/agents/cumulo.json). Validar SSOT. |
 | **[FEATURE]**   | tareas, acciones, objetivos | Cargar [`SddIA/process/feature.json`](./SddIA/process/feature.json). Orquestra ciclo de una feature. |
