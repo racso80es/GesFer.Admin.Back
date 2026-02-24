@@ -32,4 +32,6 @@ El agente auditor (unificado y process-interaction) queda integrado como consumi
 - Agregar datos de interacciones: quién (invoked_by), qué entidad de modelo (entity_type, entity_id), cuándo (timestamp).
 - **Antes de cada commit:** generar en paths.auditsPath un fichero documental con la información contabilizada, en **JSON y MD** (mismo nombre base).
 
+**Fuente de datos para el generador:** Ver contrato de lectura en esta carpeta: [data-source-contract.md](./data-source-contract.md). Rutas de lectura: paths.auditsPath (o `docs/audits/`), y opcionalmente `docs/diagnostics/{branch}/execution_history.json` (mapeo definido en el contrato).
+
 Ref: SddIA/tokens/tokens-contract.json → interaction_audit.auditor_consumer.
