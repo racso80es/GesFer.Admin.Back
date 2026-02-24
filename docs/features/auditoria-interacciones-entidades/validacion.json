@@ -1,0 +1,17 @@
+{
+  "feature_id": "auditoria-interacciones-entidades",
+  "validated_at": null,
+  "checks": {
+    "pre_commit_generates_interactions_report": {
+      "description": "El hook pre-commit (o flujo equivalente) ejecuta Generate-InteractionsReport.ps1 y se generan INTERACCIONES_*.json y .md en docs/audits/.",
+      "expected": "Tras git commit, existen en docs/audits/ al menos un par de ficheros INTERACCIONES_YYYY-MM-DD_HHmm.json y .md con contenido válido.",
+      "optional": true
+    },
+    "schema_compliance": {
+      "description": "Los ficheros generados cumplen interaction-report-schema.md y interaction-report-schema.json.",
+      "expected": "generated_at, branch, aggregations presentes en JSON; MD con tabla Entidad, Tipo, Invocador, Conteo, Última vez.",
+      "optional": true
+    }
+  },
+  "artefacts": ["interaction-report-schema.md", "interaction-report-schema.json", "data-source-contract.md", "scripts/audits/Generate-InteractionsReport.ps1", "scripts/git-hooks/pre-commit"]
+}

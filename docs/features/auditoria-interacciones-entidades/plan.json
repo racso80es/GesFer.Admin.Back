@@ -8,35 +8,35 @@
       "phase": 1,
       "name": "Estructura del reporte (JSON y MD)",
       "deliverable": "interaction-report-schema.md (y opcional interaction-report-schema.json)",
-      "status": "pending",
+      "status": "done",
       "acceptance": "Estructura y ejemplo sin ambigüedad para generación de INTERACCIONES_*.json y .md"
     },
     {
       "phase": 2,
       "name": "Fuente de datos",
       "deliverable": "Contrato de lectura y documentación de fuente(s); extensión invoke-command si aplica",
-      "status": "pending",
+      "status": "done",
       "acceptance": "Al menos una fuente documentada desde la que el generador puede leer interacciones"
     },
     {
       "phase": 3,
       "name": "Generador (script)",
       "deliverable": "Script (PowerShell o Rust) que escribe INTERACCIONES_<timestamp>.json y .md en paths.auditsPath",
-      "status": "pending",
+      "status": "done",
       "acceptance": "Ejecución manual del script produce ambos ficheros válidos en docs/audits/"
     },
     {
       "phase": 4,
       "name": "Integración pre-commit",
       "deliverable": "Hook pre-commit o flujo invoke-command que ejecute el generador antes de cada commit",
-      "status": "pending",
+      "status": "done",
       "acceptance": "Un git commit desencadena la generación cuando el hook/flujo se ejecuta"
     },
     {
       "phase": 5,
       "name": "Verificación y auditoría",
       "deliverable": "Comprobación en commit de prueba; registro en auditoría; validacion.json opcional",
-      "status": "pending",
+      "status": "done",
       "acceptance": "Commit de prueba genera los ficheros; resultado comprobable"
     }
   ],

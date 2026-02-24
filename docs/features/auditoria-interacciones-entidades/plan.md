@@ -98,7 +98,7 @@ Transformar la especificación y clarificación en una hoja de ruta ejecutable p
    - Documentar en invoke-command o en la acción de commit que, antes de `git commit`, se debe invocar el generador (por ejemplo con `--command-file` o paso explícito en el flujo).
    - No bloqueante para el commit si el generador falla (o sí, según decisión de producto): aclarar en plan o en spec.
 
-3. Decisión a documentar: si el pre-commit **bloquea** el commit cuando falla la generación, o solo **registra** el fallo y deja seguir.
+3. **Decisión documentada:** El pre-commit **no bloquea** el commit cuando falla la generación del reporte. El hook (scripts/git-hooks/pre-commit, a copiar a .git/hooks/pre-commit) intenta ejecutar el generador y siempre hace `exit 0` para no impedir el commit. Ver scripts/git-hooks/README.md.
 
 **Criterio de aceptación:** Tras configurar el hook (o el flujo), un `git commit` desencadena la generación de INTERACCIONES_*.json y .md cuando el hook/flujo se ejecuta.
 
