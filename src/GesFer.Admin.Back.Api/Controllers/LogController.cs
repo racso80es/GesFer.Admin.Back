@@ -1,6 +1,7 @@
 using GesFer.Admin.Back.Api.Attributes;
 using GesFer.Admin.Back.Application.Commands.Logs;
 using GesFer.Admin.Back.Application.DTOs.Logs;
+using GesFer.Admin.Back.Application.Queries.Logs;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -31,13 +32,6 @@ public class LogController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> ReceiveLog([FromBody] CreateLogDto dto)
     {
-        if (dto == null)
-            return BadRequest(new { message = "El cuerpo de la petición es obligatorio" });
-        if (string.IsNullOrWhiteSpace(dto.Level))
-            return BadRequest(new { message = "Level es obligatorio" });
-        if (string.IsNullOrWhiteSpace(dto.Message))
-            return BadRequest(new { message = "Message es obligatorio" });
-
         try
         {
             await _sender.Send(new CreateLogCommand(dto));
@@ -59,9 +53,6 @@ public class LogController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> ReceiveAuditLog([FromBody] CreateAuditLogDto dto)
     {
-        if (dto == null)
-            return BadRequest(new { message = "El cuerpo de la petición es obligatorio" });
-
         try
         {
             await _sender.Send(new CreateAuditLogCommand(dto));
@@ -112,14 +103,12 @@ public class LogController : ControllerBase
     {
         try
         {
-            var sevenDaysAgo = DateTime.UtcNow.AddDays(-7);
-            if (dateLimit > sevenDaysAgo)
-            {
-                return BadRequest(new { message = "No se pueden eliminar logs de los últimos 7 días" });
-            }
-
             var result = await _sender.Send(new PurgeLogsCommand(dateLimit));
             return Ok(result);
+        }
+        catch (ArgumentException ex)
+        {
+             return BadRequest(new { message = ex.Message });
         }
         catch (Exception ex)
         {
