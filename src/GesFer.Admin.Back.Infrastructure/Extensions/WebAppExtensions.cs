@@ -22,7 +22,12 @@ public static class WebAppExtensions
         try
         {
             var context = services.GetRequiredService<AdminDbContext>();
-            await context.Database.MigrateAsync();
+
+            if (context.Database.IsRelational())
+            {
+                await context.Database.MigrateAsync();
+            }
+
             var seeder = services.GetRequiredService<AdminJsonDataSeeder>();
             await seeder.SeedAllAsync();
         }
@@ -44,7 +49,12 @@ public static class WebAppExtensions
         try
         {
             var context = services.GetRequiredService<AdminDbContext>();
-            await context.Database.MigrateAsync();
+
+            if (context.Database.IsRelational())
+            {
+                await context.Database.MigrateAsync();
+            }
+
             var seeder = services.GetRequiredService<AdminJsonDataSeeder>();
             await seeder.SeedAllAsync();
             Environment.Exit(0);
