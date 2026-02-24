@@ -9,23 +9,35 @@ using Serilog;
 using Serilog.Events;
 using System.Text;
 
-// Configurar Serilog antes de crear el builder
-Log.Logger = new LoggerConfiguration()
-    .MinimumLevel.Debug()
-    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-    .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
-    .Enrich.FromLogContext()
-    .WriteTo.Console()
-    .CreateBootstrapLogger();
+// Detectar si estamos en modo Testing para evitar inicializar Serilog estático
+var isTesting = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Testing";
+
+if (!isTesting)
+{
+    // Configurar Serilog antes de crear el builder
+    Log.Logger = new LoggerConfiguration()
+        .MinimumLevel.Debug()
+        .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+        .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+        .Enrich.FromLogContext()
+        .WriteTo.Console()
+        .CreateBootstrapLogger();
+}
 
 try
 {
-    Log.Information("Iniciando aplicación GesFer Admin API");
+    if (!isTesting)
+    {
+        Log.Information("Iniciando aplicación GesFer Admin API");
+    }
 
     var builder = WebApplication.CreateBuilder(args);
 
-    // Configurar Serilog (Delegado a Infrastructure)
-    builder.Host.ConfigureInfrastructureLogging();
+    if (!isTesting)
+    {
+        // Configurar Serilog (Delegado a Infrastructure)
+        builder.Host.ConfigureInfrastructureLogging();
+    }
 
     // Configurar servicios
     builder.Services.AddControllers();
