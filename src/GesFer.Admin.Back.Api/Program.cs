@@ -1,6 +1,6 @@
 using GesFer.Admin.Back.Api;
 using GesFer.Admin.Back.Infrastructure;
-using Serilog.Sinks.MySQL;
+using GesFer.Admin.Back.Infrastructure.Logging;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
@@ -24,49 +24,8 @@ try
 
     var builder = WebApplication.CreateBuilder(args);
 
-    // Configurar Serilog
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-        ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-
-    var isDevelopment = builder.Environment.IsDevelopment();
-
-    builder.Host.UseSerilog((context, services, configuration) =>
-    {
-        configuration
-            .ReadFrom.Services(services)
-            .Enrich.FromLogContext()
-            .Enrich.WithProperty("Application", "GesFer.Admin.Back.Api")
-            .Enrich.WithProperty("Environment", context.HostingEnvironment.EnvironmentName);
-
-        if (isDevelopment)
-        {
-            configuration
-                .MinimumLevel.Verbose()
-                .WriteTo.Console();
-            // MySQL sink opcional en dev: si no está disponible, evita 500 en Swagger/endpoints
-            var useMySqlLogging = builder.Configuration.GetValue<bool>("Serilog:UseMySql");
-            if (useMySqlLogging)
-            {
-                configuration.WriteTo.MySQL(
-                    connectionString: connectionString,
-                    tableName: "Logs",
-                    restrictedToMinimumLevel: LogEventLevel.Verbose,
-                    storeTimestampInUtc: true);
-            }
-        }
-        else
-        {
-            configuration
-                .MinimumLevel.Information()
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-                .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
-                .WriteTo.MySQL(
-                    connectionString: connectionString,
-                    tableName: "Logs",
-                    restrictedToMinimumLevel: LogEventLevel.Information,
-                    storeTimestampInUtc: true);
-        }
-    });
+    // Configurar Serilog (Delegado a Infrastructure)
+    builder.Host.ConfigureInfrastructureLogging();
 
     // Configurar servicios
     builder.Services.AddControllers();
@@ -120,11 +79,13 @@ try
     });
 
     // Seguridad: HTTPS en todos los entornos. Redirección HTTP → HTTPS.
+    var isDevelopment = builder.Environment.IsDevelopment();
     if (isDevelopment)
         builder.Services.Configure<HttpsRedirectionOptions>(options => { options.HttpsPort = 5011; });
 
     // Configurar inyección de dependencias
     builder.Services.AddApplicationServices(builder.Configuration, builder.Environment);
+    builder.Services.AddInfrastructureServices(builder.Configuration, builder.Environment.IsDevelopment());
 
     // Healthchecks
     builder.Services.AddHealthChecks();

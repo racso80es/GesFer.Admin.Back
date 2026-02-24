@@ -72,6 +72,7 @@ Cuando **no existe** carpeta de tarea (ruta no proporcionada o vacía):
 4. **Comprobaciones opcionales (según proyecto):**
    - Script de validación de PR: según skill o herramienta (Cúmulo).
    - Reglas de seguridad (Security Engineer) o rendimiento (Performance Engineer).
+   - **Sincronía MD/JSON (SddIA):** Si el diff toca `SddIA/skills/*/spec.md` o `SddIA/process/*/spec.md`, comprobar que exista el `spec.json` correspondiente en la misma carpeta y que los campos clave (p. ej. skill_id/process_id, parameters, rules) estén alineados. Registrarlo como check `sddia_md_json_parity` (pass | warn). Ref: paths.featurePath/refactorization-sincronidad-md-json/. // TODO: [REF-SddIA] validate — acción refactorization-sincronidad-md-json.
 5. **Generación de informe:** Construir el objeto de resultado incluyendo **siempre** `git_changes` y todos los checks; persistir en validacion.json en la carpeta de la tarea (Cúmulo) o en paths.auditsPath + validacion-<rama>-<timestamp>.json si no hay carpeta de tarea.
 6. **Auditoría:** Registrar la ejecución de validate en paths.auditsPath + paths.accessLogFile o en log de evolución (paths.evolutionPath).
 
@@ -106,6 +107,7 @@ No se requiere un agente nuevo: **QA Judge** asume la fase de validación. Si se
 - **Validación git obligatoria:** Todo informe incluye `git_changes`; no hay ejecución de validate sin análisis de diff frente a la rama base.
 - **Reproducibilidad:** Misma rama y mismo contexto deben producir el mismo resultado de validación (salvo flakiness de tests).
 - **Single Source of Truth:** Para el estado de la feature antes del PR, el artefacto canónico es validacion.json en la carpeta de la tarea (Cúmulo) (o el generado en paths.auditsPath si no hay carpeta de tarea).
+- **Sincronía SddIA:** Para entidades de dominio (skills, process), cualquier cambio en spec.md debe propagarse a spec.json en la misma transacción; validate puede incluir el check opcional `sddia_md_json_parity` cuando el diff toque paths.skillsDefinitionPath o paths.processPath.
 
 ## Dependencias con otras acciones
 

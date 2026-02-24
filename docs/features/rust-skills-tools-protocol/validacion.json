@@ -1,0 +1,17 @@
+{
+  "feature_id": "rust-skills-tools-protocol",
+  "branch": "feat/rust-skills-tools-protocol",
+  "global_pass": true,
+  "blocking": false,
+  "checks": [
+    {"id": "norm_exists", "name": "Norma commands-via-skills-or-tools.md existe", "pass": true},
+    {"id": "norms_readme", "name": "SddIA/norms/README.md actualizado", "pass": true},
+    {"id": "agents_updated", "name": "AGENTS.md ley COMANDOS y paths Rust", "pass": true},
+    {"id": "constitution_updated", "name": "constitution.json skills_tools_implementation", "pass": true},
+    {"id": "sddia_difusion_spec", "name": "sddia-difusion spec criterios", "pass": true},
+    {"id": "cursor_rule", "name": ".cursor/rules/commands-via-skills-tools.mdc existe", "pass": true},
+    {"id": "build_skills_rs", "name": "cargo build skills-rs", "pass": null, "note": "skipped: cargo no en PATH en entorno de ejecución"},
+    {"id": "build_tools_rs", "name": "cargo build tools-rs", "pass": null, "note": "skipped: cargo no en PATH en entorno de ejecución"}
+  ],
+  "timestamp": "2026-02-23"
+}

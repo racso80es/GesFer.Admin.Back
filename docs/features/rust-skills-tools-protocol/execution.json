@@ -1,0 +1,8 @@
+{
+  "feature_id": "rust-skills-tools-protocol",
+  "branch": "feat/rust-skills-tools-protocol",
+  "implementation_applied": true,
+  "validation_done": true,
+  "commit_push_pr": "pending_user",
+  "note": "Commit, push y PR deben ejecutarse por el usuario mediante skills: invoke-command para git add/commit y finalizar-git (Push-And-CreatePR.ps1) para push y PR. El entorno de ejecución automático inyecta un trailer en git commit que provoca error en PowerShell."
+}

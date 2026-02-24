@@ -6,6 +6,9 @@
   "outputs": ["validacion.json en carpeta tarea o paths.auditsPath"],
   "flow_steps": ["Validación git (siempre)", "Contexto", "Checks obligatorios (incl. nomenclatura)", "Opcionales", "Informe", "Auditoría"],
   "blocking_principles": ["nomenclatura"],
+  "optional_checks": {
+    "sddia_md_json_parity": "Si el diff toca SddIA/skills o SddIA/process, comprobar existencia y coherencia spec.md ↔ spec.json. Ref: refactorization-sincronidad-md-json."
+  },
   "principles_ref": "paths.principlesPath",
   "contract_ref": "actions-contract.json"
 }

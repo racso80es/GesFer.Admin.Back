@@ -1,0 +1,17 @@
+{
+  "feature_id": "rust-skills-tools-protocol",
+  "branch": "feat/rust-skills-tools-protocol",
+  "objectives": [
+    "Estándar exe (Rust) para skills y tools",
+    "Contexto SddIA configurado: Rust como implementación de skills y tools",
+    "Norma: ejecutar comandos siempre mediante skills o tools, nunca directamente",
+    "Acción sddia-difusion integrada para difundir norma y contexto"
+  ],
+  "success_criteria": [
+    "Norma explícita en SddIA/norms (comandos vía skills/tools)",
+    "AGENTS y constitution referencian Rust como estándar",
+    ".cursor/rules alineados vía sddia-difusion",
+    "Documentación completa en featurePath"
+  ],
+  "sources": ["paths.normsPath", "paths.actionsPath/sddia-difusion", "paths.processPath/feature", "Cumulo paths"]
+}

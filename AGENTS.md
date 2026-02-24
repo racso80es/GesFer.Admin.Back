@@ -26,9 +26,10 @@ Antes de emitir cualquier respuesta o código, debes ejecutar este proceso menta
 1.  **SOBERANÍA:** `docs/` y `SddIA/` son la verdad absoluta. Si el usuario pide algo que contradice `docs/`, advierte y para.
 2.  **ENTORNO:** Windows 11 + PowerShell 7+. (🚫 NO `bash`, `ls`, `rm`, `/path/unix`).
 3.  **GIT:** 🚫 NO commits a `master`. 🚫 NO ramas sin documentación. 🚫 **NO ejecutar comandos git directamente:** toda operación git ha de pasar por una skill, herramienta, acción o proceso (norma SddIA/norms/git-via-skills-or-process.md).
-4.  **COMPILACIÓN:** El código roto es inaceptable. Verifica localmente.
-5.  **VISIÓN ZERO:** Acciones destructivas requieren confirmación textual explícita.
-6.  **CONSULTA DOCUMENTAL:** La **única fuente de rutas** para documentación de tareas y herramientas es el agente **Cúmulo** (`SddIA/agents/cumulo.json`). Consultar Cúmulo (paths): paths.featurePath, paths.fixPath, paths.logPath, paths.evolutionPath, paths.auditsPath, paths.actionsPath, paths.processPath, paths.templatesPath, paths.skillCapsules[skill-id], paths.toolCapsules[tool-id], etc. No usar rutas literales; ver norma SddIA/norms/paths-via-cumulo.md.
+4.  **COMANDOS:** 🚫 **NO ejecutar comandos de sistema directamente** (git, dotnet, npm, pwsh, cargo, etc.). Toda ejecución ha de pasar por skill, herramienta, acción o proceso (norma SddIA/norms/commands-via-skills-or-tools.md). Implementación estándar de skills y tools: **Rust** (paths.skillsRustPath, paths.toolsRustPath; Cúmulo).
+5.  **COMPILACIÓN:** El código roto es inaceptable. Verifica localmente.
+6.  **VISIÓN ZERO:** Acciones destructivas requieren confirmación textual explícita.
+7.  **CONSULTA DOCUMENTAL:** La **única fuente de rutas** para documentación de tareas y herramientas es el agente **Cúmulo** (`SddIA/agents/cumulo.json`). Consultar Cúmulo (paths): paths.featurePath, paths.fixPath, paths.logPath, paths.evolutionPath, paths.auditsPath, paths.actionsPath, paths.processPath, paths.templatesPath, paths.skillCapsules[skill-id], paths.toolCapsules[tool-id], paths.skillsRustPath, paths.toolsRustPath, etc. No usar rutas literales; ver norma SddIA/norms/paths-via-cumulo.md.
 
 ---
 
@@ -98,10 +99,11 @@ Si detectas que has generado código que viola una regla:
 ---
 
 ## 7. CONTEXTO DE SEGURIDAD (Karma2Token)
-Todo item (Acción, Skill, Tool, Proceso, Patrón) que se ejecute o defina en el sistema debe operar bajo el contexto de un **Karma2Token**.
+Todo item (Acción, Skill, Tool, Proceso, Patrón, Principio, Template) que se ejecute o defina en el sistema debe operar bajo el contexto de un **Karma2Token**.
 *   **Definición:** paths.tokensPath (Cúmulo); Karma2Token en `SddIA/tokens/karma2-token/spec.json`.
 *   **Propósito:** Garantizar identidad, trazabilidad, y contexto de seguridad validado.
 *   **Obligatoriedad:** Los agentes deben verificar la existencia y validez del token en cualquier interacción técnica.
+*   **Entidades de dominio (ecosistema SddIA):** Son las que integran el ítem o contrato de Token. Han de respetar **estructura** (spec.md + spec.json según su contrato) y **sincronidad** (paridad MD ↔ JSON). Norma: SddIA/norms/entidades-dominio-ecosistema-sddia.md.
 
 ---
 *Versión Optimizada para LLM - 2026. Comportamiento definido por SddIA (docs/ y SddIA/).*

@@ -1,0 +1,30 @@
+{
+  "spec_id": "SPEC-RUST-SKILLS-TOOLS-PROTOCOL-2026-02",
+  "feature_id": "rust-skills-tools-protocol",
+  "branch": "feat/rust-skills-tools-protocol",
+  "purpose": [
+    "Establecer Rust como implementación estándar de skills y tools en SddIA",
+    "Norma: ejecutar comandos solo mediante skills o tools",
+    "Integrar norma y contexto Rust en AGENTS, constitution y sddia-difusion"
+  ],
+  "scope_in": [
+    "Nueva norma SddIA/norms (comandos vía skills/tools)",
+    "Actualización AGENTS.md",
+    "Actualización SddIA/constitution o contexto",
+    "Actualización sddia-difusion y .cursor/rules",
+    "Documentación en featurePath"
+  ],
+  "scope_out": [
+    "Migración de PS1 a Rust en este feature",
+    "Cambio de implementación binaria de skills/tools individuales"
+  ],
+  "touchpoints": [
+    {"area": "SddIA/norms", "file": "commands-via-skills-or-tools.md", "change": "Nueva norma"},
+    {"area": "SddIA/norms", "file": "README.md", "change": "Índice"},
+    {"area": "AGENTS.md", "change": "Referencia norma comandos"},
+    {"area": "SddIA/constitution.json", "change": "skills_tools_implementation: rust"},
+    {"area": "SddIA/actions/sddia-difusion", "change": "Criterios norma + Rust"},
+    {"area": ".cursor/rules", "change": "Difusión norma y Rust"},
+    {"area": "docs/features/rust-skills-tools-protocol", "change": "Artefactos proceso"}
+  ]
+}

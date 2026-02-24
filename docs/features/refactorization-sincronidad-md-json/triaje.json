@@ -1,0 +1,25 @@
+{
+  "process_id": "refactorization",
+  "task_id": "refactorization-sincronidad-md-json",
+  "phase": "triaje",
+  "protocol": "Racso-Tormentosa",
+  "protocol_version": "1.2",
+  "skills_inspected": [
+    {"skill_id": "invoke-command", "spec_md": true, "spec_json": true, "discrepancy_resolved": true, "note": "parameters + command_file_routing added to JSON"},
+    {"skill_id": "iniciar-rama", "spec_md": true, "spec_json": true, "discrepancy_resolved": true},
+    {"skill_id": "finalizar-git", "spec_md": true, "spec_json": true, "discrepancy_resolved": true},
+    {"skill_id": "documentation", "spec_md": true, "spec_json": true, "discrepancy_resolved": true},
+    {"skill_id": "dotnet-development", "spec_md": true, "spec_json": true, "discrepancy_resolved": true},
+    {"skill_id": "git-operations", "spec_md": true, "spec_json": true, "discrepancy_resolved": true},
+    {"skill_id": "verify-pr-protocol", "spec_md": true, "spec_json": true},
+    {"skill_id": "security-audit", "spec_md": true, "spec_json": true},
+    {"skill_id": "frontend-build", "spec_md": true, "spec_json": true},
+    {"skill_id": "frontend-test", "spec_md": true, "spec_json": true},
+    {"skill_id": "filesystem-ops", "spec_md": true, "spec_json": true}
+  ],
+  "skill_with_past_json_desync": "invoke-command",
+  "discrepancies": [
+    "Acciones de edición no obligaban actualización del JSON al cambiar MD"
+  ],
+  "process_dependencies": ["spec", "clarify", "planning", "implementation", "execution", "validate", "finalize"]
+}

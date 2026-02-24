@@ -1,0 +1,19 @@
+{
+  "process_id": "refactorization",
+  "task_id": "refactorization-sincronidad-md-json",
+  "spec_version": "1.0.0",
+  "purpose": "Gobernanza MD/JSON y criterios de validación/difusión para paridad spec.md ↔ spec.json en skills y process",
+  "scope": [
+    "Definición entidades de dominio (ecosistema SddIA): integran contrato Token; estructura y sincronidad",
+    "Regla de sincronía en validate y sddia-difusion",
+    "Criterios de aceptación paridad MD/JSON",
+    "TODO [REF-SddIA] en touchpoints"
+  ],
+  "touchpoints": [
+    {"area": "SddIA/norms", "files": ["entidades-dominio-ecosistema-sddia.md", "README.md"], "change": "Definición entidades de dominio (Token); índice normas"},
+    {"area": "SddIA/actions/validate", "files": ["spec.md", "spec.json"], "change": "Criterio paridad MD/JSON"},
+    {"area": "SddIA/actions/sddia-difusion", "files": ["spec.md"], "change": "Criterio paridad en skills/process difundidos"},
+    {"area": "docs/features/refactorization-sincronidad-md-json", "change": "Artefactos proceso"}
+  ],
+  "related_actions": ["spec", "planning", "implementation", "validate", "finalize"]
+}

@@ -1,0 +1,14 @@
+{
+  "process_id": "refactorization",
+  "task_id": "refactorization-sincronidad-md-json",
+  "persist_ref": "paths.featurePath/refactorization-sincronidad-md-json",
+  "objectives": [
+    "Definir entidades de dominio (ecosistema SddIA): las que integran el contrato/ítem Token; todas respetan estructura y sincronidad MD/JSON",
+    "Sincronización MD/JSON en Skills y Process",
+    "Gobernanza de Acciones vinculadas al proceso",
+    "Certificación de salida del ecosistema de ficheros"
+  ],
+  "rule_of_gold": "Process y Skill definitions loaded before any modification",
+  "related_actions": ["spec", "clarify", "planning", "implementation", "execution", "validate", "finalize"],
+  "related_skills": ["invoke-command", "iniciar-rama", "finalizar-git", "documentation"]
+}
