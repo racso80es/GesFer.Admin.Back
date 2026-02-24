@@ -3,6 +3,6 @@
   "branch": "feat/auditor-unificado-kaizen",
   "evolution_log_updated": "docs/evolution/EVOLUTION_LOG.md",
   "finalized_at": "2026-02-24",
-  "pr_url": null,
+  "pr_url": "https://github.com/racso80es/GesFer.Admin.Back/pull/45",
   "persist": "docs/features/auditoria-interacciones-entidades/"
 }
