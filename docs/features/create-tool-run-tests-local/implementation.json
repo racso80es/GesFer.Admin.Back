@@ -1,0 +1,19 @@
+{
+  "task_id": "create-tool-run-tests-local",
+  "implementation_status": "done",
+  "deliverables": {
+    "definition": "SddIA/tools/run-tests-local/spec.md, spec.json",
+    "capsule": "scripts/tools/run-tests-local/ (manifest, config, .md, .bat, .ps1, bin/.gitkeep)",
+    "index": "scripts/tools/index.json updated with run-tests-local",
+    "cumulo": "SddIA/agents/cumulo.paths.json toolCapsules.run-tests-local added"
+  },
+  "capsule_components": [
+    "manifest.json",
+    "run-tests-local-config.json",
+    "run-tests-local.md",
+    "Run-Tests-Local.bat",
+    "Run-Tests-Local.ps1",
+    "bin/.gitkeep"
+  ],
+  "contract_compliance": "tools-contract.json (output JSON, feedback phases: init, prepare, seeds, build, tests, done, error)"
+}
