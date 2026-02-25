@@ -1,0 +1,51 @@
+{
+  "task_id": "create-tool-postman-mcp-validation",
+  "action_id": "clarify",
+  "phase": "specification_clarification",
+  "scope_closed": [
+    "tool_type_sddia",
+    "newman_as_runner",
+    "default_collection_path_repo_root",
+    "output_run_summary_structure",
+    "karma2token_context",
+    "api_unavailable_behavior"
+  ],
+  "gaps_resolved": [
+    {
+      "gap": "default_collection_path_base",
+      "resolution": "Collection path default is relative to repository root. Default: docs/postman/GesFer.Admin.Back.API.postman_collection.json."
+    },
+    {
+      "gap": "newman_invocation",
+      "resolution": "Newman as prerequisite (global or npx). Capsule may invoke 'newman' or 'npx newman run ...'; document in capsule postman-mcp-validation.md."
+    },
+    {
+      "gap": "internal_secret_default",
+      "resolution": "Default from postman-mcp-validation-config.json (internalSecret) or env var (e.g. POSTMAN_INTERNAL_SECRET). If missing and required by collection, execution may fail; record in feedback."
+    },
+    {
+      "gap": "run_summary_data_structure",
+      "resolution": "run_summary: { executed, passed, failed } (numbers); optional failed_requests: [{ name, error? }]. Assertions from Newman JSON reporter if available."
+    },
+    {
+      "gap": "working_directory",
+      "resolution": "Tool runs with working directory at repo root (or capsule resolves relative paths against repo root). Document in capsule."
+    }
+  ],
+  "open_pending": [
+    {
+      "item": "ps1_newman_args_and_parsing",
+      "description": "Exact Newman args (--globals, --env, -r json), JSON parsing and mapping to feedback/data — for implementation phase."
+    },
+    {
+      "item": "admin_token_flow",
+      "description": "Collection uses adminToken after Login; non-interactive run may rely on collection script or full flow (Health → Auth → rest). Validate in v1; do not block."
+    }
+  ],
+  "references": {
+    "spec": "SddIA/tools/postman-mcp-validation/spec.md, spec.json",
+    "contract": "SddIA/tools/tools-contract.json",
+    "process": "paths.processPath/create-tool/",
+    "action": "paths.actionsPath/clarify/"
+  }
+}

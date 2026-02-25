@@ -1,0 +1,41 @@
+{
+  "task_id": "create-tool-postman-mcp-validation",
+  "phase": "planning",
+  "references": {
+    "spec": "SddIA/tools/postman-mcp-validation/",
+    "clarify": "clarify.md, clarify.json"
+  },
+  "phases": [
+    {
+      "id": "1",
+      "name": "Estructura de la cápsula",
+      "deliverables": ["scripts/tools/postman-mcp-validation/", "manifest.json", "postman-mcp-validation-config.json", "postman-mcp-validation.md"]
+    },
+    {
+      "id": "2",
+      "name": "Launchers",
+      "deliverables": ["Postman-Mcp-Validation.bat", "Postman-Mcp-Validation.ps1"]
+    },
+    {
+      "id": "3",
+      "name": "Configuración",
+      "deliverables": ["Config default + env POSTMAN_INTERNAL_SECRET", "doc prerequisitos"]
+    },
+    {
+      "id": "4",
+      "name": "Índice y Cúmulo",
+      "deliverables": ["scripts/tools/index.json updated", "SddIA/agents/cumulo.paths.json toolCapsules updated"]
+    },
+    {
+      "id": "5",
+      "name": "Validación",
+      "deliverables": ["Ejecución verificada", "validacion.json (opcional)"]
+    }
+  ],
+  "success_criteria": [
+    "Cápsula con manifest, config, doc, .bat, .ps1",
+    "Salida JSON conforme a tools-contract",
+    "Tool registrada en index y Cúmulo",
+    "Caso de uso ejecutado sin invocar newman directamente"
+  ]
+}

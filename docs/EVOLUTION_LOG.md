@@ -4,6 +4,7 @@ Registro cronológico de cierres de tareas y PR. Formato por línea: `[YYYY-MM-D
 
 ---
 
+[2026-02-25] [feat/create-tool-postman-mcp-validation] Tool postman-mcp-validation: validación de endpoints con colección Postman (Newman); herramienta de seguridad externa; cápsula en scripts/tools/postman-mcp-validation/, definición en SddIA/tools/postman-mcp-validation/, diseño MCP-ready. Documentación en docs/features/create-tool-postman-mcp-validation/. [Pendiente push/PR]
 [2026-02-20] [feat/sddia-paths-cumulo] Rutas vía Cúmulo: Cúmulo ampliado con paths; actions, process, skills, agents, norms, tools y templates usan paths.*; norma paths-via-cumulo.md. Documentación en docs/features/sddia-ecosystem-independence/. [PR #17]
 [2026-02-20] [feat/skills-encapsulation] Encapsulamiento de skills (patrón tools, feature skill.Token): Cúmulo paths skills, SddIA/skills por carpeta, cápsulas scripts/skills, skills-rs (Rust), normas #Skill/#Action/#Process, finalizar-git con Push-And-CreatePR (gh). Documentación en docs/features/skill.Token/. [PR #13]
 [2026-02-20] [feat/skill.Token] Refactor: renombrar feature skills-encapsulation a skill.Token; docs en docs/features/skill.Token/. [PR #14]

@@ -4,6 +4,22 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+## 2026-02-25 — Tool postman-mcp-validation (feat/create-tool-postman-mcp-validation)
+
+**Rama:** feat/create-tool-postman-mcp-validation.
+
+**Alcance:**
+- **Tool postman-mcp-validation:** Herramienta de seguridad externa que valida endpoints ejecutando la colección Postman (Newman). Definición en SddIA/tools/postman-mcp-validation/ (spec.md, spec.json); cápsula en scripts/tools/postman-mcp-validation/ (manifest, config, .bat, .ps1). Salida JSON según tools-contract; diseño MCP-ready para futura integración con Postman MCP.
+- **Proceso create-tool:** analysis, objectives, spec, clarify, plan, implementation, validacion. Registro en scripts/tools/index.json y SddIA/agents/cumulo.paths.json (toolCapsules).
+- **Validación:** Tool ejecutada con éxito (17 requests de la colección); invocación vía & npx newman en PowerShell.
+
+**Referencias:**
+- `docs/features/create-tool-postman-mcp-validation/` — analysis, objectives, spec, clarify, plan, implementation, validacion, finalize.
+- SddIA/tools/postman-mcp-validation/ — spec.md, spec.json.
+- scripts/tools/postman-mcp-validation/ — cápsula.
+
+---
+
 ## 2026-02-24 — Auditor unificado y auditoría de interacciones (feat/auditor-unificado-kaizen)
 
 **Rama:** feat/auditor-unificado-kaizen.

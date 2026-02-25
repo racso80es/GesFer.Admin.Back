@@ -1,0 +1,29 @@
+{
+  "toolId": "postman-mcp-validation",
+  "version": "1.0.0",
+  "description": "Herramienta de seguridad externa que valida los endpoints del proyecto ejecutando la colección Postman (Newman). Salida JSON según tools-contract. Diseño MCP-ready para futura integración con Postman MCP.",
+  "implementation_path_ref": "paths.toolCapsules.postman-mcp-validation",
+  "contract_ref": "SddIA/tools/tools-contract.json",
+  "cumulo_ref": "SddIA/agents/cumulo.json",
+  "inputs": {
+    "CollectionPath": "string (opcional). Ruta al JSON de la colección. Por defecto docs/postman/GesFer.Admin.Back.API.postman_collection.json.",
+    "BaseUrl": "string (opcional). URL base API; por defecto http://localhost:5010.",
+    "InternalSecret": "string (opcional). Secreto para X-Internal-Secret; por defecto desde config o variable.",
+    "EnvironmentPath": "string (opcional). Ruta a fichero de entorno Postman .json.",
+    "OutputPath": "string (opcional). Fichero donde escribir el resultado JSON.",
+    "OutputJson": "boolean (opcional). Emitir resultado JSON por stdout."
+  },
+  "output": {
+    "schema_ref": "tools-contract.json output.required_fields y optional_fields",
+    "data_fields": "run_summary (executed, passed, failed, assertions si aplica), duration_ms",
+    "phases_feedback": ["init", "newman", "done", "error"]
+  },
+  "mcp_ready": {
+    "description": "Diseño para futura exposición como capacidad MCP.",
+    "suggested_tool_name": "run_endpoint_validation",
+    "suggested_args": ["collection_path", "base_url", "internal_secret", "environment_path"],
+    "result_format": "Mismo que salida JSON de esta tool (tools-contract)."
+  },
+  "env": ["Windows 11", "PowerShell 7+", "Node.js/npm (Newman) donde se ejecute la cápsula"],
+  "depends_on_tools": []
+}

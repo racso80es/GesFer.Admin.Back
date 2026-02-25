@@ -1,0 +1,12 @@
+{
+  "task_id": "create-tool-postman-mcp-validation",
+  "phase": "validate",
+  "result": "pass",
+  "checks": [
+    { "id": "capsule_exists", "description": "Cápsula scripts/tools/postman-mcp-validation/ con manifest, config, .md, .bat, .ps1", "status": "pass" },
+    { "id": "index_updated", "description": "postman-mcp-validation registrada en scripts/tools/index.json", "status": "pass" },
+    { "id": "cumulo_updated", "description": "toolCapsules.postman-mcp-validation en SddIA/agents/cumulo.paths.json", "status": "pass" },
+    { "id": "run_from_repo_root", "description": "Ejecutar .bat desde raíz del repo y verificar JSON con toolId, feedback, data.run_summary", "status": "pass" }
+  ],
+  "notes": "Tool ejecutada con éxito: 17 requests de la colección Postman; salida JSON conforme a tools-contract. Prerequisito: Newman (npm install -g newman o npx)."
+}
