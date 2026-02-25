@@ -1,21 +1,262 @@
 [
-  {"Id":"f1e2d3c4-b5a6-7890-1234-567890abcdef","StateId":"1a2b3c4d-5e6f-7890-1234-567890abcdef","Name":"Madrid"},
-  {"Id":"c1000001-b5a6-7890-1234-567890000001","StateId":"e1000001-5e6f-7890-1234-567890000001","Name":"Sevilla"},
-  {"Id":"c1000002-b5a6-7890-1234-567890000002","StateId":"e1000002-5e6f-7890-1234-567890000002","Name":"Zaragoza"},
-  {"Id":"c1000003-b5a6-7890-1234-567890000003","StateId":"e1000003-5e6f-7890-1234-567890000003","Name":"Oviedo"},
-  {"Id":"c1000004-b5a6-7890-1234-567890000004","StateId":"e1000004-5e6f-7890-1234-567890000004","Name":"Palma de Mallorca"},
-  {"Id":"c1000005-b5a6-7890-1234-567890000005","StateId":"e1000005-5e6f-7890-1234-567890000005","Name":"Las Palmas de Gran Canaria"},
-  {"Id":"c1000006-b5a6-7890-1234-567890000006","StateId":"e1000006-5e6f-7890-1234-567890000006","Name":"Santander"},
-  {"Id":"c1000007-b5a6-7890-1234-567890000007","StateId":"e1000007-5e6f-7890-1234-567890000007","Name":"Valladolid"},
-  {"Id":"c1000008-b5a6-7890-1234-567890000008","StateId":"e1000008-5e6f-7890-1234-567890000008","Name":"Toledo"},
-  {"Id":"c1000009-b5a6-7890-1234-567890000009","StateId":"e1000009-5e6f-7890-1234-567890000009","Name":"Barcelona"},
-  {"Id":"c100000a-b5a6-7890-1234-56789000000a","StateId":"e100000a-5e6f-7890-1234-56789000000a","Name":"Valencia"},
-  {"Id":"c100000b-b5a6-7890-1234-56789000000b","StateId":"e100000b-5e6f-7890-1234-56789000000b","Name":"Mérida"},
-  {"Id":"c100000c-b5a6-7890-1234-56789000000c","StateId":"e100000c-5e6f-7890-1234-56789000000c","Name":"Santiago de Compostela"},
-  {"Id":"c100000d-b5a6-7890-1234-56789000000d","StateId":"e100000d-5e6f-7890-1234-56789000000d","Name":"Murcia"},
-  {"Id":"c100000e-b5a6-7890-1234-56789000000e","StateId":"e100000e-5e6f-7890-1234-56789000000e","Name":"Pamplona"},
-  {"Id":"c100000f-b5a6-7890-1234-56789000000f","StateId":"e100000f-5e6f-7890-1234-56789000000f","Name":"Vitoria-Gasteiz"},
-  {"Id":"c1000010-b5a6-7890-1234-567890000010","StateId":"e1000010-5e6f-7890-1234-567890000010","Name":"Logroño"},
-  {"Id":"c1000011-b5a6-7890-1234-567890000011","StateId":"e1000011-5e6f-7890-1234-567890000011","Name":"Ceuta"},
-  {"Id":"c1000012-b5a6-7890-1234-567890000012","StateId":"e1000012-5e6f-7890-1234-567890000012","Name":"Melilla"}
+  {
+    "Id": "4479472b-bc57-4419-b088-8032654e3ba3",
+    "StateId": "1c689ec7-d97b-4712-a490-9fc04254ab4f",
+    "Name": "Vitoria-Gasteiz"
+  },
+  {
+    "Id": "2f0dd954-d5cf-48d3-a5f4-9ed79179d82d",
+    "StateId": "b6df53cd-6fc3-444c-9819-2f0b6b551bb9",
+    "Name": "Albacete"
+  },
+  {
+    "Id": "8254681b-1c15-4f60-8def-aa5fc2059c3d",
+    "StateId": "8851f750-5003-4673-aebb-04d519111bf4",
+    "Name": "Alicante/Alacant"
+  },
+  {
+    "Id": "a0cb0ce4-8c32-493b-a30a-310421cdacba",
+    "StateId": "1ecfe228-7484-4840-b911-4701dc5d94eb",
+    "Name": "Almería"
+  },
+  {
+    "Id": "8e789d06-fd65-49c3-873e-0c58259ee5e8",
+    "StateId": "7a30a827-02e5-4bb8-8a8b-c8d9c7a4f5db",
+    "Name": "Ávila"
+  },
+  {
+    "Id": "6ffbe20f-c998-4912-92ec-3b81ce3fcad4",
+    "StateId": "e9c2b992-e06a-4c7e-b393-48605b755fae",
+    "Name": "Badajoz"
+  },
+  {
+    "Id": "5f37abca-9781-43f6-845a-698f41ac7047",
+    "StateId": "0477a7e5-d03d-4922-8691-fb9ba4322bb3",
+    "Name": "Palma"
+  },
+  {
+    "Id": "92338373-4443-440c-8054-01b7116a752c",
+    "StateId": "a693437b-ecc6-40ad-856f-2dc2417c4fb2",
+    "Name": "Barcelona"
+  },
+  {
+    "Id": "2ee1baac-c13a-46fe-bb87-14595225a27c",
+    "StateId": "5dc61450-412f-460e-afa6-4668e7efe9a1",
+    "Name": "Burgos"
+  },
+  {
+    "Id": "2d97319b-47b9-4f40-b52e-45f080260c4a",
+    "StateId": "3f7439d8-644d-48be-ab17-687e3ae3e594",
+    "Name": "Cáceres"
+  },
+  {
+    "Id": "14e9e981-f387-4cb3-b3b0-a0e3f841608c",
+    "StateId": "b37c6d9a-a529-49a5-bb57-2384097ca635",
+    "Name": "Cádiz"
+  },
+  {
+    "Id": "5a7cf30e-0b78-40d1-a51b-64806eeb0a04",
+    "StateId": "14e2d12c-f152-4b02-9728-a7e6368127f1",
+    "Name": "Castelló de la Plana"
+  },
+  {
+    "Id": "2a124dc2-8e6e-452a-8826-92f6da91f626",
+    "StateId": "4c211edf-a12a-4663-9a65-f1c0d90fd7ca",
+    "Name": "Ciudad Real"
+  },
+  {
+    "Id": "97697924-a63a-444d-a2e3-3fe7c4185c59",
+    "StateId": "4075b294-b477-40ea-b0e0-4fd1a71fd3aa",
+    "Name": "Córdoba"
+  },
+  {
+    "Id": "ce4d40f0-1968-43c6-9601-8e9758db02c8",
+    "StateId": "0436b7cb-ffd7-4994-ba6f-666515db806a",
+    "Name": "A Coruña"
+  },
+  {
+    "Id": "7e1b69ff-4069-4470-9d89-5fb9aa549cb8",
+    "StateId": "8f25f59f-61ae-4bfb-ac13-2b7989a1d74f",
+    "Name": "Cuenca"
+  },
+  {
+    "Id": "ce9ce91e-f500-40a9-bbcd-2b1ac96f6280",
+    "StateId": "983bc42a-38fe-4e35-b8d6-7ab25eabd75c",
+    "Name": "Girona"
+  },
+  {
+    "Id": "f49b84a7-6242-4536-8f30-8e1c1b1bda04",
+    "StateId": "2f639dc7-aaee-4301-a567-ae02ee24deca",
+    "Name": "Granada"
+  },
+  {
+    "Id": "edc0623e-059a-407b-8ef5-da9b3affb1f1",
+    "StateId": "3ccea73e-547c-47ee-bf45-588f14b0501e",
+    "Name": "Guadalajara"
+  },
+  {
+    "Id": "ea5e8f87-cfda-4fc3-ad78-27ac6c231449",
+    "StateId": "cee7d9fb-eb3e-4c49-b8c1-a9e19ed9d766",
+    "Name": "Donostia-San Sebastián"
+  },
+  {
+    "Id": "83dd9657-4a58-4a6d-a1e4-ae483f659df9",
+    "StateId": "f6ab96e1-28a0-49b9-9777-e2a6842be08c",
+    "Name": "Huelva"
+  },
+  {
+    "Id": "f2a3aa91-2e23-4758-b0a4-7e19a0d275ef",
+    "StateId": "565e1882-baf7-438f-a958-ae3434dd5100",
+    "Name": "Huesca"
+  },
+  {
+    "Id": "cea5aade-025b-4bb2-b3b0-c8e76433f844",
+    "StateId": "e2932563-1039-41c9-b994-7d147e271f8c",
+    "Name": "Jaén"
+  },
+  {
+    "Id": "7e70eda3-dca1-4fc7-89f1-35a16bdf76e6",
+    "StateId": "c41a9771-a641-458a-9110-f4f46ee3425e",
+    "Name": "León"
+  },
+  {
+    "Id": "5020fb30-0b4b-4ff8-b366-07553f223a8d",
+    "StateId": "533a08e8-eae1-4f48-91aa-397c843ccceb",
+    "Name": "Lleida"
+  },
+  {
+    "Id": "6c03a36d-19c5-420e-81e8-6e34a1a6b9b6",
+    "StateId": "2baaa514-fd74-4ec3-a338-f9437f390ba3",
+    "Name": "Logroño"
+  },
+  {
+    "Id": "657d69bb-0a00-4d62-871d-86e9c2db8d01",
+    "StateId": "5c394ebc-9ce6-4cef-8918-2f97dc69c735",
+    "Name": "Lugo"
+  },
+  {
+    "Id": "82bbd055-db08-4371-b764-5bfe6a664239",
+    "StateId": "5d7ac5fb-e49e-442f-88f2-608b8d13d10c",
+    "Name": "Madrid"
+  },
+  {
+    "Id": "58a02586-23a8-4551-abc3-6a146e4f5a7d",
+    "StateId": "efd15e51-9e77-45f3-83d2-1a80847ba79f",
+    "Name": "Málaga"
+  },
+  {
+    "Id": "7d7df1ad-23f0-4405-83cb-d22f555e5278",
+    "StateId": "9edec675-95f7-4aaf-b8c1-5374dbc45d06",
+    "Name": "Murcia"
+  },
+  {
+    "Id": "3d577ecf-552a-4fd7-86eb-22d08670f103",
+    "StateId": "0beb7b72-25dd-434e-86e8-1096324b3fe7",
+    "Name": "Pamplona/Iruña"
+  },
+  {
+    "Id": "d82c7b78-7373-44c8-8855-207b0d2655d4",
+    "StateId": "38b0dc51-408c-4ca4-84e3-b66cdc7e85bb",
+    "Name": "Ourense"
+  },
+  {
+    "Id": "05acb89d-e845-4fb9-a0a2-51d9fa9e075f",
+    "StateId": "b75cfa2f-b3aa-44cc-8400-11dee9ad9d60",
+    "Name": "Oviedo"
+  },
+  {
+    "Id": "fab1fc32-9413-4160-a595-24c119214b00",
+    "StateId": "a70144b3-dddf-455c-a4cf-0de54eb5e7af",
+    "Name": "Palencia"
+  },
+  {
+    "Id": "6bd142b4-bad8-468a-8bab-0b032bd20f0c",
+    "StateId": "4ab8ac9d-f77e-473e-b3f4-a92cbe647628",
+    "Name": "Las Palmas de Gran Canaria"
+  },
+  {
+    "Id": "ad398b6d-145a-4831-82bd-c57d02542b4d",
+    "StateId": "768dab12-e39d-4bdf-bbe9-a9611e067a5b",
+    "Name": "Pontevedra"
+  },
+  {
+    "Id": "9cc3f65d-5156-4ebb-abeb-6746ff11d04a",
+    "StateId": "2178b206-a0bf-4bb3-9f5f-1a78b2bf24be",
+    "Name": "Salamanca"
+  },
+  {
+    "Id": "0a237bab-c36d-47ee-868f-050fe94875e1",
+    "StateId": "0ecec805-5d41-4bc1-b612-5526a4fa8fb3",
+    "Name": "Santa Cruz de Tenerife"
+  },
+  {
+    "Id": "5feac484-a71d-4fcb-9874-7d847654a3a4",
+    "StateId": "7a47ba4d-10e7-4f40-bbe4-14128a656f97",
+    "Name": "Santander"
+  },
+  {
+    "Id": "6b14e8ab-07ee-45c0-9ec3-267adab85c30",
+    "StateId": "34f5dcb1-47db-4b1e-b234-595321f6c97c",
+    "Name": "Segovia"
+  },
+  {
+    "Id": "04cbf107-8781-41b7-9a54-2bd52a87440a",
+    "StateId": "1ebc880e-31d7-499c-b91b-7e8ee4ab0528",
+    "Name": "Sevilla"
+  },
+  {
+    "Id": "2ab651ee-bd30-47b2-9fd0-ea1452a6e3ef",
+    "StateId": "6ba2a194-86d9-4721-85c7-01f549008294",
+    "Name": "Soria"
+  },
+  {
+    "Id": "9f22a66e-5b89-4c2b-822c-587b31eb1b35",
+    "StateId": "c941357b-d7a7-4cc0-aa6d-fad8328eed12",
+    "Name": "Tarragona"
+  },
+  {
+    "Id": "59cba930-37fe-4ade-a8ad-79def2ab6fd8",
+    "StateId": "63c25cdf-47e5-4f90-8bc9-1e92438b2e7d",
+    "Name": "Teruel"
+  },
+  {
+    "Id": "5d9f93cb-4025-4b17-9a7c-6a62ec76cd59",
+    "StateId": "45a10779-99fd-4ee1-aaa7-cbbfa6e04920",
+    "Name": "Toledo"
+  },
+  {
+    "Id": "c9ec597d-0c0b-4150-bf21-ceca6e7e0242",
+    "StateId": "c106e4e3-29d5-420b-978b-91f0bc53bb9e",
+    "Name": "València"
+  },
+  {
+    "Id": "7de37e78-7e37-4291-b2f6-9330e885e8c6",
+    "StateId": "9575f09b-f113-4ecb-a526-6dd81690075e",
+    "Name": "Valladolid"
+  },
+  {
+    "Id": "5693f49e-c884-420c-8cf2-47f0d3cd3c29",
+    "StateId": "2609687b-b61b-4271-807f-27e786c7f3ca",
+    "Name": "Bilbao"
+  },
+  {
+    "Id": "d7840969-4ebd-41bc-901a-f86c6a9005e8",
+    "StateId": "881f22b3-5e64-40cd-a9b7-9645a12cb7b1",
+    "Name": "Zamora"
+  },
+  {
+    "Id": "3391acdb-969e-4634-a42b-e698f2e6dd26",
+    "StateId": "9dc0c1d8-8a66-4a12-a03b-61c11361d85e",
+    "Name": "Zaragoza"
+  },
+  {
+    "Id": "b80dbd7b-60ae-4fc8-8bc6-506c817751a5",
+    "StateId": "86700e27-a9ea-4d3a-a9e5-5b047559a291",
+    "Name": "Ceuta"
+  },
+  {
+    "Id": "a14a694b-7b1c-460e-8b14-ead8c259371e",
+    "StateId": "2ee22d48-e412-431d-8b20-0b76fd21c6c5",
+    "Name": "Melilla"
+  }
 ]
