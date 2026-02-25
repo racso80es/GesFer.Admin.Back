@@ -1,0 +1,13 @@
+﻿{
+    "generated_at":  "2026-02-24T07:56:13Z",
+    "branch":  "feat/auditor-unificado-kaizen",
+    "aggregations":  [
+                         {
+                             "entity_type":  "command",
+                             "entity_id":  "git",
+                             "invoked_by":  "system",
+                             "count":  3,
+                             "last_timestamp":  "2026-02-24T07:44:42Z"
+                         }
+                     ]
+}

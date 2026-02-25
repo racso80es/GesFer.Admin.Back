@@ -1,0 +1,267 @@
+{
+	"info": {
+		"_postman_id": "gesfer-admin-back-api",
+		"name": "GesFer Admin Back API",
+		"description": "Colección para validar todos los endpoints y acciones de la API Admin. Importar en Postman y configurar variables (baseUrl, internalSecret). Tras ejecutar Login Admin, usar la variable adminToken para endpoints que requieren JWT.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{ "key": "baseUrl", "value": "http://localhost:5010" },
+		{ "key": "internalSecret", "value": "dev-internal-secret-change-in-production" },
+		{ "key": "adminToken", "value": "" }
+	],
+	"item": [
+		{
+			"name": "Health & Docs",
+			"item": [
+				{
+					"name": "Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}/health",
+						"description": "Comprueba que la API está en marcha."
+					}
+				},
+				{
+					"name": "Swagger JSON",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}/swagger/v1/swagger.json",
+						"description": "OpenAPI/Swagger de la API."
+					}
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"  var json = pm.response.json();",
+									"  if (json.Token) pm.collectionVariables.set('adminToken', json.Token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [{ "key": "Content-Type", "value": "application/json" }],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Usuario\": \"admin\",\n  \"Contraseña\": \"admin123\"\n}"
+						},
+						"url": "{{baseUrl}}/api/admin/auth/login",
+						"description": "Login administrativo. Si responde 200, el token se guarda en la variable adminToken."
+					}
+				}
+			]
+		},
+		{
+			"name": "Logs",
+			"item": [
+				{
+					"name": "Receive Log (System)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" },
+							{ "key": "X-Internal-Secret", "value": "{{internalSecret}}" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"level\": \"Information\",\n  \"message\": \"Test log desde Postman\",\n  \"timeStamp\": \"{{$isoTimestamp}}\"\n}"
+						},
+						"url": "{{baseUrl}}/api/admin/logs",
+						"description": "Envía un log (requiere X-Internal-Secret o JWT Admin)."
+					}
+				},
+				{
+					"name": "Receive Audit Log (System)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" },
+							{ "key": "X-Internal-Secret", "value": "{{internalSecret}}" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cursorId\": \"postman-test\",\n  \"username\": \"admin\",\n  \"action\": \"Test\",\n  \"httpMethod\": \"POST\",\n  \"path\": \"/api/admin/audit-logs\",\n  \"actionTimestamp\": \"{{$isoTimestamp}}\"\n}"
+						},
+						"url": "{{baseUrl}}/api/admin/audit-logs",
+						"description": "Envía un audit log (requiere X-Internal-Secret o JWT Admin)."
+					}
+				},
+				{
+					"name": "Get Logs (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/logs?pageNumber=1&pageSize=50",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "admin", "logs"],
+							"query": [
+								{ "key": "fromDate", "value": "", "disabled": true },
+								{ "key": "toDate", "value": "", "disabled": true },
+								{ "key": "level", "value": "", "disabled": true },
+								{ "key": "companyId", "value": "", "disabled": true },
+								{ "key": "userId", "value": "", "disabled": true },
+								{ "key": "pageNumber", "value": "1" },
+								{ "key": "pageSize", "value": "50" }
+							]
+						},
+						"description": "Obtiene logs paginados (solo JWT Admin)."
+					}
+				},
+				{
+					"name": "Purge Logs (Admin)",
+					"request": {
+						"method": "DELETE",
+						"header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/logs?dateLimit=2020-01-01T00:00:00Z",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "admin", "logs"],
+							"query": [{ "key": "dateLimit", "value": "2020-01-01T00:00:00Z", "description": "Solo logs anteriores a esta fecha (mínimo 7 días atrás)" }]
+						},
+						"description": "Purga logs antiguos (solo JWT Admin). dateLimit debe ser al menos 7 días en el pasado."
+					}
+				}
+			]
+		},
+		{
+			"name": "Countries",
+			"item": [
+				{
+					"name": "Get All Countries",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "X-Internal-Secret", "value": "{{internalSecret}}" }],
+						"url": "{{baseUrl}}/api/countries",
+						"description": "Lista todos los países (X-Internal-Secret o JWT Admin)."
+					}
+				},
+				{
+					"name": "Get Country By Id",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "X-Internal-Secret", "value": "{{internalSecret}}" }],
+						"url": "{{baseUrl}}/api/countries/{{countryId}}",
+						"description": "Sustituir countryId por un Guid válido (ej. de Get All Countries)."
+					}
+				},
+				{
+					"name": "Get States By Country Id",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "X-Internal-Secret", "value": "{{internalSecret}}" }],
+						"url": "{{baseUrl}}/api/countries/{{countryId}}/states",
+						"description": "Estados/provincias de un país."
+					}
+				}
+			]
+		},
+		{
+			"name": "States",
+			"item": [
+				{
+					"name": "Get Cities By State Id",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "X-Internal-Secret", "value": "{{internalSecret}}" }],
+						"url": "{{baseUrl}}/api/states/{{stateId}}/cities",
+						"description": "Ciudades de un estado. Sustituir stateId por un Guid de Get States By Country Id."
+					}
+				}
+			]
+		},
+		{
+			"name": "Company",
+			"item": [
+				{
+					"name": "Get All Companies",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "X-Internal-Secret", "value": "{{internalSecret}}" }],
+						"url": "{{baseUrl}}/api/company",
+						"description": "Lista todas las empresas."
+					}
+				},
+				{
+					"name": "Get Company By Name",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "X-Internal-Secret", "value": "{{internalSecret}}" }],
+						"url": {
+							"raw": "{{baseUrl}}/api/company/by-name?name=MiEmpresa",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "company", "by-name"],
+							"query": [{ "key": "name", "value": "MiEmpresa" }]
+						},
+						"description": "Obtiene empresa por nombre."
+					}
+				},
+				{
+					"name": "Get Company By Id",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "X-Internal-Secret", "value": "{{internalSecret}}" }],
+						"url": "{{baseUrl}}/api/company/{{companyId}}",
+						"description": "Sustituir companyId por un Guid válido."
+					}
+				},
+				{
+					"name": "Create Company",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" },
+							{ "key": "X-Internal-Secret", "value": "{{internalSecret}}" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Empresa Postman\",\n  \"address\": \"Calle Ejemplo 1\",\n  \"taxId\": null,\n  \"phone\": null,\n  \"email\": null,\n  \"postalCodeId\": null,\n  \"cityId\": null,\n  \"stateId\": null,\n  \"countryId\": null,\n  \"languageId\": null\n}"
+						},
+						"url": "{{baseUrl}}/api/company",
+						"description": "Crea una nueva empresa (Name y Address obligatorios)."
+					}
+				},
+				{
+					"name": "Update Company",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" },
+							{ "key": "X-Internal-Secret", "value": "{{internalSecret}}" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Empresa Postman Actualizada\",\n  \"address\": \"Calle Ejemplo 2\",\n  \"isActive\": true,\n  \"taxId\": null,\n  \"phone\": null,\n  \"email\": null,\n  \"postalCodeId\": null,\n  \"cityId\": null,\n  \"stateId\": null,\n  \"countryId\": null,\n  \"languageId\": null\n}"
+						},
+						"url": "{{baseUrl}}/api/company/{{companyId}}",
+						"description": "Actualiza empresa existente. Sustituir companyId."
+					}
+				},
+				{
+					"name": "Delete Company",
+					"request": {
+						"method": "DELETE",
+						"header": [{ "key": "X-Internal-Secret", "value": "{{internalSecret}}" }],
+						"url": "{{baseUrl}}/api/company/{{companyId}}",
+						"description": "Elimina (soft delete) una empresa. Sustituir companyId."
+					}
+				}
+			]
+		}
+	]
+}

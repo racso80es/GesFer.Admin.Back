@@ -1,0 +1,37 @@
+{
+  "task_id": "create-tool-run-tests-local",
+  "process_ref": "paths.processPath/create-tool/",
+  "cumulo_ref": "SddIA/agents/cumulo.json",
+  "objectives": [
+    {
+      "id": "O1",
+      "description": "Definición en SddIA: paths.toolsDefinitionPath/run-tests-local/ con spec.md y spec.json (inputs, output, feedback phases)"
+    },
+    {
+      "id": "O2",
+      "description": "Cápsula en paths.toolCapsules.run-tests-local: manifest, config, .md, .bat, .ps1; orquestación prepare-full-env, invoke-mysql-seeds (opcional), build, dotnet test por scope; salida JSON según tools-contract"
+    },
+    {
+      "id": "O3",
+      "description": "Registro en paths.toolsIndexPath y paths.toolCapsules (cumulo.paths.json)"
+    },
+    {
+      "id": "O4",
+      "description": "Validación con caso de uso: ejecutar la tool con scope E2E/local y verificar resultado JSON y exitCode sin invocar dotnet test directamente"
+    },
+    {
+      "id": "O5",
+      "description": "Documentación de la tarea en paths.featurePath/create-tool-run-tests-local/ (analysis, objectives, spec, implementation, validacion según create-tool)"
+    }
+  ],
+  "success_criteria": [
+    "Tool run-tests-local en toolsDefinitionPath y toolCapsules",
+    "Invocación produce JSON conforme a tools-contract",
+    "Tests en condiciones locales se ejecutan solo vía run-tests-local",
+    "Caso de uso validación local verificado con la tool"
+  ],
+  "out_of_scope": [
+    "Implementación Rust (opcional, fase posterior)",
+    "Plantilla test-local-validacion (create-template aparte si se desea)"
+  ]
+}

@@ -82,7 +82,7 @@ public class LogController : ControllerBase
     {
         try
         {
-            var result = await _sender.Send(new GetLogsQuery(fromDate, toDate, level, companyId, userId, pageNumber, pageSize));
+            var result = await _sender.Send(new Application.Queries.Logs.GetLogsQuery(fromDate, toDate, level, companyId, userId, pageNumber, pageSize));
             return Ok(result);
         }
         catch (Exception ex)

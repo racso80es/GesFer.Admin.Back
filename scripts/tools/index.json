@@ -18,6 +18,13 @@
       "manifest": "prepare-full-env/manifest.json",
       "wrapper_bat": "Prepare-FullEnv.bat",
       "description": "Prepara entorno: Docker (DB, cache, Adminer) y opcionalmente API y clientes. Levanta servicios y espera a MySQL."
+    },
+    {
+      "toolId": "run-tests-local",
+      "path": "run-tests-local/",
+      "manifest": "run-tests-local/manifest.json",
+      "wrapper_bat": "Run-Tests-Local.bat",
+      "description": "Ejecuta tests (unit, integration, e2e) en condiciones de validación local. Orquesta opcionalmente prepare-full-env e invoke-mysql-seeds, compila y ejecuta dotnet test según scope."
     }
   ]
 }
