@@ -1,16 +1,35 @@
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using GesFer.Admin.Back.Infrastructure.Data;
+
 namespace GesFer.Admin.Back.E2ETests;
 
-/// <summary>
-/// Fixture E2E: no arranca ningún servidor; asume que la API está ya en marcha en E2EContext.BaseUrl.
-/// La orquestación (Run-E2ELocal.ps1) se encarga de prepare-full-env, invoke-mysql-seeds y opcionalmente la API.
-/// </summary>
-public sealed class E2EFixture : IDisposable
+public class E2EFixture : WebApplicationFactory<Program>
 {
-    public E2EFixture()
+    protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        // Opcional: comprobar que la API responde al inicio de la suite (evita muchos fallos por timeout)
-        // Si falla, los tests individuales fallarán de todas formas.
-    }
+        builder.ConfigureServices(services =>
+        {
+            // Remover DbContext real
+            var descriptor = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<AdminDbContext>));
+            if (descriptor != null) services.Remove(descriptor);
 
-    public void Dispose() { }
+            // Agregar InMemory DbContext
+            services.AddDbContext<AdminDbContext>(options =>
+            {
+                options.UseInMemoryDatabase("E2E_AdminDb_" + Guid.NewGuid());
+            });
+
+            // Remover Serilog MySQL Sink si existe (para evitar errores de conexión)
+             var serviceDescriptor = services.FirstOrDefault(descriptor => descriptor.ServiceType == typeof(ILoggerProvider));
+             if (serviceDescriptor != null) services.Remove(serviceDescriptor);
+
+        });
+
+        builder.UseEnvironment("Testing");
+    }
 }
