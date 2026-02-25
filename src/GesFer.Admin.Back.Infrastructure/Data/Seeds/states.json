@@ -1,21 +1,314 @@
 [
-  {"Id":"1a2b3c4d-5e6f-7890-1234-567890abcdef","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Madrid","Code":"MD"},
-  {"Id":"e1000001-5e6f-7890-1234-567890000001","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Andalucía","Code":"AN"},
-  {"Id":"e1000002-5e6f-7890-1234-567890000002","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Aragón","Code":"AR"},
-  {"Id":"e1000003-5e6f-7890-1234-567890000003","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Asturias","Code":"AS"},
-  {"Id":"e1000004-5e6f-7890-1234-567890000004","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Illes Balears","Code":"IB"},
-  {"Id":"e1000005-5e6f-7890-1234-567890000005","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Canarias","Code":"CN"},
-  {"Id":"e1000006-5e6f-7890-1234-567890000006","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Cantabria","Code":"CB"},
-  {"Id":"e1000007-5e6f-7890-1234-567890000007","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Castilla y León","Code":"CL"},
-  {"Id":"e1000008-5e6f-7890-1234-567890000008","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Castilla-La Mancha","Code":"CM"},
-  {"Id":"e1000009-5e6f-7890-1234-567890000009","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Catalunya","Code":"CT"},
-  {"Id":"e100000a-5e6f-7890-1234-56789000000a","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Comunitat Valenciana","Code":"VC"},
-  {"Id":"e100000b-5e6f-7890-1234-56789000000b","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Extremadura","Code":"EX"},
-  {"Id":"e100000c-5e6f-7890-1234-56789000000c","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Galicia","Code":"GA"},
-  {"Id":"e100000d-5e6f-7890-1234-56789000000d","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Región de Murcia","Code":"MC"},
-  {"Id":"e100000e-5e6f-7890-1234-56789000000e","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Navarra","Code":"NA"},
-  {"Id":"e100000f-5e6f-7890-1234-56789000000f","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"País Vasco","Code":"PV"},
-  {"Id":"e1000010-5e6f-7890-1234-567890000010","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"La Rioja","Code":"LR"},
-  {"Id":"e1000011-5e6f-7890-1234-567890000011","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Ceuta","Code":"CE"},
-  {"Id":"e1000012-5e6f-7890-1234-567890000012","CountryId":"a1b2c3d4-e5f6-7890-1234-567890abcdef","Name":"Melilla","Code":"ML"}
+  {
+    "Id": "1c689ec7-d97b-4712-a490-9fc04254ab4f",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Araba/Álava",
+    "Code": "VI"
+  },
+  {
+    "Id": "b6df53cd-6fc3-444c-9819-2f0b6b551bb9",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Albacete",
+    "Code": "AB"
+  },
+  {
+    "Id": "8851f750-5003-4673-aebb-04d519111bf4",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Alicante/Alacant",
+    "Code": "A"
+  },
+  {
+    "Id": "1ecfe228-7484-4840-b911-4701dc5d94eb",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Almería",
+    "Code": "AL"
+  },
+  {
+    "Id": "7a30a827-02e5-4bb8-8a8b-c8d9c7a4f5db",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Ávila",
+    "Code": "AV"
+  },
+  {
+    "Id": "e9c2b992-e06a-4c7e-b393-48605b755fae",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Badajoz",
+    "Code": "BA"
+  },
+  {
+    "Id": "0477a7e5-d03d-4922-8691-fb9ba4322bb3",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Illes Balears",
+    "Code": "PM"
+  },
+  {
+    "Id": "a693437b-ecc6-40ad-856f-2dc2417c4fb2",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Barcelona",
+    "Code": "B"
+  },
+  {
+    "Id": "5dc61450-412f-460e-afa6-4668e7efe9a1",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Burgos",
+    "Code": "BU"
+  },
+  {
+    "Id": "3f7439d8-644d-48be-ab17-687e3ae3e594",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Cáceres",
+    "Code": "CC"
+  },
+  {
+    "Id": "b37c6d9a-a529-49a5-bb57-2384097ca635",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Cádiz",
+    "Code": "CA"
+  },
+  {
+    "Id": "14e2d12c-f152-4b02-9728-a7e6368127f1",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Castellón/Castelló",
+    "Code": "CS"
+  },
+  {
+    "Id": "4c211edf-a12a-4663-9a65-f1c0d90fd7ca",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Ciudad Real",
+    "Code": "CR"
+  },
+  {
+    "Id": "4075b294-b477-40ea-b0e0-4fd1a71fd3aa",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Córdoba",
+    "Code": "CO"
+  },
+  {
+    "Id": "0436b7cb-ffd7-4994-ba6f-666515db806a",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "A Coruña",
+    "Code": "C"
+  },
+  {
+    "Id": "8f25f59f-61ae-4bfb-ac13-2b7989a1d74f",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Cuenca",
+    "Code": "CU"
+  },
+  {
+    "Id": "983bc42a-38fe-4e35-b8d6-7ab25eabd75c",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Girona",
+    "Code": "GI"
+  },
+  {
+    "Id": "2f639dc7-aaee-4301-a567-ae02ee24deca",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Granada",
+    "Code": "GR"
+  },
+  {
+    "Id": "3ccea73e-547c-47ee-bf45-588f14b0501e",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Guadalajara",
+    "Code": "GU"
+  },
+  {
+    "Id": "cee7d9fb-eb3e-4c49-b8c1-a9e19ed9d766",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Gipuzkoa",
+    "Code": "SS"
+  },
+  {
+    "Id": "f6ab96e1-28a0-49b9-9777-e2a6842be08c",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Huelva",
+    "Code": "H"
+  },
+  {
+    "Id": "565e1882-baf7-438f-a958-ae3434dd5100",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Huesca",
+    "Code": "HU"
+  },
+  {
+    "Id": "e2932563-1039-41c9-b994-7d147e271f8c",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Jaén",
+    "Code": "J"
+  },
+  {
+    "Id": "c41a9771-a641-458a-9110-f4f46ee3425e",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "León",
+    "Code": "LE"
+  },
+  {
+    "Id": "533a08e8-eae1-4f48-91aa-397c843ccceb",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Lleida",
+    "Code": "L"
+  },
+  {
+    "Id": "2baaa514-fd74-4ec3-a338-f9437f390ba3",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "La Rioja",
+    "Code": "LO"
+  },
+  {
+    "Id": "5c394ebc-9ce6-4cef-8918-2f97dc69c735",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Lugo",
+    "Code": "LU"
+  },
+  {
+    "Id": "5d7ac5fb-e49e-442f-88f2-608b8d13d10c",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Madrid",
+    "Code": "M"
+  },
+  {
+    "Id": "efd15e51-9e77-45f3-83d2-1a80847ba79f",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Málaga",
+    "Code": "MA"
+  },
+  {
+    "Id": "9edec675-95f7-4aaf-b8c1-5374dbc45d06",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Murcia",
+    "Code": "MU"
+  },
+  {
+    "Id": "0beb7b72-25dd-434e-86e8-1096324b3fe7",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Navarra",
+    "Code": "NA"
+  },
+  {
+    "Id": "38b0dc51-408c-4ca4-84e3-b66cdc7e85bb",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Ourense",
+    "Code": "OR"
+  },
+  {
+    "Id": "b75cfa2f-b3aa-44cc-8400-11dee9ad9d60",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Asturias",
+    "Code": "O"
+  },
+  {
+    "Id": "a70144b3-dddf-455c-a4cf-0de54eb5e7af",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Palencia",
+    "Code": "P"
+  },
+  {
+    "Id": "4ab8ac9d-f77e-473e-b3f4-a92cbe647628",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Las Palmas",
+    "Code": "GC"
+  },
+  {
+    "Id": "768dab12-e39d-4bdf-bbe9-a9611e067a5b",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Pontevedra",
+    "Code": "PO"
+  },
+  {
+    "Id": "2178b206-a0bf-4bb3-9f5f-1a78b2bf24be",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Salamanca",
+    "Code": "SA"
+  },
+  {
+    "Id": "0ecec805-5d41-4bc1-b612-5526a4fa8fb3",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Santa Cruz de Tenerife",
+    "Code": "TF"
+  },
+  {
+    "Id": "7a47ba4d-10e7-4f40-bbe4-14128a656f97",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Cantabria",
+    "Code": "S"
+  },
+  {
+    "Id": "34f5dcb1-47db-4b1e-b234-595321f6c97c",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Segovia",
+    "Code": "SG"
+  },
+  {
+    "Id": "1ebc880e-31d7-499c-b91b-7e8ee4ab0528",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Sevilla",
+    "Code": "SE"
+  },
+  {
+    "Id": "6ba2a194-86d9-4721-85c7-01f549008294",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Soria",
+    "Code": "SO"
+  },
+  {
+    "Id": "c941357b-d7a7-4cc0-aa6d-fad8328eed12",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Tarragona",
+    "Code": "T"
+  },
+  {
+    "Id": "63c25cdf-47e5-4f90-8bc9-1e92438b2e7d",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Teruel",
+    "Code": "TE"
+  },
+  {
+    "Id": "45a10779-99fd-4ee1-aaa7-cbbfa6e04920",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Toledo",
+    "Code": "TO"
+  },
+  {
+    "Id": "c106e4e3-29d5-420b-978b-91f0bc53bb9e",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Valencia/València",
+    "Code": "V"
+  },
+  {
+    "Id": "9575f09b-f113-4ecb-a526-6dd81690075e",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Valladolid",
+    "Code": "VA"
+  },
+  {
+    "Id": "2609687b-b61b-4271-807f-27e786c7f3ca",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Bizkaia",
+    "Code": "BI"
+  },
+  {
+    "Id": "881f22b3-5e64-40cd-a9b7-9645a12cb7b1",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Zamora",
+    "Code": "ZA"
+  },
+  {
+    "Id": "9dc0c1d8-8a66-4a12-a03b-61c11361d85e",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Zaragoza",
+    "Code": "Z"
+  },
+  {
+    "Id": "86700e27-a9ea-4d3a-a9e5-5b047559a291",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Ceuta",
+    "Code": "CE"
+  },
+  {
+    "Id": "2ee22d48-e412-431d-8b20-0b76fd21c6c5",
+    "CountryId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "Name": "Melilla",
+    "Code": "ML"
+  }
 ]
