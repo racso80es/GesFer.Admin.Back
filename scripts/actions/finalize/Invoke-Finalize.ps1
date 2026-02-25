@@ -96,10 +96,10 @@ try {
     }
 
     Write-Host "[Finalize] Invocando skill finalizar-git (Push-And-CreatePR) con -Persist $Persist" -ForegroundColor Cyan
-    $args = @("-Persist", $Persist)
-    if ($BranchName) { $args += "-BranchName"; $args += $BranchName }
-    if ($Title) { $args += "-Title"; $args += $Title }
-    & $skillCapsule @args
+    $params = @{ Persist = $Persist }
+    if ($BranchName) { $params.BranchName = $BranchName }
+    if ($Title) { $params.Title = $Title }
+    & $skillCapsule @params
     $exitCode = $LASTEXITCODE
 } finally {
     Pop-Location
