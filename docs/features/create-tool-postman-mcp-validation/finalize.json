@@ -1,0 +1,12 @@
+{
+  "task_id": "create-tool-postman-mcp-validation",
+  "status": "ready_for_pr",
+  "branch": "feat/create-tool-postman-mcp-validation",
+  "persist": "docs/features/create-tool-postman-mcp-validation/",
+  "evolution_log_updated": "docs/EVOLUTION_LOG.md",
+  "finalized_at": "2026-02-25",
+  "pr_url": "https://github.com/racso80es/GesFer.Admin.Back/pull/49",
+  "deliverables_done": ["analysis", "objectives", "spec", "clarify", "plan", "implementation", "validacion", "finalize"],
+  "closure_criterion": "Tool postman-mcp-validation en SddIA (definición + cápsula), registrada en índice y Cúmulo; validación ejecutada (17 requests).",
+  "note": "Para cerrar: ejecutar .\\scripts\\actions\\finalize\\Invoke-Finalize.ps1 -Persist docs/features/create-tool-postman-mcp-validation/ (el script invoca la skill finalizar-git). Ver SddIA/actions/finalize/spec.md."
+}

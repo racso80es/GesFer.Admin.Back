@@ -27,7 +27,19 @@ La acción **finalize** (finalizar) cierra el ciclo de la feature: asegura commi
 
 ## Skill de referencia: finalizar-git
 
-La acción finalize **utiliza la skill** `finalizar-git` (definición en paths.skillsDefinitionPath/finalizar-git/ (spec.md, spec.json) y `spec.json`; implementación en paths.skillCapsules[\"finalizar-git\"]) para centralizar todas las interacciones con Git. El ejecutor debe aplicar los pasos y reglas definidos en esa skill para las fases **pre_pr** (push y creación del PR) y, cuando corresponda, **post_pr** (tras aceptar el PR: unificar, eliminar rama unificada, volver a master). La skill es la única fuente de verdad para los comandos y flujos git de cierre.
+La acción finalize **utiliza y ejecuta la skill** `finalizar-git` (definición en paths.skillsDefinitionPath/finalizar-git/; implementación en paths.skillCapsules[\"finalizar-git\"]) para centralizar todas las interacciones con Git. El ejecutor **debe invocar** la skill para las fases **pre_pr** (push y creación del PR) y, cuando corresponda, **post_pr** (tras aceptar el PR: unificar, eliminar rama unificada, volver a master). La skill es la única fuente de verdad para los comandos y flujos git de cierre (Ley COMANDOS: no ejecutar git directamente; toda operación vía skill/herramienta).
+
+### Ejecución de la skill finalizar-git (obligatoria)
+
+Para **ejecutar** la acción finalize (pasos de push y PR), se debe invocar el script orquestador que a su vez ejecuta la skill:
+
+- **Script orquestador:** `scripts/actions/finalize/Invoke-Finalize.ps1`
+- **Desde la raíz del repositorio:**
+  ```powershell
+  .\scripts\actions\finalize\Invoke-Finalize.ps1 -Persist "docs/features/<nombre_feature>/"
+  ```
+- **Parámetros:** `-Persist` (obligatorio, ruta de la carpeta de la feature), `-BranchName` (opcional), `-NoVerify` (opcional, omitir verify-pr-protocol), `-Title` (opcional, título del PR).
+- **Comportamiento del script:** Comprueba precondiciones (rama no master, objectives.md, validacion.json); opcionalmente ejecuta verify-pr-protocol (Rust); **invoca la skill finalizar-git** ejecutando `Push-And-CreatePR.ps1` de la cápsula (paths.skillCapsules[\"finalizar-git\"]). El push y la creación del PR los realiza únicamente la skill; el agente no ejecuta comandos git directamente.
 
 ## Flujo de ejecución (propuesto)
 
@@ -43,19 +55,19 @@ La acción finalize **utiliza la skill** `finalizar-git` (definición en paths.s
 4. **Actualización de Evolution Logs:**
    - Añadir entrada en docs/EVOLUTION_LOG.md (raíz) o paths.evolutionPath + paths.evolutionLogFile.
    - Añadir sección en paths.evolutionPath + paths.evolutionLogFile con resumen y enlace a la carpeta de la feature.
-5. **Subir la rama (push):** Publicar la rama actual en el remoto. **El agente debe ejecutar el comando**, no solo documentarlo: en PowerShell desde la raíz del repo, `git push -u origin <rama_actual>` (obtener rama con `git branch --show-current`). Comprobar la salida: debe aparecer confirmación de envío a `origin` (ej. `branch 'feat/...' set up to track 'origin/feat/...'` o `Everything up-to-date`). Si el usuario pide «subir» sin más contexto, ejecutar este paso: push de la rama actual a origin. Sin este paso ejecutado con éxito, el cierre no está completo.
-6. **Crear Pull Request (skill finalizar-git, fase pre_pr):** Invocar **Push-And-CreatePR.ps1** de la cápsula finalizar-git (paths.skillCapsules[\"finalizar-git\"]): desde la raíz del repo, parámetro -Persist con valor paths.featurePath/<nombre_feature>/ (resolver vía Cúmulo). Si **GitHub CLI (gh)** está instalado y autenticado, ejecuta `gh pr create`; si no, muestra la URL para crear el PR manualmente. La descripción del PR enlaza a la carpeta de la feature (paths.featurePath/<nombre_feature>/). (Nota: el script puede incluir el push; si ya se ejecutó el paso 5, el push redundante es idempotente.)
+5. **Ejecutar script finalize (push + PR):** **Invocar** `.\scripts\actions\finalize\Invoke-Finalize.ps1 -Persist "docs/features/<nombre_feature>/"` desde la raíz del repo. Este script comprueba precondiciones, opcionalmente ejecuta verify-pr-protocol y **ejecuta la skill finalizar-git** (Push-And-CreatePR.ps1), que realiza el push y la creación del PR. Sin este paso ejecutado con éxito, el cierre no está completo. El agente no ejecuta `git push` ni `gh pr create` directamente; toda la interacción Git se hace a través de la skill (Ley COMANDOS).
 6. **Persistencia opcional:** Escribir finalize.json en la carpeta de la feature (Cúmulo) con { "pr_url": "...", "branch": "...", "timestamp": "..." }.
 7. **Auditoría:** Registrar el evento de finalización en paths.auditsPath + paths.accessLogFile (Cúmulo).
 8. **Post-PR (skill finalizar-git, fase post_pr):** Una vez el PR esté aceptado/mergeado en el remoto, el ejecutor (o el usuario) aplica la fase **post_pr** de la skill `finalizar-git` invocando la skill finalizar-git (paths.skillCapsules[\"finalizar-git\"]). Tekton invoca la implementación (fase post_pr). Ver paths.skillsDefinitionPath/finalizar-git/spec.md.
 
-## Implementación técnica (opcional)
+## Implementación técnica
 
-Puede implementarse mediante scripts (PowerShell o equivalente) que ejecuten los pasos de cierre. Parámetros típicos:
+La acción finalize **ejecuta la skill finalizar-git** mediante el script orquestador:
 
-- `--persist`: ruta de la carpeta de la feature.
-- `--no-pr`: solo actualizar logs y push; no crear el PR (útil si el PR se abre manualmente).
-- `--token`: (opcional) token de auditoría.
+- **Ruta del script:** `scripts/actions/finalize/Invoke-Finalize.ps1` (desde la raíz del repo).
+- **Invocación mínima:** `.\scripts\actions\finalize\Invoke-Finalize.ps1 -Persist "docs/features/<nombre_feature>/"`
+- **Parámetros:** `-Persist` (obligatorio), `-BranchName`, `-NoVerify` (omitir verify-pr-protocol), `-Title`.
+- El script invoca internamente **Push-And-CreatePR.ps1** de paths.skillCapsules[\"finalizar-git\"]; no se ejecutan comandos git fuera de la skill.
 
 ## Integración con agentes
 

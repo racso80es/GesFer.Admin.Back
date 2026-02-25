@@ -25,6 +25,13 @@
       "manifest": "run-tests-local/manifest.json",
       "wrapper_bat": "Run-Tests-Local.bat",
       "description": "Ejecuta tests (unit, integration, e2e) en condiciones de validación local. Orquesta opcionalmente prepare-full-env e invoke-mysql-seeds, compila y ejecuta dotnet test según scope."
+    },
+    {
+      "toolId": "postman-mcp-validation",
+      "path": "postman-mcp-validation/",
+      "manifest": "postman-mcp-validation/manifest.json",
+      "wrapper_bat": "Postman-Mcp-Validation.bat",
+      "description": "Valida endpoints ejecutando la colección Postman (Newman). Herramienta de seguridad externa; salida JSON según tools-contract. Diseño MCP-ready."
     }
   ]
 }

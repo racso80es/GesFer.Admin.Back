@@ -1,0 +1,6 @@
+{
+  "task_id": "create-tool-postman-mcp-validation",
+  "spec_ref": "paths.toolsDefinitionPath/postman-mcp-validation/spec.json",
+  "tool_id": "postman-mcp-validation",
+  "implementation_path_ref": "paths.toolCapsules.postman-mcp-validation"
+}

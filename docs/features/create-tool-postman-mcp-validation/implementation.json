@@ -1,0 +1,35 @@
+{
+  "task_id": "create-tool-postman-mcp-validation",
+  "phase": "implementation",
+  "touchpoints": [
+    {
+      "path": "scripts/tools/postman-mcp-validation/manifest.json",
+      "action": "create"
+    },
+    {
+      "path": "scripts/tools/postman-mcp-validation/postman-mcp-validation-config.json",
+      "action": "create"
+    },
+    {
+      "path": "scripts/tools/postman-mcp-validation/postman-mcp-validation.md",
+      "action": "create"
+    },
+    {
+      "path": "scripts/tools/postman-mcp-validation/Postman-Mcp-Validation.bat",
+      "action": "create"
+    },
+    {
+      "path": "scripts/tools/postman-mcp-validation/Postman-Mcp-Validation.ps1",
+      "action": "create"
+    },
+    {
+      "path": "scripts/tools/index.json",
+      "action": "modify"
+    },
+    {
+      "path": "SddIA/agents/cumulo.paths.json",
+      "action": "modify"
+    }
+  ],
+  "validation": "Execute capsule .bat from repo root; verify JSON output and exitCode. Phase 5 in plan."
+}

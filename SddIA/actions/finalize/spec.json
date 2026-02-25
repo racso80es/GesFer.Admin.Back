@@ -1,9 +1,11 @@
 {
   "action_id": "finalize",
   "name": "Finalize",
-  "purpose": "Cierre: commits, Evolution Logs, push, PR. Usa skill finalizar-git.",
+  "purpose": "Cierre: commits, Evolution Logs, push, PR. Ejecuta skill finalizar-git vía Invoke-Finalize.ps1.",
   "inputs": ["Carpeta feature (Cúmulo)", "Rama feat/ o fix/"],
   "outputs": ["Rama en origin", "Evolution Logs", "PR", "finalize.json opcional"],
-  "flow_steps": ["Precondiciones", "Commits atómicos", "Evolution Logs", "Push", "pre_pr finalizar-git", "finalize.json", "Auditoría", "post_pr opcional"],
+  "flow_steps": ["Precondiciones", "Commits atómicos", "Evolution Logs", "Ejecutar Invoke-Finalize.ps1 (skill finalizar-git)", "finalize.json", "Auditoría", "post_pr opcional"],
+  "implementation_script_ref": "scripts/actions/finalize/Invoke-Finalize.ps1",
+  "skill_ref": "finalizar-git",
   "contract_ref": "actions-contract.json"
 }

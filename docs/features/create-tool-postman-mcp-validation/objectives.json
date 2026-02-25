@@ -1,0 +1,38 @@
+{
+  "task_id": "create-tool-postman-mcp-validation",
+  "process_ref": "paths.processPath/create-tool/",
+  "cumulo_ref": "SddIA/agents/cumulo.json",
+  "objectives": [
+    {
+      "id": "O1",
+      "description": "Definición en SddIA: paths.toolsDefinitionPath/postman-mcp-validation/ con spec.md y spec.json (inputs CollectionPath, BaseUrl, InternalSecret, OutputPath, OutputJson; diseño MCP-ready documentado)"
+    },
+    {
+      "id": "O2",
+      "description": "Cápsula en paths.toolCapsules.postman-mcp-validation: manifest, config, .md, .bat, .ps1; ejecución de colección vía Newman con variables; salida JSON según tools-contract (feedback, data con resumen ejecución/assertions)"
+    },
+    {
+      "id": "O3",
+      "description": "Registro en paths.toolsIndexPath y paths.toolCapsules (cumulo.paths.json)"
+    },
+    {
+      "id": "O4",
+      "description": "Validación con caso de uso: ejecutar la tool con la colección del proyecto y verificar resultado JSON y exitCode sin invocar newman directamente"
+    },
+    {
+      "id": "O5",
+      "description": "Documentación de la tarea en paths.featurePath/create-tool-postman-mcp-validation/ (analysis, objectives, spec, implementation, validacion según create-tool)"
+    }
+  ],
+  "success_criteria": [
+    "Tool postman-mcp-validation en toolsDefinitionPath y toolCapsules",
+    "Invocación ejecuta colección Postman y produce JSON conforme a tools-contract",
+    "Validaciones de endpoints se ejecutan solo vía postman-mcp-validation",
+    "Spec documenta diseño MCP-ready para futura integración con Postman MCP",
+    "Caso de uso validación de endpoints verificado con la tool"
+  ],
+  "out_of_scope": [
+    "Implementación Rust (opcional, fase posterior)",
+    "Servidor MCP propio o cliente MCP hacia Postman en v1 (solo diseño documentado)"
+  ]
+}
