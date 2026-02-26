@@ -62,7 +62,8 @@ public class AdminJsonDataSeeder
 
             while (currentDir != null && solutionDir == null && depth < maxDepth)
             {
-                if (File.Exists(Path.Combine(currentDir.FullName, "GesFer.sln")))
+                // Buscamos la solución del backend que está en src/
+                if (File.Exists(Path.Combine(currentDir.FullName, "GesFer.Admin.Back.sln")))
                 {
                     solutionDir = currentDir;
                 }
@@ -75,9 +76,9 @@ public class AdminJsonDataSeeder
 
             if (solutionDir != null)
             {
-                // Ruta canónica desde la raíz de la solución
+                // Ruta canónica desde la carpeta de la solución (src/)
                 // Ajustado a GesFer.Admin.Back.Infrastructure
-                var canonicalPath = Path.Combine(solutionDir.FullName, "src", "GesFer.Admin.Back.Infrastructure", "Data", "Seeds");
+                var canonicalPath = Path.Combine(solutionDir.FullName, "GesFer.Admin.Back.Infrastructure", "Data", "Seeds");
                 if (Directory.Exists(canonicalPath))
                 {
                     foundPath = canonicalPath;
