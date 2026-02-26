@@ -55,7 +55,7 @@ public class GeoControllerTests
     [Fact]
     public async Task GetCitiesByState_ShouldReturnList()
     {
-        var stateId = Guid.Parse("1a2b3c4d-5e6f-7890-1234-567890abcdef");
+        var stateId = Guid.Parse("5d7ac5fb-e49e-442f-88f2-608b8d13d10c"); // State: Madrid
         var response = await _client.GetAsync($"/api/states/{stateId}/cities");
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         var list = await response.Content.ReadFromJsonAsync<List<CityDto>>();
