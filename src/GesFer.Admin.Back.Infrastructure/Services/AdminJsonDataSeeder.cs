@@ -558,6 +558,20 @@ public class AdminJsonDataSeeder
                         email = parsedEmail;
                     }
 
+                    Guid? languageId = null;
+                    if (!string.IsNullOrWhiteSpace(companyData.LanguageId))
+                    {
+                        if (Guid.TryParse(companyData.LanguageId, out var parsedLanguageId))
+                        {
+                            languageId = parsedLanguageId;
+                        }
+                        else
+                        {
+                            _logger.LogWarning("[SEED ADMIN] LanguageId inválido en Company '{Name}' (Id: {Id}). Asignando null.",
+                                companyData.Name, companyData.Id);
+                        }
+                    }
+
                     var company = new Company
                     {
                         Id = Guid.Parse(companyData.Id),
@@ -566,7 +580,7 @@ public class AdminJsonDataSeeder
                         Address = companyData.Address,
                         Phone = string.IsNullOrWhiteSpace(companyData.Phone) ? null : companyData.Phone,
                         Email = email,
-                        LanguageId = string.IsNullOrWhiteSpace(companyData.LanguageId) ? null : Guid.Parse(companyData.LanguageId),
+                        LanguageId = languageId,
                         CreatedAt = DateTime.UtcNow,
                         IsActive = true
                     };

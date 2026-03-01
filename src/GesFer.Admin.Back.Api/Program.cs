@@ -83,6 +83,12 @@ try
     if (isDevelopment)
         builder.Services.Configure<HttpsRedirectionOptions>(options => { options.HttpsPort = 5011; });
 
+    // Configurar opciones
+    builder.Services.Configure<GesFer.Admin.Back.Api.Configuration.SystemAuthOptions>(options =>
+    {
+        options.SharedSecret = builder.Configuration["SharedSecret"] ?? string.Empty;
+    });
+
     // Configurar inyección de dependencias
     builder.Services.AddApplicationServices(builder.Configuration, builder.Environment);
     builder.Services.AddInfrastructureServices(builder.Configuration, builder.Environment.IsDevelopment());
