@@ -1,4 +1,4 @@
-using GesFer.Admin.Back.Api.Controllers;
+using GesFer.Admin.Back.Application.DTOs.Auth;
 using System.Net.Http.Json;
 using Xunit;
 using FluentAssertions;
