@@ -80,7 +80,7 @@ public class AdminWebAppFactory : WebApplicationFactory<Program>, IAsyncLifetime
             Contraseña = "admin123"
         });
         response.EnsureSuccessStatusCode();
-        var result = await response.Content.ReadFromJsonAsync<GesFer.Admin.Back.Api.Controllers.AdminLoginResponse>();
+        var result = await response.Content.ReadFromJsonAsync<GesFer.Admin.Back.Application.DTOs.Auth.AdminLoginResponse>();
         return result!.Token;
     }
 

@@ -1,6 +1,7 @@
 using FluentAssertions;
 using GesFer.Admin.Back.Api.Controllers;
 using GesFer.Admin.Back.Application.Common.Interfaces;
+using GesFer.Admin.Back.Application.DTOs.Auth;
 using GesFer.Admin.Back.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

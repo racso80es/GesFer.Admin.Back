@@ -1,6 +1,6 @@
 
 using GesFer.Admin.Back.Application.Common.Interfaces;
-using GesFer.Admin.Back.Infrastructure.Services;
+using GesFer.Admin.Back.Application.DTOs.Auth;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GesFer.Admin.Back.Api.Controllers;
@@ -80,23 +80,4 @@ public class AdminAuthController : ControllerBase
             return StatusCode(500, new { message = "Error interno del servidor", error = ex.Message });
         }
     }
-}
-
-// DTOs temporales (deberían estar en Application/DTOs)
-public class AdminLoginRequest
-{
-    public string Usuario { get; set; } = string.Empty;
-    public string Contraseña { get; set; } = string.Empty;
-}
-
-public class AdminLoginResponse
-{
-    public string UserId { get; set; } = string.Empty;
-    public string CursorId { get; set; } = string.Empty;
-    public string Username { get; set; } = string.Empty;
-    public string FirstName { get; set; } = string.Empty;
-    public string LastName { get; set; } = string.Empty;
-    public string? Email { get; set; }
-    public string Role { get; set; } = string.Empty;
-    public string Token { get; set; } = string.Empty;
 }
