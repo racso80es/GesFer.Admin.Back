@@ -7,7 +7,7 @@ Implementación por defecto en Rust de los skills con ejecutable (contrato SddIA
 | Binario | Skill | Cápsula destino |
 |---------|--------|-----------------|
 | iniciar_rama.exe | iniciar-rama | scripts/skills/iniciar-rama/bin/ |
-| merge_to_master_cleanup.exe | finalizar-git (post_pr) | scripts/skills/finalizar-git/bin/ |
+| merge_to_master_cleanup.exe | FinalizarProceso (post_pr) | scripts/skills/finalizar-proceso/bin/ |
 | invoke_command.exe | invoke-command | scripts/skills/invoke-command/bin/ |
 
 ## Build e instalación

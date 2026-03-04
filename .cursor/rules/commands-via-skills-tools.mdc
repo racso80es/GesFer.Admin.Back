@@ -15,7 +15,7 @@ alwaysApply: true
 - **Herramienta (tool)** (paths.toolCapsules[tool-id], paths.toolsDefinitionPath)
 - **Acción** (paths.actionsPath) o **Proceso** (paths.processPath)
 
-Ejemplos: usar la skill **iniciar-rama** para crear ramas, **finalizar-git** para push/PR, **invoke-command** para ejecutar comandos de sistema de forma trazada.
+Ejemplos: usar la skill **iniciar-rama** para crear ramas, **FinalizarProceso** para push/PR, **invoke-command** para ejecutar comandos de sistema de forma trazada.
 
 ## Implementación estándar: Rust
 

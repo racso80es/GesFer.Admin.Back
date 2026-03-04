@@ -17,5 +17,5 @@
     { "id": "8", "name": "Finalizar", "description": "Acción finalize." }
   ],
   "related_actions": ["spec", "clarify", "planning", "implementation", "execution", "validate", "finalize"],
-  "related_skills": ["iniciar-rama", "finalizar-git"]
+  "related_skills": ["iniciar-rama", "finalizar-proceso"]
 }

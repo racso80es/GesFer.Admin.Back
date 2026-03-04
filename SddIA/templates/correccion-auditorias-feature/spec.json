@@ -12,7 +12,7 @@
     "default_branch_pattern": "feat/correccion-segun-auditorias | feat/correccion-auditorias-<id>"
   },
   "related_actions": ["spec", "clarify", "planning", "implementation", "execution", "validate", "finalize"],
-  "related_skills": ["iniciar-rama", "finalizar-git", "documentation", "security-audit"],
+  "related_skills": ["iniciar-rama", "finalizar-proceso", "documentation", "security-audit"],
   "interested_agents": ["architect", "tekton-developer", "auditor-back", "auditor-front", "auditor-process"],
   "contract_ref": "SddIA/templates/templates-contract.json"
 }

@@ -1,0 +1,7 @@
+{
+  "feature_id": "refactor-skill-finalizar-proceso",
+  "branch": "feat/refactor-skill-finalizar-proceso",
+  "build_backend": "ok",
+  "criteria_acceptance": { "skill_renamed": true, "paths_updated": true },
+  "ready_for_finalize": true
+}

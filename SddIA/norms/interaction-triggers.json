@@ -30,6 +30,13 @@
       "behavior": "Ejecutar git push: git branch --show-current luego git push -u origin <rama>. PowerShell. Reportar éxito o error. No solo documentar; ejecutar.",
       "list_source": "—",
       "response": "Ejecutar push y confirmar resultado."
+    },
+    {
+      "trigger": "finalizar proceso",
+      "when": "El usuario pide finalizar proceso, cerrar proceso o post-PR (tras haber mergeado el PR)",
+      "behavior": "Invocar skill finalizar-proceso fase post_pr: Finalizar-Proceso.ps1 -BranchName <rama> (paths.skillCapsules.finalizar-proceso)",
+      "list_source": "paths.skillCapsules.finalizar-proceso",
+      "response": "Ejecutar Finalizar-Proceso.ps1 y confirmar repositorio en main, rama eliminada (local y por defecto remota)."
     }
   ],
   "cumulo_ref": "SddIA/agents/cumulo.json",

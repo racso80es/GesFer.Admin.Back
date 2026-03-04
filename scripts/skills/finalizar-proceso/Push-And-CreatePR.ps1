@@ -2,7 +2,7 @@
 .SYNOPSIS
     Push de la rama actual y creación del PR hacia master/main (GitHub CLI si está disponible).
 .DESCRIPTION
-    Fase pre_pr de la skill finalizar-git: push origin <rama> y crear Pull Request.
+    Fase pre_pr de la skill FinalizarProceso: push origin <rama> y crear Pull Request.
     Si gh (GitHub CLI) está instalado y autenticado, ejecuta gh pr create. Si no, muestra la URL para crear el PR manualmente.
 .PARAMETER BranchName
     Rama a pushear (por defecto: rama actual).
@@ -52,7 +52,6 @@ if ([string]::IsNullOrWhiteSpace($BranchName)) {
     exit 1
 }
 
-# Detectar base (master/main)
 if ([string]::IsNullOrWhiteSpace($BaseBranch)) {
     $ref = git symbolic-ref refs/remotes/origin/HEAD 2>$null
     if ($ref -match "origin/(master|main)") {
@@ -69,7 +68,6 @@ if ($BranchName -eq $BaseBranch) {
 
 Write-Host "[Push-And-CreatePR] Rama: $BranchName -> base: $BaseBranch" -ForegroundColor Cyan
 
-# 1. Push
 Write-Host "[1/2] Push origin $BranchName..." -ForegroundColor Yellow
 git push origin $BranchName
 if ($LASTEXITCODE -ne 0) {
@@ -78,7 +76,6 @@ if ($LASTEXITCODE -ne 0) {
 }
 Write-Host "Push OK." -ForegroundColor Green
 
-# 2. Crear PR (gh si está disponible)
 $body = if ($Persist) { "Documentación: ``$Persist``" } else { "Rama: $BranchName" }
 $prTitle = if ($Title) { $Title } else { $BranchName }
 
@@ -100,7 +97,6 @@ if ($ghPath) {
     Write-Warning "gh pr create falló (¿autenticado? gh auth login). Mostrando URL manual."
 }
 
-# Fallback: URL para crear PR manualmente (GitHub)
 $remoteUrl = (git config --get remote.origin.url).Trim()
 $repo = $null
 if ($remoteUrl -match "github\.com[:/](.+?)(?:\.git)?$") {

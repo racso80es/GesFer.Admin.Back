@@ -1,0 +1,12 @@
+# Finalizar proceso (post-PR) — skill FinalizarProceso
+
+**Fuente canónica:** SddIA/norms/interaction-triggers.md (disparador «finalizar proceso»). Esta regla es difusión para Cursor.
+
+Cuando el usuario escriba **finalizar proceso**, **cerrar proceso** o **post-PR** (tras haber mergeado el PR en el remoto):
+
+1. **Invocar** la skill **FinalizarProceso** fase post_pr (no ejecutar comandos git directamente).
+2. Punto de entrada: `.\scripts\skills\finalizar-proceso\Finalizar-Proceso.ps1 -BranchName "feat/<nombre_rama>"` (o Finalizar-Proceso.bat con la rama como argumento).
+3. Por defecto se elimina la rama remota; usar `-NoDeleteRemote` si no debe borrarse en origin.
+4. Confirmar: repositorio en main, sincronizado; rama de trabajo eliminada (local y por defecto remota).
+
+Norma completa: SddIA/norms/interaction-triggers.md. Skill: paths.skillCapsules.finalizar-proceso; definición: paths.skillsDefinitionPath/finalizar-proceso/spec.md (fase post_pr).

@@ -18,6 +18,6 @@
     { "id": "8", "name": "Finalizar", "description": "Acción finalize; Evolution Logs, PR." }
   ],
   "related_actions": ["spec", "clarify", "planning", "implementation", "execution", "validate", "finalize"],
-  "related_skills": ["iniciar-rama", "finalizar-git", "documentation", "security-audit"],
+  "related_skills": ["iniciar-rama", "finalizar-proceso", "documentation", "security-audit"],
   "principles_ref": "paths.principlesPath"
 }

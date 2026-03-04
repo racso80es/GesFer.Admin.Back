@@ -37,9 +37,9 @@ $skillsDir = Join-Path $scriptDir "..\skills"
 $releaseDir = Join-Path $scriptDir "target\release"
 $capsules = @(
     @{ exe = "iniciar_rama"; capsule = "iniciar-rama" },
-    @{ exe = "merge_to_master_cleanup"; capsule = "finalizar-git" },
+    @{ exe = "merge_to_master_cleanup"; capsule = "finalizar-proceso" },
     @{ exe = "invoke_command"; capsule = "invoke-command" },
-    @{ exe = "push_and_create_pr"; capsule = "finalizar-git" }
+    @{ exe = "push_and_create_pr"; capsule = "finalizar-proceso" }
 )
 foreach ($cap in $capsules) {
     $src = Join-Path $releaseDir "$($cap.exe).exe"

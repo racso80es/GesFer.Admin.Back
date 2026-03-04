@@ -23,7 +23,7 @@
 | skill_id | Descripción | Cápsula |
 |----------|-------------|---------|
 | iniciar-rama | Crea rama feat/ o fix/ actualizada con master/main. Inicio de acción. | paths.skillCapsules.iniciar-rama |
-| finalizar-git | Aceptar PR a master, unificar, eliminar rama, volver a master. | paths.skillCapsules.finalizar-git |
+| finalizar-proceso | Aceptar PR a master, unificar, eliminar rama, volver a master. | paths.skillCapsules.finalizar-proceso |
 | invoke-command | Interceptor de comandos de sistema (git, dotnet, npm, pwsh). | paths.skillCapsules.invoke-command |
 | git-operations | Uso seguro de Git (ramas feat/fix, commits convencionales). | — |
 | documentation | Estándares SSOT y gestión de documentación. | — |
@@ -57,7 +57,7 @@
 | implementation | Implementación (doc): indicar touchpoints en código y documento de implementación; no modifica código. |
 | execution | Ejecución: aplicar al código los cambios del documento de implementación. |
 | validate | Validación: comprobar calidad antes del PR (git diff, build, tests, docs); generar validacion.json. |
-| finalize | Finalizar: cierre del ciclo (commits, Evolution Logs, push, PR a master). Usa skill finalizar-git. |
+| finalize | Finalizar: cierre del ciclo (commits, Evolution Logs, push, PR a master). Usa skill finalizar-proceso. |
 | sddia-difusion | Difusión de SddIA: mantener .cursor/rules, .github y otros gestores IA alineados con AGENTS y SddIA/norms. |
 
 ---
@@ -99,6 +99,23 @@
 4. **No sustituir por documentación:** El agente no debe limitarse a decir que «el paso es subir»; debe **ejecutar** el comando de push y reportar el resultado.
 
 **Relación con finalize:** La acción finalize (paths.actionsPath/finalize/) incluye este paso como obligatorio; cuando el usuario pide «subir» o «finalizar» (y se aplica el cierre), el agente debe ejecutar el push.
+
+---
+
+## Disparador: finalizar proceso (post-PR)
+
+**Cuándo:** El usuario escribe **finalizar proceso**, **cerrar proceso**, **post-PR** o pide explícitamente completar el cierre tras haber mergeado el PR (unificar en main, eliminar rama local y remota).
+
+**Comportamiento:**
+
+1. **Reconocer** que el usuario quiere ejecutar la fase **post_pr** de la skill **finalizar-proceso**.
+2. **Invocar la skill:** Desde la raíz del repo, ejecutar el punto de entrada de la cápsula paths.skillCapsules.finalizar-proceso:
+   - **PowerShell:** `.\scripts\skills\finalizar-proceso\Finalizar-Proceso.ps1 -BranchName "feat/<nombre_rama>"` (si se conoce la rama ya mergeada).
+   - **O .bat:** `.\scripts\skills\finalizar-proceso\Finalizar-Proceso.bat "feat/<nombre_rama>"`.
+3. Por defecto se elimina la rama remota. Para no eliminarla: `-NoDeleteRemote`.
+4. **Comprobar resultado:** Repositorio en main, sincronizado con origin; rama de trabajo eliminada (local y, por defecto, remota).
+
+**Referencia:** paths.skillsDefinitionPath/finalizar-proceso/spec.md (fase post_pr, «Finalizar proceso»).
 
 ---
 

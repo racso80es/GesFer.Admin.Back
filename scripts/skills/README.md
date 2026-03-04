@@ -12,7 +12,7 @@ El listado canónico se obtiene de:
 | skillId | Descripción breve | Launcher en cápsula |
 |---------|-------------------|---------------------|
 | **iniciar-rama** | Crea rama feat/ o fix/ actualizada con master. | `iniciar-rama/Iniciar-Rama.bat` |
-| **finalizar-git** | Post-merge: master, sync, eliminar rama. Pre-pr: Unificar-Rama.ps1. | `finalizar-git/Merge-To-Master-Cleanup.bat` |
+| **finalizar-proceso** | FinalizarProceso: Post-merge: master, sync, eliminar rama. Pre-pr: Unificar-Rama.ps1, Push-And-CreatePR. | `finalizar-proceso/Finalizar-Proceso.bat`, `finalizar-proceso/Merge-To-Master-Cleanup.bat` |
 | **invoke-command** | Interceptor de comandos de sistema (git, dotnet, npm, pwsh). | `invoke-command/Invoke-Command.bat` |
 
 Cada skill con ejecutable reside en una **cápsula** **paths.skillCapsules[&lt;skill-id&gt;]** con `manifest.json`, script `.ps1`, launcher `.bat` y opcionalmente `bin/` con el ejecutable Rust (generado por `scripts/skills-rs/install.ps1`).

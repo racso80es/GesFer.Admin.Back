@@ -3,7 +3,7 @@
     Post-merge: posiciona en master/main, sincroniza y elimina la rama ya mergeada (local y opcionalmente remota).
 .DESCRIPTION
     Ejecutar tras haber aceptado/mergeado el PR en el remoto. Cumple la fase post_pr de la skill
-    finalizar-git (SddIA/skills/finalizar-git.md). No hace merge local: asume que el merge ya ocurrió
+    FinalizarProceso (SddIA/skills/finalizar-proceso/). No hace merge local: asume que el merge ya ocurrió
     en origin (vía PR). Ley GIT: no commit en master; el merge a master es vía PR.
 .PARAMETER BranchName
     Rama que ya fue mergeada (ej. feat/nombre-feature). Si no se indica, se usa la rama actual.

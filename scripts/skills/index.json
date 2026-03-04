@@ -13,11 +13,12 @@
       "description": "Crea rama feat/ o fix/ actualizada con master/main. Inicio de acción o tarea."
     },
     {
-      "skillId": "finalizar-git",
-      "path": "finalizar-git/",
-      "manifest": "finalizar-git/manifest.json",
-      "launcher_bat_post_pr": "finalizar-git/Merge-To-Master-Cleanup.bat",
-      "description": "Pre-pr: Unificar-Rama.ps1, Push-And-CreatePR.ps1 (push + crear PR con gh). Post-pr: Merge-To-Master-Cleanup."
+      "skillId": "finalizar-proceso",
+      "path": "finalizar-proceso/",
+      "manifest": "finalizar-proceso/manifest.json",
+      "launcher_bat_post_pr": "finalizar-proceso/Merge-To-Master-Cleanup.bat",
+      "launcher_finalizar_proceso": "finalizar-proceso/Finalizar-Proceso.bat",
+      "description": "Pre-pr: Unificar-Rama.ps1, Push-And-CreatePR.ps1 (push + crear PR con gh). Post-pr: Finalizar-Proceso.ps1, Merge-To-Master-Cleanup."
     },
     {
       "skillId": "invoke-command",

@@ -1,0 +1,1 @@
+git commit -m "refactor(skill): renombrar finalizar-git a FinalizarProceso (finalizar-proceso)"

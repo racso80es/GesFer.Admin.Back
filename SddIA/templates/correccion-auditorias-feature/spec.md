@@ -36,7 +36,7 @@ El agente que ejecute la plantilla resolverá estas referencias según la norma 
 ## Agentes y skills
 
 - **Agentes:** Auditor (Back/Front/Process) para análisis; Arquitecto y Tekton para orquestación y corrección.
-- **Skills:** iniciar-rama, finalizar-git, documentation, security-audit cuando aplique.
+- **Skills:** iniciar-rama, finalizar-proceso, documentation, security-audit cuando aplique.
 
 ## Referencias
 

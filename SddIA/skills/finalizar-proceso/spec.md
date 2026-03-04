@@ -1,6 +1,6 @@
-# Skill: Finalizar Git
+# Skill: FinalizarProceso
 
-**skill_id:** `finalizar-git`
+**skill_id:** `finalizar-proceso`
 
 ## Objetivo
 
@@ -42,18 +42,23 @@ Centralizar todas las interacciones con Git necesarias para el cierre de una fea
    - Si no hay `gh`, muestra la URL para crear el PR manualmente (GitHub) o instrucciones para otro proveedor.
 4. La descripción del PR debe enlazar a la ruta de documentación (Cúmulo) si se pasa el parámetro `-Persist`.
 
-#### Fase `post_pr` (después de aceptar/mergear el PR en el remoto)
+#### Fase `post_pr` (después de aceptar/mergear el PR en el remoto) — **«Finalizar proceso»**
 
 1. Asegurarse de que el PR ya está mergeado en `master` (o `main`) en el remoto.
-2. **Implementación:** Cápsula paths.skillCapsules[\"finalizar-git\"]: launcher `Merge-To-Master-Cleanup.bat` (o .ps1). Ejecutable por defecto en Rust (paths.skillsRustPath, Cúmulo) en bin/ si existe.
+2. **Punto de entrada recomendado:** Ejecutar **Finalizar-Proceso.ps1** (o `Finalizar-Proceso.bat`), que realiza la limpieza completa: checkout a main, pull, eliminación de la rama local y **por defecto** de la rama remota.
 
    Desde la raíz del repo:
    ```powershell
-   .\scripts\skills\finalizar-git\Merge-To-Master-Cleanup.bat "<rama_actual>" -DeleteRemote
-   # o .ps1: -BranchName "<rama_actual>" -DeleteRemote
+   .\scripts\skills\finalizar-proceso\Finalizar-Proceso.ps1 -BranchName "feat/<nombre_feature>"
+   # o .bat con el nombre de rama como argumento:
+   .\scripts\skills\finalizar-proceso\Finalizar-Proceso.bat "feat/<nombre_feature>"
+   # Sin -BranchName se usa la rama actual. Por defecto se elimina la rama remota (-DeleteRemote).
+   # Para no eliminar la rama remota: -NoDeleteRemote
    ```
 
-3. **Alternativa manual:** Si el script no se usa, ejecutar en orden: `git checkout master` (o `main`), `git pull origin master`, `git branch -d <rama_actual>`, opcionalmente `git push origin --delete <rama_actual>`, y comprobar con `git status` y `git branch -vv`.
+3. **Implementación interna:** La cápsula también expone `Merge-To-Master-Cleanup.ps1` (y .bat) para invocación directa; el launcher Rust (bin/merge_to_master_cleanup.exe) se usa si existe. Finalizar-Proceso.ps1 llama a Merge-To-Master-Cleanup con `-DeleteRemote` por defecto.
+
+4. **Alternativa manual:** Si no se usan los scripts, ejecutar en orden: `git checkout master` (o `main`), `git pull origin master`, `git branch -d <rama_actual>`, `git push origin --delete <rama_actual>`, y comprobar con `git status` y `git branch -vv`.
 
 ### Reglas (Ley GIT)
 
@@ -67,9 +72,10 @@ Centralizar todas las interacciones con Git necesarias para el cierre de una fea
 |--------|------------------------|-----|
 | **pre_pr**  | Unificar-Rama.ps1 | Certificar rama (build, documentación, commit). |
 | **pre_pr**  | **Push-And-CreatePR.ps1** | Push de la rama y **crear el PR** (GitHub CLI `gh pr create` si está disponible; si no, URL/instrucciones). Parámetros: `-BranchName`, `-Persist` (ruta paths.featurePath/...), `-Title` opcional. |
-| **post_pr** | Merge-To-Master-Cleanup.bat (.exe en bin/ o .ps1) | Tras aceptar el PR: posicionar en master/main, sincronizar y eliminar la rama mergeada (local y opcionalmente remota). |
+| **post_pr** | **Finalizar-Proceso.ps1** (.bat) | **Punto de entrada «finalizar proceso»:** posicionar en main, sincronizar, eliminar rama local y por defecto remota. Parámetros: `-BranchName` (opcional), `-NoDeleteRemote` para no borrar la rama en origin. |
+| **post_pr** | Merge-To-Master-Cleanup.ps1 (.bat, .exe en bin/ si existe) | Llamado por Finalizar-Proceso; invocación directa: `-BranchName`, `-DeleteRemote`. |
 
-Ruta canónica de la cápsula: Cúmulo paths.skillCapsules[\"finalizar-git\"].
+Ruta canónica de la cápsula: Cúmulo paths.skillCapsules[\"finalizar-proceso\"].
 
 ### Dependencia opcional: GitHub CLI (gh)
 
@@ -86,4 +92,4 @@ Si `gh` no está disponible, el script muestra la URL para crear el PR manualmen
 - **Agentes:** Tekton Developer, Finalizer / Release Agent (según paths.actionsPath/finalize/).
 
 ---
-*Especificación del skill Finalizar Git. Definición en paths.skillsDefinitionPath/finalizar-git/ (contrato paths.skillsDefinitionPath/skills-contract.md).*
+*Especificación del skill FinalizarProceso. Definición en paths.skillsDefinitionPath/finalizar-proceso/ (contrato paths.skillsDefinitionPath/skills-contract.md).*

@@ -28,7 +28,7 @@
         "description": "Parámetros opcionales por defecto (rama, carpeta de persistencia, etc.)."
       },
       "related_actions": { "type": "array", "items": { "type": "string" }, "description": "Acciones del ciclo que aplican (spec, clarify, planning, implementation, execution, validate, finalize)." },
-      "related_skills": { "type": "array", "items": { "type": "string" }, "description": "Skills recomendadas (iniciar-rama, finalizar-git, documentation, etc.)." },
+      "related_skills": { "type": "array", "items": { "type": "string" }, "description": "Skills recomendadas (iniciar-rama, finalizar-proceso, documentation, etc.)." },
       "interested_agents": { "type": "array", "items": { "type": "string" }, "description": "Agentes que orquestan o consumen esta plantilla (architect, tekton-developer, etc.)." },
       "contract_ref": { "type": "string", "description": "Referencia al contrato: SddIA/templates/templates-contract.json" }
     },

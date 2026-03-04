@@ -1,16 +1,22 @@
 {
   "spec_version": "1.0.0",
-  "skill_id": "finalizar-git",
-  "name": "Finalizar Git",
+  "skill_id": "finalizar-proceso",
+  "name": "FinalizarProceso",
   "description": "Centraliza las interacciones con Git para aceptar PR a master, unificar, eliminar rama unificada y volver a master. Consumible por la acción finalize.",
-  "implementation_path_ref": "paths.skillCapsules.finalizar-git",
+  "implementation_path_ref": "paths.skillCapsules.finalizar-proceso",
   "contract_ref": "paths.skillsDefinitionPath + skills-contract.json (Cúmulo)",
   "owner": "tekton-developer",
   "status": "Active",
   "phases": [
     { "id": "pre_pr", "name": "Pre-PR", "description": "Push de la rama (Push-And-CreatePR.ps1) y creación del PR con gh pr create si está disponible; si no, URL/instrucciones." },
-    { "id": "post_pr", "name": "Post-PR", "description": "Tras merge del PR en remoto: actualizar master local, eliminar rama, volver a master." }
+    { "id": "post_pr", "name": "Post-PR (finalizar proceso)", "description": "Tras merge del PR en remoto: checkout main, pull, eliminar rama local y por defecto remota. Punto de entrada: Finalizar-Proceso.ps1 o Finalizar-Proceso.bat." }
   ],
+  "post_pr_entry_point": {
+    "script": "Finalizar-Proceso.ps1",
+    "bat": "Finalizar-Proceso.bat",
+    "parameters": { "BranchName": "opcional (rama mergeada)", "NoDeleteRemote": "opcional, no eliminar rama en origin" },
+    "default_delete_remote": true
+  },
   "rules": [
     "Nunca commit directo en master; todo en feat/ o fix/ y merge vía PR",
     "Mensajes de commit: Conventional Commits (feat:, fix:, chore:)",
@@ -18,7 +24,8 @@
   ],
   "common_workflows": {
     "push_and_open_pr": "Push-And-CreatePR.ps1 -Persist paths.featurePath/<nombre_feature>/ (push + gh pr create o URL manual)",
-    "after_pr_merged": "Invocar Merge-To-Master-Cleanup (cápsula) -BranchName <branch> -DeleteRemote; o comandos git equivalentes"
+    "finalizar_proceso": "Finalizar-Proceso.ps1 -BranchName <rama> (por defecto -DeleteRemote; usar -NoDeleteRemote para no borrar remota)",
+    "after_pr_merged": "Invocar Finalizar-Proceso.ps1 o Merge-To-Master-Cleanup.ps1 -BranchName <branch> -DeleteRemote"
   },
   "related_artefacts": ["paths.actionsPath/finalize/"],
   "related_agents": ["tekton-developer", "finalizer", "release-agent"]
