@@ -12,5 +12,6 @@ Este directorio contiene **normas de comportamiento** del agente definidas en el
 | **entidades-dominio-ecosistema-sddia.md** | Definición de entidades de dominio (ecosistema SddIA): las que integran el contrato/ítem Token; obligación de estructura (spec.md + spec.json) y sincronidad MD/JSON. |
 | **agents-principles-contract.md** | Implementación del contrato de principios en agentes (principlesContract). |
 | **patterns-in-planning-implementation-execution.md** | Aplicación de patrones en planning, implementation, execution. |
+| **obediencia-procesos.md** | La IA no debe validar o cuestionar las indicaciones dadas por el proceso, sino ejecutarlas literalmente. |
 
 **Referencia en protocolo:** AGENTS.md (leyes universales, disparadores) indica que el comportamiento lo define SddIA y remite a este directorio.
