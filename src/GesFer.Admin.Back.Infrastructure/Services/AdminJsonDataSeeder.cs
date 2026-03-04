@@ -187,7 +187,12 @@ public class AdminJsonDataSeeder
         int count = 0;
         foreach (var item in languages)
         {
-            var id = Guid.Parse(item.Id);
+            if (!Guid.TryParse(item.Id, out var id))
+            {
+                _logger.LogWarning("AdminJsonDataSeeder: El Guid '{Id}' no es válido en Language '{Name}'. Omitiendo registro.", item.Id, item.Name);
+                continue;
+            }
+
             var existing = await _context.Languages.IgnoreQueryFilters().FirstOrDefaultAsync(x => x.Id == id);
             if (existing == null)
             {
@@ -227,7 +232,17 @@ public class AdminJsonDataSeeder
         int count = 0;
         foreach (var item in countries)
         {
-            var id = Guid.Parse(item.Id);
+            if (!Guid.TryParse(item.Id, out var id))
+            {
+                _logger.LogWarning("AdminJsonDataSeeder: El Guid '{Id}' no es válido en Country '{Name}'. Omitiendo registro.", item.Id, item.Name);
+                continue;
+            }
+            if (!Guid.TryParse(item.LanguageId, out var languageId))
+            {
+                _logger.LogWarning("AdminJsonDataSeeder: El LanguageId '{LanguageId}' no es válido en Country '{Name}'. Omitiendo registro.", item.LanguageId, item.Name);
+                continue;
+            }
+
             var existing = await _context.Countries.IgnoreQueryFilters().FirstOrDefaultAsync(x => x.Id == id);
             if (existing == null)
             {
@@ -236,7 +251,7 @@ public class AdminJsonDataSeeder
                     Id = id,
                     Name = item.Name,
                     Code = item.Code,
-                    LanguageId = Guid.Parse(item.LanguageId),
+                    LanguageId = languageId,
                     CreatedAt = DateTime.UtcNow,
                     IsActive = true
                 });
@@ -267,14 +282,24 @@ public class AdminJsonDataSeeder
         int count = 0;
         foreach (var item in states)
         {
-            var id = Guid.Parse(item.Id);
+            if (!Guid.TryParse(item.Id, out var id))
+            {
+                _logger.LogWarning("AdminJsonDataSeeder: El Guid '{Id}' no es válido en State '{Name}'. Omitiendo registro.", item.Id, item.Name);
+                continue;
+            }
+            if (!Guid.TryParse(item.CountryId, out var countryId))
+            {
+                _logger.LogWarning("AdminJsonDataSeeder: El CountryId '{CountryId}' no es válido en State '{Name}'. Omitiendo registro.", item.CountryId, item.Name);
+                continue;
+            }
+
             var existing = await _context.States.IgnoreQueryFilters().FirstOrDefaultAsync(x => x.Id == id);
             if (existing == null)
             {
                 _context.States.Add(new State
                 {
                     Id = id,
-                    CountryId = Guid.Parse(item.CountryId),
+                    CountryId = countryId,
                     Name = item.Name,
                     Code = item.Code,
                     CreatedAt = DateTime.UtcNow,
@@ -307,14 +332,24 @@ public class AdminJsonDataSeeder
         int count = 0;
         foreach (var item in cities)
         {
-            var id = Guid.Parse(item.Id);
+            if (!Guid.TryParse(item.Id, out var id))
+            {
+                _logger.LogWarning("AdminJsonDataSeeder: El Guid '{Id}' no es válido en City '{Name}'. Omitiendo registro.", item.Id, item.Name);
+                continue;
+            }
+            if (!Guid.TryParse(item.StateId, out var stateId))
+            {
+                _logger.LogWarning("AdminJsonDataSeeder: El StateId '{StateId}' no es válido en City '{Name}'. Omitiendo registro.", item.StateId, item.Name);
+                continue;
+            }
+
             var existing = await _context.Cities.IgnoreQueryFilters().FirstOrDefaultAsync(x => x.Id == id);
             if (existing == null)
             {
                 _context.Cities.Add(new City
                 {
                     Id = id,
-                    StateId = Guid.Parse(item.StateId),
+                    StateId = stateId,
                     Name = item.Name,
                     CreatedAt = DateTime.UtcNow,
                     IsActive = true
@@ -349,14 +384,24 @@ public class AdminJsonDataSeeder
         int count = 0;
         foreach (var item in postalCodes)
         {
-            var id = Guid.Parse(item.Id);
+            if (!Guid.TryParse(item.Id, out var id))
+            {
+                _logger.LogWarning("AdminJsonDataSeeder: El Guid '{Id}' no es válido en PostalCode '{Code}'. Omitiendo registro.", item.Id, item.Code);
+                continue;
+            }
+            if (!Guid.TryParse(item.CityId, out var cityId))
+            {
+                _logger.LogWarning("AdminJsonDataSeeder: El CityId '{CityId}' no es válido en PostalCode '{Code}'. Omitiendo registro.", item.CityId, item.Code);
+                continue;
+            }
+
             var existing = await _context.PostalCodes.IgnoreQueryFilters().FirstOrDefaultAsync(x => x.Id == id);
             if (existing == null)
             {
                 _context.PostalCodes.Add(new PostalCode
                 {
                     Id = id,
-                    CityId = Guid.Parse(item.CityId),
+                    CityId = cityId,
                     Code = item.Code,
                     CreatedAt = DateTime.UtcNow,
                     IsActive = true
@@ -526,9 +571,16 @@ public class AdminJsonDataSeeder
         {
             try
             {
+                if (!Guid.TryParse(companyData.Id, out var id))
+                {
+                    _logger.LogWarning("AdminJsonDataSeeder: El Guid '{Id}' no es válido en Company '{Name}'. Omitiendo registro.", companyData.Id, companyData.Name);
+                    skippedCount++;
+                    continue;
+                }
+
                 var existing = await _context.Companies
                     .IgnoreQueryFilters()
-                    .FirstOrDefaultAsync(c => c.Id == Guid.Parse(companyData.Id));
+                    .FirstOrDefaultAsync(c => c.Id == id);
 
                 if (existing == null)
                 {
@@ -574,7 +626,7 @@ public class AdminJsonDataSeeder
 
                     var company = new Company
                     {
-                        Id = Guid.Parse(companyData.Id),
+                        Id = id,
                         Name = companyData.Name,
                         TaxId = taxId,
                         Address = companyData.Address,
