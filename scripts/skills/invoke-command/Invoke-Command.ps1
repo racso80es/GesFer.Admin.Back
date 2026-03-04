@@ -3,11 +3,23 @@
     Wrapper de ejecución para interacciones de IA (Protocolo Racso-Tormentosa).
 #>
 param (
-    [Parameter(Mandatory=$true)] [string]$Command,
+    [Parameter(Mandatory=$false)] [string]$Command,
+    [Parameter(Mandatory=$false)] [string]$CommandFile,
     [Parameter(Mandatory=$false)] [string]$Contexto = "GesFer",
     [ValidateSet("Triaje","Analisis","Evaluacion","Marcado","Accion")]
     [string]$Fase = "Accion"
 )
+
+if (-not $Command -and -not $CommandFile) {
+    Write-Error "Indique -Command o -CommandFile."
+    exit 1
+}
+if ($CommandFile) {
+    $cmdPath = $CommandFile
+    if (-not [System.IO.Path]::IsPathRooted($cmdPath)) { $cmdPath = Join-Path (Get-Location) $CommandFile }
+    if (-not (Test-Path $cmdPath)) { Write-Error "CommandFile no encontrado: $cmdPath"; exit 1 }
+    $Command = (Get-Content -Path $cmdPath -Raw).Trim()
+}
 
 # 1. AC-001 [LOGS]: Validación de sintaxis previa
 if ($Command -like "*log*") {
@@ -31,13 +43,14 @@ try {
     Write-Error "Error detectado en la ejecución de la IA."
 }
 
-# 4. Persistencia en la Carpeta de la Rama
+# 4. Persistencia en la Carpeta de la Rama (Output seguro ante null)
+$outputStr = if ($null -eq $output) { "" } else { try { $output.ToString() } catch { "" } }
 $logEntry = @{
     Timestamp = $timestamp
     Fase      = $Fase
     Command   = $Command
     Status    = $status
-    Output    = $output.ToString()
+    Output    = $outputStr
 } | ConvertTo-Json
 
 if (-not (Test-Path "docs/diagnostics/$branch")) { New-Item -ItemType Directory -Path "docs/diagnostics/$branch" }
