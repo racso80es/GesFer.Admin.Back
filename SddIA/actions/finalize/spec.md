@@ -25,13 +25,13 @@ La acción **finalize** (finalizar) cierra el ciclo de la feature: asegura commi
 - **Pull Request:** Creado hacia `master`, con descripción que enlace a la documentación de la feature (ej. paths.featurePath/<nombre_feature>/).
 - **Opcional:** Referencia al PR o estado en validacion.json o finalize.json de la carpeta de la feature (Cúmulo) (ej. URL del PR, timestamp de cierre).
 
-## Skill de referencia: finalizar-git
+## Skill de referencia: FinalizarProceso (finalizar-proceso)
 
-La acción finalize **utiliza y ejecuta la skill** `finalizar-git` (definición en paths.skillsDefinitionPath/finalizar-git/; implementación en paths.skillCapsules[\"finalizar-git\"]) para centralizar todas las interacciones con Git. El ejecutor **debe invocar** la skill para las fases **pre_pr** (push y creación del PR) y, cuando corresponda, **post_pr** (tras aceptar el PR: unificar, eliminar rama unificada, volver a master). La skill es la única fuente de verdad para los comandos y flujos git de cierre (Ley COMANDOS: no ejecutar git directamente; toda operación vía skill/herramienta).
+La acción finalize **utiliza y ejecuta la skill** **FinalizarProceso** (skill_id: `finalizar-proceso`; definición en paths.skillsDefinitionPath/finalizar-proceso/; implementación en paths.skillCapsules[\"finalizar-proceso\"]) para centralizar todas las interacciones con Git. El ejecutor **debe invocar** esta skill para las fases **pre_pr** (push y creación del PR) y, cuando corresponda, **post_pr** (tras aceptar el PR: unificar en main, eliminar rama, volver a main). La skill es la única fuente de verdad para los comandos y flujos git de cierre (Ley COMANDOS: no ejecutar git directamente; toda operación vía skill/herramienta).
 
-### Ejecución de la skill finalizar-git (obligatoria)
+### Ejecución de la skill FinalizarProceso (obligatoria)
 
-Para **ejecutar** la acción finalize (pasos de push y PR), se debe invocar el script orquestador que a su vez ejecuta la skill:
+Para **ejecutar** la acción finalize (pasos de push y PR), se debe invocar el script orquestador que a su vez invoca la skill **finalizar-proceso**:
 
 - **Script orquestador:** `scripts/actions/finalize/Invoke-Finalize.ps1`
 - **Desde la raíz del repositorio:**
@@ -39,7 +39,7 @@ Para **ejecutar** la acción finalize (pasos de push y PR), se debe invocar el s
   .\scripts\actions\finalize\Invoke-Finalize.ps1 -Persist "docs/features/<nombre_feature>/"
   ```
 - **Parámetros:** `-Persist` (obligatorio, ruta de la carpeta de la feature), `-BranchName` (opcional), `-NoVerify` (opcional, omitir verify-pr-protocol), `-Title` (opcional, título del PR).
-- **Comportamiento del script:** Comprueba precondiciones (rama no master, objectives.md, validacion.json); opcionalmente ejecuta verify-pr-protocol (Rust); **invoca la skill finalizar-git** ejecutando `Push-And-CreatePR.ps1` de la cápsula (paths.skillCapsules[\"finalizar-git\"]). El push y la creación del PR los realiza únicamente la skill; el agente no ejecuta comandos git directamente.
+- **Comportamiento del script:** Comprueba precondiciones (rama no master, objectives.md, validacion.json); opcionalmente ejecuta verify-pr-protocol (Rust); **invoca la skill finalizar-proceso** ejecutando `Push-And-CreatePR.ps1` de la cápsula (paths.skillCapsules[\"finalizar-proceso\"]). El push y la creación del PR los realiza únicamente la skill; el agente no ejecuta comandos git directamente.
 
 ## Flujo de ejecución (propuesto)
 
@@ -55,19 +55,19 @@ Para **ejecutar** la acción finalize (pasos de push y PR), se debe invocar el s
 4. **Actualización de Evolution Logs:**
    - Añadir entrada en docs/EVOLUTION_LOG.md (raíz) o paths.evolutionPath + paths.evolutionLogFile.
    - Añadir sección en paths.evolutionPath + paths.evolutionLogFile con resumen y enlace a la carpeta de la feature.
-5. **Ejecutar script finalize (push + PR):** **Invocar** `.\scripts\actions\finalize\Invoke-Finalize.ps1 -Persist "docs/features/<nombre_feature>/"` desde la raíz del repo. Este script comprueba precondiciones, opcionalmente ejecuta verify-pr-protocol y **ejecuta la skill finalizar-git** (Push-And-CreatePR.ps1), que realiza el push y la creación del PR. Sin este paso ejecutado con éxito, el cierre no está completo. El agente no ejecuta `git push` ni `gh pr create` directamente; toda la interacción Git se hace a través de la skill (Ley COMANDOS).
+5. **Ejecutar script finalize (push + PR):** **Invocar** `.\scripts\actions\finalize\Invoke-Finalize.ps1 -Persist "docs/features/<nombre_feature>/"` desde la raíz del repo. Este script comprueba precondiciones, opcionalmente ejecuta verify-pr-protocol y **invoca la skill finalizar-proceso** (Push-And-CreatePR.ps1 de la cápsula), que realiza el push y la creación del PR. Sin este paso ejecutado con éxito, el cierre no está completo. El agente no ejecuta `git push` ni `gh pr create` directamente; toda la interacción Git se hace a través de la skill (Ley COMANDOS).
 6. **Persistencia opcional:** Escribir finalize.json en la carpeta de la feature (Cúmulo) con { "pr_url": "...", "branch": "...", "timestamp": "..." }.
 7. **Auditoría:** Registrar el evento de finalización en paths.auditsPath + paths.accessLogFile (Cúmulo).
-8. **Post-PR (skill finalizar-git, fase post_pr):** Una vez el PR esté aceptado/mergeado en el remoto, el ejecutor (o el usuario) aplica la fase **post_pr** de la skill `finalizar-git` invocando la skill finalizar-git (paths.skillCapsules[\"finalizar-git\"]). Tekton invoca la implementación (fase post_pr). Ver paths.skillsDefinitionPath/finalizar-git/spec.md.
+8. **Post-PR (skill finalizar-proceso, fase post_pr):** Una vez el PR esté aceptado/mergeado en el remoto, el ejecutor (o el usuario) aplica la fase **post_pr** de la skill **FinalizarProceso** invocando `.\scripts\skills\finalizar-proceso\Finalizar-Proceso.ps1 -BranchName "feat/<nombre_feature>"` (o Finalizar-Proceso.bat). Por defecto se elimina la rama remota; usar `-NoDeleteRemote` para no borrarla. Ver paths.skillsDefinitionPath/finalizar-proceso/spec.md.
 
 ## Implementación técnica
 
-La acción finalize **ejecuta la skill finalizar-git** mediante el script orquestador:
+La acción finalize **hace uso de la skill finalizar-proceso** (FinalizarProceso) mediante el script orquestador:
 
 - **Ruta del script:** `scripts/actions/finalize/Invoke-Finalize.ps1` (desde la raíz del repo).
 - **Invocación mínima:** `.\scripts\actions\finalize\Invoke-Finalize.ps1 -Persist "docs/features/<nombre_feature>/"`
 - **Parámetros:** `-Persist` (obligatorio), `-BranchName`, `-NoVerify` (omitir verify-pr-protocol), `-Title`.
-- El script invoca internamente **Push-And-CreatePR.ps1** de paths.skillCapsules[\"finalizar-git\"]; no se ejecutan comandos git fuera de la skill.
+- El script invoca internamente **Push-And-CreatePR.ps1** de la cápsula paths.skillCapsules[\"finalizar-proceso\"]; no se ejecutan comandos git fuera de la skill.
 
 ## Integración con agentes
 
@@ -81,7 +81,7 @@ La acción finalize **ejecuta la skill finalizar-git** mediante el script orques
 | :--- | :--- |
 | **Id sugerido** | `tekton-developer` (cierre y PR) o un agente dedicado `finalizer` / `release-agent` si se desea separar responsabilidades. |
 | **Rol** | Cierre: commits atómicos, actualización de Evolution Logs, push, creación del PR. Respetar Ley GIT y SSOT. |
-| **Skills necesarios** | `finalizar-git` (obligatorio para pasos Git de cierre), `git-operations`, `documentation`, `invoke-command` (y posiblemente integración con API del repositorio para crear PR). |
+| **Skills necesarios** | `finalizar-proceso` (FinalizarProceso, obligatorio para pasos Git de cierre), `git-operations`, `documentation`, `invoke-command` (y posiblemente integración con API del repositorio para crear PR). |
 | **Restricciones** | Nunca commit en master; toda operación git/comando vía invoke-command; descripción del PR debe enlazar a paths.featurePath/<nombre_feature>/ (Cúmulo).**
 
 Si se desea un agente nuevo para no mezclar “escribir código” con “cerrar y hacer PR”, se puede definir:

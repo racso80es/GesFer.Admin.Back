@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-    Ejecuta la acción finalize: comprueba precondiciones e invoca la skill finalizar-git (Push-And-CreatePR).
+    Ejecuta la acción finalize: comprueba precondiciones e invoca la skill finalizar-proceso (FinalizarProceso, Push-And-CreatePR).
 .DESCRIPTION
     Orquestador de la acción finalize (SddIA/actions/finalize). Comprueba rama, objectives.md y validacion.json;
-    opcionalmente ejecuta verify-pr-protocol; luego invoca la skill finalizar-git (Push-And-CreatePR.ps1)
+    opcionalmente ejecuta verify-pr-protocol; luego invoca la skill finalizar-proceso (Push-And-CreatePR.ps1)
     para push y creación del PR. La skill es la única que ejecuta comandos git (Ley COMANDOS).
 .PARAMETER Persist
     Ruta de la carpeta de la feature (Cúmulo), ej. docs/features/create-tool-postman-mcp-validation/
@@ -89,13 +89,13 @@ try {
         }
     }
 
-    $skillCapsule = Join-Path $repoRoot "scripts\skills\finalizar-git\Push-And-CreatePR.ps1"
+    $skillCapsule = Join-Path $repoRoot "scripts\skills\finalizar-proceso\Push-And-CreatePR.ps1"
     if (-not (Test-Path $skillCapsule)) {
-        Write-Error "No se encontró la skill finalizar-git: $skillCapsule (paths.skillCapsules['finalizar-git'])"
+        Write-Error "No se encontró la skill finalizar-proceso: $skillCapsule (paths.skillCapsules['finalizar-proceso'])"
         exit 1
     }
 
-    Write-Host "[Finalize] Invocando skill finalizar-git (Push-And-CreatePR) con -Persist $Persist" -ForegroundColor Cyan
+    Write-Host "[Finalize] Invocando skill finalizar-proceso (FinalizarProceso, Push-And-CreatePR) con -Persist $Persist" -ForegroundColor Cyan
     $params = @{ Persist = $Persist }
     if ($BranchName) { $params.BranchName = $BranchName }
     if ($Title) { $params.Title = $Title }
