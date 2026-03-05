@@ -1,0 +1,19 @@
+{
+  "spec_version": "1.0.0",
+  "id": "correccion-auditorias-2026-03-05",
+  "name": "Corrección según Auditorías 2026-03-05",
+  "type": "correccion-auditorias",
+  "objectives": [
+    "Formalizar la ejecución del proceso de corrección para el informe AUDITORIA_2026_03_05.md.",
+    "Documentar el resultado óptimo sin deuda técnica detectada."
+  ],
+  "metrics": {
+    "arquitectura": "100%",
+    "nomenclatura": "100%",
+    "estabilidad_async": "100%"
+  },
+  "constraints": [
+    "Asegurar que todas las verificaciones en pre-commit pasen exitosamente.",
+    "Cumplir con el formato y validaciones requeridos por Cúmulo."
+  ]
+}
