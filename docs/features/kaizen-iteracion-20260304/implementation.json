@@ -1,0 +1,16 @@
+{
+  "feature_id": "kaizen-iteracion-20260304",
+  "context_ref": "paths.featurePath/kaizen-iteracion-20260304",
+  "touchpoints": [
+    {
+      "file": "scripts/skills/invoke-command/Invoke-Command.ps1",
+      "change": "Calcular Output de log de forma segura ante $output null; asignar en logEntry.",
+      "lines_approx": "35-41"
+    }
+  ],
+  "validation_steps": [
+    "Invoke-Command.ps1 -Command \"git fetch origin\" sin excepción",
+    "execution_history.json actualizado con Output string",
+    "dotnet build exitoso"
+  ]
+}

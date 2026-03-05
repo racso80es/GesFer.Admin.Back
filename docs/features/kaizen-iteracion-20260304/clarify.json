@@ -1,0 +1,10 @@
+{
+  "feature_id": "kaizen-iteracion-20260304",
+  "context_ref": "paths.featurePath/kaizen-iteracion-20260304",
+  "decisions": [
+    { "topic": "output_null_log", "decision": "Output como string vacío cuando $output sea $null" },
+    { "topic": "non_string_output", "decision": "Usar .ToString(); si falla, usar \"\"" },
+    { "topic": "scope", "decision": "Solo Invoke-Command.ps1; no .bat ni binarios Rust" }
+  ],
+  "ambiguities_resolved": true
+}

@@ -4,6 +4,20 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+## 2026-03-04 — Kaizen iteración: invoke-command output null y CommandFile (feat/kaizen-iteracion-20260304)
+
+**Rama:** feat/kaizen-iteracion-20260304.
+
+**Alcance:**
+- **Invoke-Command.ps1:** Manejo seguro de `$output` null al escribir en execution_history.json (evita excepción en comandos sin salida, p. ej. `git fetch origin`). Parámetro opcional `-CommandFile` para leer el comando desde archivo y evitar inyección de trailers en entornos automatizados.
+- **Proceso feature:** spec, clarify, plan, implementation, execution, validacion en paths.featurePath/kaizen-iteracion-20260304/.
+
+**Referencias:**
+- `docs/features/kaizen-iteracion-20260304/` — objectives, spec, clarify, plan, implementation, execution, validacion.
+- SddIA/skills/invoke-command/ — spec.md, spec.json.
+
+---
+
 ## 2026-02-25 — Tool postman-mcp-validation (feat/create-tool-postman-mcp-validation)
 
 **Rama:** feat/create-tool-postman-mcp-validation.
