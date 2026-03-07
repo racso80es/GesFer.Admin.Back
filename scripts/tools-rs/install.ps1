@@ -39,17 +39,21 @@ $toolsDir = Join-Path $scriptDir "..\tools"
 $releaseDir = Join-Path $scriptDir "target\release"
 $capsules = @(
     @{ exe = "prepare_full_env"; capsule = "prepare-full-env" },
-    @{ exe = "invoke_mysql_seeds"; capsule = "invoke-mysql-seeds" }
+    @{ exe = "invoke_mysql_seeds"; capsule = "invoke-mysql-seeds" },
+    @{ exe = "start_api"; capsule = "start-api" }
 )
 foreach ($cap in $capsules) {
     $src = Join-Path $releaseDir "$($cap.exe).exe"
-    $binDir = Join-Path (Join-Path $toolsDir $cap.capsule) "bin"
-    if (Test-Path $src) {
-        if (-not (Test-Path $binDir)) { New-Item -ItemType Directory -Path $binDir -Force | Out-Null }
-        Copy-Item -Path $src -Destination (Join-Path $binDir "$($cap.exe).exe") -Force
-        Write-Host "  Copiado: scripts/tools/$($cap.capsule)/bin/$($cap.exe).exe" -ForegroundColor Cyan
-    }
+    $capDir = Join-Path $toolsDir $cap.capsule
+    if (-not (Test-Path $src)) { continue }
+    # start-api: exe en la carpeta de la tool (junto al .bat); el resto en bin/
+    $destDir = if ($cap.capsule -eq "start-api") { $capDir } else { Join-Path $capDir "bin" }
+    if (-not (Test-Path $destDir)) { New-Item -ItemType Directory -Path $destDir -Force | Out-Null }
+    Copy-Item -Path $src -Destination (Join-Path $destDir "$($cap.exe).exe") -Force
+    $relPath = if ($cap.capsule -eq "start-api") { "$($cap.capsule)/$($cap.exe).exe" } else { "$($cap.capsule)/bin/$($cap.exe).exe" }
+    Write-Host "  Copiado: scripts/tools/$relPath" -ForegroundColor Cyan
 }
-Write-Host "OK. Ejecutables en capsulas (scripts/tools/<tool>/bin/):" -ForegroundColor Green
+Write-Host "OK. Ejecutables en capsulas:" -ForegroundColor Green
 Write-Host "  - prepare-full-env/bin/prepare_full_env.exe" -ForegroundColor White
 Write-Host "  - invoke-mysql-seeds/bin/invoke_mysql_seeds.exe" -ForegroundColor White
+Write-Host "  - start-api/start_api.exe (misma carpeta que el .bat)" -ForegroundColor White
