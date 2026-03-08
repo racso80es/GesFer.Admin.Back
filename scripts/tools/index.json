@@ -32,6 +32,13 @@
       "manifest": "postman-mcp-validation/manifest.json",
       "wrapper_bat": "Postman-Mcp-Validation.bat",
       "description": "Valida endpoints ejecutando la colección Postman (Newman). Herramienta de seguridad externa; salida JSON según tools-contract. Diseño MCP-ready."
+    },
+    {
+      "toolId": "start-api",
+      "path": "start-api/",
+      "manifest": "start-api/manifest.json",
+      "wrapper_bat": "Start-Api.bat",
+      "description": "Levanta la API del proyecto (Admin Back): build opcional, dotnet run, healthcheck. Completa el ciclo infra → datos → API. Ejecutable por terceros."
     }
   ]
 }

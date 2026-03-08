@@ -1,0 +1,25 @@
+{
+  "spec_version": "1.0.0",
+  "process_id": "create-tool",
+  "task_id": "create-tool-start-api",
+  "tool_id": "start-api",
+  "branch": "feat/create-tool-start-api",
+  "persist_ref": "paths.featurePath/create-tool-start-api",
+  "objectives_ref": "objectives.md",
+  "spec_ref": "spec.md",
+  "contract_ref": "SddIA/tools/tools-contract.json",
+  "deliverables": {
+    "definition": "paths.toolsDefinitionPath/start-api/ (spec.md, spec.json)",
+    "capsule": "paths.toolCapsules.start-api",
+    "index_entry": "scripts/tools/index.json",
+    "cumulo_entry": "paths.toolCapsules.start-api en cumulo.paths.json"
+  },
+  "tool_contract_summary": {
+    "toolId": "start-api",
+    "description": "Levanta la API del proyecto (Admin Back): build opcional, dotnet run, opcional healthcheck. Ciclo de vida: infra → datos → API.",
+    "inputs": ["NoBuild", "Profile", "Port", "ConfigPath", "OutputPath", "OutputJson"],
+    "output_schema_ref": "tools-contract.json",
+    "phases_feedback": ["init", "build", "launch", "healthcheck", "done", "error"],
+    "depends_on_tools": ["prepare-full-env", "invoke-mysql-seeds"]
+  }
+}

@@ -89,13 +89,13 @@ try {
         }
     }
 
-    $skillCapsule = Join-Path $repoRoot "scripts\skills\finalizar-proceso\Push-And-CreatePR.ps1"
+    $skillCapsule = Join-Path $repoRoot "scripts\skills\finalizar-git\Push-And-CreatePR.ps1"
     if (-not (Test-Path $skillCapsule)) {
-        Write-Error "No se encontró la skill finalizar-proceso: $skillCapsule (paths.skillCapsules['finalizar-proceso'])"
+        Write-Error "No se encontró la skill finalizar-git: $skillCapsule (paths.skillCapsules['finalizar-git'])"
         exit 1
     }
 
-    Write-Host "[Finalize] Invocando skill finalizar-proceso (FinalizarProceso, Push-And-CreatePR) con -Persist $Persist" -ForegroundColor Cyan
+    Write-Host "[Finalize] Invocando skill finalizar-git (Push-And-CreatePR) con -Persist $Persist" -ForegroundColor Cyan
     $params = @{ Persist = $Persist }
     if ($BranchName) { $params.BranchName = $BranchName }
     if ($Title) { $params.Title = $Title }
