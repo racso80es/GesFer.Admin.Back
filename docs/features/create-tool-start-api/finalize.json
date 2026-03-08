@@ -1,0 +1,7 @@
+{
+  "branch": "feat/create-tool-start-api",
+  "persist": "docs/features/create-tool-start-api/",
+  "timestamp": "2026-03-07",
+  "pr_url": null,
+  "note": "Finalize ejecutado; push y PR vía skill finalizar-git (Push-And-CreatePR.ps1). Completar PR en remoto si aplica."
+}
