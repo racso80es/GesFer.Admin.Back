@@ -1,0 +1,40 @@
+{
+  "spec_version": "1.0.0",
+  "feature_id": "refactorization-consolidacion-kalma2",
+  "name": "Consolidación: eliminar referencias a Kalma2",
+  "description": "Refactorización para eliminar referencias al proyecto Kalma2 y a rutas src/Kalma2 y Kalma2/ en la solución GesFer.Admin.Back, consolidando identidad y SSOT (Cúmulo). Karma2Token queda fuera de alcance.",
+  "process_ref": "paths.processPath/refactorization/",
+  "persist_path": "paths.featurePath/refactorization-consolidacion-kalma2/",
+  "objectives_ref": "objectives.md",
+  "analysis_ref": "analysis.md",
+  "scope": {
+    "in_scope": ["Kalma2 as project name", "src/Kalma2 paths", "Kalma2/Docs, Kalma2/Interfaces references", "SddIA constitution and constitution/*", "SddIA/actions/clarify", "SddIA/skills/frontend-test"],
+    "out_of_scope": ["Karma2Token and karma2-token references in contracts and norms"]
+  },
+  "artefacts": [
+    { "id": "objectives", "path": "objectives.md", "purpose": "Objetivos y criterios de éxito" },
+    { "id": "analysis", "path": "analysis.md", "purpose": "Análisis de referencias Kalma2 vs Karma2 e inventario de archivos" },
+    { "id": "spec_md", "path": "spec.md", "purpose": "Especificación técnica con touchpoints y reglas de sustitución" },
+    { "id": "spec", "path": "spec.json", "purpose": "Metadatos de la refactorización" },
+    { "id": "clarify_md", "path": "clarify.md", "purpose": "Clarificaciones y decisiones para planning" },
+    { "id": "clarify_json", "path": "clarify.json", "purpose": "Clarificación machine-readable" },
+    { "id": "plan_md", "path": "plan.md", "purpose": "Plan de fases y tareas" },
+    { "id": "plan_json", "path": "plan.json", "purpose": "Plan machine-readable" },
+    { "id": "implementation_md", "path": "implementation.md", "purpose": "Ítems de implementación para execution" },
+    { "id": "implementation_json", "path": "implementation.json", "purpose": "Implementación machine-readable" },
+    { "id": "execution_json", "path": "execution.json", "purpose": "Registro de ejecución" },
+    { "id": "validacion_json", "path": "validacion.json", "purpose": "Validación pre-PR" },
+    { "id": "finalize_json", "path": "finalize.json", "purpose": "Cierre y merge" }
+  ],
+  "touchpoints": {
+    "files_affected": 10,
+    "areas": ["SddIA/CONSTITUTION.md", "SddIA/constitution/*.md|*.json", "SddIA/actions/clarify/spec.md"],
+    "excluded": ["SddIA/skills/frontend-test (clarify 1.2)"]
+  },
+  "security_model": {
+    "required_token": "Karma2Token",
+    "token_ref": "SddIA/tokens/karma2-token/spec.json"
+  },
+  "status": "finalized",
+  "next_phase": "merge_via_finalizar_git"
+}

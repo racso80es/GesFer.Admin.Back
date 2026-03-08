@@ -1,0 +1,10 @@
+{
+  "task_id": "refactorization-consolidacion-kalma2",
+  "status": "ready_for_merge",
+  "branch": "feat/refactorization-consolidacion-kalma2",
+  "persist": "docs/features/refactorization-consolidacion-kalma2/",
+  "evolution_log_updated": "docs/evolution/EVOLUTION_LOG.md",
+  "deliverables_done": ["objectives", "analysis", "spec", "clarify", "plan", "implementation", "execution", "validacion", "finalize"],
+  "closure_criterion": "Referencias a Kalma2 eliminadas en Constitución y constitution/*; clarify/spec.md con paths.featurePath; skill frontend-test eliminada. Validación pasada.",
+  "note": "Para merge y cierre: ejecutar la skill **finalizar-git** (paths.skillCapsules[\"finalizar-git\"]). Rama: feat/refactorization-consolidacion-kalma2. No ejecutar comandos git directamente (norma SddIA)."
+}

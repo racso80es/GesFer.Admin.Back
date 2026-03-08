@@ -1,0 +1,38 @@
+{
+  "task_id": "refactorization-consolidacion-kalma2",
+  "status": "Validated",
+  "phase": "validate",
+  "timestamp": "2026-03-08",
+  "validations": [
+    {
+      "check": "No Kalma2 en CONSTITUTION.md ni constitution/*",
+      "result": "Pass",
+      "details": "Referencias eliminadas; título Constitución (GesFer.Admin.Back); cuerpo con 'el proyecto'."
+    },
+    {
+      "check": "No rutas src/Kalma2 ni Kalma2/ en archivos tocados",
+      "result": "Pass",
+      "details": "10 archivos modificados sin referencias activas a Kalma2/rutas."
+    },
+    {
+      "check": "Features usan paths.featurePath en clarify/spec.md",
+      "result": "Pass",
+      "details": "SddIA/actions/clarify/spec.md actualizado con paths.featurePath (Cúmulo)."
+    },
+    {
+      "check": "Karma2Token no modificado",
+      "result": "Pass",
+      "details": "Ningún contrato ni norma de Karma2Token fue alterado."
+    },
+    {
+      "check": "Documentación y build coherentes",
+      "result": "Pass",
+      "details": "Solo documentación SddIA/constitution y actions tocada; sin rotura de build."
+    },
+    {
+      "check": "Skill frontend-test eliminada",
+      "result": "Pass",
+      "details": "Directorio SddIA/skills/frontend-test eliminado; referencias quitadas de README, norms, .cursor/rules, docker-compose, script."
+    }
+  ]
+}

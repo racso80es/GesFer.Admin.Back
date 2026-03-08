@@ -12,5 +12,5 @@ Este principio establece la arquitectura de procesos dobles y el canal de comuni
 3. **Modos de Operación:** El sistema debe soportar modos operativos distintos (ej. "Jefe" vs "Calma") gestionados por el estado global.
 
 ## Estado Actual
-- **IPC:** Implementado en `src/Kalma2/Desktop/electron/ipc`.
-- **Modos:** Configurados en `src/Kalma2/Core/Modes`.
+- **En GesFer.Admin.Back:** No aplica IPC Electron (backend .NET).
+- **Modos:** N/A en este repo; principio conservado para referencia.

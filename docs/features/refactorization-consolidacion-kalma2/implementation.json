@@ -1,0 +1,25 @@
+{
+  "spec_version": "1.0.0",
+  "task_id": "refactorization-consolidacion-kalma2",
+  "action_id": "implementation",
+  "phase": "implementation_doc",
+  "context_ref": "paths.featurePath/refactorization-consolidacion-kalma2/",
+  "plan_ref": "plan.md",
+  "spec_ref": "spec.md",
+  "clarify_ref": "clarify.md",
+  "items": [
+    { "id": "IMPL-1.1", "action": "Modificar", "path": "SddIA/CONSTITUTION.md", "location": "todo el archivo", "proposal": "Título Constitución (GesFer.Admin.Back); §1–§5 sustituir Kalma2 por el proyecto/este repositorio; mantener principios.", "dependencies": [] },
+    { "id": "IMPL-2.1", "action": "Modificar", "path": "SddIA/constitution/constitution.architect.md", "location": "Propósito, Directrices, Estado Actual", "proposal": "el proyecto; src/ con Api, Application, Domain, Infrastructure; Estado Actual GesFer.Admin.Back.", "dependencies": [] },
+    { "id": "IMPL-2.2", "action": "Modificar", "path": "SddIA/constitution/constitution.architect.json", "location": "guidelines, implementation", "proposal": "guidelines y implementation según spec §3.3.", "dependencies": [] },
+    { "id": "IMPL-3.1", "action": "Modificar", "path": "SddIA/constitution/constitution.audity.md", "location": "Estado Actual", "proposal": "Auditoría vía SddIA paths.auditsPath, agente auditor; Reglas SddIA/norms y agentes.", "dependencies": [] },
+    { "id": "IMPL-3.2", "action": "Modificar", "path": "SddIA/constitution/constitution.audity.json", "location": "implementation", "proposal": "loggerPath y rulesPath N/A o SddIA ref.", "dependencies": [] },
+    { "id": "IMPL-4.1", "action": "Modificar", "path": "SddIA/constitution/constitution.cognitive.md", "location": "Propósito, Estado Actual", "proposal": "Dotar al proyecto de...; persistencia Infrastructure; no aplica Core/Memory.", "dependencies": [] },
+    { "id": "IMPL-4.2", "action": "Modificar", "path": "SddIA/constitution/constitution.cognitive.json", "location": "implementation.storagePath", "proposal": "storagePath N/A; persistence via Infrastructure/DbContext.", "dependencies": [] },
+    { "id": "IMPL-5.1", "action": "Modificar", "path": "SddIA/constitution/constitution.duality.md", "location": "Estado Actual", "proposal": "No aplica IPC Electron; Modos N/A en este repo.", "dependencies": [] },
+    { "id": "IMPL-5.2", "action": "Modificar", "path": "SddIA/constitution/constitution.duality.json", "location": "implementation", "proposal": "ipcBridge y modesPath N/A (GesFer.Admin.Back).", "dependencies": [] },
+    { "id": "IMPL-6.1", "action": "Modificar", "path": "SddIA/actions/clarify/spec.md", "location": "Flujo paso 3", "proposal": "Feature → paths.featurePath (Cúmulo), e.g. paths.featurePath/<nombre_feature>/ (docs/features/<nombre_feature>/ en este repo).", "dependencies": [] }
+  ],
+  "order_execution": ["IMPL-1.1", "IMPL-2.1", "IMPL-2.2", "IMPL-3.1", "IMPL-3.2", "IMPL-4.1", "IMPL-4.2", "IMPL-5.1", "IMPL-5.2", "IMPL-6.1"],
+  "files_affected_count": 10,
+  "excluded": ["SddIA/skills/frontend-test", "Karma2Token / karma2-token"]
+}

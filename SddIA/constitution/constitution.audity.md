@@ -12,5 +12,5 @@ Este principio establece la necesidad de un logger criptográfico y un middlewar
 3. **Transparencia ("Caja de Cristal"):** Proporcionar una visión clara del estado de salud ética en la UI.
 
 ## Estado Actual
-- **Logger:** `src/Kalma2/Core/Audit/Logger.ts`.
-- **Reglas:** `src/Kalma2/Core/Audit/Rules`.
+- **En GesFer.Admin.Back:** Auditoría vía SddIA (paths.auditsPath, agente auditor). No aplica Logger.ts/Electron.
+- **Reglas:** SddIA/norms y agentes (auditor, process-interaction).

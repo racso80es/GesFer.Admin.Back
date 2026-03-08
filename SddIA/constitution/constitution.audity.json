@@ -9,7 +9,7 @@
   ],
   "status": "Active",
   "implementation": {
-    "loggerPath": "src/Kalma2/Core/Audit/Logger.ts",
-    "rulesPath": "src/Kalma2/Core/Audit/Rules"
+    "loggerPath": "N/A (GesFer.Admin.Back); audit via paths.auditsPath, SddIA/agents/auditor.",
+    "rulesPath": "SddIA/norms, SddIA/agents/auditor."
   }
 }

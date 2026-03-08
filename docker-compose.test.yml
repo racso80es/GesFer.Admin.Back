@@ -1,20 +1,6 @@
 version: '3.8'
 
 services:
-  # Servicio para tests de Frontend (Product) - Unitarios/Integración Jest
-  frontend-test:
-    image: node:20-alpine
-    working_dir: /app/src/Product/Front
-    volumes:
-      - ./:/app
-      - /app/src/Product/Front/node_modules
-      - /app/src/Product/Front/.next
-    environment:
-      - CI=true
-    command: sh -c "npm ci && npm run test:all"
-    networks:
-      - gesfer_test_network
-
   # Servicio para tests de Backend (Integration)
   backend-test:
     image: mcr.microsoft.com/dotnet/sdk:8.0

@@ -9,7 +9,7 @@
   ],
   "status": "Active",
   "implementation": {
-    "ipcBridge": "src/Kalma2/Desktop/electron/ipc",
-    "modesPath": "src/Kalma2/Core/Modes"
+    "ipcBridge": "N/A (GesFer.Admin.Back; backend only).",
+    "modesPath": "N/A (GesFer.Admin.Back)."
   }
 }

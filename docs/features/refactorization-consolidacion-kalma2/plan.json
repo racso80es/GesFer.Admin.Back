@@ -1,0 +1,41 @@
+{
+  "spec_version": "1.0.0",
+  "task_id": "refactorization-consolidacion-kalma2",
+  "action_id": "planning",
+  "phase": "planning",
+  "objectives": [
+    "Eliminar referencias a Kalma2 y rutas src/Kalma2, Kalma2/ en 10 archivos",
+    "Consolidar identidad Constitución (GesFer.Admin.Back)",
+    "Sustituir rutas por Cúmulo o N/A; no tocar frontend-test ni Karma2Token"
+  ],
+  "phases": [
+    { "id": "1", "name": "Constitución principal", "tasks": ["1.1 CONSTITUTION.md"] },
+    { "id": "2", "name": "Constitution architect", "tasks": ["2.1 constitution.architect.md", "2.2 constitution.architect.json"] },
+    { "id": "3", "name": "Constitution audity", "tasks": ["3.1 constitution.audity.md", "3.2 constitution.audity.json"] },
+    { "id": "4", "name": "Constitution cognitive", "tasks": ["4.1 constitution.cognitive.md", "4.2 constitution.cognitive.json"] },
+    { "id": "5", "name": "Constitution duality", "tasks": ["5.1 constitution.duality.md", "5.2 constitution.duality.json"] },
+    { "id": "6", "name": "Acción clarify", "tasks": ["6.1 actions/clarify/spec.md"] }
+  ],
+  "files_affected": [
+    "SddIA/CONSTITUTION.md",
+    "SddIA/constitution/constitution.architect.md",
+    "SddIA/constitution/constitution.architect.json",
+    "SddIA/constitution/constitution.audity.md",
+    "SddIA/constitution/constitution.audity.json",
+    "SddIA/constitution/constitution.cognitive.md",
+    "SddIA/constitution/constitution.cognitive.json",
+    "SddIA/constitution/constitution.duality.md",
+    "SddIA/constitution/constitution.duality.json",
+    "SddIA/actions/clarify/spec.md"
+  ],
+  "excluded": ["SddIA/skills/frontend-test", "Karma2Token / karma2-token references"],
+  "verification": [
+    "No Kalma2 nor src/Kalma2 nor Kalma2/ in modified files",
+    "dotnet build succeeds"
+  ],
+  "references": {
+    "spec": "spec.md",
+    "clarify": "clarify.md",
+    "process": "paths.processPath/refactorization/"
+  }
+}

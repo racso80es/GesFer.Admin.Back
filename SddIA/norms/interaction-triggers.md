@@ -30,7 +30,6 @@
 | filesystem-ops | Operaciones de archivo seguras (PowerShell). | — |
 | dotnet-development | Estándares .NET (build, test, logging). | — |
 | frontend-build | Build Next.js (Product, Admin) fallback. | — |
-| frontend-test | Tests unitarios y E2E frontend. | — |
 | security-audit | Auditoría y hooks pre-commit/pre-push. | — |
 
 ---

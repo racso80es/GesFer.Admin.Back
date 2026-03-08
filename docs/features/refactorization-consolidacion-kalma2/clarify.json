@@ -1,0 +1,38 @@
+{
+  "spec_version": "1.0.0",
+  "task_id": "refactorization-consolidacion-kalma2",
+  "action_id": "clarify",
+  "phase": "specification_clarification",
+  "scope_closed": [
+    "constitution_title_and_naming",
+    "frontend_test_excluded_from_scope",
+    "constitution_estado_actual_routes",
+    "clarify_spec_feature_path_wording"
+  ],
+  "gaps_resolved": [
+    {
+      "gap": "constitution_project_name",
+      "resolution": "Title: 'Constitución del Proyecto (GesFer.Admin.Back)'. Body: use 'el proyecto' as subject; 'este repositorio (GesFer.Admin.Back)' when explicit identification needed."
+    },
+    {
+      "gap": "frontend_test_scope",
+      "resolution": "Skill frontend-test (SddIA/skills/frontend-test) excluded from this refactorization; do not modify spec.md nor spec.json."
+    },
+    {
+      "gap": "constitution_estado_actual_no_equivalent",
+      "resolution": "Use explicit Cúmulo/agent reference when conceptual equivalent exists; use 'N/A (GesFer.Admin.Back)' or 'No aplica en este repositorio' when none."
+    },
+    {
+      "gap": "clarify_spec_feature_folder_wording",
+      "resolution": "Use 'paths.featurePath (Cúmulo)' and add '(e.g. docs/features/<nombre_feature>/ in this repo)' for clarity."
+    }
+  ],
+  "open_pending": [],
+  "references": {
+    "spec": "spec.md",
+    "objectives": "objectives.md",
+    "analysis": "analysis.md",
+    "process": "paths.processPath/refactorization/",
+    "action": "paths.actionsPath/clarify/"
+  }
+}

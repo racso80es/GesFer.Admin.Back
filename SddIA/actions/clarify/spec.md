@@ -15,8 +15,8 @@ Esta acción se implementa mediante documentación manual en la carpeta de la ta
 1.  **Validación de Token:** Se verifica el token del auditor (`AUDITOR-PROCESS`).
 2.  **Validación de Ruta:** Se verifica que el archivo especificado en `--spec` exista.
 3.  **Determinación de Contexto:**
-    *   Si la especificación pertenece a una Feature (`Kalma2/Docs/Feature/`), se asegura que exista una carpeta dedicada para la feature (e.g., `Kalma2/Docs/Feature/{SpecName}/`).
-    *   Si no existe, se crea y se mueve el archivo original allí (migración automática).
+    *   Si la especificación pertenece a una Feature, se asegura que exista una carpeta dedicada en paths.featurePath (Cúmulo), e.g. paths.featurePath/<nombre_feature>/ (p. ej. docs/features/<nombre_feature>/ en este repo).
+    *   Si no existe, se crea y se mueve el archivo original allí (migración automática); carpeta en paths.featurePath/<nombre_feature>/.
 4.  **Generación de Clarificaciones:** Se crea un archivo `{SpecName}_CLARIFICATIONS.md` en la misma carpeta que la especificación original.
 5.  **Escaneo de Seguridad:** Cada entrada del usuario es analizada por el `SecurityScanner` para prevenir inyecciones o fugas de datos sensibles.
 6.  **Persistencia:** El contenido de la clarificación se añade al archivo generado.

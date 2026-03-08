@@ -9,7 +9,7 @@
   ],
   "status": "Active",
   "implementation": {
-    "storagePath": "src/Kalma2/Core/Memory",
+    "storagePath": "N/A (GesFer.Admin.Back); persistence via Infrastructure/DbContext.",
     "contextManagement": "Core Services"
   }
 }

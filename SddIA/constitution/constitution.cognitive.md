@@ -1,7 +1,7 @@
 # Principio Constitucional: Núcleo Cognitivo
 
 ## Propósito
-Dotar a Kalma2 de una capacidad de "memoria" y contexto persistente, permitiendo que el sistema aprenda y se adapte a través de las sesiones.
+Dotar al proyecto de una capacidad de "memoria" y contexto persistente, permitiendo que el sistema aprenda y se adapte a través de las sesiones.
 
 ## Definición
 Este principio define la infraestructura para la persistencia de datos (Memoria), el aprendizaje y la gestión del contexto dinámico.
@@ -12,5 +12,5 @@ Este principio define la infraestructura para la persistencia de datos (Memoria)
 3. **Indexación Semántica:** Estructurar logs y datos para su fácil consumo por modelos de IA (RAG local).
 
 ## Estado Actual
-- **Almacén:** `src/Kalma2/Core/Memory`.
+- **En GesFer.Admin.Back:** Persistencia en base de datos (Infrastructure); memoria/contexto según convención del dominio. No aplica Core/Memory (repo backend).
 - **Contexto:** Gestionado por servicios de `Core`.

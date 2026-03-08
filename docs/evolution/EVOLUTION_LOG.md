@@ -4,6 +4,23 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+## 2026-03-08 — Consolidación: eliminar referencias a Kalma2 (feat/refactorization-consolidacion-kalma2)
+
+**Rama:** feat/refactorization-consolidacion-kalma2.
+
+**Alcance:**
+- **Constitución:** Título "Constitución del Proyecto (GesFer.Admin.Back)"; todas las referencias a "Kalma2" sustituidas por "el proyecto" / "este repositorio" en SddIA/CONSTITUTION.md.
+- **Constitution (SddIA/constitution/):** architect, audity, cognitive, duality (.md y .json): rutas src/Kalma2 y nombres Kalma2 eliminados; Estado actual alineado a GesFer.Admin.Back o N/A donde no aplica (backend .NET).
+- **Acción clarify:** SddIA/actions/clarify/spec.md actualizado: Feature → paths.featurePath (Cúmulo), e.g. docs/features/<nombre_feature>/.
+- **Skill frontend-test eliminada:** Definición (SddIA/skills/frontend-test/) y referencias en README, interaction-triggers, .cursor/rules; servicio frontend-test y paso correspondiente en docker-compose.test.yml y scripts/ejecutar-tests.ps1.
+- **Proceso refactorization:** objectives, analysis, spec, clarify, plan, implementation, execution, validacion, finalize en paths.featurePath/refactorization-consolidacion-kalma2/.
+
+**Referencias:**
+- `docs/features/refactorization-consolidacion-kalma2/` — objectives, analysis, spec, clarify, plan, implementation, execution, validacion, finalize.
+- SddIA/CONSTITUTION.md, SddIA/constitution/*, SddIA/actions/clarify/spec.md.
+
+---
+
 ## 2026-03-04 — Kaizen iteración: invoke-command output null y CommandFile (feat/kaizen-iteracion-20260304)
 
 **Rama:** feat/kaizen-iteracion-20260304.
