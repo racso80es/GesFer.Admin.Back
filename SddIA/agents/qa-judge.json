@@ -33,5 +33,6 @@
     "Audit Format: Generate paths.auditsPath + YYYYMMDD_HHMM_<BRANCH>_CLOSE.md (Cúmulo).",
     "Mandatory Commands: pwsh skill o herramienta de validación (Cúmulo), dotnet test.",
     "Bug/fix doc path: para fixes {persist} = paths.fixPath/<nombre_fix> (consultar SddIA/agents/cumulo.json). Expect docs under {persist}/."
-  ]
+  ],
+  "default_model": "GPT-4o"
 }

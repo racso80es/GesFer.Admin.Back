@@ -14,5 +14,6 @@
     "Logging: Use IAsyncLogPublisher (Fire & Forget).",
     "Optimization: Use Alpine/Distroless docker images.",
     "Optimization: Detect N+1 queries in EF Core logs."
-  ]
+  ],
+  "default_model": "GPT-4o"
 }

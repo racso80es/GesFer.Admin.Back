@@ -106,4 +106,29 @@ Todo item (Acción, Skill, Tool, Proceso, Patrón, Principio, Template) que se e
 *   **Entidades de dominio (ecosistema SddIA):** Son las que integran el ítem o contrato de Token. Han de respetar **estructura** (spec.md + spec.json según su contrato) y **sincronidad** (paridad MD ↔ JSON). Norma: SddIA/norms/entidades-dominio-ecosistema-sddia.md.
 
 ---
+
+## 8. MODELOS DE IA RECOMENDADOS
+
+Todos los subagentes deben indicar su modelo por defecto (`default_model`) en su respectivo archivo de definición (`SddIA/agents/*.json`).
+
+A continuación, se listan los modelos y las opciones sugeridas para su ejecución. En caso de no disponer del modelo configurado, optar por la mejor opción posible para la tarea encomendada al agente.
+
+### Modelos Premium:
+- **Claude Opus 4.6** (3x) - *Recomendado para:* Arquitecto (o el más semejante para cumplir requisitos de arquitecto).
+- **GPT-5.2-Codex** (1x)
+- **Grok Code Fast 1** (0,25x)
+- **GPT-5.1-Codex-Mini** (0,33x)
+- **Claude Sonnet 4** (1x)
+- **Claude Sonnet 4.5** (1x) - *Recomendado para:* Tekton (o el más adecuado para tareas de implementación de código).
+- **Claude Opus 4.5** (3x)
+- **Claude Haiku 4.5** (0,33x) - *Recomendado para:* Cúmulo y tareas de Documentación.
+- **Gemini 2.5 Pro** (1x)
+- **GPT-5.2** (1x)
+
+### Modelos Estándar:
+- **GPT-5 mini** (0x)
+- **GPT-4.1** (0x)
+- **GPT-4o** (0x) - *Recomendado para:* Auditor y Juez.
+
+---
 *Versión Optimizada para LLM - 2026. Comportamiento definido por SddIA (docs/ y SddIA/).*
