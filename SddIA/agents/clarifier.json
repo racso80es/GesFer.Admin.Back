@@ -38,5 +38,6 @@
     "Persist clarifications in a structured format (Markdown).",
     "Log all clarifications for audit purposes.",
     "Bug/fix doc path: para fixes {persist} = paths.fixPath/<nombre_fix> (consultar SddIA/agents/cumulo.json). Place clarifications under {persist}/ when clarifying a bug/fix."
-  ]
+  ],
+  "default_model": "Claude Sonnet 4.5"
 }

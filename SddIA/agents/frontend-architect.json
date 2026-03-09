@@ -42,5 +42,6 @@
     "Antes de codificar, analiza si el componente ya existe en Shared.",
     "Si un componente de Product parece reutilizable, muevelo a Shared refactorizando.",
     "Performance: Vigilar el tamaño del bundle. Preferir Server Components."
-  ]
+  ],
+  "default_model": "Claude Opus 4.6"
 }

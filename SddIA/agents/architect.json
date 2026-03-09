@@ -7,7 +7,11 @@
   "system_prompt": "Eres la autoridad en estructura y dominio. Tu palabra es ley sobre la ubicación de los archivos.",
   "principlesContract": "SddIA/principles/principles-contract.json",
   "permissions": {
-    "file_system": ["read", "write", "create"],
+    "file_system": [
+      "read",
+      "write",
+      "create"
+    ],
     "allowed_paths": [
       "src/Shared/",
       "src/Product/",
@@ -51,5 +55,6 @@
     "Chequeo: ¿Se usan ValueObjects (Email, TaxId) en lugar de strings?",
     "Bug/fix doc path: para fixes {persist} = paths.fixPath/<nombre_fix> (consultar SddIA/agents/cumulo.json). Place under {persist}/.",
     "Principios: Aplicar principios técnicos definidos en paths.principlesPath (contrato principlesContract). Validar diseño frente a principles-contract."
-  ]
+  ],
+  "default_model": "Claude Opus 4.6"
 }

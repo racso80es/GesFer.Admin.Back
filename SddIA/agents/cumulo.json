@@ -5,10 +5,19 @@
   "role_type": "Strategic",
   "description": "Eres el responsable de la integridad, estructura y vigencia de todo el conocimiento del proyecto.",
   "system_prompt": "Eres el cumulo de todos los agentes. Tu objetivo es mantener la integridad, estructura y vigencia de todo el conocimiento del proyecto.",
-  "skills": ["filesystem-ops", "documentation"],
+  "skills": [
+    "filesystem-ops",
+    "documentation"
+  ],
   "constraints": [
-    {"rule": "Jerarquía Estricta: No hay documentos técnicos en la raíz. Todo está categorizado.", "severity": "CRITICAL"},
-    {"rule": "Grado S+: Una sola fuente de verdad (SSOT).", "severity": "HIGH"}
+    {
+      "rule": "Jerarquía Estricta: No hay documentos técnicos en la raíz. Todo está categorizado.",
+      "severity": "CRITICAL"
+    },
+    {
+      "rule": "Grado S+: Una sola fuente de verdad (SSOT).",
+      "severity": "HIGH"
+    }
   ],
   "pathsContract": "SddIA/agents/cumulo.paths.json",
   "instructionsContract": "SddIA/agents/cumulo.instructions.json",
@@ -16,8 +25,15 @@
   "process_interface": {
     "description": "Elementos de proceso deben cumplir esta interfaz.",
     "required_artefacts": [
-      {"ext": ".md", "purpose": "Documentación legible. Solicitar o generar al menos un {nombre}.md en {persist}/."},
-      {"ext": ".json", "purpose": "Metadatos machine-readable. Solicitar o generar al menos un {nombre}.json en {persist}/."}
+      {
+        "ext": ".md",
+        "purpose": "Documentación legible. Solicitar o generar al menos un {nombre}.md en {persist}/."
+      },
+      {
+        "ext": ".json",
+        "purpose": "Metadatos machine-readable. Solicitar o generar al menos un {nombre}.json en {persist}/."
+      }
     ]
-  }
+  },
+  "default_model": "Claude Haiku 4.5"
 }
