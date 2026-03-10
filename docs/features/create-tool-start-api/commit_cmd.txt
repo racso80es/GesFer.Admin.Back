@@ -1,0 +1,1 @@
+git add docs/features/create-tool-start-api/ scripts/tools-rs/Cargo.toml scripts/tools-rs/src/bin/start_api.rs; git commit -m "feat(tools): ejecutable Rust start-api en capsula, proceso create-tool-start-api cerrado"

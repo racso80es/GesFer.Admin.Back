@@ -5,21 +5,26 @@
   "tool_id": "start-api",
   "branch": "feat/create-tool-start-api",
   "persist_ref": "paths.featurePath/create-tool-start-api",
-  "objectives_ref": "objectives.md",
-  "spec_ref": "spec.md",
-  "contract_ref": "SddIA/tools/tools-contract.json",
-  "deliverables": {
-    "definition": "paths.toolsDefinitionPath/start-api/ (spec.md, spec.json)",
-    "capsule": "paths.toolCapsules.start-api",
-    "index_entry": "scripts/tools/index.json",
-    "cumulo_entry": "paths.toolCapsules.start-api en cumulo.paths.json"
+  "objective": "Ejecutable Rust (start_api.exe) como implementación por defecto en la cápsula start-api; .ps1 como fallback.",
+  "current_state": {
+    "capsule_exists": true,
+    "definition_sddia_exists": true,
+    "rust_source_exists": true,
+    "launcher_bat_prioritizes_exe": true,
+    "install_script_copies_exe": true
   },
-  "tool_contract_summary": {
-    "toolId": "start-api",
-    "description": "Levanta la API del proyecto (Admin Back): build opcional, dotnet run, opcional healthcheck. Ciclo de vida: infra → datos → API.",
-    "inputs": ["NoBuild", "Profile", "Port", "ConfigPath", "OutputPath", "OutputJson"],
-    "output_schema_ref": "tools-contract.json",
-    "phases_feedback": ["init", "build", "launch", "healthcheck", "done", "error"],
-    "depends_on_tools": ["prepare-full-env", "invoke-mysql-seeds"]
-  }
+  "deliverables": [
+    "start_api.exe en scripts/tools/start-api/ (vía scripts/tools-rs/install.ps1)",
+    "Documentación de objetivos y spec en docs/features/create-tool-start-api/"
+  ],
+  "success_criteria": [
+    "cargo build --release en scripts/tools-rs exitoso",
+    "start_api.exe presente en cápsula tras install.ps1",
+    "Salida JSON según tools-contract.json; success=true solo con health 200"
+  ],
+  "contract_ref": "SddIA/tools/tools-contract.json",
+  "definition_ref": "SddIA/tools/start-api/",
+  "implementation_ref": "paths.toolCapsules.start-api",
+  "rust_crate_ref": "paths.toolsRustPath (scripts/tools-rs)",
+  "related_actions": ["implementation", "validate", "finalize"]
 }

@@ -1,0 +1,25 @@
+{
+  "spec_version": "1.0.0",
+  "task_id": "create-tool-start-api",
+  "branch": "feat/create-tool-start-api",
+  "steps_done": [
+    "Rama feat/create-tool-start-api creada (skill iniciar-rama)",
+    "Documentación objectives.md, spec.md, spec.json",
+    "Cargo.toml ajustado: solo bin start_api (otros sin fuente)",
+    "install.ps1 ejecutado con Rust en PATH; start_api.exe copiado a cápsula",
+    "Verificación: start_api.exe existe en scripts/tools/start-api/",
+    "Validación: ejecución con --output-json; salida JSON conforme a tools-contract"
+  ],
+  "steps_pending": [],
+  "touchpoints": {
+    "rust_bin": "scripts/tools-rs/src/bin/start_api.rs",
+    "install_script": "scripts/tools-rs/install.ps1",
+    "capsule_exe": "scripts/tools/start-api/start_api.exe",
+    "launcher_bat": "scripts/tools/start-api/Start-Api.bat"
+  },
+  "validation": {
+    "build": "OK",
+    "exe_present": "OK",
+    "run_check": "OK (JSON emitido; contrato cumplido)"
+  }
+}

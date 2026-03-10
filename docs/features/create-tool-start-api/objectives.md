@@ -1,29 +1,35 @@
-# Objetivos: create-tool-start-api
+# Objetivos: create-tool start-api (ejecutable Rust)
 
-**Proceso:** create-tool  
+**Proceso:** create-tool (SddIA/process/create-tool)  
 **Rama:** feat/create-tool-start-api  
-**tool-id:** start-api
+**Persistencia:** paths.featurePath/create-tool-start-api (Cúmulo)
 
 ## Objetivo principal
 
-Poder hacer uso de una **herramienta de sistema programada en Rust** que permita **levantar la API** del proyecto GesFer.Admin.Back, completando el ciclo de vida junto con las herramientas existentes de infraestructura y entorno.
+Tener la herramienta **start-api** con **ejecutable Rust** como implementación por defecto, cumpliendo el estándar indicado en SddIA/tools/tools-contract.json (default_implementation.language: rust). Actualmente existe el script PowerShell (Start-Api.ps1) en la cápsula; el estándar exige binario .exe en Rust, con fallback a .ps1 cuando el .exe no esté presente.
 
-## Objetivos específicos
+## Situación actual
 
-1. **Definir** la herramienta `start-api` según el proceso create-tool y el contrato `SddIA/tools/tools-contract.json`.
-2. **Contrato adecuado:** especificación clara de entradas, salida JSON, fases de feedback y dependencias opcionales con `prepare-full-env` e `invoke-mysql-seeds`.
-3. **Ejecución por terceros:** la herramienta debe poder ser invocada desde agentes, CI/CD o sistemas externos para gestionar la solución (levantar la API de forma trazada y con salida estándar).
-4. **Implementación por defecto en Rust:** binario en paths.toolsRustPath, cápsula en paths.toolCapsules.start-api con manifest, config, documentación y launcher .bat/.ps1.
+- **Cápsula:** paths.toolCapsules.start-api → `./scripts/tools/start-api/`
+- **Definición SddIA:** SddIA/tools/start-api/ (spec.md, spec.json)
+- **Implementación Rust:** paths.toolsRustPath → `./scripts/tools-rs/` → binario `start_api` (src/bin/start_api.rs)
+- **Launcher:** Start-Api.bat invoca `start_api.exe` si existe en la cápsula; si no, fallback a Start-Api.ps1
+- **Install:** scripts/tools-rs/install.ps1 compila con `cargo build --release` y copia `start_api.exe` a la cápsula start-api
 
-## Contexto
+## Entregables
 
-- **prepare-full-env:** prepara infraestructura (Docker, MySQL, cache, Adminer).
-- **invoke-mysql-seeds:** prepara datos (migraciones y seeds).
-- **start-api (nueva):** levanta la API del proyecto → cierra el ciclo: infra → datos → API.
+1. **Ejecutable Rust** en la cápsula: `start_api.exe` disponible en scripts/tools/start-api/ (tras ejecutar install.ps1 desde scripts/tools-rs).
+2. **Comportamiento:** El launcher .bat prioriza el .exe; el .ps1 queda como fallback.
+3. **Contrato:** Salida JSON y feedback según tools-contract.json (ya implementado en start_api.rs).
+4. **Documentación:** Objetivos y spec en esta carpeta; definición en SddIA/tools/start-api ya existe y está alineada.
 
-## Criterios de éxito
+## Criterio de éxito
 
-- Definición en SddIA (spec.md, spec.json) con implementation_path_ref y contrato.
-- Cápsula en paths.toolCapsules.start-api con manifest.json, config, doc, launcher.
-- Índice (scripts/tools/index.json) y Cúmulo (toolCapsules) actualizados.
-- Salida JSON conforme a tools-contract; ejecución bajo Karma2Token.
+- Tras `cargo build --release` y `install.ps1` en scripts/tools-rs, existe `scripts/tools/start-api/start_api.exe`.
+- Al ejecutar Start-Api.bat (o el .exe directamente), la herramienta devuelve JSON de resultado y considera éxito solo si el endpoint health responde HTTP 200.
+- Parámetros soportados: --no-build, --profile, --port, --port-blocked (fail|kill), --config-path, --output-path, --output-json.
+
+## Notas
+
+- No se ejecutan comandos de sistema directamente (norma SddIA: skills/herramientas/acciones). La compilación e instalación se realizan mediante la herramienta o el script install.ps1 según el proceso del proyecto.
+- Rama de trabajo: feat/create-tool-start-api (crear con skill iniciar-rama si aplica).

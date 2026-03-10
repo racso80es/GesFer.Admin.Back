@@ -153,7 +153,7 @@ fn main() {
             .args(["build", &config.api_working_dir, "-c", "Release"])
             .current_dir(&repo_root)
             .output();
-        let build_ms = build_start.elapsed().as_millis() as u64;
+        let _build_ms = build_start.elapsed().as_millis() as u64;
         match out {
             Ok(o) if o.status.success() => {
                 feedback.push(FeedbackEntry::info("build", "Build OK"));
@@ -252,7 +252,7 @@ fn main() {
     std::process::exit(0);
 }
 
-fn load_config(repo_root: &str, config_path: &str, feedback: &mut Vec<FeedbackEntry>) -> Option<Config> {
+fn load_config(repo_root: &str, config_path: &str, _feedback: &mut Vec<FeedbackEntry>) -> Option<Config> {
     let mut path = std::path::PathBuf::from(repo_root);
     path.push(config_path);
     if !path.exists() {

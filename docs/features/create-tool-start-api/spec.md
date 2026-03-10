@@ -1,72 +1,54 @@
-# Especificación: create-tool-start-api
+# Especificación: create-tool start-api (ejecutable Rust)
 
 **Proceso:** create-tool  
-**Rama:** feat/create-tool-start-api  
-**Persistencia:** paths.featurePath/create-tool-start-api/ (Cúmulo)
+**tool_id:** start-api  
+**Contrato:** SddIA/tools/tools-contract.json
 
-## 1. Resumen
+## Resumen
 
-Crear la herramienta **start-api** que permita levantar la API del proyecto (GesFer.Admin.Back) de forma programática, con salida JSON según tools-contract y ejecutable por terceros (agentes, CI/CD, orquestadores). Implementación por defecto en Rust; cápsula en paths.toolCapsules.start-api.
+La herramienta start-api debe cumplir el estándar de implementación por defecto en Rust. La cápsula ya existe; la implementación Rust ya está en paths.toolsRustPath (scripts/tools-rs/src/bin/start_api.rs). Este proceso documenta el entregable (ejecutable en la cápsula) y los pasos para tener el .exe disponible.
 
-## 2. Alcance
-
-- **Definición (SddIA):** paths.toolsDefinitionPath/start-api/ (spec.md, spec.json).
-- **Cápsula:** paths.toolCapsules.start-api (paths.toolsPath/start-api/): manifest.json, start-api-config.json, start-api.md, launcher .bat/.ps1, opcional binario en bin/.
-- **Implementación Rust:** paths.toolsRustPath (Cúmulo), binario copiado a cápsula/bin/.
-- **Índice y Cúmulo:** scripts/tools/index.json y SddIA/agents/cumulo.paths.json (toolCapsules.start-api).
-
-## 3. Contrato de la herramienta start-api
-
-### 3.1 Identificación
+## Definición de la herramienta (SddIA)
 
 - **toolId:** start-api
-- **contract_ref:** SddIA/tools/tools-contract.json
+- **Definición:** SddIA/tools/start-api/ (spec.md, spec.json)
 - **implementation_path_ref:** paths.toolCapsules.start-api
+- **Entradas:** NoBuild, Profile, Port, PortBlocked (fail|kill), ConfigPath, OutputPath, OutputJson
+- **Éxito:** endpoint health responde HTTP 200 en el tiempo configurado
+- **Fases feedback:** init → port-check → [port-kill] → build → launch → healthcheck → done | error
 
-### 3.2 Descripción
+## Implementación Rust (existente)
 
-Herramienta que levanta la API del proyecto (Admin Back): compila si es necesario, inicia el host (dotnet run / Kestrel) y opcionalmente comprueba salud. Pensada para ejecución por terceros y para completar el ciclo infra (prepare-full-env) → datos (invoke-mysql-seeds) → API (start-api).
+| Elemento | Ruta |
+|----------|------|
+| Binario | scripts/tools-rs/src/bin/start_api.rs |
+| Crate | gesfer-tools (scripts/tools-rs/Cargo.toml) |
+| Lib compartida | scripts/tools-rs/src/lib.rs (FeedbackEntry, ToolResult, to_contract_json) |
+| Config | CamelCase en JSON → struct Config con snake_case (api_working_dir, default_profile, default_port, health_url, health_check_timeout_seconds) |
+| Config path por defecto | start-api-config.json (resuelto desde repo root o scripts/tools/start-api/) |
 
-### 3.3 Entradas
+## Entregable en la cápsula
 
-| Parámetro   | Tipo    | Descripción |
-|------------|---------|-------------|
-| NoBuild    | boolean | (opcional) No compilar; solo ejecutar si ya hay build. |
-| Profile    | string  | (opcional) Perfil de ejecución (ej. Development). Por defecto según config. |
-| Port       | number  | (opcional) Puerto del host (override). |
-| PortBlocked| fail \| kill | (opcional) Si el puerto está ocupado: **fail** = error y salir (por defecto); **kill** = cerrar el proceso que usa el puerto y continuar. |
-| ConfigPath | string  | (opcional) Ruta al JSON de configuración. |
-| OutputPath | string  | (opcional) Fichero donde escribir el resultado JSON. |
-| OutputJson | boolean | (opcional) Emitir resultado JSON por stdout. |
+- **Ejecutable:** start_api.exe en scripts/tools/start-api/ (misma carpeta que Start-Api.bat).
+- **Origen:** Copiado desde scripts/tools-rs/target/release/start_api.exe por install.ps1.
+- **Launcher:** Start-Api.bat ya implementado: si existe start_api.exe lo invoca; si no, powershell -File Start-Api.ps1.
 
-### 3.4 Validación de éxito y puerto
+## Pasos para obtener el ejecutable
 
-- **Éxito:** La herramienta considera la ejecución correcta **solo si el endpoint health responde adecuadamente** (HTTP 200 en la URL configurada).
-- **Puerto ocupado:** Se valida si el puerto está ocupado antes de arrancar. Comportamiento según **PortBlocked** (fail o kill).
+1. Asegurar Rust en PATH (por ejemplo .cargo\bin).
+2. Desde scripts/tools-rs: ejecutar install.ps1 (o equivalente vía skill/herramienta). Esto ejecuta `cargo build --release` y copia start_api.exe a scripts/tools/start-api/.
+3. Opcional: validar ejecutando Start-Api.bat o start_api.exe con --output-json.
 
-### 3.5 Salida
+## Validación
 
-Conforme a tools-contract.json: toolId, exitCode, success, timestamp, message, feedback[], data (url_base, pid, port, healthy), duration_ms.
+- Build: `cargo build --release` en scripts/tools-rs sin errores.
+- Presencia: scripts/tools/start-api/start_api.exe existe tras install.ps1.
+- Ejecución: la herramienta devuelve JSON con toolId "start-api", exitCode 0 cuando health OK, feedback con fases y data con url_base, port, pid, healthy.
+- Contrato: cumple output (toolId, exitCode, success, timestamp, message, feedback, data, duration_ms) y feedback entry schema.
 
-### 3.6 Fases (feedback)
+## Referencias
 
-init → port-check → [port-kill si aplica] → build (opcional) → launch → healthcheck → done | error.
-
-### 3.7 Dependencias lógicas
-
-- **depends_on_tools:** ["prepare-full-env", "invoke-mysql-seeds"] — recomendado que infra y datos estén listos; no bloqueante si el invocador ya los ejecutó.
-
-### 3.8 Entorno
-
-Windows 11, PowerShell 7+, .NET SDK 8. Opcional Docker/MySQL si se asume que prepare-full-env e invoke-mysql-seeds ya se ejecutaron.
-
-## 4. Interfaz de proceso
-
-Esta tarea genera al menos un .md y un .json en la carpeta de la tarea (objectives.md, spec.md, spec.json). El entregable ejecutable es la cápsula en paths.toolCapsules.start-api.
-
-## 5. Referencias
-
-- Proceso: SddIA/process/create-tool/spec.md, spec.json
-- Contrato tools: SddIA/tools/tools-contract.json
-- Cúmulo: SddIA/agents/cumulo.json, cumulo.paths.json
-- Herramientas de referencia: prepare-full-env, invoke-mysql-seeds (spec en SddIA/tools/).
+- SddIA/process/create-tool/spec.md
+- SddIA/tools/tools-contract.json
+- SddIA/agents/cumulo.paths.json (paths.toolCapsules.start-api, paths.toolsRustPath)
+- scripts/tools/start-api/start-api.md (uso del binario Rust)

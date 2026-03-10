@@ -1,6 +1,16 @@
 {
-  "result": "pass",
-  "timestamp": "2026-03-07",
-  "scope": "create-tool-start-api",
-  "summary": "Tool start-api: definición, cápsula, exe en carpeta de la tool (sin bin), commit aplicado."
+  "spec_version": "1.0.0",
+  "task_id": "create-tool-start-api",
+  "branch": "feat/create-tool-start-api",
+  "validated_at": "2026-03-10",
+  "criteria": {
+    "exe_exists_in_capsule": true,
+    "exe_path": "scripts/tools/start-api/start_api.exe",
+    "exe_runs": true,
+    "output_json_contract": true,
+    "feedback_phases_observed": ["init", "port-check", "build", "launch", "healthcheck"],
+    "contract_ref": "SddIA/tools/tools-contract.json"
+  },
+  "result": "PASS",
+  "notes": "Ejecutable Rust en destino; Start-Api.bat invoca el exe; salida JSON con toolId, exitCode, success, feedback, data, duration_ms. Tarea completada."
 }
