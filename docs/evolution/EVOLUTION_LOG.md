@@ -4,6 +4,21 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+## 2026-03-10 — Ejecutable Rust start-api (feat/create-tool-start-api)
+
+**Rama:** feat/create-tool-start-api.
+
+**Alcance:**
+- **Proceso create-tool start-api:** Ejecutable Rust (`start_api.exe`) como implementación por defecto en la cápsula `scripts/tools/start-api/`; el .ps1 queda como fallback. Cumplimiento del estándar SddIA/tools/tools-contract.json (default_implementation: rust).
+- **scripts/tools-rs:** Cargo.toml ajustado para compilar solo el binario `start_api` (entradas sin fuente eliminadas); `install.ps1` copia el exe a la cápsula. Corrección de warnings en `start_api.rs`.
+- **Documentación:** objectives, spec, implementation, validacion en `docs/features/create-tool-start-api/`. Validación: exe en destino y salida JSON conforme al contrato.
+
+**Referencias:**
+- `docs/features/create-tool-start-api/` — objectives, spec, implementation, validacion, commit_cmd.
+- SddIA/tools/start-api/, scripts/tools/start-api/, scripts/tools-rs/.
+
+---
+
 ## 2026-03-08 — Consolidación: eliminar referencias a Kalma2 (feat/refactorization-consolidacion-kalma2)
 
 **Rama:** feat/refactorization-consolidacion-kalma2.
