@@ -1,0 +1,24 @@
+{
+  "spec_version": "1.0.0",
+  "task_id": "create-process-audit-tool",
+  "execution_date": "2026-03-10",
+  "case": "audit-start-api",
+  "phases": [
+    { "id": "0", "name": "Preparar entorno", "result": "PASS" },
+    { "id": "1", "name": "Definir objetivos", "result": "PASS" },
+    { "id": "2", "name": "Analizar especificación", "result": "PASS" },
+    { "id": "3", "name": "Diseñar pruebas", "result": "PASS" },
+    { "id": "4", "name": "Ejecutar herramienta", "result": "PASS", "duration_ms": 42352 },
+    { "id": "5", "name": "Validar retorno JSON", "result": "PASS" },
+    { "id": "6", "name": "Validar objetivos funcionales", "result": "PASS" },
+    { "id": "7", "name": "Generar informe", "result": "PASS" },
+    { "id": "8", "name": "Cierre", "result": "PASS" }
+  ],
+  "result": "PARTIAL",
+  "artifacts": [
+    "docs/audits/tools/start-api/audit-report-2026-03-10.md",
+    "docs/audits/tools/start-api/audit-result-2026-03-10.json",
+    "docs/audits/tools/start-api/tool-output-raw.json"
+  ],
+  "status": "completed"
+}

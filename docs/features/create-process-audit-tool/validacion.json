@@ -1,0 +1,110 @@
+{
+  "spec_version": "1.0.0",
+  "timestamp": "2026-03-10T20:00:00.000Z",
+  "branch": "main",
+  "base_branch": "main",
+  "mode": "direct_on_main",
+  "task_path": "docs/features/create-process-audit-tool/",
+  "git_changes": {
+    "base_branch": "main",
+    "uncommitted_changes": true,
+    "files_added": [
+      "SddIA/process/audit-tool/spec.md",
+      "SddIA/process/audit-tool/spec.json",
+      "SddIA/process/audit-tool/templates/audit-report-template.md",
+      "SddIA/process/audit-tool/templates/audit-result-schema.json",
+      "docs/features/create-process-audit-tool/objectives.md",
+      "docs/features/create-process-audit-tool/spec.md",
+      "docs/features/create-process-audit-tool/spec.json",
+      "docs/features/create-process-audit-tool/clarify.md",
+      "docs/features/create-process-audit-tool/clarify.json",
+      "docs/features/create-process-audit-tool/plan.md",
+      "docs/features/create-process-audit-tool/plan.json",
+      "docs/features/create-process-audit-tool/implementation.md",
+      "docs/features/create-process-audit-tool/implementation.json",
+      "docs/features/create-process-audit-tool/execution.md",
+      "docs/features/create-process-audit-tool/execution.json",
+      "docs/audits/tools/start-api/objectives.md",
+      "docs/audits/tools/start-api/audit-report-2026-03-10.md",
+      "docs/audits/tools/start-api/audit-result-2026-03-10.json",
+      "docs/audits/tools/start-api/tool-output-raw.json"
+    ],
+    "files_modified": [
+      ".cursor/rules/process-suggestions.mdc",
+      "AGENTS.md",
+      "SddIA/norms/interaction-triggers.md",
+      "SddIA/process/README.md"
+    ],
+    "files_deleted": [],
+    "summary_by_category": {
+      "SddIA": 8,
+      "docs": 15,
+      ".cursor": 1,
+      "root": 1
+    },
+    "total_files": 23
+  },
+  "checks": [
+    {
+      "name": "git_changes",
+      "result": "pass",
+      "message": "Análisis de cambios git completado",
+      "detail": "23 archivos modificados o añadidos"
+    },
+    {
+      "name": "ley_git",
+      "result": "fail",
+      "message": "Trabajo directo en rama main detectado",
+      "detail": "La rama actual es 'main', no se debería trabajar directamente en main/master. Debería usarse una rama feat/ o fix/.",
+      "blocking": true
+    },
+    {
+      "name": "documentation",
+      "result": "pass",
+      "message": "Documentación completa",
+      "detail": "11 archivos en docs/features/create-process-audit-tool/: objectives.md, spec.md, spec.json, clarify.md, clarify.json, plan.md, plan.json, implementation.md, implementation.json, execution.md, execution.json"
+    },
+    {
+      "name": "build",
+      "result": "pass",
+      "message": "Compilación exitosa",
+      "detail": "dotnet build src/GesFer.Admin.Back.sln -- 7 proyectos, 0 errores, 0 advertencias"
+    },
+    {
+      "name": "test",
+      "result": "pass",
+      "message": "Tests exitosos",
+      "detail": "80 tests passed (51 unit, 27 integration, 2 E2E), 1 skipped, 0 failures"
+    },
+    {
+      "name": "nomenclatura",
+      "result": "warn",
+      "message": "No aplicable (trabajo en main)",
+      "detail": "La validación de nomenclatura de rama no aplica al trabajar directamente en main"
+    },
+    {
+      "name": "sddia_md_json_parity",
+      "result": "pass",
+      "message": "Sincronía MD/JSON verificada",
+      "detail": "SddIA/process/audit-tool/: spec.md y spec.json presentes y coherentes"
+    }
+  ],
+  "global": "fail",
+  "blocking": true,
+  "blocking_reasons": [
+    "Violación ley GIT: trabajo directo en rama main (debería usarse feat/ o fix/)"
+  ],
+  "recommendations": [
+    "Crear rama feat/create-process-audit-tool desde main",
+    "Mover cambios a la nueva rama con git stash, git checkout -b feat/create-process-audit-tool, git stash pop",
+    "Commitear cambios en la rama feature",
+    "Ejecutar validación nuevamente desde la rama feature"
+  ],
+  "summary": {
+    "total_checks": 7,
+    "passed": 5,
+    "failed": 1,
+    "warnings": 1,
+    "blocking": 1
+  }
+}
