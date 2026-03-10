@@ -1,0 +1,57 @@
+{
+  "spec_version": "1.0.0",
+  "task_id": "create-process-audit-tool",
+  "clarify_date": "2026-03-10",
+  "status": "resolved",
+  "decisions": [
+    {
+      "id": "Q1",
+      "topic": "Parámetros de invocación",
+      "decision": "B",
+      "description": "Leer parámetros de <tool-id>-config.json si existe, fallback sin parámetros. Informar al usuario de los parámetros que se van a utilizar antes de ejecutar.",
+      "rationale": "Transparencia: el usuario debe saber qué configuración se aplica."
+    },
+    {
+      "id": "Q2",
+      "topic": "Semántica de PARTIAL",
+      "decision": "accepted",
+      "description": "PASS: todo correcto. FAIL: validación crítica falla. PARTIAL: arranca y JSON válido, pero hay warnings.",
+      "rationale": "Propuesta aceptada sin modificaciones."
+    },
+    {
+      "id": "Q3",
+      "topic": "Identificación de health endpoint",
+      "decision": "B+C",
+      "description": "Leer de config si existe campo healthEndpoint. Fallback a convención: http://localhost:<port>/health.",
+      "rationale": "Flexibilidad con convención predecible."
+    },
+    {
+      "id": "Q4",
+      "topic": "Respuesta HTTP válida",
+      "decision": "HTTP 200",
+      "description": "HTTP Status 200 es suficiente. No se requiere validar el body.",
+      "rationale": "Simplifica la validación; el status code indica estado saludable."
+    },
+    {
+      "id": "Q5",
+      "topic": "Detener proceso tras auditoría",
+      "decision": "C",
+      "description": "Configurable por herramienta. Default: cleanup (detener proceso).",
+      "rationale": "Flexibilidad para distintos escenarios de uso."
+    },
+    {
+      "id": "Q6",
+      "topic": "Nombrado de informes",
+      "decision": "B",
+      "description": "Versionado por fecha: audit-report-YYYY-MM-DD.md, audit-result-YYYY-MM-DD.json.",
+      "rationale": "Trazabilidad sin acumulación excesiva."
+    },
+    {
+      "id": "Q7",
+      "topic": "Registro en Evolution Log",
+      "decision": "B",
+      "description": "Solo registrar si resultado es FAIL o PARTIAL.",
+      "rationale": "Evitar ruido; registrar solo anomalías relevantes."
+    }
+  ]
+}

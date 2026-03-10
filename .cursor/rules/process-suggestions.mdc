@@ -23,6 +23,7 @@ Cuando el usuario escriba **#Process** (solo o en un mensaje), responde sugirien
 | **create-tool** | Creación de una nueva herramienta: rama feat/create-tool-\<tool-id\>, cápsula en paths.toolCapsules, índice y Cúmulo actualizados. |
 | **correccion-auditorias** | Corrección de hallazgos de auditoría: rama feat/correccion-segun-auditorias; entrada paths.auditsPath; documentación en paths.featurePath. |
 | **create-template** | Creación de plantilla: rama feat/create-template-\<template-id\>, carpeta en paths.templatesPath. Configuración predefinida de proceso con fin concreto. |
+| **audit-tool** | Auditoría de herramienta: verificación empírica del funcionamiento de una tool. Resultado: informe en paths.auditsPath/tools/\<tool-id\>/. |
 
 ## Respuesta sugerida
 

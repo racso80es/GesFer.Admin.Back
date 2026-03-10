@@ -43,6 +43,7 @@ Al **empezar una tarea** se debe elegir un **proceso**. Los procesos definen el 
 | **bug-fix** | Corrección de bug: rama `fix/<nombre_fix>`. Alcance mínimo. | `paths.fixPath/<nombre_fix>` | [`SddIA/process/bug-fix/`](./SddIA/process/bug-fix/) |
 | **create-tool** | Creación de herramienta: rama `feat/create-tool-<tool-id>`. Entregable: cápsula en paths.toolCapsules. | `paths.featurePath/create-tool-<tool-id>` (doc); entregable en `paths.toolsPath/<tool-id>/` | [`SddIA/process/create-tool/`](./SddIA/process/create-tool/) |
 | **create-template** | Creación de plantilla: rama `feat/create-template-<template-id>`. Entregable: carpeta en paths.templatesPath con spec.md y spec.json. | `paths.featurePath/create-template-<template-id>` (doc); entregable en `paths.templatesPath/<template-id>/` | [`SddIA/process/create-template/`](./SddIA/process/create-template/) |
+| **audit-tool** | Auditoría de herramienta: verificación empírica del funcionamiento. Resultado: informe en paths.auditsPath/tools/<tool-id>/. | `paths.featurePath/audit-tool-<tool-id>` (doc); resultado en `paths.auditsPath/tools/<tool-id>/` | [`SddIA/process/audit-tool/`](./SddIA/process/audit-tool/) |
 
 Índice de procesos: [`SddIA/process/README.md`](./SddIA/process/README.md).
 

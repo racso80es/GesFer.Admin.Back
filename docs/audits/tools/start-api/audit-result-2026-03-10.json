@@ -1,0 +1,126 @@
+{
+  "spec_version": "1.0.0",
+  "tool_id": "start-api",
+  "tool_version": "1.0.0",
+  "audit_date": "2026-03-10T19:45:00.000Z",
+  "result": "PARTIAL",
+  "auditor": "agent",
+  "duration_ms": 42352,
+  "phases_results": [
+    {
+      "phase_id": "0",
+      "name": "Preparar entorno",
+      "result": "PASS",
+      "message": "Ejecutable y archivos requeridos presentes",
+      "evidence": "start_api.exe, manifest.json, start-api-config.json"
+    },
+    {
+      "phase_id": "1",
+      "name": "Definir objetivos",
+      "result": "PASS",
+      "message": "Objetivos documentados",
+      "evidence": "docs/audits/tools/start-api/objectives.md"
+    },
+    {
+      "phase_id": "2",
+      "name": "Analizar especificación",
+      "result": "PASS",
+      "message": "Manifest y config válidos",
+      "evidence": "manifest.json version 1.0.0, config completo"
+    },
+    {
+      "phase_id": "3",
+      "name": "Diseñar pruebas",
+      "result": "PASS",
+      "message": "Casos de prueba definidos",
+      "evidence": "Validación JSON, validación funcional (health)"
+    },
+    {
+      "phase_id": "4",
+      "name": "Ejecutar herramienta",
+      "result": "PASS",
+      "message": "Ejecución completada con exitCode 7",
+      "evidence": "Comando: start_api.exe --output-json, duración: 34028ms"
+    },
+    {
+      "phase_id": "5",
+      "name": "Validar retorno JSON",
+      "result": "PASS",
+      "message": "Estructura válida según contrato",
+      "evidence": "Todos los campos requeridos presentes"
+    },
+    {
+      "phase_id": "6",
+      "name": "Validar objetivos funcionales",
+      "result": "PASS",
+      "message": "API levantada y health responde HTTP 200",
+      "evidence": "PID 1928, puerto 5010, StatusCode 200"
+    },
+    {
+      "phase_id": "7",
+      "name": "Generar informe",
+      "result": "PASS",
+      "message": "Informe generado",
+      "evidence": "audit-report-2026-03-10.md, audit-result-2026-03-10.json"
+    },
+    {
+      "phase_id": "8",
+      "name": "Cierre",
+      "result": "PENDING",
+      "message": "Cleanup pendiente",
+      "evidence": "API aún activa"
+    }
+  ],
+  "json_validation": {
+    "valid": true,
+    "fields_checked": ["toolId", "exitCode", "success", "timestamp", "message", "feedback", "data", "duration_ms"],
+    "errors": []
+  },
+  "functional_validation": {
+    "valid": true,
+    "checks": [
+      {
+        "name": "API levantada",
+        "criteria": "Proceso activo en puerto configurado",
+        "result": "PASS",
+        "detail": "PID 1928, puerto 5010"
+      },
+      {
+        "name": "Health endpoint HTTP 200",
+        "criteria": "HTTP 200 en http://localhost:5010/health",
+        "result": "PASS",
+        "detail": "StatusCode 200, Content: Healthy"
+      }
+    ]
+  },
+  "command_executed": "& \"c:\\Proyectos\\GesFer.Admin.Back\\scripts\\tools\\start-api\\start_api.exe\" --output-json",
+  "parameters_used": {
+    "apiWorkingDir": "src/GesFer.Admin.Back.Api",
+    "command": "dotnet run",
+    "defaultProfile": "Development",
+    "defaultPort": 5010,
+    "healthUrl": "http://localhost:5010/health",
+    "healthCheckTimeoutSeconds": 30
+  },
+  "json_output": {
+    "toolId": "start-api",
+    "exitCode": 7,
+    "success": false,
+    "timestamp": "2026-03-10T18:43:37.498805500+00:00",
+    "message": "Health no respondió a tiempo",
+    "feedback_count": 15,
+    "data": {
+      "healthy": false,
+      "pid": 1928,
+      "port": 5010,
+      "profile": "Development",
+      "url_base": "http://localhost:5010/health"
+    },
+    "duration_ms": 34028
+  },
+  "recommendations": [
+    "Considerar aumentar timeout de health check a 45s o implementar reintentos con backoff exponencial",
+    "La herramienta es estricta: success solo si health responde dentro del timeout. Esto es correcto según especificación.",
+    "El retorno JSON es coherente: exitCode 7, success false, feedback con warning, data.healthy false"
+  ]
+}

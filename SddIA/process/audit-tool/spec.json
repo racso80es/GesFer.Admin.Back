@@ -1,0 +1,57 @@
+{
+  "spec_version": "1.0.0",
+  "process_id": "audit-tool",
+  "name": "Auditoría de herramientas",
+  "description": "Proceso de tarea para auditar empíricamente una herramienta existente. Verifica ejecución, retorno JSON y cumplimiento de objetivos funcionales. Resultado: informe en paths.auditsPath/tools/<tool-id>/.",
+  "contract_ref": "paths.processPath/process-contract.json",
+  "persist_ref": "paths.featurePath/audit-tool-<tool-id>",
+  "audit_output_ref": "paths.auditsPath/tools/<tool-id>",
+  "phases": [
+    { "id": "0", "name": "Preparar entorno", "description": "Verificar existencia de herramienta en paths.toolCapsules. Rama opcional feat/audit-tool-<tool-id>." },
+    { "id": "1", "name": "Definir objetivos", "description": "Documentar criterios de éxito en objectives.md." },
+    { "id": "2", "name": "Analizar especificación", "description": "Revisar manifest.json y documentación de la herramienta." },
+    { "id": "3", "name": "Diseñar pruebas", "description": "Definir casos de prueba: invocación, parámetros, validaciones esperadas." },
+    { "id": "4", "name": "Ejecutar herramienta", "description": "Invocar .exe (o script fallback) y capturar salida JSON." },
+    { "id": "5", "name": "Validar retorno JSON", "description": "Verificar estructura según tools-contract.json." },
+    { "id": "6", "name": "Validar objetivos funcionales", "description": "Confirmar que la herramienta logra su objetivo declarado." },
+    { "id": "7", "name": "Generar informe", "description": "Crear audit-report.md y audit-result.json con resultado PASS/FAIL." },
+    { "id": "8", "name": "Cierre", "description": "Actualizar paths.auditsPath, opcional Evolution Log." }
+  ],
+  "inputs": [
+    { "name": "tool-id", "type": "string", "description": "Identificador de la herramienta a auditar (kebab-case).", "required": true },
+    { "name": "capsule_path", "type": "path", "description": "paths.toolCapsules[<tool-id>]", "required": true }
+  ],
+  "outputs": [
+    { "name": "audit-report.md", "type": "file", "description": "Informe legible con resultado, evidencias y recomendaciones." },
+    { "name": "audit-result.json", "type": "file", "description": "Resultado machine-readable: tool_id, audit_date, result, phases_results, evidence." }
+  ],
+  "related_actions": ["spec", "validate"],
+  "related_skills": [],
+  "tools_contract_ref": "SddIA/tools/tools-contract.json",
+  "principles_ref": "paths.principlesPath",
+  "configuration": {
+    "cleanup_after_audit": {
+      "description": "Si true, detener el proceso de la herramienta tras la auditoría.",
+      "default": true,
+      "configurable": true
+    },
+    "parameters_source": {
+      "description": "Fuente de parámetros de invocación: config file de la herramienta.",
+      "pattern": "<tool-id>-config.json",
+      "fallback": "sin parámetros"
+    },
+    "health_endpoint": {
+      "description": "URL del health endpoint.",
+      "source": "config.healthUrl o convención http://localhost:<port>/health"
+    },
+    "report_naming": {
+      "pattern": "audit-report-YYYY-MM-DD.md / audit-result-YYYY-MM-DD.json",
+      "description": "Versionado por fecha para trazabilidad."
+    },
+    "evolution_log": {
+      "when": "FAIL o PARTIAL",
+      "description": "Solo registrar anomalías en Evolution Log."
+    }
+  },
+  "templates_ref": "paths.processPath/audit-tool/templates/"
+}

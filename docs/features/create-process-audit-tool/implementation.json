@@ -1,0 +1,76 @@
+{
+  "spec_version": "1.0.0",
+  "task_id": "create-process-audit-tool",
+  "implementation_date": "2026-03-10",
+  "based_on": "plan.md",
+  "items": [
+    {
+      "id": "1.1",
+      "action": "Modificar",
+      "path": "SddIA/process/audit-tool/spec.json",
+      "description": "Añadir campos configuration y templates_ref",
+      "status": "completed"
+    },
+    {
+      "id": "1.2",
+      "action": "Modificar",
+      "path": "SddIA/process/audit-tool/spec.md",
+      "description": "Añadir sección Configuración y semántica de resultados",
+      "status": "completed"
+    },
+    {
+      "id": "2.1",
+      "action": "Crear",
+      "path": "SddIA/process/audit-tool/templates/audit-report-template.md",
+      "description": "Plantilla para informe de auditoría",
+      "status": "completed"
+    },
+    {
+      "id": "2.2",
+      "action": "Crear",
+      "path": "SddIA/process/audit-tool/templates/audit-result-schema.json",
+      "description": "JSON Schema para audit-result.json",
+      "status": "completed"
+    },
+    {
+      "id": "3.1",
+      "action": "Crear",
+      "path": "docs/audits/tools/",
+      "description": "Carpeta para auditorías de herramientas",
+      "status": "completed"
+    },
+    {
+      "id": "3.2",
+      "action": "Crear",
+      "path": "docs/audits/tools/start-api/",
+      "description": "Carpeta para auditoría de start-api",
+      "status": "completed"
+    },
+    {
+      "id": "4.1",
+      "action": "Crear",
+      "path": "docs/audits/tools/start-api/objectives.md",
+      "description": "Objetivos de auditoría con parámetros y criterios",
+      "status": "completed"
+    },
+    {
+      "id": "5.1",
+      "action": "Modificar",
+      "path": "AGENTS.md",
+      "description": "Añadir audit-tool a tabla de procesos",
+      "status": "completed"
+    }
+  ],
+  "files_created": [
+    "SddIA/process/audit-tool/templates/audit-report-template.md",
+    "SddIA/process/audit-tool/templates/audit-result-schema.json",
+    "docs/audits/tools/start-api/objectives.md"
+  ],
+  "files_modified": [
+    "SddIA/process/audit-tool/spec.json",
+    "SddIA/process/audit-tool/spec.md",
+    "AGENTS.md"
+  ],
+  "status": "completed",
+  "pending_execution": true
+}

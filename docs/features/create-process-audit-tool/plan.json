@@ -1,0 +1,47 @@
+{
+  "spec_version": "1.0.0",
+  "task_id": "create-process-audit-tool",
+  "plan_date": "2026-03-10",
+  "based_on": ["spec.md", "clarify.md"],
+  "phases": [
+    {
+      "id": "1",
+      "name": "Completar definición del proceso",
+      "tasks": [
+        { "id": "1.1", "description": "Actualizar spec.json con campos de configuración", "status": "completed" },
+        { "id": "1.2", "description": "Añadir sección de configuración en spec.md", "status": "completed" }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Crear plantillas de informe",
+      "tasks": [
+        { "id": "2.1", "description": "Crear audit-report-template.md", "status": "completed" },
+        { "id": "2.2", "description": "Crear audit-result-schema.json", "status": "completed" }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Preparar estructura de auditorías",
+      "tasks": [
+        { "id": "3.1", "description": "Crear carpeta docs/audits/tools/", "status": "completed" },
+        { "id": "3.2", "description": "Crear carpeta docs/audits/tools/start-api/", "status": "completed" }
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Documentar caso práctico",
+      "tasks": [
+        { "id": "4.1", "description": "Crear objectives.md para auditoría de start-api", "status": "completed" }
+      ]
+    },
+    {
+      "id": "5",
+      "name": "Actualizar índices y difusión",
+      "tasks": [
+        { "id": "5.1", "description": "Actualizar AGENTS.md con audit-tool", "status": "completed" }
+      ]
+    }
+  ],
+  "status": "completed"
+}
