@@ -29,14 +29,16 @@
     "cumulo_paths": "SddIA/agents/cumulo.paths.json",
     "target_tool": "scripts/tools/start-api/"
   },
-  "status": "validated",
+  "status": "finalized",
   "pending_clarifications": false,
   "clarifications_resolved": "2026-03-10",
   "plan_completed": "2026-03-10",
   "implementation_completed": "2026-03-10",
   "execution_completed": "2026-03-10",
   "validation_completed": "2026-03-10",
-  "validation_result": "fail",
-  "validation_blocking": true,
-  "pending_remediation": true
+  "validation_result": "pass",
+  "validation_blocking": false,
+  "finalize_completed": "2026-03-10",
+  "pr_url": "https://github.com/racso80es/GesFer.Admin.Back/pull/73",
+  "commit_hash": "cc929b79a63504062135fffe6ba01e9df2ecdeda"
 }
