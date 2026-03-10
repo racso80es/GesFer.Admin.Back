@@ -1,0 +1,182 @@
+{
+  "implementation_version": "1.0.0",
+  "fecha": "2026-03-10",
+  "proceso": "refactorization",
+  "rama": "feat/refactorization-eliminar-ps1-skills-tools",
+  "estado": "completado",
+  "resumen": "Eliminación de archivos .ps1 en cápsulas de skills y tools. Actualización de especificaciones, contratos y procesos.",
+  "archivos_eliminados": {
+    "skills": {
+      "capsulas": [
+        "scripts/skills/iniciar-rama/Iniciar-Rama.ps1",
+        "scripts/skills/finalizar-git/Merge-To-Master-Cleanup.ps1",
+        "scripts/skills/finalizar-git/Push-And-CreatePR.ps1",
+        "scripts/skills/finalizar-git/Unificar-Rama.ps1",
+        "scripts/skills/invoke-command/Invoke-Command.ps1"
+      ],
+      "raiz_legacy": [
+        "scripts/skills/Iniciar-Rama.ps1",
+        "scripts/skills/Invoke-Command.ps1",
+        "scripts/skills/Merge-To-Master-Cleanup.ps1",
+        "scripts/skills/Unificar-Rama.ps1"
+      ],
+      "total": 9
+    },
+    "tools": {
+      "archivos": [
+        "scripts/tools/invoke-mysql-seeds/Invoke-MySqlSeeds.ps1",
+        "scripts/tools/prepare-full-env/Prepare-FullEnv.ps1",
+        "scripts/tools/start-api/Start-Api.ps1"
+      ],
+      "total": 3
+    },
+    "total_general": 12
+  },
+  "especificaciones_actualizadas": {
+    "skills": [
+      {
+        "archivo": "SddIA/skills/iniciar-rama/spec.md",
+        "cambio": "Agregada sección 'Implementación' con estándar .exe"
+      },
+      {
+        "archivo": "SddIA/skills/finalizar-git/spec.md",
+        "cambio": "Agregada sección 'Implementación' con estándar .exe"
+      },
+      {
+        "archivo": "SddIA/skills/invoke-command/spec.md",
+        "cambio": "Agregada sección 'Implementación' con estándar .exe"
+      }
+    ],
+    "tools_migradas": [
+      {
+        "archivo": "SddIA/tools/invoke-mysql-seeds/spec.md",
+        "cambio": "Agregada sección 'Implementación' con estándar .exe"
+      },
+      {
+        "archivo": "SddIA/tools/prepare-full-env/spec.md",
+        "cambio": "Agregada sección 'Implementación' con estándar .exe"
+      },
+      {
+        "archivo": "SddIA/tools/start-api/spec.md",
+        "cambio": "Agregada sección 'Implementación' con estándar .exe"
+      }
+    ],
+    "tools_pendientes": [
+      {
+        "archivo": "SddIA/tools/postman-mcp-validation/spec.md",
+        "cambio": "Agregada sección 'Estado de Implementación' (pendiente migración)",
+        "nota": "Sin ejecutable .exe. Se mantiene temporalmente .ps1"
+      },
+      {
+        "archivo": "SddIA/tools/run-tests-local/spec.md",
+        "cambio": "Agregada sección 'Estado de Implementación' (pendiente migración)",
+        "nota": "Sin ejecutable .exe. Se mantiene temporalmente .ps1"
+      }
+    ],
+    "total": 8
+  },
+  "contratos_actualizados": [
+    {
+      "archivo": "SddIA/skills/skills-contract.json",
+      "cambios": [
+        "Campo 'implementation' agregado",
+        "Actualizado 'default_implementation.delivery'",
+        "Actualizado 'required_artefacts_capsule' (.exe OBLIGATORIO)",
+        "Eliminado .ps1 de artefactos requeridos"
+      ]
+    },
+    {
+      "archivo": "SddIA/tools/tools-contract.json",
+      "cambios": [
+        "Campo 'implementation' agregado",
+        "Actualizado 'default_implementation.delivery'",
+        "Actualizado 'required_artefacts_per_tool' (.exe OBLIGATORIO)",
+        "Eliminado .ps1 de artefactos requeridos"
+      ]
+    }
+  ],
+  "procesos_actualizados": [
+    {
+      "archivo": "SddIA/process/create-tool/spec.md",
+      "cambio": "Agregada sección 'Implementación de la Herramienta' con estándar .exe"
+    }
+  ],
+  "validaciones": {
+    "compilacion_backend": {
+      "comando": "dotnet build src/GesFer.Admin.Back.sln",
+      "resultado": "exitosa",
+      "errores": 0,
+      "advertencias": 0
+    },
+    "ejecutables_skills": {
+      "iniciar_rama": {
+        "path": "scripts/skills/iniciar-rama/bin/iniciar_rama.exe",
+        "verificado": true,
+        "funcional": true
+      },
+      "invoke_command": {
+        "path": "scripts/skills/invoke-command/bin/invoke_command.exe",
+        "verificado": true,
+        "funcional": true
+      },
+      "merge_to_master_cleanup": {
+        "path": "scripts/skills/finalizar-git/bin/merge_to_master_cleanup.exe",
+        "verificado": true,
+        "funcional": true
+      },
+      "push_and_create_pr": {
+        "path": "scripts/skills/finalizar-git/bin/push_and_create_pr.exe",
+        "verificado": true,
+        "funcional": true
+      }
+    },
+    "ejecutables_tools": {
+      "invoke_mysql_seeds": {
+        "path": "scripts/tools/invoke-mysql-seeds/bin/invoke_mysql_seeds.exe",
+        "existe": true
+      },
+      "prepare_full_env": {
+        "path": "scripts/tools/prepare-full-env/bin/prepare_full_env.exe",
+        "existe": true
+      },
+      "start_api": {
+        "path": "scripts/tools/start-api/start_api.exe",
+        "existe": true
+      }
+    }
+  },
+  "tools_pendientes_migracion": [
+    {
+      "tool_id": "postman-mcp-validation",
+      "estado": "pendiente_rust",
+      "prioridad": "media",
+      "archivo_ps1_actual": "scripts/tools/postman-mcp-validation/Postman-Mcp-Validation.ps1"
+    },
+    {
+      "tool_id": "run-tests-local",
+      "estado": "pendiente_rust",
+      "prioridad": "media",
+      "archivo_ps1_actual": "scripts/tools/run-tests-local/Run-Tests-Local.ps1"
+    }
+  ],
+  "impacto": {
+    "reduccion_archivos": 12,
+    "reduccion_complejidad": "alta",
+    "claridad": "una única implementación por entidad",
+    "alineacion_constitucion": true,
+    "deuda_tecnica_reducida": true
+  },
+  "proximos_pasos": {
+    "cierre": [
+      "Crear commits",
+      "Actualizar Evolution Log",
+      "Push a remoto",
+      "Crear PR hacia main",
+      "Mergear y limpiar rama"
+    ],
+    "futuras_tareas": [
+      "Migrar postman-mcp-validation a Rust",
+      "Migrar run-tests-local a Rust"
+    ]
+  }
+}

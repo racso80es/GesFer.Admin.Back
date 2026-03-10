@@ -27,9 +27,30 @@ Cumple `SddIA/tools/tools-contract.json`: toolId, exitCode, success, timestamp, 
 
 init → newman (ejecución de la colección) → done (o error).
 
+## Estado de Implementación
+
+**Formato actual:** Script PowerShell (`.ps1`)  
+**Ubicación:** `scripts/tools/postman-mcp-validation/Postman-Mcp-Validation.ps1`
+
+**Migración pendiente a Rust:**
+- Estado: Pendiente
+- Prioridad: Media
+- Notas: Esta herramienta aún no ha sido migrada a Rust. Se mantiene temporalmente el script `.ps1`.
+
+**Formato objetivo:** Ejecutable Rust (`.exe`)  
+**Ubicación objetivo:** `scripts/tools/postman-mcp-validation/bin/postman_mcp_validation.exe`
+
+**Estándar futuro:** Una vez migrado, solo existirá el ejecutable `.exe`. No se deberá mantener el `.ps1`.
+
+### Invocación actual (PowerShell)
+
+```powershell
+& "scripts/tools/postman-mcp-validation/Postman-Mcp-Validation.ps1" [opciones]
+```
+
 ## Implementación
 
-La implementación (manifest, config, .bat, .ps1) reside en la carpeta indicada por Cúmulo en **implementation_path_ref**. La cápsula invocará Newman sobre la colección con las variables indicadas y transformará la salida de Newman al formato del contrato.
+La implementación (manifest, config, .bat, .ps1) reside en la carpeta indicada por Cúmulo en **implementation_path_ref**.
 
 ## Diseño MCP-ready (futura integración con Postman MCP)
 

@@ -45,4 +45,26 @@ Recomendado tener ejecutadas antes **prepare-full-env** e **invoke-mysql-seeds**
 
 ## Implementación
 
-**Obligatoria en Rust.** La implementación reside en paths.toolsRustPath (binario `start_api.exe`), copiado a la cápsula en `bin/`. Launcher .bat/.ps1 en la cápsula invoca el .exe en `bin/` si existe; si no, fallback a .ps1. La raíz del path de implementación la indica Cúmulo.
+**Formato:** Ejecutable Rust (`.exe`)  
+**Ubicación:** `scripts/tools/start-api/start_api.exe`  
+**Fuente Rust:** `scripts/tools-rs/src/start_api.rs`
+
+**Estándar:** Solo se generan ejecutables `.exe`. No se deben crear archivos `.ps1`.
+
+### Invocación
+
+```powershell
+# Invocación directa
+& "scripts/tools/start-api/start_api.exe" [opciones]
+
+# Opciones disponibles
+--no-build              # No compilar; solo ejecutar si ya hay build
+--profile <perfil>      # Perfil de ejecución (ej. Development)
+--port <número>         # Puerto del host (override)
+--port-blocked <acción> # Comportamiento si puerto ocupado: fail | kill
+--config-path <path>    # Ruta al JSON de configuración
+--output-path <path>    # Fichero donde escribir resultado JSON
+--output-json           # Emitir resultado JSON por stdout
+```
+
+**Implementación (scripts):** Ruta canónica en Cúmulo → **implementation_path_ref:** `paths.toolCapsules.start-api` (consultar `SddIA/agents/cumulo.json`). La raíz del path de implementación la indica Cúmulo.

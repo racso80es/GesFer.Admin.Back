@@ -36,21 +36,20 @@ Centralizar todas las interacciones con Git necesarias para el cierre de una fea
 
 1. Comprobar que la rama actual no es `master`.
 2. Comprobar estado: cambios sin commitear → commit atómico con mensaje convencional.
-3. **Push y creación del PR:** ejecutar el componente **Push-And-CreatePR.ps1** de la cápsula:
+3. **Push y creación del PR:** ejecutar el componente `bin/push_and_create_pr.exe` de la cápsula:
    - Hace `git push origin <rama_actual>`.
    - Si **GitHub CLI (gh)** está instalado y autenticado, ejecuta `gh pr create --base master|main --head <rama> --title <título> --body "Documentación: <ruta Cúmulo>"`.
    - Si no hay `gh`, muestra la URL para crear el PR manualmente (GitHub) o instrucciones para otro proveedor.
-4. La descripción del PR debe enlazar a la ruta de documentación (Cúmulo) si se pasa el parámetro `-Persist`.
+4. La descripción del PR debe enlazar a la ruta de documentación (Cúmulo) si se pasa el parámetro correspondiente.
 
 #### Fase `post_pr` (después de aceptar/mergear el PR en el remoto)
 
 1. Asegurarse de que el PR ya está mergeado en `master` (o `main`) en el remoto.
-2. **Implementación:** Cápsula paths.skillCapsules[\"finalizar-git\"]: launcher `Merge-To-Master-Cleanup.bat` (o .ps1). Ejecutable por defecto en Rust (paths.skillsRustPath, Cúmulo) en bin/ si existe.
+2. **Implementación:** Cápsula paths.skillCapsules["finalizar-git"]: ejecutable `bin/merge_to_master_cleanup.exe`. Launcher: `Merge-To-Master-Cleanup.bat`.
 
    Desde la raíz del repo:
    ```powershell
    .\scripts\skills\finalizar-git\Merge-To-Master-Cleanup.bat "<rama_actual>" -DeleteRemote
-   # o .ps1: -BranchName "<rama_actual>" -DeleteRemote
    ```
 
 3. **Alternativa manual:** Si el script no se usa, ejecutar en orden: `git checkout master` (o `main`), `git pull origin master`, `git branch -d <rama_actual>`, opcionalmente `git push origin --delete <rama_actual>`, y comprobar con `git status` y `git branch -vv`.
@@ -61,15 +60,45 @@ Centralizar todas las interacciones con Git necesarias para el cierre de una fea
 - **Mensajes convencionales:** Los commits deben seguir Conventional Commits (ej. `feat:`, `fix:`, `chore:`).
 - **Pre-push:** Ejecutar validación local (build/tests) antes de push cuando lo exija el proceso (validacion.json pass antes de finalize).
 
+## Implementación
+
+**Formato:** Ejecutable Rust (`.exe`)  
+**Ubicación:**
+- `scripts/skills/finalizar-git/bin/merge_to_master_cleanup.exe`
+- `scripts/skills/finalizar-git/bin/push_and_create_pr.exe`
+
+**Fuente Rust:** `scripts/skills-rs/src/finalizar_git/`
+
+**Estándar:** Solo se generan ejecutables `.exe`. No se deben crear archivos `.ps1`.
+
 ### Integración con la cápsula
 
-| Fase    | Componente en cápsula | Uso |
-|--------|------------------------|-----|
-| **pre_pr**  | Unificar-Rama.ps1 | Certificar rama (build, documentación, commit). |
-| **pre_pr**  | **Push-And-CreatePR.ps1** | Push de la rama y **crear el PR** (GitHub CLI `gh pr create` si está disponible; si no, URL/instrucciones). Parámetros: `-BranchName`, `-Persist` (ruta paths.featurePath/...), `-Title` opcional. |
-| **post_pr** | Merge-To-Master-Cleanup.bat (.exe en bin/ o .ps1) | Tras aceptar el PR: posicionar en master/main, sincronizar y eliminar la rama mergeada (local y opcionalmente remota). |
+**Cápsula:** paths.skillCapsules["finalizar-git"] (Cúmulo).
 
-Ruta canónica de la cápsula: Cúmulo paths.skillCapsules[\"finalizar-git\"].
+| Fase    | Componente | Ubicación | Uso |
+|--------|------------|-----------|-----|
+| **post_pr** | merge_to_master_cleanup.exe | `bin/merge_to_master_cleanup.exe` | Tras aceptar el PR: posicionar en master/main, sincronizar y eliminar la rama mergeada (local y opcionalmente remota). |
+| **pre_pr**  | push_and_create_pr.exe | `bin/push_and_create_pr.exe` | Push de la rama y **crear el PR** (GitHub CLI `gh pr create` si está disponible; si no, URL/instrucciones). |
+
+### Invocación
+
+**Post-PR (merge y cleanup):**
+```powershell
+# Mediante launcher
+.\scripts\skills\finalizar-git\Merge-To-Master-Cleanup.bat "<rama_actual>" -DeleteRemote
+
+# Invocación directa
+& "scripts/skills/finalizar-git/bin/merge_to_master_cleanup.exe" --branch-name "<rama_actual>" --delete-remote
+```
+
+**Pre-PR (push y crear PR):**
+```powershell
+# Mediante launcher
+.\scripts\skills\finalizar-git\Push-And-CreatePR.bat "<rama_actual>" -Persist "<ruta_docs>"
+
+# Invocación directa
+& "scripts/skills/finalizar-git/bin/push_and_create_pr.exe" --branch-name "<rama_actual>" --persist "<ruta_docs>"
+```
 
 ### Dependencia opcional: GitHub CLI (gh)
 

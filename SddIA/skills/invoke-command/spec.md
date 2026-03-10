@@ -18,19 +18,29 @@ Skill obligatoria para ejecutar comandos de sistema (git, dotnet, npm, pwsh, etc
 - **Compliance:** AC-001 validación sintáctica; registro en docs/diagnostics/{branch}/execution_history.json; alineación Protocolo Racso-Tormentosa.
 - **Scope:** Aplica siempre que el agente ejecute cualquier comando de sistema: sin excepción para git (status, add, commit, push, pull, branch, checkout), dotnet, npm, pwsh.
 
+## Implementación
+
+**Formato:** Ejecutable Rust (`.exe`)  
+**Ubicación:** `scripts/skills/invoke-command/bin/invoke_command.exe`  
+**Fuente Rust:** `scripts/skills-rs/src/invoke_command.rs`
+
+**Estándar:** Solo se generan ejecutables `.exe`. No se deben crear archivos `.ps1`.
+
 ## Integración con la cápsula
 
-**Implementación:** Cápsula en paths.skillCapsules[\"invoke-command\"] (Cúmulo). Launcher en la cápsula: Invoke-Command.bat (bin/invoke_command.exe si existe, si no Invoke-Command.ps1). Ejecutable por defecto en Rust (paths.skillsRustPath (Cúmulo)).
+**Cápsula:** paths.skillCapsules["invoke-command"] (Cúmulo).  
+**Launcher:** `Invoke-Command.bat` en la cápsula; invoca `bin/invoke_command.exe`.
 
-Uso (desde la raíz del repo):
+### Invocación
 
 ```powershell
-.\scripts\skills\invoke-command\Invoke-Command.ps1 -Command 'git status' -Fase Accion
+# Mediante launcher
 .\scripts\skills\invoke-command\Invoke-Command.bat --command "git status" --fase Accion
 .\scripts\skills\invoke-command\Invoke-Command.bat --command-file "docs\features\<nombre>\commit_cmd.txt" --fase Accion
-```
 
-El .bat invoca bin/invoke_command.exe (Rust) si existe; el exe acepta -Command/-Fase y --command-file.
+# Invocación directa del ejecutable
+& "scripts/skills/invoke-command/bin/invoke_command.exe" --command "git status" --fase Accion
+```
 
 **Rutas con --command-file:** (1) Con el .bat, usar **ruta absoluta** al archivo de comando (p. ej. `--command-file "c:\Proyectos\Repo\docs\features\X\commit_cmd.txt"`) para que el exe resuelva bien desde cualquier directorio. (2) Alternativa: ejecutar el exe directamente desde la **raíz del repo**; entonces las rutas relativas (p. ej. `docs\features\X\commit_cmd.txt`) se resuelven correctamente.
 
