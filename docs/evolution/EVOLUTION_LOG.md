@@ -46,6 +46,13 @@ Se eliminaron los archivos `.ps1` (PowerShell scripts) de las cápsulas de skill
 - **Claridad:** Una única implementación por entidad
 - **Estabilidad:** Archivos instaladores (`install.ps1` en `skills-rs` y `tools-rs`) mantenidos correctamente
 
+### Mejora adicional: start-api exitCode 8
+
+- **Herramienta:** start-api
+- **Cambio:** Detección de base de datos (MySQL) no disponible en stderr de la API.
+- **Nuevo exitCode 8:** Mensaje explícito "Base de datos no disponible (MySQL). Ejecute prepare-full-env e invoke-mysql-seeds."
+- **Documentación:** Códigos de salida documentados en spec.md, spec.json y start-api.md.
+
 ### Validaciones
 
 - **Compilación:** Exitosa (0 errores, 0 advertencias)
