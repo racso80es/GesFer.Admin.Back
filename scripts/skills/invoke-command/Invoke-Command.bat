@@ -5,7 +5,7 @@ REM Capsula: paths.skillCapsules.invoke-command (scripts/skills/invoke-command/)
 REM Uso: Invoke-Command.ps1 -Command "git status" -Fase Accion
 
 set "SCRIPT_DIR=%~dp0"
-set "REPO_ROOT=%SCRIPT_DIR%..\..\"
+set "REPO_ROOT=%SCRIPT_DIR%..\..\..\"
 cd /d "%REPO_ROOT%"
 
 set "RUST_EXE=%SCRIPT_DIR%bin\invoke_command.exe"

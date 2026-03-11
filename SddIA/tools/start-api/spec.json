@@ -17,7 +17,18 @@
   "output": {
     "schema_ref": "tools-contract.json output.required_fields y optional_fields",
     "phases_feedback": ["init", "port-check", "port-kill", "build", "launch", "healthcheck", "done", "error"],
-    "success_criterion": "El endpoint health responde adecuadamente (HTTP 200)."
+    "success_criterion": "El endpoint health responde adecuadamente (HTTP 200).",
+    "exit_codes": {
+      "0": "Éxito: health responde 200",
+      "1": "Config no encontrado o inválido",
+      "2": "Puerto ocupado (PortBlocked=fail)",
+      "3": "Puerto ocupado: no se pudo liberar o sigue ocupado",
+      "4": "Directorio API no encontrado",
+      "5": "Build fallido",
+      "6": "Error al lanzar dotnet run",
+      "7": "Health no respondió a tiempo",
+      "8": "Base de datos no disponible (MySQL). Ejecutar prepare-full-env e invoke-mysql-seeds antes."
+    }
   },
   "port_check": "Validar si el puerto está ocupado antes de arrancar; comportamiento según PortBlocked.",
   "depends_on_tools": ["prepare-full-env", "invoke-mysql-seeds"],

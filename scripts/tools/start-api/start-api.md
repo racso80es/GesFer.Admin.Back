@@ -34,6 +34,13 @@ Desde la raíz del repositorio (o con `GESFER_REPO_ROOT` apuntando a la raíz):
 
 JSON según SddIA/tools/tools-contract.json: toolId, exitCode, success, timestamp, message, feedback[], data (url_base, port, pid, healthy), duration_ms. **success = true** solo si el health responde 200.
 
+### Códigos de error relevantes
+
+| exitCode | Situación |
+|----------|-----------|
+| 7 | Health no respondió a tiempo |
+| 8 | **Base de datos (MySQL) no disponible** — ejecute prepare-full-env e invoke-mysql-seeds antes |
+
 ## Implementación
 
 Implementación **obligatoria en Rust** (binario `start_api.exe` en la misma carpeta que el .bat). El launcher .bat invoca el .exe si existe; si no, fallback a Start-Api.ps1.

@@ -1,0 +1,207 @@
+{
+  "spec_version": "1.0.0",
+  "fecha": "2026-03-10",
+  "proceso": "refactorization",
+  "rama": "feat/refactorization-eliminar-ps1-skills-tools",
+  "resumen": "Eliminación de archivos .ps1 en cápsulas de skills y tools, manteniendo únicamente ejecutables .exe (Rust).",
+  "entidades_afectadas": {
+    "skills": [
+      {
+        "skill_id": "iniciar-rama",
+        "capsula": "scripts/skills/iniciar-rama",
+        "ps1_eliminar": ["iniciar-rama/Iniciar-Rama.ps1"],
+        "exe_confirmado": true,
+        "exe_path": "bin/iniciar_rama.exe"
+      },
+      {
+        "skill_id": "finalizar-git",
+        "capsula": "scripts/skills/finalizar-git",
+        "ps1_eliminar": [
+          "finalizar-git/Merge-To-Master-Cleanup.ps1",
+          "finalizar-git/Push-And-CreatePR.ps1",
+          "finalizar-git/Unificar-Rama.ps1"
+        ],
+        "exe_confirmado": true,
+        "exe_paths": [
+          "bin/merge_to_master_cleanup.exe",
+          "bin/push_and_create_pr.exe"
+        ]
+      },
+      {
+        "skill_id": "invoke-command",
+        "capsula": "scripts/skills/invoke-command",
+        "ps1_eliminar": ["invoke-command/Invoke-Command.ps1"],
+        "exe_confirmado": true,
+        "exe_path": "bin/invoke_command.exe"
+      }
+    ],
+    "skills_legacy_root": [
+      "scripts/skills/Iniciar-Rama.ps1",
+      "scripts/skills/Invoke-Command.ps1",
+      "scripts/skills/Merge-To-Master-Cleanup.ps1",
+      "scripts/skills/Unificar-Rama.ps1"
+    ],
+    "tools": [
+      {
+        "tool_id": "invoke-mysql-seeds",
+        "capsula": "scripts/tools/invoke-mysql-seeds",
+        "ps1_eliminar": ["invoke-mysql-seeds/Invoke-MySqlSeeds.ps1"],
+        "exe_confirmado": true,
+        "exe_path": "bin/invoke_mysql_seeds.exe"
+      },
+      {
+        "tool_id": "prepare-full-env",
+        "capsula": "scripts/tools/prepare-full-env",
+        "ps1_eliminar": ["prepare-full-env/Prepare-FullEnv.ps1"],
+        "exe_confirmado": true,
+        "exe_path": "bin/prepare_full_env.exe"
+      },
+      {
+        "tool_id": "start-api",
+        "capsula": "scripts/tools/start-api",
+        "ps1_eliminar": ["start-api/Start-Api.ps1"],
+        "exe_confirmado": true,
+        "exe_path": "start_api.exe"
+      },
+      {
+        "tool_id": "postman-mcp-validation",
+        "capsula": "scripts/tools/postman-mcp-validation",
+        "ps1_eliminar": ["postman-mcp-validation/Postman-Mcp-Validation.ps1"],
+        "exe_confirmado": false,
+        "nota": "Requiere verificación de existencia de .exe antes de eliminación"
+      },
+      {
+        "tool_id": "run-tests-local",
+        "capsula": "scripts/tools/run-tests-local",
+        "ps1_eliminar": ["run-tests-local/Run-Tests-Local.ps1"],
+        "exe_confirmado": false,
+        "nota": "Requiere verificación de existencia de .exe antes de eliminación"
+      }
+    ]
+  },
+  "acciones_requeridas": [
+    {
+      "fase": "verificacion",
+      "acciones": [
+        {
+          "id": "4.1.1",
+          "descripcion": "Verificar existencia de .exe para postman-mcp-validation y run-tests-local",
+          "criterio": "Si existe .exe, proceder con eliminación. Si no existe, documentar como pendiente."
+        }
+      ]
+    },
+    {
+      "fase": "eliminacion",
+      "acciones": [
+        {
+          "id": "4.2.1",
+          "descripcion": "Eliminar archivos PS1 de skills",
+          "archivos_count": 9
+        },
+        {
+          "id": "4.2.2",
+          "descripcion": "Eliminar archivos PS1 de tools (solo si existe EXE)",
+          "archivos_confirmados": 3,
+          "archivos_pendientes": 2
+        }
+      ]
+    },
+    {
+      "fase": "actualizacion_specs",
+      "acciones": [
+        {
+          "id": "4.3.1",
+          "descripcion": "Actualizar specs de skills",
+          "archivos": [
+            "SddIA/skills/iniciar-rama/spec.md",
+            "SddIA/skills/finalizar-git/spec.md",
+            "SddIA/skills/invoke-command/spec.md"
+          ]
+        },
+        {
+          "id": "4.3.2",
+          "descripcion": "Actualizar specs de tools",
+          "archivos": [
+            "SddIA/tools/invoke-mysql-seeds/spec.md",
+            "SddIA/tools/prepare-full-env/spec.md",
+            "SddIA/tools/start-api/spec.md",
+            "SddIA/tools/postman-mcp-validation/spec.md",
+            "SddIA/tools/run-tests-local/spec.md"
+          ]
+        },
+        {
+          "id": "4.3.3",
+          "descripcion": "Actualizar contrato de skills",
+          "archivo": "SddIA/skills/skills-contract.json"
+        },
+        {
+          "id": "4.3.4",
+          "descripcion": "Actualizar contrato de tools",
+          "archivo": "SddIA/tools/tools-contract.json"
+        }
+      ]
+    },
+    {
+      "fase": "actualizacion_procesos",
+      "acciones": [
+        {
+          "id": "4.4.1",
+          "descripcion": "Actualizar proceso create-tool",
+          "archivo": "SddIA/process/create-tool/spec.md"
+        },
+        {
+          "id": "4.4.2",
+          "descripcion": "Actualizar proceso create-skill (si existe)",
+          "opcional": true
+        }
+      ]
+    }
+  ],
+  "criterios_aceptacion": {
+    "eliminacion": {
+      "ps1_eliminados": true,
+      "instaladores_intactos": true
+    },
+    "especificaciones": {
+      "skills_actualizadas": true,
+      "tools_actualizadas": true,
+      "contratos_actualizados": true
+    },
+    "procesos": {
+      "create_tool_actualizado": true,
+      "create_skill_actualizado": true
+    },
+    "funcionamiento": {
+      "compilacion_exitosa": true,
+      "skills_ejecutables": true,
+      "tools_ejecutables": true
+    }
+  },
+  "metricas": {
+    "archivos_eliminados": {
+      "skills": 9,
+      "tools": "3-5 (pendiente verificación)",
+      "total_estimado": "12-14"
+    },
+    "specs_actualizadas": {
+      "skills": 3,
+      "tools": 5,
+      "contratos": 2,
+      "procesos": 1
+    }
+  },
+  "riesgos": [
+    {
+      "descripcion": "Tools sin .exe quedan inoperativas",
+      "probabilidad": "Media",
+      "impacto": "Alto",
+      "mitigacion": "Verificar existencia de .exe antes de eliminar .ps1"
+    },
+    {
+      "descripcion": "Referencias a .ps1 en documentación",
+      "probabilidad": "Baja",
+      "impacto": "Bajo",
+      "mitigacion": "Búsqueda global de referencias tras eliminación"
+    }
+  ]
+}

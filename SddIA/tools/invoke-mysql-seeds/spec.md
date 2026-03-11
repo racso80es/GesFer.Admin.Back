@@ -28,4 +28,24 @@ init → mysql → migrations → seeds → done (o error).
 
 ## Implementación
 
-La implementación técnica (scripts PowerShell, .bat, config, manifest, opcional binario Rust) reside en la carpeta cuya ruta se obtiene de Cúmulo mediante **implementation_path_ref**. No se duplica la ruta aquí; la raíz del path la indica Cúmulo.
+**Formato:** Ejecutable Rust (`.exe`)  
+**Ubicación:** `scripts/tools/invoke-mysql-seeds/bin/invoke_mysql_seeds.exe`  
+**Fuente Rust:** `scripts/tools-rs/src/invoke_mysql_seeds.rs`
+
+**Estándar:** Solo se generan ejecutables `.exe`. No se deben crear archivos `.ps1`.
+
+### Invocación
+
+```powershell
+# Invocación directa
+& "scripts/tools/invoke-mysql-seeds/bin/invoke_mysql_seeds.exe" [opciones]
+
+# Opciones disponibles
+--skip-migrations       # No ejecutar migraciones EF Core
+--skip-seeds           # No ejecutar seeds
+--config-path <path>   # Ruta al JSON de configuración
+--output-path <path>   # Fichero donde escribir resultado JSON
+--output-json          # Emitir resultado JSON por stdout
+```
+
+**Implementación (scripts):** Ruta canónica en Cúmulo → **implementation_path_ref:** `paths.toolCapsules.invoke-mysql-seeds` (consultar `SddIA/agents/cumulo.json`). La raíz del path de implementación la indica Cúmulo.

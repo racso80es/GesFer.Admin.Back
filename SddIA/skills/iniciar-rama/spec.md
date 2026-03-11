@@ -45,16 +45,29 @@ Encargarse del **inicio de una acción**: crear una rama nueva adecuada (feat/ o
 - **Nunca trabajar en master/main:** El inicio de una acción debe dejar el repo en una rama feat/ o fix/.
 - **Troncal actualizada:** La nueva rama se crea desde la troncal ya actualizada con origin para evitar desvíos innecesarios.
 
+## Implementación
+
+**Formato:** Ejecutable Rust (`.exe`)  
+**Ubicación:** `scripts/skills/iniciar-rama/bin/iniciar_rama.exe`  
+**Fuente Rust:** `scripts/skills-rs/src/iniciar_rama.rs`  
+
+**Estándar:** Solo se generan ejecutables `.exe`. No se deben crear archivos `.ps1`.
+
 ### Integración con la cápsula
 
-**Implementación:** Cápsula en paths.skillCapsules[\"iniciar-rama\"] (Cúmulo). Launcher: `Iniciar-Rama.bat` en la cápsula; invoca `bin/iniciar_rama.exe` si existe, si no `Iniciar-Rama.ps1`. Ejecutable por defecto en Rust (paths.skillsRustPath, Cúmulo).
+**Cápsula:** paths.skillCapsules["iniciar-rama"] (Cúmulo).  
+**Launcher:** `Iniciar-Rama.bat` en la cápsula; invoca `bin/iniciar_rama.exe`.
 
 Desde la raíz del repo (ejemplo con launcher en cápsula):
 
 ```powershell
 .\scripts\skills\iniciar-rama\Iniciar-Rama.bat feat mi-feature
-# o vía PowerShell fallback:
-.\scripts\skills\iniciar-rama\Iniciar-Rama.ps1 -BranchType feat -BranchName "mi-feature"
+```
+
+### Invocación directa del ejecutable
+
+```powershell
+& "scripts/skills/iniciar-rama/bin/iniciar_rama.exe" --branch-type feat --branch-name "mi-feature"
 ```
 
 ### Consumidores

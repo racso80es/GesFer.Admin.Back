@@ -1,8 +1,11 @@
 //! Herramienta start-api en Rust (contrato tools).
 //! Valida si el puerto está ocupado; opción fail/kill. Levanta la API, comprueba health (éxito = health 200).
+//! Detecta errores de base de datos (MySQL no disponible) en la salida de la API.
 
+use std::io::{BufRead, BufReader};
 use std::net::TcpListener;
-use std::process::Command;
+use std::process::{Command, Stdio};
+use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::{Duration, Instant};
 
@@ -174,7 +177,7 @@ fn main() {
         feedback.push(FeedbackEntry::info("build", "NoBuild: omitiendo compilación"));
     }
 
-    // 3. Lanzar API en segundo plano
+    // 3. Lanzar API en segundo plano (capturar stderr para detectar errores de BD)
     feedback.push(FeedbackEntry::info(
         "launch",
         &format!("Levantando API en {} (Profile: {}, Port: {})", api_dir.display(), profile, port),
@@ -184,6 +187,8 @@ fn main() {
         .current_dir(&api_dir)
         .env("ASPNETCORE_URLS", format!("http://127.0.0.1:{}", port))
         .env("ASPNETCORE_ENVIRONMENT", &profile)
+        .stdout(Stdio::null())
+        .stderr(Stdio::piped())
         .spawn()
     {
         Ok(c) => c,
@@ -196,13 +201,26 @@ fn main() {
     let pid = child.id();
     feedback.push(FeedbackEntry::info("launch", &format!("API iniciada con PID {}", pid)));
 
-    // Asegurar que al salir (éxito o panic) no dejamos el proceso huérfano sin avisar; el contrato es "levantar" y devolver resultado, el proceso sigue en background.
     let _ = child.stdin.take();
+    let stderr_accum: Arc<Mutex<String>> = Arc::new(Mutex::new(String::new()));
+    if let Some(stderr) = child.stderr.take() {
+        let acc = Arc::clone(&stderr_accum);
+        thread::spawn(move || {
+            let reader = BufReader::new(stderr);
+            for line in reader.lines().filter_map(Result::ok) {
+                if let Ok(mut s) = acc.lock() {
+                    s.push_str(&line);
+                    s.push('\n');
+                }
+            }
+        });
+    }
 
     let timeout_secs = config.health_check_timeout_seconds.unwrap_or(30);
     let step = Duration::from_secs(2);
     let deadline = Instant::now() + Duration::from_secs(timeout_secs);
     let mut healthy = false;
+    let mut db_unavailable = false;
     let client = reqwest::blocking::Client::builder()
         .timeout(Duration::from_secs(5))
         .build()
@@ -210,6 +228,18 @@ fn main() {
 
     while Instant::now() < deadline {
         thread::sleep(step);
+
+        // Comprobar si la API reporta error de base de datos en stderr
+        if let Ok(guard) = stderr_accum.lock() {
+            let log = guard.as_str();
+            if log.contains("Unable to connect to any of the specified MySQL hosts")
+                || log.contains("MySqlConnector.MySqlException")
+            {
+                db_unavailable = true;
+                break;
+            }
+        }
+
         if let Ok(resp) = client.get(&health_url).send() {
             if resp.status().as_u16() == 200 {
                 healthy = true;
@@ -221,6 +251,36 @@ fn main() {
             "healthcheck",
             &format!("Esperando salud ({}/{} s)...", Instant::now().duration_since(start).as_secs(), timeout_secs),
         ));
+    }
+
+    if db_unavailable {
+        feedback.push(FeedbackEntry::error(
+            "healthcheck",
+            "Base de datos (MySQL) no disponible. La API no puede completar el arranque.",
+            None,
+        ));
+        feedback.push(FeedbackEntry::info(
+            "healthcheck",
+            "Ejecute prepare-full-env (Docker/MySQL) e invoke-mysql-seeds antes de start-api.",
+        ));
+        let data = serde_json::json!({
+            "url_base": health_url,
+            "port": port,
+            "profile": profile,
+            "pid": pid,
+            "healthy": false,
+            "error_type": "database_unavailable"
+        });
+        emit_result(
+            false,
+            8,
+            "Base de datos no disponible (MySQL). Ejecute prepare-full-env e invoke-mysql-seeds.",
+            feedback,
+            Some(data),
+            start,
+            &args,
+        );
+        std::process::exit(8);
     }
 
     if !healthy {

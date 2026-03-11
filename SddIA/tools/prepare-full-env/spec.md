@@ -29,4 +29,25 @@ init → docker → mysql → api → clients → done (o error).
 
 ## Implementación
 
-La implementación técnica (scripts PowerShell, .bat, config, manifest, opcional binario Rust) reside en la carpeta cuya ruta se obtiene de Cúmulo mediante **implementation_path_ref**. No se duplica la ruta aquí; la raíz del path la indica Cúmulo.
+**Formato:** Ejecutable Rust (`.exe`)  
+**Ubicación:** `scripts/tools/prepare-full-env/bin/prepare_full_env.exe`  
+**Fuente Rust:** `scripts/tools-rs/src/prepare_full_env.rs`
+
+**Estándar:** Solo se generan ejecutables `.exe`. No se deben crear archivos `.ps1`.
+
+### Invocación
+
+```powershell
+# Invocación directa
+& "scripts/tools/prepare-full-env/bin/prepare_full_env.exe" [opciones]
+
+# Opciones disponibles
+--docker-only          # Solo levantar Docker (DB, cache, Adminer)
+--start-api           # Además levantar la Admin API en local
+--no-docker           # No levantar Docker
+--config-path <path>  # Ruta al JSON de configuración
+--output-path <path>  # Fichero donde escribir resultado JSON
+--output-json         # Emitir resultado JSON por stdout
+```
+
+**Implementación (scripts):** Ruta canónica en Cúmulo → **implementation_path_ref:** `paths.toolCapsules.prepare-full-env` (consultar `SddIA/agents/cumulo.json`). La raíz del path de implementación la indica Cúmulo.

@@ -31,6 +31,22 @@ Antes de levantar la API se comprueba si el puerto está en uso. Si está ocupad
 - **PortBlocked=fail:** se emite error y se termina con exitCode distinto de 0.
 - **PortBlocked=kill:** se intenta identificar y cerrar el proceso que usa el puerto (en Windows: netstat + taskkill); tras liberar el puerto se continúa con el arranque.
 
+## Códigos de salida (exitCode)
+
+| exitCode | Situación | Acción recomendada |
+|----------|-----------|---------------------|
+| 0 | Éxito: health responde 200 | — |
+| 1 | Config no encontrado o inválido | Verificar ruta de start-api-config.json |
+| 2 | Puerto ocupado (PortBlocked=fail) | Usar --port-blocked kill o cambiar puerto |
+| 3 | Puerto ocupado: no se pudo liberar o sigue ocupado | Liberar puerto manualmente |
+| 4 | Directorio API no encontrado | Verificar apiWorkingDir en config |
+| 5 | Build fallido | Revisar compilación dotnet |
+| 6 | Error al lanzar dotnet run | Verificar .NET SDK instalado |
+| 7 | Health no respondió a tiempo | Revisar logs de la API; puede haber otro problema |
+| 8 | **Base de datos no disponible (MySQL)** | Ejecutar **prepare-full-env** e **invoke-mysql-seeds** antes de start-api |
+
+La herramienta detecta en la salida de la API errores de conexión a MySQL (p. ej. `Unable to connect to any of the specified MySQL hosts`, `MySqlConnector.MySqlException`) y devuelve exitCode 8 con mensaje explícito y sugerencia de dependencias.
+
 ## Salida
 
 Cumple `SddIA/tools/tools-contract.json`: objeto JSON con toolId, exitCode, success, timestamp, message, feedback[], data (url_base, pid, port, healthy), duration_ms.
@@ -45,4 +61,26 @@ Recomendado tener ejecutadas antes **prepare-full-env** e **invoke-mysql-seeds**
 
 ## Implementación
 
-**Obligatoria en Rust.** La implementación reside en paths.toolsRustPath (binario `start_api.exe`), copiado a la cápsula en `bin/`. Launcher .bat/.ps1 en la cápsula invoca el .exe en `bin/` si existe; si no, fallback a .ps1. La raíz del path de implementación la indica Cúmulo.
+**Formato:** Ejecutable Rust (`.exe`)  
+**Ubicación:** `scripts/tools/start-api/start_api.exe`  
+**Fuente Rust:** `scripts/tools-rs/src/start_api.rs`
+
+**Estándar:** Solo se generan ejecutables `.exe`. No se deben crear archivos `.ps1`.
+
+### Invocación
+
+```powershell
+# Invocación directa
+& "scripts/tools/start-api/start_api.exe" [opciones]
+
+# Opciones disponibles
+--no-build              # No compilar; solo ejecutar si ya hay build
+--profile <perfil>      # Perfil de ejecución (ej. Development)
+--port <número>         # Puerto del host (override)
+--port-blocked <acción> # Comportamiento si puerto ocupado: fail | kill
+--config-path <path>    # Ruta al JSON de configuración
+--output-path <path>    # Fichero donde escribir resultado JSON
+--output-json           # Emitir resultado JSON por stdout
+```
+
+**Implementación (scripts):** Ruta canónica en Cúmulo → **implementation_path_ref:** `paths.toolCapsules.start-api` (consultar `SddIA/agents/cumulo.json`). La raíz del path de implementación la indica Cúmulo.

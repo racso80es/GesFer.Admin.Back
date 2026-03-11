@@ -4,6 +4,70 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+## 2026-03-10 - Refactorización: Eliminación de PS1 en Skills y Tools (feat/refactorization-eliminar-ps1-skills-tools)
+
+**Rama:** feat/refactorization-eliminar-ps1-skills-tools  
+**Tipo:** Refactorización técnica  
+**Documentación:** `docs/features/refactorization-eliminar-ps1-skills-tools/`
+
+### Resumen
+
+Se eliminaron los archivos `.ps1` (PowerShell scripts) de las cápsulas de skills y tools, manteniendo únicamente los ejecutables `.exe` (Rust) como implementación estándar. Se actualizaron especificaciones, contratos y procesos para documentar el estándar `.exe` en futuras generaciones.
+
+### Archivos Eliminados
+
+- **Skills:** 9 archivos `.ps1` (5 de cápsulas + 4 legacy en raíz)
+- **Tools:** 3 archivos `.ps1` (solo los que tenían `.exe` confirmado)
+- **Total:** 12 archivos
+
+### Entidades Actualizadas
+
+**Especificaciones:**
+- **Skills:** `iniciar-rama`, `finalizar-git`, `invoke-command` — Agregada sección "Implementación" con estándar `.exe`
+- **Tools migradas:** `invoke-mysql-seeds`, `prepare-full-env`, `start-api` — Agregada sección "Implementación" con estándar `.exe`
+- **Tools pendientes:** `postman-mcp-validation`, `run-tests-local` — Documentadas como "pendiente de migración a Rust"
+
+**Contratos:**
+- `SddIA/skills/skills-contract.json` — Campo `implementation` agregado; `.exe` OBLIGATORIO; `.ps1` eliminado de artefactos requeridos
+- `SddIA/tools/tools-contract.json` — Campo `implementation` agregado; `.exe` OBLIGATORIO para nuevas herramientas
+
+**Procesos:**
+- `SddIA/process/create-tool/spec.md` — Agregada sección "Implementación de la Herramienta" con estándar `.exe`
+
+### Pendientes de Migración
+
+- **Tools sin `.exe`:** `postman-mcp-validation`, `run-tests-local`
+- **Acción:** Documentadas como "pendiente de migración a Rust" en sus specs
+
+### Justificación
+
+- **Alineación con constitución:** La implementación estándar es Rust (`.exe`)
+- **Reducción de deuda técnica:** Eliminación de duplicidad
+- **Claridad:** Una única implementación por entidad
+- **Estabilidad:** Archivos instaladores (`install.ps1` en `skills-rs` y `tools-rs`) mantenidos correctamente
+
+### Mejora adicional: start-api exitCode 8
+
+- **Herramienta:** start-api
+- **Cambio:** Detección de base de datos (MySQL) no disponible en stderr de la API.
+- **Nuevo exitCode 8:** Mensaje explícito "Base de datos no disponible (MySQL). Ejecute prepare-full-env e invoke-mysql-seeds."
+- **Documentación:** Códigos de salida documentados en spec.md, spec.json y start-api.md.
+
+### Validaciones
+
+- **Compilación:** Exitosa (0 errores, 0 advertencias)
+- **Skills ejecutables:** Todas funcionales
+- **Tools ejecutables:** Todas verificadas
+
+### Referencias
+
+- Spec: `docs/features/refactorization-eliminar-ps1-skills-tools/spec.md`
+- Objectives: `docs/features/refactorization-eliminar-ps1-skills-tools/objectives.md`
+- Implementation: `docs/features/refactorization-eliminar-ps1-skills-tools/implementation.md`
+- Validación: `docs/features/refactorization-eliminar-ps1-skills-tools/validacion.json`
+
+---
+
 ## 2026-03-10 — Proceso audit-tool con caso práctico start-api (feat/create-process-audit-tool)
 
 **Rama:** feat/create-process-audit-tool  
