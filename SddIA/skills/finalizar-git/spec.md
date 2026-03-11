@@ -98,7 +98,13 @@ Centralizar todas las interacciones con Git necesarias para el cierre de una fea
 
 # Invocación directa
 & "scripts/skills/finalizar-git/bin/push_and_create_pr.exe" --branch-name "<rama_actual>" --persist "<ruta_docs>"
+& "scripts/skills/finalizar-git/bin/push_and_create_pr.exe" --branch-name "<rama>" --body "Descripción del PR"
+& "scripts/skills/finalizar-git/bin/push_and_create_pr.exe" --branch-name "<rama>" --body-file "docs/features/X/pr_body.md"
 ```
+
+**Parámetros de body del PR (precedencia: body-file > body > persist > rama):**
+- **--body:** Descripción directa del PR (evita fichero .txt).
+- **--body-file:** Ruta a fichero con el body (para cuerpos largos; evita límites de línea de comandos).
 
 ### Dependencia opcional: GitHub CLI (gh)
 

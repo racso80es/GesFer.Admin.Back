@@ -1,0 +1,13 @@
+{
+  "task_id": "create-skill-invoke-commit",
+  "clarify_version": "1.0.0",
+  "decisions": {
+    "C1": "solo_commit",
+    "C2": "body_and_body_file",
+    "C3": "lista_separada_por_coma",
+    "C4": "invocacion_directa_si",
+    "C5": "invoke-commit"
+  },
+  "pending_questions": [],
+  "status": "resolved"
+}

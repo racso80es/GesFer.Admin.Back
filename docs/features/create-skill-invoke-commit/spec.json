@@ -1,0 +1,39 @@
+{
+  "task_id": "create-skill-invoke-commit",
+  "skill_id": "invoke-commit",
+  "branch": "feat/create-skill-invoke-commit",
+  "persist_ref": "paths.featurePath/create-skill-invoke-commit",
+  "objective": "Crear skill invoke-commit para operaciones de commit con parámetros directos, sin ficheros .txt.",
+  "deliverables": {
+    "definition": "paths.skillsDefinitionPath/invoke-commit/ (spec.md, spec.json)",
+    "capsule": "paths.skillCapsules.invoke-commit",
+    "implementation": "scripts/skills-rs/src/bin/invoke_commit.rs",
+    "cumulo_entry": "paths.skillCapsules.invoke-commit en cumulo.paths.json"
+  },
+  "inputs_commit": {
+    "message": "string (obligatorio). Mensaje del commit.",
+    "files": "string (opcional). Rutas separadas por coma (ej. a.md,b.json).",
+    "all": "flag (opcional). git add -A.",
+    "scope": "string (opcional). Scope Conventional Commits.",
+    "type": "string (opcional). feat|fix|chore|docs|refactor. Default: feat.",
+    "fase": "string (opcional). Para telemetría.",
+    "contexto": "string (opcional). Default: GesFer."
+  },
+  "decisions": {
+    "C1": "solo_commit",
+    "C2": "body_and_body_file",
+    "C3": "files_comma_separated",
+    "C4": "invoke_commit_direct",
+    "C5": "invoke-commit"
+  },
+  "deliverable_push_and_create_pr": {
+    "params": ["--body", "--body-file"],
+    "precedence": "body-file > body > persist > rama"
+  },
+  "acceptance_criteria": [
+    "Commit con --message y --files (comma-separated) o --all sin fichero.",
+    "Conventional Commits con --type y --scope.",
+    "Registro en execution_history.json.",
+    "Cumple skills-contract.json."
+  ]
+}

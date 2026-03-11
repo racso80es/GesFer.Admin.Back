@@ -1,14 +1,17 @@
 //! Skill finalizar-git (pre_pr) en Rust (contrato skills).
 //! Push de la rama y creación del PR (gh pr create si está disponible).
-//! Uso: push_and_create_pr.exe [--persist <ruta>] [--branch <rama>] [--title <titulo>] [--base main|master]
+//! Uso: push_and_create_pr.exe [--persist <ruta>] [--body <texto>] [--body-file <ruta>] [--branch <rama>] [--title <titulo>] [--base main|master]
 
 use std::process::Command;
 use std::env;
+use std::fs;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
     let mut branch_name = String::new();
     let mut persist = String::new();
+    let mut body = String::new();
+    let mut body_file = String::new();
     let mut title = String::new();
     let mut base_branch = String::new();
     let mut i = 1;
@@ -20,6 +23,16 @@ fn main() {
         }
         if (args[i] == "--persist" || args[i] == "-Persist") && i + 1 < args.len() {
             persist = args[i + 1].clone();
+            i += 2;
+            continue;
+        }
+        if (args[i] == "--body" || args[i] == "-Body") && i + 1 < args.len() {
+            body = args[i + 1].clone();
+            i += 2;
+            continue;
+        }
+        if (args[i] == "--body-file" || args[i] == "-BodyFile") && i + 1 < args.len() {
+            body_file = args[i + 1].clone();
             i += 2;
             continue;
         }
@@ -72,15 +85,29 @@ fn main() {
     }
     println!("Push OK.");
 
-    let body = if persist.is_empty() {
-        format!("Rama: {}", branch_name)
-    } else {
+    let pr_body = if !body_file.is_empty() {
+        let from_file = fs::read_to_string(body_file.trim_matches('"').trim())
+            .unwrap_or_else(|_| String::new())
+            .trim()
+            .to_string();
+        if from_file.is_empty() && !persist.is_empty() {
+            format!("Documentación: ``{}``", persist)
+        } else if from_file.is_empty() {
+            format!("Rama: {}", branch_name)
+        } else {
+            from_file
+        }
+    } else if !body.is_empty() {
+        body
+    } else if !persist.is_empty() {
         format!("Documentación: ``{}``", persist)
+    } else {
+        format!("Rama: {}", branch_name)
     };
     let pr_title = if title.is_empty() { branch_name.clone() } else { title };
 
     println!("[2/2] Creando PR con GitHub CLI (gh)...");
-    if run("gh", &["pr", "create", "--base", &base_branch, "--head", &branch_name, "--title", &pr_title, "--body", &body]) {
+    if run("gh", &["pr", "create", "--base", &base_branch, "--head", &branch_name, "--title", &pr_title, "--body", &pr_body]) {
         println!("PR creado correctamente.");
         std::process::exit(0);
     }
@@ -93,7 +120,7 @@ fn main() {
                 let create_url = format!("https://github.com/{}/compare/{}...{}?expand=1", repo, base_branch, branch_name);
                 println!("Crear PR manualmente: {}", create_url);
                 println!("Título sugerido: {}", pr_title);
-                println!("Body: {}", body);
+                println!("Body: {}", pr_body);
             }
         }
     }

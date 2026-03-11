@@ -1,0 +1,20 @@
+{
+  "skill_id": "invoke-commit",
+  "name": "Operaciones de Commit",
+  "description": "Centraliza git add + git commit con parámetros directos. Sin ficheros .txt intermedios. Consumible por acciones, procesos y flujos SddIA.",
+  "implementation_path_ref": "paths.skillCapsules.invoke-commit",
+  "contract_ref": "SddIA/skills/skills-contract.json",
+  "parameters": {
+    "message": { "required": true, "aliases": ["-m"], "description": "Mensaje del commit." },
+    "files": { "required": false, "description": "Rutas separadas por coma." },
+    "all": { "required": false, "aliases": ["-a"], "type": "flag", "description": "git add -A." },
+    "type": { "required": false, "default": "feat", "enum": ["feat", "fix", "chore", "docs", "refactor"] },
+    "scope": { "required": false, "description": "Scope Conventional Commits." },
+    "fase": { "required": false, "default": "Accion" },
+    "contexto": { "required": false, "default": "GesFer" }
+  },
+  "rules": [
+    "Para commits, invocar invoke-commit directamente; no es necesario invoke-command.",
+    "Registro en docs/diagnostics/{branch}/execution_history.json."
+  ]
+}

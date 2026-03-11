@@ -1,0 +1,12 @@
+{
+  "task_id": "create-skill-invoke-commit",
+  "plan_version": "1.0.0",
+  "phases": [
+    { "id": "1", "name": "Definición SddIA", "items": ["spec.md", "spec.json en SddIA/skills/invoke-commit/"] },
+    { "id": "2", "name": "Implementación invoke_commit", "items": ["invoke_commit.rs", "Cargo.toml"] },
+    { "id": "3", "name": "Cápsula invoke-commit", "items": ["Invoke-Commit.bat", "manifest.json", "invoke-commit.md"] },
+    { "id": "4", "name": "Extensión push_and_create_pr", "items": ["--body", "--body-file"] },
+    { "id": "5", "name": "Integración", "items": ["install.ps1", "cumulo.paths.json", "skills index.json"] },
+    { "id": "6", "name": "Validación", "items": ["build", "test invoke_commit", "test push_and_create_pr"] }
+  ]
+}

@@ -30,3 +30,7 @@ path = "src/bin/verify_pr_protocol.rs"
 [[bin]]
 name = "push_and_create_pr"
 path = "src/bin/push_and_create_pr.rs"
+
+[[bin]]
+name = "invoke_commit"
+path = "src/bin/invoke_commit.rs"

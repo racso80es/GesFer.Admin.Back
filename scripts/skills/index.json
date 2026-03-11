@@ -25,6 +25,13 @@
       "manifest": "invoke-command/manifest.json",
       "launcher_bat": "invoke-command/Invoke-Command.bat",
       "description": "Interceptor de comandos de sistema (git, dotnet, npm, pwsh). Telemetría y registro por rama."
+    },
+    {
+      "skillId": "invoke-commit",
+      "path": "invoke-commit/",
+      "manifest": "invoke-commit/manifest.json",
+      "launcher_bat": "invoke-commit/Invoke-Commit.bat",
+      "description": "Operaciones de commit con parámetros directos (--message, --files, --all). Sin ficheros .txt."
     }
   ]
 }
