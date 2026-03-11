@@ -1,0 +1,8 @@
+{
+  "id": "correccion-auditorias-20260311",
+  "type": "feature",
+  "security_model": {
+    "karma_token": "SddIA/Tokens/Karma2Token.json"
+  },
+  "description": "Registro de auditoría sin hallazgos críticos."
+}
