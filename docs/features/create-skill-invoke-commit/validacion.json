@@ -1,0 +1,23 @@
+{
+  "validacion_version": "1.0.0",
+  "fecha": "2026-03-11",
+  "proceso": "feature",
+  "rama": "feat/create-skill-invoke-commit",
+  "estado": "aprobado",
+  "criterios_aceptacion": {
+    "invoke_commit": {
+      "commit_sin_fichero": { "cumplido": true, "evidencia": "invoke_commit.rs con --message, --files, --all" },
+      "conventional_commits": { "cumplido": true, "evidencia": "--type, --scope" },
+      "telemetria": { "cumplido": true, "evidencia": "execution_history.json" },
+      "capsula": { "cumplido": true, "evidencia": "scripts/skills/invoke-commit/" }
+    },
+    "push_and_create_pr": {
+      "body_param": { "cumplido": true, "evidencia": "--body en push_and_create_pr.rs" },
+      "body_file_param": { "cumplido": true, "evidencia": "--body-file en push_and_create_pr.rs" },
+      "precedencia": { "cumplido": true, "evidencia": "body-file > body > persist > rama" }
+    }
+  },
+  "compilacion": "exitosa",
+  "prueba_invoke_commit": "exitosa (feat: test invoke-commit)",
+  "listo_para_pr": true
+}

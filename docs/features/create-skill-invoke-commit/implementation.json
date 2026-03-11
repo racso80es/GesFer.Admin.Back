@@ -1,0 +1,17 @@
+{
+  "task_id": "create-skill-invoke-commit",
+  "implementation_version": "1.0.0",
+  "touchpoints": [
+    { "path": "SddIA/skills/invoke-commit/spec.md", "action": "create" },
+    { "path": "SddIA/skills/invoke-commit/spec.json", "action": "create" },
+    { "path": "scripts/skills-rs/src/bin/invoke_commit.rs", "action": "create" },
+    { "path": "scripts/skills-rs/Cargo.toml", "action": "modify" },
+    { "path": "scripts/skills/invoke-commit/Invoke-Commit.bat", "action": "create" },
+    { "path": "scripts/skills/invoke-commit/manifest.json", "action": "create" },
+    { "path": "scripts/skills/invoke-commit/invoke-commit.md", "action": "create" },
+    { "path": "scripts/skills-rs/src/bin/push_and_create_pr.rs", "action": "modify" },
+    { "path": "scripts/skills-rs/install.ps1", "action": "modify" },
+    { "path": "SddIA/agents/cumulo.paths.json", "action": "modify" },
+    { "path": "scripts/skills/index.json", "action": "modify" }
+  ]
+}

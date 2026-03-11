@@ -39,7 +39,8 @@ $capsules = @(
     @{ exe = "iniciar_rama"; capsule = "iniciar-rama" },
     @{ exe = "merge_to_master_cleanup"; capsule = "finalizar-git" },
     @{ exe = "invoke_command"; capsule = "invoke-command" },
-    @{ exe = "push_and_create_pr"; capsule = "finalizar-git" }
+    @{ exe = "push_and_create_pr"; capsule = "finalizar-git" },
+    @{ exe = "invoke_commit"; capsule = "invoke-commit" }
 )
 foreach ($cap in $capsules) {
     $src = Join-Path $releaseDir "$($cap.exe).exe"

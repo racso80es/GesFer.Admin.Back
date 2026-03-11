@@ -25,6 +25,7 @@
 | iniciar-rama | Crea rama feat/ o fix/ actualizada con master/main. Inicio de acción. | paths.skillCapsules.iniciar-rama |
 | finalizar-git | Aceptar PR a master, unificar, eliminar rama, volver a master. | paths.skillCapsules.finalizar-git |
 | invoke-command | Interceptor de comandos de sistema (git, dotnet, npm, pwsh). | paths.skillCapsules.invoke-command |
+| invoke-commit | Operaciones de commit con parámetros directos (--message, --files, --all). Sin ficheros .txt. | paths.skillCapsules.invoke-commit |
 | git-operations | Uso seguro de Git (ramas feat/fix, commits convencionales). | — |
 | documentation | Estándares SSOT y gestión de documentación. | — |
 | filesystem-ops | Operaciones de archivo seguras (PowerShell). | — |
