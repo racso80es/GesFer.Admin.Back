@@ -31,6 +31,22 @@ Antes de levantar la API se comprueba si el puerto está en uso. Si está ocupad
 - **PortBlocked=fail:** se emite error y se termina con exitCode distinto de 0.
 - **PortBlocked=kill:** se intenta identificar y cerrar el proceso que usa el puerto (en Windows: netstat + taskkill); tras liberar el puerto se continúa con el arranque.
 
+## Códigos de salida (exitCode)
+
+| exitCode | Situación | Acción recomendada |
+|----------|-----------|---------------------|
+| 0 | Éxito: health responde 200 | — |
+| 1 | Config no encontrado o inválido | Verificar ruta de start-api-config.json |
+| 2 | Puerto ocupado (PortBlocked=fail) | Usar --port-blocked kill o cambiar puerto |
+| 3 | Puerto ocupado: no se pudo liberar o sigue ocupado | Liberar puerto manualmente |
+| 4 | Directorio API no encontrado | Verificar apiWorkingDir en config |
+| 5 | Build fallido | Revisar compilación dotnet |
+| 6 | Error al lanzar dotnet run | Verificar .NET SDK instalado |
+| 7 | Health no respondió a tiempo | Revisar logs de la API; puede haber otro problema |
+| 8 | **Base de datos no disponible (MySQL)** | Ejecutar **prepare-full-env** e **invoke-mysql-seeds** antes de start-api |
+
+La herramienta detecta en la salida de la API errores de conexión a MySQL (p. ej. `Unable to connect to any of the specified MySQL hosts`, `MySqlConnector.MySqlException`) y devuelve exitCode 8 con mensaje explícito y sugerencia de dependencias.
+
 ## Salida
 
 Cumple `SddIA/tools/tools-contract.json`: objeto JSON con toolId, exitCode, success, timestamp, message, feedback[], data (url_base, pid, port, healthy), duration_ms.
