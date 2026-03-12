@@ -1,0 +1,74 @@
+{
+  "task_id": "refactorization-arquitectura-frontmatter",
+  "process_ref": "paths.processPath/refactorization/",
+  "cumulo_ref": "SddIA/agents/cumulo.json",
+  "branch": "feat/refactorization-arquitectura-frontmatter",
+  "persist_path": "paths.featurePath/refactorization-arquitectura-frontmatter",
+  "source_analysis": [
+    "docs/analysis/analisis-arquitectura-dual.md",
+    "docs/analysis/revision-arquitectura-dual-2026-03-12.md",
+    "docs/analysis/revision-arquitectura-dual-2026-03-12.json"
+  ],
+  "objectives": [
+    {
+      "id": "O1",
+      "phase": 1,
+      "description": "Auditar duplicidad de campos en los 84 pares (title, description, purpose)"
+    },
+    {
+      "id": "O2",
+      "phase": 1,
+      "description": "Limpiar spec.json: eliminar campos textuales duplicados del MD"
+    },
+    {
+      "id": "O3",
+      "phase": 1,
+      "description": "Optimizar scripts Rust para lazy-loading de spec.md"
+    },
+    {
+      "id": "O4",
+      "phase": 1,
+      "description": "Medir consumo de tokens LLM (línea base pre-optimización)"
+    },
+    {
+      "id": "O5",
+      "phase": 2,
+      "description": "Actualizar normas SddIA sobre nuevo formato (PRIMERO): constitution, entidades-dominio, contratos, interaction-triggers, paths-via-cumulo"
+    },
+    {
+      "id": "O6",
+      "phase": 2,
+      "description": "Script Rust de conversión dual → frontmatter (puntual)"
+    },
+    {
+      "id": "O7",
+      "phase": 2,
+      "description": "Migrar 84 entidades + contratos duales en único PR (sin coexistencia): karma2-token excepción JSON-only"
+    }
+  ],
+  "success_criteria": [
+    "Fase 1: spec.json sin campos textuales duplicados del MD en 84 pares",
+    "Fase 1: Scripts Rust con lazy-loading de spec.md",
+    "Fase 1: Línea base de tokens LLM medida",
+    "Fase 2: Normas SddIA actualizadas (PRIMERO): constitution, entidades-dominio, contratos, interaction-triggers, paths-via-cumulo",
+    "Fase 2: Script de conversión dual → frontmatter operativo",
+    "Fase 2: 84 entidades + contratos migrados en único PR; karma2-token excepción",
+    "Fase 2: Check validate con esquema YAML nativo",
+    "Fase 2: process_interface y acciones generan artefactos en frontmatter (C8)"
+  ],
+  "ecosystem_scope": {
+    "total_dual_pairs": 84,
+    "entity_breakdown": {
+      "actions": 8,
+      "process": 7,
+      "patterns": 11,
+      "principles": 21,
+      "security": 20,
+      "skills": 11,
+      "tools": 5,
+      "templates": 1
+    },
+    "contracts_affected": 9
+  },
+  "tracking_ids": ["RV-001", "RV-002", "RV-003", "RV-004", "RV-005", "RV-006", "RV-007"]
+}
