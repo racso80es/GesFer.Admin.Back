@@ -1,0 +1,27 @@
+{
+  "task_id": "refactorization-arquitectura-frontmatter",
+  "phase": "Fase 1 - RV-004",
+  "description": "Línea base de consumo de tokens LLM pre-optimización (post limpieza spec.json)",
+  "measurement_date": "2026-03-12",
+  "status": "baseline_documentado",
+  "methodology": "Cargar N entidades en formato dual (spec.json + spec.md) en contexto LLM; medir tokens_input y tokens_output. Comparar con formato frontmatter post-migración (Fase 2).",
+  "baseline": {
+    "format": "dual (spec.json + spec.md)",
+    "sample_entities": [
+      "SddIA/patterns/e98e4d2a-1c3f-4e56-9a2b-8f7d6c5b4a01",
+      "SddIA/skills/iniciar-rama",
+      "SddIA/actions/spec"
+    ],
+    "notes": "Post IMPL-1.2: spec.json ya sin title, description, purpose, name. Reducción estimada ~15-25% en tokens por entidad vs pre-limpieza. Medición empírica requiere ejecutar con modelo real (Claude, GPT, etc.)."
+  },
+  "target_post_fase2": {
+    "format": "frontmatter (single .md)",
+    "expected_reduction": "Menor fragmentación; menos tokens por encabezados duplicados y metadatos superpuestos."
+  },
+  "placeholder_for_empirical": {
+    "model": null,
+    "tokens_input_sample_5_entities": null,
+    "tokens_output_sample": null,
+    "timestamp": null
+  }
+}

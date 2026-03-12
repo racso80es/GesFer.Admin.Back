@@ -1,0 +1,34 @@
+{
+  "task_id": "refactorization-arquitectura-frontmatter",
+  "phase": "execution",
+  "execution_date": "2026-03-12",
+  "fase_ejecutada": "Fase 1 - Mitigación",
+  "items_completados": [
+    {
+      "id": "IMPL-1.1",
+      "status": "completed",
+      "output": "docs/features/refactorization-arquitectura-frontmatter/inventario-duplicidad.json",
+      "notes": "84 entidades inventariadas; fields_to_remove: title, description, purpose, name"
+    },
+    {
+      "id": "IMPL-1.2",
+      "status": "completed",
+      "output": "84 spec.json modificados",
+      "notes": "Script remove-json-keys.ps1; karma2-token excluido"
+    },
+    {
+      "id": "IMPL-1.3",
+      "status": "completed",
+      "output": "scripts/tools-rs/sddia-skills/",
+      "notes": "List usa solo spec.json; Show carga spec.md bajo demanda"
+    },
+    {
+      "id": "IMPL-1.4",
+      "status": "completed",
+      "output": "docs/features/refactorization-arquitectura-frontmatter/metrica-tokens.json",
+      "notes": "Línea base documentada; medición empírica pendiente"
+    }
+  ],
+  "fase_2_pendiente": true,
+  "prerequisito_fase2": "Fase 1 completa (cumplido)"
+}
