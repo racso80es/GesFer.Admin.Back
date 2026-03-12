@@ -1,0 +1,127 @@
+{
+  "revision_id": "revision-arquitectura-dual-2026-03-12",
+  "date": "2026-03-12",
+  "reviewed_by": "Agente Auditor (AUDITOR, Claude Opus 4.6)",
+  "documents": {
+    "original_audit": {
+      "path": "docs/analysis/analisis-arquitectura-dual.md",
+      "title": "Análisis de Rendimiento: Arquitectura Dual (Markdown + JSON) en SddIA",
+      "quality_rating": "Alta en diagnóstico técnico; incompleta en cobertura normativa"
+    },
+    "revision": {
+      "path": "docs/analysis/revision-arquitectura-dual-2026-03-12.md",
+      "title": "Revisión: Análisis de Arquitectura Dual (MD + JSON) en SddIA"
+    }
+  },
+  "ecosystem_snapshot": {
+    "total_dual_pairs": 84,
+    "json_only_entities": 1,
+    "contract_files": 9,
+    "total_managed_files": 185,
+    "entity_breakdown": {
+      "actions": 8,
+      "process": 7,
+      "patterns": 11,
+      "principles": 21,
+      "security": 20,
+      "skills": 11,
+      "tools": 5,
+      "templates": 1
+    }
+  },
+  "normative_constraints": [
+    {
+      "artifact": "constitution.json → L7_DOMAIN_ENTITIES",
+      "requirement": "spec.md + spec.json obligatorios; sincronía MD/JSON"
+    },
+    {
+      "artifact": "SddIA/norms/entidades-dominio-ecosistema-sddia.md",
+      "requirement": "Estructura y paridad obligatorias"
+    },
+    {
+      "artifact": "validate → sddia_md_json_parity",
+      "requirement": "Check automatizado de paridad"
+    },
+    {
+      "artifact": "9 contratos *-contract.json",
+      "requirement": "Esquemas de spec.json por tipo de entidad"
+    }
+  ],
+  "audit_evaluation": {
+    "pros_cons_accuracy": "Alta",
+    "alternatives_evaluation": "Adecuada",
+    "technical_depth": "Media-Alta",
+    "normative_coverage": "Baja",
+    "migration_impact_estimate": "Insuficiente"
+  },
+  "recommendation": {
+    "direction": "Alternativa A: Frontmatter YAML + MD",
+    "approach": "Dos fases: mitigación inmediata + migración planificada",
+    "urgency": "Media"
+  },
+  "tracking": [
+    {
+      "id": "RV-001",
+      "action": "Auditar duplicidad de campos en los 84 pares (title, description, purpose)",
+      "origin": "Auditoría §5 + Revisión §4",
+      "priority": "Alta",
+      "status": "Pendiente",
+      "assigned_to": null,
+      "completed_at": null
+    },
+    {
+      "id": "RV-002",
+      "action": "Limpiar spec.json: eliminar campos textuales duplicados del MD",
+      "origin": "Auditoría §5",
+      "priority": "Alta",
+      "status": "Pendiente",
+      "assigned_to": null,
+      "completed_at": null
+    },
+    {
+      "id": "RV-003",
+      "action": "Optimizar scripts Rust para lazy-loading de spec.md",
+      "origin": "Auditoría §5",
+      "priority": "Media",
+      "status": "Pendiente",
+      "assigned_to": null,
+      "completed_at": null
+    },
+    {
+      "id": "RV-004",
+      "action": "Medir consumo de tokens LLM (línea base pre-optimización)",
+      "origin": "Revisión §4",
+      "priority": "Media",
+      "status": "Pendiente",
+      "assigned_to": null,
+      "completed_at": null
+    },
+    {
+      "id": "RV-005",
+      "action": "Evaluar viabilidad de enmienda a L7 y contratos para Fase 2",
+      "origin": "Revisión §3.2",
+      "priority": "Media",
+      "status": "Pendiente",
+      "assigned_to": null,
+      "completed_at": null
+    },
+    {
+      "id": "RV-006",
+      "action": "Diseñar herramienta Rust de conversión dual → frontmatter",
+      "origin": "Revisión §4",
+      "priority": "Baja",
+      "status": "Pendiente",
+      "assigned_to": null,
+      "completed_at": null
+    },
+    {
+      "id": "RV-007",
+      "action": "Crear proceso refactorization formal para la migración",
+      "origin": "Revisión §4",
+      "priority": "Baja",
+      "status": "Pendiente",
+      "assigned_to": null,
+      "completed_at": null
+    }
+  ]
+}
