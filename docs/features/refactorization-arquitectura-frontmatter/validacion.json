@@ -1,0 +1,28 @@
+{
+  "timestamp": "2026-03-13",
+  "branch": "feat/refactorization-arquitectura-frontmatter",
+  "base_branch": "main",
+  "result": "pass",
+  "blocking": false,
+  "git_changes": {
+    "base_branch": "main",
+    "files_added": ["docs/features/refactorization-arquitectura-frontmatter/dual-to-frontmatter/convert-all.ps1"],
+    "files_modified_count": 168,
+    "files_deleted_count": 84,
+    "summary_by_category": {
+      "SddIA/": 168,
+      "docs/": 5,
+      "scripts/": 6,
+      ".cursor/": 4,
+      "AGENTS.md": 1
+    }
+  },
+  "checks": [
+    {"id": "git_changes", "name": "Validación cambios git", "result": "pass", "message": "Diff obtenido correctamente frente a main"},
+    {"id": "build", "name": "Compilación dotnet", "result": "pass", "message": "Compilación correcta en src/"},
+    {"id": "test", "name": "Tests dotnet", "result": "pass", "message": "51 unit + 2 E2E + integration tests superados"},
+    {"id": "nomenclatura", "name": "Nomenclatura rama", "result": "pass", "message": "", "detail": {"branch": "feat/refactorization-arquitectura-frontmatter", "branch_ok": true}},
+    {"id": "documentation", "name": "Documentación tarea", "result": "pass", "message": "objectives.md, spec.md, implementation.md presentes"},
+    {"id": "ley_git", "name": "Rama no master/main", "result": "pass", "message": "Trabajo en feat/"}
+  ]
+}
