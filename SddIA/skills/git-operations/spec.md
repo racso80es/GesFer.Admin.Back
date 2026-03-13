@@ -1,3 +1,17 @@
+---
+common_workflows:
+  finalize: git push origin <branch_name>
+  save_progress: 'git commit -m ''<type>: <short_description>'''
+  start_task: git checkout -b <type>/<description>
+contract_ref: paths.skillsDefinitionPath/skills-contract.md (Cúmulo)
+rules:
+- 'STRICT PROHIBITION: Never commit directly to ''master'' or ''main''.'
+- 'Mandatory Branching: Work must be done in ''feat/<desc>'' or ''fix/<desc>'' branches.'
+- 'Commit Message Format: Use Conventional Commits (e.g. ''feat: add login'', ''fix: resolve null ref'').'
+- 'Pre-Push: Always run local validation (build/tests) before requesting to push.'
+skill_id: git-operations
+---
+
 # Skill: Git Operations Standard
 
 **skill_id:** `git-operations`

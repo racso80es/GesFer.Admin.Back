@@ -1,0 +1,80 @@
+{
+  "spec_version": "1.0.0",
+  "task_id": "refactorization-arquitectura-frontmatter",
+  "action_id": "planning",
+  "phase": "planning",
+  "objectives": [
+    "Fase 1: Mitigación (RV-001 a RV-004) completa antes de Fase 2",
+    "Fase 2: Actualizar normas SddIA PRIMERO; luego script, migración único PR, validate, Cursor, AGENTS",
+    "karma2-token excepción JSON-only; migración sin coexistencia"
+  ],
+  "phases": [
+    {
+      "id": "1",
+      "name": "Mitigación",
+      "tasks": ["1.1 RV-001 auditar duplicidad", "1.2 RV-002 limpiar spec.json", "1.3 RV-003 lazy-loading scripts", "1.4 RV-004 medir tokens"]
+    },
+    {
+      "id": "2.1",
+      "name": "Actualización normas SddIA (PRIMERO)",
+      "tasks": ["2.1.1 constitution L7", "2.1.2 entidades-dominio", "2.1.3 9 contratos", "2.1.4-2.1.9 normas (interaction-triggers, paths-via-cumulo, patterns, agents-principles, commands, git, README)"]
+    },
+    {
+      "id": "2.2",
+      "name": "Script conversión",
+      "tasks": ["2.2.1 Crear script Rust", "2.2.2 Probar con 3 entidades"]
+    },
+    {
+      "id": "2.3",
+      "name": "Migración único PR",
+      "tasks": ["2.3.1 Migrar 84 entidades", "2.3.2 Migrar contratos duales", "2.3.3 Eliminar spec.json"]
+    },
+    {
+      "id": "2.4",
+      "name": "Validación y difusión",
+      "tasks": ["2.4.1 validate esquema YAML", "2.4.2 Reglas Cursor", "2.4.3 AGENTS.md", "2.4.4 Evolution Log", "2.4.5 C8: process_interface y acciones para frontmatter"]
+    }
+  ],
+  "execution_order": [
+    "Fase 1 completa",
+    "Fase 2.1 (normas)",
+    "Fase 2.2 (script)",
+    "Fase 2.3 (migración único PR)",
+    "Fase 2.4 (validación)"
+  ],
+  "files_affected_phase1": [
+    "84 spec.json (limpieza)",
+    "Scripts Rust paths.skillsRustPath, paths.toolsRustPath"
+  ],
+  "files_affected_phase2": [
+    "SddIA/constitution.json",
+    "SddIA/norms/entidades-dominio-ecosistema-sddia.md",
+    "SddIA/norms/interaction-triggers.md",
+    "SddIA/norms/paths-via-cumulo.md",
+    "SddIA/norms/patterns-in-planning-implementation-execution.md",
+    "SddIA/norms/agents-principles-contract.md",
+    "SddIA/norms/commands-via-skills-or-tools.md",
+    "SddIA/norms/git-via-skills-or-process.md",
+    "SddIA/norms/README.md",
+    "9 contratos *-contract.json/*-contract.md",
+    "84 entidades (spec.md → .md frontmatter; spec.json eliminado)",
+    "SddIA/actions/validate/",
+    "SddIA/agents/cumulo.json (process_interface)",
+    "SddIA/actions/spec/, clarify/, planning/, implementation/",
+    ".cursor/rules/*.mdc",
+    "AGENTS.md"
+  ],
+  "excluded": ["karma2-token (excepción JSON-only)", "Alternativas B/C", "Tool en toolCapsules"],
+  "verification": [
+    "Fase 1: inventario RV-001; spec.json limpio; lazy-loading; métrica tokens",
+    "Fase 2: normas actualizadas; script operativo; 84+9 migrados; validate YAML; Cursor/AGENTS; process_interface y acciones C8; Evolution Log",
+    "dotnet build OK; no coexistencia dual/frontmatter"
+  ],
+  "action_tags": ["[REF-FM]"],
+  "references": {
+    "spec": "spec.md",
+    "clarify": "clarify.md",
+    "objectives": "objectives.md",
+    "process": "paths.processPath/refactorization/"
+  }
+}

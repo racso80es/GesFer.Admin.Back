@@ -4,6 +4,33 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+## 2026-03-12 - Refactorización: Arquitectura Frontmatter (feat/refactorization-arquitectura-frontmatter)
+
+**Rama:** feat/refactorization-arquitectura-frontmatter  
+**Tipo:** Refactorización arquitectónica  
+**Documentación:** `docs/features/refactorization-arquitectura-frontmatter/objectives.md`
+
+### Resumen
+
+Migración de la arquitectura dual (spec.md + spec.json) a Markdown con Frontmatter YAML. Las entidades de dominio SddIA (actions, process, patterns, principles, security, skills, tools, templates) ahora usan un único archivo .md por entidad con metadatos en frontmatter y contenido legible en el cuerpo. Excepción: karma2-token se mantiene JSON-only.
+
+### Cambios realizados
+
+- **84 entidades** convertidas: spec.json + spec.md → spec.md con frontmatter YAML
+- **8 contratos** convertidos: *-contract.json + *-contract.md → *-contract.md con frontmatter
+- **Script Rust** dual_to_frontmatter en scripts/tools-rs para conversión automática
+- **Normas SddIA** actualizadas: constitution (L7), entidades-dominio, interaction-triggers, paths-via-cumulo, etc.
+- **AGENTS.md, cumulo.json, validate** alineados con nueva estructura
+- **process_interface** actualizado: artefactos .md con frontmatter en lugar de par .md + .json
+
+### Referencias
+
+- Objectives: `docs/features/refactorization-arquitectura-frontmatter/objectives.md`
+- Spec: `docs/features/refactorization-arquitectura-frontmatter/spec.md`
+- Implementation: `docs/features/refactorization-arquitectura-frontmatter/implementation.md`
+
+---
+
 ## 2026-03-10 - Refactorización: Eliminación de PS1 en Skills y Tools (feat/refactorization-eliminar-ps1-skills-tools)
 
 **Rama:** feat/refactorization-eliminar-ps1-skills-tools  

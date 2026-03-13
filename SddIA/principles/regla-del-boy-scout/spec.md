@@ -1,3 +1,18 @@
+---
+category: Clean Code
+contract_ref: paths.principlesPath/principles-contract.md
+id: c1f7a01b-9a8c-4d3b-8f2e-1e3d4a5b6c70
+metadata:
+  difficulty: Beginner
+  status: Published
+principle_id: regla-del-boy-scout
+tags:
+- Clean Code
+- Refactoring
+- Buenas Prácticas
+- Deuda Técnica
+---
+
 # Regla del Boy Scout
 
 **principle_id:** `regla-del-boy-scout`

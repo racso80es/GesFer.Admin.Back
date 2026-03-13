@@ -1,3 +1,17 @@
+---
+category: Clean Code
+contract_ref: paths.principlesPath/principles-contract.md
+id: c1f7a01b-9a8c-4d3b-8f2e-1e3d4a5b6c72
+metadata:
+  difficulty: Intermediate
+  status: Published
+principle_id: split-phase-refactoring
+tags:
+- Refactoring
+- Algoritmos
+- Legibilidad
+---
+
 # Split Phase Refactoring
 
 **principle_id:** `split-phase-refactoring`

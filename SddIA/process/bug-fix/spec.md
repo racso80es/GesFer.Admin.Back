@@ -1,3 +1,37 @@
+---
+constraints:
+- Rama fix/<nombre_fix>, nunca master.
+- Documentación obligatoria en paths.fixPath/<nombre_fix>.
+- 'Alcance mínimo: causa raíz; no refactor en la misma rama.'
+contract_ref: paths.processPath/process-contract.md
+paths:
+  bugPath_ref: paths.bugPath (Cúmulo)
+  fixPath_ref: paths.fixPath (Cúmulo)
+persist_ref: paths.fixPath/<nombre_fix>
+principles_ref: paths.principlesPath
+process_id: bug-fix
+process_interface_compliance: Solicita/genera en carpeta de la tarea al menos un .md (objectives.md, spec.md, clarify.md) y al menos un .json (spec.json, clarify.json, validacion.json).
+related_actions:
+- spec
+- clarify
+- implementation
+- execution
+- validate
+- finalize
+related_skills:
+- iniciar-rama
+skills:
+- documentation
+- filesystem-ops
+- dotnet-development
+- iniciar-rama
+spec_version: 1.0.0
+triggers:
+- Reporte de bug
+- Fallo en CI o tests
+- Solicitud de fix con bug-id o título
+---
+
 # Proceso: Bug Fix
 
 Este documento define el **proceso de tarea** para la corrección de un bug. Está ubicado en paths.processPath/bug-fix/ (Cúmulo). La ruta de persistencia se obtiene de **Cúmulo** (paths.fixPath/<nombre_fix>).

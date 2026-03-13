@@ -1,3 +1,19 @@
+---
+dependencies:
+- dotnet
+- pwsh
+- cargo
+implementation_path: scripts/skills-rs/src/bin/verify_pr_protocol.rs
+inputs: []
+language: rust
+outputs:
+- description: 0 for success, non-zero for failure.
+  name: Exit Code
+  type: integer
+security_context: Karma2Token
+skill_id: verify-pr-protocol
+---
+
 # Skill: verify-pr-protocol
 
 ## Propósito

@@ -1,3 +1,18 @@
+---
+category: Arquitectura de Software
+contract_ref: paths.principlesPath/principles-contract.md
+id: c1f7a01b-9a8c-4d3b-8f2e-1e3d4a5b6c85
+metadata:
+  difficulty: Intermediate
+  status: Published
+principle_id: peligro-del-modulo-shared
+tags:
+- Clean Architecture
+- Shared Kernel
+- Cohesión
+- Acoplamiento
+---
+
 # El Peligro del Módulo Shared
 
 **principle_id:** `peligro-del-modulo-shared`

@@ -1,3 +1,31 @@
+---
+contract_ref: SddIA/tools/tools-contract.md
+cumulo_ref: SddIA/agents/cumulo.json
+env:
+- Windows 11
+- PowerShell 7+
+- Docker
+- .NET SDK 8
+implementation_path_ref: paths.toolCapsules.invoke-mysql-seeds
+inputs:
+  ConfigPath: string (opcional). Ruta al JSON de configuración; por defecto en implementación.
+  OutputJson: boolean (opcional). Emitir resultado JSON por stdout.
+  OutputPath: string (opcional). Fichero donde escribir el resultado JSON.
+  SkipMigrations: boolean (opcional). No ejecutar dotnet ef database update.
+  SkipSeeds: boolean (opcional). Solo migraciones, no seeds.
+output:
+  phases_feedback:
+  - init
+  - mysql
+  - migrations
+  - seeds
+  - done
+  - error
+  schema_ref: tools-contract.md output.required_fields y optional_fields
+toolId: invoke-mysql-seeds
+version: 1.0.0
+---
+
 # Especificación: invoke-mysql-seeds
 
 **toolId:** `invoke-mysql-seeds`  
@@ -20,7 +48,7 @@ Herramienta que comprueba la disponibilidad de MySQL, aplica migraciones EF Core
 
 ## Salida
 
-Cumple `SddIA/tools/tools-contract.json`: objeto JSON con toolId, exitCode, success, timestamp, message, feedback[], data (mysql, migrations, seeds), duration_ms.
+Cumple `SddIA/tools/tools-contract.md`: objeto JSON con toolId, exitCode, success, timestamp, message, feedback[], data (mysql, migrations, seeds), duration_ms.
 
 ## Fases (feedback)
 

@@ -1,3 +1,20 @@
+---
+category: Ciberseguridad
+id: a1b2c3d4-0000-4000-a000-000000000002
+interested_agents:
+- security-engineer
+- tekton-developer
+- architect
+metadata:
+  difficulty: Intermediate
+  status: Published
+tags:
+- Base de Datos
+- Prevención
+- SQL
+- Buenas Prácticas
+---
+
 # Consultas Parametrizadas (Prepared Statements)
 
 ## Descripción

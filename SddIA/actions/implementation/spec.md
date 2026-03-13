@@ -1,3 +1,23 @@
+---
+action_id: implementation
+contract_ref: actions-contract.md
+flow_steps:
+- Validación
+- Análisis plan
+- Resolución rutas
+- Unificación
+- Persistencia
+- Auditoría
+inputs:
+- Plan (obligatorio)
+- SPEC (opcional)
+- Clarificaciones (opcional)
+outputs:
+- IMPL-{FeatureId}.md en carpeta de tarea (Cúmulo)
+patterns_ref: paths.patternsPath
+principles_ref: paths.principlesPath
+---
+
 # Action: Implementation
 
 ## Propósito

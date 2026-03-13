@@ -1,0 +1,65 @@
+{
+  "task_id": "refactorization-arquitectura-frontmatter",
+  "phase": "execution",
+  "execution_date": "2026-03-12",
+  "fase_ejecutada": "Fase 2.1 - Actualización normas SddIA",
+  "items_completados": [
+    {
+      "id": "IMPL-1.1",
+      "status": "completed",
+      "output": "docs/features/refactorization-arquitectura-frontmatter/inventario-duplicidad.json",
+      "notes": "84 entidades inventariadas; fields_to_remove: title, description, purpose, name"
+    },
+    {
+      "id": "IMPL-1.2",
+      "status": "completed",
+      "output": "84 spec.json modificados",
+      "notes": "Script remove-json-keys.ps1; karma2-token excluido"
+    },
+    {
+      "id": "IMPL-1.3",
+      "status": "completed",
+      "output": "scripts/tools-rs/sddia-skills/",
+      "notes": "List usa solo spec.json; Show carga spec.md bajo demanda"
+    },
+    {
+      "id": "IMPL-1.4",
+      "status": "completed",
+      "output": "docs/features/refactorization-arquitectura-frontmatter/metrica-tokens.json",
+      "notes": "Línea base documentada; medición empírica pendiente"
+    }
+  ],
+  "fase_2_items": [
+    {
+      "id": "IMPL-2.1.1",
+      "status": "completed",
+      "output": "SddIA/constitution.json",
+      "notes": "L7_DOMAIN_ENTITIES: estructura frontmatter YAML; excepción tokens JSON-only"
+    },
+    {
+      "id": "IMPL-2.1.2",
+      "status": "completed",
+      "output": "SddIA/norms/entidades-dominio-ecosistema-sddia.md",
+      "notes": "Estructura canónica: .md con frontmatter YAML"
+    },
+    {
+      "id": "IMPL-2.1.3",
+      "status": "completed",
+      "output": "9 contratos (actions, process, patterns, principles, security, skills, tools, templates, tokens)",
+      "notes": "definition_artefacts/required_files: frontmatter YAML; tokens-contract sin cambios (excepción karma2-token)"
+    },
+    {
+      "id": "IMPL-2.1.4-2.1.9",
+      "status": "completed",
+      "output": "interaction-triggers, paths-via-cumulo, patterns-in-planning, agents-principles, commands-via-skills, git-via-skills, norms/README",
+      "notes": "Referencias spec.md/spec.json sustituidas por archivo .md con frontmatter YAML"
+    }
+  ],
+  "fase_2_pendiente": true,
+  "prerequisito_fase2": "Fase 1 completa (cumplido)",
+  "fase_2_1_completa": true,
+  "fase_2_2_completa": true,
+  "fase_2_3_completa": true,
+  "fase_2_4_completa": true,
+  "siguiente_paso": "Validación y PR (acción finalize)"
+}

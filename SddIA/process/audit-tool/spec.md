@@ -1,3 +1,80 @@
+---
+audit_output_ref: paths.auditsPath/tools/<tool-id>
+configuration:
+  cleanup_after_audit:
+    configurable: true
+    default: true
+    description: Si true, detener el proceso de la herramienta tras la auditoría.
+  evolution_log:
+    description: Solo registrar anomalías en Evolution Log.
+    when: FAIL o PARTIAL
+  health_endpoint:
+    description: URL del health endpoint.
+    source: config.healthUrl o convención http://localhost:<port>/health
+  parameters_source:
+    description: 'Fuente de parámetros de invocación: config file de la herramienta.'
+    fallback: sin parámetros
+    pattern: <tool-id>-config.json
+  report_naming:
+    description: Versionado por fecha para trazabilidad.
+    pattern: audit-report-YYYY-MM-DD.md / audit-result-YYYY-MM-DD.json
+contract_ref: paths.processPath/process-contract.md
+inputs:
+- description: Identificador de la herramienta a auditar (kebab-case).
+  name: tool-id
+  required: true
+  type: string
+- description: paths.toolCapsules[<tool-id>]
+  name: capsule_path
+  required: true
+  type: path
+outputs:
+- description: Informe legible con resultado, evidencias y recomendaciones.
+  name: audit-report.md
+  type: file
+- description: 'Resultado machine-readable: tool_id, audit_date, result, phases_results, evidence.'
+  name: audit-result.json
+  type: file
+persist_ref: paths.featurePath/audit-tool-<tool-id>
+phases:
+- description: Verificar existencia de herramienta en paths.toolCapsules. Rama opcional feat/audit-tool-<tool-id>.
+  id: '0'
+  name: Preparar entorno
+- description: Documentar criterios de éxito en objectives.md.
+  id: '1'
+  name: Definir objetivos
+- description: Revisar manifest.json y documentación de la herramienta.
+  id: '2'
+  name: Analizar especificación
+- description: 'Definir casos de prueba: invocación, parámetros, validaciones esperadas.'
+  id: '3'
+  name: Diseñar pruebas
+- description: Invocar .exe (o script fallback) y capturar salida JSON.
+  id: '4'
+  name: Ejecutar herramienta
+- description: Verificar estructura según tools-contract.md.
+  id: '5'
+  name: Validar retorno JSON
+- description: Confirmar que la herramienta logra su objetivo declarado.
+  id: '6'
+  name: Validar objetivos funcionales
+- description: Crear audit-report.md y audit-result.json con resultado PASS/FAIL.
+  id: '7'
+  name: Generar informe
+- description: Actualizar paths.auditsPath, opcional Evolution Log.
+  id: '8'
+  name: Cierre
+principles_ref: paths.principlesPath
+process_id: audit-tool
+related_actions:
+- spec
+- validate
+related_skills: []
+spec_version: 1.0.0
+templates_ref: paths.processPath/audit-tool/templates/
+tools_contract_ref: SddIA/tools/tools-contract.md
+---
+
 # Proceso: Auditoría de herramientas (audit-tool)
 
 Este documento define el **proceso de tarea** para auditar una herramienta (tool) existente en el proyecto. Está ubicado en paths.processPath/audit-tool/ (Cúmulo). Las rutas de herramientas y auditorías se obtienen de **Cúmulo** (paths.toolsPath, paths.toolCapsules, paths.auditsPath).
@@ -9,7 +86,7 @@ Este documento define el **proceso de tarea** para auditar una herramienta (tool
 El proceso **audit-tool** define el procedimiento para verificar empíricamente que una herramienta del ecosistema funciona correctamente según su especificación. Garantiza que:
 
 1. La herramienta se ejecuta sin errores (invocación del `.exe` o script).
-2. El retorno JSON cumple el contrato de herramientas (SddIA/tools/tools-contract.json).
+2. El retorno JSON cumple el contrato de herramientas (SddIA/tools/tools-contract.md).
 3. Los objetivos funcionales declarados en la herramienta se cumplen (validación directa).
 
 ## Alcance del procedimiento
@@ -27,7 +104,7 @@ El proceso **audit-tool** define el procedimiento para verificar empíricamente 
 | 2 | Analizar especificación | Revisar manifest.json y documentación de la herramienta para identificar criterios de validación. |
 | 3 | Diseñar pruebas | Definir casos de prueba: invocación, parámetros, validaciones esperadas. |
 | 4 | Ejecutar herramienta | Invocar el .exe (o script) y capturar salida JSON. |
-| 5 | Validar retorno JSON | Verificar estructura y campos según tools-contract.json. |
+| 5 | Validar retorno JSON | Verificar estructura y campos según tools-contract.md. |
 | 6 | Validar objetivos funcionales | Confirmar que la herramienta logra su objetivo (ej: API levantada, health OK). |
 | 7 | Generar informe | audit-report.md y audit-result.json con resultado: PASS/FAIL, evidencias. |
 | 8 | Cierre | Actualizar paths.auditsPath, opcional Evolution Log. |
@@ -36,7 +113,7 @@ El proceso **audit-tool** define el procedimiento para verificar empíricamente 
 
 - **tool-id:** Identificador de la herramienta a auditar (kebab-case).
 - **Cápsula de herramienta:** paths.toolCapsules[<tool-id>].
-- **Contrato de herramientas:** SddIA/tools/tools-contract.json.
+- **Contrato de herramientas:** SddIA/tools/tools-contract.md.
 
 ## Salidas
 
@@ -82,6 +159,6 @@ Para la herramienta **start-api**, los criterios de validación son:
 
 ## Referencias
 
-- Contrato de herramientas: SddIA/tools/tools-contract.json, tools-contract.md.
+- Contrato de herramientas: SddIA/tools/tools-contract.md, tools-contract.md.
 - Cúmulo: paths.toolCapsules, paths.auditsPath, paths.toolsPath.
 - Proceso machine-readable: paths.processPath/audit-tool/spec.json.

@@ -1,3 +1,18 @@
+---
+category: Ciberseguridad
+id: a1b2c3d4-0000-4000-a000-000000000005
+interested_agents:
+- security-engineer
+- auditor
+metadata:
+  difficulty: Beginner
+  status: Published
+tags:
+- Ingeniería Social
+- Vulnerabilidades
+- Usuarios
+---
+
 # El Usuario como Vulnerabilidad Principal
 
 ## Descripción

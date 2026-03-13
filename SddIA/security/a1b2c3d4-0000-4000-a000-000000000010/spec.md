@@ -1,3 +1,20 @@
+---
+category: DevSecOps
+id: a1b2c3d4-0000-4000-a000-000000000010
+interested_agents:
+- security-engineer
+- tekton-developer
+- infrastructure-architect
+metadata:
+  difficulty: Advanced
+  status: Published
+tags:
+- Supply Chain
+- Dependencias
+- Malware
+- npm
+---
+
 # Ataques de Supply Chain en Dependencias (npm)
 
 ## Descripción

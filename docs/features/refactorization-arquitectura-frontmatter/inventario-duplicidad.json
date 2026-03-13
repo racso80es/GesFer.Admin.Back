@@ -1,0 +1,913 @@
+﻿{
+    "total_entities":  84,
+    "fields_to_remove":  [
+                             "title",
+                             "description",
+                             "purpose",
+                             "name"
+                         ],
+    "inventario":  [
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "action_id",
+                                                         "name",
+                                                         "purpose",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/actions/clarify/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "action_id",
+                                                         "name",
+                                                         "purpose",
+                                                         "contract_ref",
+                                                         "principles_ref",
+                                                         "patterns_ref"
+                                                     ],
+                           "entity_path":  "SddIA/actions/execution/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "action_id",
+                                                         "name",
+                                                         "purpose",
+                                                         "implementation_script_ref",
+                                                         "skill_ref",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/actions/finalize/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "action_id",
+                                                         "name",
+                                                         "purpose",
+                                                         "contract_ref",
+                                                         "principles_ref",
+                                                         "patterns_ref"
+                                                     ],
+                           "entity_path":  "SddIA/actions/implementation/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "action_id",
+                                                         "name",
+                                                         "purpose",
+                                                         "contract_ref",
+                                                         "principles_ref",
+                                                         "patterns_ref"
+                                                     ],
+                           "entity_path":  "SddIA/actions/planning/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "action_id",
+                                                         "name",
+                                                         "purpose",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/actions/sddia-difusion/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "action_id",
+                                                         "name",
+                                                         "purpose",
+                                                         "contract_ref",
+                                                         "principles_ref"
+                                                     ],
+                           "entity_path":  "SddIA/actions/spec/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "action_id",
+                                                         "name",
+                                                         "purpose",
+                                                         "principles_ref",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/actions/validate/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/patterns/e98e4d2a-1c3f-4e56-9a2b-8f7d6c5b4a01/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/patterns/e98e4d2a-1c3f-4e56-9a2b-8f7d6c5b4a02/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/patterns/e98e4d2a-1c3f-4e56-9a2b-8f7d6c5b4a03/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/patterns/e98e4d2a-1c3f-4e56-9a2b-8f7d6c5b4a04/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/patterns/e98e4d2a-1c3f-4e56-9a2b-8f7d6c5b4a05/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/patterns/e98e4d2a-1c3f-4e56-9a2b-8f7d6c5b4a06/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/patterns/e98e4d2a-1c3f-4e56-9a2b-8f7d6c5b4a07/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/patterns/e98e4d2a-1c3f-4e56-9a2b-8f7d6c5b4a08/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/patterns/e98e4d2a-1c3f-4e56-9a2b-8f7d6c5b4a09/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/patterns/e98e4d2a-1c3f-4e56-9a2b-8f7d6c5b4a10/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/patterns/e98e4d2a-1c3f-4e56-9a2b-8f7d6c5b4a11/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "principle_id",
+                                                         "title",
+                                                         "category",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/principles/aggregate-roots/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "principle_id",
+                                                         "title",
+                                                         "category",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/principles/base-de-datos-como-cola-de-mensajeria/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "principle_id",
+                                                         "title",
+                                                         "category",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/principles/bounded-contexts/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "principle_id",
+                                                         "title",
+                                                         "category",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/principles/caso-de-uso-como-unidad-de-testing/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "principle_id",
+                                                         "title",
+                                                         "category",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/principles/clausulas-de-guarda-early-return/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "principle_id",
+                                                         "title",
+                                                         "category",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/principles/dependency-inversion-principle-dip/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "principle_id",
+                                                         "title",
+                                                         "category",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/principles/eventos-de-dominio-domain-events/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "principle_id",
+                                                         "title",
+                                                         "category",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/principles/evitar-magic-numbers/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "principle_id",
+                                                         "title",
+                                                         "category",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/principles/identificadores-uuids-desde-el-cliente/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "principle_id",
+                                                         "title",
+                                                         "category",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/principles/ley-de-demeter-tell-dont-ask/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "principle_id",
+                                                         "title",
+                                                         "category",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/principles/manejo-de-errores-tipado-either-result/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "principle_id",
+                                                         "title",
+                                                         "category",
+                                                         "contract_ref",
+                                                         "defined_by_agent"
+                                                     ],
+                           "entity_path":  "SddIA/principles/nomenclatura/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "principle_id",
+                                                         "title",
+                                                         "category",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/principles/open-closed-principle-ocp/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "principle_id",
+                                                         "title",
+                                                         "category",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/principles/peligro-del-modulo-shared/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "principle_id",
+                                                         "title",
+                                                         "category",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/principles/preparatory-refactoring/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "principle_id",
+                                                         "title",
+                                                         "category",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/principles/read-models-y-proyecciones/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "principle_id",
+                                                         "title",
+                                                         "category",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/principles/regla-del-boy-scout/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "principle_id",
+                                                         "title",
+                                                         "category",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/principles/single-responsibility-principle-srp/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "principle_id",
+                                                         "title",
+                                                         "category",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/principles/split-phase-refactoring/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "principle_id",
+                                                         "title",
+                                                         "category",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/principles/test-first-vs-tdd/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "principle_id",
+                                                         "title",
+                                                         "category",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/principles/value-objects/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "spec_version",
+                                                         "process_id",
+                                                         "name",
+                                                         "description",
+                                                         "contract_ref",
+                                                         "persist_ref",
+                                                         "audit_output_ref",
+                                                         "tools_contract_ref",
+                                                         "principles_ref",
+                                                         "templates_ref"
+                                                     ],
+                           "entity_path":  "SddIA/process/audit-tool/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "spec_version",
+                                                         "process_id",
+                                                         "name",
+                                                         "description",
+                                                         "contract_ref",
+                                                         "persist_ref",
+                                                         "process_interface_compliance",
+                                                         "principles_ref"
+                                                     ],
+                           "entity_path":  "SddIA/process/bug-fix/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "spec_version",
+                                                         "process_id",
+                                                         "name",
+                                                         "description",
+                                                         "contract_ref",
+                                                         "persist_ref",
+                                                         "input_ref",
+                                                         "principles_ref"
+                                                     ],
+                           "entity_path":  "SddIA/process/correccion-auditorias/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "spec_version",
+                                                         "process_id",
+                                                         "name",
+                                                         "description",
+                                                         "process_doc_ref",
+                                                         "contract_ref",
+                                                         "templates_contract_ref",
+                                                         "persist_ref",
+                                                         "process_interface_compliance"
+                                                     ],
+                           "entity_path":  "SddIA/process/create-template/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "spec_version",
+                                                         "process_id",
+                                                         "name",
+                                                         "description",
+                                                         "process_doc_ref",
+                                                         "contract_ref",
+                                                         "tools_contract_ref",
+                                                         "persist_ref",
+                                                         "process_interface_compliance"
+                                                     ],
+                           "entity_path":  "SddIA/process/create-tool/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "spec_version",
+                                                         "process_id",
+                                                         "name",
+                                                         "description",
+                                                         "contract_ref",
+                                                         "persist_ref",
+                                                         "principles_ref"
+                                                     ],
+                           "entity_path":  "SddIA/process/feature/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "spec_version",
+                                                         "process_id",
+                                                         "name",
+                                                         "description",
+                                                         "contract_ref",
+                                                         "persist_ref"
+                                                     ],
+                           "entity_path":  "SddIA/process/refactorization/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/security/a1b2c3d4-0000-4000-a000-000000000001/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/security/a1b2c3d4-0000-4000-a000-000000000002/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/security/a1b2c3d4-0000-4000-a000-000000000003/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/security/a1b2c3d4-0000-4000-a000-000000000004/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/security/a1b2c3d4-0000-4000-a000-000000000005/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/security/a1b2c3d4-0000-4000-a000-000000000006/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/security/a1b2c3d4-0000-4000-a000-000000000007/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/security/a1b2c3d4-0000-4000-a000-000000000008/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/security/a1b2c3d4-0000-4000-a000-000000000009/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/security/a1b2c3d4-0000-4000-a000-000000000010/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/security/a1b2c3d4-0000-4000-a000-000000000011/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/security/a1b2c3d4-0000-4000-a000-000000000012/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/security/a1b2c3d4-0000-4000-a000-000000000013/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/security/a1b2c3d4-0000-4000-a000-000000000014/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/security/a1b2c3d4-0000-4000-a000-000000000015/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/security/a1b2c3d4-0000-4000-a000-000000000016/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/security/a1b2c3d4-0000-4000-a000-000000000017/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/security/a1b2c3d4-0000-4000-a000-000000000018/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/security/a1b2c3d4-0000-4000-a000-000000000019/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "id",
+                                                         "title",
+                                                         "category"
+                                                     ],
+                           "entity_path":  "SddIA/security/a1b2c3d4-0000-4000-a000-000000000020/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "skill_id",
+                                                         "name",
+                                                         "description",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/skills/documentation/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "skill_id",
+                                                         "name",
+                                                         "description",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/skills/dotnet-development/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "skill_id",
+                                                         "name",
+                                                         "description",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/skills/filesystem-ops/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "spec_version",
+                                                         "skill_id",
+                                                         "name",
+                                                         "description",
+                                                         "implementation_path_ref",
+                                                         "contract_ref",
+                                                         "owner",
+                                                         "status"
+                                                     ],
+                           "entity_path":  "SddIA/skills/finalizar-git/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "spec_version",
+                                                         "skill_id",
+                                                         "name",
+                                                         "description",
+                                                         "contract_ref",
+                                                         "owner",
+                                                         "status"
+                                                     ],
+                           "entity_path":  "SddIA/skills/frontend-build/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "skill_id",
+                                                         "name",
+                                                         "description",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/skills/git-operations/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "spec_version",
+                                                         "skill_id",
+                                                         "name",
+                                                         "description",
+                                                         "implementation_path_ref",
+                                                         "contract_ref",
+                                                         "owner",
+                                                         "status"
+                                                     ],
+                           "entity_path":  "SddIA/skills/iniciar-rama/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "skill_id",
+                                                         "name",
+                                                         "description",
+                                                         "implementation_path_ref",
+                                                         "contract_ref",
+                                                         "scope_clarification",
+                                                         "usage_instruction"
+                                                     ],
+                           "entity_path":  "SddIA/skills/invoke-command/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "skill_id",
+                                                         "name",
+                                                         "description",
+                                                         "implementation_path_ref",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/skills/invoke-commit/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "spec_version",
+                                                         "skill_id",
+                                                         "name",
+                                                         "description",
+                                                         "contract_ref",
+                                                         "owner",
+                                                         "status"
+                                                     ],
+                           "entity_path":  "SddIA/skills/security-audit/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "skill_id",
+                                                         "name",
+                                                         "description",
+                                                         "implementation_path",
+                                                         "language",
+                                                         "security_context"
+                                                     ],
+                           "entity_path":  "SddIA/skills/verify-pr-protocol/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "template_id",
+                                                         "name",
+                                                         "description",
+                                                         "process_ref",
+                                                         "contract_ref"
+                                                     ],
+                           "entity_path":  "SddIA/templates/correccion-auditorias-feature/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "toolId",
+                                                         "version",
+                                                         "description",
+                                                         "implementation_path_ref",
+                                                         "contract_ref",
+                                                         "cumulo_ref"
+                                                     ],
+                           "entity_path":  "SddIA/tools/invoke-mysql-seeds/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "toolId",
+                                                         "version",
+                                                         "description",
+                                                         "implementation_path_ref",
+                                                         "contract_ref",
+                                                         "cumulo_ref"
+                                                     ],
+                           "entity_path":  "SddIA/tools/postman-mcp-validation/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "toolId",
+                                                         "version",
+                                                         "description",
+                                                         "implementation_path_ref",
+                                                         "contract_ref",
+                                                         "cumulo_ref"
+                                                     ],
+                           "entity_path":  "SddIA/tools/prepare-full-env/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "toolId",
+                                                         "version",
+                                                         "description",
+                                                         "implementation_path_ref",
+                                                         "contract_ref",
+                                                         "cumulo_ref"
+                                                     ],
+                           "entity_path":  "SddIA/tools/run-tests-local/spec.json"
+                       },
+                       {
+                           "spec_md_exists":  true,
+                           "json_fields_with_text":  [
+                                                         "toolId",
+                                                         "version",
+                                                         "description",
+                                                         "implementation_path_ref",
+                                                         "contract_ref",
+                                                         "cumulo_ref",
+                                                         "port_check"
+                                                     ],
+                           "entity_path":  "SddIA/tools/start-api/spec.json"
+                       }
+                   ]
+}

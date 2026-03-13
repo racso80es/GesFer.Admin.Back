@@ -42,7 +42,7 @@ Al **empezar una tarea** se debe elegir un **proceso**. Los procesos definen el 
 | **feature** | Funcionalidad nueva: rama `feat/<nombre_feature>`. | `paths.featurePath/<nombre_feature>` | [`SddIA/process/feature/`](./SddIA/process/feature/) |
 | **bug-fix** | Corrección de bug: rama `fix/<nombre_fix>`. Alcance mínimo. | `paths.fixPath/<nombre_fix>` | [`SddIA/process/bug-fix/`](./SddIA/process/bug-fix/) |
 | **create-tool** | Creación de herramienta: rama `feat/create-tool-<tool-id>`. Entregable: cápsula en paths.toolCapsules. | `paths.featurePath/create-tool-<tool-id>` (doc); entregable en `paths.toolsPath/<tool-id>/` | [`SddIA/process/create-tool/`](./SddIA/process/create-tool/) |
-| **create-template** | Creación de plantilla: rama `feat/create-template-<template-id>`. Entregable: carpeta en paths.templatesPath con spec.md y spec.json. | `paths.featurePath/create-template-<template-id>` (doc); entregable en `paths.templatesPath/<template-id>/` | [`SddIA/process/create-template/`](./SddIA/process/create-template/) |
+| **create-template** | Creación de plantilla: rama `feat/create-template-<template-id>`. Entregable: carpeta en paths.templatesPath con spec.md (frontmatter YAML). | `paths.featurePath/create-template-<template-id>` (doc); entregable en `paths.templatesPath/<template-id>/` | [`SddIA/process/create-template/`](./SddIA/process/create-template/) |
 | **audit-tool** | Auditoría de herramienta: verificación empírica del funcionamiento. Resultado: informe en paths.auditsPath/tools/<tool-id>/. | `paths.featurePath/audit-tool-<tool-id>` (doc); resultado en `paths.auditsPath/tools/<tool-id>/` | [`SddIA/process/audit-tool/`](./SddIA/process/audit-tool/) |
 
 Índice de procesos: [`SddIA/process/README.md`](./SddIA/process/README.md).
@@ -51,10 +51,9 @@ Al **empezar una tarea** se debe elegir un **proceso**. Los procesos definen el 
 
 Todo elemento que actúe como **proceso** (o agente de proceso) debe cumplir una **interfaz** que exige la existencia y uso de artefactos en formatos fijos:
 
-- **`.md`** — Documentación legible (objetivos, spec, clarificaciones, plan, resúmenes). El proceso debe **solicitar o generar** al menos un fichero `.md` por tarea (p. ej. `objectives.md`, `spec.md`, `clarify.md`).
-- **`.json`** — Metadatos y resultados machine-readable (spec, clarificaciones, implementación, validación). El proceso debe **solicitar o generar** al menos un fichero `.json` por tarea (p. ej. `spec.json`, `clarify.json`, `implementation.json`, `validacion.json`).
+- **`.md` con frontmatter YAML** — Documentación y metadatos en un único formato por artefacto. El proceso debe **solicitar o generar** al menos un fichero `.md` con frontmatter por tarea (p. ej. `objectives.md`, `spec.md`, `clarify.md`, `plan.md`, `implementation.md`, `validacion.md`).
 
-Cumplimiento: cada proceso en `SddIA/process/` debe documentar qué artefactos `{nombre}.md` y `{nombre}.json` requiere o produce en la carpeta de la tarea (Cúmulo), y los agentes que orquestan el proceso deben respetar esa interfaz.
+Cumplimiento: cada proceso en `SddIA/process/` debe documentar qué artefactos `{nombre}.md` (con frontmatter YAML) requiere o produce en la carpeta de la tarea (Cúmulo), y los agentes que orquestan el proceso deben respetar esa interfaz.
 
 ---
 
@@ -64,7 +63,7 @@ Selecciona el rol más específico posible. Si dudas, activa **Arquitecto**.
 
 > **NOTA:** Rutas de agentes: consultar Cúmulo cuando aplique; por convención, definiciones en `SddIA/agents/*.json` y agentes de proceso en `SddIA/process/*.json`. Las rutas de documentación de tareas vienen siempre de Cúmulo (`paths.featurePath`, `paths.fixPath`).
 >
-> **Contrato de principios (agents.principles):** Los agentes que aplican principios técnicos (Arquitecto, Tekton, Cúmulo) implementan el contrato de la entidad principles mediante el campo **`principlesContract`** en su definición JSON, apuntando a `SddIA/principles/principles-contract.json`. Las acciones y procesos que afecten diseño o implementación deben validar coherencia con ese contrato (paths.principlesPath). Ver SddIA/norms/agents-principles-contract.md.
+> **Contrato de principios (agents.principles):** Los agentes que aplican principios técnicos (Arquitecto, Tekton, Cúmulo) implementan el contrato de la entidad principles mediante el campo **`principlesContract`** en su definición JSON, apuntando a `SddIA/principles/principles-contract.md`. Las acciones y procesos que afecten diseño o implementación deben validar coherencia con ese contrato (paths.principlesPath). Ver SddIA/norms/agents-principles-contract.md.
 
 | ROL | DISPARADORES (IF...) | ACCIÓN (THEN...) |
 | :--- | :--- | :--- |
@@ -78,8 +77,8 @@ Selecciona el rol más específico posible. Si dudas, activa **Arquitecto**.
 | **[AUDITOR]** | Auditoría, Accesibilidad, Lint, Frontend, Backend, C#, Arquitectura, DbContext. | Cargar [`SddIA/agents/auditor/auditor.json`](./SddIA/agents/auditor/auditor.json). Generar reporte (backend y/o frontend según contexto). |
 | **[AUDITOR-PROCESS]**| Git Hooks, Husky, Token, Hash, Process Interaction. | Cargar [`SddIA/agents/auditor/process-interaction.json`](./SddIA/agents/auditor/process-interaction.json). Validar Hash. |
 | **[CUMULO]** | Documentación, Docs, Markdown, Guías, Conocimiento, Rutas. | Cargar [`SddIA/agents/cumulo.json`](./SddIA/agents/cumulo.json). Validar SSOT. |
-| **[FEATURE]**   | tareas, acciones, objetivos | Cargar [`SddIA/process/feature.json`](./SddIA/process/feature.json). Orquestra ciclo de una feature. |
-| **[BUG-FIX]** | Bug, Fix, Incidencia, Corrección, Reproducción. | Cargar [`SddIA/process/bug-fix/`](./SddIA/process/bug-fix/) (spec.md, spec.json). Orquestar ciclo del fix. |
+| **[FEATURE]**   | tareas, acciones, objetivos | Cargar [`SddIA/process/feature/`](./SddIA/process/feature/) (spec.md con frontmatter). Orquestra ciclo de una feature. |
+| **[BUG-FIX]** | Bug, Fix, Incidencia, Corrección, Reproducción. | Cargar [`SddIA/process/bug-fix/`](./SddIA/process/bug-fix/) (spec.md con frontmatter). Orquestar ciclo del fix. |
 | **[CREATE-TOOL]** | Herramienta, Tool, Crear herramienta, Nueva tool. | Cargar [`SddIA/process/create-tool/`](./SddIA/process/create-tool/). Orquestar ciclo de creación de herramienta (cápsula, índice, Cúmulo). |
 | **[CREATE-TEMPLATE]** | Plantilla, Template, Crear plantilla, Nueva plantilla. | Cargar [`SddIA/process/create-template/`](./SddIA/process/create-template/). Orquestar ciclo de creación de plantilla (paths.templatesPath, contrato templates). |
 
@@ -104,7 +103,7 @@ Todo item (Acción, Skill, Tool, Proceso, Patrón, Principio, Template) que se e
 *   **Definición:** paths.tokensPath (Cúmulo); Karma2Token en `SddIA/tokens/karma2-token/spec.json`.
 *   **Propósito:** Garantizar identidad, trazabilidad, y contexto de seguridad validado.
 *   **Obligatoriedad:** Los agentes deben verificar la existencia y validez del token en cualquier interacción técnica.
-*   **Entidades de dominio (ecosistema SddIA):** Son las que integran el ítem o contrato de Token. Han de respetar **estructura** (spec.md + spec.json según su contrato) y **sincronidad** (paridad MD ↔ JSON). Norma: SddIA/norms/entidades-dominio-ecosistema-sddia.md.
+*   **Entidades de dominio (ecosistema SddIA):** Son las que integran el ítem o contrato de Token. Han de respetar **estructura** (archivo .md con frontmatter YAML; excepción: tokens pueden ser JSON-only). Norma: SddIA/norms/entidades-dominio-ecosistema-sddia.md.
 
 ---
 

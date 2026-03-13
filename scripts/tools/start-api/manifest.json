@@ -2,7 +2,7 @@
   "toolId": "start-api",
   "version": "1.0.0",
   "description": "Levanta la API del proyecto (Admin Back): build opcional, dotnet run, opcional healthcheck. Ciclo: infra → datos → API.",
-  "contract_ref": "SddIA/tools/tools-contract.json",
+  "contract_ref": "SddIA/tools/tools-contract.md",
   "components": {
     "launcher_bat": "Start-Api.bat",
     "launcher_ps1": "Start-Api.ps1",

@@ -1,3 +1,37 @@
+---
+contract_ref: SddIA/tools/tools-contract.md
+cumulo_ref: SddIA/agents/cumulo.json
+depends_on_tools:
+- prepare-full-env
+- invoke-mysql-seeds
+env:
+- Windows 11
+- PowerShell 7+
+- .NET SDK 8
+implementation_path_ref: paths.toolCapsules.run-tests-local
+inputs:
+  E2EBaseUrl: string (opcional). URL base API para E2E; por defecto http://localhost:5010.
+  OnlyTests: boolean (opcional). Solo ejecutar tests (no prepare, no seeds).
+  OutputJson: boolean (opcional). Emitir resultado JSON por stdout.
+  OutputPath: string (opcional). Fichero donde escribir el resultado JSON.
+  SkipPrepare: boolean (opcional). No invocar prepare-full-env.
+  SkipSeeds: boolean (opcional). No invocar invoke-mysql-seeds.
+  TestScope: string (opcional). unit | integration | e2e | all. Por defecto all.
+output:
+  data_fields: tests_summary (passed, failed, total por scope o proyecto), duration_ms
+  phases_feedback:
+  - init
+  - prepare
+  - seeds
+  - build
+  - tests
+  - done
+  - error
+  schema_ref: tools-contract.md output.required_fields y optional_fields
+toolId: run-tests-local
+version: 1.0.0
+---
+
 # Especificación: run-tests-local
 
 **toolId:** `run-tests-local`  
@@ -22,7 +56,7 @@ Ejecutar tests (unitarios, integración, E2E) en condiciones de validación loca
 
 ## Salida
 
-Cumple `SddIA/tools/tools-contract.json`: toolId, exitCode, success, timestamp, message, feedback[], data (tests_summary, duration_ms).
+Cumple `SddIA/tools/tools-contract.md`: toolId, exitCode, success, timestamp, message, feedback[], data (tests_summary, duration_ms).
 
 ## Fases (feedback)
 

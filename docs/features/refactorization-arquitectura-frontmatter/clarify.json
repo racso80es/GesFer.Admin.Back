@@ -1,0 +1,90 @@
+{
+  "task_id": "refactorization-arquitectura-frontmatter",
+  "spec_ref": "spec.md",
+  "spec_id": "SPEC-REF-2026-002",
+  "state": "resolved",
+  "gaps": [
+    {
+      "id": "C1",
+      "topic": "Contratos duales (*-contract.md + *-contract.json)",
+      "question": "¿Los contratos deben migrarse a frontmatter en Fase 2 o en iteración posterior?",
+      "options": [
+        {"id": "A", "description": "Incluir contratos en Fase 2"},
+        {"id": "B", "description": "Excluir en v1; migrar posteriormente"}
+      ],
+      "user_response": "A",
+      "resolution": "En Fase 2 toda entidad SddIA ha de respetar la nueva estructura. Incluir contratos en Fase 2."
+    },
+    {
+      "id": "C2",
+      "topic": "Orden Fase 1 vs Fase 2",
+      "question": "¿Fase 2 requiere Fase 1 completa o RV-001/RV-002 son suficientes como prerrequisitos?",
+      "options": [
+        {"id": "A", "description": "Fase 1 completa antes de Fase 2 (secuencial)"},
+        {"id": "B", "description": "RV-001 y RV-002 prerrequisitos; RV-003/RV-004 en paralelo con RV-006"}
+      ],
+      "user_response": "A",
+      "resolution": "Fase 1 completa antes de Fase 2 (secuencial estricto)."
+    },
+    {
+      "id": "C3",
+      "topic": "Excepción karma2-token",
+      "question": "¿karma2-token migra a frontmatter o se mantiene como excepción JSON-only?",
+      "options": [
+        {"id": "A", "description": "Migrar también; unificar"},
+        {"id": "B", "description": "Mantener excepción; tokens JSON-only"}
+      ],
+      "user_response": "B",
+      "resolution": "Mantener excepción; tokens pueden ser JSON-only por contrato."
+    },
+    {
+      "id": "C4",
+      "topic": "Validación frontmatter",
+      "question": "¿Cómo validar frontmatter YAML en acción validate?",
+      "options": [
+        {"id": "A", "description": "JSON Schema sobre YAML parseado"},
+        {"id": "B", "description": "Esquema YAML nativo"},
+        {"id": "C", "description": "Validación estructural mínima sin esquema formal"}
+      ],
+      "user_response": "B",
+      "resolution": "Esquema YAML nativo (herramienta en el ecosistema)."
+    },
+    {
+      "id": "C5",
+      "topic": "Compatibilidad durante migración",
+      "question": "¿Scripts soportan ambos formatos (dual + frontmatter) durante transición?",
+      "options": [
+        {"id": "A", "description": "Sí; soporte dual durante transición"},
+        {"id": "B", "description": "No; migración en único PR sin coexistencia"}
+      ],
+      "user_response": "B",
+      "resolution": "Migración en único PR; no hay coexistencia."
+    },
+    {
+      "id": "C6",
+      "topic": "Ubicación herramienta conversión",
+      "question": "¿Herramienta Rust como tool en toolCapsules o script puntual?",
+      "options": [
+        {"id": "A", "description": "Nueva tool en toolCapsules (reutilizable)"},
+        {"id": "B", "description": "Script puntual en carpeta tarea o scripts/"}
+      ],
+      "user_response": "B",
+      "resolution": "Script puntual en carpeta de la tarea o scripts/; uso puntual."
+    }
+  ],
+  "resolved_count": 6,
+  "total_count": 6,
+  "additional_requirement": {
+    "id": "C7",
+    "topic": "Actualización normas SddIA",
+    "description": "Actualización en las normas SddIA sobre el nuevo formato. Esto ha de ser lo primero.",
+    "priority": "FIRST",
+    "resolution": "La actualización de normas SddIA (constitution, entidades-dominio, contratos, interaction-triggers, paths-via-cumulo, etc.) sobre el nuevo formato frontmatter es el primer paso de la Fase 2, antes de cualquier migración de entidades."
+  },
+  "additional_requirement_c8": {
+    "id": "C8",
+    "topic": "Documentación generada en procesos",
+    "description": "La documentación generada en un proceso (plan.json/md, spec.json/md, clarify.json/md, etc) ha de respetar el nuevo patrón frontmatter.",
+    "resolution": "Los artefactos de documentación de tarea (objectives, spec, clarify, plan, implementation, validacion, execution) en paths.featurePath y paths.fixPath deben usar formato frontmatter: un único .md con frontmatter YAML por artefacto, en lugar de pares .md + .json. La process_interface y las acciones (spec, clarify, planning, implementation) deben actualizarse para generar artefactos en formato frontmatter."
+  }
+}

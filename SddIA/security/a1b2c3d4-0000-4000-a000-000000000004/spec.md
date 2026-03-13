@@ -1,3 +1,20 @@
+---
+category: Seguridad de Aplicaciones
+id: a1b2c3d4-0000-4000-a000-000000000004
+interested_agents:
+- architect
+- security-engineer
+- tekton-developer
+metadata:
+  difficulty: Advanced
+  status: Published
+tags:
+- Criptografía
+- Clave Pública
+- Clave Privada
+- Autenticación descentralizada
+---
+
 # Criptografía Asimétrica en JWT
 
 ## Descripción

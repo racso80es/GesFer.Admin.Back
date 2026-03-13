@@ -1,3 +1,21 @@
+---
+category: Ciberseguridad
+id: a1b2c3d4-0000-4000-a000-000000000001
+interested_agents:
+- security-engineer
+- architect
+- tekton-developer
+- auditor
+metadata:
+  difficulty: Intermediate
+  status: Published
+tags:
+- Seguridad Web
+- Base de Datos
+- Vulnerabilidades
+- SQLi
+---
+
 # SQL Injection (Inyección SQL)
 
 ## Descripción

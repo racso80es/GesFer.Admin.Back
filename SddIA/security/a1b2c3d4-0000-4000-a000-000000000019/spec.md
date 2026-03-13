@@ -1,3 +1,20 @@
+---
+category: Seguridad de Aplicaciones
+id: a1b2c3d4-0000-4000-a000-000000000019
+interested_agents:
+- architect
+- tekton-developer
+- security-engineer
+metadata:
+  difficulty: Beginner
+  status: Published
+tags:
+- Node.js
+- Express
+- Cabeceras HTTP
+- CORS
+---
+
 # Asegurando APIs con Helmet y CORS
 
 ## Descripción

@@ -1,0 +1,75 @@
+{
+  "spec_id": "SPEC-REF-2026-002",
+  "refactor_id": "refactorization-arquitectura-frontmatter",
+  "title": "Refactorización Arquitectura Dual → Frontmatter en SddIA",
+  "persist": "docs/features/refactorization-arquitectura-frontmatter/",
+  "branch": "feat/refactorization-arquitectura-frontmatter",
+  "state": "Draft",
+  "principle": "Migrar de arquitectura dual (spec.md + spec.json) a Markdown con Frontmatter YAML. Fase 1: mitigación (limpiar duplicidad, lazy-loading). Fase 2: migración con herramienta Rust y enmienda normativa.",
+  "scope": {
+    "phase1_included": [
+      "Auditar duplicidad en 84 pares (RV-001)",
+      "Limpiar spec.json de campos textuales duplicados (RV-002)",
+      "Optimizar scripts Rust lazy-loading spec.md (RV-003)",
+      "Medir tokens LLM línea base (RV-004)"
+    ],
+    "phase2_included": [
+      "1. Actualización normas SddIA (PRIMERO): constitution, entidades-dominio, contratos, interaction-triggers, paths-via-cumulo",
+      "2. Script Rust conversión dual → frontmatter (puntual)",
+      "3. Migración único PR: 84 entidades + contratos duales (sin coexistencia)",
+      "4. Validate: esquema YAML nativo",
+      "5. Actualizar reglas Cursor y AGENTS.md",
+      "6. C8: process_interface y acciones para artefactos frontmatter (documentación de tarea)"
+    ],
+    "phase2_order": [
+      "Actualizar normas SddIA",
+      "Script conversión",
+      "Migración único PR",
+      "Validate, Cursor, AGENTS"
+    ],
+    "clarify_decisions": {
+      "C1": "Contratos en Fase 2; toda entidad SddIA ha de respetar nueva estructura",
+      "C2": "Fase 1 completa antes de Fase 2 (secuencial)",
+      "C3": "karma2-token excepción JSON-only",
+      "C4": "Esquema YAML nativo",
+      "C5": "Migración único PR sin coexistencia",
+      "C6": "Script puntual en carpeta tarea o scripts/",
+      "C7": "Actualización normas SddIA ha de ser lo primero",
+      "C8": "Documentación de proceso (objectives, spec, clarify, plan, implementation, validacion) ha de respetar patrón frontmatter; process_interface y acciones actualizadas"
+    },
+    "excluded": [
+      "Alternativas B (JSON unificado) y C (SQLite)",
+      "Cambiar implementación cápsulas salvo consumidores spec",
+      "karma2-token migración (excepción JSON-only)"
+    ]
+  },
+  "ecosystem_scope": {
+    "total_dual_pairs": 84,
+    "entity_breakdown": {
+      "actions": 8,
+      "process": 7,
+      "patterns": 11,
+      "principles": 21,
+      "security": 20,
+      "skills": 11,
+      "tools": 5,
+      "templates": 1
+    },
+    "contracts_affected": 9
+  },
+  "acceptance_criteria": [
+    "Fase 1: RV-001 a RV-004 completados",
+    "Fase 2: Herramienta conversión operativa",
+    "Fase 2: constitution, contratos, norma enmendados",
+    "Fase 2: validate actualizado",
+    "Fase 2: 84 entidades migradas",
+    "Evolution Log actualizado al cierre"
+  ],
+  "source": "objectives.md",
+  "analysis_refs": [
+    "docs/analysis/analisis-arquitectura-dual.md",
+    "docs/analysis/revision-arquitectura-dual-2026-03-12.md"
+  ],
+  "process_ref": "paths.processPath/refactorization/",
+  "clarify_pending": false
+}

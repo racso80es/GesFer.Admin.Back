@@ -12,7 +12,7 @@ La **implementación del contrato de la entidad principles** en el dominio de ag
 ## Contrato referenciado
 
 - **Ruta canónica:** Cúmulo → paths.principlesPath (SddIA/principles/).
-- **Contrato global:** paths.principlesPath/principles-contract.json (definición por principio: spec.md, spec.json en paths.principlesPath/<principle-id>/).
+- **Contrato global:** paths.principlesPath/principles-contract.json (definición por principio: spec.md con frontmatter YAML en paths.principlesPath/<principle-id>/).
 
 ## Validación en acciones y procesos
 

@@ -1,3 +1,25 @@
+---
+action_id: validate
+blocking_principles:
+- nomenclatura
+contract_ref: actions-contract.md
+flow_steps:
+- Validación git (siempre)
+- Contexto
+- Checks obligatorios (incl. nomenclatura)
+- Opcionales
+- Informe
+- Auditoría
+inputs:
+- Carpeta tarea (Cúmulo)
+- Rama actual
+optional_checks:
+  sddia_frontmatter_valid: 'Si el diff toca SddIA/skills, SddIA/process, paths.patternsPath, paths.principlesPath, etc., comprobar que el .md tenga frontmatter YAML válido. Ref: entidades-dominio-ecosistema-sddia.md.'
+outputs:
+- validacion.json en carpeta tarea o paths.auditsPath
+principles_ref: paths.principlesPath
+---
+
 # Action: Validate
 
 ## Propósito
@@ -72,7 +94,7 @@ Cuando **no existe** carpeta de tarea (ruta no proporcionada o vacía):
 4. **Comprobaciones opcionales (según proyecto):**
    - Script de validación de PR: según skill o herramienta (Cúmulo).
    - Reglas de seguridad (Security Engineer) o rendimiento (Performance Engineer).
-   - **Sincronía MD/JSON (SddIA):** Si el diff toca `SddIA/skills/*/spec.md` o `SddIA/process/*/spec.md`, comprobar que exista el `spec.json` correspondiente en la misma carpeta y que los campos clave (p. ej. skill_id/process_id, parameters, rules) estén alineados. Registrarlo como check `sddia_md_json_parity` (pass | warn). Ref: paths.featurePath/refactorization-sincronidad-md-json/. // TODO: [REF-SddIA] validate — acción refactorization-sincronidad-md-json.
+   - **Frontmatter válido (SddIA):** Si el diff toca entidades de dominio (SddIA/skills, SddIA/process, SddIA/patterns, SddIA/principles, etc.), comprobar que el .md tenga frontmatter YAML válido. Registrarlo como check `sddia_frontmatter_valid` (pass | warn). Ref: SddIA/norms/entidades-dominio-ecosistema-sddia.md.
 5. **Generación de informe:** Construir el objeto de resultado incluyendo **siempre** `git_changes` y todos los checks; persistir en validacion.json en la carpeta de la tarea (Cúmulo) o en paths.auditsPath + validacion-<rama>-<timestamp>.json si no hay carpeta de tarea.
 6. **Auditoría:** Registrar la ejecución de validate en paths.auditsPath + paths.accessLogFile o en log de evolución (paths.evolutionPath).
 
@@ -107,7 +129,7 @@ No se requiere un agente nuevo: **QA Judge** asume la fase de validación. Si se
 - **Validación git obligatoria:** Todo informe incluye `git_changes`; no hay ejecución de validate sin análisis de diff frente a la rama base.
 - **Reproducibilidad:** Misma rama y mismo contexto deben producir el mismo resultado de validación (salvo flakiness de tests).
 - **Single Source of Truth:** Para el estado de la feature antes del PR, el artefacto canónico es validacion.json en la carpeta de la tarea (Cúmulo) (o el generado en paths.auditsPath si no hay carpeta de tarea).
-- **Sincronía SddIA:** Para entidades de dominio (skills, process), cualquier cambio en spec.md debe propagarse a spec.json en la misma transacción; validate puede incluir el check opcional `sddia_md_json_parity` cuando el diff toque paths.skillsDefinitionPath o paths.processPath.
+- **Frontmatter SddIA:** Las entidades de dominio usan .md con frontmatter YAML; validate puede incluir el check opcional `sddia_frontmatter_valid` cuando el diff toque paths.skillsDefinitionPath, paths.processPath u otras rutas de entidades.
 
 ## Dependencias con otras acciones
 

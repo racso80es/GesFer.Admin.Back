@@ -1,3 +1,24 @@
+---
+action_id: spec
+contract_ref: actions-contract.md
+flow_steps:
+- Validación token
+- Ingesta y análisis
+- Contexto vía --context
+- Normalización OpenSpecs
+- SecurityScanner
+- Persistencia
+- Auditoría
+inputs:
+- --token
+- --title
+- --input
+- --context (Cúmulo)
+outputs:
+- SPEC-*.md con frontmatter YAML (metadatos + cuerpo Markdown) en carpeta de tarea (Cúmulo)
+principles_ref: paths.principlesPath
+---
+
 # Action: Spec
 
 ## Propósito
@@ -21,8 +42,7 @@ Esta acción se implementa mediante documentación manual en la carpeta de tarea
 4.  **Normalización OpenSpecs:** Aplicación de plantillas estándar para asegurar que el documento contenga las secciones obligatorias: Contexto, Arquitectura, Seguridad y Criterios de Aceptación.
 5.  **Escaneo de Seguridad Inicial:** El `SecurityScanner` evalúa si los requisitos propuestos introducen riesgos de diseño o vulnerabilidades teóricas.
 6.  **Persistencia:**
-    *   **Markdown (.md):** Generado en `{Context}/{NombreFichero}.md`. El proceso solo decide el nombre del fichero (ej. `SPEC-admin-back-repeated-failures.md`); `Context` es el parámetro de entrada (ruta indicada por el agente documental).
-    *   **Metadata JSON:** Generación de un manifiesto técnico para el rastreo de dependencias por otros agentes.
+    *   **Markdown con frontmatter (.md):** Generado en `{Context}/{NombreFichero}.md` con frontmatter YAML (metadatos) + cuerpo Markdown. El proceso solo decide el nombre del fichero (ej. `SPEC-admin-back-repeated-failures.md`); `Context` es el parámetro de entrada (ruta indicada por el agente documental).
 7.  **Auditoría:** Registro de la creación del documento en paths.auditsPath + paths.accessLogFile.
 
 ## Integración con Agentes

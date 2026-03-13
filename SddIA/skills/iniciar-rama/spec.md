@@ -1,3 +1,57 @@
+---
+common_workflows:
+  start_feature: Iniciar-Rama.bat o .ps1 -BranchType feat -BranchName <slug>
+  start_fix: Iniciar-Rama.bat o .ps1 -BranchType fix -BranchName <slug>
+contract_ref: paths.skillsDefinitionPath/skills-contract.md (Cúmulo)
+implementation_path_ref: paths.skillCapsules.iniciar-rama
+owner: tekton-developer
+parameters:
+  BranchName:
+    description: Slug del nombre (ej. mi-feature, correccion-timeout)
+    required: true
+    type: string
+  BranchType:
+    description: 'Tipo de rama: feat o fix'
+    enum:
+    - feat
+    - fix
+    required: true
+    type: string
+  MainBranch:
+    description: Rama troncal; por defecto se detecta
+    enum:
+    - master
+    - main
+    required: false
+    type: string
+  SkipPull:
+    default: false
+    description: No ejecutar pull en la troncal
+    required: false
+    type: boolean
+phases:
+- description: Fetch, checkout a master/main, pull, checkout -b feat/<slug> o fix/<slug>.
+  id: create_branch
+  name: Crear rama desde troncal actualizada
+  steps:
+  - Normalizar slug del nombre de rama
+  - 'Si rama existe: checkout y merge origin/troncal; si no: fetch, checkout troncal, pull, checkout -b nueva rama'
+  - Comprobar git status y git branch -vv
+related_agents:
+- tekton-developer
+- architect
+- bug-fix-specialist
+related_artefacts:
+- paths.processPath/feature/
+- paths.processPath/bug-fix/
+rules:
+- Nunca trabajar en master/main; inicio de acción deja el repo en feat/ o fix/
+- La nueva rama se crea desde la troncal actualizada con origin
+skill_id: iniciar-rama
+spec_version: 1.0.0
+status: Active
+---
+
 # Skill: Iniciar Rama
 
 **skill_id:** `iniciar-rama`

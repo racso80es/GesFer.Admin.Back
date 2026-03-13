@@ -1,3 +1,32 @@
+---
+constraints:
+- Cumplimiento obligatorio de Karma2Token para trazabilidad y seguridad.
+- process_id en kebab-case (feature, bug-fix, refactorization, create-tool).
+- Rutas canónicas solo desde Cúmulo (paths.processPath, paths.featurePath, paths.fixPath, paths.actionsPath, paths.principlesPath).
+- Un proceso sin spec.md (con frontmatter YAML) en su carpeta no se considera completo.
+- 'Fases de diseño/implementación: validar principios según principles-contract.'
+consumers:
+- paths.actionsPath
+- SddIA/agents/*.json
+- SddIA/norms/interaction-triggers.md
+- .cursor/rules
+contract_version: 1.0.0
+definition_artefacts:
+- ext: .md
+  format: frontmatter_yaml
+  naming: spec.md
+  path: paths.processPath/<process-id>/
+  purpose: 'Especificación: frontmatter YAML (metadatos) + cuerpo Markdown. Campos: process_id, name, description, phases, persist_ref, related_actions, contract_ref. es-ES.'
+description: 'Contrato que todo proceso de tarea debe cumplir: definición en paths.processPath/<process-id>/ con archivo .md con frontmatter YAML. Cumple process_interface (Cúmulo) para artefactos generados en la carpeta de la tarea.'
+principles_validation: 'Los procesos deben validar que las fases de diseño e implementación sean coherentes con paths.principlesPath (principles-contract). En spec.json puede declararse principles_ref: paths.principlesPath.'
+process_interface_ref: 'Cúmulo (SddIA/agents/cumulo.json) → process_interface: al menos un .md y un .json en la carpeta de la tarea (paths.featurePath, paths.fixPath).'
+scope: paths.processPath (SddIA/process/)
+security_model:
+  description: Todo proceso debe orquestarse bajo el contexto de un Karma2Token válido.
+  required_token: Karma2Token
+  token_ref: SddIA/tokens/karma2-token/spec.json
+---
+
 # Contrato: Procesos de tarea (process)
 
 **Alcance:** paths.processPath (SddIA/process/). Todo proceso de tarea debe cumplir este contrato.

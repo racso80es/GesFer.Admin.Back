@@ -1,3 +1,18 @@
+---
+category: Arquitectura de Software
+contract_ref: paths.principlesPath/principles-contract.md
+id: c1f7a01b-9a8c-4d3b-8f2e-1e3d4a5b6c86
+metadata:
+  difficulty: Intermediate
+  status: Published
+principle_id: identificadores-uuids-desde-el-cliente
+tags:
+- Identificadores
+- UUID
+- Frontend
+- APIs
+---
+
 # Identificadores UUIDs desde el Cliente
 
 **principle_id:** `identificadores-uuids-desde-el-cliente`

@@ -1,3 +1,19 @@
+---
+category: Educación en Seguridad
+id: a1b2c3d4-0000-4000-a000-000000000009
+interested_agents:
+- security-engineer
+- auditor
+metadata:
+  difficulty: Beginner
+  status: Published
+tags:
+- CTF
+- Gamificación
+- HackTheBox
+- Entrenamiento
+---
+
 # Formación mediante CTF (Capture The Flag)
 
 ## Descripción

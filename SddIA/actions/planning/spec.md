@@ -1,3 +1,21 @@
+---
+action_id: planning
+contract_ref: actions-contract.md
+flow_steps:
+- Validación token
+- Extracción contexto
+- Análisis requisitos
+- Generación plan
+- Auditoría
+inputs:
+- --token
+- --spec
+outputs:
+- '{SpecName}_PLAN.md en carpeta de la spec'
+patterns_ref: paths.patternsPath
+principles_ref: paths.principlesPath
+---
+
 # Action: Plan
 
 ## Propósito

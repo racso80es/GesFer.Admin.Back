@@ -1,3 +1,18 @@
+---
+category: Domain-Driven Design
+contract_ref: paths.principlesPath/principles-contract.md
+id: c1f7a01b-9a8c-4d3b-8f2e-1e3d4a5b6c80
+metadata:
+  difficulty: Advanced
+  status: Published
+principle_id: aggregate-roots
+tags:
+- DDD
+- Agregados
+- Transacciones
+- Integridad
+---
+
 # Aggregate Roots
 
 **principle_id:** `aggregate-roots`

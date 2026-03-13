@@ -1,3 +1,49 @@
+---
+contract_ref: SddIA/tools/tools-contract.md
+cumulo_ref: SddIA/agents/cumulo.json
+depends_on_tools:
+- prepare-full-env
+- invoke-mysql-seeds
+env:
+- Windows 11
+- PowerShell 7+
+- .NET SDK 8
+implementation_path_ref: paths.toolCapsules.start-api
+inputs:
+  ConfigPath: string (opcional). Ruta al JSON de configuración; por defecto en implementación.
+  NoBuild: boolean (opcional). No compilar; solo ejecutar si ya hay build.
+  OutputJson: boolean (opcional). Emitir resultado JSON por stdout.
+  OutputPath: string (opcional). Fichero donde escribir el resultado JSON.
+  Port: number (opcional). Puerto del host (override).
+  PortBlocked: 'fail | kill (opcional). Si el puerto está ocupado: fail = error y salir; kill = cerrar proceso que usa el puerto y continuar. Por defecto: fail.'
+  Profile: string (opcional). Perfil de ejecución (ej. Development). Por defecto según config.
+output:
+  exit_codes:
+    '0': 'Éxito: health responde 200'
+    '1': Config no encontrado o inválido
+    '2': Puerto ocupado (PortBlocked=fail)
+    '3': 'Puerto ocupado: no se pudo liberar o sigue ocupado'
+    '4': Directorio API no encontrado
+    '5': Build fallido
+    '6': Error al lanzar dotnet run
+    '7': Health no respondió a tiempo
+    '8': Base de datos no disponible (MySQL). Ejecutar prepare-full-env e invoke-mysql-seeds antes.
+  phases_feedback:
+  - init
+  - port-check
+  - port-kill
+  - build
+  - launch
+  - healthcheck
+  - done
+  - error
+  schema_ref: tools-contract.md output.required_fields y optional_fields
+  success_criterion: El endpoint health responde adecuadamente (HTTP 200).
+port_check: Validar si el puerto está ocupado antes de arrancar; comportamiento según PortBlocked.
+toolId: start-api
+version: 1.0.0
+---
+
 # Especificación: start-api
 
 **toolId:** `start-api`  
@@ -49,7 +95,7 @@ La herramienta detecta en la salida de la API errores de conexión a MySQL (p. e
 
 ## Salida
 
-Cumple `SddIA/tools/tools-contract.json`: objeto JSON con toolId, exitCode, success, timestamp, message, feedback[], data (url_base, pid, port, healthy), duration_ms.
+Cumple `SddIA/tools/tools-contract.md`: objeto JSON con toolId, exitCode, success, timestamp, message, feedback[], data (url_base, pid, port, healthy), duration_ms.
 
 ## Fases (feedback)
 

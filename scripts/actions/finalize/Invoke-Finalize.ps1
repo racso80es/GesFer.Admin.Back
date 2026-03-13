@@ -89,17 +89,30 @@ try {
         }
     }
 
-    $skillCapsule = Join-Path $repoRoot "scripts\skills\finalizar-git\Push-And-CreatePR.ps1"
-    if (-not (Test-Path $skillCapsule)) {
-        Write-Error "No se encontró la skill finalizar-git: $skillCapsule (paths.skillCapsules['finalizar-git'])"
+    $skillDir = Join-Path $repoRoot "scripts\skills\finalizar-git"
+    $exePath = Join-Path $skillDir "bin\push_and_create_pr.exe"
+    $ps1Path = Join-Path $skillDir "Push-And-CreatePR.ps1"
+
+    $useExe = Test-Path $exePath
+    $usePs1 = Test-Path $ps1Path
+
+    if (-not $useExe -and -not $usePs1) {
+        Write-Error "No se encontró la skill finalizar-git: ni bin/push_and_create_pr.exe ni Push-And-CreatePR.ps1 en $skillDir (paths.skillCapsules['finalizar-git']). Ejecute scripts/skills-rs/install.ps1."
         exit 1
     }
 
     Write-Host "[Finalize] Invocando skill finalizar-git (Push-And-CreatePR) con -Persist $Persist" -ForegroundColor Cyan
-    $params = @{ Persist = $Persist }
-    if ($BranchName) { $params.BranchName = $BranchName }
-    if ($Title) { $params.Title = $Title }
-    & $skillCapsule @params
+    if ($useExe) {
+        $exeArgs = @("--persist", $Persist)
+        if ($BranchName) { $exeArgs += @("--branch", $BranchName) }
+        if ($Title) { $exeArgs += @("--title", $Title) }
+        & $exePath @exeArgs
+    } else {
+        $params = @{ Persist = $Persist }
+        if ($BranchName) { $params.BranchName = $BranchName }
+        if ($Title) { $params.Title = $Title }
+        & $ps1Path @params
+    }
     $exitCode = $LASTEXITCODE
 } finally {
     Pop-Location
