@@ -1,3 +1,33 @@
+---
+contract_ref: SddIA/tools/tools-contract.md
+cumulo_ref: SddIA/agents/cumulo.json
+env:
+- Windows 11
+- PowerShell 7+
+- Docker Desktop
+- .NET SDK
+implementation_path_ref: paths.toolCapsules.prepare-full-env
+inputs:
+  ConfigPath: string (opcional). Ruta al JSON de configuración; por defecto en implementación.
+  DockerOnly: boolean (opcional). Solo levantar Docker.
+  NoDocker: boolean (opcional). No levantar Docker; solo API/clientes si config.
+  OutputJson: boolean (opcional). Emitir resultado JSON por stdout.
+  OutputPath: string (opcional). Fichero donde escribir el resultado JSON.
+  StartApi: boolean (opcional). Además levantar Admin API en local.
+output:
+  phases_feedback:
+  - init
+  - docker
+  - mysql
+  - api
+  - clients
+  - done
+  - error
+  schema_ref: tools-contract.md output.required_fields y optional_fields
+toolId: prepare-full-env
+version: 1.0.0
+---
+
 # Especificación: prepare-full-env
 
 **toolId:** `prepare-full-env`  
@@ -21,7 +51,7 @@ Herramienta que prepara el entorno de desarrollo: levanta servicios Docker (MySQ
 
 ## Salida
 
-Cumple `SddIA/tools/tools-contract.json`: objeto JSON con toolId, exitCode, success, timestamp, message, feedback[], data (docker, api, clients), duration_ms.
+Cumple `SddIA/tools/tools-contract.md`: objeto JSON con toolId, exitCode, success, timestamp, message, feedback[], data (docker, api, clients), duration_ms.
 
 ## Fases (feedback)
 

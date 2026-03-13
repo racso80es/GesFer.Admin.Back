@@ -1,3 +1,21 @@
+---
+blocking_for_pr: true
+category: Normas SddIA
+contract_ref: paths.principlesPath/principles-contract.md
+defined_by_agent: cumulo
+id: d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f80
+metadata:
+  difficulty: Beginner
+  status: Published
+principle_id: nomenclatura
+tags:
+- Nomenclatura
+- Convenciones
+- Cúmulo
+- PR
+- Validación
+---
+
 # Norma de Nomenclatura
 
 **principle_id:** `nomenclatura`  

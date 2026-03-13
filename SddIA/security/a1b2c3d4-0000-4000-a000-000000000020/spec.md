@@ -1,3 +1,20 @@
+---
+category: DevSecOps
+id: a1b2c3d4-0000-4000-a000-000000000020
+interested_agents:
+- security-engineer
+- tekton-developer
+- infrastructure-architect
+metadata:
+  difficulty: Beginner
+  status: Published
+tags:
+- Dependencias
+- CVE
+- Automatización
+- GitHub
+---
+
 # Actualizaciones Automáticas con Dependabot
 
 ## Descripción

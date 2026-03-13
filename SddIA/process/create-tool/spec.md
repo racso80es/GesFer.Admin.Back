@@ -1,3 +1,32 @@
+---
+contract_ref: paths.processPath/process-contract.md
+inputs:
+  description: Descripción breve. Obligatorio.
+  tool_id: kebab-case. Obligatorio.
+paths:
+  featurePath_ref: paths.featurePath (Cúmulo)
+  toolCapsulesRef: paths.toolCapsules
+  toolsDefinitionPath: ./SddIA/tools/
+  toolsIndexPath_ref: paths.toolsIndexPath (Cúmulo)
+  toolsPath_ref: paths.toolsPath (Cúmulo)
+persist_ref: paths.featurePath/create-tool-<tool-id>
+process_doc_ref: paths.processPath/create-tool/
+process_id: create-tool
+process_interface_compliance: 'Genera en carpeta de la tarea al menos un .md y un .json; entrega ejecutable: cápsula en paths.toolsPath/<tool-id>/.'
+related_actions:
+- spec
+- implementation
+- validate
+- finalize
+related_skills:
+- iniciar-rama
+spec_version: 1.0.0
+tools_contract_ref: SddIA/tools/tools-contract.md
+triggers:
+- Crear nueva herramienta en paths.toolsPath
+- Solicitud de creación de herramienta con tool-id
+---
+
 # Proceso: Creación de herramientas (create-tool)
 
 Este documento define el **proceso de tarea** para crear una nueva herramienta (tool) en el proyecto. Está ubicado en paths.processPath/create-tool/ (Cúmulo). Las rutas de herramientas se obtienen de **Cúmulo** (paths.toolsPath, paths.toolCapsules, paths.toolsIndexPath).
@@ -6,7 +35,7 @@ Este documento define el **proceso de tarea** para crear una nueva herramienta (
 
 ## Propósito
 
-El proceso **create-tool** define el procedimiento para incorporar una nueva herramienta al ecosistema de paths.toolsPath (Cúmulo): desde la definición del objetivo hasta la cápsula lista, el índice actualizado y Cúmulo sincronizado. Garantiza que cada herramienta cumpla SddIA/tools/tools-contract.json y que las rutas queden registradas en Cúmulo y en scripts/tools/index.json.
+El proceso **create-tool** define el procedimiento para incorporar una nueva herramienta al ecosistema de paths.toolsPath (Cúmulo): desde la definición del objetivo hasta la cápsula lista, el índice actualizado y Cúmulo sincronizado. Garantiza que cada herramienta cumpla SddIA/tools/tools-contract.md y que las rutas queden registradas en Cúmulo y en scripts/tools/index.json.
 
 ## Alcance del procedimiento
 
@@ -81,6 +110,6 @@ Si estás migrando una herramienta existente desde `.ps1` a `.exe`:
 
 ## Referencias
 
-- Contrato: SddIA/tools/tools-contract.json, tools-contract.md.
+- Contrato: SddIA/tools/tools-contract.md, tools-contract.md.
 - Cúmulo: paths.toolsDefinitionPath, paths.toolsPath, paths.toolCapsules, paths.toolsIndexPath.
 - Proceso machine-readable: paths.processPath/create-tool/spec.json.

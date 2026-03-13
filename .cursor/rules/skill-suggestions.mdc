@@ -30,6 +30,6 @@ Cuando el usuario escriba **#Skill** (solo o en un mensaje), responde sugiriendo
 
 ## Respuesta sugerida
 
-Ofrecer el listado en español y añadir, si aplica: *"¿Con cuál quieres trabajar o qué necesitas hacer?"* Para más detalle: definición en paths.skillsDefinitionPath/\<skill-id\>/ (spec.md, spec.json); implementación en paths.skillCapsules[skill-id] (Cúmulo).
+Ofrecer el listado en español y añadir, si aplica: *"¿Con cuál quieres trabajar o qué necesitas hacer?"* Para más detalle: definición en paths.skillsDefinitionPath/\<skill-id\>/ (spec.md con frontmatter YAML); implementación en paths.skillCapsules[skill-id] (Cúmulo).
 
 Listado canónico en **SddIA/norms/interaction-triggers.md** (disparador #Skill) y **SddIA/skills/**.

@@ -17,5 +17,5 @@ En SddIA **no se escriben rutas de ficheros literales** (ej. `docs/features/`, `
 
 ## Aplicación
 
-- **Actions, process, skills, agents:** Referenciar rutas solo como paths.\<clave\> o paths.\<clave\>[\<id\>]. No usar cadenas literales docs/... ni scripts/... en la documentación de comportamiento.
+- **Actions, process, skills, agents:** Referenciar rutas solo como paths.\<clave\> o paths.\<clave\>[\<id\>]. Estructura de entidades: archivo .md con frontmatter YAML (paths.actionsPath, paths.processPath, paths.skillsDefinitionPath, paths.toolsDefinitionPath, etc.). No usar cadenas literales docs/... ni scripts/... en la documentación de comportamiento.
 - **AGENTS.md y constitution:** Indicar que la única fuente de rutas es el contrato de paths (cumulo.paths.json) referenciado por Cúmulo; no ejemplos con rutas literales salvo en ese contrato.

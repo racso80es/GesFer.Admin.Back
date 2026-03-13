@@ -1,3 +1,19 @@
+---
+category: Ciberseguridad
+id: a1b2c3d4-0000-4000-a000-000000000007
+interested_agents:
+- security-engineer
+- auditor
+metadata:
+  difficulty: Intermediate
+  status: Published
+tags:
+- Ofensiva
+- Red Team
+- Penetration Testing
+- Auditoría
+---
+
 # Red Team vs Pen Testing
 
 ## Descripción

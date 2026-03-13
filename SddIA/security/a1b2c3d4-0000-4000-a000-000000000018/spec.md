@@ -1,3 +1,20 @@
+---
+category: Seguridad en Código
+id: a1b2c3d4-0000-4000-a000-000000000018
+interested_agents:
+- security-engineer
+- tekton-developer
+- auditor
+metadata:
+  difficulty: Intermediate
+  status: Published
+tags:
+- GitHub
+- Git
+- Spoofing
+- Verificación
+---
+
 # Modo Vigilante (Vigilant Mode) en GitHub
 
 ## Descripción

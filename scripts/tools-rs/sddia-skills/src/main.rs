@@ -1,5 +1,5 @@
 //! SddIA Skills Runner.
-//! Lazy-loading: List usa solo spec.json; Show carga spec.md solo cuando se necesita contexto completo.
+//! List y Show usan spec.md con frontmatter YAML (arquitectura post-migración).
 
 use clap::{Parser, Subcommand};
 use serde_json::Value;
@@ -21,8 +21,8 @@ fn find_repo_root() -> Option<std::path::PathBuf> {
     }
 }
 
-/// Lista skills leyendo SOLO spec.json (lazy-loading: no carga spec.md)
-fn list_skills_json_only() -> Result<Vec<String>, String> {
+/// Lista skills leyendo existencia de spec.md
+fn list_skills() -> Result<Vec<String>, String> {
     let root = find_repo_root().ok_or("No se encontró SddIA/skills (ejecutar desde raíz del repo)")?;
     let skills_dir = root.join(SKILLS_PATH);
     let mut skills = Vec::new();
@@ -30,8 +30,8 @@ fn list_skills_json_only() -> Result<Vec<String>, String> {
         let entry = entry.map_err(|e| e.to_string())?;
         let path = entry.path();
         if path.is_dir() {
-            let spec_json = path.join("spec.json");
-            if spec_json.exists() {
+            let spec_md = path.join("spec.md");
+            if spec_md.exists() {
                 if let Some(name) = path.file_name() {
                     skills.push(name.to_string_lossy().to_string());
                 }
@@ -42,28 +42,37 @@ fn list_skills_json_only() -> Result<Vec<String>, String> {
     Ok(skills)
 }
 
-/// Carga contexto completo: spec.json + spec.md (solo cuando se necesita)
+/// Parsea frontmatter YAML de un archivo .md
+fn parse_frontmatter(content: &str) -> Option<(&str, &str)> {
+    let content = content.trim_start();
+    if !content.starts_with("---") {
+        return None;
+    }
+    let rest = &content[3..];
+    let end = rest.find("\n---")?;
+    let yaml = rest[..end].trim();
+    let body = rest[end + 4..].trim_start();
+    Some((yaml, body))
+}
+
+/// Carga spec.md con frontmatter: devuelve (frontmatter como Value, cuerpo)
 fn load_full_context(skill_id: &str) -> Result<(Value, String), String> {
     let root = find_repo_root().ok_or("No se encontró SddIA/skills")?;
     let skill_dir = root.join(SKILLS_PATH).join(skill_id);
-    let spec_json_path = skill_dir.join("spec.json");
     let spec_md_path = skill_dir.join("spec.md");
-    if !spec_json_path.exists() {
-        return Err(format!("Skill '{}' no encontrado (no spec.json)", skill_id));
+    if !spec_md_path.exists() {
+        return Err(format!("Skill '{}' no encontrado (no spec.md)", skill_id));
     }
-    let json_str = fs::read_to_string(&spec_json_path).map_err(|e| e.to_string())?;
-    let json: Value = serde_json::from_str(&json_str).map_err(|e| e.to_string())?;
-    let md_content = if spec_md_path.exists() {
-        fs::read_to_string(&spec_md_path).unwrap_or_default()
-    } else {
-        String::new()
-    };
-    Ok((json, md_content))
+    let content = fs::read_to_string(&spec_md_path).map_err(|e| e.to_string())?;
+    let (yaml_str, body) = parse_frontmatter(&content)
+        .ok_or_else(|| format!("Skill '{}': spec.md sin frontmatter YAML válido", skill_id))?;
+    let value: Value = serde_yaml::from_str(yaml_str).map_err(|e| e.to_string())?;
+    Ok((value, body.to_string()))
 }
 
 #[derive(Parser)]
 #[command(name = "sddia-skills")]
-#[command(about = "SddIA Skills Runner. Lazy-loading: List usa solo spec.json.", long_about = None)]
+#[command(about = "SddIA Skills Runner. Usa spec.md con frontmatter YAML.", long_about = None)]
 struct Cli {
     #[command(subcommand)]
     command: Commands,
@@ -71,9 +80,9 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
-    /// Lista skills (lee SOLO spec.json, no spec.md - lazy-loading)
+    /// Lista skills (lee existencia de spec.md)
     List,
-    /// Muestra contexto completo de un skill (carga spec.json + spec.md)
+    /// Muestra contexto completo de un skill (spec.md con frontmatter)
     Show {
         /// ID del skill
         skill_id: String,
@@ -90,9 +99,9 @@ fn main() {
 
     match &cli.command {
         Commands::List => {
-            match list_skills_json_only() {
+            match list_skills() {
                 Ok(skills) => {
-                    println!("Skills (solo spec.json cargado, sin spec.md):");
+                    println!("Skills:");
                     for s in skills {
                         println!("  - {}", s);
                     }
@@ -105,10 +114,10 @@ fn main() {
         }
         Commands::Show { skill_id } => {
             match load_full_context(skill_id) {
-                Ok((json, md)) => {
-                    println!("=== spec.json ===\n{}", serde_json::to_string_pretty(&json).unwrap_or_default());
-                    if !md.is_empty() {
-                        println!("\n=== spec.md (primeras 20 líneas) ===\n{}", md.lines().take(20).collect::<Vec<_>>().join("\n"));
+                Ok((frontmatter, body)) => {
+                    println!("=== Frontmatter (YAML) ===\n{}", serde_json::to_string_pretty(&frontmatter).unwrap_or_default());
+                    if !body.is_empty() {
+                        println!("\n=== Cuerpo (primeras 20 líneas) ===\n{}", body.lines().take(20).collect::<Vec<_>>().join("\n"));
                     }
                 }
                 Err(e) => {

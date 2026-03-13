@@ -1,7 +1,38 @@
+---
+config:
+  default_branch_pattern: feat/correccion-segun-auditorias | feat/correccion-auditorias-<id>
+  default_persist: paths.featurePath/<nombre_correccion>
+contract_ref: SddIA/templates/templates-contract.md
+input_sources:
+  audit_file: 'Opcional: fichero o patrón (ej. AUDITORIA_*.md, validacion-*.json)'
+  audit_origin: paths.auditsPath (Cúmulo) o ruta parcial/total indicada
+interested_agents:
+- architect
+- tekton-developer
+- auditor-back
+- auditor-front
+- auditor-process
+process_ref: correccion-auditorias
+related_actions:
+- spec
+- clarify
+- planning
+- implementation
+- execution
+- validate
+- finalize
+related_skills:
+- iniciar-rama
+- finalizar-git
+- documentation
+- security-audit
+template_id: correccion-auditorias-feature
+---
+
 # Plantilla: Feature de corrección según auditorías
 
 **template_id:** correccion-auditorias-feature  
-**Contrato:** SddIA/templates/templates-contract.json
+**Contrato:** SddIA/templates/templates-contract.md
 
 ## Propósito
 

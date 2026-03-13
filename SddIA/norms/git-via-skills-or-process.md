@@ -6,7 +6,7 @@
 
 **La IA nunca debe ejecutar comandos git directamente** en la shell (ni `git status`, `git add`, `git commit`, `git push`, `git pull`, `git branch`, `git checkout`, etc.). Cualquier operación git ha de realizarse **siempre** a través de al menos uno de los siguientes canales:
 
-- **Skill:** p. ej. paths.skillCapsules.invoke-command (interceptor de comandos de sistema), paths.skillCapsules.iniciar-rama, paths.skillCapsules.finalizar-git. Contrato: paths.skillsDefinitionPath/\<skill-id\>/spec.json.
+- **Skill:** p. ej. paths.skillCapsules.invoke-command (interceptor de comandos de sistema), paths.skillCapsules.iniciar-rama, paths.skillCapsules.finalizar-git. Contrato: paths.skillsDefinitionPath/\<skill-id\>/ (archivo .md con frontmatter YAML).
 - **Herramienta (tool):** definida en paths.toolsDefinitionPath, implementación en paths.toolCapsules[tool-id].
 - **Acción:** definida en paths.actionsPath (spec, planning, implementation, execution, validate, finalize, etc.). Las acciones pueden orquestar skills o herramientas que ejecuten git.
 - **Proceso:** definido en paths.processPath (feature, bug-fix, create-tool, create-principle, etc.). Los procesos invocan acciones y skills; la IA sigue el proceso en lugar de lanzar git por su cuenta.

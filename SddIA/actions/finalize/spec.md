@@ -1,3 +1,26 @@
+---
+action_id: finalize
+contract_ref: actions-contract.md
+flow_steps:
+- Precondiciones
+- Commits atómicos
+- Evolution Logs
+- Invocar Invoke-Finalize.ps1 (skill finalizar-proceso, pre_pr)
+- finalize.json
+- Auditoría
+- 'post_pr: Finalizar-Proceso.ps1 (skill finalizar-proceso)'
+implementation_script_ref: scripts/actions/finalize/Invoke-Finalize.ps1
+inputs:
+- Carpeta feature (Cúmulo)
+- Rama feat/ o fix/
+outputs:
+- Rama en origin
+- Evolution Logs
+- PR
+- finalize.json opcional
+skill_ref: finalizar-proceso
+---
+
 # Action: Finalize
 
 ## Propósito

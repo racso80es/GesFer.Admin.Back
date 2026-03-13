@@ -1,3 +1,21 @@
+---
+category: Arquitectura de Software
+id: a1b2c3d4-0000-4000-a000-000000000014
+interested_agents:
+- architect
+- infrastructure-architect
+- tekton-developer
+- security-engineer
+metadata:
+  difficulty: Intermediate
+  status: Published
+tags:
+- Gestión de Secretos
+- Bitwarden
+- Vault
+- Seguridad
+---
+
 # Gestión de Secretos con Vaults
 
 ## Descripción

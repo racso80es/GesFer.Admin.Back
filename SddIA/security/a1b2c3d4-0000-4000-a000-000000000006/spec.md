@@ -1,3 +1,20 @@
+---
+category: DevSecOps
+id: a1b2c3d4-0000-4000-a000-000000000006
+interested_agents:
+- security-engineer
+- infrastructure-architect
+- auditor
+metadata:
+  difficulty: Intermediate
+  status: Published
+tags:
+- SOC
+- Blue Team
+- Defensa
+- Monitorización
+---
+
 # Centro de Operaciones de Seguridad (SOC)
 
 ## Descripción

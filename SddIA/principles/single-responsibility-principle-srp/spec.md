@@ -1,3 +1,18 @@
+---
+category: Principios SOLID
+contract_ref: paths.principlesPath/principles-contract.md
+id: c1f7a01b-9a8c-4d3b-8f2e-1e3d4a5b6c75
+metadata:
+  difficulty: Intermediate
+  status: Published
+principle_id: single-responsibility-principle-srp
+tags:
+- SOLID
+- Cohesión
+- Acoplamiento
+- Arquitectura
+---
+
 # Single Responsibility Principle (SRP)
 
 **principle_id:** `single-responsibility-principle-srp`

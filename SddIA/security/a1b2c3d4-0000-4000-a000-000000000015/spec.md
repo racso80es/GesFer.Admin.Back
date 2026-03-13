@@ -1,3 +1,20 @@
+---
+category: Políticas de Seguridad
+id: a1b2c3d4-0000-4000-a000-000000000015
+interested_agents:
+- security-engineer
+- auditor
+- infrastructure-architect
+metadata:
+  difficulty: Beginner
+  status: Published
+tags:
+- Encriptación
+- On-Call
+- Robo de Datos
+- Hard Drives
+---
+
 # Cifrado Físico de Dispositivos
 
 ## Descripción

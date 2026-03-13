@@ -16,7 +16,7 @@
 2. **Sugerir las skills existentes** listando `skill_id` y descripción breve.
 3. **Fuente del listado:** paths.skillsDefinitionPath (README.md, tabla de skills) y/o las carpetas en **paths.skillsDefinitionPath** (Cúmulo). Para skills con implementación ejecutable: **paths.skillsIndexPath** o **paths.skillCapsules** (Cúmulo).
 4. **Formato de respuesta:** Tabla o lista clara en español; indicar cuáles tienen cápsula (paths.skillCapsules) y cuáles son solo definición.
-5. **Cierre:** Ofrecer seguir con una skill concreta: *"¿Con cuál quieres trabajar o qué necesitas hacer?"* Detalle: paths.skillsDefinitionPath/<skill-id>/ (spec.md, spec.json); implementación en paths.skillCapsules[skill-id].
+5. **Cierre:** Ofrecer seguir con una skill concreta: *"¿Con cuál quieres trabajar o qué necesitas hacer?"* Detalle: paths.skillsDefinitionPath/<skill-id>/ (archivo .md con frontmatter YAML); implementación en paths.skillCapsules[skill-id].
 
 ### Listado de referencia (actualizar si cambia paths.skillsDefinitionPath)
 
@@ -45,7 +45,7 @@
 2. **Sugerir las acciones existentes** listando action_id y descripción breve.
 3. **Fuente del listado:** paths.actionsPath (Cúmulo) — cada acción en carpeta paths.actionsPath/<action-id>/ (spec.md, spec.json). Orden típico en el proceso feature: spec → clarify → planning → implementation → execution → validate → finalize.
 4. **Formato de respuesta:** Tabla o lista clara en español con action_id y propósito.
-5. **Cierre:** Ofrecer seguir con una acción concreta: *"¿Cuál quieres ejecutar o sobre cuál necesitas detalle?"* Detalle: paths.actionsPath/<action-id>/ (spec.md, spec.json).
+5. **Cierre:** Ofrecer seguir con una acción concreta: *"¿Cuál quieres ejecutar o sobre cuál necesitas detalle?"* Detalle: paths.actionsPath/<action-id>/ (archivo .md con frontmatter YAML).
 
 ### Listado de referencia (actualizar si cambia paths.actionsPath)
 
@@ -70,9 +70,9 @@
 
 1. **Reconocer** que el usuario quiere ver o elegir un proceso de tarea.
 2. **Sugerir los procesos existentes** listando el identificador y descripción breve.
-3. **Fuente del listado:** paths.processPath (Cúmulo: README.md y carpetas por proceso). Cada proceso tiene carpeta &lt;process-id&gt;/ con spec.md y spec.json (contrato: process-contract.json).
+3. **Fuente del listado:** paths.processPath (Cúmulo: README.md y carpetas por proceso). Cada proceso tiene carpeta &lt;process-id&gt;/ con archivo .md con frontmatter YAML (contrato: process-contract.json).
 4. **Formato de respuesta:** Tabla o lista clara en español con process_id y propósito; indicar definición: paths.processPath/&lt;process-id&gt;/.
-5. **Cierre:** Ofrecer seguir con un proceso: *"¿Con cuál quieres iniciar una tarea o necesitas detalle?"* Detalle: paths.processPath/README.md y paths.processPath/&lt;process-id&gt;/ (spec.md, spec.json).
+5. **Cierre:** Ofrecer seguir con un proceso: *"¿Con cuál quieres iniciar una tarea o necesitas detalle?"* Detalle: paths.processPath/README.md y paths.processPath/&lt;process-id&gt;/ (archivo .md con frontmatter YAML).
 
 ### Listado de referencia (actualizar si cambia paths.processPath)
 

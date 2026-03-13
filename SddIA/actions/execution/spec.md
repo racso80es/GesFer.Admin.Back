@@ -1,3 +1,20 @@
+---
+action_id: execution
+contract_ref: actions-contract.md
+flow_steps:
+- Validación entrada
+- Carga ítems
+- Por cada ítem aplicar
+- Persistencia
+- Auditoría
+inputs:
+- implementation.json o IMPL (carpeta tarea, Cúmulo)
+outputs:
+- execution.json en carpeta de tarea (Cúmulo)
+patterns_ref: paths.patternsPath
+principles_ref: paths.principlesPath
+---
+
 # Action: Execution
 
 ## Propósito

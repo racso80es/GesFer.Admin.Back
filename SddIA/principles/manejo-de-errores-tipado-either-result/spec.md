@@ -1,3 +1,18 @@
+---
+category: Arquitectura de Software
+contract_ref: paths.principlesPath/principles-contract.md
+id: c1f7a01b-9a8c-4d3b-8f2e-1e3d4a5b6c83
+metadata:
+  difficulty: Intermediate
+  status: Published
+principle_id: manejo-de-errores-tipado-either-result
+tags:
+- Errores
+- Either
+- Result
+- Programación Funcional
+---
+
 # Manejo de Errores Tipado (Either / Result)
 
 **principle_id:** `manejo-de-errores-tipado-either-result`

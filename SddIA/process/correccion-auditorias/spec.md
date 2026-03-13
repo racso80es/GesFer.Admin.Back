@@ -1,3 +1,53 @@
+---
+contract_ref: paths.processPath/process-contract.md
+input_ref: paths.auditsPath
+persist_ref: paths.featurePath/<nombre_correccion>
+phases:
+- description: Revisar últimos informes en paths.auditsPath; consolidar hallazgos (críticos/medios/bajos).
+  id: '0'
+  name: Análisis de auditorías
+- description: objectives.md con hallazgos priorizados y criterios de cierre.
+  id: '1'
+  name: Documentación de objetivos
+- description: Acción spec; spec.md, spec.json.
+  id: '2'
+  name: Especificación
+- description: Acción clarify si aplica; clarify.md, clarify.json.
+  id: '3'
+  name: Clarificación
+- description: Acción planning; plan.
+  id: '4'
+  name: Planificación
+- description: Acción implementation; implementation.md, implementation.json.
+  id: '5'
+  name: Implementación (doc)
+- description: Acción execution; execution.json.
+  id: '6'
+  name: Ejecución
+- description: Acción validate; validacion.json.
+  id: '7'
+  name: Validar
+- description: Acción finalize; Evolution Logs, PR.
+  id: '8'
+  name: Finalizar
+principles_ref: paths.principlesPath
+process_id: correccion-auditorias
+related_actions:
+- spec
+- clarify
+- planning
+- implementation
+- execution
+- validate
+- finalize
+related_skills:
+- iniciar-rama
+- finalizar-git
+- documentation
+- security-audit
+spec_version: 1.0.0
+---
+
 # Proceso: Corrección según Auditorías
 
 Este documento define el **proceso de tarea** para la corrección de hallazgos derivados de auditorías (paths.auditsPath). Está ubicado en paths.processPath/correccion-auditorias/ (Cúmulo). La ruta de persistencia se obtiene de **Cúmulo** (paths.featurePath/<nombre_correccion>).

@@ -1,3 +1,19 @@
+---
+category: DevSecOps
+id: a1b2c3d4-0000-4000-a000-000000000011
+interested_agents:
+- security-engineer
+- tekton-developer
+metadata:
+  difficulty: Advanced
+  status: Published
+tags:
+- npm
+- postinstall
+- Scripts
+- Exfiltración
+---
+
 # Ejecución de malware vía scripts postinstall
 
 ## Descripción

@@ -1,3 +1,50 @@
+---
+contract_ref: paths.processPath/process-contract.md
+persist_ref: paths.featurePath/<nombre_feature>
+phases:
+- description: Rama feat desde master; skill iniciar-rama.
+  id: '0'
+  name: Preparar entorno
+- description: objectives.md en carpeta de la tarea.
+  id: '1'
+  name: Documentación con objetivos
+- description: Acción spec; salida spec.md, spec.json.
+  id: '2'
+  name: Especificación
+- description: Acción clarify; clarify.md, clarify.json.
+  id: '3'
+  name: Clarificación
+- description: Acción planning; plan.
+  id: '4'
+  name: Planificación
+- description: Acción implementation; implementation.md, implementation.json.
+  id: '5'
+  name: Implementación (doc)
+- description: Acción execution; execution.json.
+  id: '6'
+  name: Ejecución
+- description: Acción validate; validacion.json.
+  id: '7'
+  name: Validar
+- description: Acción finalize; Evolution Logs, PR.
+  id: '8'
+  name: Finalizar
+principles_ref: paths.principlesPath
+process_id: feature
+related_actions:
+- spec
+- clarify
+- planning
+- implementation
+- execution
+- validate
+- finalize
+related_skills:
+- iniciar-rama
+- finalizar-git
+spec_version: 1.0.0
+---
+
 # Proceso: Feature
 
 Este documento define el **proceso de tarea** para desarrollar una funcionalidad. Está ubicado en paths.processPath/feature/ (Cúmulo). Las acciones que orquesta están en paths.actionsPath (Cúmulo). La ruta de persistencia se obtiene de **Cúmulo** (paths.featurePath/<nombre_feature>).

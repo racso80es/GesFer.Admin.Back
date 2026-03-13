@@ -1,3 +1,64 @@
+---
+contract_version: 1.0.0
+description: Contrato que cada patrón de diseño debe cumplir en SddIA/patterns.
+folder_structure: 'Cada patrón debe residir en una carpeta nombrada con su UUID: SddIA/patterns/<uuid>/'
+json_schema:
+  properties:
+    category:
+      type: string
+    id:
+      description: UUID v4 del patrón
+      type: string
+    interested_agents:
+      description: Lista de agentes de SddIA que deben conocer este patrón.
+      items:
+        type: string
+      type: array
+    metadata:
+      properties:
+        difficulty:
+          enum:
+          - Basic
+          - Intermediate
+          - Advanced
+          type: string
+        status:
+          enum:
+          - Draft
+          - Published
+          - Deprecated
+          type: string
+      required:
+      - difficulty
+      - status
+      type: object
+    tags:
+      items:
+        type: string
+      type: array
+    title:
+      type: string
+  required:
+  - id
+  - title
+  - category
+  - tags
+  - metadata
+  - interested_agents
+  type: object
+required_files:
+- description: Archivo .md con frontmatter YAML (metadatos) + cuerpo Markdown.
+  format: markdown_frontmatter_yaml
+  language: es-ES
+  name: spec.md
+  required: true
+scope: SddIA/patterns/
+security_model:
+  description: La aplicación o modificación de un patrón requiere un contexto de Karma2Token válido.
+  required_token: Karma2Token
+  token_ref: SddIA/tokens/karma2-token/spec.json
+---
+
 # Contrato de Patrones (SddIA/patterns/)
 
 **Alcance:** Todas las entidades bajo `SddIA/patterns/`.

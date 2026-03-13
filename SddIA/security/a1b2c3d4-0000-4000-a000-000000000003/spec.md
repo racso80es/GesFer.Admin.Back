@@ -1,3 +1,20 @@
+---
+category: Seguridad de Aplicaciones
+id: a1b2c3d4-0000-4000-a000-000000000003
+interested_agents:
+- architect
+- security-engineer
+- tekton-developer
+metadata:
+  difficulty: Intermediate
+  status: Published
+tags:
+- Autenticación
+- JWT
+- Tokens
+- Identidad
+---
+
 # JSON Web Tokens (JWT) y su Integridad
 
 ## Descripción

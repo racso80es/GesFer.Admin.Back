@@ -1,3 +1,65 @@
+---
+contract_version: 1.0.0
+description: Contrato que cada item de seguridad debe cumplir en SddIA/security.
+domain_entities: 'Los items de seguridad son entidades de dominio (ecosistema SddIA); integran el contrato Token y deben respetar estructura frontmatter YAML. Norma: SddIA/norms/entidades-dominio-ecosistema-sddia.md.'
+folder_structure: 'Cada item debe residir en una carpeta nombrada con su UUID: SddIA/security/<uuid>/'
+json_schema:
+  properties:
+    category:
+      type: string
+    id:
+      description: UUID v4 del item de seguridad
+      type: string
+    interested_agents:
+      description: Lista de agentes de SddIA que deben conocer este item.
+      items:
+        type: string
+      type: array
+    metadata:
+      properties:
+        difficulty:
+          enum:
+          - Beginner
+          - Intermediate
+          - Advanced
+          type: string
+        status:
+          enum:
+          - Draft
+          - Published
+          - Deprecated
+          type: string
+      required:
+      - difficulty
+      - status
+      type: object
+    tags:
+      items:
+        type: string
+      type: array
+    title:
+      type: string
+  required:
+  - id
+  - title
+  - category
+  - tags
+  - metadata
+  - interested_agents
+  type: object
+required_files:
+- description: Archivo .md con frontmatter YAML (metadatos) + cuerpo Markdown.
+  format: markdown_frontmatter_yaml
+  language: es-ES
+  name: spec.md
+  required: true
+scope: SddIA/security/
+security_model:
+  description: La consulta o aplicación de un item de seguridad requiere un contexto de Karma2Token válido.
+  required_token: Karma2Token
+  token_ref: SddIA/Tokens/karma2-token/spec.json
+---
+
 # Contrato de Seguridad (SddIA/security/)
 
 **Alcance:** Todas las entidades bajo `SddIA/security/`.

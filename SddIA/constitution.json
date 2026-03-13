@@ -49,7 +49,7 @@
     {
       "id": "L7_DOMAIN_ENTITIES",
       "rule": "Domain Entities (SddIA Ecosystem)",
-      "description": "Entities that integrate the Token contract (paths.tokensPath) are domain entities. They must respect structure (spec.md + spec.json) and MD/JSON synchronicity. Norm: SddIA/norms/entidades-dominio-ecosistema-sddia.md.",
+      "description": "Entities that integrate the Token contract (paths.tokensPath) are domain entities. They must respect structure: Markdown with Frontmatter YAML (single .md per entity). Exception: tokens may be JSON-only per tokens-contract. Norm: SddIA/norms/entidades-dominio-ecosistema-sddia.md.",
       "severity": "HIGH"
     }
   ],

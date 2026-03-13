@@ -1,3 +1,49 @@
+---
+contract_ref: paths.processPath/process-contract.md
+persist_ref: paths.featurePath/refactorization-<nombre_refactor>
+phases:
+- description: Rama feat/refactorization-<nombre_refactor>; skill iniciar-rama.
+  id: '0'
+  name: Preparar entorno
+- description: objectives.md.
+  id: '1'
+  name: Documentación con objetivos
+- description: Acción spec.
+  id: '2'
+  name: Especificación
+- description: Acción clarify.
+  id: '3'
+  name: Clarificación
+- description: Acción planning.
+  id: '4'
+  name: Planificación
+- description: Acción implementation.
+  id: '5'
+  name: Implementación (doc)
+- description: Acción execution.
+  id: '6'
+  name: Ejecución
+- description: Acción validate.
+  id: '7'
+  name: Validar
+- description: Acción finalize.
+  id: '8'
+  name: Finalizar
+process_id: refactorization
+related_actions:
+- spec
+- clarify
+- planning
+- implementation
+- execution
+- validate
+- finalize
+related_skills:
+- iniciar-rama
+- finalizar-git
+spec_version: 1.0.0
+---
+
 # Proceso: Refactorización
 
 Este documento define el **proceso de tarea** para una refactorización. Está ubicado en paths.processPath/refactorization/ (Cúmulo). Las acciones que orquesta están en paths.actionsPath (Cúmulo). La ruta de persistencia se obtiene de **Cúmulo** (paths.featurePath/refactorization-<nombre_refactor>; mismo espacio que features hasta que se defina paths.refactorPath).

@@ -1,3 +1,32 @@
+---
+common_workflows:
+  after_pr_merged: Invocar Merge-To-Master-Cleanup (cápsula) -BranchName <branch> -DeleteRemote; o comandos git equivalentes
+  push_and_open_pr: Push-And-CreatePR.ps1 -Persist paths.featurePath/<nombre_feature>/ (push + gh pr create o URL manual)
+contract_ref: paths.skillsDefinitionPath + skills-contract.md (Cúmulo)
+implementation_path_ref: paths.skillCapsules.finalizar-git
+owner: tekton-developer
+phases:
+- description: Push de la rama (Push-And-CreatePR.ps1) y creación del PR con gh pr create si está disponible; si no, URL/instrucciones.
+  id: pre_pr
+  name: Pre-PR
+- description: 'Tras merge del PR en remoto: actualizar master local, eliminar rama, volver a master.'
+  id: post_pr
+  name: Post-PR
+related_agents:
+- tekton-developer
+- finalizer
+- release-agent
+related_artefacts:
+- paths.actionsPath/finalize/
+rules:
+- Nunca commit directo en master; todo en feat/ o fix/ y merge vía PR
+- 'Mensajes de commit: Conventional Commits (feat:, fix:, chore:)'
+- 'Pre-push: validación (validacion.json pass) cuando lo exija el proceso'
+skill_id: finalizar-git
+spec_version: 1.0.0
+status: Active
+---
+
 # Skill: Finalizar Git
 
 **skill_id:** `finalizar-git`

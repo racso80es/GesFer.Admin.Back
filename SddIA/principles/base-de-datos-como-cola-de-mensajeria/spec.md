@@ -1,3 +1,18 @@
+---
+category: Sistemas Distribuidos
+contract_ref: paths.principlesPath/principles-contract.md
+id: c1f7a01b-9a8c-4d3b-8f2e-1e3d4a5b6c89
+metadata:
+  difficulty: Advanced
+  status: Published
+principle_id: base-de-datos-como-cola-de-mensajeria
+tags:
+- Event-Driven
+- Message Brokers
+- PostgreSQL
+- Outbox Pattern
+---
+
 # Base de Datos como Cola de Mensajería
 
 **principle_id:** `base-de-datos-como-cola-de-mensajeria`

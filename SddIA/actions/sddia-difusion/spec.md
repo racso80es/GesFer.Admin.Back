@@ -1,3 +1,19 @@
+---
+action_id: sddia-difusion
+contract_ref: actions-contract.md
+flow_steps:
+- Comprobar fuentes canónicas
+- Comparar .cursor/rules
+- Actualizar reglas
+- Documentar .github y otros
+inputs:
+- Estado SddIA
+- Estado touchpoints
+outputs:
+- .cursor/rules actualizados
+- Documentación touchpoints
+---
+
 # Action: Difusión de SddIA
 
 ## Propósito

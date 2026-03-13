@@ -24,7 +24,7 @@ Definir **dónde y cómo** se aplican los patrones de diseño (paths.patternsPat
 
 - **Consultar paths.patternsPath:** El agente o proceso que genera el plan (documentación manual; comandos vía invoke-command, paths.skillCapsules["invoke-command"]) debe poder resolver la lista de patrones (spec.json por carpeta UUID) para sugerir o validar referencias.
 - **interested_agents:** Los patrones declaran `interested_agents` (architect, tekton-developer, etc.); en planificación el **Arquitecto** selecciona qué patrones aplican al roadmap; **Tekton** los usa en implementación/ejecución.
-- **No inventar patrones en el plan:** Las referencias en el PLAN deben ser a patrones existentes en paths.patternsPath (UUID con spec.md y spec.json conforme a patterns-contract).
+- **No inventar patrones en el plan:** Las referencias en el PLAN deben ser a patrones existentes en paths.patternsPath (UUID con spec.md con frontmatter YAML conforme a patterns-contract).
 
 ### Ejemplo (fragmento PLAN)
 
@@ -49,13 +49,13 @@ Definir **dónde y cómo** se aplican los patrones de diseño (paths.patternsPat
 |---------------------|-------------------------|
 | **Análisis del plan** | Al derivar touchpoints de cada tarea del PLAN, si la tarea referencia un patrón (por UUID o etiqueta [PATTERN-<uuid>]), el ítem de implementación debe incluir el **pattern_id** (UUID) asociado. |
 | **Estructura del documento IMPL** | Cada ítem puede tener un campo opcional **Patrón** (o `pattern_id`) con el UUID del patrón que rige ese cambio. Así el ejecutor y el revisor saben qué patrón debe cumplirse en ese punto. |
-| **Resolución de rutas** | Los patrones pueden imponer restricciones de ubicación (ej. Hexagonal: puertos en dominio, adaptadores en infra); la acción implementation puede validar que las rutas propuestas sean coherentes con el patrón referenciado (consultando spec.md/spec.json del patrón). |
+| **Resolución de rutas** | Los patrones pueden imponer restricciones de ubicación (ej. Hexagonal: puertos en dominio, adaptadores en infra); la acción implementation puede validar que las rutas propuestas sean coherentes con el patrón referenciado (consultando spec.md con frontmatter del patrón). |
 
 ### Criterios
 
 - **Trazabilidad PLAN → IMPL:** Si el PLAN incluye "Patrones aplicados" o etiquetas [PATTERN-<uuid>], los ítems del IMPL que materializan esas tareas deben llevar el pattern_id correspondiente.
 - **Unificación:** El documento de implementación sigue siendo una sola fuente de verdad; el campo patrón es *metadato* del ítem para guiar ejecución y revisión.
-- **Contrato patterns-contract:** Cualquier pattern_id usado en IMPL debe existir en paths.patternsPath/<uuid>/ con spec.md y spec.json válidos.
+- **Contrato patterns-contract:** Cualquier pattern_id usado en IMPL debe existir en paths.patternsPath/<uuid>/ con spec.md (frontmatter YAML) válido.
 
 ### Ejemplo (ítem IMPL con patrón)
 

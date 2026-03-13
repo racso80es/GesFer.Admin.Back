@@ -1,3 +1,77 @@
+---
+constraints:
+- template_id en kebab-case.
+- Rutas en input_sources deben poder resolverse vía Cúmulo cuando sean canónicas.
+- process_ref debe existir en paths.processPath.
+consumers:
+- paths.actionsPath
+- SddIA/agents/*.json
+- paths.processPath
+- .cursor/rules
+contract_version: 1.0.0
+description: 'Contrato que cada plantilla (template) en SddIA/templates debe cumplir: configuración predefinida de un proceso con fin concreto, orígenes de entrada y artefactos.'
+folder_structure: Cada plantilla en SddIA/templates/<template-id>/ con spec.md (frontmatter YAML).
+json_schema:
+  properties:
+    config:
+      description: Parámetros opcionales por defecto (rama, carpeta de persistencia, etc.).
+      type: object
+    contract_ref:
+      description: 'Referencia al contrato: SddIA/templates/templates-contract.json'
+      type: string
+    description:
+      description: Descripción breve del fin concreto y del procedimiento.
+      type: string
+    input_sources:
+      additionalProperties:
+        type: string
+      description: 'Orígenes de entrada: rutas Cúmulo, parciales, totales o ficheros.'
+      type: object
+    interested_agents:
+      description: Agentes que orquestan o consumen esta plantilla (architect, tekton-developer, etc.).
+      items:
+        type: string
+      type: array
+    name:
+      description: Nombre legible de la plantilla.
+      type: string
+    process_ref:
+      description: 'Proceso que orquesta la tarea (feature, correccion-auditorias, bug-fix, etc.). Referencia: paths.processPath/<process-id>.'
+      type: string
+    related_actions:
+      description: Acciones del ciclo que aplican (spec, clarify, planning, implementation, execution, validate, finalize).
+      items:
+        type: string
+      type: array
+    related_skills:
+      description: Skills recomendadas (iniciar-rama, finalizar-git, documentation, etc.).
+      items:
+        type: string
+      type: array
+    template_id:
+      description: Identificador de la plantilla en kebab-case.
+      type: string
+  required:
+  - template_id
+  - name
+  - description
+  - process_ref
+  - related_actions
+  - contract_ref
+  type: object
+required_files:
+- description: Archivo .md con frontmatter YAML (metadatos) + cuerpo Markdown.
+  format: markdown_frontmatter_yaml
+  language: es-ES
+  name: spec.md
+  required: true
+scope: SddIA/templates/
+security_model:
+  description: La ejecución de una plantilla requiere un contexto de Karma2Token válido.
+  required_token: Karma2Token
+  token_ref: SddIA/tokens/karma2-token/spec.json
+---
+
 # Contrato de Plantillas (SddIA/templates/)
 
 **Alcance:** Todas las entidades bajo `SddIA/templates/`.

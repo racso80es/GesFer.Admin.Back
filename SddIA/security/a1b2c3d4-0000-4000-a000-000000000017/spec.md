@@ -1,3 +1,20 @@
+---
+category: Seguridad en Código
+id: a1b2c3d4-0000-4000-a000-000000000017
+interested_agents:
+- security-engineer
+- tekton-developer
+- auditor
+metadata:
+  difficulty: Intermediate
+  status: Published
+tags:
+- Git
+- GPG
+- Firma
+- Identidad
+---
+
 # Firmas de Commits con GPG
 
 ## Descripción

@@ -1,3 +1,62 @@
+---
+constraints:
+- Cumplimiento obligatorio de Karma2Token para trazabilidad y seguridad.
+- skill-id en kebab-case.
+- Rutas canónicas solo desde Cúmulo (paths.skillsDefinitionPath, paths.skillCapsules, paths.skillsIndexPath).
+- Un skill sin spec.md (con frontmatter YAML) en su carpeta no se considera completo.
+- Las acciones y agentes resuelven la definición en SddIA y la implementación vía Cúmulo.
+consumers:
+- paths.actionsPath
+- SddIA/agents/*.json
+- paths.processPath
+contract_version: 1.1.0
+default_implementation:
+  delivery:
+  - Cada skill con ejecutable reside en una cápsula paths.skillCapsules[skill-id]. Los ejecutables se construyen en paths.skillsRustPath (Cúmulo) y se copian a <cápsula>/bin/.
+  - Launcher .bat en la cápsula invoca el .exe en bin/.
+  - 'manifest.json, documentación .md obligatorios en la cápsula. Rutas canónicas: Cúmulo paths.skillCapsules.'
+  language: rust
+  rationale: Rendimiento, seguridad de memoria, portabilidad y distribución como binario. Las implementaciones por defecto de scripts de skills (y de tools) han de ser en Rust.
+definition_artefacts:
+- ext: .md
+  format: frontmatter_yaml
+  naming: spec.md
+  path: paths.skillsDefinitionPath/<skill-id>/
+  purpose: 'Especificación: frontmatter YAML (metadatos) + cuerpo Markdown. Campos: skill_id, name, description, implementation_path_ref. es-ES.'
+description: 'Contrato que todo skill debe cumplir: definición en paths.skillsDefinitionPath/<skill-id>/, implementación en paths.skillCapsules[skill-id]. Implementación por defecto en Rust.'
+implementation:
+  format: Rust executable (.exe)
+  location_pattern: scripts/skills/{skill-id}/bin/{nombre}.exe
+  migration_note: Las skills existentes con .ps1 deben migrar a .exe. El fallback a .ps1 ha sido eliminado.
+  prohibited_formats:
+  - .ps1
+  - .bat
+  - .sh
+  source_location: scripts/skills-rs/src/{nombre}.rs
+  standard: Solo se deben generar ejecutables .exe compilados desde Rust. Los scripts PowerShell (.ps1) están prohibidos en nuevas implementaciones.
+implementation_requirements:
+- El ejecutable o script sugerido para la implementación de la skill debe ser desarrollado en Rust (localizado en paths.toolsRustPath (Cúmulo)).
+required_artefacts_capsule:
+- ext: .rs
+  path: paths.skillsRustPath (Cúmulo)/src/bin
+  purpose: Implementación por defecto en Rust.
+- ext: binary
+  path: <cápsula>/bin/<skill_bin>.exe
+  purpose: Ejecutable Rust en la cápsula (copiado desde skills-rs/install.ps1). OBLIGATORIO.
+- ext: .bat
+  purpose: 'Launcher en cápsula: invoca binario en bin/.'
+- ext: .json
+  naming: manifest
+  purpose: 'Manifest de la cápsula: skillId, components, contract_ref.'
+- ext: .md
+  purpose: Documentación en la cápsula. es-ES.
+scope: SddIA/skills/
+security_model:
+  description: Todo skill debe ser invocado bajo el contexto de un Karma2Token válido.
+  required_token: Karma2Token
+  token_ref: SddIA/tokens/karma2-token/spec.json
+---
+
 # Contrato de skills (Cúmulo: paths.skillsPath / paths.skillCapsules)
 
 **Alcance:** Todas las entidades en **paths.skillsPath** y en cada **paths.skillCapsules[&lt;skill-id&gt;]** (Cúmulo (SddIA/agents/cumulo.json) que actúen como skills con implementación ejecutable. Listado: **paths.skillsIndexPath** (índice en raíz de skills).

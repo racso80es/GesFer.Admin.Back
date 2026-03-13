@@ -1,3 +1,34 @@
+---
+contract_ref: paths.skillsDefinitionPath/skills-contract.md (Cúmulo)
+implementation:
+  hooks:
+    pre-commit:
+      purpose: Validate commit token and run unit tests.
+    pre-push:
+      purpose: Validate push token and run integration/E2E tests.
+  logging:
+    file: paths.auditsPath + paths.accessLogFile (Cúmulo)
+    format: '| Timestamp | User | Branch | Action | Status | Details |'
+owner: auditor.process
+related_agents:
+- auditor.process
+- auditor
+requirements:
+- description: All git commits must trigger the pre-commit hook.
+  id: SEC-AUDIT-001
+- description: All git pushes must trigger the pre-push hook.
+  id: SEC-AUDIT-002
+- description: Any failure in the audit script (exit code != 0) must block the git operation.
+  id: SEC-AUDIT-003
+- description: Execution must be logged to paths.auditsPath + paths.accessLogFile regardless of outcome.
+  id: SEC-AUDIT-004
+- description: Auditor Process Token must be validated before allowing any action.
+  id: SEC-AUDIT-005
+skill_id: security-audit
+spec_version: 1.0.0
+status: Active
+---
+
 # Skill: Security Audit Automation & Git Hooks
 
 **skill_id:** `security-audit` (security-audit-automation)

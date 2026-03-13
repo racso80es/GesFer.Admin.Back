@@ -1,3 +1,20 @@
+---
+category: Seguridad de Aplicaciones
+id: a1b2c3d4-0000-4000-a000-000000000016
+interested_agents:
+- architect
+- security-engineer
+- tekton-developer
+metadata:
+  difficulty: Intermediate
+  status: Published
+tags:
+- Rate Limit
+- IP Blocking
+- Scraping
+- APIs
+---
+
 # Rate Limiting y Prevención de Scraping
 
 ## Descripción
