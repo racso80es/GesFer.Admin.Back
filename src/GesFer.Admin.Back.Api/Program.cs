@@ -24,14 +24,15 @@ builder.Services.AddSwaggerGen(c =>
             Description = "API RESTful para gestión administrativa del sistema GesFer"
         });
         
-        // Configurar seguridad JWT en Swagger
+        // Configurar seguridad JWT en Swagger (Http + Bearer para que Swagger UI envíe "Authorization: Bearer {token}")
         c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
         {
-            Description = "JWT Authorization header usando el esquema Bearer. Ejemplo: \"Authorization: Bearer {token}\"",
+            Description = "JWT Authorization header usando el esquema Bearer. Introduce solo el token (sin 'Bearer ').",
             Name = "Authorization",
             In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-            Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
-            Scheme = "Bearer"
+            Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+            Scheme = "bearer",
+            BearerFormat = "JWT"
         });
 
         c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement

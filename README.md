@@ -59,6 +59,54 @@ Luego ejecutar la API localmente (o usar el servicio `gesfer-admin-api` del comp
 
 ---
 
+## Autenticación
+
+La API admite **dos métodos** de autenticación:
+
+| Método | Uso | Header |
+|--------|-----|--------|
+| **JWT Bearer** | Usuarios administrativos (login) | `Authorization: Bearer {token}` |
+| **Shared Secret** | Llamadas sistema a sistema | `X-Internal-Secret: {valor}` |
+
+### JWT (usuarios Admin)
+
+1. **Obtener token:** `POST /api/admin/auth/login` con `{ "Usuario": "admin", "Contraseña": "admin123" }`.
+2. La respuesta incluye `Token`. Copia solo el valor (sin `Bearer `).
+3. **En Swagger UI:** Pulsa «Authorize», pega el token y confirma. Swagger enviará `Authorization: Bearer {token}` en las peticiones.
+4. **En Postman/curl:** Añade el header `Authorization: Bearer {token}`.
+
+> El token expira según `JwtSettings:ExpirationMinutes` (por defecto 60). Tras expirar, hay que hacer login de nuevo.
+
+### Shared Secret (sistema)
+
+Para integraciones entre servicios (p. ej. Product → Admin), envía el header:
+
+```
+X-Internal-Secret: {SharedSecret}
+```
+
+El valor se configura en `appsettings` (`SharedSecret`). En desarrollo: `dev-internal-secret-change-in-production`.
+
+### Endpoints protegidos
+
+- **`[AuthorizeSystemOrAdmin]`** — Acepta JWT con rol Admin **o** Shared Secret.
+- **`[Authorize(Policy = "AdminOnly")]`** — Solo JWT con rol Admin (no Shared Secret).
+
+El login (`POST /api/admin/auth/login`) es público.
+
+### Configuración JWT (producción)
+
+En `appsettings` o variables de entorno:
+
+| Clave | Descripción |
+|-------|-------------|
+| `JwtSettings:SecretKey` | Clave secreta (mínimo 32 caracteres para HS256) |
+| `JwtSettings:Issuer` | Emisor del token (p. ej. `GesFerApi`) |
+| `JwtSettings:Audience` | Audiencia (p. ej. `GesFerClient`) |
+| `JwtSettings:ExpirationMinutes` | Minutos hasta expiración (por defecto 60) |
+
+---
+
 ## Credenciales por defecto (desarrollo)
 
 ### Usuario administrativo (login API)
