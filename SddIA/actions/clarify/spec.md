@@ -14,7 +14,7 @@ inputs:
 - --spec
 - --input o --context
 outputs:
-- '{SpecName}_CLARIFICATIONS.md en carpeta de la spec'
+- clarify.md con frontmatter YAML + cuerpo Markdown en carpeta de tarea (Cúmulo). Sin clarify.json. Patrón: SddIA/norms/features-documentation-pattern.md.
 ---
 
 # Action: Clarify

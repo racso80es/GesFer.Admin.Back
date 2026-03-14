@@ -47,8 +47,10 @@ public class AuditLogService : IAuditLogService
         }
         catch (Exception ex)
         {
-            // Log el error pero no fallar la operación principal
-            _logger.LogError(ex, "Error al registrar log de auditoría para CursorId: {CursorId}, Action: {Action}", cursorId, action);
+            // Log el error pero no fallar la operación principal (RNF3: audit no bloquea respuesta)
+            _logger.LogError(ex,
+                "Error al registrar log de auditoría para CursorId: {CursorId}, Action: {Action}, Path: {Path}. Mensaje: {Message}",
+                cursorId, action, path, ex.Message);
         }
     }
 }

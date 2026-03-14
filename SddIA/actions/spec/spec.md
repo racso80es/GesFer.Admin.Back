@@ -15,7 +15,7 @@ inputs:
 - --input
 - --context (Cúmulo)
 outputs:
-- SPEC-*.md con frontmatter YAML (metadatos + cuerpo Markdown) en carpeta de tarea (Cúmulo)
+- spec.md con frontmatter YAML (metadatos + cuerpo Markdown) en carpeta de tarea (Cúmulo). Sin spec.json. Patrón: SddIA/norms/features-documentation-pattern.md.
 principles_ref: paths.principlesPath
 ---
 

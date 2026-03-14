@@ -8,22 +8,22 @@ phases:
 - description: objectives.md en carpeta de la tarea.
   id: '1'
   name: Documentación con objetivos
-- description: Acción spec; salida spec.md, spec.json.
+- description: Acción spec; salida spec.md (frontmatter YAML + Markdown).
   id: '2'
   name: Especificación
-- description: Acción clarify; clarify.md, clarify.json.
+- description: Acción clarify; clarify.md (frontmatter YAML + Markdown).
   id: '3'
   name: Clarificación
-- description: Acción planning; plan.
+- description: Acción planning; plan.md (frontmatter YAML + Markdown).
   id: '4'
   name: Planificación
-- description: Acción implementation; implementation.md, implementation.json.
+- description: Acción implementation; implementation.md (frontmatter YAML + Markdown).
   id: '5'
   name: Implementación (doc)
-- description: Acción execution; execution.json.
+- description: Acción execution; execution.md (frontmatter YAML + Markdown).
   id: '6'
   name: Ejecución
-- description: Acción validate; validacion.json.
+- description: Acción validate; validacion.md (frontmatter YAML + Markdown).
   id: '7'
   name: Validar
 - description: Acción finalize; Evolution Logs, PR.
@@ -49,7 +49,7 @@ spec_version: 1.0.0
 
 Este documento define el **proceso de tarea** para desarrollar una funcionalidad. Está ubicado en paths.processPath/feature/ (Cúmulo). Las acciones que orquesta están en paths.actionsPath (Cúmulo). La ruta de persistencia se obtiene de **Cúmulo** (paths.featurePath/<nombre_feature>).
 
-**Interfaz de proceso:** Cumple la interfaz en Cúmulo (`process_interface`): solicita/genera en la carpeta de la tarea (Cúmulo) al menos un **`.md`** (objectives.md, spec.md, clarify.md, plan, etc.) y al menos un **`.json`** (spec.json, clarify.json, implementation.json, validacion.json, etc.).
+**Interfaz de proceso:** Cumple la interfaz en Cúmulo (`process_interface`): solicita/genera en la carpeta de la tarea (Cúmulo) artefactos **`.md`** con frontmatter YAML + cuerpo Markdown (objectives.md, spec.md, clarify.md, plan.md, implementation.md, execution.md, validacion.md). **No se usan ficheros `.json` separados.** Patrón: SddIA/norms/features-documentation-pattern.md; contrato: paths.featurePath/features-contract.md.
 
 ## Propósito
 
@@ -65,12 +65,12 @@ Ruta de la tarea: Cúmulo (paths.featurePath/<nombre_feature>).
 | :--- | :--- | :--- |
 | **0** | Preparar entorno | Crear rama feat/<nombre_feature> (o `fix/` si aplica) desde `master` actualizado. No trabajar en `master`. **Skill:** iniciar-rama — invocar según contrato (paths.skillsDefinitionPath/iniciar-rama/). Tekton invoca la implementación (paths.skillCapsules[\"iniciar-rama\"]). Parámetros: BranchType feat, BranchName <nombre_feature>. |
 | **1** | Documentación con objetivos | Documentar objetivo, alcance y ley aplicada. La documentación de la tarea se ubica en la carpeta de la tarea (Cúmulo)/objectives.md. |
-| **2** | Especificación | Ejecutar o generar SPEC (acción **spec**). Entrada: requerimiento o borrador, carpeta de la tarea (Cúmulo)/objectives.md; salida: especificación técnica en paths.actionsPath (spec/) y copia/canon en carpeta de la tarea (Cúmulo)/spec.md y spec.json |
-| **3** | Clarificación | Ejecutar o generar clarificaciones (acción **clarify**). Especificación técnica: paths.actionsPath/clarify/. Entrada: carpeta de la tarea (Cúmulo)/objectives.md, spec.json; salida: carpeta de la tarea (Cúmulo)/clarify.md, clarify.json |
-| **4** | Planificación | Ejecutar o generar plan (acción **plan**). Entrada: Especificación, Clarificación. Salida: carpeta de la tarea (Cúmulo)/plan (y/o clarify según convención). |
-| **5** | Implementación | Generar documento de implementación. Especificación técnica: paths.actionsPath/implementation/. Entrada: carpeta de la tarea (Cúmulo)/objectives.md, spec.json, clarify.json; salida: carpeta de la tarea (Cúmulo)/implementation.md, implementation.json |
-| **6** | Ejecución | Aplicar el plan al código (Tekton Developer). Especificación técnica: paths.actionsPath/execution/. Entrada: carpeta de la tarea (Cúmulo)/implementation.json; salida: carpeta de la tarea (Cúmulo)/execution.json |
-| **7** | Validar | Ejecutar validación pre-PR. Especificación técnica: paths.actionsPath/validate/. Entrada: carpeta de la tarea (Cúmulo); salida: carpeta de la tarea (Cúmulo)/validacion.json |
+| **2** | Especificación | Ejecutar o generar SPEC (acción **spec**). Entrada: requerimiento o borrador, carpeta de la tarea (Cúmulo)/objectives.md; salida: especificación técnica en carpeta de la tarea (Cúmulo)/spec.md (frontmatter YAML + Markdown). |
+| **3** | Clarificación | Ejecutar o generar clarificaciones (acción **clarify**). Entrada: carpeta de la tarea (Cúmulo)/objectives.md, spec.md; salida: carpeta de la tarea (Cúmulo)/clarify.md (frontmatter YAML + Markdown). |
+| **4** | Planificación | Ejecutar o generar plan (acción **plan**). Entrada: Especificación, Clarificación. Salida: carpeta de la tarea (Cúmulo)/plan.md (frontmatter YAML + Markdown). |
+| **5** | Implementación | Generar documento de implementación. Entrada: carpeta de la tarea (Cúmulo)/objectives.md, spec.md, clarify.md; salida: carpeta de la tarea (Cúmulo)/implementation.md (frontmatter YAML + Markdown). |
+| **6** | Ejecución | Aplicar el plan al código (Tekton Developer). Entrada: carpeta de la tarea (Cúmulo)/implementation.md; salida: carpeta de la tarea (Cúmulo)/execution.md (frontmatter YAML + Markdown). |
+| **7** | Validar | Ejecutar validación pre-PR. Entrada: carpeta de la tarea (Cúmulo); salida: carpeta de la tarea (Cúmulo)/validacion.md (frontmatter YAML + Markdown). |
 | **8** | Finalizar | Cierre y PR. Especificación técnica: paths.actionsPath/finalize/. Entrada: carpeta de la tarea (Cúmulo); salida: Evolution Logs y Pull Request. |
 
 ## Implementación
@@ -84,10 +84,13 @@ Este proceso se implementa como **procedimiento** que combina:
 
 | Documento | Contenido |
 | :--- | :--- |
-| **objectives.md** (u OBJETIVO.md) | Objetivo, alcance, ley aplicada, resumen del proceso (fases 0–8), cierre y PR, referencias. |
-| **spec.md** / SPEC-* | Especificación técnica (puede generarse con `--spec` y copiarse/adaptarse aquí). |
-| **clarify.md** / SPEC-*_CLARIFICATIONS.md | Clarificaciones y decisiones (puede generarse con `--clarify` y copiarse aquí). |
-| **PLAN-*** | Plan de implementación / task roadmap (puede generarse con `--plan` y copiarse aquí). |
+| **objectives.md** | Objetivo, alcance, ley aplicada (frontmatter YAML + Markdown). |
+| **spec.md** | Especificación técnica (frontmatter YAML + Markdown). |
+| **clarify.md** | Clarificaciones y decisiones (frontmatter YAML + Markdown). |
+| **plan.md** | Plan de implementación / task roadmap (frontmatter YAML + Markdown). |
+| **implementation.md** | Touchpoints y ítems de implementación (frontmatter YAML + Markdown). |
+| **execution.md** | Registro de ejecución (frontmatter YAML + Markdown). |
+| **validacion.md** | Informe de validación pre-PR (frontmatter YAML + Markdown). |
 
 ### Actualización de Evolution Logs
 

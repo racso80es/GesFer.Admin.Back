@@ -11,7 +11,7 @@ inputs:
 - --token
 - --spec
 outputs:
-- '{SpecName}_PLAN.md en carpeta de la spec'
+- plan.md con frontmatter YAML + cuerpo Markdown en carpeta de tarea (Cúmulo). Sin plan.json. Patrón: SddIA/norms/features-documentation-pattern.md.
 patterns_ref: paths.patternsPath
 principles_ref: paths.principlesPath
 ---

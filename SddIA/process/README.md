@@ -34,9 +34,8 @@ Las **acciones** (spec, clarify, plan, implementation, execution, validate, fina
 
 Todo proceso debe cumplir la **interfaz** definida en Cúmulo (Cúmulo → process_interface): solicitar o generar en la carpeta de la tarea (Cúmulo) artefactos con las extensiones:
 
-| Extensión | Uso |
+| Formato | Uso |
 | :--- | :--- |
-| **`.md`** | Al menos un fichero `{nombre}.md` por tarea (objectives.md, spec.md, clarify.md, plan, etc.). |
-| **`.json`** | Al menos un fichero `{nombre}.json` por tarea (spec.json, clarify.json, implementation.json, validacion.json, etc.). |
+| **`.md` con frontmatter YAML** | Un fichero por acción: objectives.md, spec.md, clarify.md, plan.md, implementation.md, execution.md, validacion.md. Sin ficheros `.json` separados. Patrón: SddIA/norms/features-documentation-pattern.md. |
 
 Los agentes de proceso y los procedimientos (paths.processPath/<process-id>/) documentan qué artefactos requieren o producen en la carpeta de la tarea.

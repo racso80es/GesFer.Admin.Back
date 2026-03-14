@@ -9,22 +9,22 @@ phases:
 - description: objectives.md con hallazgos priorizados y criterios de cierre.
   id: '1'
   name: Documentación de objetivos
-- description: Acción spec; spec.md, spec.json.
+- description: Acción spec; spec.md (frontmatter YAML + Markdown).
   id: '2'
   name: Especificación
-- description: Acción clarify si aplica; clarify.md, clarify.json.
+- description: Acción clarify si aplica; clarify.md (frontmatter YAML + Markdown).
   id: '3'
   name: Clarificación
 - description: Acción planning; plan.
   id: '4'
   name: Planificación
-- description: Acción implementation; implementation.md, implementation.json.
+- description: Acción implementation; implementation.md (frontmatter YAML + Markdown).
   id: '5'
   name: Implementación (doc)
-- description: Acción execution; execution.json.
+- description: Acción execution; execution.md (frontmatter YAML + Markdown).
   id: '6'
   name: Ejecución
-- description: Acción validate; validacion.json.
+- description: Acción validate; validacion.md (frontmatter YAML + Markdown).
   id: '7'
   name: Validar
 - description: Acción finalize; Evolution Logs, PR.
@@ -52,7 +52,7 @@ spec_version: 1.0.0
 
 Este documento define el **proceso de tarea** para la corrección de hallazgos derivados de auditorías (paths.auditsPath). Está ubicado en paths.processPath/correccion-auditorias/ (Cúmulo). La ruta de persistencia se obtiene de **Cúmulo** (paths.featurePath/<nombre_correccion>).
 
-**Interfaz de proceso:** Cumple la interfaz en Cúmulo (`process_interface`): solicita/genera en la carpeta de la tarea (Cúmulo) al menos un **`.md`** (objectives.md, spec.md, clarify.md) y al menos un **`.json`** (spec.json, audit-hallazgos.json o similar, validacion.json).
+**Interfaz de proceso:** Cumple la interfaz en Cúmulo (`process_interface`): solicita/genera en la carpeta de la tarea (Cúmulo) artefactos **`.md`** con frontmatter YAML (objectives.md, spec.md, clarify.md, validacion.md). Sin .json separados. Patrón: SddIA/norms/features-documentation-pattern.md.
 
 ## Propósito
 
@@ -66,7 +66,7 @@ El proceso **correccion-auditorias** orquesta el ciclo de corrección de hallazg
 ## Alcance
 
 - **Rama:** feat/correccion-segun-auditorias o feat/correccion-auditorias-<identificador> (nunca master).
-- **Documentación:** Carpeta paths.featurePath/<nombre_correccion>/ con objectives.md (objetivo, hallazgos consolidados, prioridades), spec.md/spec.json, clarify.md si aplica, implementation, validacion.json.
+- **Documentación:** Carpeta paths.featurePath/<nombre_correccion>/ con objectives.md, spec.md, clarify.md si aplica, implementation.md, validacion.md (todos con frontmatter YAML + Markdown). Sin .json separados.
 - **Skills:** iniciar-rama, documentation, invoke-command, security-audit cuando aplique.
 - **Restricciones:** Priorizar hallazgos críticos (compilación, seguridad, violación de capas); alcance acotado por lo reportado en auditorías.
 
@@ -76,7 +76,7 @@ El proceso **correccion-auditorias** orquesta el ciclo de corrección de hallazg
 2. **Documentación de objetivos:** Redactar objectives.md con hallazgos priorizados y criterios de cierre.
 3. **Especificación y plan:** Acciones spec, clarify, planning según ciclo feature.
 4. **Implementación y ejecución:** Aplicar correcciones; cada hallazgo puede ser un ítem de implementation.
-5. **Validación y cierre:** validacion.json; registrar en paths.auditsPath o Evolution Logs que los hallazgos fueron abordados.
+5. **Validación y cierre:** validacion.md; registrar en paths.auditsPath o Evolution Logs que los hallazgos fueron abordados.
 
 ## Integración
 

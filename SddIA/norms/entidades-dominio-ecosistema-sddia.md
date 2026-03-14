@@ -24,7 +24,9 @@ Todas las **entidades de dominio** han de:
 1. **Respetar la estructura canónica:** archivo `.md` con frontmatter YAML (metadatos) + cuerpo Markdown. Excepción: tokens (paths.tokensPath) pueden ser JSON-only por tokens-contract.
 2. **Validación:** esquema YAML nativo en acción validate. El check `sddia_frontmatter_valid` valida frontmatter YAML en `.md` de entidades.
 
-La validación puede realizarse mediante el check opcional `sddia_frontmatter_valid` (acción validate) cuando el diff toque paths.skillsDefinitionPath, paths.processPath u otras rutas de entidades de dominio. La acción sddia-difusion incluye entre sus criterios la validez del frontmatter en las definiciones que se difunden.
+La validación puede realizarse mediante el check opcional `sddia_frontmatter_valid` (acción validate) cuando el diff toque paths.skillsDefinitionPath, paths.processPath, paths.featurePath, paths.fixPath u otras rutas de entidades de dominio. La acción sddia-difusion incluye entre sus criterios la validez del frontmatter en las definiciones que se difunden.
+
+**Documentación de tareas (paths.featurePath, paths.fixPath):** Sigue el mismo patrón: un `.md` por acción con frontmatter YAML + Markdown; sin `.json` separados. Norma: SddIA/norms/features-documentation-pattern.md.
 
 ## Referencias
 

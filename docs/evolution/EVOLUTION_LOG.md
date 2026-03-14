@@ -4,6 +4,32 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+## 2026-03-14 - Registro login Admin en AuditLogs (feat/admin-login-audit-log)
+
+**Rama:** feat/admin-login-audit-log  
+**Tipo:** Feature  
+**Documentación:** `docs/features/admin-login-audit-log/objectives.md`
+
+### Resumen
+
+Refactor del login Admin a CQRS (AdminLoginCommand + Handler) y registro en AuditLogs de logins exitosos (LoginSuccess) y fallidos (LoginFailed), incluyendo IP y User-Agent en AdditionalData. El controlador delega todo al handler; no orquesta servicios.
+
+### Cambios realizados
+
+- **AdminLoginCommand** y **AdminLoginHandler** (MediatR)
+- **AdminLoginResult** para mapear a 200/400/401/500
+- **AdminAuthController** refactorizado: solo ISender e ILogger
+- **Validación** en handler (Usuario/Contraseña no vacíos)
+- **Tests** unitarios e integración actualizados
+
+### Referencias
+
+- Objectives: `docs/features/admin-login-audit-log/objectives.md`
+- Spec: `docs/features/admin-login-audit-log/spec.md`
+- Validación: `docs/features/admin-login-audit-log/validacion.json`
+
+---
+
 ## 2026-03-12 - Refactorización: Arquitectura Frontmatter (feat/refactorization-arquitectura-frontmatter)
 
 **Rama:** feat/refactorization-arquitectura-frontmatter  

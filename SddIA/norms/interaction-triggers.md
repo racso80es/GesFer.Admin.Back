@@ -56,7 +56,7 @@
 | planning | Plan: convertir spec y clarificaciones en hoja de ruta técnica ejecutable. |
 | implementation | Implementación (doc): indicar touchpoints en código y documento de implementación; no modifica código. |
 | execution | Ejecución: aplicar al código los cambios del documento de implementación. |
-| validate | Validación: comprobar calidad antes del PR (git diff, build, tests, docs); generar validacion.json. |
+| validate | Validación: comprobar calidad antes del PR (git diff, build, tests, docs); generar validacion.md. |
 | finalize | Finalizar: cierre del ciclo (commits, Evolution Logs, push, PR a master). Usa skill finalizar-git. |
 | sddia-difusion | Difusión de SddIA: mantener .cursor/rules, .github y otros gestores IA alineados con AGENTS y SddIA/norms. |
 

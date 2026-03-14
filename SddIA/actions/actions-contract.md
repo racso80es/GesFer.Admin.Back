@@ -37,12 +37,12 @@ Cada acción tiene una **carpeta** en paths.actionsPath con identificador `<acti
 
 | Artefacto | Propósito |
 |-----------|-----------|
-| **spec.md** | Especificación legible: propósito, entradas, salidas, flujo de ejecución. es-ES. |
-| **spec.json** | Metadatos machine-readable: action_id, name, purpose, inputs, outputs, flow_steps, contract_ref, related_processes. |
+| **spec.md** | Especificación legible: frontmatter YAML (action_id, inputs, outputs, flow_steps, etc.) + cuerpo Markdown. es-ES. Sin spec.json separado. |
 
 ## Restricciones
 
 - action_id en kebab-case (spec, clarify, planning, implementation, execution, validate, finalize, sddia-difusion).
+- Salida de acciones en carpeta de tarea (paths.featurePath, paths.fixPath): un .md por acción con frontmatter YAML + Markdown. Sin .json separados. Patrón: SddIA/norms/features-documentation-pattern.md.
 - Rutas solo vía Cúmulo.
 
 ## Consumidores

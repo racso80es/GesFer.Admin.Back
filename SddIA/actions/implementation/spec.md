@@ -13,7 +13,7 @@ inputs:
 - SPEC (opcional)
 - Clarificaciones (opcional)
 outputs:
-- IMPL-{FeatureId}.md en carpeta de tarea (Cúmulo)
+- implementation.md con frontmatter YAML + cuerpo Markdown en carpeta de tarea (Cúmulo). Sin implementation.json. Patrón: SddIA/norms/features-documentation-pattern.md.
 patterns_ref: paths.patternsPath
 principles_ref: paths.principlesPath
 ---

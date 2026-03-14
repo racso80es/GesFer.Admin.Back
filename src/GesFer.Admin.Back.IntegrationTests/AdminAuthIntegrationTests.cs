@@ -1,4 +1,7 @@
 using GesFer.Admin.Back.Application.DTOs.Auth;
+using GesFer.Admin.Back.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http.Json;
 using Xunit;
 using FluentAssertions;
@@ -15,6 +18,35 @@ public class AdminAuthIntegrationTests
     {
         _factory = factory;
         _client = factory.CreateClient();
+    }
+
+    [Fact]
+    public async Task AdminLogin_WithDefaultCredentials_CreatesAuditLogRecord()
+    {
+        // Arrange
+        var request = new AdminLoginRequest
+        {
+            Usuario = "admin",
+            Contraseña = "admin123"
+        };
+
+        // Act
+        var response = await _client.PostAsJsonAsync("/api/admin/auth/login", request);
+
+        // Assert
+        response.EnsureSuccessStatusCode();
+
+        using var scope = _factory.Services.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<AdminDbContext>();
+        var auditLogs = await context.AuditLogs
+            .Where(a => a.Action == "LoginSuccess" && a.Username == "admin")
+            .ToListAsync();
+
+        auditLogs.Should().NotBeEmpty("el login exitoso debe registrar un AuditLog con Action=LoginSuccess");
+        var log = auditLogs.OrderByDescending(a => a.ActionTimestamp).First();
+        log.CursorId.Should().NotBeNullOrEmpty();
+        log.Path.Should().Be("/api/admin/auth/login");
+        log.HttpMethod.Should().Be("POST");
     }
 
     [Fact]
