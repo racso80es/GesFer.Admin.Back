@@ -1,28 +1,23 @@
-
-using GesFer.Admin.Back.Application.Common.Interfaces;
+using GesFer.Admin.Back.Application.Commands.Auth;
 using GesFer.Admin.Back.Application.DTOs.Auth;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GesFer.Admin.Back.Api.Controllers;
 
 /// <summary>
-/// Controlador para autenticación administrativa
+/// Controlador para autenticación administrativa. Delega al AdminLoginHandler (CQRS).
 /// </summary>
 [ApiController]
 [Route("api/admin/auth")]
 public class AdminAuthController : ControllerBase
 {
-    private readonly IAdminAuthService _adminAuthService;
-    private readonly IAdminJwtService _adminJwtService;
+    private readonly ISender _sender;
     private readonly ILogger<AdminAuthController> _logger;
 
-    public AdminAuthController(
-        IAdminAuthService adminAuthService,
-        IAdminJwtService adminJwtService,
-        ILogger<AdminAuthController> logger)
+    public AdminAuthController(ISender sender, ILogger<AdminAuthController> logger)
     {
-        _adminAuthService = adminAuthService;
-        _adminJwtService = adminJwtService;
+        _sender = sender;
         _logger = logger;
     }
 
@@ -33,50 +28,37 @@ public class AdminAuthController : ControllerBase
     /// <returns>Información del usuario administrativo autenticado y token JWT con role: Admin</returns>
     [HttpPost("login")]
     [ProducesResponseType(typeof(AdminLoginResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Login([FromBody] AdminLoginRequest request)
     {
         try
         {
-            if (string.IsNullOrWhiteSpace(request.Usuario) || string.IsNullOrWhiteSpace(request.Contraseña))
+            var clientIp = HttpContext.Connection.RemoteIpAddress?.ToString();
+            var userAgent = HttpContext.Request.Headers["User-Agent"].FirstOrDefault();
+
+            var command = new AdminLoginCommand(
+                request.Usuario ?? string.Empty,
+                request.Contraseña ?? string.Empty,
+                clientIp,
+                userAgent);
+
+            var result = await _sender.Send(command);
+
+            if (result.IsSuccess && result.Response != null)
+                return Ok(result.Response);
+
+            return result.HttpStatusCode switch
             {
-                return BadRequest(new { message = "Usuario y contraseña son requeridos" });
-            }
-
-            var adminUser = await _adminAuthService.AuthenticateAsync(request.Usuario, request.Contraseña);
-
-            if (adminUser == null)
-            {
-                return Unauthorized(new { message = "Credenciales administrativas inválidas" });
-            }
-
-            // Cursor ID es el UserId convertido a string
-            var cursorId = adminUser.Id.ToString();
-
-            // Generar token JWT administrativo con claim role: Admin
-            var token = _adminJwtService.GenerateAdminToken(
-                cursorId: cursorId,
-                username: adminUser.Username,
-                userId: adminUser.Id
-            );
-
-            var response = new AdminLoginResponse
-            {
-                UserId = adminUser.Id.ToString(),
-                CursorId = cursorId,
-                Username = adminUser.Username,
-                FirstName = adminUser.FirstName,
-                LastName = adminUser.LastName,
-                Email = adminUser.Email,
-                Role = "Admin",
-                Token = token
+                400 => BadRequest(new { message = result.ErrorMessage }),
+                401 => Unauthorized(new { message = result.ErrorMessage }),
+                _ => StatusCode(result.HttpStatusCode, new { message = result.ErrorMessage })
             };
-
-            return Ok(response);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error al realizar login administrativo para usuario: {Usuario}", request.Usuario);
+            _logger.LogError(ex, "Error al realizar login administrativo para usuario: {Usuario}", request?.Usuario);
             return StatusCode(500, new { message = "Error interno del servidor", error = ex.Message });
         }
     }

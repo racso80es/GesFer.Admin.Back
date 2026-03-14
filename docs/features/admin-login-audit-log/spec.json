@@ -1,0 +1,88 @@
+{
+  "spec_version": "1.0.0",
+  "feature_id": "admin-login-audit-log",
+  "date": "2026-03-14",
+  "objective": "Registrar en AuditLogs el evento de login Admin (éxito y fallo) mediante refactor CQRS",
+  "base_docs": ["objectives.md", "analysis.md", "clarify.md"],
+  "scope": {
+    "in_scope": [
+      "AdminLoginCommand y AdminLoginHandler",
+      "Registro en AuditLogs (LoginSuccess, LoginFailed)",
+      "IP y UserAgent en AdditionalData",
+      "Validación en Handler (Usuario/Contraseña no vacíos)",
+      "Refactor AdminAuthController a ISender.Send"
+    ],
+    "out_scope": [
+      "FluentValidation",
+      "Cambios en esquema tabla AuditLogs",
+      "Logout u otras acciones auth",
+      "Middleware o filtros genéricos"
+    ]
+  },
+  "functional_requirements": [
+    {
+      "id": "RF1",
+      "title": "AdminLoginCommand",
+      "description": "Command MediatR con Usuario, Contraseña, ClientIp, UserAgent",
+      "touchpoint": "Application/Commands/Auth/AdminLoginCommand.cs",
+      "acceptance": "Controlador puede enviar con ISender.Send(AdminLoginCommand)"
+    },
+    {
+      "id": "RF2",
+      "title": "AdminLoginHandler",
+      "description": "Handler: validación, auth, token, audit (éxito y fallo)",
+      "touchpoint": "Application/Handlers/Auth/AdminLoginHandler.cs",
+      "acceptance": "Flujo completo sin orquestación en controlador"
+    },
+    {
+      "id": "RF3",
+      "title": "AdminLoginResult",
+      "description": "Tipo retorno: Success, ValidationError, AuthFailure, Error",
+      "touchpoint": "Application/DTOs/Auth/AdminLoginResult.cs",
+      "acceptance": "Controlador mapea a 200/400/401/500"
+    },
+    {
+      "id": "RF4",
+      "title": "AdditionalData IP y User-Agent",
+      "description": "JSON con clientIp y userAgent en AuditLog.AdditionalData",
+      "touchpoint": "AdminLoginHandler, AdminAuthController (obtiene de HttpContext)",
+      "acceptance": "Registros AuditLogs tienen IP y UserAgent cuando disponibles"
+    },
+    {
+      "id": "RF5",
+      "title": "Refactor AdminAuthController",
+      "description": "Solo ISender e ILogger; delegar todo al command",
+      "touchpoint": "Api/Controllers/AdminAuthController.cs",
+      "acceptance": "Controlador no inyecta IAdminAuthService, IAdminJwtService, IAuditLogService"
+    }
+  ],
+  "non_functional_requirements": [
+    { "id": "RNF1", "description": "No nuevas dependencias NuGet" },
+    { "id": "RNF2", "description": "Compatibilidad contrato API (AdminLoginRequest, AdminLoginResponse)" },
+    { "id": "RNF3", "description": "AuditLogService no bloquea respuesta; fallo audit no falla login" },
+    { "id": "RNF4", "description": "Tests unitarios e integración actualizados/creados" }
+  ],
+  "validation_criteria": [
+    "Login exitoso → 200, token válido, AuditLog Action=LoginSuccess con IP/UserAgent",
+    "Login fallido → 401, AuditLog Action=LoginFailed con Username e IP/UserAgent",
+    "Request sin Usuario/Contraseña → 400, sin registro AuditLog",
+    "Controlador solo inyecta ISender e ILogger",
+    "Tests pasan"
+  ],
+  "touchpoints": [
+    "Application/Commands/Auth/AdminLoginCommand.cs",
+    "Application/Handlers/Auth/AdminLoginHandler.cs",
+    "Application/DTOs/Auth/AdminLoginResult.cs",
+    "Api/Controllers/AdminAuthController.cs",
+    "UnitTests/.../AdminAuthControllerTests.cs",
+    "UnitTests/.../AdminLoginHandlerTests.cs",
+    "IntegrationTests/AdminAuthIntegrationTests.cs"
+  ],
+  "references": {
+    "objectives": "./objectives.md",
+    "analysis": "./analysis.md",
+    "clarify": "./clarify.md",
+    "controller": "src/GesFer.Admin.Back.Api/Controllers/AdminAuthController.cs",
+    "audit_service": "src/GesFer.Admin.Back.Infrastructure/Services/AuditLogService.cs"
+  }
+}

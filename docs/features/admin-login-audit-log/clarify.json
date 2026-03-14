@@ -1,0 +1,35 @@
+{
+  "spec_version": "1.0.0",
+  "feature_id": "admin-login-audit-log",
+  "date": "2026-03-14",
+  "base": ["spec.md", "spec.json", "objectives.md"],
+  "decisions_closed": {
+    "refactor_cqrs": "Sí — AdminLoginCommand + Handler",
+    "audit_failed_attempts": "Sí — registrar 401 con Action=LoginFailed",
+    "ip_useragent_additionaldata": "Sí — incluir en AdditionalData como JSON",
+    "validation": "4b — Validación en Handler, sin FluentValidation"
+  },
+  "resolutions": [
+    {
+      "item": "validation_approach",
+      "resolution": "Validación en AdminLoginHandler: Usuario y Contraseña no vacíos. Devuelve AdminLoginResult.ValidationError para 400. Sin FluentValidation."
+    },
+    {
+      "item": "audit_on_validation_error",
+      "resolution": "No registrar en AuditLogs cuando hay ValidationError (400). Solo cuando se intenta auth: éxito (LoginSuccess) o fallo (LoginFailed)."
+    },
+    {
+      "item": "client_context_source",
+      "resolution": "Controller obtiene ClientIp y UserAgent de HttpContext (Connection.RemoteIpAddress, Request.Headers[\"User-Agent\"]) y los pasa al AdminLoginCommand."
+    },
+    {
+      "item": "audit_cursorid_on_failure",
+      "resolution": "En LoginFailed, CursorId vacío o \"\" (no hay usuario autenticado); Username = request.Usuario (el intento de login)."
+    }
+  ],
+  "references": {
+    "spec": "./spec.md",
+    "objectives": "./objectives.md",
+    "analysis": "./analysis.md"
+  }
+}

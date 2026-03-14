@@ -1,0 +1,19 @@
+{
+  "spec_version": "1.0.0",
+  "feature_id": "admin-login-audit-log",
+  "date": "2026-03-14",
+  "validation_criteria": [
+    { "id": "build", "status": "ok", "detail": "dotnet build correcto" },
+    { "id": "unit_tests", "status": "ok", "detail": "55 passed (AdminAuthController, AdminLoginHandler)" },
+    { "id": "integration_tests", "status": "ok", "detail": "27 passed, 1 skipped (PurgeLogs)" },
+    { "id": "postman", "status": "ok", "detail": "17 peticiones ejecutadas; login Admin OK" },
+    { "id": "login_success_audit", "status": "ok", "detail": "AdminLoginHandler registra LoginSuccess en AuditLogs con IP/UserAgent" },
+    { "id": "login_failed_audit", "status": "ok", "detail": "AdminLoginHandler registra LoginFailed en AuditLogs con IP/UserAgent" },
+    { "id": "controller_cqrs", "status": "ok", "detail": "AdminAuthController solo inyecta ISender e ILogger" }
+  ],
+  "references": {
+    "spec": "./spec.md",
+    "execution": "./execution.json",
+    "plan": "./plan.md"
+  }
+}

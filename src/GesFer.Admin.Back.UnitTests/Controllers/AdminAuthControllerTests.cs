@@ -1,8 +1,8 @@
 using FluentAssertions;
 using GesFer.Admin.Back.Api.Controllers;
-using GesFer.Admin.Back.Application.Common.Interfaces;
+using GesFer.Admin.Back.Application.Commands.Auth;
 using GesFer.Admin.Back.Application.DTOs.Auth;
-using GesFer.Admin.Back.Domain.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -13,17 +13,18 @@ namespace GesFer.Admin.Back.UnitTests.Controllers;
 
 public class AdminAuthControllerTests
 {
-    private readonly Mock<IAdminAuthService> _mockAuthService;
-    private readonly Mock<IAdminJwtService> _mockJwtService;
+    private readonly Mock<ISender> _mockSender;
     private readonly Mock<ILogger<AdminAuthController>> _mockLogger;
     private readonly AdminAuthController _controller;
 
     public AdminAuthControllerTests()
     {
-        _mockAuthService = new Mock<IAdminAuthService>();
-        _mockJwtService = new Mock<IAdminJwtService>();
+        _mockSender = new Mock<ISender>();
         _mockLogger = new Mock<ILogger<AdminAuthController>>();
-        _controller = new AdminAuthController(_mockAuthService.Object, _mockJwtService.Object, _mockLogger.Object);
+        _controller = new AdminAuthController(_mockSender.Object, _mockLogger.Object)
+        {
+            ControllerContext = new ControllerContext { HttpContext = new DefaultHttpContext() }
+        };
     }
 
     [Fact]
@@ -31,6 +32,8 @@ public class AdminAuthControllerTests
     {
         // Arrange
         var request = new AdminLoginRequest { Usuario = "", Contraseña = "" };
+        _mockSender.Setup(s => s.Send(It.IsAny<AdminLoginCommand>(), default))
+            .ReturnsAsync(AdminLoginResult.ValidationError("Usuario y contraseña son requeridos"));
 
         // Act
         var result = await _controller.Login(request);
@@ -45,8 +48,8 @@ public class AdminAuthControllerTests
     {
         // Arrange
         var request = new AdminLoginRequest { Usuario = "invalid", Contraseña = "wrongpassword" };
-        _mockAuthService.Setup(s => s.AuthenticateAsync(request.Usuario, request.Contraseña))
-            .ReturnsAsync((AdminUser?)null);
+        _mockSender.Setup(s => s.Send(It.IsAny<AdminLoginCommand>(), default))
+            .ReturnsAsync(AdminLoginResult.AuthFailure("Credenciales administrativas inválidas"));
 
         // Act
         var result = await _controller.Login(request);
@@ -61,36 +64,32 @@ public class AdminAuthControllerTests
     {
         // Arrange
         var request = new AdminLoginRequest { Usuario = "admin", Contraseña = "password" };
-        var adminUser = new AdminUser
+        var userId = Guid.NewGuid();
+        var response = new AdminLoginResponse
         {
-            Id = Guid.NewGuid(),
+            UserId = userId.ToString(),
+            CursorId = userId.ToString(),
             Username = "admin",
             FirstName = "Admin",
             LastName = "User",
-            Email = "admin@example.com"
+            Email = "admin@example.com",
+            Role = "Admin",
+            Token = "generated-token"
         };
-        var token = "generated-token";
-
-        _mockAuthService.Setup(s => s.AuthenticateAsync(request.Usuario, request.Contraseña))
-            .ReturnsAsync(adminUser);
-
-        _mockJwtService.Setup(s => s.GenerateAdminToken(
-            It.IsAny<string>(),
-            adminUser.Username,
-            adminUser.Id))
-            .Returns(token);
+        _mockSender.Setup(s => s.Send(It.IsAny<AdminLoginCommand>(), default))
+            .ReturnsAsync(AdminLoginResult.Success(response));
 
         // Act
         var result = await _controller.Login(request);
 
         // Assert
         var okResult = result.Should().BeOfType<OkObjectResult>().Subject;
-        var response = okResult.Value.Should().BeOfType<AdminLoginResponse>().Subject;
+        var actualResponse = okResult.Value.Should().BeOfType<AdminLoginResponse>().Subject;
 
-        response.Should().NotBeNull();
-        response.Username.Should().Be("admin");
-        response.Token.Should().Be(token);
-        response.UserId.Should().Be(adminUser.Id.ToString());
+        actualResponse.Should().NotBeNull();
+        actualResponse.Username.Should().Be("admin");
+        actualResponse.Token.Should().Be("generated-token");
+        actualResponse.UserId.Should().Be(userId.ToString());
     }
 
     [Fact]
@@ -98,7 +97,7 @@ public class AdminAuthControllerTests
     {
         // Arrange
         var request = new AdminLoginRequest { Usuario = "admin", Contraseña = "password" };
-        _mockAuthService.Setup(s => s.AuthenticateAsync(request.Usuario, request.Contraseña))
+        _mockSender.Setup(s => s.Send(It.IsAny<AdminLoginCommand>(), default))
             .ThrowsAsync(new Exception("Database error"));
 
         // Act
