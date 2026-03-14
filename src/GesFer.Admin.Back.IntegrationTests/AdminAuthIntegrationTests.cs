@@ -88,4 +88,37 @@ public class AdminAuthIntegrationTests
         // Assert
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.Unauthorized);
     }
+
+    /// <summary>
+    /// Confirma que un login fallido inserta un registro LoginFailed en AuditLogs.
+    /// </summary>
+    [Fact]
+    public async Task AdminLogin_WithInvalidCredentials_InsertsLoginFailedAuditLog()
+    {
+        // Arrange
+        var request = new AdminLoginRequest
+        {
+            Usuario = "admin",
+            Contraseña = "wrongpassword"
+        };
+
+        // Act
+        var response = await _client.PostAsJsonAsync("/api/admin/auth/login", request);
+
+        // Assert - respuesta 401
+        response.StatusCode.Should().Be(System.Net.HttpStatusCode.Unauthorized);
+
+        // Assert - inserción en AuditLogs
+        using var scope = _factory.Services.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<AdminDbContext>();
+        var auditLogs = await context.AuditLogs
+            .Where(a => a.Action == "LoginFailed" && a.Username == "admin")
+            .ToListAsync();
+
+        auditLogs.Should().NotBeEmpty("el login fallido debe registrar un AuditLog con Action=LoginFailed");
+        var log = auditLogs.OrderByDescending(a => a.ActionTimestamp).First();
+        log.CursorId.Should().BeEmpty("LoginFailed no tiene CursorId");
+        log.Path.Should().Be("/api/admin/auth/login");
+        log.HttpMethod.Should().Be("POST");
+    }
 }
