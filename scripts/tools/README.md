@@ -14,7 +14,7 @@ El listado canónico de herramientas existentes se obtiene de:
 | **invoke-mysql-seeds** | Migraciones EF y seeds de Admin sobre MySQL. | `Invoke-MySqlSeeds.bat` |
 | **prepare-full-env** | Docker (DB, cache, Adminer) y opcionalmente API y clientes. | `Prepare-FullEnv.bat` |
 
-Cada herramienta reside en una **cápsula** **paths.toolCapsules[&lt;tool-id&gt;]** con `manifest.json`, script `.ps1`, config, documentación y opcionalmente `bin/` con el ejecutable Rust.
+Cada herramienta reside en una **cápsula** **paths.toolCapsules[&lt;tool-id&gt;]** con `manifest.json`, script `.ps1`, config, documentación y el ejecutable Rust (`.exe`) en la misma carpeta de la cápsula.
 
 ## Uso del índice
 

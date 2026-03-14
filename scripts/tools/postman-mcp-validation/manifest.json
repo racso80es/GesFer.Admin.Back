@@ -8,7 +8,7 @@
     "launcher_ps1": "Postman-Mcp-Validation.ps1",
     "config": "postman-mcp-validation-config.json",
     "doc": "postman-mcp-validation.md",
-    "bin": "bin/postman_mcp_validation.exe"
+    "bin": "postman_mcp_validation.exe"
   },
   "env": ["Windows 11", "PowerShell 7+", "Node.js/npm (Newman)"]
 }

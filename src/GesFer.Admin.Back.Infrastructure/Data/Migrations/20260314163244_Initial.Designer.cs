@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GesFer.Admin.Back.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AdminDbContext))]
-    [Migration("20260213154125_InitialAdmin")]
-    partial class InitialAdmin
+    [Migration("20260314163244_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -120,50 +120,7 @@ namespace GesFer.Admin.Back.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AuditLogs");
-                });
-
-            modelBuilder.Entity("GesFer.Admin.Back.Domain.Entities.Log", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("ClientInfo")
-                        .HasColumnType("longtext");
-
-                    b.Property<Guid?>("CompanyId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Exception")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Level")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Properties")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Source")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Template")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("TimeStamp")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Logs", (string)null);
+                    b.ToTable("AuditLogs", (string)null);
                 });
 
             modelBuilder.Entity("GesFer.Admin.Back.Domain.Entities.City", b =>
@@ -340,6 +297,49 @@ namespace GesFer.Admin.Back.Infrastructure.Data.Migrations
                     b.ToTable("Language");
                 });
 
+            modelBuilder.Entity("GesFer.Admin.Back.Domain.Entities.Log", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClientInfo")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid?>("CompanyId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Exception")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Level")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Properties")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Source")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Template")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Logs", (string)null);
+                });
+
             modelBuilder.Entity("GesFer.Admin.Back.Domain.Entities.PostalCode", b =>
                 {
                     b.Property<Guid>("Id")
@@ -369,7 +369,7 @@ namespace GesFer.Admin.Back.Infrastructure.Data.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.ToTable("PostalCode");
+                    b.ToTable("PostalCode", (string)null);
                 });
 
             modelBuilder.Entity("GesFer.Admin.Back.Domain.Entities.State", b =>

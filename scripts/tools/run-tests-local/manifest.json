@@ -8,7 +8,7 @@
     "launcher_ps1": "Run-Tests-Local.ps1",
     "config": "run-tests-local-config.json",
     "doc": "run-tests-local.md",
-    "bin": "bin/run_tests_local.exe"
+    "bin": "run_tests_local.exe"
   },
   "env": ["Windows 11", "PowerShell 7+", ".NET SDK 8"]
 }

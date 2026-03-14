@@ -14,10 +14,10 @@ contract_version: 1.1.0
 default_implementation:
   delivery:
   - Cada herramienta reside en una capsula paths.toolsPath (Cúmulo) /<tool-id>/ con manifest.json. Los ejecutables se construyen en paths.toolsRustPath (Cúmulo) y se copian a paths.toolsPath (Cúmulo) /<tool-id>/bin/.
-  - Launcher .bat en la capsula invoca el .exe en bin/.
+  - Launcher .bat en la capsula invoca el .exe.
   - 'Config (.json), documentacion (.md) y manifest.json obligatorios en la capsula. Rutas canonicas: Cúmulo paths.toolCapsules.'
   language: rust
-  rationale: Rendimiento, seguridad de memoria, portabilidad y distribución como binario. Las implementaciones por defecto de tools y de scripts de skills han de ser en Rust.
+  rationale: Rendimiento, seguridad de memoria, portabilidad y distribución como binario. Las implementaciones por defecto de tools y de scripts de skills han de ser en Rust formato exe.
 definition_artefacts:
 - ext: .md
   format: frontmatter_yaml

@@ -68,7 +68,7 @@ namespace GesFer.Admin.Back.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AdminUsers", (string)null);
+                    b.ToTable("AdminUsers");
                 });
 
             modelBuilder.Entity("GesFer.Admin.Back.Domain.Entities.AuditLog", b =>
@@ -149,7 +149,7 @@ namespace GesFer.Admin.Back.Infrastructure.Data.Migrations
 
                     b.HasIndex("StateId");
 
-                    b.ToTable("City", (string)null);
+                    b.ToTable("City");
                 });
 
             modelBuilder.Entity("GesFer.Admin.Back.Domain.Entities.Company", b =>
@@ -257,7 +257,7 @@ namespace GesFer.Admin.Back.Infrastructure.Data.Migrations
 
                     b.HasIndex("LanguageId");
 
-                    b.ToTable("Country", (string)null);
+                    b.ToTable("Country");
                 });
 
             modelBuilder.Entity("GesFer.Admin.Back.Domain.Entities.Language", b =>
@@ -291,7 +291,7 @@ namespace GesFer.Admin.Back.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Language", (string)null);
+                    b.ToTable("Language");
                 });
 
             modelBuilder.Entity("GesFer.Admin.Back.Domain.Entities.Log", b =>
@@ -401,7 +401,7 @@ namespace GesFer.Admin.Back.Infrastructure.Data.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.ToTable("State", (string)null);
+                    b.ToTable("State");
                 });
 
             modelBuilder.Entity("GesFer.Admin.Back.Domain.Entities.City", b =>

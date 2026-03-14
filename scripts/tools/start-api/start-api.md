@@ -12,7 +12,7 @@ Levanta la API del proyecto GesFer.Admin.Back. Comprueba si el puerto está ocup
 Desde la raíz del repositorio (o con `GESFER_REPO_ROOT` apuntando a la raíz):
 
 ```powershell
-# Desde scripts/tools/start-api/bin/ o con PATH
+# Desde scripts/tools/start-api/ o con PATH
 .\start_api.exe
 
 # Puerto ocupado: fallar (por defecto)

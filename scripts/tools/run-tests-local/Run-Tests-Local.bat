@@ -1,13 +1,13 @@
 @echo off
 setlocal
-REM Run-Tests-Local.bat - Ejecuta tests en condiciones locales (contrato tools, Rust en bin/ si existe)
+REM Run-Tests-Local.bat - Ejecuta tests en condiciones locales (contrato tools, Rust .exe en capsula si existe)
 REM Capsula: scripts/tools/run-tests-local/
 
 set "SCRIPT_DIR=%~dp0"
 set "REPO_ROOT=%SCRIPT_DIR%..\..\.."
 cd /d "%REPO_ROOT%"
 
-set "RUST_EXE=%SCRIPT_DIR%bin\run_tests_local.exe"
+set "RUST_EXE=%SCRIPT_DIR%run_tests_local.exe"
 if exist "%RUST_EXE%" (
     set "GESFER_REPO_ROOT=%REPO_ROOT%"
     "%RUST_EXE%" %*

@@ -8,7 +8,7 @@
     "launcher_ps1": "Prepare-FullEnv.ps1",
     "config": "prepare-env.json",
     "doc": "prepare-env.md",
-    "bin": "bin/prepare_full_env.exe"
+    "bin": "prepare_full_env.exe"
   },
   "env": ["Windows 11", "PowerShell 7+", "Docker Desktop", ".NET SDK"]
 }

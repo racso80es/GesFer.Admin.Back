@@ -25,7 +25,6 @@ public class AdminDbContextFactory : IDesignTimeDbContextFactory<AdminDbContext>
             {
                 mysqlOptions.EnableStringComparisonTranslations();
                 mysqlOptions.EnableRetryOnFailure(maxRetryCount: 3, maxRetryDelay: TimeSpan.FromSeconds(5), errorNumbersToAdd: null);
-                mysqlOptions.MigrationsHistoryTable("__EFMigrationsHistory_Admin");
             });
 
         return new AdminDbContext(optionsBuilder.Options);

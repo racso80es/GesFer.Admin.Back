@@ -29,7 +29,7 @@
 
 ## 3. Validación manual recomendada
 
-- Comprobar en MySQL/Adminer que existan las tablas: Language, Country, State, City, PostalCode, Companies, AdminUsers, AuditLogs, Logs, __EFMigrationsHistory_Admin.
+- Comprobar en MySQL/Adminer que existan las tablas: Language, Country, State, City, PostalCode, Companies, AdminUsers, AuditLogs, Logs, __EFMigrationsHistory.
 - Si se copian los JSON de Seeds al directorio que usa el seeder (o se arranca desde la solución con ruta canónica), volver a ejecutar seeds y comprobar datos en Language, Country, State, City, Companies, AdminUsers.
 - Probar login con usuario seed (cuando existan datos en AdminUsers) y listado de companies/geo con token.
 

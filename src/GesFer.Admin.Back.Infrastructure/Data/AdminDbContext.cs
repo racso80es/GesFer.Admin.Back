@@ -28,6 +28,8 @@ public class AdminDbContext : DbContext, IApplicationDbContext
         // Aplicar configuraciones de entidades (incluyendo CompanyConfiguration)
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AdminDbContext).Assembly);
 
+        modelBuilder.Entity<AuditLog>(entity => entity.ToTable("AuditLogs"));
+
         // Configuración manual para Log (Serilog)
         modelBuilder.Entity<Log>(entity =>
         {

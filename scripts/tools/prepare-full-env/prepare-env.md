@@ -25,7 +25,7 @@ o
 .\scripts\tools\Prepare-FullEnv.bat
 ```
 
-El `.bat` usa `bin\prepare_full_env.exe` dentro de la cápsula si existe (build Rust + `scripts/tools-rs/install.ps1`); si no, ejecuta el script PowerShell.
+El `.bat` usa `prepare_full_env.exe` dentro de la cápsula si existe (build Rust + `scripts/tools-rs/install.ps1`); si no, ejecuta el script PowerShell.
 
 ### PowerShell directo
 

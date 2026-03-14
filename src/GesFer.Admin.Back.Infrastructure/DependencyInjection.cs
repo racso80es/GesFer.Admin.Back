@@ -38,7 +38,6 @@ public static class DependencyInjection
                         maxRetryCount: 5,
                         maxRetryDelay: TimeSpan.FromSeconds(30),
                         errorNumbersToAdd: null);
-                    mysqlOptions.MigrationsHistoryTable("__EFMigrationsHistory_Admin");
                 });
 
             if (isDevelopment)

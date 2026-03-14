@@ -23,7 +23,7 @@ O desde la cápsula (compatibilidad con launcher en raíz de tools):
 .\scripts\tools\Invoke-MySqlSeeds.bat
 ```
 
-El `.bat` usa `bin\invoke_mysql_seeds.exe` dentro de la cápsula si existe (build Rust + `scripts/tools-rs/install.ps1`); si no, ejecuta el script PowerShell.
+El `.bat` usa `invoke_mysql_seeds.exe` dentro de la cápsula si existe (build Rust + `scripts/tools-rs/install.ps1`); si no, ejecuta el script PowerShell.
 
 En PowerShell directo:
 

@@ -7,7 +7,7 @@ set "SCRIPT_DIR=%~dp0"
 set "REPO_ROOT=%SCRIPT_DIR%..\..\.."
 cd /d "%REPO_ROOT%"
 
-set "RUST_EXE=%SCRIPT_DIR%bin\postman_mcp_validation.exe"
+set "RUST_EXE=%SCRIPT_DIR%postman_mcp_validation.exe"
 if exist "%RUST_EXE%" (
     set "GESFER_REPO_ROOT=%REPO_ROOT%"
     "%RUST_EXE%" %*
