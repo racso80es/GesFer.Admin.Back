@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using GesFer.Admin.Back.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Moq;
 using GesFer.Admin.Back.Infrastructure.Services;
@@ -12,19 +13,19 @@ namespace GesFer.Admin.Back.UnitTests.Services;
 
 public class AuditLogServiceTests
 {
-    private readonly AdminDbContext _dbContext;
+    private readonly string _dbName;
+    private readonly IServiceProvider _serviceProvider;
     private readonly Mock<ILogger<AuditLogService>> _loggerMock;
     private readonly AuditLogService _auditLogService;
 
     public AuditLogServiceTests()
     {
-        var options = new DbContextOptionsBuilder<AdminDbContext>()
-            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-            .Options;
-
-        _dbContext = new AdminDbContext(options);
+        _dbName = Guid.NewGuid().ToString();
+        var services = new ServiceCollection();
+        services.AddDbContext<AdminDbContext>(opts => opts.UseInMemoryDatabase(_dbName));
+        _serviceProvider = services.BuildServiceProvider();
         _loggerMock = new Mock<ILogger<AuditLogService>>();
-        _auditLogService = new AuditLogService(_dbContext, _loggerMock.Object);
+        _auditLogService = new AuditLogService(_serviceProvider, _loggerMock.Object);
     }
 
     [Fact]
@@ -41,8 +42,10 @@ public class AuditLogServiceTests
         // Act
         await _auditLogService.LogActionAsync(cursorId, username, action, httpMethod, path, additionalData);
 
-        // Assert
-        var log = await _dbContext.AuditLogs.FirstOrDefaultAsync();
+        // Assert - usar el mismo DbContext (misma BD InMemory) que el servicio
+        using var scope = _serviceProvider.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<AdminDbContext>();
+        var log = await context.AuditLogs.FirstOrDefaultAsync();
         log.Should().NotBeNull();
         log!.CursorId.Should().Be(cursorId);
         log.Username.Should().Be(username);
@@ -58,12 +61,23 @@ public class AuditLogServiceTests
     [Fact]
     public async Task LogActionAsync_ShouldNotThrow_WhenDatabaseFails()
     {
-        // Arrange
-        // Force failure by disposing the context
-        await _dbContext.DisposeAsync();
+        // Arrange - ServiceProvider que devuelve un DbContext ya disposed para simular fallo de BD
+        var failDbName = "fail-" + Guid.NewGuid();
+        var failServices = new ServiceCollection();
+        failServices.AddScoped<AdminDbContext>(_ =>
+        {
+            var opts = new DbContextOptionsBuilder<AdminDbContext>()
+                .UseInMemoryDatabase(failDbName)
+                .Options;
+            var ctx = new AdminDbContext(opts);
+            ctx.Dispose();
+            return ctx;
+        });
+        var failProvider = failServices.BuildServiceProvider();
+        var failService = new AuditLogService(failProvider, _loggerMock.Object);
 
         // Act
-        Func<Task> act = async () => await _auditLogService.LogActionAsync("cursor", "user", "action", "POST", "/path", null);
+        Func<Task> act = async () => await failService.LogActionAsync("cursor", "user", "action", "POST", "/path", null);
 
         // Assert
         await act.Should().NotThrowAsync();
@@ -84,7 +98,9 @@ public class AuditLogServiceTests
         await _auditLogService.LogActionAsync("cursor", "user", "action", "POST", "/path", null);
 
         // Assert
-        var log = await _dbContext.AuditLogs.FirstAsync();
+        using var scope = _serviceProvider.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<AdminDbContext>();
+        var log = await context.AuditLogs.FirstAsync();
         log.Should().NotBeNull();
         log.AdditionalData.Should().BeNull();
         log.IsActive.Should().BeTrue();

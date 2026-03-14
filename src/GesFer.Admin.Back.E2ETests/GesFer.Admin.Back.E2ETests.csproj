@@ -24,4 +24,11 @@
     <ProjectReference Include="..\GesFer.Admin.Back.Infrastructure\GesFer.Admin.Back.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="..\GesFer.Admin.Back.Infrastructure\Data\Seeds\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>Data\Seeds\%(Filename)%(Extension)</TargetPath>
+    </Content>
+  </ItemGroup>
+
 </Project>

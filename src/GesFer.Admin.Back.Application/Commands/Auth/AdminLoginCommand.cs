@@ -7,7 +7,7 @@ namespace GesFer.Admin.Back.Application.Commands.Auth;
 /// Command para el caso de uso de login Admin. Encapsula autenticación, token y registro en AuditLogs.
 /// </summary>
 public record AdminLoginCommand(
-    string Usuario,
-    string Contraseña,
+    string UserName,
+    string Password,
     string? ClientIp = null,
     string? UserAgent = null) : IRequest<AdminLoginResult>;

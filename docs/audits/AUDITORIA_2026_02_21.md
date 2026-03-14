@@ -112,7 +112,7 @@ Modificar `src/GesFer.Admin.Back.Api/Program.cs` para eliminar el string de fall
 ```csharp
 // Antes
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-    ?? "Server=localhost;Port=3306;Database=ScrapDb;User=scrapuser;Password=scrappassword;CharSet=utf8mb4;AllowUserVariables=True;AllowLoadLocalInfile=True;";
+    ?? "Server=localhost;Port=3306;Database=GesFer_Admin;User=admin;Password=GesFerAdmin@pthrjkl;CharSet=utf8mb4;AllowUserVariables=True;AllowLoadLocalInfile=True;";
 
 // Después
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")

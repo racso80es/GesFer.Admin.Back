@@ -15,7 +15,7 @@ GesFer es un ecosistema modular que históricamente incluía varios componentes.
 | **Product / Back** | API REST de producto | Repo separado |
 | **Product / Front** | Interfaz web de producto | Repo separado |
 
-**Resumen:** Este proyecto es el **backend (API)** del módulo **Admin**. El frontend de administración ([GesFer.Admin.Front](https://github.com/racso80es/GesFer.Admin.Front)) consume esta API; ambos repos comparten el protocolo SddIA y la estructura de documentación. La base de datos (`ScrapDb`) puede ser compartida con otros componentes del ecosistema.
+**Resumen:** Este proyecto es el **backend (API)** del módulo **Admin**. El frontend de administración ([GesFer.Admin.Front](https://github.com/racso80es/GesFer.Admin.Front)) consume esta API; ambos repos comparten el protocolo SddIA y la estructura de documentación. La base de datos (`GesFer_Admin`) puede ser compartida con otros componentes del ecosistema.
 
 ---
 
@@ -23,7 +23,7 @@ GesFer es un ecosistema modular que históricamente incluía varios componentes.
 
 - **Stack:** .NET 8, ASP.NET Core Web API, JWT, Entity Framework Core, Serilog, Swagger.
 - **Estructura:** Api → Application → Infrastructure → Domain; tests y scripts en `src/`.
-- **Base de datos:** MySQL 8 (por defecto `ScrapDb` en `localhost:3306`).
+- **Base de datos:** MySQL 8 (por defecto `GesFer_Admin` en `localhost:3306`).
 
 ---
 
@@ -80,9 +80,9 @@ Endpoint de login: `POST /api/admin/auth/login` con `{ "Usuario": "admin", "Cont
 |-------|-------------------|
 | **Host** | `localhost` |
 | **Puerto** | `3306` |
-| **Base de datos** | `ScrapDb` |
-| **Usuario** | `scrapuser` |
-| **Contraseña** | `scrappassword` |
+| **Base de datos** | `GesFer_Admin` |
+| **Usuario** | `admin` |
+| **Contraseña** | `GesFerAdmin@pthrjkl` |
 
 Coinciden con la configuración de `docker-compose.yml` y `appsettings.json`.
 

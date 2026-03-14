@@ -8,9 +8,9 @@ El archivo `docker-compose.yml` está correctamente configurado con:
 
 1. **MySQL 8.0** (`gesfer_api_db`)
    - Puerto: `3306`
-   - Base de datos: `ScrapDb`
-   - Usuario: `scrapuser`
-   - Contraseña: `scrappassword`
+   - Base de datos: `GesFer_Admin`
+   - Usuario: `admin`
+   - Contraseña: `GesFerAdmin@pthrjkl`
    - Root password: `rootpassword`
    - Charset: `utf8mb4_unicode_ci`
    - Healthcheck configurado
@@ -88,7 +88,7 @@ docker-compose down -v
 ### Desde PowerShell
 
 ```powershell
-docker exec -it gesfer_api_db mysql -u scrapuser -pscrappassword ScrapDb -e "SELECT 1;"
+docker exec -it gesfer_api_db mysql -u admin -pGesFerAdmin@pthrjkl GesFer_Admin -e "SELECT 1;"
 ```
 
 ### Desde Adminer
@@ -96,16 +96,16 @@ docker exec -it gesfer_api_db mysql -u scrapuser -pscrappassword ScrapDb -e "SEL
 1. Abrir navegador en: `http://localhost:8080`
 2. Sistema: `MySQL`
 3. Servidor: `db`
-4. Usuario: `scrapuser`
-5. Contraseña: `scrappassword`
-6. Base de datos: `ScrapDb`
+4. Usuario: `admin`
+5. Contraseña: `GesFerAdmin@pthrjkl`
+6. Base de datos: `GesFer_Admin`
 
 ## 📝 Cadena de Conexión
 
 La cadena de conexión configurada en `appsettings.json` es:
 
 ```
-Server=localhost;Port=3306;Database=ScrapDb;User=scrapuser;Password=scrappassword;CharSet=utf8mb4;AllowUserVariables=True;AllowLoadLocalInfile=True;
+Server=localhost;Port=3306;Database=GesFer_Admin;User=admin;Password=GesFerAdmin@pthrjkl;CharSet=utf8mb4;AllowUserVariables=True;AllowLoadLocalInfile=True;
 ```
 
 ## ⚙️ Configuración de EF Core
@@ -156,10 +156,10 @@ docker stats
 docker exec -it gesfer_api_db bash
 
 # Backup de la base de datos
-docker exec gesfer_api_db mysqldump -u scrapuser -pscrappassword ScrapDb > backup.sql
+docker exec gesfer_api_db mysqldump -u admin -pGesFerAdmin@pthrjkl GesFer_Admin > backup.sql
 
 # Restaurar base de datos
-docker exec -i gesfer_api_db mysql -u scrapuser -pscrappassword ScrapDb < backup.sql
+docker exec -i gesfer_api_db mysql -u admin -pGesFerAdmin@pthrjkl GesFer_Admin < backup.sql
 
 # Ver variables de entorno
 docker exec gesfer_api_db env

@@ -1,17 +1,16 @@
 using System.Net;
 using System.Net.Http.Json;
-using System.Net.Http.Headers;
 using FluentAssertions;
-using GesFer.Admin.Back.Application.DTOs.Company;
-using GesFer.Admin.Back.Application.DTOs.Geo;
-using Xunit;
+using GesFer.Admin.Back.Application.DTOs.Auth;
 using GesFer.Admin.Back.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Xunit;
 
 namespace GesFer.Admin.Back.E2ETests;
 
 /// <summary>
-/// Pruebas E2E contra la API Admin en memoria.
+/// Pruebas E2E contra la API Admin en memoria (fixture con seeds).
 /// </summary>
 [Trait("Category", "E2E")]
 public class AdminApiE2ETests : IClassFixture<E2EFixture>
@@ -24,15 +23,51 @@ public class AdminApiE2ETests : IClassFixture<E2EFixture>
         _fixture = fixture;
         _client = _fixture.CreateClient();
         _client.DefaultRequestHeaders.Add("Accept", "application/json");
+    }
 
-        // Seed database manually for tests if needed
+    [Fact]
+    public async Task AdminLogin_ReturnsToken_AndPersistsAuditLog()
+    {
+        var request = new AdminLoginRequest { Usuario = "admin", Contraseña = "admin123" };
+
+        var response = await _client.PostAsJsonAsync("/api/admin/auth/login", request);
+
+        response.EnsureSuccessStatusCode();
+        var result = await response.Content.ReadFromJsonAsync<AdminLoginResponse>();
+        result.Should().NotBeNull();
+        result!.Token.Should().NotBeNullOrEmpty();
+        result.Username.Should().Be("admin");
+        result.Role.Should().Be("Admin");
+
         using var scope = _fixture.Services.CreateScope();
-        var db = scope.ServiceProvider.GetRequiredService<AdminDbContext>();
-        db.Database.EnsureCreated();
-        // Here you would normally call a Seeder, e.g. await new AdminJsonDataSeeder(db).SeedAllAsync();
-        // Assuming the app seeds itself on startup or we need to trigger it.
-        // For now, let's rely on the fact that Program.cs might be doing it or we might need to add it.
-        // Given the CI failure, the priority is to get the app running in memory.
+        var context = scope.ServiceProvider.GetRequiredService<AdminDbContext>();
+        var auditLogs = await context.AuditLogs
+            .Where(a => a.Action == "LoginSuccess" && a.Username == "admin")
+            .ToListAsync();
+
+        auditLogs.Should().NotBeEmpty("el login exitoso debe persistir un registro en AuditLogs");
+        var log = auditLogs.OrderByDescending(a => a.ActionTimestamp).First();
+        log.CursorId.Should().NotBeNullOrEmpty();
+        log.Path.Should().Be("/api/admin/auth/login");
+        log.HttpMethod.Should().Be("POST");
+    }
+
+    [Fact]
+    public async Task AdminLogin_WithInvalidCredentials_Returns401_AndPersistsLoginFailedAuditLog()
+    {
+        var request = new AdminLoginRequest { Usuario = "admin", Contraseña = "wrong" };
+
+        var response = await _client.PostAsJsonAsync("/api/admin/auth/login", request);
+
+        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+
+        using var scope = _fixture.Services.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<AdminDbContext>();
+        var auditLogs = await context.AuditLogs
+            .Where(a => a.Action == "LoginFailed" && a.Username == "admin")
+            .ToListAsync();
+
+        auditLogs.Should().NotBeEmpty("el login fallido debe persistir un registro LoginFailed en AuditLogs");
     }
 
     [Fact]

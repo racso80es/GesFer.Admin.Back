@@ -136,8 +136,8 @@ if (Environment.GetEnvironmentVariable("RUN_SEEDS_ONLY") == "1")
     await app.Services.RunMigrationsAndSeedsThenExitAsync();
 }
 
-// Inicializar base de datos y seeds (se ejecuta siempre para garantizar consistencia)
-await app.Services.RunMigrationsAndSeedsAsync();
+// Inicializar base de datos (solo migraciones; seeds vía Invoke-MySqlSeeds con RUN_SEEDS_ONLY=1)
+await app.Services.RunMigrationsOnlyAsync();
 
 // Configurar el pipeline HTTP
 if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Testing"))

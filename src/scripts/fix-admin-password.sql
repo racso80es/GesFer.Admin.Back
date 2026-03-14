@@ -4,7 +4,7 @@
 -- Este script actualiza el hash de la contraseña del usuario admin
 -- para que coincida con el hash correcto de "admin123"
 
-USE ScrapDb;
+USE GesFer_Admin;
 
 -- Hash BCrypt correcto para "admin123" (verificado)
 -- Este hash debe coincidir con el usado en SetupService.cs y master-data.json

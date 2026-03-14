@@ -39,7 +39,7 @@ Modificar `src/GesFer.Admin.Back.Api/DependencyInjection.cs` para eliminar el st
 ```csharp
 // ANTES
 var connectionString = configuration.GetConnectionString("DefaultConnection")
-    ?? "Server=localhost;...;Password=scrappassword;...";
+    ?? "Server=localhost;...;Password=GesFerAdmin@pthrjkl;...";
 
 // DESPUÉS
 var connectionString = configuration.GetConnectionString("DefaultConnection")

@@ -31,7 +31,7 @@ if (-not (Test-Path $scriptPath)) {
     exit 1
 }
 
-$result = Get-Content $scriptPath | docker exec -i gesfer_api_db mysql -u scrapuser -pscrappassword ScrapDb 2>&1
+$result = Get-Content $scriptPath | docker exec -i gesfer_api_db mysql -u admin -pGesFerAdmin@pthrjkl GesFer_Admin 2>&1
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host "   ✓ Hash de contraseña corregido correctamente" -ForegroundColor Green

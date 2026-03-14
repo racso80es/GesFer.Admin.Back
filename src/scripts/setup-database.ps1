@@ -25,7 +25,7 @@ Write-Host "   ✓ MySQL está disponible" -ForegroundColor Green
 
 # Verificar si las tablas existen
 Write-Host "3. Verificando si las tablas existen..." -ForegroundColor Yellow
-$tableResult = docker exec gesfer_api_db mysql -u scrapuser -pscrappassword ScrapDb -e "SHOW TABLES;" 2>&1
+$tableResult = docker exec gesfer_api_db mysql -u admin -pGesFerAdmin@pthrjkl GesFer_Admin -e "SHOW TABLES;" 2>&1
 $hasTables = $tableResult -match "Companies"
 
 if (-not $hasTables) {

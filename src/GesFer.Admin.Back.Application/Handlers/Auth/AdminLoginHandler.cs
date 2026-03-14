@@ -36,19 +36,19 @@ public class AdminLoginHandler : IRequestHandler<AdminLoginCommand, AdminLoginRe
     {
         try
         {
-            if (string.IsNullOrWhiteSpace(request.Usuario) || string.IsNullOrWhiteSpace(request.Contraseña))
+            if (string.IsNullOrWhiteSpace(request.UserName) || string.IsNullOrWhiteSpace(request.Password))
             {
                 return AdminLoginResult.ValidationError("Usuario y contraseña son requeridos");
             }
 
-            var adminUser = await _authService.AuthenticateAsync(request.Usuario, request.Contraseña);
+            var adminUser = await _authService.AuthenticateAsync(request.UserName, request.Password);
 
             if (adminUser == null)
             {
                 var additionalData = BuildAdditionalData(request.ClientIp, request.UserAgent);
                 await _auditService.LogActionAsync(
                     cursorId: string.Empty,
-                    username: request.Usuario,
+                    username: request.UserName,
                     action: "LoginFailed",
                     httpMethod: HttpMethod,
                     path: LoginPath,
@@ -85,7 +85,7 @@ public class AdminLoginHandler : IRequestHandler<AdminLoginCommand, AdminLoginRe
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error al realizar login administrativo para usuario: {Usuario}", request.Usuario);
+            _logger.LogError(ex, "Error al realizar login administrativo para usuario: {Usuario}", request.UserName);
             return AdminLoginResult.Error("Error interno del servidor");
         }
     }

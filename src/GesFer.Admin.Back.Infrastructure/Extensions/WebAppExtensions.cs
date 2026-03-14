@@ -12,7 +12,32 @@ namespace GesFer.Admin.Back.Infrastructure;
 public static class WebAppExtensions
 {
     /// <summary>
-    /// Ejecuta migraciones y seeds de Admin (MigrateAsync + SeedAllAsync). Llamar desde Program: await app.Services.RunMigrationsAndSeedsAsync().
+    /// Ejecuta solo migraciones de Admin (sin seeds). Usado en arranque normal de la API.
+    /// Los seeds se ejecutan mediante Invoke-MySqlSeeds (RUN_SEEDS_ONLY=1).
+    /// </summary>
+    public static async Task RunMigrationsOnlyAsync(this IServiceProvider serviceProvider)
+    {
+        using var scope = serviceProvider.CreateScope();
+        var services = scope.ServiceProvider;
+        var logger = services.GetRequiredService<ILoggerFactory>().CreateLogger("GesFer.Admin.Back.Infrastructure.WebAppExtensions");
+        try
+        {
+            var context = services.GetRequiredService<AdminDbContext>();
+
+            if (context.Database.IsRelational())
+            {
+                await context.Database.MigrateAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error en migraciones: {Message}", ex.Message);
+            throw;
+        }
+    }
+
+    /// <summary>
+    /// Ejecuta migraciones y seeds de Admin (MigrateAsync + SeedAllAsync). Usado por Invoke-MySqlSeeds (RUN_SEEDS_ONLY=1).
     /// </summary>
     public static async Task RunMigrationsAndSeedsAsync(this IServiceProvider serviceProvider)
     {

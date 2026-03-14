@@ -10,7 +10,7 @@ namespace GesFer.Admin.Back.Infrastructure.Data;
 /// </summary>
 public class AdminDbContextFactory : IDesignTimeDbContextFactory<AdminDbContext>
 {
-    private const string DefaultConnection = "Server=localhost;Port=3306;Database=ScrapDb;User=scrapuser;Password=scrappassword;CharSet=utf8mb4;AllowUserVariables=True;AllowLoadLocalInfile=True;";
+    private const string DefaultConnection = "Server=localhost;Port=3306;Database=GesFer_Admin;User=admin;Password=GesFerAdmin@pthrjkl;CharSet=utf8mb4;AllowUserVariables=True;AllowLoadLocalInfile=True;";
 
     public AdminDbContext CreateDbContext(string[] args)
     {

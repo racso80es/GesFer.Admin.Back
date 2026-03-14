@@ -45,6 +45,31 @@ public class LogController : ControllerBase
     }
 
     /// <summary>
+    /// Obtiene logs de auditoría paginados (LoginSuccess, LoginFailed, etc.). Requiere JWT Admin.
+    /// </summary>
+    [HttpGet]
+    [Route("/api/admin/audit-logs")]
+    [Authorize(Policy = "AdminOnly")]
+    [ProducesResponseType(typeof(AuditLogsPagedResponseDto), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetAuditLogs(
+        [FromQuery] string? action = null,
+        [FromQuery] string? username = null,
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = 50)
+    {
+        try
+        {
+            var result = await _sender.Send(new GetAuditLogsQuery(action, username, pageNumber, pageSize));
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error al obtener audit logs");
+            return StatusCode(500, new { message = "Error interno del servidor", error = ex.Message });
+        }
+    }
+
+    /// <summary>
     /// Recibe un log de auditoría desde otros servicios (System)
     /// </summary>
     [HttpPost]

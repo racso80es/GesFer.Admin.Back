@@ -119,7 +119,7 @@ curl http://localhost:5000/api/health
 
 2. **Errores comunes:**
    - "Unable to connect to any of the specified MySQL hosts"
-   - "Database 'ScrapDb' does not exist"
+   - "Database 'GesFer_Admin' does not exist"
    - "Access denied for user"
 
 ### Si Nada Funciona

@@ -102,6 +102,25 @@
 					}
 				},
 				{
+					"name": "Get Audit Logs (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/audit-logs?pageNumber=1&pageSize=50",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "admin", "audit-logs"],
+							"query": [
+								{ "key": "action", "value": "LoginSuccess", "disabled": true },
+								{ "key": "username", "value": "", "disabled": true },
+								{ "key": "pageNumber", "value": "1" },
+								{ "key": "pageSize", "value": "50" }
+							]
+						},
+						"description": "Obtiene logs de auditoría (LoginSuccess, LoginFailed, etc.). Requiere JWT Admin. Tras Login Admin deberían aparecer registros."
+					}
+				},
+				{
 					"name": "Get Logs (Admin)",
 					"request": {
 						"method": "GET",

@@ -2,35 +2,39 @@ using GesFer.Admin.Back.Application.Common.Interfaces;
 using GesFer.Admin.Back.Domain.Entities;
 using GesFer.Admin.Back.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace GesFer.Admin.Back.Infrastructure.Services;
 
 /// <summary>
-/// Servicio para registrar logs de auditoría administrativa
+/// Servicio para registrar logs de auditoría administrativa.
+/// Usa un scope independiente para evitar conflictos con entidades rastreadas (ej. AdminUser en login).
 /// </summary>
 public class AuditLogService : IAuditLogService
 {
-    private readonly AdminDbContext _context;
+    private readonly IServiceProvider _serviceProvider;
     private readonly ILogger<AuditLogService> _logger;
 
-    public AuditLogService(AdminDbContext context, ILogger<AuditLogService> logger)
+    public AuditLogService(IServiceProvider serviceProvider, ILogger<AuditLogService> logger)
     {
-        _context = context;
+        _serviceProvider = serviceProvider;
         _logger = logger;
     }
 
     /// <summary>
-    /// Registra un log de auditoría con el Cursor ID del administrador
-    /// Usa Sequential GUIDs para el Id del log
+    /// Registra un log de auditoría con el Cursor ID del administrador.
+    /// Usa Sequential GUIDs para el Id del log. Scope independiente para evitar conflictos de DbContext.
     /// </summary>
     public async Task LogActionAsync(string cursorId, string username, string action, string httpMethod, string path, string? additionalData = null)
     {
         try
         {
+            using var scope = _serviceProvider.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<AdminDbContext>();
+
             var auditLog = new AuditLog
             {
-                // El Id se generará automáticamente como Sequential GUID por ApplicationDbContext
                 CursorId = cursorId,
                 Username = username,
                 Action = action,
@@ -42,15 +46,16 @@ public class AuditLogService : IAuditLogService
                 IsActive = true
             };
 
-            _context.AuditLogs.Add(auditLog);
-            await _context.SaveChangesAsync();
+            context.AuditLogs.Add(auditLog);
+            await context.SaveChangesAsync();
+            _logger.LogDebug("AuditLog registrado: Action={Action}, Username={Username}, Path={Path}", action, username, path);
         }
         catch (Exception ex)
         {
             // Log el error pero no fallar la operación principal (RNF3: audit no bloquea respuesta)
             _logger.LogError(ex,
-                "Error al registrar log de auditoría para CursorId: {CursorId}, Action: {Action}, Path: {Path}. Mensaje: {Message}",
-                cursorId, action, path, ex.Message);
+                "Error al registrar log de auditoría para CursorId: {CursorId}, Action: {Action}, Path: {Path}. Tipo: {ExceptionType}, Mensaje: {Message}, StackTrace: {StackTrace}",
+                cursorId, action, path, ex.GetType().FullName, ex.Message, ex.StackTrace);
         }
     }
 }
