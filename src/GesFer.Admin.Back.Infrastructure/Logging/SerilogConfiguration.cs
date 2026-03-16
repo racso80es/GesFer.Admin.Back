@@ -20,20 +20,18 @@ public static class SerilogConfiguration
                 .Enrich.WithProperty("Application", "GesFer.Admin.Back.Api")
                 .Enrich.WithProperty("Environment", context.HostingEnvironment.EnvironmentName);
 
+            // Resolve the queue created in Program.cs to provide it to the sink
+            var logQueue = services.GetService(typeof(ILogQueue)) as ILogQueue;
+
             if (isDevelopment)
             {
                 configuration
                     .MinimumLevel.Verbose()
                     .WriteTo.Console();
 
-                var useMySqlLogging = context.Configuration.GetValue<bool>("Serilog:UseMySql");
-                if (useMySqlLogging && !string.IsNullOrEmpty(connectionString))
+                if (logQueue != null)
                 {
-                    configuration.WriteTo.MySQL(
-                        connectionString: connectionString,
-                        tableName: "Logs",
-                        restrictedToMinimumLevel: LogEventLevel.Verbose,
-                        storeTimestampInUtc: true);
+                    configuration.WriteTo.Sink(new MediatRLogSink(logQueue), LogEventLevel.Verbose);
                 }
             }
             else
@@ -43,13 +41,9 @@ public static class SerilogConfiguration
                     .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
                     .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning);
 
-                if (!string.IsNullOrEmpty(connectionString))
+                if (logQueue != null)
                 {
-                    configuration.WriteTo.MySQL(
-                        connectionString: connectionString,
-                        tableName: "Logs",
-                        restrictedToMinimumLevel: LogEventLevel.Information,
-                        storeTimestampInUtc: true);
+                    configuration.WriteTo.Sink(new MediatRLogSink(logQueue), LogEventLevel.Information);
                 }
             }
         });

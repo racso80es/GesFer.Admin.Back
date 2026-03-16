@@ -5,6 +5,7 @@ using GesFer.Admin.Back.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Pomelo.EntityFrameworkCore.MySql;
 
 namespace GesFer.Admin.Back.Infrastructure;
@@ -54,6 +55,11 @@ public static class DependencyInjection
         services.AddScoped<AdminJsonDataSeeder>();
         services.AddSingleton<ISequentialGuidGenerator, MySqlSequentialGuidGenerator>();
         services.AddSingleton<ISensitiveDataSanitizer, SensitiveDataSanitizer>();
+
+        // El ILogQueue ya fue agregado al inicio en Program.cs para Serilog,
+        // pero lo registramos por seguridad si se llama independientemente.
+        services.TryAddSingleton<GesFer.Admin.Back.Infrastructure.Logging.ILogQueue, GesFer.Admin.Back.Infrastructure.Logging.LogQueue>();
+        services.AddHostedService<GesFer.Admin.Back.Infrastructure.Logging.LogDispatcherBackgroundService>();
 
         return services;
     }
