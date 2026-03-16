@@ -1,0 +1,10 @@
+{
+  "result": "pass",
+  "branch": "feat/eliminar-dependencias-serilog",
+  "base_branch": "main",
+  "checks": [
+    { "name": "build", "result": "pass", "message": "dotnet build OK" },
+    { "name": "unit_tests", "result": "pass", "message": "55 tests pasaron" },
+    { "name": "logs_bd", "result": "pass", "message": "Registros en tabla Logs verificados" }
+  ]
+}

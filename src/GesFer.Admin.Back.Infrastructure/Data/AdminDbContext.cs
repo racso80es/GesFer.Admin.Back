@@ -30,7 +30,7 @@ public class AdminDbContext : DbContext, IApplicationDbContext
 
         modelBuilder.Entity<AuditLog>(entity => entity.ToTable("AuditLogs"));
 
-        // Configuración manual para Log (Serilog)
+        // Configuración manual para Log (tabla Logs)
         modelBuilder.Entity<Log>(entity =>
         {
             entity.ToTable("Logs"); // Asegurar nombre de tabla

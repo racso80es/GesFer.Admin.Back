@@ -2,13 +2,12 @@ namespace GesFer.Admin.Back.Domain.Entities;
 
 /// <summary>
 /// Entidad que representa un log del sistema.
-/// NO hereda de BaseEntity porque Serilog.Sinks.MySQL requiere Id INT AUTO_INCREMENT.
-/// Esta entidad está diseñada específicamente para ser compatible con Serilog.
+/// NO hereda de BaseEntity porque la tabla Logs usa Id INT AUTO_INCREMENT.
 /// </summary>
 public class Log
 {
     /// <summary>
-    /// Identificador único del log (INT AUTO_INCREMENT, administrado por MySQL/Serilog)
+    /// Identificador único del log (INT AUTO_INCREMENT, administrado por MySQL)
     /// </summary>
     public int Id { get; set; }
 
@@ -23,7 +22,7 @@ public class Log
     public string Message { get; set; } = string.Empty;
 
     /// <summary>
-    /// Template del mensaje (con placeholders) - usado por Serilog
+    /// Template del mensaje (con placeholders)
     /// </summary>
     public string? Template { get; set; }
 
@@ -38,7 +37,7 @@ public class Log
     public string? Properties { get; set; }
 
     /// <summary>
-    /// Timestamp del log (UTC) - Serilog usa TimeStamp con mayúscula
+    /// Timestamp del log (UTC)
     /// </summary>
     public DateTime TimeStamp { get; set; } = DateTime.UtcNow;
 
