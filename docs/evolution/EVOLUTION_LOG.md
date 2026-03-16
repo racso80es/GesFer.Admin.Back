@@ -2,6 +2,33 @@
 
 Registro de cierres de tareas con resumen de alcance y referencia a documentación.
 
+[2026-03-16] [feat/eliminar-dependencias-serilog] Eliminación de Serilog; sistema de logs con Microsoft.Extensions.Logging. [PR]
+
+---
+
+## 2026-03-16 - Eliminar dependencias Serilog (feat/eliminar-dependencias-serilog)
+
+**Rama:** feat/eliminar-dependencias-serilog  
+**Tipo:** Feature  
+**Documentación:** `docs/features/eliminar-dependencias-serilog/objectives.md`
+
+### Resumen
+
+Sistema de logs sin dependencias de terceros. Reemplazo de Serilog por Microsoft.Extensions.Logging con LogQueueLoggerProvider que escribe a ILogQueue. Se mantienen la cola, CreateLogCommand y la tabla Logs.
+
+### Cambios realizados
+
+- **LogQueueLogger** y **LogQueueLoggerProvider** (ILoggerProvider)
+- Eliminados MediatRLogSink, SerilogConfiguration y paquetes Serilog
+- Program.cs: AddProvider en lugar de ConfigureInfrastructureLogging
+- Tests: eliminado Serilog.Log.CloseAndFlushAsync
+
+### Referencias
+
+- Objectives: `docs/features/eliminar-dependencias-serilog/objectives.md`
+- Spec: `docs/features/eliminar-dependencias-serilog/spec.md`
+- Validación: `docs/features/eliminar-dependencias-serilog/validacion.json`
+
 ---
 
 ## 2026-03-14 - Registro login Admin en AuditLogs (feat/admin-login-audit-log)
