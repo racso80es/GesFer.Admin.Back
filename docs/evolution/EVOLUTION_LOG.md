@@ -2,7 +2,7 @@
 
 Registro de cierres de tareas con resumen de alcance y referencia a documentación.
 
-[2026-03-16] [feat/eliminar-dependencias-serilog] Eliminación de Serilog; sistema de logs con Microsoft.Extensions.Logging. [PR]
+[2026-03-16] [feat/eliminar-dependencias-serilog] Eliminación de Serilog; sistema de logs con Microsoft.Extensions.Logging. [PR #86 mergeado]
 
 ---
 
