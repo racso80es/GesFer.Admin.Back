@@ -40,7 +40,7 @@ public class LogDispatcherBackgroundService : BackgroundService
                 }
                 catch (Exception ex)
                 {
-                    // Intentionally avoid putting an error log back to Serilog here to avoid infinite loops
+                    // Evitar reenviar el error a la cola de logs para evitar bucles infinitos
                     Console.WriteLine($"[CRITICAL] Error in LogDispatcherBackgroundService processing log: {ex}");
                 }
             }

@@ -62,6 +62,5 @@ public class E2EFixture : WebApplicationFactory<Program>, IAsyncLifetime
     public new async Task DisposeAsync()
     {
         await base.DisposeAsync();
-        await Serilog.Log.CloseAndFlushAsync();
     }
 }

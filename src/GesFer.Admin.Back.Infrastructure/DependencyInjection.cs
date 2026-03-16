@@ -56,7 +56,7 @@ public static class DependencyInjection
         services.AddSingleton<ISequentialGuidGenerator, MySqlSequentialGuidGenerator>();
         services.AddSingleton<ISensitiveDataSanitizer, SensitiveDataSanitizer>();
 
-        // El ILogQueue ya fue agregado al inicio en Program.cs para Serilog,
+        // El ILogQueue ya fue agregado al inicio en Program.cs,
         // pero lo registramos por seguridad si se llama independientemente.
         services.TryAddSingleton<GesFer.Admin.Back.Infrastructure.Logging.ILogQueue, GesFer.Admin.Back.Infrastructure.Logging.LogQueue>();
         services.AddHostedService<GesFer.Admin.Back.Infrastructure.Logging.LogDispatcherBackgroundService>();

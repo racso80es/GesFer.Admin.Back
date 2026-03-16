@@ -2,6 +2,7 @@ using GesFer.Admin.Back.Api;
 using GesFer.Admin.Back.Infrastructure;
 using GesFer.Admin.Back.Infrastructure.Logging;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -9,11 +10,16 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Ensure the queue is available before Serilog configuration uses the ServiceProvider
-builder.Services.AddSingleton<ILogQueue, LogQueue>();
+// Cola de logs: instancia explícita para el provider y para DI
+var logQueue = new LogQueue();
+builder.Services.AddSingleton<ILogQueue>(logQueue);
 
-// Configurar Serilog (Delegado a Infrastructure)
-builder.Host.ConfigureInfrastructureLogging();
+// Logging sin Serilog: provider custom que escribe a ILogQueue
+builder.Logging.AddProvider(new LogQueueLoggerProvider(logQueue));
+var isDevelopment = builder.Environment.IsDevelopment();
+builder.Logging.SetMinimumLevel(isDevelopment ? LogLevel.Debug : LogLevel.Information);
+builder.Logging.AddFilter("Microsoft", LogLevel.Warning);
+builder.Logging.AddFilter("Microsoft.AspNetCore", LogLevel.Warning);
 
 // Configurar servicios
 builder.Services.AddControllers();
@@ -68,7 +74,6 @@ builder.Services.AddCors(options =>
 });
 
 // Seguridad: HTTPS en todos los entornos. Redirección HTTP → HTTPS.
-var isDevelopment = builder.Environment.IsDevelopment();
 if (isDevelopment)
     builder.Services.Configure<HttpsRedirectionOptions>(options => { options.HttpsPort = 5011; });
 

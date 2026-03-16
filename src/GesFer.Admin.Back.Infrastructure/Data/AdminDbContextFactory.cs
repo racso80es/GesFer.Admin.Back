@@ -6,7 +6,7 @@ namespace GesFer.Admin.Back.Infrastructure.Data;
 
 /// <summary>
 /// Factory de diseño para que las herramientas de EF Core (ej. dotnet ef database update)
-/// creen el DbContext sin arrancar la aplicación web, evitando fallos por Serilog/MySQL o JWT.
+/// creen el DbContext sin arrancar la aplicación web, evitando fallos por MySQL o JWT.
 /// </summary>
 public class AdminDbContextFactory : IDesignTimeDbContextFactory<AdminDbContext>
 {
