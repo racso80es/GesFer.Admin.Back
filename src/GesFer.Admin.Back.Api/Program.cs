@@ -9,6 +9,9 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Ensure the queue is available before Serilog configuration uses the ServiceProvider
+builder.Services.AddSingleton<ILogQueue, LogQueue>();
+
 // Configurar Serilog (Delegado a Infrastructure)
 builder.Host.ConfigureInfrastructureLogging();
 
