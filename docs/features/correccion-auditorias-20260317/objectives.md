@@ -1,4 +1,4 @@
 # Objetivos de Corrección - 2026-03-17
 
-1. Documentar que el sistema se encuentra en un estado saludable (100% en todas las métricas).
-2. Cerrar el proceso sin hallazgos técnicos.
+1. Diagnosticar y resolver el TimeOut en los tests de integración causados por el Deadlock de `LogQueueLogger`.
+2. Mantener la sanidad de las métricas (100%) previniendo logs recursivos desde el proceso en segundo plano.

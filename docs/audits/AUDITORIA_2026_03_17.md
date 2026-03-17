@@ -7,8 +7,17 @@
 
 ## 2. Pain Points
 
-No hay hallazgos críticos ni medios. El proyecto compila correctamente, los tests pasan, y no se identifican problemas de arquitectura, nomenclatura o estabilidad asíncrona.
+🔴 **Críticos**
+Hallazgo: Bucle infinito en el logueo de base de datos causado por EF Core registrando sus propias operaciones de inserción de logs, lo que produce una cascada infinita de logs en `LogQueueLogger` y bloquea los Integration Tests.
+
+Ubicación: `src/GesFer.Admin.Back.Infrastructure/Logging/LogQueueLogger.cs` en el método `Log<TState>`.
 
 ## 3. Acciones Kaizen (Hoja de Ruta para el Executor)
 
-No se requieren acciones correctoras.
+1. Filtrar los logs entrantes en `LogQueueLogger` para evitar procesar categorías recursivas.
+2. Añadir validación temprana para rechazar namespaces como `Microsoft`, `System`, y clases internas del proceso de logueo (`LogDispatcherBackgroundService`, `CreateLogHandler`).
+3. Comprobar que los test de integración ya no sufren Timeouts por Deadlock.
+
+**Definition of Done (DoD):**
+* El log no registra comandos internos de EF Core ni de MediatR para evitar la recursión.
+* La suite de pruebas completa de Integration Tests pasa sin fallos de timeout o bloqueo de hilo asíncrono.
