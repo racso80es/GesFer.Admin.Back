@@ -1,0 +1,15 @@
+{
+    "id": "26445851-d6f5-469e-a98c-5c95b5bdf5f7",
+    "name": "correccion-auditorias-20260317",
+    "type": "feature",
+    "version": "1.0.0",
+    "status": "active",
+    "security_model": {
+        "token": "Karma2Token",
+        "description": "Se aplica protocolo estricto Karma2Token para todas las operaciones"
+    },
+    "metadata": {
+        "author": "Guardián de la Infraestructura",
+        "date": "2026-03-17"
+    }
+}

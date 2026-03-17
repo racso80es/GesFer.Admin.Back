@@ -29,6 +29,15 @@ internal sealed class LogQueueLogger : ILogger
         if (!IsEnabled(logLevel))
             return;
 
+        // Evitar loop infinito: si es EF Core, Microsoft, o el propio servicio de logs guardando en BD
+        if (_categoryName.StartsWith("Microsoft") ||
+            _categoryName.StartsWith("System") ||
+            _categoryName.Contains("LogDispatcherBackgroundService") ||
+            _categoryName.Contains("CreateLogHandler"))
+        {
+            return;
+        }
+
         var message = formatter(state, exception);
         var properties = ExtractProperties(state, eventId);
 
