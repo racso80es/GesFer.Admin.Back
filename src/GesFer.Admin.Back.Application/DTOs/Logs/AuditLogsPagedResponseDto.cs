@@ -1,6 +1,6 @@
 namespace GesFer.Admin.Back.Application.DTOs.Logs;
 
-public class AuditLogsPagedResponseDto
+public record AuditLogsPagedResponseDto
 {
     public List<AuditLogDto> AuditLogs { get; set; } = new();
     public int TotalCount { get; set; }

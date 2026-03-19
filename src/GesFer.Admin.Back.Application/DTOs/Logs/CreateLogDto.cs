@@ -1,6 +1,6 @@
 namespace GesFer.Admin.Back.Application.DTOs.Logs;
 
-public class CreateLogDto
+public record CreateLogDto
 {
     public string Level { get; set; } = string.Empty;
     public string Message { get; set; } = string.Empty;
