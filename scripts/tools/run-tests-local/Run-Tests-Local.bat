@@ -1,7 +1,6 @@
 @echo off
 setlocal
-REM Run-Tests-Local.bat - Ejecuta tests en condiciones locales (contrato tools, Rust .exe en capsula si existe)
-REM Capsula: scripts/tools/run-tests-local/
+REM Launcher humano: run_tests_local.exe en la cápsula. Agente: JSON stdin/stdout.
 
 set "SCRIPT_DIR=%~dp0"
 set "REPO_ROOT=%SCRIPT_DIR%..\..\.."
@@ -15,11 +14,6 @@ if exist "%RUST_EXE%" (
     exit /b %ERRORLEVEL%
 )
 
-set "PS_SCRIPT=%SCRIPT_DIR%Run-Tests-Local.ps1"
-where pwsh >nul 2>&1
-if %ERRORLEVEL% equ 0 (
-    pwsh -NoProfile -ExecutionPolicy Bypass -File "%PS_SCRIPT%" %*
-) else (
-    powershell -NoProfile -ExecutionPolicy Bypass -File "%PS_SCRIPT%" %*
-)
+echo ERROR: run_tests_local.exe no encontrado. Ejecute scripts/tools-rs/install.ps1 si el binario está en el proyecto.
 endlocal
+exit /b 1

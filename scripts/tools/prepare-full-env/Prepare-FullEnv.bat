@@ -66,19 +66,5 @@ if exist "%RUST_EXE%" (
     "%RUST_EXE%" %*
     exit /b !ERRORLEVEL!
 )
-
-set "PS_SCRIPT=%SCRIPT_DIR%Prepare-FullEnv.ps1"
-if exist "%PS_SCRIPT%" (
-    echo [Usando Prepare-FullEnv.ps1]
-    where pwsh >nul 2>&1
-    if !ERRORLEVEL! equ 0 (
-        pwsh -NoProfile -ExecutionPolicy Bypass -File "%PS_SCRIPT%" %*
-    ) else (
-        powershell -NoProfile -ExecutionPolicy Bypass -File "%PS_SCRIPT%" %*
-    )
-    exit /b !ERRORLEVEL!
-) else (
-    echo ERROR: No se encontro prepare_full_env.exe ni Prepare-FullEnv.ps1
-    echo Ejecute scripts/tools-rs/install.ps1 para compilar el binario.
-    exit /b 1
-)
+echo ERROR: prepare_full_env.exe no encontrado. Ejecute scripts/tools-rs/install.ps1
+exit /b 1

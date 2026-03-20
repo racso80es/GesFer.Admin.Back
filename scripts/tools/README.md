@@ -14,7 +14,7 @@ El listado canónico de herramientas existentes se obtiene de:
 | **invoke-mysql-seeds** | Migraciones EF y seeds de Admin sobre MySQL. | `Invoke-MySqlSeeds.bat` |
 | **prepare-full-env** | Docker (DB, cache, Adminer) y opcionalmente API y clientes. | `Prepare-FullEnv.bat` |
 
-Cada herramienta reside en una **cápsula** **paths.toolCapsules[&lt;tool-id&gt;]** con `manifest.json`, script `.ps1`, config, documentación y el ejecutable Rust (`.exe`) en la misma carpeta de la cápsula.
+Cada herramienta reside en una **cápsula** **paths.toolCapsules[&lt;tool-id&gt;]** con `manifest.json`, config, documentación y el ejecutable Rust (`.exe`) en la **raíz** de la cápsula. **Agente:** JSON stdin/stdout (`SddIA/norms/capsule-json-io.md`). Los `.bat` son launchers humanos.
 
 ## Uso del índice
 
@@ -23,4 +23,4 @@ Para listar las herramientas de forma programática (scripts, agentes, CI):
 - Leer `scripts/tools/index.json` y usar el array `tools`.
 - O consultar Cúmulo `paths.toolCapsules` para las rutas canónicas de cada cápsula.
 
-Contrato de herramientas: `SddIA/tools/tools-contract.json`.
+Contrato de herramientas: `SddIA/tools/tools-contract.md` (v2).

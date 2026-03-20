@@ -1,11 +1,59 @@
-//! Skill finalizar-git (post_pr) en Rust (contrato skills).
-//! Post-merge: checkout master, pull, eliminar rama local y opcionalmente remota.
-//! Uso: merge_to_master_cleanup.exe [--branch <BranchName>] [--delete-remote]
+//! Skill finalizar-git (post_pr) — TTY o JSON stdin.
 
 use std::process::Command;
-use std::env;
+use std::{env, time::Instant};
+
+use gesfer_skills::{try_read_capsule_request, write_capsule_response, CapsuleResponse, FeedbackEntry};
+use serde::Deserialize;
+
+const SKILL_ID: &str = "finalizar-git";
+
+#[derive(Debug, Deserialize, Default)]
+#[serde(rename_all = "camelCase")]
+struct Body {
+    #[serde(default)]
+    branch_name: Option<String>,
+    #[serde(default)]
+    delete_remote: Option<bool>,
+}
 
 fn main() {
+    if let Ok(Some(req)) = try_read_capsule_request() {
+        let body: Body = serde_json::from_value(req.request.clone()).unwrap_or_default();
+        let start = Instant::now();
+        let delete_remote = body.delete_remote.unwrap_or(false);
+        let branch_name = body.branch_name.clone().filter(|s| !s.is_empty());
+
+        match run_cleanup(branch_name.as_deref(), delete_remote) {
+            Ok(msg) => {
+                let res = CapsuleResponse::skill(
+                    SKILL_ID,
+                    true,
+                    0,
+                    &msg,
+                    vec![FeedbackEntry::info("git", &msg)],
+                    serde_json::json!({ "branch": branch_name }),
+                    Some(start.elapsed().as_millis() as u64),
+                );
+                let _ = write_capsule_response(&res);
+                std::process::exit(0);
+            }
+            Err((code, msg)) => {
+                let res = CapsuleResponse::skill(
+                    SKILL_ID,
+                    false,
+                    code,
+                    &msg,
+                    vec![FeedbackEntry::error("git", &msg, None)],
+                    serde_json::json!({}),
+                    Some(start.elapsed().as_millis() as u64),
+                );
+                let _ = write_capsule_response(&res);
+                std::process::exit(code);
+            }
+        }
+    }
+
     let args: Vec<String> = env::args().collect();
     let mut branch_name = String::new();
     let mut delete_remote = false;
@@ -21,6 +69,19 @@ fn main() {
         }
         i += 1;
     }
+    let branch_opt = if branch_name.is_empty() {
+        None
+    } else {
+        Some(branch_name.as_str())
+    };
+    match run_cleanup(branch_opt, delete_remote) {
+        Ok(_) => std::process::exit(0),
+        Err((code, _)) => std::process::exit(code),
+    }
+}
+
+fn run_cleanup(branch_name_in: Option<&str>, delete_remote: bool) -> Result<String, (i32, String)> {
+    let mut branch_name = branch_name_in.map(|s| s.to_string()).unwrap_or_default();
     if branch_name.is_empty() {
         if let Ok(out) = Command::new("git").args(["branch", "--show-current"]).output() {
             if out.status.success() {
@@ -29,10 +90,12 @@ fn main() {
         }
     }
     if branch_name.is_empty() {
-        eprintln!("No se pudo determinar la rama. Use --branch <nombre>");
-        std::process::exit(1);
+        return Err((1, "No se pudo determinar la rama. Use --branch".into()));
     }
-    let main_branch = if let Ok(out) = Command::new("git").args(["symbolic-ref", "refs/remotes/origin/HEAD"]).output() {
+    let main_branch = if let Ok(out) = Command::new("git")
+        .args(["symbolic-ref", "refs/remotes/origin/HEAD"])
+        .output()
+    {
         if out.status.success() {
             let s = String::from_utf8_lossy(&out.stdout);
             if s.contains("origin/main") {
@@ -47,7 +110,7 @@ fn main() {
         "master"
     };
     if branch_name == main_branch {
-        std::process::exit(0);
+        return Ok("Ya en troncal".into());
     }
 
     let run = |cmd: &str, cargs: &[&str]| -> bool {
@@ -55,12 +118,10 @@ fn main() {
     };
 
     if !run("git", &["checkout", main_branch]) {
-        eprintln!("Falló git checkout {}", main_branch);
-        std::process::exit(1);
+        return Err((1, format!("Falló git checkout {}", main_branch)));
     }
     if !run("git", &["pull", "origin", main_branch]) {
-        eprintln!("Falló git pull origin {}", main_branch);
-        std::process::exit(1);
+        return Err((1, format!("Falló git pull origin {}", main_branch)));
     }
     if !run("git", &["branch", "-d", &branch_name]) {
         let _ = run("git", &["branch", "-D", &branch_name]);
@@ -68,5 +129,5 @@ fn main() {
     if delete_remote {
         let _ = run("git", &["push", "origin", "--delete", &branch_name]);
     }
-    std::process::exit(0);
+    Ok("Limpieza post-merge completada".into())
 }

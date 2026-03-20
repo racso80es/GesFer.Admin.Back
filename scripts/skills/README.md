@@ -6,24 +6,25 @@ Este directorio es **paths.skillsPath** (Cúmulo, `SddIA/agents/cumulo.json`). C
 
 El listado canónico se obtiene de:
 
-- **Índice (Cúmulo):** **paths.skillsIndexPath** — fichero `index.json` en la raíz de skills; array `skills` con `skillId`, `path`, `manifest`, `launcher_bat`, `description`.
+- **Índice (Cúmulo):** **paths.skillsIndexPath** — fichero `index.json` en la raíz de skills.
 - **Fuente de verdad de rutas:** Cúmulo **paths.skillCapsules** (`SddIA/agents/cumulo.json`).
 
-| skillId | Descripción breve | Launcher en cápsula |
-|---------|-------------------|---------------------|
-| **iniciar-rama** | Crea rama feat/ o fix/ actualizada con master. | `iniciar-rama/Iniciar-Rama.bat` |
-| **finalizar-git** | Post-merge: master, sync, eliminar rama. Pre-pr: Unificar-Rama.ps1. | `finalizar-git/Merge-To-Master-Cleanup.bat` |
-| **invoke-command** | Interceptor de comandos de sistema (git, dotnet, npm, pwsh). | `invoke-command/Invoke-Command.bat` |
+| skillId | Descripción breve | Launcher humano (opcional) | Ejecutable (agente) |
+|---------|-------------------|----------------------------|---------------------|
+| **iniciar-rama** | Crea rama feat/ o fix/ actualizada con troncal. | `iniciar-rama/Iniciar-Rama.bat` | `iniciar_rama.exe` |
+| **finalizar-git** | Pre-PR: push + PR; post-PR: limpieza de rama. | `Push-And-CreatePR.bat`, `Merge-To-Master-Cleanup.bat` | `push_and_create_pr.exe`, `merge_to_master_cleanup.exe` |
+| **invoke-command** | Interceptor de comandos. | `Invoke-Command.bat` | `invoke_command.exe` |
+| **invoke-commit** | Commit con parámetros o JSON. | `Invoke-Commit.bat` | `invoke_commit.exe` |
 
-Cada skill con ejecutable reside en una **cápsula** **paths.skillCapsules[&lt;skill-id&gt;]** con `manifest.json`, script `.ps1`, launcher `.bat` y opcionalmente `bin/` con el ejecutable Rust (generado por `scripts/skills-rs/install.ps1`).
+Cada cápsula tiene `manifest.json`, `.exe` en la **raíz** (contrato v2) y documentación `.md`. **La IA invoca el `.exe`** con JSON en stdin según **SddIA/norms/capsule-json-io.md**. Los `.bat` son solo atajos humanos.
 
-## Implementación por defecto: Rust
+## Implementación: Rust
 
-Las implementaciones por defecto de los scripts de skills han de ser en Rust (igual que en tools). Los binarios se construyen en `scripts/skills-rs` y se copian a cada cápsula `bin/`. El launcher `.bat` invoca el `.exe` en `bin/` si existe; si no, fallback al `.ps1`.
+Compilar y copiar: `scripts/skills-rs/install.ps1` (genera release y copia a cada cápsula).
 
 ## Definición vs implementación
 
-- **Definición:** SddIA/skills/&lt;skill-id&gt;/ (spec.md, spec.json) — paths.skillsDefinitionPath.
+- **Definición:** SddIA/skills/&lt;skill-id&gt;/ — paths.skillsDefinitionPath.
 - **Implementación:** scripts/skills/&lt;skill-id&gt;/ — paths.skillCapsules[skill-id].
 
-Contrato: `SddIA/skills/skills-contract.json`.
+Contrato: `SddIA/skills/skills-contract.md`.

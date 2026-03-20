@@ -1,33 +1,30 @@
 # gesfer-skills (Rust)
 
-Implementación por defecto en Rust de los skills con ejecutable (contrato SddIA/skills/skills-contract.json). Igual que en tools, el ejecutable sugerido para skills ha de ser en Rust.
+Implementación en Rust de skills ejecutables (contrato `SddIA/skills/skills-contract.md` v2). Envelope JSON: `SddIA/norms/capsule-json-io.md`.
 
 ## Binarios
 
-| Binario | Skill | Cápsula destino |
-|---------|--------|-----------------|
-| iniciar_rama.exe | iniciar-rama | scripts/skills/iniciar-rama/bin/ |
-| merge_to_master_cleanup.exe | finalizar-git (post_pr) | scripts/skills/finalizar-git/bin/ |
-| invoke_command.exe | invoke-command | scripts/skills/invoke-command/bin/ |
+| Binario | Skill | Cápsula (raíz) |
+|---------|--------|----------------|
+| iniciar_rama.exe | iniciar-rama | `scripts/skills/iniciar-rama/` |
+| merge_to_master_cleanup.exe | finalizar-git (post_pr) | `scripts/skills/finalizar-git/` |
+| push_and_create_pr.exe | finalizar-git (pre_pr) | `scripts/skills/finalizar-git/` |
+| invoke_command.exe | invoke-command | `scripts/skills/invoke-command/` |
+| invoke_commit.exe | invoke-commit | `scripts/skills/invoke-commit/` |
+| verify_pr_protocol.exe | (utilidad; no copiada por install) | — |
 
 ## Build e instalación
-
-Desde la raíz del repo (o desde scripts/skills-rs):
 
 ```powershell
 .\scripts\skills-rs\install.ps1
 ```
 
-- Asegura Rust en PATH (ej. `$env:USERPROFILE\.cargo\bin`).
-- Ejecuta `cargo build --release`.
-- Copia cada .exe a la cápsula correspondiente en `scripts/skills/<skill-id>/bin/`.
+- `cargo build --release`
+- Copia cada `.exe` a **la raíz** de `scripts/skills/<skill-id>/` (sin carpeta `bin/`).
 
-Los launchers .bat en cada cápsula invocan el .exe en bin/ si existe; si no, fallback al script .ps1.
+## Uso
 
-## Uso de los binarios
+- **Agente:** pipe JSON por stdin; respuesta JSON por stdout.
+- **Humano:** mismos argumentos CLI que antes en TTY (o `.bat` en la cápsula).
 
-- **iniciar_rama:** `iniciar_rama.exe feat mi-feature` o `iniciar_rama.exe fix correccion-timeout [master|main]`
-- **merge_to_master_cleanup:** `merge_to_master_cleanup.exe [--branch <rama>] [--delete-remote]`
-- **invoke_command:** `invoke_command.exe --command "git status" [--fase Accion] [--contexto GesFer]`
-
-Rutas canónicas: Cúmulo paths.skillCapsules (SddIA/agents/cumulo.json).
+Rutas: Cúmulo `paths.skillCapsules` (`SddIA/agents/cumulo.json`).

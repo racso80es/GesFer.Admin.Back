@@ -10,7 +10,7 @@ use std::thread;
 use std::time::{Duration, Instant};
 
 use clap::Parser;
-use gesfer_tools::{FeedbackEntry, ToolResult, to_contract_json};
+use gesfer_tools::{CapsuleResponse, FeedbackEntry, to_contract_json};
 use serde::Deserialize;
 
 const TOOL_ID: &str = "start-api";
@@ -41,6 +41,50 @@ struct Args {
     port_blocked: String,
 }
 
+#[derive(Debug, Deserialize, Default)]
+#[serde(rename_all = "camelCase")]
+struct StartApiCapsuleRequestFields {
+    #[serde(default)]
+    no_build: Option<bool>,
+    #[serde(default)]
+    profile: Option<String>,
+    #[serde(default)]
+    port: Option<u16>,
+    #[serde(default)]
+    config_path: Option<String>,
+    #[serde(default)]
+    output_path: Option<String>,
+    #[serde(default)]
+    output_json: Option<bool>,
+    #[serde(default)]
+    port_blocked: Option<String>,
+}
+
+fn merge_start_api_capsule_request(args: &mut Args, v: &serde_json::Value) {
+    let f: StartApiCapsuleRequestFields = serde_json::from_value(v.clone()).unwrap_or_default();
+    if let Some(x) = f.no_build {
+        args.no_build = x;
+    }
+    if let Some(x) = f.profile {
+        args.profile = Some(x);
+    }
+    if let Some(x) = f.port {
+        args.port = Some(x);
+    }
+    if let Some(x) = f.config_path {
+        args.config_path = Some(x);
+    }
+    if let Some(x) = f.output_path {
+        args.output_path = Some(x);
+    }
+    if let Some(x) = f.output_json {
+        args.output_json = x;
+    }
+    if let Some(x) = f.port_blocked {
+        args.port_blocked = x;
+    }
+}
+
 #[derive(Debug, Deserialize)]
 struct Config {
     api_working_dir: String,
@@ -54,7 +98,19 @@ fn main() {
     let start = Instant::now();
     let mut feedback = Vec::new();
 
-    let args = Args::parse();
+    let mut args = Args::parse();
+    let agent_capsule = match gesfer_tools::try_read_capsule_request() {
+        Ok(None) => false,
+        Ok(Some(req)) => {
+            merge_start_api_capsule_request(&mut args, &req.request);
+            true
+        }
+        Err(e) => {
+            eprintln!("{}", e);
+            std::process::exit(2);
+        }
+    };
+
     let port_blocked = if args.port_blocked.to_lowercase() == "kill" {
         PortBlocked::Kill
     } else {
@@ -70,7 +126,16 @@ fn main() {
     let config = match config {
         Some(c) => c,
         None => {
-                emit_result(false, 1, "Config no encontrado o inválido", feedback, None, start, &args);
+                emit_result(
+                false,
+                1,
+                "Config no encontrado o inválido",
+                feedback,
+                None,
+                start,
+                &args,
+                agent_capsule,
+            );
             std::process::exit(1);
         }
     };
@@ -105,7 +170,16 @@ fn main() {
                     None,
                 ));
                 let data = serde_json::json!({ "port": port, "port_in_use": true });
-                emit_result(false, 2, "Puerto ocupado", feedback, Some(data), start, &args);
+                emit_result(
+                    false,
+                    2,
+                    "Puerto ocupado",
+                    feedback,
+                    Some(data),
+                    start,
+                    &args,
+                    agent_capsule,
+                );
                 std::process::exit(2);
             }
             PortBlocked::Kill => {
@@ -117,7 +191,16 @@ fn main() {
                         Some(&e),
                     ));
                     let data = serde_json::json!({ "port": port, "port_in_use": true });
-                    emit_result(false, 3, "No se pudo liberar el puerto", feedback, Some(data), start, &args);
+                    emit_result(
+                        false,
+                        3,
+                        "No se pudo liberar el puerto",
+                        feedback,
+                        Some(data),
+                        start,
+                        &args,
+                        agent_capsule,
+                    );
                     std::process::exit(3);
                 }
                 feedback.push(FeedbackEntry::info("port-kill", "Puerto liberado."));
@@ -128,7 +211,16 @@ fn main() {
                         "El puerto sigue ocupado tras intentar cerrar el proceso.",
                         None,
                     ));
-                    emit_result(false, 3, "Puerto aún ocupado", feedback, None, start, &args);
+                    emit_result(
+                        false,
+                        3,
+                        "Puerto aún ocupado",
+                        feedback,
+                        None,
+                        start,
+                        &args,
+                        agent_capsule,
+                    );
                     std::process::exit(3);
                 }
             }
@@ -144,7 +236,16 @@ fn main() {
             &format!("Directorio API no encontrado: {}", api_dir.display()),
             None,
         ));
-        emit_result(false, 4, "Directorio API no encontrado", feedback, None, start, &args);
+        emit_result(
+            false,
+            4,
+            "Directorio API no encontrado",
+            feedback,
+            None,
+            start,
+            &args,
+            agent_capsule,
+        );
         std::process::exit(4);
     }
 
@@ -156,7 +257,7 @@ fn main() {
             .args(["build", &config.api_working_dir, "-c", "Release"])
             .current_dir(&repo_root)
             .output();
-        let build_ms = build_start.elapsed().as_millis() as u64;
+        let _build_ms = build_start.elapsed().as_millis() as u64;
         match out {
             Ok(o) if o.status.success() => {
                 feedback.push(FeedbackEntry::info("build", "Build OK"));
@@ -164,12 +265,30 @@ fn main() {
             Ok(o) => {
                 let stderr = String::from_utf8_lossy(&o.stderr);
                 feedback.push(FeedbackEntry::error("build", "Build fallido", Some(stderr.as_ref())));
-                emit_result(false, 5, "Build fallido", feedback, None, start, &args);
+                emit_result(
+                    false,
+                    5,
+                    "Build fallido",
+                    feedback,
+                    None,
+                    start,
+                    &args,
+                    agent_capsule,
+                );
                 std::process::exit(5);
             }
             Err(e) => {
                 feedback.push(FeedbackEntry::error("build", "No se pudo ejecutar dotnet build", Some(&e.to_string())));
-                emit_result(false, 5, "dotnet build no disponible", feedback, None, start, &args);
+                emit_result(
+                    false,
+                    5,
+                    "dotnet build no disponible",
+                    feedback,
+                    None,
+                    start,
+                    &args,
+                    agent_capsule,
+                );
                 std::process::exit(5);
             }
         }
@@ -194,7 +313,16 @@ fn main() {
         Ok(c) => c,
         Err(e) => {
             feedback.push(FeedbackEntry::error("launch", "No se pudo ejecutar dotnet run", Some(&e.to_string())));
-            emit_result(false, 6, "Error al lanzar API", feedback, None, start, &args);
+            emit_result(
+                false,
+                6,
+                "Error al lanzar API",
+                feedback,
+                None,
+                start,
+                &args,
+                agent_capsule,
+            );
             std::process::exit(6);
         }
     };
@@ -279,6 +407,7 @@ fn main() {
             Some(data),
             start,
             &args,
+            agent_capsule,
         );
         std::process::exit(8);
     }
@@ -296,7 +425,16 @@ fn main() {
             "pid": pid,
             "healthy": false
         });
-        emit_result(false, 7, "Health no respondió a tiempo", feedback, Some(data), start, &args);
+        emit_result(
+            false,
+            7,
+            "Health no respondió a tiempo",
+            feedback,
+            Some(data),
+            start,
+            &args,
+            agent_capsule,
+        );
         std::process::exit(7);
     }
 
@@ -308,11 +446,20 @@ fn main() {
         "healthy": true
     });
     feedback.push(FeedbackEntry::info("done", &format!("API levantada. PID: {} URL: {}", pid, health_url)));
-    emit_result(true, 0, "API levantada; health OK", feedback, Some(data), start, &args);
+    emit_result(
+        true,
+        0,
+        "API levantada; health OK",
+        feedback,
+        Some(data),
+        start,
+        &args,
+        agent_capsule,
+    );
     std::process::exit(0);
 }
 
-fn load_config(repo_root: &str, config_path: &str, feedback: &mut Vec<FeedbackEntry>) -> Option<Config> {
+fn load_config(repo_root: &str, config_path: &str, _feedback: &mut Vec<FeedbackEntry>) -> Option<Config> {
     let mut path = std::path::PathBuf::from(repo_root);
     path.push(config_path);
     if !path.exists() {
@@ -380,20 +527,23 @@ fn emit_result(
     data: Option<serde_json::Value>,
     start: Instant,
     args: &Args,
+    agent_capsule: bool,
 ) {
     let duration_ms = start.elapsed().as_millis() as u64;
-    let result = ToolResult {
-        tool_id: TOOL_ID.to_string(),
-        exit_code,
+    let res = CapsuleResponse::tool(
+        TOOL_ID,
         success,
-        timestamp: chrono::Utc::now().to_rfc3339(),
-        message: message.to_string(),
+        exit_code,
+        message,
         feedback,
-        data,
-        duration_ms: Some(duration_ms),
-    };
-    let json = to_contract_json(&result).expect("serialize");
-    if args.output_json || std::env::var("TOOLS_OUTPUT_JSON").as_deref() == Ok("1") {
+        data.unwrap_or_else(|| serde_json::json!({})),
+        Some(duration_ms),
+    );
+    let json = to_contract_json(&res).expect("serialize");
+    if agent_capsule
+        || args.output_json
+        || std::env::var("TOOLS_OUTPUT_JSON").as_deref() == Ok("1")
+    {
         println!("{}", json);
     }
     if let Some(ref path) = args.output_path {

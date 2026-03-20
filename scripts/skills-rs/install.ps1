@@ -1,9 +1,8 @@
 <#
 .SYNOPSIS
-    Compila gesfer-skills (scripts/skills-rs) y copia los .exe a cada cápsula de skill en scripts/skills/.
+    Compila gesfer-skills (scripts/skills-rs) y copia los .exe a la raíz de cada cápsula (contrato v2).
 .DESCRIPTION
-    Requiere Rust en PATH (.cargo\bin). Tras cargo build --release, copia iniciar_rama.exe,
-    merge_to_master_cleanup.exe e invoke_command.exe a scripts/skills/<skill-id>/bin/.
+    Requiere Rust en PATH (.cargo\bin). Tras cargo build --release, copia los binarios a scripts/skills/<skill-id>/ (sin carpeta bin/).
 #>
 $ErrorActionPreference = "Stop"
 $scriptDir = $PSScriptRoot
@@ -44,11 +43,12 @@ $capsules = @(
 )
 foreach ($cap in $capsules) {
     $src = Join-Path $releaseDir "$($cap.exe).exe"
-    $binDir = Join-Path (Join-Path $skillsDir $cap.capsule) "bin"
+    $capDir = Join-Path $skillsDir $cap.capsule
     if (Test-Path $src) {
-        if (-not (Test-Path $binDir)) { New-Item -ItemType Directory -Path $binDir -Force | Out-Null }
-        Copy-Item -Path $src -Destination (Join-Path $binDir "$($cap.exe).exe") -Force
-        Write-Host "  Copiado: scripts/skills/$($cap.capsule)/bin/$($cap.exe).exe" -ForegroundColor Cyan
+        if (-not (Test-Path $capDir)) { New-Item -ItemType Directory -Path $capDir -Force | Out-Null }
+        $dest = Join-Path $capDir "$($cap.exe).exe"
+        Copy-Item -Path $src -Destination $dest -Force
+        Write-Host "  Copiado: scripts/skills/$($cap.capsule)/$($cap.exe).exe" -ForegroundColor Cyan
     }
 }
-Write-Host "OK. Ejecutables en cápsulas (scripts/skills/<skill-id>/bin/)." -ForegroundColor Green
+Write-Host "OK. Ejecutables en raíz de cápsula (scripts/skills/<skill-id>/)." -ForegroundColor Green

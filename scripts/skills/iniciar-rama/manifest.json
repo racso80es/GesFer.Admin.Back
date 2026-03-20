@@ -1,13 +1,12 @@
 {
   "skillId": "iniciar-rama",
-  "version": "1.0.0",
-  "description": "Crea una rama nueva (feat/ o fix/) actualizada con master/main y posiciona el repo en ella. Inicio de acción o tarea.",
-  "contract_ref": "SddIA/skills/skills-contract.json",
+  "version": "2.0.0",
+  "description": "Crea rama feat/ o fix/ actualizada con troncal. Agente: iniciar_rama.exe + JSON stdin/stdout.",
+  "contract_ref": "SddIA/skills/skills-contract.md",
   "components": {
     "launcher_bat": "Iniciar-Rama.bat",
-    "launcher_ps1": "Iniciar-Rama.ps1",
     "doc": "iniciar-rama.md",
-    "bin": "bin/iniciar_rama.exe"
+    "executable": "iniciar_rama.exe"
   },
-  "env": ["Windows 11", "PowerShell 7+", "Git"]
+  "env": ["Windows 11", "Git"]
 }

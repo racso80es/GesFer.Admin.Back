@@ -1,12 +1,12 @@
 {
   "skillId": "invoke-commit",
-  "version": "1.0.0",
-  "description": "Operaciones de commit con parámetros directos. Parámetros --message, --files (comma-separated), --all. Sin ficheros .txt intermedios.",
-  "contract_ref": "SddIA/skills/skills-contract.json",
+  "version": "2.0.0",
+  "description": "git add + commit con parámetros directos o JSON. Agente: invoke_commit.exe + stdin/stdout.",
+  "contract_ref": "SddIA/skills/skills-contract.md",
   "components": {
     "launcher_bat": "Invoke-Commit.bat",
     "doc": "invoke-commit.md",
-    "bin": "bin/invoke_commit.exe"
+    "executable": "invoke_commit.exe"
   },
-  "env": ["Windows 11", "PowerShell 7+", "Git"]
+  "env": ["Windows 11", "Git"]
 }

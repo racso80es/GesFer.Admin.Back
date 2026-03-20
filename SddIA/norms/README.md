@@ -9,6 +9,7 @@ Este directorio contiene **normas de comportamiento** del agente definidas en el
 | **paths-via-cumulo.md** | Rutas solo desde Cúmulo (contrato de paths); no rutas literales. |
 | **git-via-skills-or-process.md** | La IA nunca ejecuta git directamente; solo vía skill, herramienta, acción o proceso. |
 | **commands-via-skills-or-tools.md** | La IA nunca ejecuta comandos de sistema directamente; solo vía skill, herramienta, acción o proceso. Implementación estándar: Rust (paths.skillsRustPath, paths.toolsRustPath). |
+| **capsule-json-io.md** | Envelope JSON compartido (stdin/stdout) para invocar skills y tools desde agentes; SSOT de meta, request y result. |
 | **entidades-dominio-ecosistema-sddia.md** | Definición de entidades de dominio (ecosistema SddIA): las que integran el contrato/ítem Token; obligación de estructura (archivo .md con frontmatter YAML); excepción tokens JSON-only. |
 | **agents-principles-contract.md** | Implementación del contrato de principios en agentes (principlesContract). |
 | **patterns-in-planning-implementation-execution.md** | Aplicación de patrones en planning, implementation, execution. |

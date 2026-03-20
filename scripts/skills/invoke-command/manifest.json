@@ -1,13 +1,12 @@
 {
   "skillId": "invoke-command",
-  "version": "1.0.0",
-  "description": "Interceptor de ejecuciones de sistema (git, dotnet, npm, pwsh). Telemetría, validación y registro por rama.",
-  "contract_ref": "SddIA/skills/skills-contract.json",
+  "version": "2.0.0",
+  "description": "Interceptor de ejecuciones de sistema (git, dotnet, npm, pwsh). Telemetría y registro por rama. Agente: invoke_command.exe + JSON stdin/stdout (SddIA/norms/capsule-json-io.md).",
+  "contract_ref": "SddIA/skills/skills-contract.md",
   "components": {
     "launcher_bat": "Invoke-Command.bat",
-    "launcher_ps1": "Invoke-Command.ps1",
     "doc": "invoke-command.md",
-    "bin": "bin/invoke_command.exe"
+    "executable": "invoke_command.exe"
   },
-  "env": ["Windows 11", "PowerShell 7+", "Git"]
+  "env": ["Windows 11", "Git", "PowerShell (solo para ejecución legacy de comandos en Windows)"]
 }

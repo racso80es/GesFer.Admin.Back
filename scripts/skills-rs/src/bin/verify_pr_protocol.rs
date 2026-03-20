@@ -1,61 +1,144 @@
-//! Skill verify-pr-protocol
-//! Enforces the PR Acceptance Protocol:
-//! 1. Nomenclature (validate-nomenclatura.ps1)
-//! 2. Compilation (dotnet build)
-//! 3. Tests (dotnet test)
+//! verify-pr-protocol — TTY (logs) o JSON stdin (respuesta capsule-json-io).
 
-use std::process::{Command, exit};
+use std::process::{exit, Command};
+use std::time::Instant;
+
+use gesfer_skills::{try_read_capsule_request, write_capsule_response, CapsuleResponse, FeedbackEntry};
+
+const SKILL_ID: &str = "verify-pr-protocol";
 
 fn main() {
-    println!("[VERIFY-PR-PROTOCOL] Starting PR Acceptance Protocol...");
+    let agent = match try_read_capsule_request() {
+        Ok(None) => false,
+        Ok(Some(_)) => true,
+        Err(e) => {
+            eprintln!("{}", e);
+            exit(2);
+        }
+    };
+    let start = Instant::now();
 
-    // 1. Nomenclature Check
-    println!("[VERIFY-PR-PROTOCOL] 1/3 Checking Nomenclature...");
-    // Attempt to find a suitable shell for the PS1 script
+    let mut feedback = Vec::new();
+
+    if agent {
+        feedback.push(FeedbackEntry::info("init", "verify-pr-protocol (JSON)"));
+    } else {
+        println!("[VERIFY-PR-PROTOCOL] Starting PR Acceptance Protocol...");
+    }
+
+    if !agent {
+        println!("[VERIFY-PR-PROTOCOL] 1/3 Checking Nomenclature...");
+    } else {
+        feedback.push(FeedbackEntry::info("nomenclature", "Checking nomenclature"));
+    }
     let shell = if cfg!(target_os = "windows") {
         "powershell"
     } else {
-        "pwsh" // Standard PowerShell Core on Linux/Mac
+        "pwsh"
     };
+    let nomenclature_status =
+        run_command(shell, &["-NoProfile", "-Command", "./scripts/validate-nomenclatura.ps1"]);
 
-    let nomenclature_status = run_command(shell, &["-NoProfile", "-Command", "./scripts/validate-nomenclatura.ps1"]);
-
-    // If pwsh is missing on Linux (e.g. some CI envs), we might need to handle it.
-    // However, the protocol demands it. If it fails to run (status false), we fail.
     if !nomenclature_status {
-        eprintln!("[ERROR] Nomenclature check failed (or pwsh not found).");
+        if agent {
+            feedback.push(FeedbackEntry::error(
+                "nomenclature",
+                "Nomenclature check failed",
+                None,
+            ));
+            let res = CapsuleResponse::skill(
+                SKILL_ID,
+                false,
+                1,
+                "Nomenclature check failed",
+                feedback,
+                serde_json::json!({}),
+                Some(start.elapsed().as_millis() as u64),
+            );
+            let _ = write_capsule_response(&res);
+        } else {
+            eprintln!("[ERROR] Nomenclature check failed (or pwsh not found).");
+        }
         exit(1);
     }
 
-    // 2. Compilation Check
-    println!("[VERIFY-PR-PROTOCOL] 2/3 Compiling Solution...");
-    let build_status = run_command("dotnet", &["build", "src/GesFer.Admin.Back.sln"]);
+    if !agent {
+        println!("[VERIFY-PR-PROTOCOL] 2/3 Compiling Solution...");
+    } else {
+        feedback.push(FeedbackEntry::info("build", "dotnet build"));
+    }
+    let build_status = run_command(
+        "dotnet",
+        &["build", "src/GesFer.Admin.Back.sln"],
+    );
     if !build_status {
-        eprintln!("[ERROR] Compilation failed.");
+        if agent {
+            feedback.push(FeedbackEntry::error("build", "Compilation failed", None));
+            let res = CapsuleResponse::skill(
+                SKILL_ID,
+                false,
+                2,
+                "Compilation failed",
+                feedback,
+                serde_json::json!({}),
+                Some(start.elapsed().as_millis() as u64),
+            );
+            let _ = write_capsule_response(&res);
+        } else {
+            eprintln!("[ERROR] Compilation failed.");
+        }
         exit(1);
     }
 
-    // 3. Test Execution
-    println!("[VERIFY-PR-PROTOCOL] 3/3 Running Tests...");
-    let test_status = run_command("dotnet", &["test", "src/GesFer.Admin.Back.sln"]);
+    if !agent {
+        println!("[VERIFY-PR-PROTOCOL] 3/3 Running Tests...");
+    } else {
+        feedback.push(FeedbackEntry::info("tests", "dotnet test"));
+    }
+    let test_status = run_command(
+        "dotnet",
+        &["test", "src/GesFer.Admin.Back.sln"],
+    );
     if !test_status {
-        eprintln!("[ERROR] Tests failed.");
+        if agent {
+            feedback.push(FeedbackEntry::error("tests", "Tests failed", None));
+            let res = CapsuleResponse::skill(
+                SKILL_ID,
+                false,
+                3,
+                "Tests failed",
+                feedback,
+                serde_json::json!({}),
+                Some(start.elapsed().as_millis() as u64),
+            );
+            let _ = write_capsule_response(&res);
+        } else {
+            eprintln!("[ERROR] Tests failed.");
+        }
         exit(1);
     }
 
-    println!("[VERIFY-PR-PROTOCOL] All checks passed successfully. PR is ready for acceptance.");
+    if agent {
+        feedback.push(FeedbackEntry::info("done", "All checks passed"));
+        let res = CapsuleResponse::skill(
+            SKILL_ID,
+            true,
+            0,
+            "PR protocol OK",
+            feedback,
+            serde_json::json!({ "checks": ["nomenclature", "build", "test"] }),
+            Some(start.elapsed().as_millis() as u64),
+        );
+        let _ = write_capsule_response(&res);
+    } else {
+        println!("[VERIFY-PR-PROTOCOL] All checks passed successfully. PR is ready for acceptance.");
+    }
 }
 
 fn run_command(program: &str, args: &[&str]) -> bool {
-    let status = Command::new(program)
-        .args(args)
-        .status();
-
-    match status {
+    match Command::new(program).args(args).status() {
         Ok(s) => s.success(),
         Err(_) => {
-            // Siltently fail here to let the caller handle the false return.
-            // In a real scenario we might want to log why it failed (e.g. program not found)
             eprintln!("[WARNING] Could not execute command: {}", program);
             false
         }
