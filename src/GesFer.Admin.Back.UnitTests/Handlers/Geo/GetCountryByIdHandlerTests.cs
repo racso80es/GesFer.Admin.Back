@@ -39,12 +39,15 @@ public class GetCountryByIdHandlerTests
     }
 
     [Fact]
-    public async Task Handle_ReturnsNull_WhenDeleted()
+    public async Task Handle_ReturnsNull_WhenInactive()
     {
         // Arrange
         var id = Guid.NewGuid();
         await using var context = CreateContext();
-        context.Countries.Add(new Country { Id = id, Name = "Deleted", Code = "XX", DeletedAt = DateTime.UtcNow });
+        context.Countries.Add(new Country { Id = id, Name = "Off", Code = "XX" });
+        await context.SaveChangesAsync();
+        var entity = await context.Countries.FindAsync([id], CancellationToken.None);
+        entity!.IsActive = false;
         await context.SaveChangesAsync();
 
         var handler = new GetCountryByIdHandler(context);

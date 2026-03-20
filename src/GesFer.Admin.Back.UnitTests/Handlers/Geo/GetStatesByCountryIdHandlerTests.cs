@@ -40,4 +40,26 @@ public class GetStatesByCountryIdHandlerTests
         result.Should().HaveCount(2);
         result.Select(s => s.Name).Should().Contain(new[] { "Madrid", "Barcelona" });
     }
+
+    [Fact]
+    public async Task Handle_ExcludesInactiveStates()
+    {
+        var countryId = Guid.NewGuid();
+        await using var context = CreateContext();
+        var offId = Guid.NewGuid();
+        context.States.AddRange(
+            new State { Id = Guid.NewGuid(), CountryId = countryId, Name = "On", Code = "ON" },
+            new State { Id = offId, CountryId = countryId, Name = "Off", Code = "OF" }
+        );
+        await context.SaveChangesAsync();
+        var off = await context.States.FindAsync([offId], CancellationToken.None);
+        off!.IsActive = false;
+        await context.SaveChangesAsync();
+
+        var handler = new GetStatesByCountryIdHandler(context);
+        var result = await handler.Handle(new GetStatesByCountryIdCommand(countryId), CancellationToken.None);
+
+        result.Should().HaveCount(1);
+        result[0].Name.Should().Be("On");
+    }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GesFer.Admin.Back.Application.Handlers.Geo;
 
-public class GetAllCountriesHandler : IRequestHandler<GetAllCountriesCommand, List<CountryDto>>
+public class GetAllCountriesHandler : IRequestHandler<GetAllCountriesCommand, List<CountryGeoReadDto>>
 {
     private readonly IApplicationDbContext _context;
 
@@ -15,24 +15,24 @@ public class GetAllCountriesHandler : IRequestHandler<GetAllCountriesCommand, Li
         _context = context;
     }
 
-    public async Task<List<CountryDto>> Handle(GetAllCountriesCommand request, CancellationToken cancellationToken)
+    public async Task<List<CountryGeoReadDto>> Handle(GetAllCountriesCommand request, CancellationToken cancellationToken)
     {
         return await _context.Countries
             .AsNoTracking()
-            .Where(c => c.DeletedAt == null)
+            .IgnoreQueryFilters()
+            .Where(c => c.IsActive)
             .OrderBy(c => c.Name)
-            .Select(c => new CountryDto
+            .Select(c => new CountryGeoReadDto
             {
                 Id = c.Id,
                 Name = c.Name,
-                Code = c.Code,
-                LanguageId = c.LanguageId
+                Code = c.Code
             })
             .ToListAsync(cancellationToken);
     }
 }
 
-public class GetCountryByIdHandler : IRequestHandler<GetCountryByIdCommand, CountryDto?>
+public class GetCountryByIdHandler : IRequestHandler<GetCountryByIdCommand, CountryGeoReadDto?>
 {
     private readonly IApplicationDbContext _context;
 
@@ -41,23 +41,23 @@ public class GetCountryByIdHandler : IRequestHandler<GetCountryByIdCommand, Coun
         _context = context;
     }
 
-    public async Task<CountryDto?> Handle(GetCountryByIdCommand request, CancellationToken cancellationToken)
+    public async Task<CountryGeoReadDto?> Handle(GetCountryByIdCommand request, CancellationToken cancellationToken)
     {
         return await _context.Countries
             .AsNoTracking()
-            .Where(c => c.Id == request.Id && c.DeletedAt == null)
-            .Select(c => new CountryDto
+            .IgnoreQueryFilters()
+            .Where(c => c.Id == request.Id && c.IsActive)
+            .Select(c => new CountryGeoReadDto
             {
                 Id = c.Id,
                 Name = c.Name,
-                Code = c.Code,
-                LanguageId = c.LanguageId
+                Code = c.Code
             })
             .FirstOrDefaultAsync(cancellationToken);
     }
 }
 
-public class GetStatesByCountryIdHandler : IRequestHandler<GetStatesByCountryIdCommand, List<StateDto>>
+public class GetStatesByCountryIdHandler : IRequestHandler<GetStatesByCountryIdCommand, List<StateGeoReadDto>>
 {
     private readonly IApplicationDbContext _context;
 
@@ -66,13 +66,14 @@ public class GetStatesByCountryIdHandler : IRequestHandler<GetStatesByCountryIdC
         _context = context;
     }
 
-    public async Task<List<StateDto>> Handle(GetStatesByCountryIdCommand request, CancellationToken cancellationToken)
+    public async Task<List<StateGeoReadDto>> Handle(GetStatesByCountryIdCommand request, CancellationToken cancellationToken)
     {
         return await _context.States
             .AsNoTracking()
-            .Where(s => s.CountryId == request.CountryId && s.DeletedAt == null)
+            .IgnoreQueryFilters()
+            .Where(s => s.CountryId == request.CountryId && s.IsActive)
             .OrderBy(s => s.Name)
-            .Select(s => new StateDto
+            .Select(s => new StateGeoReadDto
             {
                 Id = s.Id,
                 CountryId = s.CountryId,
@@ -83,7 +84,7 @@ public class GetStatesByCountryIdHandler : IRequestHandler<GetStatesByCountryIdC
     }
 }
 
-public class GetCitiesByStateIdHandler : IRequestHandler<GetCitiesByStateIdCommand, List<CityDto>>
+public class GetCitiesByStateIdHandler : IRequestHandler<GetCitiesByStateIdCommand, List<CityGeoReadDto>>
 {
     private readonly IApplicationDbContext _context;
 
@@ -92,17 +93,44 @@ public class GetCitiesByStateIdHandler : IRequestHandler<GetCitiesByStateIdComma
         _context = context;
     }
 
-    public async Task<List<CityDto>> Handle(GetCitiesByStateIdCommand request, CancellationToken cancellationToken)
+    public async Task<List<CityGeoReadDto>> Handle(GetCitiesByStateIdCommand request, CancellationToken cancellationToken)
     {
         return await _context.Cities
             .AsNoTracking()
-            .Where(c => c.StateId == request.StateId && c.DeletedAt == null)
+            .IgnoreQueryFilters()
+            .Where(c => c.StateId == request.StateId && c.IsActive)
             .OrderBy(c => c.Name)
-            .Select(c => new CityDto
+            .Select(c => new CityGeoReadDto
             {
                 Id = c.Id,
                 StateId = c.StateId,
                 Name = c.Name
+            })
+            .ToListAsync(cancellationToken);
+    }
+}
+
+public class GetPostalCodesByCityIdHandler : IRequestHandler<GetPostalCodesByCityIdCommand, List<PostalCodeGeoReadDto>>
+{
+    private readonly IApplicationDbContext _context;
+
+    public GetPostalCodesByCityIdHandler(IApplicationDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<List<PostalCodeGeoReadDto>> Handle(GetPostalCodesByCityIdCommand request, CancellationToken cancellationToken)
+    {
+        return await _context.PostalCodes
+            .AsNoTracking()
+            .IgnoreQueryFilters()
+            .Where(p => p.CityId == request.CityId && p.IsActive)
+            .OrderBy(p => p.Code)
+            .Select(p => new PostalCodeGeoReadDto
+            {
+                Id = p.Id,
+                CityId = p.CityId,
+                Code = p.Code
             })
             .ToListAsync(cancellationToken);
     }

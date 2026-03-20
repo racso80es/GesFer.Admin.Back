@@ -62,5 +62,6 @@ public class AdminDbContext : DbContext, IApplicationDbContext
     DbSet<Country> IApplicationDbContext.Countries => Countries;
     DbSet<State> IApplicationDbContext.States => States;
     DbSet<City> IApplicationDbContext.Cities => Cities;
+    DbSet<PostalCode> IApplicationDbContext.PostalCodes => PostalCodes;
     DbSet<Language> IApplicationDbContext.Languages => Languages;
 }

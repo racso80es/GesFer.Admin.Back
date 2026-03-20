@@ -40,4 +40,26 @@ public class GetCitiesByStateIdHandlerTests
         result.Should().HaveCount(2);
         result.Select(c => c.Name).Should().Contain(new[] { "Madrid City", "Alcala" });
     }
+
+    [Fact]
+    public async Task Handle_ExcludesInactiveCities()
+    {
+        var stateId = Guid.NewGuid();
+        await using var context = CreateContext();
+        var offId = Guid.NewGuid();
+        context.Cities.AddRange(
+            new City { Id = Guid.NewGuid(), StateId = stateId, Name = "On" },
+            new City { Id = offId, StateId = stateId, Name = "Off" }
+        );
+        await context.SaveChangesAsync();
+        var off = await context.Cities.FindAsync([offId], CancellationToken.None);
+        off!.IsActive = false;
+        await context.SaveChangesAsync();
+
+        var handler = new GetCitiesByStateIdHandler(context);
+        var result = await handler.Handle(new GetCitiesByStateIdCommand(stateId), CancellationToken.None);
+
+        result.Should().HaveCount(1);
+        result[0].Name.Should().Be("On");
+    }
 }

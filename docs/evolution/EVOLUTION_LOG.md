@@ -2,6 +2,27 @@
 
 Registro de cierres de tareas con resumen de alcance y referencia a documentación.
 
+[2026-03-20] [feat/unificacion-geolocation-lectura-product] API geo unificada `/api/geolocation`, ArchitectureTests, tests y docs P3–P6. Ver `docs/features/unificacion-geolocation-lectura-product/validacion.md`.
+
+---
+
+## 2026-03-20 - Unificación geolocalización lectura (feat/unificacion-geolocation-lectura-product)
+
+**Rama:** feat/unificacion-geolocation-lectura-product  
+**Tipo:** Feature  
+**Documentación:** `docs/features/unificacion-geolocation-lectura-product/`
+
+### Resumen
+
+Un solo controlador `GeolocationController` reemplaza `CountriesController` y `StatesController`. Criterio de visibilidad geo por `IsActive` + `IgnoreQueryFilters` (handlers previos P1–P2). Proyecto `GesFer.Admin.Back.ArchitectureTests` con reglas de dependencia entre capas. Integración y unitarios bajo `/api/geolocation`.
+
+### Referencias
+
+- Spec: `docs/features/unificacion-geolocation-lectura-product/spec.md`
+- Validación: `docs/features/unificacion-geolocation-lectura-product/validacion.md`
+
+---
+
 [2026-03-16] [feat/eliminar-dependencias-serilog] Eliminación de Serilog; sistema de logs con Microsoft.Extensions.Logging. [PR #86 mergeado]
 
 ---
