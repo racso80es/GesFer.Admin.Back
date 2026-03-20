@@ -1,6 +1,6 @@
 namespace GesFer.Admin.Back.Application.DTOs.Auth;
 
-public class AdminLoginResponse
+public record AdminLoginResponse
 {
     public string UserId { get; set; } = string.Empty;
     public string CursorId { get; set; } = string.Empty;
