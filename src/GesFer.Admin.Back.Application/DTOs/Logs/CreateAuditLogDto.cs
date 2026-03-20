@@ -1,6 +1,6 @@
 namespace GesFer.Admin.Back.Application.DTOs.Logs;
 
-public class CreateAuditLogDto
+public record CreateAuditLogDto
 {
     public string? CursorId { get; set; }
     public string? Username { get; set; }

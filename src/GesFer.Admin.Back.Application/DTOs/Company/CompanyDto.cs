@@ -5,7 +5,7 @@ namespace GesFer.Admin.Back.Application.DTOs.Company;
 /// <summary>
 /// DTO para respuesta de empresa
 /// </summary>
-public class CompanyDto
+public record CompanyDto
 {
     public Guid Id { get; set; }
     public string Name { get; set; } = string.Empty;
@@ -26,7 +26,7 @@ public class CompanyDto
 /// <summary>
 /// DTO para crear empresa
 /// </summary>
-public class CreateCompanyDto
+public record CreateCompanyDto
 {
     [Required(ErrorMessage = "El nombre es obligatorio")]
     [MaxLength(200)]
@@ -55,7 +55,7 @@ public class CreateCompanyDto
 /// <summary>
 /// DTO para actualizar empresa
 /// </summary>
-public class UpdateCompanyDto
+public record UpdateCompanyDto
 {
     [Required(ErrorMessage = "El nombre es obligatorio")]
     [MaxLength(200)]
