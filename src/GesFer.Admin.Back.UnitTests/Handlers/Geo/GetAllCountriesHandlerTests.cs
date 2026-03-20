@@ -23,11 +23,16 @@ public class GetAllCountriesHandlerTests
     {
         // Arrange
         await using var context = CreateContext();
+        var inactiveId = Guid.NewGuid();
         context.Countries.AddRange(
-            new Country { Id = Guid.NewGuid(), Name = "Spain", Code = "ES", IsActive = true },
-            new Country { Id = Guid.NewGuid(), Name = "France", Code = "FR", IsActive = true },
-            new Country { Id = Guid.NewGuid(), Name = "Deleted", Code = "XX", DeletedAt = DateTime.UtcNow }
+            new Country { Id = Guid.NewGuid(), Name = "Spain", Code = "ES" },
+            new Country { Id = Guid.NewGuid(), Name = "France", Code = "FR" },
+            new Country { Id = inactiveId, Name = "Inactive", Code = "XX" }
         );
+        await context.SaveChangesAsync();
+        var inactive = await context.Countries.FindAsync([inactiveId], CancellationToken.None);
+        inactive!.IsActive = false;
+        inactive.DeletedAt = DateTime.UtcNow;
         await context.SaveChangesAsync();
 
         var handler = new GetAllCountriesHandler(context);
@@ -38,6 +43,6 @@ public class GetAllCountriesHandlerTests
         // Assert
         result.Should().HaveCount(2);
         result.Select(c => c.Name).Should().Contain(new[] { "Spain", "France" });
-        result.Select(c => c.Name).Should().NotContain("Deleted");
+        result.Select(c => c.Name).Should().NotContain("Inactive");
     }
 }

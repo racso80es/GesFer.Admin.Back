@@ -25,7 +25,7 @@ public class GeoControllerTests
     {
         var response = await _client.GetAsync("/api/countries");
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-        var list = await response.Content.ReadFromJsonAsync<List<CountryDto>>();
+        var list = await response.Content.ReadFromJsonAsync<List<CountryGeoReadDto>>();
         list.Should().NotBeNull();
         list.Should().Contain(c => c.Name == "España");
     }
@@ -36,7 +36,7 @@ public class GeoControllerTests
         var id = Guid.Parse("a1b2c3d4-e5f6-7890-1234-567890abcdef");
         var response = await _client.GetAsync($"/api/countries/{id}");
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-        var item = await response.Content.ReadFromJsonAsync<CountryDto>();
+        var item = await response.Content.ReadFromJsonAsync<CountryGeoReadDto>();
         item.Should().NotBeNull();
         item!.Id.Should().Be(id);
     }
@@ -47,7 +47,7 @@ public class GeoControllerTests
         var countryId = Guid.Parse("a1b2c3d4-e5f6-7890-1234-567890abcdef");
         var response = await _client.GetAsync($"/api/countries/{countryId}/states");
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-        var list = await response.Content.ReadFromJsonAsync<List<StateDto>>();
+        var list = await response.Content.ReadFromJsonAsync<List<StateGeoReadDto>>();
         list.Should().NotBeNull();
         list.Should().Contain(s => s.Name == "Madrid");
     }
@@ -58,7 +58,7 @@ public class GeoControllerTests
         var stateId = Guid.Parse("5d7ac5fb-e49e-442f-88f2-608b8d13d10c"); // State: Madrid
         var response = await _client.GetAsync($"/api/states/{stateId}/cities");
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-        var list = await response.Content.ReadFromJsonAsync<List<CityDto>>();
+        var list = await response.Content.ReadFromJsonAsync<List<CityGeoReadDto>>();
         list.Should().NotBeNull();
         list.Should().Contain(c => c.Name == "Madrid");
     }

@@ -27,7 +27,7 @@ public class StatesController : ControllerBase
     /// Obtiene las ciudades de un estado/provincia
     /// </summary>
     [HttpGet("{id}/cities")]
-    [ProducesResponseType(typeof(List<CityDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(List<CityGeoReadDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetCities(Guid id)
     {
         try

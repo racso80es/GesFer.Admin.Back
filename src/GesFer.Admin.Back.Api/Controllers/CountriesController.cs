@@ -27,7 +27,7 @@ public class CountriesController : ControllerBase
     /// Obtiene todos los países
     /// </summary>
     [HttpGet]
-    [ProducesResponseType(typeof(List<CountryDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(List<CountryGeoReadDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll()
     {
         try
@@ -47,7 +47,7 @@ public class CountriesController : ControllerBase
     /// Obtiene un país por ID
     /// </summary>
     [HttpGet("{id}")]
-    [ProducesResponseType(typeof(CountryDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(CountryGeoReadDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(Guid id)
     {
@@ -72,7 +72,7 @@ public class CountriesController : ControllerBase
     /// Obtiene los estados/provincias de un país
     /// </summary>
     [HttpGet("{id}/states")]
-    [ProducesResponseType(typeof(List<StateDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(List<StateGeoReadDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetStates(Guid id)
     {
         try
