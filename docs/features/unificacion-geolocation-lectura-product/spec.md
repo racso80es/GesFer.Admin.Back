@@ -36,11 +36,9 @@ non_functional_requirements:
     text: "[AuthorizeSystemOrAdmin] en el controlador."
 touchpoints:
   - path: src/GesFer.Admin.Back.Api/Controllers/GeolocationController.cs
-    note: Nuevo; rutas bajo api/geolocation.
-  - path: src/GesFer.Admin.Back.Api/Controllers/CountriesController.cs
-    note: Eliminar.
-  - path: src/GesFer.Admin.Back.Api/Controllers/StatesController.cs
-    note: Eliminar.
+    note: Controlador único; rutas bajo api/geolocation.
+  - path: src/GesFer.Admin.Back.ArchitectureTests/
+    note: Tests de dependencias entre capas (P4).
   - path: src/GesFer.Admin.Back.Application/DTOs/Geo/GeoDtos.cs
     note: DTOs lectura por nivel (§3); eliminar shapes homogéneos duplicados si existían.
   - path: src/GesFer.Admin.Back.Application/Commands/Geo/GeoQueries.cs
