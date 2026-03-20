@@ -96,6 +96,6 @@ Para que todos los E2E pasen, la API debe estar usando la misma configuración (
 
 - **Ubicación:** `src/GesFer.Admin.Back.E2ETests/`
 - **Trait:** `Category=E2E` (permite filtrar con `--filter Category=E2E`).
-- **Cobertura actual:** health, swagger, `/api/countries`, `/api/company` (con X-Internal-Secret y con JWT admin), `/api/admin/auth/login`.
+- **Cobertura actual:** health, swagger, `/api/geolocation/countries` (y resto de rutas bajo `/api/geolocation`), `/api/company` (con X-Internal-Secret y con JWT admin), `/api/admin/auth/login`.
 
 Las herramientas de inicialización (prepare-full-env, invoke-mysql-seeds) están definidas en Cúmulo (`paths.toolCapsules`) y se invocan desde este script.

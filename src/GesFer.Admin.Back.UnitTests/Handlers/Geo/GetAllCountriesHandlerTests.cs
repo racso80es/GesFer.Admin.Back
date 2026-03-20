@@ -45,4 +45,21 @@ public class GetAllCountriesHandlerTests
         result.Select(c => c.Name).Should().Contain(new[] { "Spain", "France" });
         result.Select(c => c.Name).Should().NotContain("Inactive");
     }
+
+    [Fact]
+    public async Task Handle_IncludesCountry_WhenDeletedAtSetButStillActive()
+    {
+        await using var context = CreateContext();
+        var id = Guid.NewGuid();
+        context.Countries.Add(new Country { Id = id, Name = "Zedland", Code = "ZZ" });
+        await context.SaveChangesAsync();
+        var entity = await context.Countries.FindAsync([id], CancellationToken.None);
+        entity!.DeletedAt = DateTime.UtcNow;
+        await context.SaveChangesAsync();
+
+        var handler = new GetAllCountriesHandler(context);
+        var result = await handler.Handle(new GetAllCountriesCommand(), CancellationToken.None);
+
+        result.Should().Contain(c => c.Id == id && c.Name == "Zedland");
+    }
 }

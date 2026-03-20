@@ -159,15 +159,15 @@
 			]
 		},
 		{
-			"name": "Countries",
+			"name": "Geolocation",
 			"item": [
 				{
 					"name": "Get All Countries",
 					"request": {
 						"method": "GET",
 						"header": [{ "key": "X-Internal-Secret", "value": "{{internalSecret}}" }],
-						"url": "{{baseUrl}}/api/countries",
-						"description": "Lista todos los países (X-Internal-Secret o JWT Admin)."
+						"url": "{{baseUrl}}/api/geolocation/countries",
+						"description": "Lista países activos (X-Internal-Secret o JWT Admin)."
 					}
 				},
 				{
@@ -175,7 +175,7 @@
 					"request": {
 						"method": "GET",
 						"header": [{ "key": "X-Internal-Secret", "value": "{{internalSecret}}" }],
-						"url": "{{baseUrl}}/api/countries/{{countryId}}",
+						"url": "{{baseUrl}}/api/geolocation/countries/{{countryId}}",
 						"description": "Sustituir countryId por un Guid válido (ej. de Get All Countries)."
 					}
 				},
@@ -184,22 +184,26 @@
 					"request": {
 						"method": "GET",
 						"header": [{ "key": "X-Internal-Secret", "value": "{{internalSecret}}" }],
-						"url": "{{baseUrl}}/api/countries/{{countryId}}/states",
-						"description": "Estados/provincias de un país."
+						"url": "{{baseUrl}}/api/geolocation/countries/{{countryId}}/states",
+						"description": "Estados/provincias activos de un país."
 					}
-				}
-			]
-		},
-		{
-			"name": "States",
-			"item": [
+				},
 				{
 					"name": "Get Cities By State Id",
 					"request": {
 						"method": "GET",
 						"header": [{ "key": "X-Internal-Secret", "value": "{{internalSecret}}" }],
-						"url": "{{baseUrl}}/api/states/{{stateId}}/cities",
-						"description": "Ciudades de un estado. Sustituir stateId por un Guid de Get States By Country Id."
+						"url": "{{baseUrl}}/api/geolocation/states/{{stateId}}/cities",
+						"description": "Ciudades activas de un estado. Sustituir stateId por un Guid de Get States By Country Id."
+					}
+				},
+				{
+					"name": "Get Postal Codes By City Id",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "X-Internal-Secret", "value": "{{internalSecret}}" }],
+						"url": "{{baseUrl}}/api/geolocation/cities/{{cityId}}/postal-codes",
+						"description": "Códigos postales activos de una ciudad. Sustituir cityId por un Guid de Get Cities By State Id."
 					}
 				}
 			]

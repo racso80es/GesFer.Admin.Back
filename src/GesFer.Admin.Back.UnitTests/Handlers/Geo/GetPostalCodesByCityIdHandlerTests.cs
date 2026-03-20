@@ -37,4 +37,26 @@ public class GetPostalCodesByCityIdHandlerTests
         result.Should().HaveCount(2);
         result.Select(p => p.Code).Should().ContainInOrder("28001", "28002");
     }
+
+    [Fact]
+    public async Task Handle_ExcludesInactivePostalCodes()
+    {
+        var cityId = Guid.NewGuid();
+        await using var context = CreateContext();
+        var offId = Guid.NewGuid();
+        context.PostalCodes.AddRange(
+            new PostalCode { Id = Guid.NewGuid(), CityId = cityId, Code = "11111", IsActive = true },
+            new PostalCode { Id = offId, CityId = cityId, Code = "22222", IsActive = true }
+        );
+        await context.SaveChangesAsync();
+        var off = await context.PostalCodes.FindAsync([offId], CancellationToken.None);
+        off!.IsActive = false;
+        await context.SaveChangesAsync();
+
+        var handler = new GetPostalCodesByCityIdHandler(context);
+        var result = await handler.Handle(new GetPostalCodesByCityIdCommand(cityId), CancellationToken.None);
+
+        result.Should().HaveCount(1);
+        result[0].Code.Should().Be("11111");
+    }
 }
