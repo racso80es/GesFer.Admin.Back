@@ -1,6 +1,6 @@
 namespace GesFer.Admin.Back.Application.DTOs.Geo;
 
-public class CountryDto
+public record CountryDto
 {
     public Guid Id { get; set; }
     public string Name { get; set; } = string.Empty;
@@ -8,7 +8,7 @@ public class CountryDto
     public Guid LanguageId { get; set; }
 }
 
-public class StateDto
+public record StateDto
 {
     public Guid Id { get; set; }
     public Guid CountryId { get; set; }
@@ -16,7 +16,7 @@ public class StateDto
     public string? Code { get; set; }
 }
 
-public class CityDto
+public record CityDto
 {
     public Guid Id { get; set; }
     public Guid StateId { get; set; }
