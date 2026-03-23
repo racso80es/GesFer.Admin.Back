@@ -160,7 +160,7 @@ pub fn try_read_capsule_request() -> Result<Option<CapsuleRequest>, String> {
     std::io::Read::read_to_string(&mut std::io::stdin(), &mut buf).map_err(|e| e.to_string())?;
     let buf = buf.trim();
     if buf.is_empty() {
-        return Err("stdin no es TTY pero no hay JSON de entrada".to_string());
+        return Ok(None);
     }
     serde_json::from_str(buf)
         .map_err(|e| format!("JSON de entrada inválido: {}", e))
