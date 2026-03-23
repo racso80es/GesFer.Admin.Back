@@ -151,7 +151,7 @@ impl CapsuleResponse {
     }
 }
 
-/// `None` si stdin es TTY (modo humano / CLI legacy). `Some(request)` si hay JSON en stdin.
+/// `None` si stdin es TTY (modo humano / CLI legacy) o si stdin está vacío (como en CI). `Some(request)` si hay JSON en stdin.
 pub fn try_read_capsule_request() -> Result<Option<CapsuleRequest>, String> {
     if atty::is(atty::Stream::Stdin) {
         return Ok(None);
@@ -160,6 +160,7 @@ pub fn try_read_capsule_request() -> Result<Option<CapsuleRequest>, String> {
     std::io::Read::read_to_string(&mut std::io::stdin(), &mut buf).map_err(|e| e.to_string())?;
     let buf = buf.trim();
     if buf.is_empty() {
+        // En lugar de fallar, asumimos que no hay petición JSON y operamos en modo CLI / CI
         return Ok(None);
     }
     serde_json::from_str(buf)

@@ -38,4 +38,4 @@ jobs:
       env:
         GITHUB_HEAD_REF: ${{ github.head_ref }}
       run: |
-        cargo run --release --manifest-path scripts/skills-rs/Cargo.toml --bin verify_pr_protocol
+        cargo run --release --manifest-path scripts/skills-rs/Cargo.toml --bin verify_pr_protocol < /dev/null
