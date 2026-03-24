@@ -57,6 +57,6 @@ public class GetPostalCodesByCityIdHandlerTests
         var result = await handler.Handle(new GetPostalCodesByCityIdCommand(cityId), CancellationToken.None);
 
         result.Should().HaveCount(1);
-        result[0].Code.Should().Be("11111");
+        result.First().Code.Should().Be("11111");
     }
 }

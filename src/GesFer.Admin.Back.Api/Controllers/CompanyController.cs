@@ -29,7 +29,7 @@ public class CompanyController : ControllerBase
     /// Obtiene todas las empresas
     /// </summary>
     [HttpGet]
-    [ProducesResponseType(typeof(List<CompanyDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<CompanyDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll()
     {
         try

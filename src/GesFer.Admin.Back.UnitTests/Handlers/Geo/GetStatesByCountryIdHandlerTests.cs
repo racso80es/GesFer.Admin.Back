@@ -60,6 +60,6 @@ public class GetStatesByCountryIdHandlerTests
         var result = await handler.Handle(new GetStatesByCountryIdCommand(countryId), CancellationToken.None);
 
         result.Should().HaveCount(1);
-        result[0].Name.Should().Be("On");
+        result.First().Name.Should().Be("On");
     }
 }
