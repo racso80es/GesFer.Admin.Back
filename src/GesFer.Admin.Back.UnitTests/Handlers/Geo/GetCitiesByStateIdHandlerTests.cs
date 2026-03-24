@@ -60,6 +60,6 @@ public class GetCitiesByStateIdHandlerTests
         var result = await handler.Handle(new GetCitiesByStateIdCommand(stateId), CancellationToken.None);
 
         result.Should().HaveCount(1);
-        result[0].Name.Should().Be("On");
+        result.First().Name.Should().Be("On");
     }
 }

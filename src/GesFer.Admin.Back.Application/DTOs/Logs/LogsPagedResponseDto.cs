@@ -2,7 +2,7 @@ namespace GesFer.Admin.Back.Application.DTOs.Logs;
 
 public record LogsPagedResponseDto
 {
-    public List<LogDto> Logs { get; set; } = new();
+    public IEnumerable<LogDto> Logs { get; set; } = new List<LogDto>();
     public int TotalCount { get; set; }
     public int PageNumber { get; set; }
     public int PageSize { get; set; }

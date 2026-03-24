@@ -3,4 +3,4 @@ using MediatR;
 
 namespace GesFer.Admin.Back.Application.Commands.Company;
 
-public record GetAllCompaniesCommand() : IRequest<List<CompanyDto>>;
+public record GetAllCompaniesCommand() : IRequest<IEnumerable<CompanyDto>>;

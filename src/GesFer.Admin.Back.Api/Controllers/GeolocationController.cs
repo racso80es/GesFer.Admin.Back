@@ -25,7 +25,7 @@ public class GeolocationController : ControllerBase
 
     /// <summary>Obtiene todos los países activos.</summary>
     [HttpGet("countries")]
-    [ProducesResponseType(typeof(List<CountryGeoReadDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<CountryGeoReadDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetCountries()
     {
         try
@@ -62,7 +62,7 @@ public class GeolocationController : ControllerBase
 
     /// <summary>Estados/provincias de un país.</summary>
     [HttpGet("countries/{countryId:guid}/states")]
-    [ProducesResponseType(typeof(List<StateGeoReadDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<StateGeoReadDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetStatesByCountry(Guid countryId)
     {
         try
@@ -79,7 +79,7 @@ public class GeolocationController : ControllerBase
 
     /// <summary>Ciudades de un estado.</summary>
     [HttpGet("states/{stateId:guid}/cities")]
-    [ProducesResponseType(typeof(List<CityGeoReadDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<CityGeoReadDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetCitiesByState(Guid stateId)
     {
         try
@@ -96,7 +96,7 @@ public class GeolocationController : ControllerBase
 
     /// <summary>Códigos postales de una ciudad.</summary>
     [HttpGet("cities/{cityId:guid}/postal-codes")]
-    [ProducesResponseType(typeof(List<PostalCodeGeoReadDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<PostalCodeGeoReadDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetPostalCodesByCity(Guid cityId)
     {
         try

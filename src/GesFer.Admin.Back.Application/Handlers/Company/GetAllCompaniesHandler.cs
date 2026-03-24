@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GesFer.Admin.Back.Application.Handlers.Company;
 
-public class GetAllCompaniesHandler : IRequestHandler<GetAllCompaniesCommand, List<CompanyDto>>
+public class GetAllCompaniesHandler : IRequestHandler<GetAllCompaniesCommand, IEnumerable<CompanyDto>>
 {
     private readonly IApplicationDbContext _context;
 
@@ -15,7 +15,7 @@ public class GetAllCompaniesHandler : IRequestHandler<GetAllCompaniesCommand, Li
         _context = context;
     }
 
-    public async Task<List<CompanyDto>> Handle(GetAllCompaniesCommand request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<CompanyDto>> Handle(GetAllCompaniesCommand request, CancellationToken cancellationToken)
     {
         var companies = await _context.Companies
             .Where(c => c.DeletedAt == null)

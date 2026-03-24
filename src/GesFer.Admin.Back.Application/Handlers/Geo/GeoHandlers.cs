@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GesFer.Admin.Back.Application.Handlers.Geo;
 
-public class GetAllCountriesHandler : IRequestHandler<GetAllCountriesCommand, List<CountryGeoReadDto>>
+public class GetAllCountriesHandler : IRequestHandler<GetAllCountriesCommand, IEnumerable<CountryGeoReadDto>>
 {
     private readonly IApplicationDbContext _context;
 
@@ -15,7 +15,7 @@ public class GetAllCountriesHandler : IRequestHandler<GetAllCountriesCommand, Li
         _context = context;
     }
 
-    public async Task<List<CountryGeoReadDto>> Handle(GetAllCountriesCommand request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<CountryGeoReadDto>> Handle(GetAllCountriesCommand request, CancellationToken cancellationToken)
     {
         return await _context.Countries
             .AsNoTracking()
@@ -57,7 +57,7 @@ public class GetCountryByIdHandler : IRequestHandler<GetCountryByIdCommand, Coun
     }
 }
 
-public class GetStatesByCountryIdHandler : IRequestHandler<GetStatesByCountryIdCommand, List<StateGeoReadDto>>
+public class GetStatesByCountryIdHandler : IRequestHandler<GetStatesByCountryIdCommand, IEnumerable<StateGeoReadDto>>
 {
     private readonly IApplicationDbContext _context;
 
@@ -66,7 +66,7 @@ public class GetStatesByCountryIdHandler : IRequestHandler<GetStatesByCountryIdC
         _context = context;
     }
 
-    public async Task<List<StateGeoReadDto>> Handle(GetStatesByCountryIdCommand request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<StateGeoReadDto>> Handle(GetStatesByCountryIdCommand request, CancellationToken cancellationToken)
     {
         return await _context.States
             .AsNoTracking()
@@ -84,7 +84,7 @@ public class GetStatesByCountryIdHandler : IRequestHandler<GetStatesByCountryIdC
     }
 }
 
-public class GetCitiesByStateIdHandler : IRequestHandler<GetCitiesByStateIdCommand, List<CityGeoReadDto>>
+public class GetCitiesByStateIdHandler : IRequestHandler<GetCitiesByStateIdCommand, IEnumerable<CityGeoReadDto>>
 {
     private readonly IApplicationDbContext _context;
 
@@ -93,7 +93,7 @@ public class GetCitiesByStateIdHandler : IRequestHandler<GetCitiesByStateIdComma
         _context = context;
     }
 
-    public async Task<List<CityGeoReadDto>> Handle(GetCitiesByStateIdCommand request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<CityGeoReadDto>> Handle(GetCitiesByStateIdCommand request, CancellationToken cancellationToken)
     {
         return await _context.Cities
             .AsNoTracking()
@@ -110,7 +110,7 @@ public class GetCitiesByStateIdHandler : IRequestHandler<GetCitiesByStateIdComma
     }
 }
 
-public class GetPostalCodesByCityIdHandler : IRequestHandler<GetPostalCodesByCityIdCommand, List<PostalCodeGeoReadDto>>
+public class GetPostalCodesByCityIdHandler : IRequestHandler<GetPostalCodesByCityIdCommand, IEnumerable<PostalCodeGeoReadDto>>
 {
     private readonly IApplicationDbContext _context;
 
@@ -119,7 +119,7 @@ public class GetPostalCodesByCityIdHandler : IRequestHandler<GetPostalCodesByCit
         _context = context;
     }
 
-    public async Task<List<PostalCodeGeoReadDto>> Handle(GetPostalCodesByCityIdCommand request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<PostalCodeGeoReadDto>> Handle(GetPostalCodesByCityIdCommand request, CancellationToken cancellationToken)
     {
         return await _context.PostalCodes
             .AsNoTracking()
