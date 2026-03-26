@@ -3,7 +3,7 @@
 
 pub use gesfer_capsule::{
     try_read_capsule_request, write_capsule_response, CapsuleRequest, CapsuleResponse, FeedbackEntry,
-    FeedbackLevel, RequestMeta, ResponseMeta,
+    FeedbackLevel, RequestMeta, ResponseMeta, ENV_CAPSULE_REQUEST, ENV_SKIP_STDIN,
 };
 
 use serde::{Deserialize, Serialize};

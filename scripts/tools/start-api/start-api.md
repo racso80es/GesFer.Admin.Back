@@ -30,6 +30,13 @@ Desde la raíz del repositorio (o con `GESFER_REPO_ROOT` apuntando a la raíz):
 .\start_api.exe --config-path ruta/a/start-api-config.json
 ```
 
+### Invocación por agente (IA)
+
+Mismo envelope que `SddIA/norms/capsule-json-io.md`. Si el entorno no puede hacer pipe + EOF de forma fiable:
+
+- **`GESFER_SKIP_STDIN=1`** y flags CLI, p. ej. `--output-json --port-blocked kill`.
+- O **`GESFER_CAPSULE_REQUEST`** con el JSON del envelope (sin usar stdin).
+
 ## Salida
 
 JSON según SddIA/tools/tools-contract.json: toolId, exitCode, success, timestamp, message, feedback[], data (url_base, port, pid, healthy), duration_ms. **success = true** solo si el health responde 200.

@@ -151,8 +151,38 @@ impl CapsuleResponse {
     }
 }
 
-/// `None` si stdin es TTY (modo humano / CLI legacy) o si stdin está vacío (como en CI). `Some(request)` si hay JSON en stdin.
+/// Variable de entorno: envelope JSON (una línea) sin usar stdin. Útil cuando el runner no puede cerrar stdin de forma fiable.
+pub const ENV_CAPSULE_REQUEST: &str = "GESFER_CAPSULE_REQUEST";
+
+/// Variable de entorno: si es `1` o `true`, no se lee stdin y se asume modo CLI (mismos args que con TTY).
+/// Evita bloqueos cuando stdin no es TTY pero el padre deja el pipe abierto sin datos ni EOF.
+pub const ENV_SKIP_STDIN: &str = "GESFER_SKIP_STDIN";
+
+fn env_truthy(name: &str) -> bool {
+    std::env::var(name)
+        .map(|v| v == "1" || v.eq_ignore_ascii_case("true"))
+        .unwrap_or(false)
+}
+
+/// Resuelve la petición capsule-json-io con este orden:
+/// 1. [`ENV_CAPSULE_REQUEST`]: JSON del envelope completo; **no** lee stdin.
+/// 2. [`ENV_SKIP_STDIN`]: modo CLI sin leer stdin (`Ok(None)`).
+/// 3. stdin es TTY: modo CLI (`Ok(None)`).
+/// 4. stdin no TTY: lee hasta EOF (puede bloquear si el padre no cierra stdin).
+///
+/// `None` si modo CLI o stdin vacío tras EOF. `Some(request)` si hay JSON válido.
 pub fn try_read_capsule_request() -> Result<Option<CapsuleRequest>, String> {
+    if let Ok(raw) = std::env::var(ENV_CAPSULE_REQUEST) {
+        let buf = raw.trim();
+        if !buf.is_empty() {
+            return serde_json::from_str(buf)
+                .map_err(|e| format!("JSON de entrada inválido ({}): {}", ENV_CAPSULE_REQUEST, e))
+                .map(Some);
+        }
+    }
+    if env_truthy(ENV_SKIP_STDIN) {
+        return Ok(None);
+    }
     if atty::is(atty::Stream::Stdin) {
         return Ok(None);
     }

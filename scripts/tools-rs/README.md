@@ -22,9 +22,13 @@ Compila `cargo build --release` y copia los `.exe` a la **raíz** de cada cápsu
 
 ## Uso
 
-- **Agente:** JSON por stdin cuando stdin no es TTY; respuesta envelope v2 por stdout.
+- **Agente:** envelope JSON por **stdin** (stdin no TTY) → respuesta v2 por stdout. Si el runner no cierra stdin bien, puede **bloquear** el proceso; alternativas:
+  - **`GESFER_CAPSULE_REQUEST`** — mismo JSON que iría stdin (sin leer stdin).
+  - **`GESFER_SKIP_STDIN=1`** — modo CLI; pasar flags (`--output-json`, `--port-blocked`, etc.).
 - **Humano:** flags `clap` habituales; `--output-json` o `TOOLS_OUTPUT_JSON=1` para imprimir JSON.
 - `GESFER_REPO_ROOT` — raíz del repo cuando aplica.
+
+Ver `SddIA/norms/capsule-json-io.md` §4.1.
 
 ## Estructura
 

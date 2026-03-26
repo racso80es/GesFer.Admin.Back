@@ -96,6 +96,19 @@ Cada elemento:
 | **Agente / IA** | `.exe` con JSON por **stdin**; leer JSON por **stdout**. | No usar `.bat` como interfaz del agente. |
 | **Humano** | `.bat` opcional en la cápsula: envoltorio mínimo sobre el mismo `.exe` sin scripts `.ps1`. | La semántica debe coincidir con la invocación JSON cuando sea posible; si el `.bat` solo pasa argumentos legacy, debe documentarse en la cápsula. |
 
+### 4.1 Entornos donde stdin no es fiable (agentes / CI)
+
+Si **stdin no es TTY** y el proceso padre deja el pipe **abierto sin cerrar** (EOF), una lectura bloqueante hasta EOF puede **colgar** el binario. El crate **`gesfer-capsule`** (`scripts/gesfer-capsule`) resuelve la petición en este orden:
+
+| Prioridad | Mecanismo | Efecto |
+|-----------|-----------|--------|
+| 1 | Variable de entorno **`GESFER_CAPSULE_REQUEST`** | JSON del envelope completo (UTF-8). **No** se lee stdin. |
+| 2 | **`GESFER_SKIP_STDIN=1`** (o `true`) | No se lee stdin; modo **CLI** con los mismos argumentos que en TTY (`clap` / flags documentados). |
+| 3 | stdin TTY | Modo CLI (`Ok(None)` en la capa de lectura). |
+| 4 | stdin no TTY | Lectura hasta EOF (comportamiento estándar). |
+
+Recomendación para **IA / runners**: usar **`GESFER_CAPSULE_REQUEST`** o **`GESFER_SKIP_STDIN`** + flags CLI cuando no se pueda garantizar pipe + EOF.
+
 ---
 
 ## 5. Migración desde contrato anterior (tools)
