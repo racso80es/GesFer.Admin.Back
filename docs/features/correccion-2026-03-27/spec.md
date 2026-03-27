@@ -1,6 +1,10 @@
 ---
-id: "correccion-2026-03-27"
-type: feature
+feature_name: correccion-2026-03-27
+created: "2026-03-27"
+process: correccion-auditorias
+base:
+  - docs/features/correccion-2026-03-27/objectives.md
+  - docs/audits/AUDITORIA_2026_03_27.md
 ---
 
 # Especificación: Corrección Auditoría 2026-03-27

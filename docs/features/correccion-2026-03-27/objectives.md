@@ -1,6 +1,7 @@
 ---
-id: "correccion-2026-03-27"
-type: feature
+feature_name: correccion-2026-03-27
+created: "2026-03-27"
+process: correccion-auditorias
 ---
 
 # Objetivos de Corrección (Auditoría 2026-03-27)
@@ -18,4 +19,4 @@ La arquitectura y la salud del código tienen un estado excelente (100% de métr
 
 ## Objetivos
 
-1. **Formalizar la auditoría**: Completar el proceso SddIA `correccion-auditorias` registrando este estado libre de deuda técnica y de alertas de compilación.
+1. **Formalizar la auditoría limpia**: Completar el proceso SddIA `correccion-auditorias` registrando este estado libre de deuda técnica y de alertas de compilación.
