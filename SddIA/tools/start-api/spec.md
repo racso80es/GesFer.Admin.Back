@@ -26,8 +26,8 @@ output:
     '4': Directorio API no encontrado
     '5': Build fallido
     '6': Error al lanzar dotnet run
-    '7': Health no respondió a tiempo
-    '8': Base de datos no disponible (MySQL). Ejecutar prepare-full-env e invoke-mysql-seeds antes.
+    '7': Health no respondió a tiempo (`result.error_type`: `health_timeout`; incluye `health_wait_elapsed_secs`, `health_timeout_config_secs`)
+    '8': Base de datos no disponible (MySQL). Ejecutar prepare-full-env e invoke-mysql-seeds antes (`result.error_type`: `database_unavailable`)
   phases_feedback:
   - init
   - port-check

@@ -168,7 +168,7 @@ fn env_truthy(name: &str) -> bool {
 /// 1. [`ENV_CAPSULE_REQUEST`]: JSON del envelope completo; **no** lee stdin.
 /// 2. [`ENV_SKIP_STDIN`]: modo CLI sin leer stdin (`Ok(None)`).
 /// 3. stdin es TTY: modo CLI (`Ok(None)`).
-/// 4. stdin no TTY: lee hasta EOF (puede bloquear si el padre no cierra stdin).
+/// 4. stdin no TTY: si hay bytes pendientes, lee hasta EOF; si no hay datos y no es peekable, modo CLI.
 ///
 /// `None` si modo CLI o stdin vacío tras EOF. `Some(request)` si hay JSON válido.
 pub fn try_read_capsule_request() -> Result<Option<CapsuleRequest>, String> {
@@ -186,6 +186,16 @@ pub fn try_read_capsule_request() -> Result<Option<CapsuleRequest>, String> {
     if atty::is(atty::Stream::Stdin) {
         return Ok(None);
     }
+    // stdin no TTY: evitar bloqueo indefinido si el cliente no cerrará stdin y no hay datos.
+    match stdin_bytes_available() {
+        Some(0) => return Ok(None),
+        None => {
+            if std::env::args_os().count() > 1 {
+                return Ok(None);
+            }
+        }
+        Some(_) => {}
+    }
     let mut buf = String::new();
     std::io::Read::read_to_string(&mut std::io::stdin(), &mut buf).map_err(|e| e.to_string())?;
     let buf = buf.trim();
@@ -196,6 +206,46 @@ pub fn try_read_capsule_request() -> Result<Option<CapsuleRequest>, String> {
     serde_json::from_str(buf)
         .map_err(|e| format!("JSON de entrada inválido: {}", e))
         .map(Some)
+}
+
+/// Bytes ya disponibles en stdin sin consumirlos (pipes). `None` si no aplica o error.
+fn stdin_bytes_available() -> Option<u32> {
+    #[cfg(windows)]
+    {
+        use std::os::windows::io::AsRawHandle;
+        use windows_sys::Win32::System::Pipes::PeekNamedPipe;
+        let h = std::io::stdin().as_raw_handle();
+        let mut avail = 0u32;
+        let ok = unsafe {
+            PeekNamedPipe(
+                h as *mut _,
+                std::ptr::null_mut(),
+                0,
+                std::ptr::null_mut(),
+                &mut avail,
+                std::ptr::null_mut(),
+            )
+        };
+        if ok == 0 {
+            return None;
+        }
+        Some(avail)
+    }
+    #[cfg(unix)]
+    {
+        use std::os::unix::io::AsRawFd;
+        let fd = std::io::stdin().as_raw_fd();
+        let mut n: libc::c_int = 0;
+        let r = unsafe { libc::ioctl(fd, libc::FIONREAD, &mut n) };
+        if r < 0 {
+            return None;
+        }
+        Some(n as u32)
+    }
+    #[cfg(not(any(windows, unix)))]
+    {
+        None
+    }
 }
 
 pub fn write_capsule_response(res: &CapsuleResponse) -> Result<(), String> {
