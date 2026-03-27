@@ -90,28 +90,38 @@ try {
     }
 
     $skillDir = Join-Path $repoRoot "scripts\skills\finalizar-git"
-    $exePath = Join-Path $skillDir "bin\push_and_create_pr.exe"
-    $ps1Path = Join-Path $skillDir "Push-And-CreatePR.ps1"
+    # Cápsula: .exe en raíz (contrato v2); compatibilidad legacy: bin/push_and_create_pr.exe
+    $exePathRoot = Join-Path $skillDir "push_and_create_pr.exe"
+    $exePathBin = Join-Path $skillDir "bin\push_and_create_pr.exe"
+    $batPath = Join-Path $skillDir "Push-And-CreatePR.bat"
 
-    $useExe = Test-Path $exePath
-    $usePs1 = Test-Path $ps1Path
+    if (Test-Path $exePathRoot) {
+        $exePath = $exePathRoot
+    } elseif (Test-Path $exePathBin) {
+        $exePath = $exePathBin
+    } else {
+        $exePath = $null
+    }
 
-    if (-not $useExe -and -not $usePs1) {
-        Write-Error "No se encontró la skill finalizar-git: ni bin/push_and_create_pr.exe ni Push-And-CreatePR.ps1 en $skillDir (paths.skillCapsules['finalizar-git']). Ejecute scripts/skills-rs/install.ps1."
+    $useExe = $null -ne $exePath
+    $useBat = -not $useExe -and (Test-Path $batPath)
+
+    if (-not $useExe -and -not $useBat) {
+        Write-Error "No se encontró la skill finalizar-git: push_and_create_pr.exe (raíz o bin/) ni Push-And-CreatePR.bat en $skillDir. Ejecute scripts/skills-rs/install.ps1."
         exit 1
     }
 
-    Write-Host "[Finalize] Invocando skill finalizar-git (Push-And-CreatePR) con -Persist $Persist" -ForegroundColor Cyan
+    Write-Host "[Finalize] Invocando skill finalizar-git (pre-PR) con -Persist $Persist" -ForegroundColor Cyan
     if ($useExe) {
         $exeArgs = @("--persist", $Persist)
         if ($BranchName) { $exeArgs += @("--branch", $BranchName) }
         if ($Title) { $exeArgs += @("--title", $Title) }
         & $exePath @exeArgs
     } else {
-        $params = @{ Persist = $Persist }
-        if ($BranchName) { $params.BranchName = $BranchName }
-        if ($Title) { $params.Title = $Title }
-        & $ps1Path @params
+        $batArgs = @("--persist", $Persist)
+        if ($BranchName) { $batArgs += @("--branch", $BranchName) }
+        if ($Title) { $batArgs += @("--title", $Title) }
+        & $batPath @batArgs
     }
     $exitCode = $LASTEXITCODE
 } finally {
