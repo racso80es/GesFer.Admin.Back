@@ -6,7 +6,7 @@ related_actions:
   - activation
   - execution
   - finalization
-spec_version: 1.1.0
+spec_version: 1.2.0
 ---
 # Proceso: Automatic Task
 
@@ -23,7 +23,7 @@ Localiza en la **raíz** de `paths.tasksPath` los archivos `.md` sueltos (no den
 
 - Verifica que cumple con un análisis suficiente para poder realizar la tarea.
 - Si la tarea no tiene un ID único (ej. T-26-001), asígnale uno basado en la fecha actual en el nombre del fichero o en su contenido.
-- Comprueba que la tarea no está ya en ejecución (no existe en `paths.tasksPath/ACTIVE/`).
+- Comprueba que la tarea no está ya en ejecución (no existe en `paths.tasksPath/ACTIVE/` en ninguna rama activa ni master).
 
 **1.2 Cola Kaizen (solo si 1.1 no devuelve ninguna tarea)**  
 Si **no** hay ningún `.md` pendiente en la raíz de `paths.tasksPath`, revisa la subcarpeta **`paths.tasksPath/KAIZEN/`** (cola de tareas Kaizen ya especificadas).
@@ -32,7 +32,8 @@ Si **no** hay ningún `.md` pendiente en la raíz de `paths.tasksPath`, revisa l
 - Esa tarea se ejecuta con el **mismo procedimiento** que una tarea normal (activación, ejecución, finalización; ver §2–4).
 
 **1.3 Nueva Kaizen (solo si 1.1 y 1.2 no ofrecen trabajo)**  
-Si no hay tareas en la raíz de `paths.tasksPath` **ni** en `paths.tasksPath/KAIZEN/`, analiza el proyecto en busca de acciones de mejora continua (Kaizen), elige una, **regístrala** como nuevo fichero `.md` en `paths.tasksPath/KAIZEN/` (convención de nombre recomendada: `Kaizen_YYYY_MM_DD_<slug>.md`) y procédela igual que en §2–4.
+- Si no hay tareas en la raíz de `paths.tasksPath` **ni** en `paths.tasksPath/KAIZEN/`, analiza el proyecto en busca de acciones de mejora continua (Kaizen), elige una, **regístrala** como nuevo fichero `.md` en `paths.tasksPath/KAIZEN/` (convención de nombre recomendada: `Kaizen_YYYY_MM_DD_<slug>.md`) y procédela igual que en §2–4.
+- Comprueba que el kaicen (fichero u objetivo) no está ya en ejecución (no existe en `paths.tasksPath/ACTIVE/` en ninguna rama activa ni master). 
 
 ### 2. Activación y Bloqueo (Activation)
 Transición a estado `ACTIVE` para evitar colisiones con otras IAs (Jules/Cursor).

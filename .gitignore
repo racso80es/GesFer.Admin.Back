@@ -111,3 +111,6 @@ src/Admin/Front/playwright-report/
 infrastructure/mock-apis/node_modules/
 /src/Tools/Calma-Desktop/node_modules
 **/target/
+
+# Telemetría local invoke-command: ramas tipo feat/<id> generan docs/diagnostics/feat/<id>/ (no versionar este id efímero de Kaizen)
+docs/diagnostics/feat/kaizen-2026-03-27-13652127576201859270/
