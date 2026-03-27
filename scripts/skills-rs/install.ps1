@@ -1,8 +1,9 @@
 <#
 .SYNOPSIS
-    Compila gesfer-skills (scripts/skills-rs) y copia los .exe a la raíz de cada cápsula (contrato v2).
+    Compila gesfer-skills (scripts/skills-rs) y copia los .exe a cada cápsula de skill en scripts/skills/.
 .DESCRIPTION
-    Requiere Rust en PATH (.cargo\bin). Tras cargo build --release, copia los binarios a scripts/skills/<skill-id>/ (sin carpeta bin/).
+    Requiere Rust en PATH (.cargo\bin). Tras cargo build --release, copia los ejecutables a la raíz
+    de cada cápsula (convención Admin: index.json paths.skillCapsules) salvo sddia-evolution, que usa bin/.
 #>
 $ErrorActionPreference = "Stop"
 $scriptDir = $PSScriptRoot
@@ -34,21 +35,38 @@ if ($LASTEXITCODE -ne 0) {
 
 $skillsDir = Join-Path $scriptDir "..\skills"
 $releaseDir = Join-Path $scriptDir "target\release"
-$capsules = @(
+
+# Raíz de cápsula (skills-contract v2 / manifest components.executable en raíz)
+$capsulesRoot = @(
     @{ exe = "iniciar_rama"; capsule = "iniciar-rama" },
     @{ exe = "merge_to_master_cleanup"; capsule = "finalizar-git" },
     @{ exe = "invoke_command"; capsule = "invoke-command" },
     @{ exe = "push_and_create_pr"; capsule = "finalizar-git" },
     @{ exe = "invoke_commit"; capsule = "invoke-commit" }
 )
-foreach ($cap in $capsules) {
+foreach ($cap in $capsulesRoot) {
     $src = Join-Path $releaseDir "$($cap.exe).exe"
-    $capDir = Join-Path $skillsDir $cap.capsule
+    $destDir = Join-Path $skillsDir $cap.capsule
     if (Test-Path $src) {
-        if (-not (Test-Path $capDir)) { New-Item -ItemType Directory -Path $capDir -Force | Out-Null }
-        $dest = Join-Path $capDir "$($cap.exe).exe"
-        Copy-Item -Path $src -Destination $dest -Force
+        if (-not (Test-Path $destDir)) { New-Item -ItemType Directory -Path $destDir -Force | Out-Null }
+        Copy-Item -Path $src -Destination (Join-Path $destDir "$($cap.exe).exe") -Force
         Write-Host "  Copiado: scripts/skills/$($cap.capsule)/$($cap.exe).exe" -ForegroundColor Cyan
     }
 }
-Write-Host "OK. Ejecutables en raíz de cápsula (scripts/skills/<skill-id>/)." -ForegroundColor Green
+
+# Cápsula sddia-evolution: binarios en bin/ (manifest components.*_exe)
+$capsulesBin = @(
+    @{ exe = "sddia_evolution_register"; capsule = "sddia-evolution" },
+    @{ exe = "sddia_evolution_validate"; capsule = "sddia-evolution" },
+    @{ exe = "sddia_evolution_watch"; capsule = "sddia-evolution" }
+)
+foreach ($cap in $capsulesBin) {
+    $src = Join-Path $releaseDir "$($cap.exe).exe"
+    $binDir = Join-Path (Join-Path $skillsDir $cap.capsule) "bin"
+    if (Test-Path $src) {
+        if (-not (Test-Path $binDir)) { New-Item -ItemType Directory -Path $binDir -Force | Out-Null }
+        Copy-Item -Path $src -Destination (Join-Path $binDir "$($cap.exe).exe") -Force
+        Write-Host "  Copiado: scripts/skills/$($cap.capsule)/bin/$($cap.exe).exe" -ForegroundColor Cyan
+    }
+}
+Write-Host "OK. Ejecutables en cápsulas (scripts/skills/<skill-id>/)." -ForegroundColor Green

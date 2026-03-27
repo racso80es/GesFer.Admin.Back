@@ -44,6 +44,14 @@
       "launcher_bat": "invoke-commit/Invoke-Commit.bat",
       "executable": "invoke-commit/invoke_commit.exe",
       "description": "Commit con --message, --files o --all (o JSON)."
+    },
+    {
+      "skillId": "sddia-evolution-register",
+      "path": "sddia-evolution/",
+      "manifest": "sddia-evolution/manifest.json",
+      "launcher_bat": "sddia-evolution/Register.bat",
+      "executable": "sddia-evolution/bin/sddia_evolution_register.exe",
+      "description": "Registro evolution SddIA (UUID, índice, hash); validate y watch en la misma cápsula."
     }
   ]
 }
