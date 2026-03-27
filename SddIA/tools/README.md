@@ -7,7 +7,7 @@ Este directorio es **paths.toolsDefinitionPath** (Cúmulo, `SddIA/agents/cumulo.
 | Ubicación | Contenido | Propósito |
 |-----------|-----------|-----------|
 | **SddIA/tools/** (este directorio) | Contrato global: `tools-contract.json`, `tools-contract.md`. Por herramienta: subcarpeta **&lt;tool-id&gt;/** con `spec.md` y `spec.json`. | **Definición:** qué hace la herramienta, contrato, entradas/salidas, fases. Consumido por agentes y procesos. |
-| **scripts/tools/** | Índice `index.json`, wrappers .bat y, por herramienta, cápsula **&lt;tool-id&gt;/** (manifest, .ps1, .bat, config, doc, bin/). | **Implementación:** código, configuración y ejecutables. Ruta canónica: **paths.toolCapsules[&lt;tool-id&gt;]** (Cúmulo). |
+| **scripts/tools/** | Índice `index.json` (incluye `invocation_policy`: .bat usuarios, .exe IA/MCP/automatización, sin .ps1 como interfaz), wrappers .bat y, por herramienta, cápsula **&lt;tool-id&gt;/** (manifest, .bat, config, doc, .exe). | **Implementación:** código, configuración y ejecutables. Ruta canónica: **paths.toolCapsules[&lt;tool-id&gt;]** (Cúmulo). |
 
 La **raíz del path de implementación** la indica Cúmulo (**paths.toolsPath**, **paths.toolCapsules**). No se usan rutas literales en la definición.
 

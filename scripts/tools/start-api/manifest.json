@@ -1,11 +1,15 @@
 {
   "toolId": "start-api",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Levanta la API del proyecto (Admin Back): build opcional, dotnet run, opcional healthcheck. Ciclo: infra → datos → API.",
   "contract_ref": "SddIA/tools/tools-contract.md",
+  "invocation": {
+    "bat": "Uso para usuarios humanos (envoltorio .bat en raíz de cápsula).",
+    "exe": "Uso obligatorio para IAs, servidores MCP y automatizaciones: start_api.exe en raíz de cápsula (JSON según capsule-json-io).",
+    "no_ps1": "No usar .ps1 como interfaz de contrato; ejecutar siempre el .exe."
+  },
   "components": {
     "launcher_bat": "Start-Api.bat",
-    "launcher_ps1": "Start-Api.ps1",
     "config": "start-api-config.json",
     "doc": "start-api.md",
     "exe": "start_api.exe"

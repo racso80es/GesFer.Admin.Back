@@ -105,9 +105,9 @@ Si **stdin no es TTY** y el proceso padre deja el pipe **abierto sin cerrar** (E
 | 1 | Variable de entorno **`GESFER_CAPSULE_REQUEST`** | JSON del envelope completo (UTF-8). **No** se lee stdin. |
 | 2 | **`GESFER_SKIP_STDIN=1`** (o `true`) | No se lee stdin; modo **CLI** con los mismos argumentos que en TTY (`clap` / flags documentados). |
 | 3 | stdin TTY | Modo CLI (`Ok(None)` en la capa de lectura). |
-| 4 | stdin no TTY | Lectura hasta EOF (comportamiento estándar). |
+| 4 | stdin no TTY | Si hay bytes pendientes (peek), lectura hasta EOF; si **0 bytes** y pipe no consumible, modo CLI sin bloquear. Si no se puede peek y hay **argv adicional**, modo CLI. |
 
-Recomendación para **IA / runners**: usar **`GESFER_CAPSULE_REQUEST`** o **`GESFER_SKIP_STDIN`** + flags CLI cuando no se pueda garantizar pipe + EOF.
+Recomendación para **IA / runners**: usar **`GESFER_CAPSULE_REQUEST`** o **`GESFER_SKIP_STDIN`** + flags CLI cuando no se pueda garantizar pipe + EOF. La implementación en `gesfer-capsule` evita bloqueos por stdin abierto sin datos (peek / heurística argv).
 
 ---
 

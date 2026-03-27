@@ -45,8 +45,11 @@ JSON según SddIA/tools/tools-contract.json: toolId, exitCode, success, timestam
 
 | exitCode | Situación |
 |----------|-----------|
-| 7 | Health no respondió a tiempo |
-| 8 | **Base de datos (MySQL) no disponible** — ejecute prepare-full-env e invoke-mysql-seeds antes |
+| 5 | Build fallido (`result.error_type`: `build_failed`) |
+| 7 | Health no respondió a tiempo (`result.error_type`: `health_timeout`; revisar MySQL, tiempo en `healthCheckTimeoutSeconds`) |
+| 8 | **Base de datos (MySQL) no disponible** (`result.error_type`: `database_unavailable`) — ejecute prepare-full-env e invoke-mysql-seeds antes |
+
+Durante `dotnet build`, la herramienta escribe líneas periódicas en **stderr** (`[start-api] compilación en curso…`) para evitar que clientes con watchdog por inactividad corten el proceso.
 
 ## Implementación
 

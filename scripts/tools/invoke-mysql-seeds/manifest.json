@@ -1,11 +1,15 @@
 {
   "toolId": "invoke-mysql-seeds",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Migraciones EF y seeds de Admin sobre MySQL. Comprueba MySQL, aplica dotnet ef database update y ejecuta seeds (RUN_SEEDS_ONLY).",
   "contract_ref": "SddIA/tools/tools-contract.md",
+  "invocation": {
+    "bat": "Uso para usuarios humanos (envoltorio .bat en raíz de cápsula).",
+    "exe": "Uso obligatorio para IAs, servidores MCP y automatizaciones: invoke_mysql_seeds.exe en raíz de cápsula (JSON según capsule-json-io).",
+    "no_ps1": "No usar .ps1 como interfaz de contrato; ejecutar siempre el .exe."
+  },
   "components": {
     "launcher_bat": "Invoke-MySqlSeeds.bat",
-    "launcher_ps1": "Invoke-MySqlSeeds.ps1",
     "config": "mysql-seeds-config.json",
     "doc": "mysql-seeds.md",
     "bin": "invoke_mysql_seeds.exe"

@@ -1,8 +1,13 @@
 {
   "skillId": "invoke-commit",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "git add + commit con parámetros directos o JSON. Agente: invoke_commit.exe + stdin/stdout.",
   "contract_ref": "SddIA/skills/skills-contract.md",
+  "invocation": {
+    "bat": "Uso para usuarios humanos (envoltorio .bat en raíz de cápsula).",
+    "exe": "Uso obligatorio para IAs, servidores MCP y automatizaciones: invoke_commit.exe en raíz de cápsula (JSON según capsule-json-io).",
+    "no_ps1": "No usar .ps1 como interfaz de contrato; ejecutar siempre el .exe."
+  },
   "components": {
     "launcher_bat": "Invoke-Commit.bat",
     "doc": "invoke-commit.md",

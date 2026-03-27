@@ -1,9 +1,15 @@
 {
-  "index_version": "1.0.0",
+  "index_version": "1.1.0",
   "description": "Índice de herramientas en paths.toolsPath. Fuente canónica de rutas: Cúmulo (SddIA/agents/cumulo.json → paths.toolCapsules).",
   "toolsPath": "./scripts/tools/",
   "cumulo_ref": "SddIA/agents/cumulo.json",
   "contract_ref": "SddIA/tools/tools-contract.json",
+  "invocation_policy": {
+    "bat": "Envoltorio para usuarios humanos (raíz de cápsula).",
+    "exe": "Interfaz obligatoria para IAs, servidores MCP y automatizaciones: binario .exe en la raíz de la cápsula; E/S según SddIA/norms/capsule-json-io.md.",
+    "no_ps1": "Los scripts .ps1 no forman parte del contrato de invocación. No usarlos como interfaz; ejecutar siempre el .exe.",
+    "norm_ref": "SddIA/norms/capsule-json-io.md"
+  },
   "tools": [
     {
       "toolId": "invoke-mysql-seeds",

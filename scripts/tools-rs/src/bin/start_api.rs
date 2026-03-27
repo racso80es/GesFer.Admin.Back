@@ -5,6 +5,7 @@
 use std::io::{BufRead, BufReader};
 use std::net::TcpListener;
 use std::process::{Command, Stdio};
+use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::{Duration, Instant};
@@ -14,6 +15,8 @@ use gesfer_tools::{CapsuleResponse, FeedbackEntry, to_contract_json};
 use serde::Deserialize;
 
 const TOOL_ID: &str = "start-api";
+/// Intervalo entre líneas de progreso en stderr durante `dotnet build` (evita timeout por inactividad del cliente).
+const BUILD_PROGRESS_SECS: u64 = 10;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum PortBlocked {
@@ -169,7 +172,11 @@ fn main() {
                     "Puerto ocupado. Use --port-blocked kill para liberar el proceso o cambie el puerto.",
                     None,
                 ));
-                let data = serde_json::json!({ "port": port, "port_in_use": true });
+                let data = serde_json::json!({
+                    "port": port,
+                    "port_in_use": true,
+                    "error_type": "port_in_use"
+                });
                 emit_result(
                     false,
                     2,
@@ -190,7 +197,11 @@ fn main() {
                         "No se pudo liberar el puerto",
                         Some(&e),
                     ));
-                    let data = serde_json::json!({ "port": port, "port_in_use": true });
+                    let data = serde_json::json!({
+                        "port": port,
+                        "port_in_use": true,
+                        "error_type": "port_kill_failed"
+                    });
                     emit_result(
                         false,
                         3,
@@ -252,11 +263,29 @@ fn main() {
     // 2. Build opcional
     if !args.no_build {
         feedback.push(FeedbackEntry::info("build", "Compilando proyecto..."));
+        let build_done = Arc::new(AtomicBool::new(false));
+        let bd = Arc::clone(&build_done);
+        let progress = thread::spawn(move || {
+            let mut elapsed = 0u64;
+            while !bd.load(Ordering::SeqCst) {
+                thread::sleep(Duration::from_secs(BUILD_PROGRESS_SECS));
+                if bd.load(Ordering::SeqCst) {
+                    break;
+                }
+                elapsed += BUILD_PROGRESS_SECS;
+                eprintln!(
+                    "[start-api] compilación en curso ({} s). Si el cliente corta por tiempo, use --no-build o compile antes.",
+                    elapsed
+                );
+            }
+        });
         let build_start = Instant::now();
         let out = Command::new("dotnet")
             .args(["build", &config.api_working_dir, "-c", "Release"])
             .current_dir(&repo_root)
             .output();
+        build_done.store(true, Ordering::SeqCst);
+        let _ = progress.join();
         let _build_ms = build_start.elapsed().as_millis() as u64;
         match out {
             Ok(o) if o.status.success() => {
@@ -265,12 +294,16 @@ fn main() {
             Ok(o) => {
                 let stderr = String::from_utf8_lossy(&o.stderr);
                 feedback.push(FeedbackEntry::error("build", "Build fallido", Some(stderr.as_ref())));
+                let data = serde_json::json!({
+                    "error_type": "build_failed",
+                    "api_working_dir": config.api_working_dir,
+                });
                 emit_result(
                     false,
                     5,
                     "Build fallido",
                     feedback,
-                    None,
+                    Some(data),
                     start,
                     &args,
                     agent_capsule,
@@ -279,12 +312,16 @@ fn main() {
             }
             Err(e) => {
                 feedback.push(FeedbackEntry::error("build", "No se pudo ejecutar dotnet build", Some(&e.to_string())));
+                let data = serde_json::json!({
+                    "error_type": "build_failed",
+                    "detail": "dotnet_cli_error"
+                });
                 emit_result(
                     false,
                     5,
                     "dotnet build no disponible",
                     feedback,
-                    None,
+                    Some(data),
                     start,
                     &args,
                     agent_capsule,
@@ -347,6 +384,7 @@ fn main() {
     let timeout_secs = config.health_check_timeout_seconds.unwrap_or(30);
     let step = Duration::from_secs(2);
     let deadline = Instant::now() + Duration::from_secs(timeout_secs);
+    let health_wait_start = Instant::now();
     let mut healthy = false;
     let mut db_unavailable = false;
     let client = reqwest::blocking::Client::builder()
@@ -377,7 +415,11 @@ fn main() {
         }
         feedback.push(FeedbackEntry::info(
             "healthcheck",
-            &format!("Esperando salud ({}/{} s)...", Instant::now().duration_since(start).as_secs(), timeout_secs),
+            &format!(
+                "Esperando salud ({}/{} s)...",
+                health_wait_start.elapsed().as_secs(),
+                timeout_secs
+            ),
         ));
     }
 
@@ -397,7 +439,8 @@ fn main() {
             "profile": profile,
             "pid": pid,
             "healthy": false,
-            "error_type": "database_unavailable"
+            "error_type": "database_unavailable",
+            "health_wait_elapsed_secs": health_wait_start.elapsed().as_secs()
         });
         emit_result(
             false,
@@ -423,7 +466,10 @@ fn main() {
             "port": port,
             "profile": profile,
             "pid": pid,
-            "healthy": false
+            "healthy": false,
+            "error_type": "health_timeout",
+            "health_wait_elapsed_secs": health_wait_start.elapsed().as_secs(),
+            "health_timeout_config_secs": timeout_secs
         });
         emit_result(
             false,

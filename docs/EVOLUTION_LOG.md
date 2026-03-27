@@ -4,6 +4,7 @@ Registro cronológico de cierres de tareas y PR. Formato por línea: `[YYYY-MM-D
 
 ---
 
+[2026-03-27] [fix/start-api-client-timeout] Bug start-api: timeout desde cliente — peek stdin y heurística argv (gesfer-capsule), líneas de progreso en build (stderr), `error_type` en result; documentación en docs/bugs/start-api-client-timeout/. [PR #100]
 [2026-03-07] [feat/create-tool-start-api] Tool start-api: levantar API del proyecto (Rust); validación puerto (fail/kill), health como éxito; exe en carpeta de la tool (sin bin). Documentación en docs/features/create-tool-start-api/. [PR #68]
 [2026-02-25] [feat/create-tool-postman-mcp-validation] Tool postman-mcp-validation: validación de endpoints con colección Postman (Newman); herramienta de seguridad externa; cápsula en scripts/tools/postman-mcp-validation/, definición en SddIA/tools/postman-mcp-validation/, diseño MCP-ready. Documentación en docs/features/create-tool-postman-mcp-validation/. [Pendiente push/PR]
 [2026-02-20] [feat/sddia-paths-cumulo] Rutas vía Cúmulo: Cúmulo ampliado con paths; actions, process, skills, agents, norms, tools y templates usan paths.*; norma paths-via-cumulo.md. Documentación en docs/features/sddia-ecosystem-independence/. [PR #17]
