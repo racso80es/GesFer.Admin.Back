@@ -1,0 +1,25 @@
+---
+description: Trazabilidad SddIA evolution — registro obligatorio al cambiar el protocolo bajo ./SddIA/ (difusión; SSOT en SddIA/norms)
+globs: SddIA/**/*
+---
+
+# Norma de sincronismo SddIA (evolution) — difusión Cursor
+
+**Fuente canónica:** `SddIA/norms/sddia-evolution-sync.md`. **Contrato YAML:** `SddIA/evolution/evolution_contract.md` (v1.1). **Rutas:** solo vía Cúmulo — `SddIA/agents/cumulo.json` → `pathsContract` → claves `paths.sddiaEvolutionPath`, `paths.sddiaEvolutionLogFile`, `paths.sddiaEvolutionContractFile` (`SddIA/norms/paths-via-cumulo.md`).
+
+## Comportamiento (agente / desarrollador)
+
+Si **modificas, creas o eliminas** artefactos bajo `./SddIA/` (excluyendo solo lo que la norma excluya explícitamente):
+
+1. Completa el **registro de evolution**: índice (`Evolution_log.md`) + detalle `{id_cambio}.md` con **`id_cambio` = UUID v4** y frontmatter según contrato; campo **`tipo_operacion`** (`alta` | `baja` | `modificacion`).
+2. Usa el binario **Rust** de registro (cápsula en Cúmulo, envelope JSON según `SddIA/norms/capsule-json-io.md`) — **no** implementación `.ps1` como entrega de registro.
+3. En **baja**, documenta **paths eliminados** y **referencia al commit previo** cuando aplique.
+4. El **CI** (`sddia_evolution_validate` en PR) refuerza el cumplimiento; esta regla no sustituye al pipeline.
+
+## Coherencia
+
+Si algo en esta regla **contradice** `AGENTS.md` o `SddIA/norms/`, **prevalece SddIA**. Al cambiar la norma o el contrato, actualizar esta difusión (acción **sddia-difusion**: `SddIA/actions/sddia-difusion/`) para evitar deriva.
+
+---
+
+*Difusión de SddIA para Cursor. No duplicar aquí el esquema YAML completo.*
