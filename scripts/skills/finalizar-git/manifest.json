@@ -1,8 +1,13 @@
 {
   "skillId": "finalizar-git",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Pre-PR: push + PR (push_and_create_pr.exe). Post-PR: limpieza (merge_to_master_cleanup.exe). Agente: JSON stdin/stdout por binario.",
   "contract_ref": "SddIA/skills/skills-contract.md",
+  "invocation": {
+    "bat": "Uso para usuarios humanos (envoltorios .bat en raíz de cápsula: pre-PR y post-PR).",
+    "exe": "Uso obligatorio para IAs, servidores MCP y automatizaciones: push_and_create_pr.exe y merge_to_master_cleanup.exe (JSON según capsule-json-io).",
+    "no_ps1": "No usar .ps1 como interfaz de contrato; ejecutar siempre el .exe correspondiente."
+  },
   "components": {
     "launcher_bat_post_pr": "Merge-To-Master-Cleanup.bat",
     "launcher_bat_pre_pr": "Push-And-CreatePR.bat",

@@ -1,8 +1,13 @@
 {
   "skillId": "invoke-command",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Interceptor de ejecuciones de sistema (git, dotnet, npm, pwsh). Telemetría y registro por rama. Agente: invoke_command.exe + JSON stdin/stdout (SddIA/norms/capsule-json-io.md).",
   "contract_ref": "SddIA/skills/skills-contract.md",
+  "invocation": {
+    "bat": "Uso para usuarios humanos (envoltorio .bat en raíz de cápsula).",
+    "exe": "Uso obligatorio para IAs, servidores MCP y automatizaciones: invoke_command.exe en raíz de cápsula (JSON según capsule-json-io).",
+    "no_ps1": "No usar .ps1 como interfaz de contrato; ejecutar siempre el .exe."
+  },
   "components": {
     "launcher_bat": "Invoke-Command.bat",
     "doc": "invoke-command.md",

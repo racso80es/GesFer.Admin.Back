@@ -7,7 +7,7 @@ Este directorio es **paths.skillsDefinitionPath** (Cúmulo, `SddIA/agents/cumulo
 | Ubicación | Contenido | Propósito |
 |-----------|-----------|-----------|
 | **SddIA/skills/** (este directorio) | Contrato global: `skills-contract.md`. Por skill: subcarpeta **&lt;skill-id&gt;/** con `spec.md` y `spec.json`. | **Definición:** qué hace el skill, contrato, entradas/salidas (`request`/`result`), flujo. Consumido por agentes y procesos. |
-| **scripts/skills/** | Índice `index.json` y, por skill con ejecutable, cápsula **&lt;skill-id&gt;/** (manifest, .exe en raíz, .bat opcional humano, doc). | **Implementación:** ejecutables Rust y documentación. En **v2** no hay `bin/` ni `.ps1`. Ruta: **paths.skillCapsules[&lt;skill-id&gt;]** (Cúmulo). |
+| **scripts/skills/** | Índice `index.json` (incluye `invocation_policy`: .bat usuarios, .exe IA/MCP/automatización, sin .ps1 como interfaz) y, por skill con ejecutable, cápsula **&lt;skill-id&gt;/** (manifest, .exe en raíz, .bat opcional humano, doc). | **Implementación:** ejecutables Rust y documentación. En **v2** no hay `bin/` ni `.ps1` como contrato. Ruta: **paths.skillCapsules[&lt;skill-id&gt;]** (Cúmulo). |
 
 La **raíz del path de implementación** la indica Cúmulo (**paths.skillsPath**, **paths.skillCapsules**). No se usan rutas literales en la definición.
 

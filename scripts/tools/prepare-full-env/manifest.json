@@ -1,11 +1,15 @@
 {
   "toolId": "prepare-full-env",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Prepara entorno: Docker (DB, cache, Adminer) y opcionalmente API y clientes. Levanta servicios y espera a MySQL.",
   "contract_ref": "SddIA/tools/tools-contract.json",
+  "invocation": {
+    "bat": "Uso para usuarios humanos (envoltorio .bat en raíz de cápsula).",
+    "exe": "Uso obligatorio para IAs, servidores MCP y automatizaciones: prepare_full_env.exe en raíz de cápsula (JSON según capsule-json-io).",
+    "no_ps1": "No usar .ps1 como interfaz de contrato; ejecutar siempre el .exe."
+  },
   "components": {
     "launcher_bat": "Prepare-FullEnv.bat",
-    "launcher_ps1": "Prepare-FullEnv.ps1",
     "config": "prepare-env.json",
     "doc": "prepare-env.md",
     "bin": "prepare_full_env.exe"
