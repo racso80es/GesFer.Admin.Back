@@ -1,11 +1,8 @@
-# Evolution Log (SddIA — protocolo)
+# Evolution log — protocolo SddIA
 
-Índice cronológico de alto nivel de cambios en el **núcleo normativo SddIA** (`./SddIA/`). Cada fila enlaza con el detalle atómico en `paths.sddiaEvolutionPath` (Cúmulo). El **ID** es un **GUID** (`id_cambio` en YAML).
+Índice maestro de cambios registrados bajo `./SddIA/`. Rutas normativas: `paths.sddiaEvolutionPath`, `paths.sddiaEvolutionLogFile` (Cúmulo).
 
-| ID | Fecha | Descripción breve |
+| ID (GUID) | Fecha | Descripción breve |
 | :--- | :--- | :--- |
-| *(pendiente)* | — | Primera entrada oficial se generará con el binario `sddia_evolution_register` (ver `docs/features/sddia-evolution-sync-norma/plan.md`). |
-
----
-
-*Contrato y procedimiento: `evolution_contract.md` (misma carpeta). Norma: `SddIA/norms/sddia-evolution-sync.md`.*
+| 2a5a0e5a-4ecc-40c8-ac2c-8b7299ca637a | 2026-03-27T12:38:31.819376800+00:00 | Introduce norma evolution SddIA: Cúmulo, contrato v1.1, binarios Rust, CI y difusión IDE |
+| d50066f8-59e9-48c8-83ef-c24f74efb78e | 2026-03-27T16:44:30.204823857+00:00 | Añadida acción alternativa Kaizen si docs/TASKS está vacío |

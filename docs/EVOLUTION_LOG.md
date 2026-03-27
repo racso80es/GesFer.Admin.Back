@@ -3,6 +3,7 @@
 Registro cronológico de cierres de tareas y PR. Formato por línea: `[YYYY-MM-DD] [rama] [Descripción breve.] [Estado].`
 
 ---
+[2026-03-27] [feat/kaizen-2026-03-27] Tarea automática (Kaizen): Ejecución de script de auditoría sin hallazgos técnicos. Documentación generada en docs/features/kaizen-2026-03-27/. [Pendiente push/PR]
 
 [2026-03-27] [fix/start-api-client-timeout] Bug start-api: timeout desde cliente — peek stdin y heurística argv (gesfer-capsule), líneas de progreso en build (stderr), `error_type` en result; documentación en docs/bugs/start-api-client-timeout/. [PR #100]
 [2026-03-07] [feat/create-tool-start-api] Tool start-api: levantar API del proyecto (Rust); validación puerto (fail/kill), health como éxito; exe en carpeta de la tool (sin bin). Documentación en docs/features/create-tool-start-api/. [PR #68]
