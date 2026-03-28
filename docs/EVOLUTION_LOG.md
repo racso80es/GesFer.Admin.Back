@@ -3,6 +3,8 @@
 Registro cronológico de cierres de tareas y PR. Formato por línea: `[YYYY-MM-DD] [rama] [Descripción breve.] [Estado].`
 
 ---
+[2026-03-28] [feat/kaizen-2026-03-28-correccion] Tarea automática (Kaizen): Ejecución de proceso correccion-auditorias por auditoría limpia. Documentación en docs/features/kaizen-2026-03-28/. [Pendiente push/PR]
+
 [2026-03-28] [feat/correccion-2026-03-28] Ejecución de proceso correccion-auditorias sin hallazgos técnicos. Documentación generada en docs/features/correccion-2026-03-28/. [Pendiente push/PR]
 
 [2026-03-27] [feat/kaizen-2026-03-27] Tarea automática (Kaizen): Ejecución de script de auditoría sin hallazgos técnicos. Documentación generada en docs/features/kaizen-2026-03-27/. [Pendiente push/PR]

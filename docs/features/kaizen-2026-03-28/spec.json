@@ -1,0 +1,10 @@
+{
+  "feature_name": "kaizen-2026-03-28",
+  "created": "2026-03-28",
+  "base": "main",
+  "tasks": [
+    "Ejecutar el proceso correccion-auditorias de kaizen",
+    "Generar documentación de kaizen",
+    "Actualizar EVOLUTION_LOG.md con la tarea completada"
+  ]
+}
