@@ -6,7 +6,7 @@ namespace GesFer.Admin.Back.Application.Commands.Logs;
 
 public record CreateAuditLogCommand(CreateAuditLogDto Dto) : IRequest<Unit>;
 
-public class CreateAuditLogHandler : IRequestHandler<CreateAuditLogCommand, Unit>
+public sealed record CreateAuditLogHandler : IRequestHandler<CreateAuditLogCommand, Unit>
 {
     private readonly IAuditLogService _auditService;
 

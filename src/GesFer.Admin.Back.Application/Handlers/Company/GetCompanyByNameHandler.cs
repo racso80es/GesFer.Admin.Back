@@ -9,7 +9,7 @@ namespace GesFer.Admin.Back.Application.Handlers.Company;
 /// <summary>
 /// Obtiene una empresa por nombre (comparación según collation del BD, típicamente case-insensitive).
 /// </summary>
-public class GetCompanyByNameHandler : IRequestHandler<GetCompanyByNameCommand, CompanyDto?>
+public sealed record GetCompanyByNameHandler : IRequestHandler<GetCompanyByNameCommand, CompanyDto?>
 {
     private readonly IApplicationDbContext _context;
 

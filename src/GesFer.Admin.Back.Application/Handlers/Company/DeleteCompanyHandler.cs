@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GesFer.Admin.Back.Application.Handlers.Company;
 
-public class DeleteCompanyHandler : IRequestHandler<DeleteCompanyCommand>
+public sealed record DeleteCompanyHandler : IRequestHandler<DeleteCompanyCommand>
 {
     private readonly IApplicationDbContext _context;
 
