@@ -2,6 +2,7 @@
 
 Registro de cierres de tareas con resumen de alcance y referencia a documentación.
 
+[2026-03-28] [feat/correccion-segun-auditorias] Formalización de auditoría limpia 2026-03-27, sin hallazgos. [DONE].
 [2026-03-20] [feat/unificacion-geolocation-lectura-product] API geo unificada `/api/geolocation`, ArchitectureTests, tests y docs P3–P6. Ver `docs/features/unificacion-geolocation-lectura-product/validacion.md`.
 
 ---
