@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GesFer.Admin.Back.Application.Handlers.Company;
 
-public class GetCompanyByIdHandler : IRequestHandler<GetCompanyByIdCommand, CompanyDto?>
+public sealed class GetCompanyByIdHandler : IRequestHandler<GetCompanyByIdCommand, CompanyDto?>
 {
     private readonly IApplicationDbContext _context;
 
