@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GesFer.Admin.Back.Application.Handlers.Company;
 
-public class GetAllCompaniesHandler : IRequestHandler<GetAllCompaniesCommand, IEnumerable<CompanyDto>>
+public sealed record GetAllCompaniesHandler : IRequestHandler<GetAllCompaniesCommand, IEnumerable<CompanyDto>>
 {
     private readonly IApplicationDbContext _context;
 

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GesFer.Admin.Back.Application.Handlers.Geo;
 
-public class GetAllCountriesHandler : IRequestHandler<GetAllCountriesCommand, IEnumerable<CountryGeoReadDto>>
+public sealed record GetAllCountriesHandler : IRequestHandler<GetAllCountriesCommand, IEnumerable<CountryGeoReadDto>>
 {
     private readonly IApplicationDbContext _context;
 
@@ -32,7 +32,7 @@ public class GetAllCountriesHandler : IRequestHandler<GetAllCountriesCommand, IE
     }
 }
 
-public class GetCountryByIdHandler : IRequestHandler<GetCountryByIdCommand, CountryGeoReadDto?>
+public sealed record GetCountryByIdHandler : IRequestHandler<GetCountryByIdCommand, CountryGeoReadDto?>
 {
     private readonly IApplicationDbContext _context;
 
@@ -57,7 +57,7 @@ public class GetCountryByIdHandler : IRequestHandler<GetCountryByIdCommand, Coun
     }
 }
 
-public class GetStatesByCountryIdHandler : IRequestHandler<GetStatesByCountryIdCommand, IEnumerable<StateGeoReadDto>>
+public sealed record GetStatesByCountryIdHandler : IRequestHandler<GetStatesByCountryIdCommand, IEnumerable<StateGeoReadDto>>
 {
     private readonly IApplicationDbContext _context;
 
@@ -84,7 +84,7 @@ public class GetStatesByCountryIdHandler : IRequestHandler<GetStatesByCountryIdC
     }
 }
 
-public class GetCitiesByStateIdHandler : IRequestHandler<GetCitiesByStateIdCommand, IEnumerable<CityGeoReadDto>>
+public sealed record GetCitiesByStateIdHandler : IRequestHandler<GetCitiesByStateIdCommand, IEnumerable<CityGeoReadDto>>
 {
     private readonly IApplicationDbContext _context;
 
@@ -110,7 +110,7 @@ public class GetCitiesByStateIdHandler : IRequestHandler<GetCitiesByStateIdComma
     }
 }
 
-public class GetPostalCodesByCityIdHandler : IRequestHandler<GetPostalCodesByCityIdCommand, IEnumerable<PostalCodeGeoReadDto>>
+public sealed record GetPostalCodesByCityIdHandler : IRequestHandler<GetPostalCodesByCityIdCommand, IEnumerable<PostalCodeGeoReadDto>>
 {
     private readonly IApplicationDbContext _context;
 

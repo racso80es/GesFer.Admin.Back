@@ -9,7 +9,7 @@ using CompanyEntity = GesFer.Admin.Back.Domain.Entities.Company;
 
 namespace GesFer.Admin.Back.Application.Handlers.Company;
 
-public class CreateCompanyHandler : IRequestHandler<CreateCompanyCommand, CompanyDto>
+public sealed record CreateCompanyHandler : IRequestHandler<CreateCompanyCommand, CompanyDto>
 {
     private readonly IApplicationDbContext _context;
 

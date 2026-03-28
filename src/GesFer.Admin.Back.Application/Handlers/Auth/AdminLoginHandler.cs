@@ -10,7 +10,7 @@ namespace GesFer.Admin.Back.Application.Handlers.Auth;
 /// <summary>
 /// Handler del caso de uso de login Admin. Valida, autentica, genera token y registra en AuditLogs.
 /// </summary>
-public class AdminLoginHandler : IRequestHandler<AdminLoginCommand, AdminLoginResult>
+public sealed record AdminLoginHandler : IRequestHandler<AdminLoginCommand, AdminLoginResult>
 {
     private const string LoginPath = "/api/admin/auth/login";
     private const string HttpMethod = "POST";
