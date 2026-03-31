@@ -6,7 +6,16 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 [2026-03-27] [feat/kaizen-2026-03-27] Formalización de auditoría limpia. Finalizado.
 
+
+[2026-03-31] [feat/correccion-2026-03-31] Formalización de auditoría limpia. Finalizado.
+
 ---
+
+## 2026-03-31 - Formalización Auditoría (feat/correccion-2026-03-31)
+
+**Rama:** feat/correccion-2026-03-31
+**Tipo:** Feature
+**Documentación:** `docs/features/correccion-2026-03-31/`
 
 ## 2026-03-27 - Formalización Auditoría (feat/kaizen-2026-03-27)
 
