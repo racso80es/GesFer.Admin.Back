@@ -1,8 +1,6 @@
 ---
-id: "correccion-2026-03-28"
-type: feature
 feature_name: correccion-2026-03-28
-created: 2026-03-28
+created: "2026-04-06"
 process: correccion-auditorias
 ---
 
@@ -17,8 +15,8 @@ process: correccion-auditorias
 - **Bajos:** Ninguno
 
 **Conclusión:**
-La arquitectura y la salud del código tienen un estado excelente (100% de métricas en Arquitectura, Nomenclatura y Estabilidad Async). El proyecto compila, las pruebas pasan correctamente y no hay hallazgos técnicos que reportar.
+La arquitectura y la salud del código tienen un estado excelente (100% de métricas en Arquitectura, Nomenclatura y Estabilidad Async). El proyecto compila, las pruebas pasan correctamente y no hay `async void`, llamados asíncronos con bloqueos sincrónicos `.Result` / `.Wait()`, o TODOs pendientes que resolver.
 
 ## Objetivos
 
-1. **Formalizar la auditoría**: Completar el proceso SddIA `correccion-auditorias` registrando este estado libre de deuda técnica y de alertas de compilación.
+1. **Formalizar la auditoría limpia**: Completar el proceso SddIA `correccion-auditorias` registrando este estado libre de deuda técnica y de alertas de compilación.

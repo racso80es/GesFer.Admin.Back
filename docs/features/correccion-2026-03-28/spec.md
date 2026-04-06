@@ -1,22 +1,18 @@
 ---
-id: "correccion-2026-03-28"
-type: feature
 feature_name: correccion-2026-03-28
-created: 2026-03-28
-base: main
+created: "2026-04-06"
+process: correccion-auditorias
+base:
+  - docs/features/correccion-2026-03-28/objectives.md
+  - docs/audits/AUDITORIA_2026_03_28.md
 ---
 
-# Especificación Técnica (Corrección 2026-03-28)
+# Especificación: Corrección Auditoría 2026-03-28
 
-**Auditoría Origen:** `docs/audits/AUDITORIA_2026_03_28.md`
+## Alcance
+Esta especificación formaliza la respuesta a la auditoría del día 2026-03-28.
 
-## Alcance Técnico
-
-- **Documentación:** Generar reporte de auditoría y completar el proceso `correccion-auditorias`.
-- **Código:** No se requieren modificaciones en el código ya que no se encontraron hallazgos técnicos.
-
-## Tareas
-
-1. Crear el reporte de auditoría `docs/audits/AUDITORIA_2026_03_28.md`.
-2. Crear los archivos de documentación requeridos por el proceso `correccion-auditorias` en `docs/features/correccion-2026-03-28/`.
-3. Actualizar `docs/EVOLUTION_LOG.md`.
+## Acciones Requeridas
+- Crear y persistir el informe de auditoría.
+- Registrar el cumplimiento a través del proceso `correccion-auditorias`.
+- Ejecutar la suite de tests para asegurar la estabilidad del proyecto y evitar que se introduzcan problemas de naming o mutabilidad en las colecciones.
