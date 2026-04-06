@@ -8,7 +8,7 @@ namespace GesFer.Admin.Back.Application.Commands.Logs;
 
 public record CreateLogCommand(CreateLogDto Dto) : IRequest<Unit>;
 
-public class CreateLogHandler : IRequestHandler<CreateLogCommand, Unit>
+public sealed class CreateLogHandler : IRequestHandler<CreateLogCommand, Unit>
 {
     private readonly IApplicationDbContext _context;
 
