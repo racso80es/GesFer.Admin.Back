@@ -1,0 +1,10 @@
+{
+  "feature_name": "correccion-2026-04-07",
+  "created": "2026-04-07",
+  "base": "main",
+  "tasks": [
+    "Crear reporte de auditoría",
+    "Generar documentación",
+    "Actualizar EVOLUTION_LOG.md"
+  ]
+}
