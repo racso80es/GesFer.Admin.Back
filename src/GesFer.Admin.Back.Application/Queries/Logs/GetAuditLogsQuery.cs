@@ -11,7 +11,7 @@ public record GetAuditLogsQuery(
     int PageNumber = 1,
     int PageSize = 50) : IRequest<AuditLogsPagedResponseDto>;
 
-public class GetAuditLogsHandler : IRequestHandler<GetAuditLogsQuery, AuditLogsPagedResponseDto>
+public sealed class GetAuditLogsHandler : IRequestHandler<GetAuditLogsQuery, AuditLogsPagedResponseDto>
 {
     private readonly IApplicationDbContext _context;
 

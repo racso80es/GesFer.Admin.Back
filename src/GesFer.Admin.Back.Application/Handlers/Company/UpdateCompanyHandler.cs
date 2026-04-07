@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GesFer.Admin.Back.Application.Handlers.Company;
 
-public class UpdateCompanyHandler : IRequestHandler<UpdateCompanyCommand, CompanyDto>
+public sealed class UpdateCompanyHandler : IRequestHandler<UpdateCompanyCommand, CompanyDto>
 {
     private readonly IApplicationDbContext _context;
 
