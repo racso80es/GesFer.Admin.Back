@@ -7,7 +7,7 @@ namespace GesFer.Admin.Back.Application.Commands.Logs;
 
 public record PurgeLogsCommand(DateTime DateLimit) : IRequest<PurgeLogsResponseDto>;
 
-public class PurgeLogsHandler : IRequestHandler<PurgeLogsCommand, PurgeLogsResponseDto>
+public sealed class PurgeLogsHandler : IRequestHandler<PurgeLogsCommand, PurgeLogsResponseDto>
 {
     private readonly IApplicationDbContext _context;
 

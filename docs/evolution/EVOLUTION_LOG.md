@@ -8,6 +8,8 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+[2026-04-07] [feat/correccion-2026-04-07] Corrección de auditoría 2026-04-07 (Handlers sellados). [Completado]
+
 ## 2026-03-27 - Formalización Auditoría (feat/kaizen-2026-03-27)
 
 **Rama:** feat/kaizen-2026-03-27
