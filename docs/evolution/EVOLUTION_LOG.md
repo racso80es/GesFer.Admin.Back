@@ -8,6 +8,8 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+[2026-04-11] [feat/correccion-auditoria] Formalización de auditoría limpia. [DONE]
+
 ## 2026-03-27 - Formalización Auditoría (feat/kaizen-2026-03-27)
 
 **Rama:** feat/kaizen-2026-03-27
