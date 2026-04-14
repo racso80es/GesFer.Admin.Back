@@ -8,6 +8,17 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 ---
 
+[2026-03-30] [feat/kaizen-2026-03-30-global-exception-middleware] Implementación de GlobalExceptionHandlingMiddleware para centralizar excepciones. [DONE].
+
+## 2026-03-30 - Global Exception Middleware (feat/kaizen-2026-03-30-global-exception-middleware)
+
+**Rama:** feat/kaizen-2026-03-30-global-exception-middleware
+**Tipo:** Feature
+**Documentación:** `docs/features/kaizen-2026-03-30-global-exception-middleware/`
+
+### Resumen
+
+Implementación de `GlobalExceptionHandlingMiddleware` en la API para centralizar la gestión de errores y eliminar try-catch repetitivos, según se requiere en los estándares del proyecto.
 [2026-04-13] [feat/correccion-2026-04-13] Formalización de auditoría limpia. Finalizado.
 
 ## 2026-03-27 - Formalización Auditoría (feat/kaizen-2026-03-27)
