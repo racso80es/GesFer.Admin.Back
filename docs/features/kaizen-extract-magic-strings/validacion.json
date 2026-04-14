@@ -1,0 +1,5 @@
+{
+  "feature": "kaizen-extract-magic-strings",
+  "phase": "validation",
+  "status": "passed"
+}
