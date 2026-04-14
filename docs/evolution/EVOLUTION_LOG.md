@@ -8,6 +8,7 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci√
 
 ---
 
+[2026-04-12] [feat/correccion-2026-04-12] Completado proceso correccion-auditorias para registrar hallazgos (Handlers no sellados). [DONE].
 [2026-03-30] [feat/kaizen-2026-03-30-global-exception-middleware] Implementaci√≥n de GlobalExceptionHandlingMiddleware para centralizar excepciones. [DONE].
 
 ## 2026-03-30 - Global Exception Middleware (feat/kaizen-2026-03-30-global-exception-middleware)

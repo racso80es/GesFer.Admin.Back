@@ -14,7 +14,7 @@ public record GetLogsQuery(
     int PageNumber = 1,
     int PageSize = 10) : IRequest<LogsPagedResponseDto>;
 
-public class GetLogsHandler : IRequestHandler<GetLogsQuery, LogsPagedResponseDto>
+public sealed class GetLogsHandler : IRequestHandler<GetLogsQuery, LogsPagedResponseDto>
 {
     private readonly IApplicationDbContext _context;
 
