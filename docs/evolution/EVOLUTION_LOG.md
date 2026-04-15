@@ -4,6 +4,42 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 [2026-03-20] [feat/unificacion-geolocation-lectura-product] API geo unificada `/api/geolocation`, ArchitectureTests, tests y docs P3–P6. Ver `docs/features/unificacion-geolocation-lectura-product/validacion.md`.
 
+[2026-03-27] [feat/kaizen-2026-03-27] Formalización de auditoría limpia. Finalizado.
+
+---
+
+[2026-04-14] [chore/correccion-auditoria-2026-04-14] Aplicación correcciones auditoría 2026-04-14 [DONE].
+
+[2026-04-12] [feat/correccion-2026-04-12] Completado proceso correccion-auditorias para registrar hallazgos (Handlers no sellados). [DONE].
+[2026-03-30] [feat/kaizen-2026-03-30-global-exception-middleware] Implementación de GlobalExceptionHandlingMiddleware para centralizar excepciones. [DONE].
+
+## 2026-03-30 - Global Exception Middleware (feat/kaizen-2026-03-30-global-exception-middleware)
+
+**Rama:** feat/kaizen-2026-03-30-global-exception-middleware
+**Tipo:** Feature
+**Documentación:** `docs/features/kaizen-2026-03-30-global-exception-middleware/`
+
+### Resumen
+
+Implementación de `GlobalExceptionHandlingMiddleware` en la API para centralizar la gestión de errores y eliminar try-catch repetitivos, según se requiere en los estándares del proyecto.
+[2026-04-13] [feat/correccion-2026-04-13] Formalización de auditoría limpia. Finalizado.
+
+## 2026-03-27 - Formalización Auditoría (feat/kaizen-2026-03-27)
+
+**Rama:** feat/kaizen-2026-03-27
+**Tipo:** Feature
+**Documentación:** `docs/features/correccion-2026-03-27/`
+
+### Resumen
+
+Formalización de la auditoría 2026-03-27. 100% en todas las métricas, cero hallazgos.
+
+### Referencias
+
+- Objectives: `docs/features/correccion-2026-03-27/objectives.md`
+- Spec: `docs/features/correccion-2026-03-27/spec.md`
+- Validación: `docs/features/correccion-2026-03-27/validacion.md`
+
 ---
 
 ## 2026-03-20 - Unificación geolocalización lectura (feat/unificacion-geolocation-lectura-product)
