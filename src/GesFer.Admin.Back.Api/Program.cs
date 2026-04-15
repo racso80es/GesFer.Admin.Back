@@ -149,6 +149,8 @@ if (Environment.GetEnvironmentVariable("RUN_SEEDS_ONLY") == "1")
 await app.Services.RunMigrationsOnlyAsync();
 
 // Configurar el pipeline HTTP
+app.UseMiddleware<GesFer.Admin.Back.Api.Middleware.GlobalExceptionHandlingMiddleware>();
+
 if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Testing"))
 {
     if (app.Environment.IsDevelopment())

@@ -12,6 +12,8 @@ namespace GesFer.Admin.Back.Api.Controllers;
 [Route("api/admin/auth")]
 public class AdminAuthController : ControllerBase
 {
+    private const string UserAgentHeaderName = "User-Agent";
+
     private readonly ISender _sender;
     private readonly ILogger<AdminAuthController> _logger;
 
@@ -36,7 +38,7 @@ public class AdminAuthController : ControllerBase
         try
         {
             var clientIp = HttpContext.Connection.RemoteIpAddress?.ToString();
-            var userAgent = HttpContext.Request.Headers["User-Agent"].FirstOrDefault();
+            var userAgent = HttpContext.Request.Headers[UserAgentHeaderName].FirstOrDefault();
 
             var command = new AdminLoginCommand(
                 request.Usuario ?? string.Empty,
