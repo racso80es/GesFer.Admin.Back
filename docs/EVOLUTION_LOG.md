@@ -4,6 +4,8 @@ Registro cronológico de cierres de tareas y PR. Formato por línea: `[YYYY-MM-D
 
 ---
 
+[2026-03-28] [chore/kaizen-mejoras-inmutabilidad-8408647499569422673] [Mejorar inmutabilidad convirtiendo Handlers a records] [Hecho].
+
 [2026-03-30] [feat/kaizen-2026-03-30] Tarea automática (Kaizen): Ejecución de script de auditoría sin hallazgos técnicos. Documentación generada en docs/features/kaizen-2026-03-30/. [Pendiente push/PR]
 [2026-03-28] [feat/correccion-2026-03-28] Ejecución de proceso correccion-auditorias sin hallazgos técnicos. Documentación generada en docs/features/correccion-2026-03-28/. [Pendiente push/PR]
 

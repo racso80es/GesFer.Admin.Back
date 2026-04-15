@@ -8,6 +8,17 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 [2026-04-09] [chore/correccion-auditoria-2026-04-09] Formalización de auditoría limpia. Finalizado.
 
+
+## 2026-03-28 - Kaizen Mejoras Inmutabilidad (chore/kaizen-mejoras-inmutabilidad-8408647499569422673)
+
+**Rama:** chore/kaizen-mejoras-inmutabilidad-8408647499569422673
+**Tipo:** Feature
+**Documentación:** `docs/features/kaizen-mejoras-inmutabilidad/`
+
+### Resumen
+
+Mejora de la inmutabilidad de la capa de aplicación convirtiendo Handlers de MediatR a `record` (o `sealed record`).
+
 ---
 
 ## 2026-04-09 - Formalización Auditoría (chore/correccion-auditoria-2026-04-09)
