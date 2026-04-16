@@ -2,6 +2,9 @@
 
 Registro de cierres de tareas con resumen de alcance y referencia a documentación.
 
+[2026-04-15] [chore/correccion-auditoria-2026-04-15] Formalización de auditoría limpia. Finalizado.
+
+
 [2026-03-20] [feat/unificacion-geolocation-lectura-product] API geo unificada `/api/geolocation`, ArchitectureTests, tests y docs P3–P6. Ver `docs/features/unificacion-geolocation-lectura-product/validacion.md`.
 
 [2026-03-27] [feat/kaizen-2026-03-27] Formalización de auditoría limpia. Finalizado.
@@ -20,6 +23,8 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 Mejora de la inmutabilidad de la capa de aplicación convirtiendo Handlers de MediatR a `record` (o `sealed record`).
 
 ---
+
+[2026-04-15] [chore/correccion-auditoria-2026-04-15] Formalización de auditoría limpia. Finalizado.
 
 ## 2026-04-09 - Formalización Auditoría (chore/correccion-auditoria-2026-04-09)
 
