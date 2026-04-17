@@ -1,5 +1,5 @@
 {
-  "index_version": "1.1.0",
+  "index_version": "1.2.0",
   "description": "Índice de herramientas en paths.toolsPath. Fuente canónica de rutas: Cúmulo (SddIA/agents/cumulo.json → paths.toolCapsules).",
   "toolsPath": "./scripts/tools/",
   "cumulo_ref": "SddIA/agents/cumulo.json",
@@ -45,6 +45,13 @@
       "manifest": "start-api/manifest.json",
       "wrapper_bat": "Start-Api.bat",
       "description": "Levanta la API del proyecto (Admin Back): build opcional, dotnet run, healthcheck. Completa el ciclo infra → datos → API. Ejecutable por terceros."
+    },
+    {
+      "toolId": "run-test-e2e-local",
+      "path": "run-test-e2e-local/",
+      "manifest": "run-test-e2e-local/manifest.json",
+      "wrapper_bat": "Run-Test-E2E-Local.bat",
+      "description": "Pruebas E2E HTTP contra API Admin local: smoke, company read (JWT/secret), CRUD empresa de prueba. Salida JSON capsule-json-io."
     }
   ]
 }

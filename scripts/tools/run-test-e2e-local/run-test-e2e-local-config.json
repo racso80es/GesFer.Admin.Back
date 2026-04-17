@@ -1,0 +1,8 @@
+{
+  "version": "1.0.0",
+  "description": "Valores por defecto para run-test-e2e-local. Rutas relativas a la raíz del repositorio vía GESFER_REPO_ROOT.",
+  "defaultBaseUrl": "http://localhost:5010",
+  "demoCompanyId": "11111111-1111-1111-1111-111111111115",
+  "demoCompanyName": "Empresa Demo",
+  "httpTimeoutSeconds": 60
+}
