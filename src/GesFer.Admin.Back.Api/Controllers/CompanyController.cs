@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using GesFer.Admin.Back.Application.Commands.Company;
 using GesFer.Admin.Back.Application.DTOs.Company;
 using MediatR;
@@ -16,6 +17,8 @@ using GesFer.Admin.Back.Api.Attributes;
 [AuthorizeSystemOrAdmin] // Protegido por Shared Secret O rol Admin
 public class CompanyController : ControllerBase
 {
+    private const string UserAgentHeaderName = "User-Agent";
+
     private readonly IMediator _mediator;
     private readonly ILogger<CompanyController> _logger;
 
@@ -57,7 +60,14 @@ public class CompanyController : ControllerBase
             return BadRequest(new { message = "El parámetro name es obligatorio" });
         try
         {
-            var command = new GetCompanyByNameCommand(name);
+            var clientIp = HttpContext.Connection.RemoteIpAddress?.ToString();
+            var userAgent = HttpContext.Request.Headers[UserAgentHeaderName].FirstOrDefault();
+            var cursorId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;
+            var username = User.Identity?.IsAuthenticated == true
+                ? (User.FindFirst(ClaimTypes.Name)?.Value ?? "unknown")
+                : "System";
+
+            var command = new GetCompanyByNameCommand(name, cursorId, username, clientIp, userAgent);
             var result = await _mediator.Send(command);
             if (result == null)
                 return NotFound(new { message = $"No se encontró la empresa con nombre '{name}'" });
