@@ -2,7 +2,7 @@
 feature_name: create-tool-run-test-e2e-local
 branch: feat/create-tool-run-test-e2e-local
 timestamp: 2026-04-17T12:00:00Z
-pr_url: ""
+pr_url: "https://github.com/racso80es/GesFer.Admin.Back/pull/177"
 ---
 
 # Cierre: create-tool run-test-e2e-local
@@ -17,8 +17,12 @@ El proceso **create-tool** para la herramienta `run-test-e2e-local` queda **cerr
 - Evolution SddIA actualizado (`Evolution_log.md` + detalle UUID).
 - Documentación de la tarea en `docs/features/create-tool-run-test-e2e-local/` (objectives, implementation, validacion, finalize).
 
-## Próximos pasos operativos (fuera de este cierre documental)
+## Pull request
 
-1. Crear rama `feat/create-tool-run-test-e2e-local` y commit siguiendo la política git del proyecto (skills/proceso).
-2. Abrir PR con descripción que referencie esta feature y la tool id `run-test-e2e-local`.
-3. Opcional: ejecutar CI / validación de frontmatter en `docs/features/` si aplica.
+- **PR #177:** https://github.com/racso80es/GesFer.Admin.Back/pull/177 (rama `feat/create-tool-run-test-e2e-local` → `main`).
+
+## Post-merge (skill `finalizar-git`, fase `post_pr`)
+
+Tras aceptar y fusionar el PR en `main`, ejecutar desde la raíz del repo:
+
+`scripts\skills\finalizar-git\Merge-To-Master-Cleanup.bat` con la rama indicada en la documentación de la cápsula, o el ejecutable `merge_to_master_cleanup.exe` según `SddIA/skills/finalizar-git/spec.md`.
