@@ -40,7 +40,8 @@ $releaseDir = Join-Path $scriptDir "target\release"
 $capsules = @(
     @{ exe = "prepare_full_env"; capsule = "prepare-full-env" },
     @{ exe = "invoke_mysql_seeds"; capsule = "invoke-mysql-seeds" },
-    @{ exe = "start_api"; capsule = "start-api" }
+    @{ exe = "start_api"; capsule = "start-api" },
+    @{ exe = "run_test_e2e_local"; capsule = "run-test-e2e-local" }
 )
 foreach ($cap in $capsules) {
     $src = Join-Path $releaseDir "$($cap.exe).exe"
@@ -53,3 +54,4 @@ Write-Host "OK. Ejecutables en capsulas (misma carpeta que el .bat):" -Foregroun
 Write-Host "  - prepare-full-env/prepare_full_env.exe" -ForegroundColor White
 Write-Host "  - invoke-mysql-seeds/invoke_mysql_seeds.exe" -ForegroundColor White
 Write-Host "  - start-api/start_api.exe" -ForegroundColor White
+Write-Host "  - run-test-e2e-local/run_test_e2e_local.exe" -ForegroundColor White

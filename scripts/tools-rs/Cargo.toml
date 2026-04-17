@@ -16,6 +16,7 @@ tokio = { version = "1.0", features = ["full"] }
 reqwest = { version = "0.11", features = ["json", "blocking"] }
 anyhow = "1.0"
 serde_yaml = "0.9"
+uuid = { version = "1.10", features = ["v4"] }
 
 [[bin]]
 name = "invoke_mysql_seeds"
@@ -28,3 +29,7 @@ path = "src/bin/prepare_full_env.rs"
 [[bin]]
 name = "start_api"
 path = "src/bin/start_api.rs"
+
+[[bin]]
+name = "run_test_e2e_local"
+path = "src/bin/run_test_e2e_local.rs"

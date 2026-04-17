@@ -1,0 +1,18 @@
+{
+  "toolId": "run-test-e2e-local",
+  "version": "1.0.0",
+  "description": "Pruebas E2E HTTP contra la API Admin local: smoke (health, swagger, login), lectura de empresas (JWT y secret interno), flujo CRUD de empresa de prueba.",
+  "contract_ref": "SddIA/tools/tools-contract.json",
+  "invocation": {
+    "bat": "Uso humano: Run-Test-E2E-Local.bat (envoltorio con --output-json).",
+    "exe": "Uso IA/automatización: run_test_e2e_local.exe en raíz de cápsula; E/S JSON según SddIA/norms/capsule-json-io.md.",
+    "no_ps1": "No usar .ps1 como interfaz de contrato."
+  },
+  "components": {
+    "launcher_bat": "Run-Test-E2E-Local.bat",
+    "config": "run-test-e2e-local-config.json",
+    "doc": "run-test-e2e-local.md",
+    "exe": "run_test_e2e_local.exe"
+  },
+  "env": ["Windows 11", "PowerShell 7+", "API Admin en ejecución (p. ej. http://localhost:5010)", "MySQL con seeds si se validan datos demo"]
+}

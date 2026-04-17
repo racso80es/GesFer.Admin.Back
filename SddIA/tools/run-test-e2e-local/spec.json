@@ -1,0 +1,38 @@
+{
+  "spec_version": "1.0.0",
+  "toolId": "run-test-e2e-local",
+  "contract_ref": "SddIA/tools/tools-contract.json",
+  "capsule_json_io_ref": "SddIA/norms/capsule-json-io.md",
+  "implementation_path_ref": "paths.toolCapsules.run-test-e2e-local",
+  "request_schema": {
+    "type": "object",
+    "description": "Campos dentro de envelope.request (meta obligatorio en envelope completo).",
+    "properties": {
+      "baseUrl": { "type": "string" },
+      "configPath": { "type": "string" },
+      "runSmoke": { "type": "boolean" },
+      "runCompanyRead": { "type": "boolean" },
+      "runCompanyCrud": { "type": "boolean" },
+      "demoCompanyId": { "type": "string" },
+      "demoCompanyName": { "type": "string" },
+      "adminUser": { "type": "string" },
+      "adminPassword": { "type": "string" },
+      "internalSecret": { "type": "string" },
+      "outputPath": { "type": "string" },
+      "outputJson": { "type": "boolean" }
+    }
+  },
+  "result_schema": {
+    "type": "object",
+    "description": "Contenido de result en la respuesta envelope.",
+    "properties": {
+      "baseUrl": { "type": "string" },
+      "runSmoke": { "type": "boolean" },
+      "runCompanyRead": { "type": "boolean" },
+      "runCompanyCrud": { "type": "boolean" },
+      "smoke": { "type": "object" },
+      "companyRead": { "type": "object" },
+      "companyCrud": { "type": "object" }
+    }
+  }
+}
