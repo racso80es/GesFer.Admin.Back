@@ -85,6 +85,7 @@
 | correccion-auditorias | Corrección de hallazgos de auditoría: rama feat/correccion-segun-auditorias o feat/correccion-auditorias-&lt;id&gt;, documentación en paths.featurePath. Entrada: paths.auditsPath. | paths.processPath/correccion-auditorias/ |
 | create-template | Creación de plantilla: rama feat/create-template-&lt;template-id&gt;, carpeta en paths.templatesPath. Configuración predefinida de proceso con fin concreto. | paths.processPath/create-template/ |
 | audit-tool | Auditoría de herramienta: verificación empírica del funcionamiento de una tool. Resultado: informe en paths.auditsPath/tools/&lt;tool-id&gt;/. | paths.processPath/audit-tool/ |
+| validate-pull-requests | Validación integral S+ Grade de un PR sobre la rama origen; informe en paths.featurePath/validate-pull-requests-&lt;pr-slug&gt;/; semillas Kaizen en paths.tasksPath. | paths.processPath/validate-pull-requests/ |
 
 ---
 
