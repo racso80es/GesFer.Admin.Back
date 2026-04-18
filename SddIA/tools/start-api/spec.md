@@ -66,6 +66,10 @@ Herramienta que **levanta la API** del proyecto (GesFer.Admin.Back): compila si 
 | OutputPath    | string | Fichero donde escribir el resultado JSON (contrato). |
 | OutputJson    | switch | Emitir el resultado JSON por stdout. |
 
+En el objeto **`request`** del envelope (capsule-json-io), los mismos parámetros se envían como JSON: preferir **camelCase** (`noBuild`, `configPath`, …). La implementación acepta también **PascalCase** como en esta tabla y **snake_case** en campos compuestos (`no_build`, `config_path`, …). Detalle: `paths.toolCapsules.start-api/start-api.md`.
+
+Opcionalmente, **`portBlocked`** puede figurar en **`start-api-config.json`** (misma semántica que CLI/`request`). Prioridad: CLI > `request` > fichero de configuración > `fail`.
+
 ## Validación de éxito
 
 La herramienta considera la ejecución **correcta** si y solo si el endpoint **health** responde adecuadamente (HTTP 200 en la URL configurada, p. ej. `http://localhost:<port>/health`). Si el healthcheck no responde en el tiempo configurado, la herramienta devuelve error.
@@ -95,7 +99,7 @@ La herramienta detecta en la salida de la API errores de conexión a MySQL (p. e
 
 ## Salida
 
-Cumple `SddIA/tools/tools-contract.md`: objeto JSON con toolId, exitCode, success, timestamp, message, feedback[], data (url_base, pid, port, healthy), duration_ms.
+Cumple `SddIA/tools/tools-contract.md` y envelope v2: `meta`, success, exitCode, message, feedback[], **`result`** (p. ej. url_base, pid, port, healthy), duration_ms.
 
 ## Fases (feedback)
 

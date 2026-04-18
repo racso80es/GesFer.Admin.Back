@@ -37,9 +37,29 @@ Mismo envelope que `SddIA/norms/capsule-json-io.md`. Si el entorno no puede hace
 - **`GESFER_SKIP_STDIN=1`** y flags CLI, p. ej. `--output-json --port-blocked kill`.
 - O **`GESFER_CAPSULE_REQUEST`** con el JSON del envelope (sin usar stdin).
 
+#### Objeto `request` (parámetros = flags CLI)
+
+Cada clave es opcional. El binario acepta **camelCase** (recomendado), **PascalCase** (como en `SddIA/tools/start-api/spec.md`) y **snake_case** en los campos compuestos.
+
+| JSON (`request`) | Flags CLI equivalentes |
+|------------------|-------------------------|
+| `noBuild` / `NoBuild` / `no_build` | `--no-build` |
+| `profile` / `Profile` | `--profile <valor>` |
+| `port` / `Port` | `--port <número>` |
+| `configPath` / `ConfigPath` / `config_path` | `--config-path <ruta>` |
+| `outputPath` / `OutputPath` / `output_path` | `--output-path <ruta>` |
+| `outputJson` / `OutputJson` / `output_json` | `--output-json` |
+| `portBlocked` / `PortBlocked` / `port_blocked` | `--port-blocked fail` \| `kill` |
+
+#### `start-api-config.json`
+
+Además de `apiWorkingDir`, `defaultPort`, `healthUrl`, etc., puede incluir **`portBlocked`** (`"fail"` \| `"kill"`). **Prioridad:** flag `--port-blocked` > objeto `request` del envelope > esta propiedad en el JSON de configuración > `fail`.
+
+Si un cliente solo fusiona `portBlocked` en un objeto de configuración pero **no** lo envía en `request` ni en la CLI, las versiones anteriores del binario **no** lo aplicaban (se quedaba el valor por defecto `fail`).
+
 ## Salida
 
-JSON según SddIA/tools/tools-contract.json: toolId, exitCode, success, timestamp, message, feedback[], data (url_base, port, pid, healthy), duration_ms. **success = true** solo si el health responde 200.
+JSON según `SddIA/norms/capsule-json-io.md` y `SddIA/tools/tools-contract.md`: `meta`, `success`, `exitCode`, `message`, `feedback[]`, **`result`** (p. ej. `url_base`, `port`, `pid`, `healthy`, `profile` cuando aplica), `duration_ms`. **success = true** solo si el health responde 200.
 
 ### Códigos de error relevantes
 

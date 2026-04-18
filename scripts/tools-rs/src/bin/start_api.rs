@@ -40,26 +40,49 @@ struct Args {
     #[arg(long)]
     output_json: bool,
     /// Si el puerto está ocupado: fail = error y salir; kill = cerrar proceso y continuar.
-    #[arg(long, default_value = "fail", value_parser = ["fail", "kill"])]
-    port_blocked: String,
+    /// Prioridad: flag CLI > `request` del envelope > `portBlocked` en start-api-config.json > fail.
+    #[arg(long, value_parser = ["fail", "kill"])]
+    port_blocked: Option<String>,
 }
 
+/// Campos del objeto `request` del envelope (capsule-json-io). Equivalentes a los flags CLI.
+/// Nombres aceptados: **camelCase** (preferido), **PascalCase** (spec SddIA) y **snake_case** donde aplica.
 #[derive(Debug, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 struct StartApiCapsuleRequestFields {
-    #[serde(default)]
+    #[serde(
+        default,
+        alias = "NoBuild",
+        alias = "no_build"
+    )]
     no_build: Option<bool>,
-    #[serde(default)]
+    #[serde(default, alias = "Profile")]
     profile: Option<String>,
-    #[serde(default)]
+    #[serde(default, alias = "Port")]
     port: Option<u16>,
-    #[serde(default)]
+    #[serde(
+        default,
+        alias = "ConfigPath",
+        alias = "config_path"
+    )]
     config_path: Option<String>,
-    #[serde(default)]
+    #[serde(
+        default,
+        alias = "OutputPath",
+        alias = "output_path"
+    )]
     output_path: Option<String>,
-    #[serde(default)]
+    #[serde(
+        default,
+        alias = "OutputJson",
+        alias = "output_json"
+    )]
     output_json: Option<bool>,
-    #[serde(default)]
+    #[serde(
+        default,
+        alias = "PortBlocked",
+        alias = "port_blocked"
+    )]
     port_blocked: Option<String>,
 }
 
@@ -84,7 +107,7 @@ fn merge_start_api_capsule_request(args: &mut Args, v: &serde_json::Value) {
         args.output_json = x;
     }
     if let Some(x) = f.port_blocked {
-        args.port_blocked = x;
+        args.port_blocked = Some(x);
     }
 }
 
@@ -95,6 +118,8 @@ struct Config {
     default_port: Option<u16>,
     health_url: Option<String>,
     health_check_timeout_seconds: Option<u64>,
+    /// Comportamiento si el puerto está ocupado (`fail` | `kill`). Opcional en JSON de cápsula.
+    port_blocked: Option<String>,
 }
 
 fn main() {
@@ -112,12 +137,6 @@ fn main() {
             eprintln!("{}", e);
             std::process::exit(2);
         }
-    };
-
-    let port_blocked = if args.port_blocked.to_lowercase() == "kill" {
-        PortBlocked::Kill
-    } else {
-        PortBlocked::Fail
     };
 
     feedback.push(FeedbackEntry::info("init", "Iniciando start-api (Rust)"));
@@ -143,11 +162,27 @@ fn main() {
         }
     };
 
-    let port = args.port.unwrap_or(config.default_port.unwrap_or(5010));
-    let health_url = config
-        .health_url
+    let port_blocked_str = args
+        .port_blocked
         .clone()
-        .unwrap_or_else(|| format!("http://127.0.0.1:{}/health", port));
+        .or(config.port_blocked.clone())
+        .unwrap_or_else(|| "fail".to_string());
+    let port_blocked = if port_blocked_str.to_lowercase() == "kill" {
+        PortBlocked::Kill
+    } else {
+        PortBlocked::Fail
+    };
+
+    let port = args.port.unwrap_or(config.default_port.unwrap_or(5010));
+    // Si el puerto viene por CLI / request, debe alinear el health con Kestrel (ASPNETCORE_URLS = 127.0.0.1:port).
+    let health_url = if args.port.is_some() {
+        format!("http://127.0.0.1:{}/health", port)
+    } else {
+        config
+            .health_url
+            .clone()
+            .unwrap_or_else(|| format!("http://127.0.0.1:{}/health", port))
+    };
     let profile = args
         .profile
         .clone()
@@ -519,12 +554,19 @@ fn load_config(repo_root: &str, config_path: &str, _feedback: &mut Vec<FeedbackE
     let default_port = obj.get("defaultPort").and_then(|v| v.as_u64()).map(|n| n as u16);
     let health_url = obj.get("healthUrl").and_then(|v| v.as_str()).map(String::from);
     let health_check_timeout_seconds = obj.get("healthCheckTimeoutSeconds").and_then(|v| v.as_u64());
+    let port_blocked = obj
+        .get("portBlocked")
+        .and_then(|v| v.as_str())
+        .map(str::trim)
+        .filter(|s| !s.is_empty())
+        .map(String::from);
     Some(Config {
         api_working_dir,
         default_profile,
         default_port,
         health_url,
         health_check_timeout_seconds,
+        port_blocked,
     })
 }
 
