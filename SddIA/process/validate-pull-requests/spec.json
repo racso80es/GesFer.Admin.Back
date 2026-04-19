@@ -1,0 +1,65 @@
+{
+  "spec_version": "1.0.0",
+  "process_id": "validate-pull-requests",
+  "name": "Validación integral de Pull Requests (S+ Grade)",
+  "description": "Orquesta architect, qa-judge y security-engineer sobre la rama origen del PR; produce informe de consenso (validacion.md), objectives.md y semillas Kaizen en paths.tasksPath.",
+  "contract_ref": "paths.processPath/process-contract.md",
+  "principles_ref": "paths.principlesPath",
+  "persist_ref": "paths.featurePath/validate-pull-requests-<pr-slug>",
+  "related_actions": ["spec", "validate"],
+  "related_skills": ["invoke-command"],
+  "related_agents": [
+    { "ref": "SddIA/agents/architect.json", "role": "architect" },
+    { "ref": "SddIA/agents/qa-judge.json", "role": "qa-judge" },
+    { "ref": "SddIA/agents/security-engineer.json", "role": "security-engineer" }
+  ],
+  "norms_ref": [
+    "SddIA/norms/git-via-skills-or-process.md",
+    "SddIA/norms/paths-via-cumulo.md"
+  ],
+  "inputs": [
+    {
+      "name": "pr_path_or_id",
+      "type": "string",
+      "required": true,
+      "description": "Identificador o ruta parcial del Pull Request en el remoto (origin)."
+    },
+    {
+      "name": "pr_branch_name",
+      "type": "string",
+      "required": true,
+      "description": "Nombre de la rama origen del PR (feature branch) cuyo estado debe analizarse."
+    },
+    {
+      "name": "code_diff",
+      "type": "string",
+      "required": true,
+      "description": "Diff o lista de archivos modificados, añadidos o eliminados en el PR."
+    },
+    {
+      "name": "document_context",
+      "type": "string",
+      "required": false,
+      "description": "Documentación SddIA, tickets o READMEs relevantes para el alcance del cambio."
+    },
+    {
+      "name": "tasks_path_cumulo",
+      "type": "path_ref",
+      "required": true,
+      "description": "Directorio destino para tareas Kaizen; debe resolverse a paths.tasksPath (Cúmulo)."
+    }
+  ],
+  "outputs": [
+    { "name": "objectives.md", "type": "file" },
+    { "name": "validacion.md", "type": "file" },
+    { "name": "[YYYYMMDD]-Refactor-[Tema].md", "type": "file_pattern", "location": "paths.tasksPath" }
+  ],
+  "phases": [
+    { "id": "0", "name": "Preparar contexto y rama del PR" },
+    { "id": "1", "name": "Escrutinio architect" },
+    { "id": "2", "name": "Escrutinio qa-judge" },
+    { "id": "3", "name": "Escrutinio security-engineer" },
+    { "id": "4", "name": "Consenso e informe final" },
+    { "id": "5", "name": "Persistencia y Cúmulo Kaizen" }
+  ]
+}

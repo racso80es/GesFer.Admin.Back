@@ -1,18 +1,56 @@
 ---
+constraints:
+- Cola, ACTIVE, DONE, KAIZEN y CLARIFY solo bajo paths.tasksPath (Cúmulo); no mezclar con rutas literales.
+- Operaciones git según SddIA/norms/git-via-skills-or-process.md (skills, acciones o proceso).
+- Por defecto el ciclo de implementación delega en el proceso feature; documentación de feature en paths.featurePath.
+contract_ref: paths.processPath/process-contract.md
+default_delegate_process: feature
+default_delegate_ref: paths.processPath/feature/
+description: Procesa una unidad de tarea del backlog (fichero o carpeta-tarea) con triaje, activación, ejecución y archivo.
 name: Automatic Task
+paths:
+  evolution_ref: paths.evolutionPath y paths.evolutionLogFile (Cúmulo)
+  featurePath_ref: paths.featurePath/<nombre_feature> (ciclo feature por defecto)
+  tasksPath_ref: paths.tasksPath (Cúmulo)
+persist_ref: paths.tasksPath
+phases:
+- description: Candidatos en raíz de paths.tasksPath y KAIZEN/; prioridad, fecha o indicación del usuario; sin colisión con ACTIVE/.
+  id: '1'
+  name: Identificación y triaje
+- description: Rama feat/ o fix/; mover unidad a paths.tasksPath/ACTIVE/; commit y push (vía skill/proceso).
+  id: '2'
+  name: Activación y bloqueo
+- description: Ejecutar proceso objetivo (por defecto feature); leer carpeta-tarea si existe spec/plan; generar artefactos en paths.featurePath si aplica.
+  id: '3'
+  name: Ejecución
+- description: Mover unidad a DONE/; Evolution Log; finalize.md cuando aplique.
+  id: '4'
+  name: Finalización y archivo
+principles_ref: paths.principlesPath
 process_id: automatic_task
+process_interface_compliance: >-
+  Unidades carpeta-tarea o documentación generada bajo paths.featurePath cumplen process_interface: .md con frontmatter YAML
+  (objectives, spec, clarify, plan, implementation, execution, validacion). Sin .json separados en esa ruta. Patrón:
+  SddIA/norms/features-documentation-pattern.md.
 related_actions:
-  - triage
-  - activation
-  - execution
-  - finalization
-spec_version: 1.2.0
+- triage
+- activation
+- execution
+- finalization
+related_skills:
+- iniciar-rama
+- finalizar-git
+- invoke-command
+spec_version: 1.3.1
 ---
+
 # Proceso: Automatic Task
 
-Este documento define el procedimiento para que una unidad de ejecución SDDIA procese una tarea del backlog de forma autónoma. Asegura la integridad del repositorio y la visibilidad del progreso.
+Este documento define el **proceso de tarea** para que una unidad de ejecución SDDIA procese una tarea del backlog de forma autónoma. Está ubicado en paths.processPath/automatic_task/ (Cúmulo). Asegura la integridad del repositorio y la visibilidad del progreso. Las rutas de cola y estados se obtienen de **Cúmulo** (paths.tasksPath); el ciclo de implementación por defecto usa paths.featurePath y el proceso **feature** (paths.processPath/feature/).
 
-**Rutas de carpetas:** usar la ruta de tareas del Cúmulo (`paths.tasksPath`), no literales fijos en documentación nueva.
+**Interfaz de proceso:** Las unidades **carpeta-tarea** bajo paths.tasksPath y la documentación generada al ejecutar el proceso **feature** cumplen la interfaz en Cúmulo (`process_interface`): artefactos **`.md`** con frontmatter YAML donde aplique el ciclo estándar. Patrón: SddIA/norms/features-documentation-pattern.md.
+
+**Rutas de carpetas:** usar siempre la ruta de tareas del Cúmulo (`paths.tasksPath`), no literales fijos en documentación nueva. En disco, la carpeta puede coincidir con `docs/tasks/` o `docs/TASKS/` según el sistema de archivos; resolver siempre la ruta del contrato (paths.tasksPath).
 
 ## Fases del Proceso
 
@@ -39,7 +77,7 @@ Si **no** hay ningún `.md` pendiente en la raíz de `paths.tasksPath`, revisa l
 Transición a estado `ACTIVE` para evitar colisiones con otras IAs (Jules/Cursor).
 
 - Mueve el archivo de la tarea **desde su origen** (raíz de `paths.tasksPath` o `paths.tasksPath/KAIZEN/`) hacia `paths.tasksPath/ACTIVE/`.
-- - **Sincronización inmediata:** Realiza el primer commit con la reubicación del archivo de la tarea a su nueva ubicación `ACTIVE/` y haz push a origin en la rama actual. Esto bloquea el TODO.
+- **Sincronización inmediata:** Realiza el primer commit con la reubicación del archivo de la tarea a su nueva ubicación `ACTIVE/` y haz push a origin en la rama actual. Esto bloquea el TODO.
 - Crea una nueva rama `feat/<nombre_feature>` o `fix/<nombre_fix>`.
 
 ### 3. Ejecución (Execution)
@@ -65,3 +103,7 @@ Para el correcto funcionamiento de este proceso, el repositorio debe mantener la
 
 ## Particularidades del proceso
 - Trabajar de la forma más autónoma posible, con el fin de obtener la ejecución de la tarea sin supervisión del usuario. En caso de no ser posible este resultado, mover a la ruta de documentos a clarificar.
+
+## Historial de versión del spec
+
+- **1.3.1:** Frontmatter alineado con process-contract (contract_ref, principles_ref, persist_ref, phases, paths, process_interface_compliance, related_skills); introducción estándar con ubicación e interfaz de proceso.
