@@ -184,6 +184,10 @@ public class AdminJsonDataSeeder
 
         if (languages == null || !languages.Any()) return result;
 
+        var existingIds = new HashSet<Guid>(
+            await _context.Languages.IgnoreQueryFilters().Select(x => x.Id).ToListAsync()
+        );
+
         int count = 0;
         foreach (var item in languages)
         {
@@ -193,8 +197,7 @@ public class AdminJsonDataSeeder
                 continue;
             }
 
-            var existing = await _context.Languages.IgnoreQueryFilters().FirstOrDefaultAsync(x => x.Id == id);
-            if (existing == null)
+            if (!existingIds.Contains(id))
             {
                 _context.Languages.Add(new Language
                 {
@@ -229,6 +232,10 @@ public class AdminJsonDataSeeder
 
         if (countries == null || !countries.Any()) return result;
 
+        var existingIds = new HashSet<Guid>(
+            await _context.Countries.IgnoreQueryFilters().Select(x => x.Id).ToListAsync()
+        );
+
         int count = 0;
         foreach (var item in countries)
         {
@@ -243,8 +250,7 @@ public class AdminJsonDataSeeder
                 continue;
             }
 
-            var existing = await _context.Countries.IgnoreQueryFilters().FirstOrDefaultAsync(x => x.Id == id);
-            if (existing == null)
+            if (!existingIds.Contains(id))
             {
                 _context.Countries.Add(new Country
                 {
@@ -279,6 +285,10 @@ public class AdminJsonDataSeeder
 
         if (states == null || !states.Any()) return result;
 
+        var existingIds = new HashSet<Guid>(
+            await _context.States.IgnoreQueryFilters().Select(x => x.Id).ToListAsync()
+        );
+
         int count = 0;
         foreach (var item in states)
         {
@@ -293,8 +303,7 @@ public class AdminJsonDataSeeder
                 continue;
             }
 
-            var existing = await _context.States.IgnoreQueryFilters().FirstOrDefaultAsync(x => x.Id == id);
-            if (existing == null)
+            if (!existingIds.Contains(id))
             {
                 _context.States.Add(new State
                 {
@@ -329,6 +338,10 @@ public class AdminJsonDataSeeder
 
         if (cities == null || !cities.Any()) return result;
 
+        var existingIds = new HashSet<Guid>(
+            await _context.Cities.IgnoreQueryFilters().Select(x => x.Id).ToListAsync()
+        );
+
         int count = 0;
         foreach (var item in cities)
         {
@@ -343,8 +356,7 @@ public class AdminJsonDataSeeder
                 continue;
             }
 
-            var existing = await _context.Cities.IgnoreQueryFilters().FirstOrDefaultAsync(x => x.Id == id);
-            if (existing == null)
+            if (!existingIds.Contains(id))
             {
                 _context.Cities.Add(new City
                 {
@@ -381,6 +393,10 @@ public class AdminJsonDataSeeder
 
         if (postalCodes == null || !postalCodes.Any()) return result;
 
+        var existingIds = new HashSet<Guid>(
+            await _context.PostalCodes.IgnoreQueryFilters().Select(x => x.Id).ToListAsync()
+        );
+
         int count = 0;
         foreach (var item in postalCodes)
         {
@@ -395,8 +411,7 @@ public class AdminJsonDataSeeder
                 continue;
             }
 
-            var existing = await _context.PostalCodes.IgnoreQueryFilters().FirstOrDefaultAsync(x => x.Id == id);
-            if (existing == null)
+            if (!existingIds.Contains(id))
             {
                 _context.PostalCodes.Add(new PostalCode
                 {
@@ -444,12 +459,16 @@ public class AdminJsonDataSeeder
             return result;
         }
 
+        var allUsers = await _context.AdminUsers.IgnoreQueryFilters().ToListAsync();
+        var existingUsersDict = allUsers
+            .GroupBy(u => u.Username)
+            .ToDictionary(g => g.Key, g => g.First());
+
         int count = 0;
         foreach (var userData in users)
         {
-            var existing = await _context.AdminUsers
-                .IgnoreQueryFilters()
-                .FirstOrDefaultAsync(u => u.Username == userData.Username);
+            if (userData.Username == null) continue;
+            existingUsersDict.TryGetValue(userData.Username, out var existing);
 
             string passwordHash;
             if (string.IsNullOrEmpty(userData.Password))
@@ -564,6 +583,11 @@ public class AdminJsonDataSeeder
             return result;
         }
 
+        var allCompanies = await _context.Companies.IgnoreQueryFilters().ToListAsync();
+        var existingCompaniesDict = allCompanies
+            .GroupBy(c => c.Id)
+            .ToDictionary(g => g.Key, g => g.First());
+
         int processedCount = 0;
         int skippedCount = 0;
 
@@ -578,9 +602,7 @@ public class AdminJsonDataSeeder
                     continue;
                 }
 
-                var existing = await _context.Companies
-                    .IgnoreQueryFilters()
-                    .FirstOrDefaultAsync(c => c.Id == id);
+                existingCompaniesDict.TryGetValue(id, out var existing);
 
                 if (existing == null)
                 {
