@@ -66,5 +66,6 @@ if exist "%RUST_EXE%" (
     "%RUST_EXE%" %*
     exit /b !ERRORLEVEL!
 )
-echo ERROR: prepare_full_env.exe no encontrado. Ejecute scripts/tools-rs/install.ps1
+echo ERROR: prepare_full_env.exe no encontrado en la raiz de la capsula.
+echo        Instale/compile las tools Rust para copiar el exe al destino correcto (ver scripts/tools-rs/README.md).
 exit /b 1

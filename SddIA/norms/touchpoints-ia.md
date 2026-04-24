@@ -10,7 +10,7 @@ Acción que orquesta la revisión y actualización: **paths.actionsPath/sddia-di
 
 | Touchpoint | Ubicación | Descripción | Cómo mantener |
 |------------|-----------|-------------|----------------|
-| **Cursor** | `.cursor/rules/*.mdc` | Reglas que Cursor aplica al asistente (disparadores #Skill, #Action, #Process, subir; SSOT). | Al cambiar procesos, acciones o listados en SddIA, ejecutar la acción sddia-difusion y actualizar los .mdc. La regla `sddia-ssot.mdc` declara que SddIA prevalece. |
+| **Cursor** | `.cursor/rules/*.mdc` | Reglas que Cursor aplica al asistente (disparadores #Skill, #Action, #Process, subir; SSOT). | Al cambiar procesos, acciones o listados en SddIA, ejecutar la acción sddia-difusion y actualizar los .mdc (incl. difusión EO/GT en `eficiencia-operativa-tokens.mdc`). La regla `sddia-ssot.mdc` declara que SddIA prevalece. |
 | **AGENTS.md** | Raíz del repo | Protocolo maestro del sistema multiagente. Referenciado por Cursor y por documentación. | Modificar solo según acuerdo con SddIA; no duplicar lógica en .cursor que contradiga AGENTS.md. |
 | **AGENTS.norms.md** | Raíz del repo | Tabla de disparadores; enlaza a SddIA/norms/interaction-triggers.md. | Mantener sincronizado con interaction-triggers.md cuando se añadan disparadores (ej. #Tool). |
 | **.github** | `.github/` | PR template, README (difusión). Workflows e issue templates si se añaden. | No duplicar normas; referenciar AGENTS.md y SddIA. PR template pide rama feat/fix, proceso y doc de tarea. Revisar con acción sddia-difusion. |

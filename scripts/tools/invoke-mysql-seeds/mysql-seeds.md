@@ -23,13 +23,7 @@ O desde la cápsula (compatibilidad con launcher en raíz de tools):
 .\scripts\tools\Invoke-MySqlSeeds.bat
 ```
 
-El `.bat` usa `invoke_mysql_seeds.exe` dentro de la cápsula si existe (build Rust + `scripts/tools-rs/install.ps1`); si no, ejecuta el script PowerShell.
-
-En PowerShell directo:
-
-```powershell
-.\scripts\tools\invoke-mysql-seeds\Invoke-MySqlSeeds.ps1
-```
+El `.bat` usa `invoke_mysql_seeds.exe` dentro de la cápsula (build Rust + `scripts/tools-rs/install.ps1`). **El ejecutable debe existir en la raíz de la cápsula** (no se admite `.ps1`).
 
 | Parámetro          | Descripción |
 |--------------------|-------------|
@@ -42,8 +36,8 @@ En PowerShell directo:
 Ejemplos:
 
 ```powershell
-.\scripts\tools\invoke-mysql-seeds\Invoke-MySqlSeeds.ps1 -OutputJson
-.\scripts\tools\invoke-mysql-seeds\Invoke-MySqlSeeds.ps1 -SkipMigrations -OutputPath logs\mysql-seeds-result.json
+.\scripts\tools\invoke-mysql-seeds\Invoke-MySqlSeeds.bat -OutputJson
+.\scripts\tools\invoke-mysql-seeds\Invoke-MySqlSeeds.bat -SkipMigrations -OutputPath logs\mysql-seeds-result.json
 ```
 
 ## Configuración: `mysql-seeds-config.json`
@@ -69,7 +63,7 @@ Los archivos de seed están en `src/Infrastructure/Data/Seeds/` (companies.json,
 
 ## Salida JSON (contrato tools)
 
-Cumple `SddIA/tools/tools-contract.json`: `toolId`, `exitCode`, `success`, `timestamp`, `message`, `feedback[]`, `data` (mysql, migrations, seeds), `duration_ms`.
+Cumple `SddIA/tools/tools-contract.json`: `toolId`, `exitCode`, `success`, `timestamp`, `message`, `feedback[]`, `result` (mysql, migrations, seeds), `duration_ms`.
 
 ## Referencia
 

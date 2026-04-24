@@ -15,12 +15,7 @@ Desde la raíz del repositorio:
 ```powershell
 .\scripts\tools\postman-mcp-validation\Postman-Mcp-Validation.bat
 ```
-
-O con PowerShell:
-
-```powershell
-.\scripts\tools\postman-mcp-validation\Postman-Mcp-Validation.ps1 -OutputJson
-```
+El wrapper `.bat` requiere que exista el ejecutable Rust de la cápsula (ver `scripts/tools-rs/README.md`).
 
 ## Parámetros
 

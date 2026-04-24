@@ -75,7 +75,7 @@ init → newman (ejecución de la colección) → done (o error).
 - Notas: Esta herramienta aún no ha sido migrada a Rust. Se mantiene temporalmente el script `.ps1`.
 
 **Formato objetivo:** Ejecutable Rust (`.exe`)  
-**Ubicación objetivo:** `scripts/tools/postman-mcp-validation/bin/postman_mcp_validation.exe`
+**Ubicación objetivo:** `scripts/tools/postman-mcp-validation/postman_mcp_validation.exe`
 
 **Estándar futuro:** Una vez migrado, solo existirá el ejecutable `.exe`. No se deberá mantener el `.ps1`.
 

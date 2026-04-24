@@ -25,15 +25,11 @@ o
 .\scripts\tools\Prepare-FullEnv.bat
 ```
 
-El `.bat` usa `prepare_full_env.exe` dentro de la cápsula si existe (build Rust + `scripts/tools-rs/install.ps1`); si no, ejecuta el script PowerShell.
+El `.bat` usa `prepare_full_env.exe` dentro de la cápsula (build Rust + `scripts/tools-rs/install.ps1`). **El ejecutable debe existir en la raíz de la cápsula** (no se admite `bin\`).
 
 ### PowerShell directo
 
-Desde la raíz del repo:
-
-```powershell
-& .\scripts\tools\prepare-full-env\Prepare-FullEnv.ps1
-```
+La interfaz soportada por automatizaciones/MCP es el **ejecutable** `.exe` (ver spec SddIA). El wrapper `.bat` es para humanos.
 
 Parámetros opcionales:
 
@@ -49,8 +45,8 @@ Parámetros opcionales:
 Ejemplos:
 
 ```powershell
-.\scripts\tools\prepare-full-env\Prepare-FullEnv.ps1 -DockerOnly
-.\scripts\tools\prepare-full-env\Prepare-FullEnv.ps1 -StartApi
+.\scripts\tools\prepare-full-env\Prepare-FullEnv.bat -DockerOnly
+.\scripts\tools\prepare-full-env\Prepare-FullEnv.bat -StartApi
 ```
 
 ## Configuración: `prepare-env.json`
@@ -61,7 +57,7 @@ Ubicación: en esta cápsula, `prepare-env.json`. Ruta canónica (Cúmulo): **pa
 |------------------------|-------------|
 | `dockerComposePath`    | Ruta al `docker-compose.yml` respecto a la raíz del repo. |
 | `mysqlContainerName`   | Nombre del contenedor MySQL para el healthcheck. |
-| `dockerServices`       | Lista de servicios a levantar con `docker-compose up -d`. |
+| `dockerServices`       | Lista de servicios a levantar con `docker compose up -d` (o `docker-compose` si aplica). |
 | `startApi.enabled`     | Si se debe levantar la API en local. |
 | `startApi.workingDir`  | Directorio del proyecto API (ej. `src/Api`). |
 | `startApi.command`     | Comando (ej. `dotnet run`). |
@@ -88,14 +84,14 @@ Si el fichero no existe, se usan valores por defecto (solo Docker: db, cache, ad
 
 La herramienta cumple `SddIA/tools/tools-contract.json`. Al finalizar produce un JSON con:
 
-- `toolId`, `exitCode`, `success`, `timestamp`, `message`, `feedback[]`, `data`, `duration_ms`.
+- `toolId`, `exitCode`, `success`, `timestamp`, `message`, `feedback[]`, `result`, `duration_ms`.
 - `feedback`: array de eventos por fase (`init`, `docker`, `mysql`, `api`, `clients`, `done`) con `phase`, `level` (info|warning|error), `message`, `timestamp`.
-- `data`: servicios Docker levantados, URLs, API y clientes iniciados.
+- `result`: servicios Docker levantados, URLs, API y clientes iniciados.
 
 Ejemplo de uso con salida a fichero y por stdout:
 
 ```powershell
-.\scripts\tools\prepare-full-env\Prepare-FullEnv.ps1 -OutputPath "logs\prepare-env-result.json" -OutputJson
+.\scripts\tools\prepare-full-env\Prepare-FullEnv.bat -OutputPath "logs\prepare-env-result.json" -OutputJson
 ```
 
 ## Referencia

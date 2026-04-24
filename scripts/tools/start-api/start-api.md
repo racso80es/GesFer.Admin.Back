@@ -73,4 +73,4 @@ Durante `dotnet build`, la herramienta escribe líneas periódicas en **stderr**
 
 ## Implementación
 
-Implementación **obligatoria en Rust** (binario `start_api.exe` en la misma carpeta que el .bat). El launcher .bat invoca el .exe si existe; si no, fallback a Start-Api.ps1.
+Implementación **obligatoria en Rust** (binario `start_api.exe` en la misma carpeta que el .bat). El launcher `.bat` invoca el `.exe`; si no existe, la ejecución debe considerarse fallida y requiere compilar/instalar tools Rust.

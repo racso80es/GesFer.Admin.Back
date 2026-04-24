@@ -60,8 +60,8 @@ init → docker → mysql → api → clients → done (o error).
 ## Implementación
 
 **Formato:** Ejecutable Rust (`.exe`)  
-**Ubicación:** `scripts/tools/prepare-full-env/bin/prepare_full_env.exe`  
-**Fuente Rust:** `scripts/tools-rs/src/prepare_full_env.rs`
+**Ubicación:** `scripts/tools/prepare-full-env/prepare_full_env.exe`  
+**Fuente Rust:** `scripts/tools-rs/src/bin/prepare_full_env.rs`
 
 **Estándar:** Solo se generan ejecutables `.exe`. No se deben crear archivos `.ps1`.
 
@@ -69,7 +69,7 @@ init → docker → mysql → api → clients → done (o error).
 
 ```powershell
 # Invocación directa
-& "scripts/tools/prepare-full-env/bin/prepare_full_env.exe" [opciones]
+& "scripts/tools/prepare-full-env/prepare_full_env.exe" [opciones]
 
 # Opciones disponibles
 --docker-only          # Solo levantar Docker (DB, cache, Adminer)

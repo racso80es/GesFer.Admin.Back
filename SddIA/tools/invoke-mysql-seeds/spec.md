@@ -57,8 +57,8 @@ init → mysql → migrations → seeds → done (o error).
 ## Implementación
 
 **Formato:** Ejecutable Rust (`.exe`)  
-**Ubicación:** `scripts/tools/invoke-mysql-seeds/bin/invoke_mysql_seeds.exe`  
-**Fuente Rust:** `scripts/tools-rs/src/invoke_mysql_seeds.rs`
+**Ubicación:** `scripts/tools/invoke-mysql-seeds/invoke_mysql_seeds.exe`  
+**Fuente Rust:** `scripts/tools-rs/src/bin/invoke_mysql_seeds.rs`
 
 **Estándar:** Solo se generan ejecutables `.exe`. No se deben crear archivos `.ps1`.
 
@@ -66,7 +66,7 @@ init → mysql → migrations → seeds → done (o error).
 
 ```powershell
 # Invocación directa
-& "scripts/tools/invoke-mysql-seeds/bin/invoke_mysql_seeds.exe" [opciones]
+& "scripts/tools/invoke-mysql-seeds/invoke_mysql_seeds.exe" [opciones]
 
 # Opciones disponibles
 --skip-migrations       # No ejecutar migraciones EF Core

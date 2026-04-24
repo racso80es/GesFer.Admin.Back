@@ -73,7 +73,7 @@ init → prepare (opcional) → seeds (opcional) → build → tests → done (o
 - Notas: Esta herramienta aún no ha sido migrada a Rust. Se mantiene temporalmente el script `.ps1`.
 
 **Formato objetivo:** Ejecutable Rust (`.exe`)  
-**Ubicación objetivo:** `scripts/tools/run-tests-local/bin/run_tests_local.exe`
+**Ubicación objetivo:** `scripts/tools/run-tests-local/run_tests_local.exe`
 
 **Estándar futuro:** Una vez migrado, solo existirá el ejecutable `.exe`. No se deberá mantener el `.ps1`.
 
