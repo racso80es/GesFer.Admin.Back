@@ -4,6 +4,8 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 
 [2026-04-24] [chore/correccion-auditoria-2026-04-24] Formalización de auditoría limpia. Finalizado.
+
+
 [2026-04-23] [feat/correccion-auditorias-2026-04-23] Correccion de CORS segun auditoria. Finalizado.
 
 
