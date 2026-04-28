@@ -1,0 +1,4 @@
+﻿NAMES                    IMAGE              STATUS                PORTS
+gesfer_product_adminer   adminer:latest     Up 4 days             0.0.0.0:8081->8080/tcp, [::]:8081->8080/tcp
+gesfer_product_cache     memcached:alpine   Up 4 days (healthy)   0.0.0.0:11212->11211/tcp, [::]:11212->11211/tcp
+GesFer_product_db        mysql:8.0          Up 4 days (healthy)   0.0.0.0:3307->3306/tcp, [::]:3307->3306/tcp
