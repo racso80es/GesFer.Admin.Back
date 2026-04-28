@@ -1,0 +1,5 @@
+NAME                 SERVICE     STATUS                    PORTS
+gesfer_api_adminer   adminer     Up 17 seconds             0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp
+gesfer_api_cache     cache       Up 28 seconds (healthy)   0.0.0.0:11211->11211/tcp, [::]:11211->11211/tcp
+gesfer_db            gesfer-db   Up 28 seconds (healthy)   0.0.0.0:3306->3306/tcp, [::]:3306->3306/tcp
+

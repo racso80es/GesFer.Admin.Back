@@ -6,30 +6,27 @@
 ## 1. Entrada
 
 - Configuración en la cápsula: `prepare-env.json` (servicios a levantar, rutas, puertos).
-- Parámetros opcionales por línea de comandos (por ejemplo `-DockerOnly`, `-StartApi`, `-StartClients`).
+- Parámetros opcionales por línea de comandos (por ejemplo `-DockerOnly`, `-NoDocker`, `-ConfigPath`, `-OutputPath`, `-OutputJson`).
 
 ## 2. Componentes
 
 ### 2.1 Ejecutable de entrada
 
-- **`Prepare-FullEnv.bat`**: en la raíz de tools hay un wrapper que delega a la cápsula. Dentro de la cápsula, el `.bat` invoca el binario Rust en `bin/` si existe; si no, PowerShell 7+ con el script `.ps1`. Ejecutable con doble clic o desde terminal.
+- **`Prepare-FullEnv.bat`**: wrapper humano en la cápsula. Invoca `prepare_full_env.exe` (Rust) en la **raíz** de la cápsula.
 
-### 2.2 Script principal PowerShell
+### 2.2 Ejecutable Rust (contrato tools v2)
 
-- **Prepare-FullEnv.ps1** (en la cápsula **paths.toolCapsules['prepare-full-env']**):
-  1. Comprobar que Docker está en ejecución (`docker info`).
-  2. Resolver ruta raíz del repo (por encima de **paths.toolsPath**).
-  3. Cargar opciones desde `prepare-env.json` en la cápsula (con valores por defecto si no existe).
-  4. Levantar servicios Docker indicados (`docker-compose up -d` para los servicios configurados, p. ej. `gesfer-db`, `cache`, `adminer`).
-  5. Esperar a que MySQL esté listo (healthcheck o `mysqladmin ping` contra el contenedor correcto, p. ej. `gesfer_db`).
-  6. Opcionalmente: levantar Admin API en local (`dotnet run` en el directorio de la API) y/o clientes indicados en el JSON, usando si existe `scripts/run-service-with-log.ps1` para logs.
-  7. Mostrar resumen de URLs y estado.
+- **prepare_full_env.exe** (en la cápsula **paths.toolCapsules['prepare-full-env']**):
+  1. Cargar opciones desde `prepare-env.json` en la cápsula (con valores por defecto si no existe).
+  2. Levantar servicios Docker indicados (`docker compose up -d` para los servicios configurados).
+  3. Esperar a que MySQL esté listo (healthcheck si existe; si no, contenedor “running”).
+  4. Opcionalmente: iniciar clientes indicados en el JSON.
+  5. Emitir JSON de salida (envelope v2) a stdout y/o a fichero.
 
 ### 2.3 Configuración JSON
 
 - **prepare-env.json** (en la cápsula; machine-readable):
   - `dockerServices`: lista de servicios de docker-compose a levantar (o `"default"` = db, cache, adminer).
-  - `startApi`: booleano o objeto con `enabled`, `workingDir`, `command` (ej. `dotnet run`).
   - `startClients`: array de entradas con `name`, `workingDir`, `command` (ej. npm run dev).
   - `dockerComposePath`: ruta relativa al repo del `docker-compose.yml`.
   - `mysqlContainerName`: nombre del contenedor MySQL para el healthcheck.
@@ -40,7 +37,7 @@
 
 ## 3. Salida
 
-- Entorno listo: Docker corriendo, DB accesible, opcionalmente API y clientes en ejecución.
+- Entorno listo: Docker corriendo, DB accesible y opcionalmente clientes en ejecución.
 - Logs de servicios en `logs/services/` si se usa `run-service-with-log.ps1`.
 
 ## 4. Restricciones
