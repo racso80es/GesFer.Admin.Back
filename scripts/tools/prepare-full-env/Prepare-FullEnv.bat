@@ -1,6 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
-REM Prepare-FullEnv.bat - Prepara entorno: Docker + API/clientes (contrato tools, Rust .exe en capsula si existe)
+REM Prepare-FullEnv.bat - Prepara entorno: Docker + clientes (contrato tools, Rust .exe en capsula si existe)
 REM Capsula: scripts/tools/prepare-full-env/
 REM Ejecutar desde la raiz del repositorio.
 
@@ -30,9 +30,9 @@ echo.
 echo ACCIONES:
 echo   - Levanta Docker: MySQL, Memcached, Adminer
 echo   - Espera a que MySQL este listo
-echo   - Opcional: inicia la Admin API en local
+echo   - Opcional: inicia clientes indicados en config
 echo.
-echo Params: -DockerOnly ^| -StartApi ^| -NoDocker ^| -ConfigPath ^| -OutputPath ^| -OutputJson
+echo Params: -DockerOnly ^| -NoDocker ^| -ConfigPath ^| -OutputPath ^| -OutputJson
 echo.
 echo ----------------------------------------
 goto :run
@@ -48,8 +48,7 @@ echo   - Ejecutar desde la raiz del repositorio
 echo.
 echo PARAMETROS:
 echo   -DockerOnly    Solo levanta Docker (DB, cache, Adminer)
-echo   -StartApi      Ademas levanta la Admin API en local
-echo   -NoDocker      No levanta Docker (solo API/clientes si se pide)
+echo   -NoDocker      No levanta Docker (solo fases no-Docker configuradas, p. ej. clientes)
 echo   -ConfigPath    Ruta al JSON de configuracion
 echo   -OutputPath    Fichero donde escribir el resultado JSON
 echo   -OutputJson    Emitir resultado JSON por stdout

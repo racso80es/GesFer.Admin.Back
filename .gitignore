@@ -12,7 +12,9 @@ logs/
 *.temp
 *.bak
 *.backup
-temp_*.txt# Carpetas temporales de compilación .NET (todos los proyectos)
+temp_*.txt
+
+# Carpetas temporales de compilación .NET (todos los proyectos)
 **/bin/
 **/obj/
 **/[Bb]in/
@@ -111,6 +113,12 @@ src/Admin/Front/playwright-report/
 infrastructure/mock-apis/node_modules/
 /src/Tools/Calma-Desktop/node_modules
 **/target/
+
+# Excepción: fuentes Rust ubicadas en src/bin (tools/skills)
+!scripts/tools-rs/src/bin/
+!scripts/tools-rs/src/bin/*.rs
+!scripts/skills-rs/src/bin/
+!scripts/skills-rs/src/bin/*.rs
 
 # Telemetría local invoke-command: ramas tipo feat/<id> generan docs/diagnostics/feat/<id>/ (no versionar este id efímero de Kaizen)
 docs/diagnostics/feat/kaizen-2026-03-27-13652127576201859270/

@@ -10,16 +10,14 @@ implementation_path_ref: paths.toolCapsules.prepare-full-env
 inputs:
   ConfigPath: string (opcional). Ruta al JSON de configuración; por defecto en implementación.
   DockerOnly: boolean (opcional). Solo levantar Docker.
-  NoDocker: boolean (opcional). No levantar Docker; solo API/clientes si config.
+  NoDocker: boolean (opcional). No levantar Docker; ejecutar únicamente las fases no-Docker definidas por config (p. ej. clientes).
   OutputJson: boolean (opcional). Emitir resultado JSON por stdout.
   OutputPath: string (opcional). Fichero donde escribir el resultado JSON.
-  StartApi: boolean (opcional). Además levantar Admin API en local.
 output:
   phases_feedback:
   - init
   - docker
   - mysql
-  - api
   - clients
   - done
   - error
@@ -36,26 +34,25 @@ version: 1.0.0
 
 ## Objetivo
 
-Herramienta que prepara el entorno de desarrollo: levanta servicios Docker (MySQL, Memcached, Adminer), espera a que MySQL esté listo y opcionalmente inicia la Admin API y clientes configurados.
+Herramienta que prepara el entorno de desarrollo: levanta servicios Docker (MySQL, Memcached, Adminer), espera a que MySQL esté listo y opcionalmente restaura las seeds de datos.
 
 ## Entradas
 
 | Parámetro | Tipo | Descripción |
 |----------|------|-------------|
 | DockerOnly | switch | Solo levantar Docker (DB, cache, Adminer). |
-| StartApi | switch | Además levantar la Admin API en local. |
-| NoDocker | switch | No levantar Docker; solo API/clientes si están habilitados en config. |
+| NoDocker | switch | No levantar Docker; ejecutar únicamente las fases no-Docker habilitadas en config (p. ej. clientes). |
 | ConfigPath | string | Ruta al JSON de configuración (por defecto en la implementación). |
 | OutputPath | string | Fichero donde escribir el resultado JSON (contrato). |
 | OutputJson | switch | Emitir el resultado JSON por stdout. |
 
 ## Salida
 
-Cumple `SddIA/tools/tools-contract.md`: objeto JSON con toolId, exitCode, success, timestamp, message, feedback[], data (docker, api, clients), duration_ms.
+Cumple `SddIA/tools/tools-contract.md`: objeto JSON con toolId, exitCode, success, timestamp, message, feedback[], data (docker, clients), duration_ms.
 
 ## Fases (feedback)
 
-init → docker → mysql → api → clients → done (o error).
+init → docker → mysql → clients → done (o error).
 
 ## Implementación
 
@@ -73,7 +70,6 @@ init → docker → mysql → api → clients → done (o error).
 
 # Opciones disponibles
 --docker-only          # Solo levantar Docker (DB, cache, Adminer)
---start-api           # Además levantar la Admin API en local
 --no-docker           # No levantar Docker
 --config-path <path>  # Ruta al JSON de configuración
 --output-path <path>  # Fichero donde escribir resultado JSON
