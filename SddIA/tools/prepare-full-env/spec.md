@@ -48,7 +48,7 @@ Herramienta que prepara el entorno de desarrollo: levanta servicios Docker (MySQ
 
 ## Salida
 
-Cumple `SddIA/tools/tools-contract.md`: objeto JSON con toolId, exitCode, success, timestamp, message, feedback[], data (docker, clients), duration_ms.
+Cumple `SddIA/tools/tools-contract.md`: objeto JSON (envelope v2) con toolId, exitCode, success, timestamp, message, feedback[], **result** (docker, clients), duration_ms.
 
 ## Fases (feedback)
 

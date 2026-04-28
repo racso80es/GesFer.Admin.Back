@@ -9,3 +9,4 @@
 | f8e2d4c1-7b3a-4f9e-8c6d-1a2b3c4d5e6f | 2026-03-27T00:00:00+00:00 | automatic_task v1.1.0 — cola KAIZEN por antigüedad antes de nueva Kaizen; rutas paths.tasksPath |
 | b6a79723-db30-461c-94aa-e98e8c1e90ec | 2026-04-17T00:00:00+00:00 | Alta tool run-test-e2e-local (E2E HTTP local); spec SddIA; toolCapsules en cumulo.paths |
 | 31993fe2-3488-4fc7-9bdf-6dbeac94bf5c | 2026-04-28T17:44:34.054925400+00:00 | prepare-full-env: retirar StartApi/--start-api del spec |
+| 515247ce-c0c4-425c-bd61-da3e9a5c2911 | 2026-04-28T17:57:00.428598500+00:00 | prepare-full-env: spec describe result (no data) |

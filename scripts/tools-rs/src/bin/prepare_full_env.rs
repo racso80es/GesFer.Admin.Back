@@ -229,9 +229,14 @@ fn main() {
     let tool_id = "prepare-full-env";
     let mut feedback: Vec<FeedbackEntry> = vec![FeedbackEntry::info("init", "Inicio prepare-full-env")];
 
+    let mut effective_request: Option<EffectiveRequest> = None;
+    let mut force_stdout = false;
+
     let run = (|| -> Result<serde_json::Value> {
         let effective = match try_read_capsule_request() {
             Ok(Some(req)) => {
+                // En modo cápsula (agente), siempre emitimos stdout (contrato v2).
+                force_stdout = true;
                 // request: { DockerOnly?, NoDocker?, OutputJson?, OutputPath?, ConfigPath? } (case-insensitive por serde Value)
                 let docker_only = req.request.get("DockerOnly").and_then(|v| v.as_bool()).unwrap_or(false)
                     || req.request.get("dockerOnly").and_then(|v| v.as_bool()).unwrap_or(false);
@@ -274,6 +279,7 @@ fn main() {
             Err(e) => return Err(anyhow!(e)),
         };
 
+        effective_request = Some(effective.clone());
         let (cfg, used_config_path) = load_config(effective.config_path.as_deref())?;
         feedback.push(FeedbackEntry::info("init", &format!("Config: {}", used_config_path)));
 
@@ -339,7 +345,24 @@ fn main() {
 
     let duration_ms = Some(started_at.elapsed().as_millis() as u64);
     let res = CapsuleResponse::tool(tool_id, success, exit_code, message, feedback, result, duration_ms);
-    let _ = write_capsule_response(&res);
+    // OutputPath: si está presente, persistimos el JSON completo del envelope.
+    if let Some(req) = &effective_request {
+        if let Some(p) = &req.output_path {
+            if let Ok(s) = serde_json::to_string(&res) {
+                let _ = fs::write(p, s);
+            }
+        }
+    }
+
+    // Stdout: en modo cápsula (agente) es obligatorio; en CLI se controla por OutputJson.
+    let should_stdout = force_stdout
+        || effective_request
+            .as_ref()
+            .map(|r| r.output_json || r.output_path.is_none())
+            .unwrap_or(true);
+    if should_stdout {
+        let _ = write_capsule_response(&res);
+    }
     std::process::exit(res.exit_code);
 }
 
