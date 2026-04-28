@@ -10,3 +10,4 @@
 | b6a79723-db30-461c-94aa-e98e8c1e90ec | 2026-04-17T00:00:00+00:00 | Alta tool run-test-e2e-local (E2E HTTP local); spec SddIA; toolCapsules en cumulo.paths |
 | 31993fe2-3488-4fc7-9bdf-6dbeac94bf5c | 2026-04-28T17:44:34.054925400+00:00 | prepare-full-env: retirar StartApi/--start-api del spec |
 | 515247ce-c0c4-425c-bd61-da3e9a5c2911 | 2026-04-28T17:57:00.428598500+00:00 | prepare-full-env: spec describe result (no data) |
+| e37c5a45-043c-43a1-a42d-9a7950f9e901 | 2026-04-28T18:38:21.474315200+00:00 | modificacion: invoke-mysql-seeds spec añade DropCreateDb |
