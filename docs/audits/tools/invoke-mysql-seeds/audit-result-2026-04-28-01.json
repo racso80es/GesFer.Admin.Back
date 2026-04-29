@@ -1,0 +1,168 @@
+{
+  "schema_version": "1.0.0",
+  "process_id": "audit-tool",
+  "audit_date": "2026-04-28",
+  "audit_id": "audit-2026-04-28-01",
+  "tool_id": "invoke-mysql-seeds",
+  "capsule_path": "paths.toolCapsules[invoke-mysql-seeds]",
+  "tool_spec_ref": "paths.toolsDefinitionPath/invoke-mysql-seeds/spec.md",
+  "tools_contract_ref": "SddIA/tools/tools-contract.md",
+  "result": "PASS",
+  "summary": {
+    "tipologia": "batch",
+    "executed": true,
+    "json_emitted": true,
+    "contract_v2_ok": true,
+    "trazabilidad_ok": true,
+    "objetivos_ok": true
+  },
+  "inputs_used": {
+    "parameters_source": "scripts/tools/invoke-mysql-seeds/mysql-seeds-config.json",
+    "command_line": [
+      "invoke_mysql_seeds.exe",
+      "--drop-create-db",
+      "--output-json",
+      "--output-path docs/audits/tools/invoke-mysql-seeds/T3-full-2026-04-28-01.json"
+    ],
+    "env": {}
+  },
+  "tool_observed_output": {
+    "capture_mode": "file",
+    "success": true,
+    "exitCode": 0,
+    "duration_ms": 13282,
+    "envelope_fields_present": [
+      "meta",
+      "success",
+      "exitCode",
+      "message",
+      "feedback",
+      "result",
+      "duration_ms"
+    ],
+    "anomalies": []
+  },
+  "expected_phases": [
+    "init",
+    "mysql",
+    "db_drop_create",
+    "migrations",
+    "seeds",
+    "done",
+    "error"
+  ],
+  "observed_phases": [
+    "init",
+    "mysql",
+    "db_drop_create",
+    "migrations",
+    "seeds",
+    "done"
+  ],
+  "traceability": {
+    "missing_expected_phases": [],
+    "unexpected_phases": [],
+    "rules_applied": [
+      "phases_may_repeat",
+      "done_error_rules"
+    ]
+  },
+  "phases_results": [
+    {
+      "phase_id": "0",
+      "name": "Preparar entorno y Clasificar",
+      "status": "PASS",
+      "evidence": [
+        {
+          "kind": "file",
+          "detail": "docs/audits/tools/invoke-mysql-seeds/setup-prepare-full-env-2026-04-28-01.json"
+        }
+      ],
+      "anomalies": []
+    },
+    {
+      "phase_id": "2",
+      "name": "Analizar especificación y Contrato",
+      "status": "PASS",
+      "evidence": [
+        {
+          "kind": "file",
+          "detail": "SddIA/tools/invoke-mysql-seeds/spec.md"
+        }
+      ],
+      "anomalies": []
+    },
+    {
+      "phase_id": "4",
+      "name": "Ejecutar herramienta",
+      "status": "PASS",
+      "evidence": [
+        {
+          "kind": "file",
+          "detail": "docs/audits/tools/invoke-mysql-seeds/T3-full-2026-04-28-01.json"
+        }
+      ],
+      "anomalies": []
+    },
+    {
+      "phase_id": "5",
+      "name": "Validar retorno JSON y Trazabilidad",
+      "status": "PASS",
+      "evidence": [
+        {
+          "kind": "file",
+          "detail": "docs/audits/tools/invoke-mysql-seeds/T2-dropcreate-only-2026-04-28-01.json"
+        },
+        {
+          "kind": "file",
+          "detail": "docs/audits/tools/invoke-mysql-seeds/T3-full-2026-04-28-01.json"
+        },
+        {
+          "kind": "file",
+          "detail": "docs/audits/tools/invoke-mysql-seeds/T4-bat-default-2026-04-28-01.json"
+        }
+      ],
+      "anomalies": []
+    },
+    {
+      "phase_id": "6",
+      "name": "Validar objetivos funcionales",
+      "status": "PASS",
+      "evidence": [
+        {
+          "kind": "file",
+          "detail": "docs/audits/tools/invoke-mysql-seeds/T3-full-2026-04-28-01.json (migrations.success=true, seeds.success=true)"
+        }
+      ],
+      "anomalies": []
+    },
+    {
+      "phase_id": "7",
+      "name": "Generar informe",
+      "status": "PASS",
+      "evidence": [
+        {
+          "kind": "file",
+          "detail": "docs/audits/tools/invoke-mysql-seeds/audit-report-2026-04-28-01.md"
+        }
+      ],
+      "anomalies": []
+    }
+  ],
+  "evidence": {
+    "files": [
+      "docs/audits/tools/invoke-mysql-seeds/audit-report-2026-04-28-01.md",
+      "docs/audits/tools/invoke-mysql-seeds/audit-result-2026-04-28-01.json",
+      "docs/audits/tools/invoke-mysql-seeds/T1-help-2026-04-28-01.txt",
+      "docs/audits/tools/invoke-mysql-seeds/setup-prepare-full-env-2026-04-28-01.json",
+      "docs/audits/tools/invoke-mysql-seeds/T2-dropcreate-only-2026-04-28-01.json",
+      "docs/audits/tools/invoke-mysql-seeds/T3-full-2026-04-28-01.json",
+      "docs/audits/tools/invoke-mysql-seeds/T4-bat-default-2026-04-28-01.json"
+    ],
+    "snippets": [],
+    "metrics": {}
+  },
+  "anomalies": [],
+  "recommendations": []
+}
+

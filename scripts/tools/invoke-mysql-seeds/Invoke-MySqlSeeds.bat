@@ -28,10 +28,11 @@ echo   - Base de datos MySQL accesible (contenedor gesfer_db)
 echo.
 echo ACCIONES:
 echo   - Comprueba que MySQL responda (mysqladmin ping)
+echo   - Elimina datos previos: DROP/CREATE database (estrategia B)
 echo   - Aplica migraciones EF: dotnet ef database update
 echo   - Ejecuta seeds Admin: companies, admin-users
 echo.
-echo Params: -SkipMigrations ^| -SkipSeeds ^| -ConfigPath ^| -OutputPath ^| -OutputJson
+echo Params: -DropCreateDb ^| -SkipMigrations ^| -SkipSeeds ^| -ConfigPath ^| -OutputPath ^| -OutputJson
 echo.
 echo ----------------------------------------
 goto :run
@@ -46,13 +47,14 @@ echo   - .NET SDK 8
 echo   - Ejecutar desde la raiz del repositorio
 echo.
 echo PARAMETROS:
+echo   -DropCreateDb    DROP/CREATE database antes de migraciones/seeds (estrategia B)
 echo   -SkipMigrations  No ejecutar dotnet ef database update; solo seeds
 echo   -SkipSeeds       Solo ejecutar migraciones; no ejecutar seeds
 echo   -ConfigPath      Ruta al JSON de configuracion
 echo   -OutputPath      Fichero donde escribir el resultado JSON
 echo   -OutputJson      Emitir resultado JSON por stdout
 echo.
-echo Ejemplo: Invoke-MySqlSeeds.bat -SkipMigrations -OutputJson
+echo Ejemplo: Invoke-MySqlSeeds.bat -DropCreateDb -OutputJson
 echo.
 endlocal
 exit /b 0
@@ -62,7 +64,8 @@ set "RUST_EXE=%SCRIPT_DIR%invoke_mysql_seeds.exe"
 if exist "%RUST_EXE%" (
     echo [Usando invoke_mysql_seeds.exe]
     set "GESFER_REPO_ROOT=%REPO_ROOT%"
-    "%RUST_EXE%" %*
+    REM Default requerido: aplicar estrategia B (DROP/CREATE DB) antes de migraciones+seeds
+    "%RUST_EXE%" -DropCreateDb %*
     exit /b !ERRORLEVEL!
 )
 echo ERROR: invoke_mysql_seeds.exe no encontrado. Ejecute scripts/tools-rs/install.ps1
