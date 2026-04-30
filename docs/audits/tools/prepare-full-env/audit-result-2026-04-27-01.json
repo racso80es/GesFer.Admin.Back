@@ -1,0 +1,190 @@
+{
+  "schema_version": "1.0.0",
+  "process_id": "audit-tool",
+  "audit_date": "2026-04-27",
+  "audit_id": "audit-2026-04-27-01",
+  "tool_id": "prepare-full-env",
+  "capsule_path": "paths.toolCapsules[prepare-full-env]",
+  "tool_spec_ref": "paths.toolsDefinitionPath/prepare-full-env/spec.md",
+  "tools_contract_ref": "SddIA/tools/tools-contract.md",
+  "result": "PARTIAL",
+  "summary": {
+    "tipologia": "batch",
+    "executed": true,
+    "json_emitted": true,
+    "contract_v2_ok": true,
+    "trazabilidad_ok": false,
+    "objetivos_ok": true,
+    "verdict_rationale": "Core funcional (Docker + MySQL ready) OK. PARTIAL por trazabilidad (fase clients ausente; docker en --no-docker) y promesa rota --start-api (solo texto, sin API levantada)."
+  },
+  "inputs_used": {
+    "parameters_source": "prepare-env.json (manifest.components.config)",
+    "cwd_required": "repository root for docker-compose resolution",
+    "command_line_examples": [
+      "prepare_full_env.exe --docker-only --output-json --config-path .\\scripts\\tools\\prepare-full-env\\prepare-env.json",
+      "prepare_full_env.exe --docker-only --output-path .\\docs\\audits\\tools\\prepare-full-env\\T2-result.json --config-path .\\scripts\\tools\\prepare-full-env\\prepare-env.json",
+      "prepare_full_env.exe --no-docker --output-json --config-path .\\scripts\\tools\\prepare-full-env\\prepare-env.json",
+      "prepare_full_env.exe --start-api --output-json --config-path .\\scripts\\tools\\prepare-full-env\\prepare-env.json"
+    ],
+    "env": {}
+  },
+  "tool_observed_output": {
+    "capture_mode": "stdout | file",
+    "note": "T1-T4 emitted valid v2 envelopes with result payload; representative success=true exitCode=0 for nominal paths",
+    "envelope_fields_present": [
+      "meta",
+      "success",
+      "exitCode",
+      "message",
+      "feedback",
+      "result",
+      "duration_ms"
+    ],
+    "anomalies": [
+      {
+        "severity": "low",
+        "code": "SPEC_MENTIONS_DATA",
+        "message": "tool_spec_ref body mentions data; runtime uses result (v2)"
+      }
+    ]
+  },
+  "expected_phases": ["init", "docker", "mysql", "api", "clients", "done", "error"],
+  "observed_phases_aggregate": ["init", "docker", "mysql", "api", "done"],
+  "traceability": {
+    "missing_expected_phases": ["clients"],
+    "semantic_issues": [
+      "docker phase present under --no-docker (T3)",
+      "start-api does not start API process; informational message only (T4)"
+    ],
+    "rules_applied": ["phases_may_repeat", "director_policy_traceability_strict"]
+  },
+  "phases_results": [
+    {
+      "phase_id": "0",
+      "name": "Preparar entorno y Clasificar",
+      "status": "PASS",
+      "evidence": [{ "kind": "classification", "tipologia": "batch" }]
+    },
+    {
+      "phase_id": "1",
+      "name": "Definir objetivos dinámicos",
+      "status": "PASS",
+      "evidence": [{ "kind": "file", "ref": "paths.featurePath/audit-tool-prepare-full-env/objectives.md" }]
+    },
+    {
+      "phase_id": "2",
+      "name": "Analizar especificación y Contrato",
+      "status": "PASS",
+      "evidence": [{ "kind": "analysis", "detail": "flags, phases_feedback, spec data vs runtime result" }]
+    },
+    {
+      "phase_id": "3",
+      "name": "Diseñar pruebas",
+      "status": "PASS",
+      "evidence": [{ "kind": "file", "ref": "paths.featurePath/audit-tool-prepare-full-env/plan.md" }]
+    },
+    {
+      "phase_id": "4",
+      "name": "Ejecutar herramienta",
+      "status": "PASS",
+      "evidence": [{ "kind": "files", "ref": "T1-stdout.json,T2-result.json,T3-stdout.json,T4-stdout.json" }]
+    },
+    {
+      "phase_id": "5",
+      "name": "Validar retorno JSON y Trazabilidad",
+      "status": "PARTIAL",
+      "evidence": [{ "kind": "envelope_v2", "ok": true }, { "kind": "traceability", "ok": false }],
+      "anomalies": [
+        { "severity": "medium", "code": "CLIENTS_PHASE_MISSING", "message": "clients never appears in feedback" },
+        { "severity": "medium", "code": "NO_DOCKER_HAS_DOCKER_PHASE", "message": "T3: docker phase emitted with --no-docker" }
+      ]
+    },
+    {
+      "phase_id": "6",
+      "name": "Validar objetivos funcionales",
+      "status": "PASS",
+      "evidence": [
+        { "kind": "docker_compose_ps", "ref": "evidence-docker-compose-ps.txt" },
+        { "kind": "docker_inspect_mysql", "ref": "evidence-mysql-inspect.txt" }
+      ],
+      "anomalies": [
+        {
+          "severity": "high",
+          "code": "START_API_NOT_STARTED",
+          "message": "Flag --start-api does not start API; informational text only (T4)"
+        }
+      ]
+    },
+    {
+      "phase_id": "7",
+      "name": "Generar informe",
+      "status": "PASS",
+      "evidence": [
+        { "kind": "file", "ref": "audit-report-2026-04-27-01.md" },
+        { "kind": "file", "ref": "audit-result-2026-04-27-01.json" }
+      ]
+    },
+    {
+      "phase_id": "8",
+      "name": "Cierre y Limpieza",
+      "status": "PASS",
+      "evidence": [
+        {
+          "kind": "cleanup",
+          "command": "docker compose down",
+          "cwd": "repository root",
+          "ref": "evidence-docker-compose-down.txt"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "files": [
+      "T1-stdout.json",
+      "T2-result.json",
+      "T3-stdout.json",
+      "T4-stdout.json",
+      "evidence-docker-compose-ps.txt",
+      "evidence-mysql-inspect.txt",
+      "evidence-docker-compose-down.txt",
+      "audit-report-2026-04-27-01.md",
+      "audit-result-2026-04-27-01.json"
+    ],
+    "snippets": [],
+    "metrics": {}
+  },
+  "anomalies": [
+    {
+      "severity": "high",
+      "code": "START_API_NO_OP",
+      "message": "Con --start-api la herramienta no levanta la API; solo emite texto guía (promesa rota)."
+    },
+    {
+      "severity": "medium",
+      "code": "TRACEABILITY_CLIENTS_MISSING",
+      "message": "La fase clients declarada en output.phases_feedback no existe en la salida real."
+    },
+    {
+      "severity": "medium",
+      "code": "NO_DOCKER_EMITS_DOCKER_PHASE",
+      "message": "En ejecución --no-docker aparece fase docker en feedback."
+    },
+    {
+      "severity": "low",
+      "code": "SPEC_VS_RUNTIME_DATA_FIELD",
+      "message": "Spec cuerpo menciona data; runtime correcto con result (v2)."
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "high",
+      "action": "P1: No depender del CWD de la raíz del repo; resolver rutas de compose y artefactos de forma explícita y robusta.",
+      "ref": "prepare_full_env.exe + prepare-env.json + dockerComposePath"
+    },
+    {
+      "priority": "high",
+      "action": "P2: Sincronizar contrato de fases (frontmatter y texto) con el código: clients, semántica --no-docker, comportamiento real de --start-api.",
+      "ref": "paths.toolsDefinitionPath/prepare-full-env/spec.md"
+    }
+  ]
+}

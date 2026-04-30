@@ -1,0 +1,14 @@
+Container gesfer_api_adminer Stopping
+Container gesfer_api_cache Stopping
+Container gesfer_api_adminer Stopped
+Container gesfer_api_adminer Removing
+Container gesfer_api_adminer Removed
+Container gesfer_db Stopping
+Container gesfer_api_cache Stopped
+Container gesfer_api_cache Removing
+Container gesfer_api_cache Removed
+Container gesfer_db Stopped
+Container gesfer_db Removing
+Container gesfer_db Removed
+Network gesferadminback_gesfer_network Removing
+

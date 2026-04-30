@@ -9,6 +9,7 @@ env:
 implementation_path_ref: paths.toolCapsules.invoke-mysql-seeds
 inputs:
   ConfigPath: string (opcional). Ruta al JSON de configuración; por defecto en implementación.
+  DropCreateDb: boolean (opcional). Eliminar datos previos recreando la BD (DROP/CREATE) antes de migraciones/seeds.
   OutputJson: boolean (opcional). Emitir resultado JSON por stdout.
   OutputPath: string (opcional). Fichero donde escribir el resultado JSON.
   SkipMigrations: boolean (opcional). No ejecutar dotnet ef database update.
@@ -17,6 +18,7 @@ output:
   phases_feedback:
   - init
   - mysql
+  - db_drop_create
   - migrations
   - seeds
   - done
@@ -40,6 +42,7 @@ Herramienta que comprueba la disponibilidad de MySQL, aplica migraciones EF Core
 
 | Parámetro | Tipo | Descripción |
 |----------|------|-------------|
+| DropCreateDb | switch | Ejecutar `DROP DATABASE IF EXISTS` + `CREATE DATABASE` (estrategia B) antes de migraciones/seeds. |
 | SkipMigrations | switch | No ejecutar `dotnet ef database update`; solo seeds. |
 | SkipSeeds | switch | Solo ejecutar migraciones; no ejecutar seeds. |
 | ConfigPath | string | Ruta al JSON de configuración (por defecto en la implementación). |
@@ -52,7 +55,7 @@ Cumple `SddIA/tools/tools-contract.md`: objeto JSON con toolId, exitCode, succes
 
 ## Fases (feedback)
 
-init → mysql → migrations → seeds → done (o error).
+init → mysql → db_drop_create → migrations → seeds → done (o error).
 
 ## Implementación
 
@@ -69,6 +72,7 @@ init → mysql → migrations → seeds → done (o error).
 & "scripts/tools/invoke-mysql-seeds/invoke_mysql_seeds.exe" [opciones]
 
 # Opciones disponibles
+--drop-create-db        # DROP/CREATE database (estrategia B) antes de migraciones/seeds
 --skip-migrations       # No ejecutar migraciones EF Core
 --skip-seeds           # No ejecutar seeds
 --config-path <path>   # Ruta al JSON de configuración

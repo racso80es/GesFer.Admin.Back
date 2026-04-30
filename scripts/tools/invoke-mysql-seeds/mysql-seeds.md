@@ -27,6 +27,7 @@ El `.bat` usa `invoke_mysql_seeds.exe` dentro de la cápsula (build Rust + `scri
 
 | Parámetro          | Descripción |
 |--------------------|-------------|
+| `-DropCreateDb`    | Elimina datos previos recreando la BD (DROP/CREATE) antes de migraciones/seeds (estrategia B). |
 | `-SkipMigrations`  | No ejecutar `dotnet ef database update`; solo seeds. |
 | `-SkipSeeds`       | Solo ejecutar migraciones; no ejecutar seeds. |
 | `-ConfigPath`      | Ruta al JSON de configuración. |
@@ -38,6 +39,7 @@ Ejemplos:
 ```powershell
 .\scripts\tools\invoke-mysql-seeds\Invoke-MySqlSeeds.bat -OutputJson
 .\scripts\tools\invoke-mysql-seeds\Invoke-MySqlSeeds.bat -SkipMigrations -OutputPath logs\mysql-seeds-result.json
+.\scripts\tools\invoke-mysql-seeds\Invoke-MySqlSeeds.bat -DropCreateDb -OutputJson
 ```
 
 ## Configuración: `mysql-seeds-config.json`
@@ -56,8 +58,9 @@ Ubicación: en esta cápsula, `mysql-seeds-config.json`. Ruta canónica (Cúmulo
 ## Flujo
 
 1. **MySQL:** Comprueba que el contenedor `gesfer_db` responda a `mysqladmin ping`.
-2. **Migraciones:** Ejecuta `dotnet ef database update --project ... --startup-project ...`.
-3. **Seeds:** Ejecuta la API con `RUN_SEEDS_ONLY=1`; la API aplica migraciones y ejecuta `SeedCompaniesAsync` y `SeedAdminUsersAsync`, luego sale.
+2. **Reset (estrategia B):** si se habilita `-DropCreateDb`, ejecuta `DROP DATABASE IF EXISTS` + `CREATE DATABASE` usando `MYSQL_DATABASE` y `MYSQL_ROOT_PASSWORD` del contenedor.
+3. **Migraciones:** Ejecuta `dotnet ef database update --project ... --startup-project ...`.
+4. **Seeds:** Ejecuta la API con `RUN_SEEDS_ONLY=1`; la API aplica migraciones y ejecuta seeds, luego sale.
 
 Los archivos de seed están en `src/Infrastructure/Data/Seeds/` (companies.json, admin-users.json).
 

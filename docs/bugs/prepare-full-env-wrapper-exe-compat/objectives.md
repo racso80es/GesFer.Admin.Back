@@ -10,5 +10,5 @@ fecha: 2026-04-23
 
 - Asegurar que `prepare_full_env.exe` existe en `scripts/tools/prepare-full-env/` tras compilar/instalar tools Rust.
 - Asegurar que `Prepare-FullEnv.bat` ejecuta `prepare_full_env.exe` en la **raíz de la cápsula** (sin `bin\`).
-- Evitar fallos “no deterministas” al partir de un entorno limpio (sin contenedores): la herramienta debe poder levantar Docker según `DockerOnly` / `StartApi` / `NoDocker`.
+- Evitar fallos “no deterministas” al partir de un entorno limpio (sin contenedores): la herramienta debe poder levantar Docker según `DockerOnly` / `NoDocker`.
 

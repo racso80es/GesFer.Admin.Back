@@ -1,7 +1,7 @@
 {
   "toolId": "prepare-full-env",
   "version": "1.1.0",
-  "description": "Prepara entorno: Docker (DB, cache, Adminer) y opcionalmente API y clientes. Levanta servicios y espera a MySQL.",
+  "description": "Prepara entorno: Docker (DB, cache, Adminer) y opcionalmente clientes. Levanta servicios y espera a MySQL.",
   "contract_ref": "SddIA/tools/tools-contract.json",
   "invocation": {
     "bat": "Uso para usuarios humanos (envoltorio .bat en raíz de cápsula).",
