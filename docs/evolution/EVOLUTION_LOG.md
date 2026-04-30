@@ -3,7 +3,7 @@
 Registro de cierres de tareas con resumen de alcance y referencia a documentación.
 
 
-[2026-04-30] [chore/correccion-auditoria-2026-04-30] Formalización de auditoría limpia. Finalizado.
+[2026-04-27] [chore/correccion-auditoria-2026-04-27] Formalización de auditoría limpia. Finalizado.
 
 
 [2026-04-24] [chore/correccion-auditoria-2026-04-24] Formalización de auditoría limpia. Finalizado.
