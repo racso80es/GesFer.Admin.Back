@@ -82,6 +82,7 @@
 | bug-fix | Corrección de un bug: rama fix/&lt;nombre_fix&gt;, documentación en paths.fixPath/&lt;nombre_fix&gt;/ (Cúmulo). Alcance mínimo. | paths.processPath/bug-fix/ |
 | refactorization | Refactorización: rama feat/refactorization-&lt;nombre_refactor&gt;, documentación en paths.featurePath/refactorization-&lt;nombre_refactor&gt;/ (Cúmulo). | paths.processPath/refactorization/ |
 | create-tool | Creación de una nueva herramienta: rama feat/create-tool-&lt;tool-id&gt;, cápsula en paths.toolCapsules, índice y Cúmulo actualizados. | paths.processPath/create-tool/ |
+| create-skill | Creación de una nueva skill: rama feat/create-skill-&lt;skill-id&gt;, definición en paths.skillsDefinitionPath y cápsula en paths.skillCapsules, índice y Cúmulo actualizados. | paths.processPath/create-skill/ |
 | correccion-auditorias | Corrección de hallazgos de auditoría: rama feat/correccion-segun-auditorias o feat/correccion-auditorias-&lt;id&gt;, documentación en paths.featurePath. Entrada: paths.auditsPath. | paths.processPath/correccion-auditorias/ |
 | create-template | Creación de plantilla: rama feat/create-template-&lt;template-id&gt;, carpeta en paths.templatesPath. Configuración predefinida de proceso con fin concreto. | paths.processPath/create-template/ |
 | audit-tool | Auditoría de herramienta: verificación empírica del funcionamiento de una tool. Resultado: informe en paths.auditsPath/tools/&lt;tool-id&gt;/. | paths.processPath/audit-tool/ |

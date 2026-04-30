@@ -1,0 +1,44 @@
+{
+  "spec_version": "1.0.0",
+  "process_id": "create-skill",
+  "name": "Creación de skills (create-skill)",
+  "description": "Proceso de tarea para crear una nueva skill (definición + cápsula ejecutable) cumpliendo contrato de skills, rutas vía Cúmulo y ejecución por binario Rust + envelope JSON.",
+  "contract_ref": "paths.processPath/process-contract.md",
+  "principles_ref": "paths.principlesPath",
+  "persist_ref": "paths.featurePath/create-skill-<skill-id>",
+  "related_actions": ["spec", "implementation", "validate", "finalize"],
+  "related_skills": ["iniciar-rama"],
+  "norms_ref": [
+    "SddIA/norms/commands-via-skills-or-tools.md",
+    "SddIA/norms/capsule-json-io.md",
+    "SddIA/norms/paths-via-cumulo.md"
+  ],
+  "inputs": [
+    {
+      "name": "skill_id",
+      "type": "string",
+      "required": true,
+      "description": "Identificador kebab-case de la skill."
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "required": true,
+      "description": "Descripción breve de la skill."
+    }
+  ],
+  "outputs": [
+    { "name": "spec.md", "type": "file", "location": "paths.skillsDefinitionPath/<skill-id>/" },
+    { "name": "manifest.json", "type": "file", "location": "paths.skillCapsules[<skill-id>]" },
+    { "name": "<skill>.exe", "type": "file", "location": "paths.skillCapsules[<skill-id>]" }
+  ],
+  "phases": [
+    { "id": "0", "name": "Preparar entorno y rama" },
+    { "id": "1", "name": "Objetivos y especificación" },
+    { "id": "2", "name": "Definición en SddIA (skillsDefinitionPath)" },
+    { "id": "3", "name": "Cápsula y binario Rust (skillsPath, skillsRustPath)" },
+    { "id": "4", "name": "Índice y rutas (skillsIndexPath, Cúmulo)" },
+    { "id": "5", "name": "Validación (contrato + ejecución)" },
+    { "id": "6", "name": "Cierre (finalize)" }
+  ]
+}
