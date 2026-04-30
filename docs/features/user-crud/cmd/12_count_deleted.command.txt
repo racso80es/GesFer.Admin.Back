@@ -1,0 +1,2 @@
+powershell -NoProfile -Command "(git diff --name-only --diff-filter=D).Count"
+

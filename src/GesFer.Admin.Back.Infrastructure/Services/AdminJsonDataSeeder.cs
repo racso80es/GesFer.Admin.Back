@@ -101,6 +101,7 @@ public class AdminJsonDataSeeder
     private static bool HasAnySeedJson(string directoryPath)
     {
         return File.Exists(Path.Combine(directoryPath, "admin-users.json"))
+            || File.Exists(Path.Combine(directoryPath, "users.json"))
             || File.Exists(Path.Combine(directoryPath, "companies.json"))
             || File.Exists(Path.Combine(directoryPath, "languages.json"))
             || File.Exists(Path.Combine(directoryPath, "postal-codes.json"));
@@ -162,14 +163,196 @@ public class AdminJsonDataSeeder
             result.Entities.AddRange(companiesResult.Entities);
         }
 
-        // 7. Users
-        var usersResult = await SeedAdminUsersAsync();
+        // 7. Users (multi-tenant)
+        var usersResult = await SeedUsersAsync();
         if (usersResult.Loaded)
         {
             result.Loaded = true;
             result.Entities.AddRange(usersResult.Entities);
         }
+
+        // 8. AdminUsers (usuarios administrativos)
+        var adminUsersResult = await SeedAdminUsersAsync();
+        if (adminUsersResult.Loaded)
+        {
+            result.Loaded = true;
+            result.Entities.AddRange(adminUsersResult.Entities);
+        }
         return result;
+    }
+
+    /// <summary>
+    /// Carga usuarios multi-tenant desde users.json.
+    /// </summary>
+    public async Task<AdminSeedResult> SeedUsersAsync()
+    {
+        var result = new AdminSeedResult();
+        var filePath = Path.Combine(_seedsPath, "users.json");
+        if (!File.Exists(filePath)) return result;
+
+        _logger.LogInformation("Cargando users desde {Path}", filePath);
+        var json = await File.ReadAllTextAsync(filePath);
+        var users = JsonSerializer.Deserialize<List<UserSeed>>(json, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        });
+
+        if (users == null || !users.Any()) return result;
+
+        // Cache de companies válidas para evitar FKs/refs inválidas
+        var validCompanyIds = new HashSet<Guid>(
+            await _context.Companies.IgnoreQueryFilters().Select(x => x.Id).ToListAsync()
+        );
+
+        // Diccionario por (CompanyId, Username) para aplicar idempotencia y reactivación
+        var existingUsers = await _context.Users.IgnoreQueryFilters().ToListAsync();
+        var existingByKey = existingUsers
+            .GroupBy(u => (u.CompanyId, u.Username))
+            .ToDictionary(g => g.Key, g => g.First());
+
+        // Hash determinista para admin123 (compatibilidad con test-data)
+        const string DeterministicAdmin123Hash = "$2a$11$IRkoFxAcLpHUIwLTqkJaHu6KYx.dgfGY.sFUIsCTY9xHPhL3jcpgW";
+
+        int created = 0;
+        int updated = 0;
+        int skipped = 0;
+
+        foreach (var u in users)
+        {
+            if (!Guid.TryParse(u.Id, out var id))
+            {
+                _logger.LogWarning("AdminJsonDataSeeder: El Guid '{Id}' no es válido en User '{Username}'. Omitiendo registro.", u.Id, u.Username);
+                skipped++;
+                continue;
+            }
+            if (!Guid.TryParse(u.CompanyId, out var companyId) || !validCompanyIds.Contains(companyId))
+            {
+                _logger.LogWarning("AdminJsonDataSeeder: CompanyId '{CompanyId}' no es válido o no existe para User '{Username}'. Omitiendo registro.",
+                    u.CompanyId, u.Username);
+                skipped++;
+                continue;
+            }
+
+            Guid? postalCodeId = TryParseNullableGuid(u.PostalCodeId, "PostalCodeId", u.Username);
+            Guid? cityId = TryParseNullableGuid(u.CityId, "CityId", u.Username);
+            Guid? stateId = TryParseNullableGuid(u.StateId, "StateId", u.Username);
+            Guid? countryId = TryParseNullableGuid(u.CountryId, "CountryId", u.Username);
+            Guid? languageId = TryParseNullableGuid(u.LanguageId, "LanguageId", u.Username);
+
+            Email? email = null;
+            if (!string.IsNullOrWhiteSpace(u.Email))
+            {
+                if (!Email.TryCreate(u.Email, out var parsedEmail))
+                {
+                    _logger.LogWarning("AdminJsonDataSeeder: Email inválido '{Email}' en User '{Username}'. Omitiendo registro.", u.Email, u.Username);
+                    skipped++;
+                    continue;
+                }
+                email = parsedEmail;
+            }
+
+            var key = (companyId, u.Username);
+            existingByKey.TryGetValue(key, out var existing);
+
+            var passwordHash = ResolvePasswordHash(u.Password, DeterministicAdmin123Hash);
+
+            if (existing == null)
+            {
+                _context.Users.Add(new Domain.Entities.User
+                {
+                    Id = id,
+                    CompanyId = companyId,
+                    Username = u.Username,
+                    PasswordHash = passwordHash,
+                    FirstName = u.FirstName ?? string.Empty,
+                    LastName = u.LastName ?? string.Empty,
+                    Email = email,
+                    Phone = string.IsNullOrWhiteSpace(u.Phone) ? null : u.Phone,
+                    Address = string.IsNullOrWhiteSpace(u.Address) ? null : u.Address,
+                    PostalCodeId = postalCodeId,
+                    CityId = cityId,
+                    StateId = stateId,
+                    CountryId = countryId,
+                    LanguageId = languageId,
+                    CreatedAt = DateTime.UtcNow,
+                    IsActive = true
+                });
+                created++;
+            }
+            else
+            {
+                bool modified = false;
+
+                // Reactivación soft delete si aplica
+                if (existing.DeletedAt != null)
+                {
+                    existing.DeletedAt = null;
+                    existing.IsActive = true;
+                    modified = true;
+                }
+
+                // Actualizar campos básicos (mantener idempotencia)
+                if (existing.FirstName != (u.FirstName ?? string.Empty)) { existing.FirstName = u.FirstName ?? string.Empty; modified = true; }
+                if (existing.LastName != (u.LastName ?? string.Empty)) { existing.LastName = u.LastName ?? string.Empty; modified = true; }
+                if (existing.Phone != (string.IsNullOrWhiteSpace(u.Phone) ? null : u.Phone)) { existing.Phone = string.IsNullOrWhiteSpace(u.Phone) ? null : u.Phone; modified = true; }
+                if (existing.Address != (string.IsNullOrWhiteSpace(u.Address) ? null : u.Address)) { existing.Address = string.IsNullOrWhiteSpace(u.Address) ? null : u.Address; modified = true; }
+                if (existing.PostalCodeId != postalCodeId) { existing.PostalCodeId = postalCodeId; modified = true; }
+                if (existing.CityId != cityId) { existing.CityId = cityId; modified = true; }
+                if (existing.StateId != stateId) { existing.StateId = stateId; modified = true; }
+                if (existing.CountryId != countryId) { existing.CountryId = countryId; modified = true; }
+                if (existing.LanguageId != languageId) { existing.LanguageId = languageId; modified = true; }
+                if (existing.Email != email) { existing.Email = email; modified = true; }
+
+                // Actualizar password si el seed trae password y no coincide
+                if (!string.IsNullOrWhiteSpace(u.Password) && !BCrypt.Net.BCrypt.Verify(u.Password, existing.PasswordHash))
+                {
+                    existing.PasswordHash = passwordHash;
+                    modified = true;
+                }
+
+                if (modified) updated++;
+            }
+        }
+
+        if (created > 0 || updated > 0)
+        {
+            await _context.SaveChangesAsync();
+            result.Loaded = true;
+            if (created > 0) result.Entities.Add($"{created} Users created");
+            if (updated > 0) result.Entities.Add($"{updated} Users updated");
+        }
+        else
+        {
+            result.Loaded = true;
+            result.Entities.Add("No new Users");
+        }
+
+        if (skipped > 0)
+            _logger.LogWarning("[SEED ADMIN] Users: {Skipped} ignorado(s)", skipped);
+
+        return result;
+    }
+
+    private Guid? TryParseNullableGuid(string? raw, string field, string username)
+    {
+        if (string.IsNullOrWhiteSpace(raw)) return null;
+        if (Guid.TryParse(raw, out var value)) return value;
+        _logger.LogWarning("AdminJsonDataSeeder: {Field} '{Raw}' no es válido en User '{Username}'. Asignando null.", field, raw, username);
+        return null;
+    }
+
+    private static string ResolvePasswordHash(string? rawPassword, string deterministicAdmin123Hash)
+    {
+        if (string.IsNullOrWhiteSpace(rawPassword))
+        {
+            // Si falta password, generamos una estándar (DEV/TEST), manteniendo la política existente
+            rawPassword = "admin123";
+        }
+
+        if (rawPassword == "admin123")
+            return deterministicAdmin123Hash;
+
+        return BCrypt.Net.BCrypt.HashPassword(rawPassword);
     }
 
     public async Task<AdminSeedResult> SeedLanguagesAsync()
@@ -698,6 +881,24 @@ public class AdminJsonDataSeeder
         public string? Phone { get; set; }
         public string? Email { get; set; }
         public string LanguageId { get; set; } = string.Empty;
+    }
+
+    private class UserSeed
+    {
+        public string Id { get; set; } = string.Empty;
+        public string CompanyId { get; set; } = string.Empty;
+        public string Username { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public string? Email { get; set; }
+        public string? Phone { get; set; }
+        public string? Address { get; set; }
+        public string? PostalCodeId { get; set; }
+        public string? CityId { get; set; }
+        public string? StateId { get; set; }
+        public string? CountryId { get; set; }
+        public string? LanguageId { get; set; }
     }
 
     private class AdminUserSeed

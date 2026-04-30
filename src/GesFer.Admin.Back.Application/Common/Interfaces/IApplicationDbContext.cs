@@ -13,5 +13,6 @@ public interface IApplicationDbContext
     DbSet<City> Cities { get; }
     DbSet<PostalCode> PostalCodes { get; }
     DbSet<Language> Languages { get; }
+    DbSet<User> Users { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

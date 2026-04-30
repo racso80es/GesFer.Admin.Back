@@ -1,0 +1,2 @@
+powershell -NoProfile -Command "Get-ChildItem -Path '.\src\GesFer.Admin.Back.Infrastructure\Data\Migrations' | Select-Object -ExpandProperty Name"
+
