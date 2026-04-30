@@ -1,6 +1,6 @@
 ---
-feature_name: correccion-2026-04-28
-branch: chore/correccion-auditoria-2026-04-28
+feature_name: correccion-2026-04-27
+branch: chore/correccion-auditoria-2026-04-27
 base_branch: main
 global: pass
 blocking: false
@@ -12,14 +12,14 @@ checks:
     result: pass
     message: Todas las pruebas pasan sin errores
 git_changes:
-  files_added: 5
+  files_added: 4
   files_modified: 1
   files_deleted: 0
 ---
-# Informe de Validación: Corrección Auditoría 2026-04-28
+# Informe de Validación: Corrección Auditoría 2026-04-27
 
 ## Resumen
-La auditoría correspondiente al 2026-04-28 indicó que no se requirieron correcciones.
+La auditoría correspondiente al 2026-04-27 indicó que no se requirieron correcciones.
 
 ## Detalles de Validación
 - **Compilación:** OK
