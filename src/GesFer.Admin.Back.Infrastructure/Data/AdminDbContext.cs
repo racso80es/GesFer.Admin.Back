@@ -20,6 +20,7 @@ public class AdminDbContext : DbContext, IApplicationDbContext
     public DbSet<Country> Countries => Set<Country>();
     public DbSet<Language> Languages => Set<Language>();
     public DbSet<PostalCode> PostalCodes => Set<PostalCode>();
+    public DbSet<User> Users => Set<User>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -64,4 +65,5 @@ public class AdminDbContext : DbContext, IApplicationDbContext
     DbSet<City> IApplicationDbContext.Cities => Cities;
     DbSet<PostalCode> IApplicationDbContext.PostalCodes => PostalCodes;
     DbSet<Language> IApplicationDbContext.Languages => Languages;
+    DbSet<User> IApplicationDbContext.Users => Users;
 }

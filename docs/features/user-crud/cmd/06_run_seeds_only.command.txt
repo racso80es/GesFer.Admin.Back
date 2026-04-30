@@ -1,0 +1,2 @@
+cmd /c "set RUN_SEEDS_ONLY=1&& dotnet run --project .\src\GesFer.Admin.Back.Api\GesFer.Admin.Back.Api.csproj -c Release"
+

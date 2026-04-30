@@ -1,0 +1,2 @@
+powershell -NoProfile -Command "(git ls-files --others --exclude-standard).Count"
+

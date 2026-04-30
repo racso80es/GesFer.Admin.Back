@@ -13,11 +13,12 @@ Esta carpeta contiene los archivos de seed data para el dominio Admin. **Admin e
 
 ### Negocio y usuarios
 - **companies.json**: Empresas (Companies). Dependen de Language (y opcionalmente City, Country, State, PostalCode).
+- **users.json**: Usuarios (multi-tenant) por empresa (`CompanyId`). Se ejecuta después de `companies.json`.
 - **admin-users.json**: Usuarios administrativos del sistema.
 
 ## Orden de ejecución (SeedAllAsync)
 
-1. Languages → 2. Countries → 3. States → 4. Cities → 5. PostalCodes → 6. Companies → 7. AdminUsers.
+1. Languages → 2. Countries → 3. States → 4. Cities → 5. PostalCodes → 6. Companies → 7. Users → 8. AdminUsers.
 
 ## Orden de ejecución (BD compartida)
 

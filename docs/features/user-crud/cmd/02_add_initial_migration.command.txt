@@ -1,0 +1,2 @@
+dotnet ef migrations add Initial --output-dir Data/Migrations --project .\src\GesFer.Admin.Back.Infrastructure\GesFer.Admin.Back.Infrastructure.csproj
+

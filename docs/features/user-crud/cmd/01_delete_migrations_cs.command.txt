@@ -1,0 +1,2 @@
+powershell -NoProfile -Command "Remove-Item -Force -ErrorAction Stop '.\src\GesFer.Admin.Back.Infrastructure\Data\Migrations\*.cs'"
+
