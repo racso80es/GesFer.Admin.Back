@@ -1,0 +1,15 @@
+{
+  "autor": "Cursor-GPT",
+  "descripcionBreve": "modificacion: invoke-mysql-seeds spec añade DropCreateDb",
+  "tipoOperacion": "modificacion",
+  "contexto": "Alinear invoke-mysql-seeds al patrón prepare-full-env; añadir estrategia B (DROP/CREATE DB) y fase db_drop_create.",
+  "proyectoOrigenCambio": "GesFer.Admin.Back",
+  "cambiosRealizados": [
+    {
+      "anterior": "SddIA/tools/invoke-mysql-seeds/spec.md (sin DropCreateDb, sin fase db_drop_create)",
+      "nuevo": "SddIA/tools/invoke-mysql-seeds/spec.md (DropCreateDb + fase db_drop_create + flags)"
+    }
+  ],
+  "impacto": "Medio"
+}
+
