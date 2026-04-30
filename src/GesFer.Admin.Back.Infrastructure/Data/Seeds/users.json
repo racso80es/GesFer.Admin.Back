@@ -2,11 +2,11 @@
   {
     "id": "aaaaaaaa-0000-0000-0000-000000000001",
     "companyId": "550e8400-e29b-41d4-a716-446655440000",
-    "username": "admin.user01",
+    "username": "user_test",
     "password": "admin123",
     "firstName": "Admin",
     "lastName": "User01",
-    "email": "admin.user01@empresa.com",
+    "email": "user_test@empresa.com",
     "phone": "910000001",
     "address": "Calle Gran Vía, 1",
     "languageId": "d3e0b8a1-5f2c-4b5d-9a6e-7f8c9d0e1a2b"
