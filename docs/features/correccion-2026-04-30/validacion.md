@@ -12,7 +12,7 @@ checks:
     result: pass
     message: Todas las pruebas pasan sin errores
 git_changes:
-  files_added: 5
+  files_added: 4
   files_modified: 1
   files_deleted: 0
 ---
