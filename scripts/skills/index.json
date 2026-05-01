@@ -12,24 +12,6 @@
   },
   "skills": [
     {
-      "skillId": "iniciar-rama",
-      "path": "iniciar-rama/",
-      "manifest": "iniciar-rama/manifest.json",
-      "launcher_bat": "iniciar-rama/Iniciar-Rama.bat",
-      "executable": "iniciar-rama/iniciar_rama.exe",
-      "description": "Crea rama feat/ o fix/ actualizada con master/main."
-    },
-    {
-      "skillId": "finalizar-git",
-      "path": "finalizar-git/",
-      "manifest": "finalizar-git/manifest.json",
-      "launcher_bat_pre_pr": "finalizar-git/Push-And-CreatePR.bat",
-      "launcher_bat_post_pr": "finalizar-git/Merge-To-Master-Cleanup.bat",
-      "executable_pre_pr": "finalizar-git/push_and_create_pr.exe",
-      "executable_post_pr": "finalizar-git/merge_to_master_cleanup.exe",
-      "description": "Pre-PR: push + crear PR. Post-PR: checkout troncal, borrar rama."
-    },
-    {
       "skillId": "invoke-command",
       "path": "invoke-command/",
       "manifest": "invoke-command/manifest.json",

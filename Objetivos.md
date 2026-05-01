@@ -22,7 +22,7 @@ Este repositorio corresponde al **backend (API)** del ecosistema GesFer, que ha 
    Cualquier persona que clone el repo debe entender de inmediato que es el backend/API de GesFer Admin y qué puede hacer con él (ejecutar, testear, desplegar).
 
 4. **Alineación con el protocolo del proyecto**  
-   Respetar las Leyes Universales y el protocolo multi-agente definidos en `AGENTS.md` (entorno Windows/PowerShell, sin commits a `master`, compilación verificada, etc.).
+   Respetar las Leyes Universales y el protocolo multi-agente definidos en `AGENTS.md` (entorno Windows/PowerShell, sin commits a `main`, compilación verificada, etc.).
 
 ---
 

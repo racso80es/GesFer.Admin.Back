@@ -1,14 +1,13 @@
 <#
 .SYNOPSIS
-    Ejecuta la acción finalize: comprueba precondiciones e invoca la skill finalizar-proceso (FinalizarProceso, Push-And-CreatePR).
+    Ejecuta la acción finalize con suite Git S+: git-sync-remote + git-create-pr.
 .DESCRIPTION
-    Orquestador de la acción finalize (SddIA/actions/finalize). Comprueba rama, objectives.md y validacion.json;
-    opcionalmente ejecuta verify-pr-protocol; luego invoca la skill finalizar-proceso (Push-And-CreatePR.ps1)
-    para push y creación del PR. La skill es la única que ejecuta comandos git (Ley COMANDOS).
+    Orquestador de la acción finalize (SddIA/actions/finalize).
+    No ejecuta git/gh directamente: invoca skills ejecutables (capsule-json-io).
 .PARAMETER Persist
     Ruta de la carpeta de la feature (Cúmulo), ej. docs/features/create-tool-postman-mcp-validation/
 .PARAMETER BranchName
-    Rama a pushear (por defecto: rama actual).
+    Rama a publicar (obligatoria; el script no resuelve rama por git directo).
 .PARAMETER NoVerify
     No ejecutar verify-pr-protocol antes de push/PR.
 .PARAMETER Title
@@ -36,13 +35,12 @@ $scriptDir = $PSScriptRoot
 $repoRoot = (Resolve-Path (Join-Path $scriptDir "..\..\..")).Path
 Push-Location $repoRoot
 try {
-    $currentBranch = (git branch --show-current).Trim()
-    if ([string]::IsNullOrWhiteSpace($currentBranch)) {
-        Write-Error "No se pudo obtener la rama actual. Ejecute desde un repositorio git."
+    if ([string]::IsNullOrWhiteSpace($BranchName)) {
+        Write-Error "BranchName es obligatorio. Este script no ejecuta git para resolver la rama actual."
         exit 1
     }
-    if ($currentBranch -eq "master" -or $currentBranch -eq "main") {
-        Write-Error "La acción finalize no debe ejecutarse en la rama troncal (master/main). Cambie a su rama feat/ o fix/."
+    if ($BranchName -eq "master" -or $BranchName -eq "main") {
+        Write-Error "La acción finalize no debe ejecutarse en la rama troncal (master/main)."
         exit 1
     }
 
@@ -70,61 +68,43 @@ try {
     }
 
     if (-not $NoVerify) {
-        $cargo = Get-Command cargo -ErrorAction SilentlyContinue
-        if ($cargo) {
-            $verifyBin = Join-Path $repoRoot "scripts\skills-rs"
-            if (Test-Path (Join-Path $verifyBin "Cargo.toml")) {
-                Write-Host "[Finalize] Ejecutando verify-pr-protocol..." -ForegroundColor Cyan
-                Push-Location $verifyBin
-                try {
-                    cargo run --bin verify_pr_protocol 2>&1
-                    if ($LASTEXITCODE -ne 0) {
-                        Write-Error "verify-pr-protocol falló. Abortando finalize. Corrija y vuelva a ejecutar."
-                        exit 1
-                    }
-                } finally {
-                    Pop-Location
-                }
-            }
-        }
+        Write-Warning "verify-pr-protocol no se ejecuta aquí (prohibido cargo run directo). Ejecutar vía skill/herramienta autorizada si aplica."
     }
 
-    $skillDir = Join-Path $repoRoot "scripts\skills\finalizar-git"
-    # Cápsula: .exe en raíz (contrato v2); compatibilidad legacy: bin/push_and_create_pr.exe
-    $exePathRoot = Join-Path $skillDir "push_and_create_pr.exe"
-    $exePathBin = Join-Path $skillDir "bin\push_and_create_pr.exe"
-    $batPath = Join-Path $skillDir "Push-And-CreatePR.bat"
-
-    if (Test-Path $exePathRoot) {
-        $exePath = $exePathRoot
-    } elseif (Test-Path $exePathBin) {
-        $exePath = $exePathBin
-    } else {
-        $exePath = $null
+    $syncExe = Join-Path $repoRoot "scripts\\skills\\git-sync-remote\\git_sync_remote.exe"
+    $prExe = Join-Path $repoRoot "scripts\\skills\\git-create-pr\\git_create_pr.exe"
+    if (-not (Test-Path $syncExe)) {
+        Write-Error "No se encontró git_sync_remote.exe en scripts/skills/git-sync-remote/. Compile/copie con skills-rs/install.ps1."
+        exit 1
     }
-
-    $useExe = $null -ne $exePath
-    $useBat = -not $useExe -and (Test-Path $batPath)
-
-    if (-not $useExe -and -not $useBat) {
-        Write-Error "No se encontró la skill finalizar-git: push_and_create_pr.exe (raíz o bin/) ni Push-And-CreatePR.bat en $skillDir. Ejecute scripts/skills-rs/install.ps1."
+    if (-not (Test-Path $prExe)) {
+        Write-Error "No se encontró git_create_pr.exe en scripts/skills/git-create-pr/. Compile/copie con skills-rs/install.ps1."
+        exit 1
+    }
+    if ([string]::IsNullOrWhiteSpace($Title)) {
+        Write-Error "Title es obligatorio para crear PR con git-create-pr."
         exit 1
     }
 
-    Write-Host "[Finalize] Invocando skill finalizar-git (pre-PR) con -Persist $Persist" -ForegroundColor Cyan
-    if ($useExe) {
-        $exeArgs = @("--persist", $Persist)
-        if ($BranchName) { $exeArgs += @("--branch", $BranchName) }
-        if ($Title) { $exeArgs += @("--title", $Title) }
-        & $exePath @exeArgs
-    } else {
-        $batArgs = @("--persist", $Persist)
-        if ($BranchName) { $batArgs += @("--branch", $BranchName) }
-        if ($Title) { $batArgs += @("--title", $Title) }
-        & $batPath @batArgs
-    }
+    $objText = ""
+    if (Test-Path $objectivesPath) { $objText = Get-Content $objectivesPath -Raw -Encoding UTF8 }
+    $valText = ""
+    if (Test-Path $validacionPath) { $valText = Get-Content $validacionPath -Raw -Encoding UTF8 }
+    $body = "## Artefactos`n`n- Persist: $Persist`n- objectives.md: $(if ($objText) { 'OK' } else { 'NO' })`n- validacion.json: $(if ($valText) { 'OK' } else { 'NO' })`n`n## Objectives (extracto)`n`n$objText`n`n## Validación (extracto)`n`n$valText"
+
+    $syncReq = @{ meta = @{ schema_version = "2.0"; entity_kind = "skill"; entity_id = "git-sync-remote" }; request = @{ force = $false } } | ConvertTo-Json -Compress
+    $env:GESFER_CAPSULE_REQUEST = $syncReq
+    Write-Host "[Finalize] git-sync-remote..." -ForegroundColor Cyan
+    & $syncExe | Write-Host
+    if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+    $prReq = @{ meta = @{ schema_version = "2.0"; entity_kind = "skill"; entity_id = "git-create-pr" }; request = @{ title = $Title; body = $body; base_branch = "main" } } | ConvertTo-Json -Compress
+    $env:GESFER_CAPSULE_REQUEST = $prReq
+    Write-Host "[Finalize] git-create-pr..." -ForegroundColor Cyan
+    & $prExe | Write-Host
     $exitCode = $LASTEXITCODE
 } finally {
+    Remove-Item Env:GESFER_CAPSULE_REQUEST -ErrorAction SilentlyContinue
     Pop-Location
 }
 exit $exitCode

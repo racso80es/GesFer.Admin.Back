@@ -17,16 +17,28 @@ Cuando el usuario escriba **#Skill** (solo o en un mensaje), responde sugiriendo
 
 | skill_id | Descripción |
 |----------|-------------|
-| **iniciar-rama** | Crea rama feat/ o fix/ actualizada con master/main. Inicio de acción o tarea. Cápsula: paths.skillCapsules.iniciar-rama |
-| **finalizar-git** | Aceptar PR a master, unificar, eliminar rama, volver a master. Pre-pr / post_pr. Cápsula: paths.skillCapsules.finalizar-git |
+| **git-workspace-recon** | Reconocimiento/validación de workspace (entorno limpio) previo a mutaciones. Cápsula: paths.skillCapsules.git-workspace-recon |
+| **git-branch-manager** | Gestión de rama (crear/cambiar/validar aislamiento) para feat/ y fix/. Cápsula: paths.skillCapsules.git-branch-manager |
+| **git-save-snapshot** | Consolidación de hitos atómicos (snapshot/commit) con trazabilidad S+. Cápsula: paths.skillCapsules.git-save-snapshot |
+| **git-sync-remote** | Sincronización segura con remoto (publicación/push) sin git directo. Cápsula: paths.skillCapsules.git-sync-remote |
+| **git-tactical-retreat** | Protocolo de emergencia ante fallos estructurales (rollback/retirada táctica). Cápsula: paths.skillCapsules.git-tactical-retreat |
+| **git-create-pr** | Creación de Pull Request enlazando artefactos de la tarea (objectives/validación). Cápsula: paths.skillCapsules.git-create-pr |
 | **invoke-command** | Interceptor de comandos de sistema (git, dotnet, npm, pwsh). Telemetría y registro por rama. Cápsula: paths.skillCapsules.invoke-command |
 | **invoke-commit** | Operaciones de commit con parámetros directos (--message, --files, --all). Sin ficheros .txt. Cápsula: paths.skillCapsules.invoke-commit |
+| **sddia-evolution-register** | Registro de cambios en `./SddIA/` en Evolution Log (contrato evolution). Cápsula: paths.skillCapsules.sddia-evolution-register |
 | **git-operations** | Uso seguro de Git (ramas feat/fix, commits convencionales). Solo definición. |
 | **documentation** | Estándares SSOT y gestión de documentación. Solo definición. |
 | **filesystem-ops** | Operaciones de archivo seguras (PowerShell). Solo definición. |
 | **dotnet-development** | Estándares .NET (build, test, logging). Solo definición. |
 | **frontend-build** | Build Next.js (Product, Admin) fallback. Solo definición. |
 | **security-audit** | Auditoría y hooks pre-commit/pre-push. Solo definición. |
+
+## Skills legacy (obsoletas) — control de versiones
+
+Estas skills se consideran **legacy/obsoletas** para control de versiones y no deben recomendarse en flujos nuevos (Tekton: prohibidas por directriz S+ Grade):
+
+- `iniciar-rama`
+- `finalizar-git`
 
 ## Respuesta sugerida
 

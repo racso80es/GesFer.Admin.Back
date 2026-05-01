@@ -38,10 +38,7 @@ $releaseDir = Join-Path $scriptDir "target\release"
 
 # Raíz de cápsula (skills-contract v2 / manifest components.executable en raíz)
 $capsulesRoot = @(
-    @{ exe = "iniciar_rama"; capsule = "iniciar-rama" },
-    @{ exe = "merge_to_master_cleanup"; capsule = "finalizar-git" },
     @{ exe = "invoke_command"; capsule = "invoke-command" },
-    @{ exe = "push_and_create_pr"; capsule = "finalizar-git" },
     @{ exe = "invoke_commit"; capsule = "invoke-commit" },
     @{ exe = "git_workspace_recon"; capsule = "git-workspace-recon" },
     @{ exe = "git_branch_manager"; capsule = "git-branch-manager" },

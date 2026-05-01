@@ -11,10 +11,14 @@ El listado canónico se obtiene de:
 
 | skillId | Descripción breve | Launcher humano (opcional) | Ejecutable (agente) |
 |---------|-------------------|----------------------------|---------------------|
-| **iniciar-rama** | Crea rama feat/ o fix/ actualizada con troncal. | `iniciar-rama/Iniciar-Rama.bat` | `iniciar_rama.exe` |
-| **finalizar-git** | Pre-PR: push + PR; post-PR: limpieza de rama. | `Push-And-CreatePR.bat`, `Merge-To-Master-Cleanup.bat` | `push_and_create_pr.exe`, `merge_to_master_cleanup.exe` |
 | **invoke-command** | Interceptor de comandos. | `Invoke-Command.bat` | `invoke_command.exe` |
 | **invoke-commit** | Commit con parámetros o JSON. | `Invoke-Commit.bat` | `invoke_commit.exe` |
+| **git-workspace-recon** | Reconocimiento/validación de workspace (entorno limpio). | `Git-Workspace-Recon.bat` | `git_workspace_recon.exe` |
+| **git-branch-manager** | Gestión de rama (crear/cambiar/validar aislamiento) para feat/fix. | `Git-Branch-Manager.bat` | `git_branch_manager.exe` |
+| **git-save-snapshot** | Consolidación de hitos atómicos (snapshot/commit). | `Git-Save-Snapshot.bat` | `git_save_snapshot.exe` |
+| **git-sync-remote** | Sincronización segura con remoto (publicación). | `Git-Sync-Remote.bat` | `git_sync_remote.exe` |
+| **git-tactical-retreat** | Protocolo de emergencia ante fallos estructurales. | `Git-Tactical-Retreat.bat` | `git_tactical_retreat.exe` |
+| **git-create-pr** | Creación de Pull Request. | `Git-Create-PR.bat` | `git_create_pr.exe` |
 
 Cada cápsula tiene `manifest.json`, `.exe` en la **raíz** (contrato v2) y documentación `.md`. **La IA invoca el `.exe`** con JSON en stdin según **SddIA/norms/capsule-json-io.md**. Los `.bat` son solo atajos humanos.
 

@@ -44,7 +44,7 @@ json_schema:
         type: string
       type: array
     related_skills:
-      description: Skills recomendadas (iniciar-rama, finalizar-git, documentation, etc.).
+      description: Skills recomendadas (suite Git S+ y otras como documentation, security-audit, etc.). No referenciar iniciar-rama/finalizar-git (legacy).
       items:
         type: string
       type: array

@@ -22,8 +22,12 @@ related_actions:
 - validate
 - finalize
 related_skills:
-- iniciar-rama
-- finalizar-git
+- git-workspace-recon
+- git-branch-manager
+- git-save-snapshot
+- git-sync-remote
+- git-tactical-retreat
+- git-create-pr
 - documentation
 - security-audit
 template_id: correccion-auditorias-feature
@@ -67,7 +71,7 @@ El agente que ejecute la plantilla resolverá estas referencias según la norma 
 ## Agentes y skills
 
 - **Agentes:** Auditor (Back/Front/Process) para análisis; Arquitecto y Tekton para orquestación y corrección.
-- **Skills:** iniciar-rama, finalizar-git, documentation, security-audit cuando aplique.
+- **Skills (Git S+):** git-workspace-recon, git-branch-manager, git-save-snapshot, git-sync-remote, git-tactical-retreat, git-create-pr. Complemento: documentation, security-audit cuando aplique.
 
 ## Referencias
 
