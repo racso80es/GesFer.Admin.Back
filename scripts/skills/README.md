@@ -19,8 +19,11 @@ El listado canónico se obtiene de:
 | **git-sync-remote** | Sincronización segura con remoto (publicación). | `Git-Sync-Remote.bat` | `git_sync_remote.exe` |
 | **git-tactical-retreat** | Protocolo de emergencia ante fallos estructurales. | `Git-Tactical-Retreat.bat` | `git_tactical_retreat.exe` |
 | **git-create-pr** | Creación de Pull Request. | `Git-Create-PR.bat` | `git_create_pr.exe` |
+| **git-close-cycle** | Post-fusión: troncal, fetch --prune, borrar rama local de tarea. | `Git-Close-Cycle.bat` | `git_close_cycle.exe` |
+| **verify-pr-protocol** | Protocolo aceptación PR: nomenclatura, build, tests. | `Verify-PR-Protocol.bat` | `verify_pr_protocol.exe` |
+| **sddia-evolution-register** (y validate/watch) | Registro/validación evolution SddIA. | `Register.bat` (cápsula) | `bin/sddia_evolution_*.exe` |
 
-Cada cápsula tiene `manifest.json`, `.exe` en la **raíz** (contrato v2) y documentación `.md`. **La IA invoca el `.exe`** con JSON en stdin según **SddIA/norms/capsule-json-io.md**. Los `.bat` son solo atajos humanos.
+Cada cápsula tiene `manifest.json`, `.exe` en la **raíz** (contrato v2; excepción **sddia-evolution**: `bin/`) y documentación `.md`. **La IA invoca el `.exe`** con JSON en stdin según **SddIA/norms/capsule-json-io.md**. Los `.bat` son solo atajos humanos.
 
 ## Implementación: Rust
 

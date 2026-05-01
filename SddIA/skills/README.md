@@ -35,6 +35,7 @@ Cada skill tiene en este directorio una carpeta con:
 | git-tactical-retreat | Protocolo de emergencia ante fallos estructurales. | git-tactical-retreat |
 | git-create-pr | Creación de Pull Request enlazando artefactos de tarea. | git-create-pr |
 | git-close-cycle | Cierre local post-fusión: troncal actualizado y rama de tarea eliminada. | git-close-cycle |
+| verify-pr-protocol | Validación protocolo PR: nomenclatura, build y tests de la solución. | verify-pr-protocol |
 | git-operations | Uso seguro de Git (ramas feat/fix, commits convencionales). | — |
 | documentation | Estándares SSOT y gestión de documentación. | — |
 | filesystem-ops | Operaciones de archivo seguras (PowerShell). | — |

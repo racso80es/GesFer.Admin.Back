@@ -25,3 +25,5 @@
 | 176945b3-e741-48ff-9d97-30d562945054 | 2026-05-01T11:42:32.083145+00:00 | Renombrar acción finalize a finalize-process; blindar actions-contract (solo orquestación skills/tools) |
 | 840c1d87-9086-4775-b351-c133dc51468b | 2026-05-01T11:53:01.606923700+00:00 | Hotfix git-sync-remote: upstream + push -u; norma git-operations Ley de Hierro |
 | 8aba101c-93b5-4b4f-b053-4108e952688c | 2026-05-01T14:05:29.628359200+00:00 | alta: skill git-close-cycle; finalize-process orquesta post-fusion |
+| b8c7d6e5-f4a3-4b2c-9d8e-7f6a5b4c3d2e | 2026-05-01T00:00:00+00:00 | alta: cápsula verify-pr-protocol + index + Cúmulo + difusión |
+| e4d5f6a7-b8c9-40d0-9f1a-2b3c4d5e6f7a | 2026-05-01T00:00:00+00:00 | modificacion: spec start-api ruta fuente Rust src/bin/start_api.rs |

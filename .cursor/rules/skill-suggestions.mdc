@@ -24,6 +24,7 @@ Cuando el usuario escriba **#Skill** (solo o en un mensaje), responde sugiriendo
 | **git-tactical-retreat** | Protocolo de emergencia ante fallos estructurales (rollback/retirada táctica). Cápsula: paths.skillCapsules.git-tactical-retreat |
 | **git-create-pr** | Creación de Pull Request enlazando artefactos de la tarea (objectives/validación). Cápsula: paths.skillCapsules.git-create-pr |
 | **git-close-cycle** | Post-fusión: troncal (main/master), pull origin HEAD, fetch --prune, eliminar rama de trabajo (-d/-D). Cápsula: paths.skillCapsules.git-close-cycle |
+| **verify-pr-protocol** | Protocolo aceptación PR: nomenclatura, dotnet build, dotnet test. Cápsula: paths.skillCapsules.verify-pr-protocol |
 | **invoke-command** | Interceptor de comandos de sistema (git, dotnet, npm, pwsh). Telemetría y registro por rama. Cápsula: paths.skillCapsules.invoke-command |
 | **invoke-commit** | Operaciones de commit con parámetros directos (--message, --files, --all). Sin ficheros .txt. Cápsula: paths.skillCapsules.invoke-commit |
 | **sddia-evolution-register** | Registro de cambios en `./SddIA/` en Evolution Log (contrato evolution). Cápsula: paths.skillCapsules.sddia-evolution-register |
