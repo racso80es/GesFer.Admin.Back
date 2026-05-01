@@ -39,5 +39,6 @@ Cada skill tiene en este directorio una carpeta con:
 ## Referencias
 
 - Contrato global: `skills-contract.md` (en este directorio; v2 + capsule-json-io).
+- **Portabilidad:** [reproducir-skills-en-otros-entornos-sddia.md](./reproducir-skills-en-otros-entornos-sddia.md) — checklist para reproducir skills en otro repo SddIA.
 - Cúmulo: `SddIA/agents/cumulo.json` → **paths.skillsDefinitionPath**, **paths.skillsPath**, **paths.skillCapsules**, **paths.skillsIndexPath**.
 - Índice de implementaciones: **paths.skillsIndexPath** (paths.skillsIndexPath, Cúmulo).

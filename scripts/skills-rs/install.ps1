@@ -42,7 +42,13 @@ $capsulesRoot = @(
     @{ exe = "merge_to_master_cleanup"; capsule = "finalizar-git" },
     @{ exe = "invoke_command"; capsule = "invoke-command" },
     @{ exe = "push_and_create_pr"; capsule = "finalizar-git" },
-    @{ exe = "invoke_commit"; capsule = "invoke-commit" }
+    @{ exe = "invoke_commit"; capsule = "invoke-commit" },
+    @{ exe = "git_workspace_recon"; capsule = "git-workspace-recon" },
+    @{ exe = "git_branch_manager"; capsule = "git-branch-manager" },
+    @{ exe = "git_save_snapshot"; capsule = "git-save-snapshot" },
+    @{ exe = "git_sync_remote"; capsule = "git-sync-remote" },
+    @{ exe = "git_tactical_retreat"; capsule = "git-tactical-retreat" },
+    @{ exe = "git_create_pr"; capsule = "git-create-pr" }
 )
 foreach ($cap in $capsulesRoot) {
     $src = Join-Path $releaseDir "$($cap.exe).exe"

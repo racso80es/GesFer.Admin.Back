@@ -1,0 +1,18 @@
+{
+  "skillId": "git-create-pr",
+  "version": "2.1.0",
+  "description": "Crea PR vía gh pr create. Agente: git_create_pr.exe + JSON stdin/stdout.",
+  "contract_ref": "SddIA/skills/skills-contract.md",
+  "invocation": {
+    "bat": "Uso para usuarios humanos (envoltorio .bat en raíz de cápsula).",
+    "exe": "Uso obligatorio para IAs, servidores MCP y automatizaciones: git_create_pr.exe en raíz de cápsula (JSON según capsule-json-io).",
+    "no_ps1": "No usar .ps1 como interfaz de contrato; ejecutar siempre el .exe."
+  },
+  "components": {
+    "launcher_bat": "Git-Create-PR.bat",
+    "doc": "git-create-pr.md",
+    "executable": "git_create_pr.exe"
+  },
+  "env": ["Windows 11", "GitHub CLI (gh)"]
+}
+

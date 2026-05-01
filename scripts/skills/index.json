@@ -52,6 +52,54 @@
       "launcher_bat": "sddia-evolution/Register.bat",
       "executable": "sddia-evolution/bin/sddia_evolution_register.exe",
       "description": "Registro evolution SddIA (UUID, índice, hash); validate y watch en la misma cápsula."
+    },
+    {
+      "skillId": "git-workspace-recon",
+      "path": "git-workspace-recon/",
+      "manifest": "git-workspace-recon/manifest.json",
+      "launcher_bat": "git-workspace-recon/Git-Workspace-Recon.bat",
+      "executable": "git-workspace-recon/git_workspace_recon.exe",
+      "description": "Reconocimiento del workspace Git: status -s + diff --stat."
+    },
+    {
+      "skillId": "git-branch-manager",
+      "path": "git-branch-manager/",
+      "manifest": "git-branch-manager/manifest.json",
+      "launcher_bat": "git-branch-manager/Git-Branch-Manager.bat",
+      "executable": "git-branch-manager/git_branch_manager.exe",
+      "description": "Gestión de ramas: git switch / git switch -c."
+    },
+    {
+      "skillId": "git-save-snapshot",
+      "path": "git-save-snapshot/",
+      "manifest": "git-save-snapshot/manifest.json",
+      "launcher_bat": "git-save-snapshot/Git-Save-Snapshot.bat",
+      "executable": "git-save-snapshot/git_save_snapshot.exe",
+      "description": "Snapshot: git add . + git commit -m (tolerando nothing to commit)."
+    },
+    {
+      "skillId": "git-sync-remote",
+      "path": "git-sync-remote/",
+      "manifest": "git-sync-remote/manifest.json",
+      "launcher_bat": "git-sync-remote/Git-Sync-Remote.bat",
+      "executable": "git-sync-remote/git_sync_remote.exe",
+      "description": "Sincronización con remoto: fetch + pull --rebase + push origin HEAD."
+    },
+    {
+      "skillId": "git-tactical-retreat",
+      "path": "git-tactical-retreat/",
+      "manifest": "git-tactical-retreat/manifest.json",
+      "launcher_bat": "git-tactical-retreat/Git-Tactical-Retreat.bat",
+      "executable": "git-tactical-retreat/git_tactical_retreat.exe",
+      "description": "Retreat: checkout -- <path> y/o reset --hard + clean -fd (guardado)."
+    },
+    {
+      "skillId": "git-create-pr",
+      "path": "git-create-pr/",
+      "manifest": "git-create-pr/manifest.json",
+      "launcher_bat": "git-create-pr/Git-Create-PR.bat",
+      "executable": "git-create-pr/git_create_pr.exe",
+      "description": "Crear Pull Request con gh pr create."
     }
   ]
 }

@@ -1,0 +1,18 @@
+{
+  "skillId": "git-sync-remote",
+  "version": "2.1.0",
+  "description": "Sincroniza con remoto: fetch + pull --rebase + push. Agente: git_sync_remote.exe + JSON stdin/stdout.",
+  "contract_ref": "SddIA/skills/skills-contract.md",
+  "invocation": {
+    "bat": "Uso para usuarios humanos (envoltorio .bat en raíz de cápsula).",
+    "exe": "Uso obligatorio para IAs, servidores MCP y automatizaciones: git_sync_remote.exe en raíz de cápsula (JSON según capsule-json-io).",
+    "no_ps1": "No usar .ps1 como interfaz de contrato; ejecutar siempre el .exe."
+  },
+  "components": {
+    "launcher_bat": "Git-Sync-Remote.bat",
+    "doc": "git-sync-remote.md",
+    "executable": "git_sync_remote.exe"
+  },
+  "env": ["Windows 11", "Git"]
+}
+

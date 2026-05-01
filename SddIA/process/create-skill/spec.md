@@ -40,7 +40,7 @@ Este documento define el **proceso de tarea** para crear una nueva **skill** en 
 El proceso **create-skill** define el procedimiento para incorporar una nueva skill al ecosistema de ejecución del repositorio:
 
 - **Definición (SddIA)**: `paths.skillsDefinitionPath/<skill-id>/` con `spec.md` (y `spec.json` si el contrato de skills lo requiere).
-- **Cápsula (entregable ejecutable)**: `paths.skillCapsules[<skill-id>]` (bajo `paths.skillsPath`) con `bin/<skill>.exe`, `manifest.json` y documentación.
+- **Cápsula (entregable ejecutable)**: `paths.skillCapsules[<skill-id>]` (bajo `paths.skillsPath`) con **`<skill>.exe` en la raíz de la cápsula**, `manifest.json` y documentación (contrato `SddIA/skills/skills-contract.md`).
 - **Índice**: actualización de `paths.skillsIndexPath`.
 - **Trazabilidad**: todo bajo **Karma2Token** y registro de evolution si cambia `./SddIA/`.
 
@@ -95,3 +95,4 @@ scripts/skills-rs/src/<skill-name>/
 - Norma: `SddIA/norms/commands-via-skills-or-tools.md`.
 - Envelope JSON: `SddIA/norms/capsule-json-io.md`.
 - Rutas: `SddIA/norms/paths-via-cumulo.md` (Cúmulo).
+- Portar este proceso a otro repo SddIA: `paths.processPath/create-skill/reproducir-create-skill-en-otros-entornos-sddia.md`.
