@@ -82,6 +82,14 @@
       "launcher_bat": "git-create-pr/Git-Create-PR.bat",
       "executable": "git-create-pr/git_create_pr.exe",
       "description": "Crear Pull Request con gh pr create."
+    },
+    {
+      "skillId": "git-close-cycle",
+      "path": "git-close-cycle/",
+      "manifest": "git-close-cycle/manifest.json",
+      "launcher_bat": "git-close-cycle/Git-Close-Cycle.bat",
+      "executable": "git-close-cycle/git_close_cycle.exe",
+      "description": "Post-fusión: troncal actualizado, fetch --prune, eliminar rama de tarea (-d/-D)."
     }
   ]
 }

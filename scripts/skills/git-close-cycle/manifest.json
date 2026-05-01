@@ -1,0 +1,16 @@
+{
+  "skillId": "git-close-cycle",
+  "version": "2.1.0",
+  "description": "Cierre local post-fusión: checkout troncal, pull origin HEAD, fetch --prune, branch -d/-D. Agente: git_close_cycle.exe + JSON stdin/stdout.",
+  "contract_ref": "SddIA/skills/skills-contract.md",
+  "invocation": {
+    "bat": "Uso para usuarios humanos (envoltorio .bat en raíz de cápsula).",
+    "exe": "Uso obligatorio para IAs: git_close_cycle.exe en raíz de cápsula (JSON según capsule-json-io).",
+    "no_ps1": "No usar .ps1 como interfaz de contrato; ejecutar siempre el .exe."
+  },
+  "components": {
+    "launcher_bat": "Git-Close-Cycle.bat",
+    "executable": "git_close_cycle.exe"
+  },
+  "env": ["Windows 11", "Git"]
+}

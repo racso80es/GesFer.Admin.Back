@@ -8,7 +8,8 @@ flow_steps:
 - Protocolo verify-pr-protocol (skill/herramienta autorizada)
 - Git S+ obligatorio: git-sync-remote → git-create-pr
 - Auditoría
-- 'post_pr: limpieza post-merge vía skill/herramienta autorizada'
+- 'post_fusion_remota: skill git-close-cycle (target_branch = rama de trabajo de la tarea)'
+- 'post_pr: limpieza post-merge vía skill/herramienta autorizada (formalizada como git-close-cycle en cierre post-fusión)'
 inputs:
 - Carpeta de la tarea (paths.featurePath o paths.fixPath, Cúmulo)
 - Rama feat/ o fix/
@@ -17,7 +18,7 @@ outputs:
 - Evolution Logs actualizados
 - Pull Request creado
 - finalize-process.md opcional en carpeta de tarea (frontmatter YAML + Markdown)
-skill_ref: git-sync-remote, git-create-pr
+skill_ref: git-sync-remote, git-create-pr, git-close-cycle
 ---
 
 # Action: finalize-process (cierre de proceso / tarea)
@@ -28,7 +29,7 @@ La acción **finalize-process** cierra el **proceso de tarea** (feature, bug-fix
 
 **Disparadores conceptuales (lenguaje natural):** «proceso finalizado», «tarea finalizada», «cierre del ciclo», «fase 8», además de peticiones de publicación («subir rama», «subir al remoto») cuando el contexto sea el **cierre formal** tras validación.
 
-**Comportamiento obligatorio:** el ejecutor debe completar la secuencia Git S+ **git-sync-remote → git-create-pr**. Sin este paso el cierre no está completo. Toda orquestación es **solo** vía skills y tools registradas (Ley COMANDOS); **prohibido** documentar o implementar esta acción como invocación directa de `.ps1`, `.bat`, `pwsh`, `git` u otros binarios del SO fuera de las cápsulas.
+**Comportamiento obligatorio:** el ejecutor debe completar la secuencia Git S+ **git-sync-remote → git-create-pr**. Sin este paso el cierre no está completo. Cuando el disparador es **«tarea finalizada»** en sentido de **cierre post-fusión en el remoto** (la rama de trabajo ya integrada en el troncal), el **paso final de ejecución orquestada** de esta acción es invocar la skill **git-close-cycle** (paths.skillCapsules.git-close-cycle) con **`target_branch`** igual al **nombre de la rama de trabajo** de la tarea (la misma feat/ o fix/ que se cerró), de forma que el clon local quede en troncal actualizado y la rama de tarea eliminada en local. **No** ejecutar **git-close-cycle** antes de confirmar la fusión en remoto si ello implicaría perder trabajo no integrado. Toda orquestación es **solo** vía skills y tools registradas (Ley COMANDOS); **prohibido** documentar o implementar esta acción como invocación directa de `.ps1`, `.bat`, `pwsh`, `git` u otros binarios del SO fuera de las cápsulas.
 
 ## Principio
 
@@ -54,6 +55,7 @@ La acción **finalize-process** cierra el **proceso de tarea** (feature, bug-fix
 - **git-save-snapshot** (hitos previos al cierre)
 - **git-sync-remote**
 - **git-create-pr**
+- **git-close-cycle** (post-fusión remota: troncal + eliminación local de la rama de tarea)
 
 Regla: el ejecutor **no** invoca `git push`, `gh pr create` ni scripts sueltos; solo cápsulas autorizadas.
 
@@ -61,6 +63,7 @@ Regla: el ejecutor **no** invoca `git push`, `gh pr create` ni scripts sueltos; 
 
 1. **git-sync-remote**
 2. **git-create-pr** (objectives + validacion en el cuerpo)
+3. **git-close-cycle** — **solo** en cierre **post-fusión**; `request.targetBranch` = rama de trabajo de la tarea (capturada antes del cambio de contexto si el ejecutor ya no está en esa rama).
 
 ## Flujo de ejecución (propuesto)
 
@@ -69,9 +72,10 @@ Regla: el ejecutor **no** invoca `git push`, `gh pr create` ni scripts sueltos; 
 3. **verify-pr-protocol:** Invocar mediante skill/herramienta autorizada (sin `cargo run` ni shell directo). Si falla, **abortar**.
 4. **Evolution Logs:** Actualizar según normas de producto y SddIA/evolution si hubo mutación bajo `SddIA/`.
 5. **git-sync-remote** y **git-create-pr**.
-6. **Opcional:** Persistir `finalize-process.md` en la carpeta de la tarea.
-7. **Auditoría:** Registrar en paths.auditsPath cuando aplique.
-8. **Post-PR:** Solo skills/herramientas autorizadas.
+6. **Post-fusión (cuando aplique):** **git-close-cycle** con el nombre de la rama de trabajo ya fusionada.
+7. **Opcional:** Persistir `finalize-process.md` en la carpeta de la tarea.
+8. **Auditoría:** Registrar en paths.auditsPath cuando aplique.
+9. **Post-PR / post-merge:** Solo skills/herramientas autorizadas; la limpieza local formal es **git-close-cycle**.
 
 ## Implementación técnica
 
