@@ -24,3 +24,4 @@
 | 79a1f7a0-d30c-444b-82b3-92af90394769 | 2026-05-01T11:16:44.850285200+00:00 | modificacion: spec run-test-e2e-local (user CRUD) y proceso feature (evaluacion impacto SddIA pre-sync/PR) |
 | 176945b3-e741-48ff-9d97-30d562945054 | 2026-05-01T11:42:32.083145+00:00 | Renombrar acción finalize a finalize-process; blindar actions-contract (solo orquestación skills/tools) |
 | 840c1d87-9086-4775-b351-c133dc51468b | 2026-05-01T11:53:01.606923700+00:00 | Hotfix git-sync-remote: upstream + push -u; norma git-operations Ley de Hierro |
+| 8aba101c-93b5-4b4f-b053-4108e952688c | 2026-05-01T14:05:29.628359200+00:00 | alta: skill git-close-cycle; finalize-process orquesta post-fusion |
