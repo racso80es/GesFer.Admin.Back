@@ -1,0 +1,17 @@
+{
+  "skillId": "verify-pr-protocol",
+  "version": "2.1.0",
+  "description": "Validación del protocolo de aceptación de PR: nomenclatura, dotnet build, dotnet test. Agente: verify_pr_protocol.exe + JSON stdin/stdout (SddIA/norms/capsule-json-io.md).",
+  "contract_ref": "SddIA/skills/skills-contract.md",
+  "invocation": {
+    "bat": "Uso para usuarios humanos (envoltorio .bat en raíz de cápsula).",
+    "exe": "Uso obligatorio para IAs y automatización: verify_pr_protocol.exe en raíz de cápsula (JSON según capsule-json-io).",
+    "no_ps1": "No usar .ps1 como interfaz de contrato; ejecutar siempre el .exe."
+  },
+  "components": {
+    "launcher_bat": "Verify-PR-Protocol.bat",
+    "doc": "verify-pr-protocol.md",
+    "executable": "verify_pr_protocol.exe"
+  },
+  "env": ["Windows 11", "PowerShell 7+", ".NET SDK 8"]
+}

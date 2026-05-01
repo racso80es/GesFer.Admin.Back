@@ -113,7 +113,7 @@ Recomendado tener ejecutadas antes **prepare-full-env** e **invoke-mysql-seeds**
 
 **Formato:** Ejecutable Rust (`.exe`)  
 **Ubicación:** `scripts/tools/start-api/start_api.exe`  
-**Fuente Rust:** `scripts/tools-rs/src/start_api.rs`
+**Fuente Rust:** `scripts/tools-rs/src/bin/start_api.rs`
 
 **Estándar:** Solo se generan ejecutables `.exe`. No se deben crear archivos `.ps1`.
 

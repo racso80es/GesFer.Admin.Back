@@ -31,6 +31,7 @@
 | git-tactical-retreat | Retreat: checkout -- path y/o reset --hard + clean -fd (guardado). | paths.skillCapsules.git-tactical-retreat |
 | git-create-pr | Crear PR vía gh pr create. | paths.skillCapsules.git-create-pr |
 | git-close-cycle | Post-fusión: checkout troncal, pull, fetch --prune, borrar rama de tarea local. | paths.skillCapsules.git-close-cycle |
+| verify-pr-protocol | Protocolo aceptación PR: nomenclatura, dotnet build, dotnet test. | paths.skillCapsules.verify-pr-protocol |
 | git-operations | Uso seguro de Git (ramas feat/fix, commits convencionales). | — |
 | documentation | Estándares SSOT y gestión de documentación. | — |
 | filesystem-ops | Operaciones de archivo seguras (PowerShell). | — |

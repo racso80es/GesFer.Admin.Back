@@ -90,6 +90,14 @@
       "launcher_bat": "git-close-cycle/Git-Close-Cycle.bat",
       "executable": "git-close-cycle/git_close_cycle.exe",
       "description": "Post-fusión: troncal actualizado, fetch --prune, eliminar rama de tarea (-d/-D)."
+    },
+    {
+      "skillId": "verify-pr-protocol",
+      "path": "verify-pr-protocol/",
+      "manifest": "verify-pr-protocol/manifest.json",
+      "launcher_bat": "verify-pr-protocol/Verify-PR-Protocol.bat",
+      "executable": "verify-pr-protocol/verify_pr_protocol.exe",
+      "description": "Protocolo aceptación PR: nomenclatura, dotnet build, dotnet test (SddIA/norms/pr-acceptance-protocol.md)."
     }
   ]
 }
