@@ -13,6 +13,7 @@ inputs:
   runSmoke: boolean (opcional, default true). Health, swagger, login OK, login inválido 401.
   runCompanyRead: boolean (opcional, default true). Lista JWT, secret, GET por id demo, 401 sin auth.
   runCompanyCrud: boolean (opcional, default true). Crear, actualizar, eliminar empresa temporal; GET 404.
+  runUserCrud: boolean (opcional, default true). Crear, leer, actualizar y eliminar usuario temporal; GET 404 al finalizar.
   demoCompanyId: string (opcional). UUID empresa demo en seeds.
   demoCompanyName: string (opcional). Nombre para comprobar en lista.
   adminUser: string (opcional). Override; env E2E_ADMIN_USER.
@@ -27,9 +28,11 @@ output:
     runSmoke: boolean
     runCompanyRead: boolean
     runCompanyCrud: boolean
+    runUserCrud: boolean
     smoke: objeto con healthOk, swaggerOk, loginOk, loginInvalidUnauthorized
     companyRead: objeto con listJwtOk, empresaDemoInList, listSecretOk, getByIdOk, unauthorizedWithoutAuth
     companyCrud: objeto con ok, companyId (id API), steps
+    userCrud: objeto con ok, userId (id API), steps
 toolId: run-test-e2e-local
 version: 1.0.0
 ---
@@ -42,7 +45,7 @@ version: 1.0.0
 
 ## Objetivo
 
-Automatizar las pruebas E2E HTTP validadas manualmente contra la API Admin en local: smoke, lectura de empresas y flujo CRUD con empresa nueva, con salida JSON única conforme al contrato de herramientas.
+Automatizar las pruebas E2E HTTP validadas manualmente contra la API Admin en local: smoke, lectura de empresas y flujo CRUD con empresa nueva, y flujo CRUD idempotente con usuario nuevo, con salida JSON única conforme al contrato de herramientas.
 
 ## Entrada (`request` en envelope)
 
@@ -50,7 +53,7 @@ Ver frontmatter `inputs`. Las credenciales por defecto de desarrollo local puede
 
 ## Salida
 
-Envelope v2; el campo `result` agrega las fases ejecutadas y booleanos de éxito por comprobación. Códigos de salida distintos de 0 indican la primera fase fallida (10–13 smoke, 20–21 company read, 30–34 company CRUD).
+Envelope v2; el campo `result` agrega las fases ejecutadas y booleanos de éxito por comprobación. Códigos de salida distintos de 0 indican la primera fase fallida (10–13 smoke, 20–21 company read, 30–34 company CRUD, 40–44 user CRUD).
 
 ## Referencias
 
