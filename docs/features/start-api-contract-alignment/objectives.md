@@ -3,7 +3,7 @@ feature_name: start-api-contract-alignment
 created: 2026-05-01
 process: feature
 branch: feat/start-api-contract-alignment
-status: validada-local
+status: finalizada
 ---
 
 # Objetivos: start-api-contract-alignment
