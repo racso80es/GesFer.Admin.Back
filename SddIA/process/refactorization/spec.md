@@ -2,7 +2,7 @@
 contract_ref: paths.processPath/process-contract.md
 persist_ref: paths.featurePath/refactorization-<nombre_refactor>
 phases:
-- description: Rama feat/refactorization-<nombre_refactor>; skill iniciar-rama.
+- description: Ejecutar git-workspace-recon para validar entorno limpio. Tras confirmar, crear rama feat/refactorization-<nombre_refactor> con git-branch-manager (nunca master).
   id: '0'
   name: Preparar entorno
 - description: objectives.md.
@@ -20,13 +20,13 @@ phases:
 - description: Acción implementation.
   id: '5'
   name: Implementación (doc)
-- description: Acción execution.
+- description: Acción execution aplicada al código. Consolidar hitos con git-save-snapshot (commits atómicos). Ante fallo estructural, git-tactical-retreat.
   id: '6'
   name: Ejecución
-- description: Acción validate.
+- description: Acción validate. Opcionalmente git-workspace-recon para coherencia pre-PR.
   id: '7'
   name: Validar
-- description: Acción finalize.
+- description: Cierre. git-sync-remote; git-create-pr enlazando objectives.md y validacion en el cuerpo del PR. Evolution Logs.
   id: '8'
   name: Finalizar
 process_id: refactorization
@@ -39,9 +39,13 @@ related_actions:
 - validate
 - finalize
 related_skills:
-- iniciar-rama
-- finalizar-git
-spec_version: 1.0.0
+- git-workspace-recon
+- git-branch-manager
+- git-save-snapshot
+- git-sync-remote
+- git-tactical-retreat
+- git-create-pr
+spec_version: 2.0.0
 ---
 
 # Proceso: Refactorización
@@ -62,15 +66,15 @@ Ruta de la tarea: Cúmulo (paths.featurePath/refactorization-<nombre_refactor>).
 
 | Fase | Nombre | Descripción |
 | :--- | :--- | :--- |
-| **0** | Preparar entorno | Crear rama feat/refactorization-<nombre_refactor> desde `master` actualizado. **Skill:** iniciar-rama (paths.skillCapsules[\"iniciar-rama\"]). |
+| **0** | Preparar entorno | **git-workspace-recon**; aislar contexto con **git-branch-manager** en `feat/refactorization-<nombre_refactor>`. |
 | **1** | Documentación con objetivos | objectives.md en carpeta de la tarea (Cúmulo). |
 | **2** | Especificación | Acción spec. Salida: spec.md, spec.json. |
 | **3** | Clarificación | Acción clarify. Salida: clarify.md, clarify.json. |
 | **4** | Planificación | Acción planning. Salida: plan. |
 | **5** | Implementación (doc) | Acción implementation. Salida: implementation.md, implementation.json. |
-| **6** | Ejecución | Acción execution. Salida: execution.json. |
+| **6** | Ejecución | Acción execution; **git-save-snapshot** por hitos; emergencia **git-tactical-retreat**. Salida: execution.json (si el ciclo lo exige). |
 | **7** | Validar | Acción validate. Salida: validacion.json. |
-| **8** | Finalizar | Acción finalize. Evolution Logs y PR. |
+| **8** | Finalizar | **git-sync-remote**; **git-create-pr** (cuerpo del PR con objetivos y validación). Evolution Logs. |
 
 ## Contenido mínimo de la carpeta de la tarea (Cúmulo)
 
@@ -98,7 +102,7 @@ El proceso **refactorization** utiliza las mismas acciones que **feature** en pa
 
 ## Estándares de Calidad
 
-- **Grado S+:** Trazabilidad desde el objetivo hasta el PR.
+- **Grado S+:** Trazabilidad desde el objetivo hasta el PR. Arsenal táctico: git-workspace-recon → git-branch-manager → git-save-snapshot → (git-tactical-retreat si aplica) → git-sync-remote → git-create-pr.
 - **Ley GIT:** Ningún commit en `master`; documentación en la carpeta de la tarea (Cúmulo).
 - **Single Source of Truth:** Documentación canónica en la carpeta de la tarea (Cúmulo).
 

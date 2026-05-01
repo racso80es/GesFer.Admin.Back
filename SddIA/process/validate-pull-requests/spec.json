@@ -1,5 +1,5 @@
 {
-  "spec_version": "1.0.0",
+  "spec_version": "2.0.0",
   "process_id": "validate-pull-requests",
   "name": "Validación integral de Pull Requests (S+ Grade)",
   "description": "Orquesta architect, qa-judge y security-engineer sobre la rama origen del PR; produce informe de consenso (validacion.md), objectives.md y semillas Kaizen en paths.tasksPath.",
@@ -7,7 +7,14 @@
   "principles_ref": "paths.principlesPath",
   "persist_ref": "paths.featurePath/validate-pull-requests-<pr-slug>",
   "related_actions": ["spec", "validate"],
-  "related_skills": ["invoke-command"],
+  "related_skills": [
+    "git-workspace-recon",
+    "git-branch-manager",
+    "git-save-snapshot",
+    "git-sync-remote",
+    "git-tactical-retreat",
+    "git-create-pr"
+  ],
   "related_agents": [
     { "ref": "SddIA/agents/architect.json", "role": "architect" },
     { "ref": "SddIA/agents/qa-judge.json", "role": "qa-judge" },

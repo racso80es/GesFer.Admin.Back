@@ -24,8 +24,26 @@ related_actions:
   - validate
   - finalize
 related_skills:
-  - iniciar-rama
-spec_version: 1.0.0
+  - git-workspace-recon
+  - git-branch-manager
+  - git-save-snapshot
+  - git-sync-remote
+  - git-tactical-retreat
+  - git-create-pr
+phases:
+  - description: Ejecutar git-workspace-recon para validar entorno limpio. Tras confirmar, crear rama feat/create-skill-<skill-id> con git-branch-manager.
+    id: '0'
+    name: Preparar entorno
+  - description: Objetivos, spec y definición en paths.skillsDefinitionPath; cápsula y Rust. Consolidar hitos con git-save-snapshot; ante fallo estructural, git-tactical-retreat.
+    id: '1'
+    name: Especificación e implementación
+  - description: Validación según skills-contract y capsule-json-io.
+    id: '2'
+    name: Validar
+  - description: git-sync-remote; git-create-pr con resumen de objectives y validación en el cuerpo del PR. Evolution si cambia ./SddIA/.
+    id: '3'
+    name: Finalizar
+spec_version: 2.0.0
 triggers:
   - "Crear nueva skill en paths.skillsPath"
   - "Solicitud de creación de skill con skill-id"
@@ -50,7 +68,7 @@ El proceso **create-skill** define el procedimiento para incorporar una nueva sk
 - **Definición (SddIA)**: `paths.skillsDefinitionPath/<skill-id>/`.
 - **Cápsula (implementación)**: `paths.skillCapsules[<skill-id>]`.
 
-Fases recomendadas: 0 Preparar entorno | 1 Objetivos y especificación | 2 Definición en SddIA | 3 Cápsula (Rust + envelope JSON) | 4 Índice + rutas | 5 Validación | 6 Cierre.
+Fases recomendadas: 0 **git-workspace-recon** + **git-branch-manager** (rama `feat/create-skill-<skill-id>`) | 1 Objetivos y especificación | 2 Definición en SddIA | 3 Cápsula (Rust + envelope JSON) con **git-save-snapshot** / **git-tactical-retreat** si aplica | 4 Índice + rutas | 5 Validación | 6 Cierre (**git-sync-remote**, **git-create-pr**).
 
 ## Restricciones
 

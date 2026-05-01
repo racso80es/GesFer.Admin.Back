@@ -1,5 +1,5 @@
 {
-  "spec_version": "1.0.0",
+  "spec_version": "2.0.0",
   "process_id": "create-skill",
   "name": "Creación de skills (create-skill)",
   "description": "Proceso de tarea para crear una nueva skill (definición + cápsula ejecutable) cumpliendo contrato de skills, rutas vía Cúmulo y ejecución por binario Rust + envelope JSON.",
@@ -7,7 +7,14 @@
   "principles_ref": "paths.principlesPath",
   "persist_ref": "paths.featurePath/create-skill-<skill-id>",
   "related_actions": ["spec", "implementation", "validate", "finalize"],
-  "related_skills": ["iniciar-rama"],
+  "related_skills": [
+    "git-workspace-recon",
+    "git-branch-manager",
+    "git-save-snapshot",
+    "git-sync-remote",
+    "git-tactical-retreat",
+    "git-create-pr"
+  ],
   "norms_ref": [
     "SddIA/norms/commands-via-skills-or-tools.md",
     "SddIA/norms/capsule-json-io.md",

@@ -17,9 +17,27 @@ related_actions:
 - validate
 - finalize
 related_skills:
-- iniciar-rama
+- git-workspace-recon
+- git-branch-manager
+- git-save-snapshot
+- git-sync-remote
+- git-tactical-retreat
+- git-create-pr
 - documentation
-spec_version: 1.0.0
+phases:
+- description: Ejecutar git-workspace-recon para validar entorno limpio. Tras confirmar, crear rama feat/create-template-<template-id> con git-branch-manager.
+  id: '0'
+  name: Preparar entorno
+- description: objectives.md y spec en carpeta de la tarea; redactar plantilla en paths.templatesPath. Hitos consolidados con git-save-snapshot; emergencia git-tactical-retreat.
+  id: '1'
+  name: Especificación e implementación de plantilla
+- description: Validación según templates-contract.
+  id: '2'
+  name: Validar
+- description: git-sync-remote; git-create-pr con objetivos y criterios de validación en el cuerpo del PR.
+  id: '3'
+  name: Finalizar
+spec_version: 2.0.0
 templates_contract_ref: SddIA/templates/templates-contract.md
 triggers:
 - Crear nueva plantilla en paths.templatesPath
@@ -41,7 +59,7 @@ El proceso **create-template** define el procedimiento para incorporar una nueva
 - **Documentación de la tarea:** Cúmulo (paths.featurePath/create-template-<template-id>/).
 - **Entregable:** paths.templatesPath/<template-id>/ con spec.md y spec.json (y opcionalmente config.json).
 
-Fases: 0 Preparar entorno | 1 Objetivos y especificación de la plantilla | 2 Redactar spec.md y spec.json según templates-contract | 3 Validación | 4 Cierre.
+Fases: 0 Preparar entorno (**git-workspace-recon**, **git-branch-manager**) | 1 Objetivos y especificación de la plantilla + entregable bajo paths.templatesPath (**git-save-snapshot**; **git-tactical-retreat** si aplica) | 2 Redactar spec.md y spec.json según templates-contract | 3 Validación | 4 Cierre (**git-sync-remote**, **git-create-pr** con artefactos de tarea en el PR).
 
 ## Restricciones
 

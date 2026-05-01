@@ -42,7 +42,7 @@ outputs:
   type: file
 persist_ref: paths.featurePath/audit-tool-<tool-id>
 phases:
-- description: Verificar existencia en paths.toolCapsules y clasificar tipología (Daemon, Batch, Pure-CLI).
+- description: Ejecutar git-workspace-recon para validar entorno limpio. Tras confirmar, aislar contexto con git-branch-manager (p. ej. rama feat/audit-tool-<tool-id> si el trabajo se versiona). Verificar existencia en paths.toolCapsules y clasificar tipología (Daemon, Batch, Pure-CLI).
   id: '0'
   name: Preparar entorno y Clasificar
 - description: Documentar criterios de éxito en objectives.md, anclados al tool_spec_ref.
@@ -63,10 +63,10 @@ phases:
 - description: Ejecutar aserciones de estado funcional basadas estrictamente en la sección 'Objetivo' del tool_spec_ref, adaptadas a la tipología.
   id: '6'
   name: Validar objetivos funcionales
-- description: Crear audit-report.md y audit-result.json con veredicto PASS/FAIL/PARTIAL.
+- description: Crear audit-report.md y audit-result.json con veredicto PASS/FAIL/PARTIAL. Consolidar hitos en el repositorio con git-save-snapshot cuando aplique; ante fallo estructural del flujo, git-tactical-retreat.
   id: '7'
   name: Generar informe
-- description: Ejecutar cleanup_after_audit según tipología y escribir entregables bajo audit_output_ref. Evolution Log solo en FAIL/PARTIAL.
+- description: Ejecutar cleanup_after_audit según tipología y escribir entregables bajo audit_output_ref. Cierre Git S+ git-sync-remote seguido de git-create-pr si la auditoría genera rama con cambios versionables, enlazando objectives/plan/validación al cuerpo del PR. Evolution Log solo en FAIL/PARTIAL.
   id: '8'
   name: Cierre y Limpieza
 principles_ref: paths.principlesPath
@@ -78,8 +78,14 @@ description: >
 related_actions:
 - spec
 - validate
-related_skills: []
-spec_version: 3.0.0
+related_skills:
+- git-workspace-recon
+- git-branch-manager
+- git-save-snapshot
+- git-sync-remote
+- git-tactical-retreat
+- git-create-pr
+spec_version: 4.0.0
 tools_contract_ref: SddIA/tools/tools-contract.md
 ---
 
@@ -127,15 +133,15 @@ En Fase 0 la herramienta se clasifica en una tipología que determina la estrate
 
 | Fase | Nombre | Descripción |
 |:-----|:-------|:------------|
-| 0 | Preparar entorno | Verificar que la herramienta existe en paths.toolCapsules. Rama opcional feat/audit-tool-<tool-id>. |
+| 0 | Preparar entorno | **git-workspace-recon**; **git-branch-manager** si se versiona en rama; verificar que la herramienta existe en paths.toolCapsules. |
 | 1 | Definir objetivos | Documentar qué se va a auditar: objectives.md con criterios de éxito. |
 | 2 | Analizar especificación | Revisar manifest.json y documentación de la herramienta para identificar criterios de validación. |
 | 3 | Diseñar pruebas | Definir casos de prueba: invocación, parámetros, validaciones esperadas. |
 | 4 | Ejecutar herramienta | Invocar el .exe (o script) y capturar salida JSON. |
 | 5 | Validar retorno JSON | Verificar estructura y campos según tools-contract.md. |
 | 6 | Validar objetivos funcionales | Confirmar que la herramienta logra su objetivo (ej: API levantada, health OK). |
-| 7 | Generar informe | audit-report.md y audit-result.json con resultado: PASS/FAIL, evidencias. |
-| 8 | Cierre | Actualizar paths.auditsPath, opcional Evolution Log. |
+| 7 | Generar informe | audit-report.md y audit-result.json; **git-save-snapshot** por hitos; emergencia **git-tactical-retreat**. |
+| 8 | Cierre | Entregables bajo paths.auditsPath; **git-sync-remote** y **git-create-pr** si hay cambios a publicar; Evolution Log si aplica. |
 
 ## Entradas
 
@@ -197,7 +203,7 @@ El archivo `audit-report-YYYY-MM-DD-##.md` debe seguir este esqueleto.
 ```markdown
 ---
 process_id: audit-tool
-spec_version: 3.0.0
+spec_version: 4.0.0
 tool_id: <tool-id>
 audit_date: YYYY-MM-DD
 audit_id: audit-YYYY-MM-DD-##

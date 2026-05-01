@@ -19,8 +19,29 @@ related_actions:
 - validate
 - finalize
 related_skills:
-- iniciar-rama
-spec_version: 1.0.0
+- git-workspace-recon
+- git-branch-manager
+- git-save-snapshot
+- git-sync-remote
+- git-tactical-retreat
+- git-create-pr
+phases:
+- description: Ejecutar git-workspace-recon para validar entorno limpio. Tras confirmar, crear rama feat/create-tool-<tool-id> con git-branch-manager (nunca master).
+  id: '0'
+  name: Preparar entorno
+- description: objectives.md y spec en carpeta de la tarea (paths.featurePath/create-tool-<tool-id>).
+  id: '1'
+  name: Objetivos y especificación
+- description: Definición en paths.toolsDefinitionPath; cápsula en paths.toolCapsules; índice y Cúmulo. Consolidar hitos con git-save-snapshot. Ante fallo estructural, git-tactical-retreat.
+  id: '2'
+  name: Implementación cápsula e integración
+- description: Validación pre-PR; validacion según contrato tools.
+  id: '3'
+  name: Validar
+- description: Cierre. git-sync-remote; git-create-pr con resumen de objectives y validación en el cuerpo del PR. Evolution Log si aplica.
+  id: '4'
+  name: Finalizar
+spec_version: 2.0.0
 tools_contract_ref: SddIA/tools/tools-contract.md
 triggers:
 - Crear nueva herramienta en paths.toolsPath
@@ -43,7 +64,9 @@ El proceso **create-tool** define el procedimiento para incorporar una nueva her
 - **Definición (SddIA):** paths.toolsDefinitionPath/<tool-id>/ con spec.md y spec.json (implementation_path_ref obligatorio).
 - **Cápsula (implementación):** paths.toolCapsules[<tool-id>].
 
-Fases: 0 Preparar entorno | 1 Objetivos y especificación | 1b Definición en SddIA | 2–6 Cápsula, manifest, scripts, índice, Cúmulo | 7 Opcional Rust | 8 Validación | 9 Cierre.
+**Git S+ (obligatorio para trabajo versionado):** Fase 0 — **git-workspace-recon** y **git-branch-manager** (rama `feat/create-tool-<tool-id>`). Durante implementación — **git-save-snapshot** por hitos; emergencia — **git-tactical-retreat**. Cierre — **git-sync-remote** y **git-create-pr** enlazando objetivos y validación al PR.
+
+Fases detalladas de entrega (tool): 0 Preparar entorno (recon + rama) | 1 Objetivos y especificación | 1b Definición en SddIA | 2–6 Cápsula, manifest, scripts, índice, Cúmulo (con snapshots) | 7 Opcional Rust | 8 Validación | 9 Cierre (sync-remote + create-pr).
 
 ## Restricciones
 
