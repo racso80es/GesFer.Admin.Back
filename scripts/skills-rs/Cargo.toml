@@ -57,6 +57,10 @@ name = "git_create_pr"
 path = "src/bin/git_create_pr.rs"
 
 [[bin]]
+name = "git_close_cycle"
+path = "src/bin/git_close_cycle.rs"
+
+[[bin]]
 name = "sddia_evolution_register"
 path = "src/bin/sddia_evolution_register.rs"
 
