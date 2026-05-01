@@ -103,10 +103,21 @@ fn resolve_path(root: &Path, p: &str) -> PathBuf {
 }
 
 fn default_config_path() -> PathBuf {
-    std::env::current_exe()
+    let beside_exe = std::env::current_exe()
         .ok()
-        .and_then(|e| e.parent().map(|p| p.join("start-api-config.json")))
-        .unwrap_or_else(|| PathBuf::from("start-api-config.json"))
+        .and_then(|e| e.parent().map(|p| p.join("start-api-config.json")));
+    if let Some(ref p) = beside_exe {
+        if p.is_file() {
+            return p.clone();
+        }
+    }
+    if let Ok(root) = std::env::var("GESFER_REPO_ROOT") {
+        let p = PathBuf::from(root).join("scripts/tools/start-api/start-api-config.json");
+        if p.is_file() {
+            return p;
+        }
+    }
+    beside_exe.unwrap_or_else(|| PathBuf::from("start-api-config.json"))
 }
 
 fn parse_port_blocked(s: Option<&str>) -> PortBlockedArg {
