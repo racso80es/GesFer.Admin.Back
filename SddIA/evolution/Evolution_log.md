@@ -23,3 +23,4 @@
 | c2d3e4f5-a6b7-48c9-d0e1-f2a3b4c5d6e7 | 2026-05-01T00:00:00+00:00 | alta: guía portabilidad proceso create-skill; ajuste spec; enlace guía skills |
 | 79a1f7a0-d30c-444b-82b3-92af90394769 | 2026-05-01T11:16:44.850285200+00:00 | modificacion: spec run-test-e2e-local (user CRUD) y proceso feature (evaluacion impacto SddIA pre-sync/PR) |
 | 176945b3-e741-48ff-9d97-30d562945054 | 2026-05-01T11:42:32.083145+00:00 | Renombrar acción finalize a finalize-process; blindar actions-contract (solo orquestación skills/tools) |
+| 840c1d87-9086-4775-b351-c133dc51468b | 2026-05-01T11:53:01.606923700+00:00 | Hotfix git-sync-remote: upstream + push -u; norma git-operations Ley de Hierro |
