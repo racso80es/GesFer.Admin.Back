@@ -7,6 +7,9 @@ logs/
 *.log
 !logFile!
 
+# Petición JSON temporal para invocación capsule-json-io (Tekton); no versionar
+.tekton_request.json
+
 # Archivos temporales
 *.tmp
 *.temp

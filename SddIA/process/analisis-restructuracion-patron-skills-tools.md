@@ -86,12 +86,12 @@
 | `SddIA/actions/implementation.md` | Acción implementation | No | No |
 | `SddIA/actions/execution.md` | Acción execution | No | No |
 | `SddIA/actions/validate.md` | Acción validate | No | No |
-| `SddIA/actions/finalize.md` | Acción finalize | No | No |
+| `SddIA/actions/finalize-process/spec.md` | Acción finalize-process | No | No |
 | `SddIA/actions/sddia-difusion.md` | Acción sddia-difusion | No | No |
 
 - **No existe** `actions-contract.json` ni `actions-contract.md` en la raíz de actions.
 - **No hay** spec.json por acción: solo ficheros .md sueltos en la raíz de paths.actionsPath.
-- **No hay** carpeta por acción: no existe `SddIA/actions/spec/`, `SddIA/actions/finalize/`, etc.
+- **No hay** carpeta por acción: no existe `SddIA/actions/spec/` suelta sin spec; las acciones viven en `paths.actionsPath/<action-id>/spec.md`.
 
 ### 3.2 Consumidores que referencian actions
 
@@ -192,7 +192,7 @@ SddIA/actions/
   validate/
     spec.md
     spec.json
-  finalize/
+  finalize-process/
     spec.md
     spec.json
   sddia-difusion/
@@ -207,7 +207,7 @@ SddIA/actions/
 ## 7. Impacto en referencias (Cúmulo y normas)
 
 - **paths.processPath** hoy = ./SddIA/process/. Si se mantiene, las referencias pasan de `paths.processPath/feature.md` a `paths.processPath/feature/spec.md` (o `paths.processPath/feature/` con convención de que el punto de entrada es spec).
-- **paths.actionsPath** hoy = ./SddIA/actions/. Referencias de `paths.actionsPath/finalize.md` a `paths.actionsPath/finalize/spec.md` (o finalize/ con spec como estándar).
+- **paths.actionsPath** hoy = ./SddIA/actions/. Referencias canónicas: `paths.actionsPath/finalize-process/spec.md`.
 - **interaction-triggers.md:** actualizar list_source y ejemplos a rutas por carpeta (paths.processPath/<process-id>/, paths.actionsPath/<action-id>/).
 - **AGENTS.md, process README, create-tool, bug-fix, feature.md, refactorization.md:** actualizar enlaces a definiciones por carpeta y a los nuevos contratos.
 

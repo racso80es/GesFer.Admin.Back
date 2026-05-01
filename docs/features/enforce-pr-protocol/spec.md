@@ -16,7 +16,7 @@ The goal is to enforce a strict protocol for Pull Request (PR) acceptance, ensur
 - **Exit Code:** Returns `0` on success, non-zero on failure.
 
 ### 2.2. SddIA Action Update: `finalize`
-- **Location:** `SddIA/actions/finalize/spec.md` and implementation.
+- **Location:** `SddIA/actions/finalize-process/spec.md` and implementation.
 - **Change:** The `finalize` action must invoke the `verify-pr-protocol` skill **before** pushing code or creating a PR.
 - **Logic:**
     - If `verify-pr-protocol` fails: The action aborts. The agent must fix issues before retrying.

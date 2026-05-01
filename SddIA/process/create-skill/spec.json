@@ -6,7 +6,7 @@
   "contract_ref": "paths.processPath/process-contract.md",
   "principles_ref": "paths.principlesPath",
   "persist_ref": "paths.featurePath/create-skill-<skill-id>",
-  "related_actions": ["spec", "implementation", "validate", "finalize"],
+  "related_actions": ["spec", "implementation", "validate", "finalize-process"],
   "related_skills": [
     "git-workspace-recon",
     "git-branch-manager",
@@ -46,6 +46,6 @@
     { "id": "3", "name": "Cápsula y binario Rust (skillsPath, skillsRustPath)" },
     { "id": "4", "name": "Índice y rutas (skillsIndexPath, Cúmulo)" },
     { "id": "5", "name": "Validación (contrato + ejecución)" },
-    { "id": "6", "name": "Cierre (finalize)" }
+    { "id": "6", "name": "Cierre (finalize-process)" }
   ]
 }

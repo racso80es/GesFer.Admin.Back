@@ -23,7 +23,7 @@ phases:
 - description: Ejecutar proceso objetivo (por defecto feature); leer carpeta-tarea si existe spec/plan; generar artefactos en paths.featurePath si aplica. Hitos atómicos con git-save-snapshot; emergencia git-tactical-retreat.
   id: '3'
   name: Ejecución
-- description: Mover unidad a DONE/; Evolution Log; finalize.md cuando aplique. Cierre git-sync-remote y git-create-pr enlazando documentación de tarea al cuerpo del PR cuando corresponda.
+- description: Mover unidad a DONE/; Evolution Log; finalize-process.md cuando aplique. Cierre git-sync-remote y git-create-pr enlazando documentación de tarea al cuerpo del PR cuando corresponda.
   id: '4'
   name: Finalización y archivo
 principles_ref: paths.principlesPath
@@ -95,7 +95,7 @@ Transición a estado `DONE` tras el cumplimiento del proceso.
 
 - Mueve el archivo de la tarea de `paths.tasksPath/ACTIVE/` a `paths.tasksPath/DONE/`.
 - Actualiza el log de evolución del producto (`paths.evolutionPath` / `paths.evolutionLogFile` según Cúmulo) con un resumen de la intervención, enlazando al archivo en `DONE/`.
-- Genera la documentación de finalización del proceso feature (`finalize.md`).
+- Genera la documentación de finalización del proceso feature (`finalize-process.md`).
 - **git-sync-remote** y **git-create-pr** cuando el cierre deba publicar rama e integrar objetivos/validación en el cuerpo del PR.
 
 ## Estructura de carpetas requerida

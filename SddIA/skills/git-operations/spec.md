@@ -1,6 +1,6 @@
 ---
 common_workflows:
-  finalize: git-sync-remote (skills) + git-create-pr (skills)
+  finalize-process: git-sync-remote (skills) + git-create-pr (skills)
   save_progress: "git-save-snapshot (skills) con Conventional Commits"
   start_task: "git-branch-manager (skills) para feat/fix"
 contract_ref: paths.skillsDefinitionPath/skills-contract.md (Cúmulo)
@@ -31,7 +31,7 @@ Uso seguro y semántico de Git: ramas feat/fix, commits convencionales, pre-push
 
 - start_task: git-branch-manager (suite Git S+)
 - save_progress: git-save-snapshot (suite Git S+)
-- finalize: git-sync-remote + git-create-pr (suite Git S+; no git push directo)
+- finalize-process: git-sync-remote + git-create-pr (suite Git S+; no git push directo)
 
 ## Alcance
 
