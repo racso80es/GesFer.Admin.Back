@@ -19,7 +19,7 @@
     {
       "name": "finalize",
       "type": "Action (SddIA)",
-      "path": "SddIA/actions/finalize/spec.md",
+      "path": "SddIA/actions/finalize-process/spec.md",
       "status": "planned"
     },
     {

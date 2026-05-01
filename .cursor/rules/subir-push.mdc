@@ -8,4 +8,4 @@ Cuando el usuario escriba **subir**, **subir la rama**, **subir a la nube** o pi
 2. Usar la skill **git-sync-remote** (paths.skillCapsules.git-sync-remote) con envelope JSON (SddIA/norms/capsule-json-io.md). **No ejecutar git directo**.
 3. Mostrar el JSON de salida (message/feedback/result) y confirmar si la rama quedó publicada o reportar el error.
 
-Norma completa: SddIA/norms/interaction-triggers.md (disparador «subir»). Acción finalize: paths.actionsPath/finalize/ (paso 4 obligatorio).
+Norma completa: SddIA/norms/interaction-triggers.md (disparador «subir»). Acción finalize-process: paths.actionsPath/finalize-process/ (paso 4 obligatorio).

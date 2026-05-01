@@ -1,4 +1,4 @@
-//! Skill git-sync-remote — fetch + pull --rebase + push (opcional --force-with-lease).
+//! Skill git-sync-remote — fetch; pull --rebase solo si hay upstream; push (-u si no hay upstream).
 
 use std::process::Command;
 
@@ -39,6 +39,12 @@ fn main() {
     std::process::exit(exit_code);
 }
 
+/// Rama actual tiene upstream configurado (`@{u}` resuelve).
+fn has_upstream() -> bool {
+    let o = run_git(&["rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{u}"]);
+    o.exit_code == 0
+}
+
 fn run(force: bool, start: std::time::Instant) -> (CapsuleResponse, i32) {
     let mut feedback: Vec<FeedbackEntry> = vec![];
 
@@ -49,15 +55,21 @@ fn run(force: bool, start: std::time::Instant) -> (CapsuleResponse, i32) {
         FeedbackEntry::error("git", "git fetch falló", Some(&fetch.combined))
     });
     if fetch.exit_code != 0 {
+        let msg = format!(
+            "Fetch falló (exit {}): {}",
+            fetch.exit_code,
+            summarize_output(&fetch.combined)
+        );
         let res = CapsuleResponse::skill(
             SKILL_ID,
             false,
             fetch.exit_code,
-            "Fetch falló",
+            &msg,
             feedback,
             serde_json::json!({
+                "hadUpstream": null,
                 "fetch": { "exitCode": fetch.exit_code, "output": fetch.combined },
-                "pullRebase": { "exitCode": null, "output": "" },
+                "pullRebase": { "skipped": true, "exitCode": null, "output": "" },
                 "push": { "exitCode": null, "output": "" }
             }),
             Some(start.elapsed().as_millis() as u64),
@@ -65,61 +77,114 @@ fn run(force: bool, start: std::time::Instant) -> (CapsuleResponse, i32) {
         return (res, fetch.exit_code);
     }
 
-    let pull = run_git(&["pull", "--rebase"]);
-    feedback.push(if pull.exit_code == 0 {
-        FeedbackEntry::info("git", "git pull --rebase")
+    let upstream = has_upstream();
+    let pull = if upstream {
+        let p = run_git(&["pull", "--rebase"]);
+        feedback.push(if p.exit_code == 0 {
+            FeedbackEntry::info("git", "git pull --rebase")
+        } else {
+            FeedbackEntry::error("git", "git pull --rebase falló", Some(&p.combined))
+        });
+        if p.exit_code != 0 {
+            let msg = format!(
+                "Pull --rebase falló (exit {}): {}",
+                p.exit_code,
+                summarize_output(&p.combined)
+            );
+            let res = CapsuleResponse::skill(
+                SKILL_ID,
+                false,
+                p.exit_code,
+                &msg,
+                feedback,
+                serde_json::json!({
+                    "hadUpstream": true,
+                    "fetch": { "exitCode": fetch.exit_code, "output": fetch.combined },
+                    "pullRebase": { "skipped": false, "exitCode": p.exit_code, "output": p.combined },
+                    "push": { "exitCode": null, "output": "" }
+                }),
+                Some(start.elapsed().as_millis() as u64),
+            );
+            return (res, p.exit_code);
+        }
+        p
     } else {
-        FeedbackEntry::error("git", "git pull --rebase falló", Some(&pull.combined))
-    });
-    if pull.exit_code != 0 {
-        let res = CapsuleResponse::skill(
-            SKILL_ID,
-            false,
-            pull.exit_code,
-            "Pull --rebase falló",
-            feedback,
-            serde_json::json!({
-                "fetch": { "exitCode": fetch.exit_code, "output": fetch.combined },
-                "pullRebase": { "exitCode": pull.exit_code, "output": pull.combined },
-                "push": { "exitCode": null, "output": "" }
-            }),
-            Some(start.elapsed().as_millis() as u64),
-        );
-        return (res, pull.exit_code);
-    }
-
-    let push = if force {
-        run_git(&["push", "origin", "HEAD", "--force-with-lease"])
-    } else {
-        run_git(&["push", "origin", "HEAD"])
+        feedback.push(FeedbackEntry::info(
+            "git",
+            "Sin rama de seguimiento (upstream): se omite pull --rebase; push usará -u origin HEAD",
+        ));
+        CmdOut {
+            exit_code: 0,
+            combined: String::new(),
+        }
     };
-    let push_lower = push.combined.to_lowercase();
-    let non_critical_push = push.exit_code == 0
-        && (push_lower.contains("everything up-to-date") || push_lower.contains("already up to date"));
+
+    let push = if upstream {
+        if force {
+            run_git(&["push", "origin", "HEAD", "--force-with-lease"])
+        } else {
+            run_git(&["push", "origin", "HEAD"])
+        }
+    } else if force {
+        run_git(&["push", "-u", "origin", "HEAD", "--force-with-lease"])
+    } else {
+        run_git(&["push", "-u", "origin", "HEAD"])
+    };
+
+    feedback.push(if push.exit_code == 0 {
+        FeedbackEntry::info("git", if upstream { "git push" } else { "git push -u origin HEAD" })
+    } else {
+        FeedbackEntry::error("git", "git push falló", Some(&push.combined))
+    });
 
     if push.exit_code != 0 {
-        feedback.push(FeedbackEntry::error("git", "git push falló", Some(&push.combined)));
+        let msg = format!(
+            "Push falló (exit {}): {}",
+            push.exit_code,
+            summarize_output(&push.combined)
+        );
+        let pull_exit_json = if upstream {
+            serde_json::to_value(pull.exit_code).unwrap_or(serde_json::Value::Null)
+        } else {
+            serde_json::Value::Null
+        };
         let res = CapsuleResponse::skill(
             SKILL_ID,
             false,
             push.exit_code,
-            "Push falló",
+            &msg,
             feedback,
             serde_json::json!({
+                "hadUpstream": upstream,
                 "fetch": { "exitCode": fetch.exit_code, "output": fetch.combined },
-                "pullRebase": { "exitCode": pull.exit_code, "output": pull.combined },
-                "push": { "exitCode": push.exit_code, "output": push.combined }
+                "pullRebase": {
+                    "skipped": !upstream,
+                    "exitCode": pull_exit_json,
+                    "output": pull.combined
+                },
+                "push": { "exitCode": push.exit_code, "output": push.combined },
+                "pushMode": if upstream { "normal" } else { "setUpstream" }
             }),
             Some(start.elapsed().as_millis() as u64),
         );
         return (res, push.exit_code);
     }
 
+    let push_lower = push.combined.to_lowercase();
+    let non_critical_push = push_lower.contains("everything up-to-date")
+        || push_lower.contains("already up to date");
+
     if non_critical_push {
         feedback.push(FeedbackEntry::warning("git", "Everything up-to-date", None));
     } else {
         feedback.push(FeedbackEntry::info("git", "Push completado"));
     }
+
+    let pull_exit_ok = if upstream {
+        serde_json::to_value(pull.exit_code).unwrap_or(serde_json::Value::Null)
+    } else {
+        serde_json::Value::Null
+    };
 
     let res = CapsuleResponse::skill(
         SKILL_ID,
@@ -132,13 +197,28 @@ fn run(force: bool, start: std::time::Instant) -> (CapsuleResponse, i32) {
         },
         feedback,
         serde_json::json!({
+            "hadUpstream": upstream,
             "fetch": { "exitCode": fetch.exit_code, "output": fetch.combined },
-            "pullRebase": { "exitCode": pull.exit_code, "output": pull.combined },
-            "push": { "exitCode": push.exit_code, "output": push.combined }
+            "pullRebase": {
+                "skipped": !upstream,
+                "exitCode": pull_exit_ok,
+                "output": pull.combined
+            },
+            "push": { "exitCode": push.exit_code, "output": push.combined },
+            "pushMode": if upstream { "normal" } else { "setUpstream" }
         }),
         Some(start.elapsed().as_millis() as u64),
     );
     (res, 0)
+}
+
+fn summarize_output(s: &str) -> String {
+    let t = s.trim();
+    if t.len() <= 500 {
+        t.to_string()
+    } else {
+        format!("{}…", &t[..500])
+    }
 }
 
 struct CmdOut {
@@ -164,4 +244,3 @@ fn run_git(args: &[&str]) -> CmdOut {
         },
     }
 }
-

@@ -47,7 +47,7 @@
 
 1. **Reconocer** que el usuario quiere ver o elegir una acción del ciclo de desarrollo.
 2. **Sugerir las acciones existentes** listando action_id y descripción breve.
-3. **Fuente del listado:** paths.actionsPath (Cúmulo) — cada acción en carpeta paths.actionsPath/<action-id>/ (spec.md, spec.json). Orden típico en el proceso feature: spec → clarify → planning → implementation → execution → validate → finalize.
+3. **Fuente del listado:** paths.actionsPath (Cúmulo) — cada acción en carpeta paths.actionsPath/<action-id>/ (spec.md). Orden típico en el proceso feature: spec → clarify → planning → implementation → execution → validate → finalize-process.
 4. **Formato de respuesta:** Tabla o lista clara en español con action_id y propósito.
 5. **Cierre:** Ofrecer seguir con una acción concreta: *"¿Cuál quieres ejecutar o sobre cuál necesitas detalle?"* Detalle: paths.actionsPath/<action-id>/ (archivo .md con frontmatter YAML).
 
@@ -61,7 +61,7 @@
 | implementation | Implementación (doc): indicar touchpoints en código y documento de implementación; no modifica código. |
 | execution | Ejecución: aplicar al código los cambios del documento de implementación. |
 | validate | Validación: comprobar calidad antes del PR (git diff, build, tests, docs); generar validacion.md. |
-| finalize | Finalizar: cierre del ciclo (commits, Evolution Logs, sync remoto y PR). Git S+: git-sync-remote + git-create-pr (git-save-snapshot por hitos; git-tactical-retreat si emergencia). |
+| finalize-process | Cierre de proceso/tarea (commits, Evolution Logs, sync remoto y PR). Git S+: git-sync-remote + git-create-pr (git-save-snapshot por hitos; git-tactical-retreat si emergencia). |
 | sddia-difusion | Difusión de SddIA: mantener .cursor/rules, .github y otros gestores IA alineados con AGENTS y SddIA/norms. |
 
 ---
@@ -96,7 +96,7 @@
 
 ## Disparador: subir (acción ejecutable)
 
-**Cuándo:** El usuario escribe **subir**, **subir la rama**, **subir a la nube** o pide explícitamente publicar la rama en el remoto (en el contexto de finalize o cierre).
+**Cuándo:** El usuario escribe **subir**, **subir la rama**, **subir a la nube** o pide explícitamente publicar la rama en el remoto (en el contexto de finalize-process o cierre).
 
 **Comportamiento:**
 
@@ -105,7 +105,7 @@
 3. **Comprobar resultado:** Leer el JSON de salida (message/feedback/result). Si hay error (credenciales, red, rama rechazada), informar al usuario con el mensaje de error; si hay éxito, confirmar que la rama quedó publicada o sincronizada.
 4. **No sustituir por documentación:** El agente no debe limitarse a decir que «el paso es subir»; debe **ejecutar** la skill y reportar el resultado.
 
-**Relación con finalize:** La acción finalize (paths.actionsPath/finalize/) incluye este paso como obligatorio; cuando el usuario pide «subir» o «finalizar» (y se aplica el cierre), el agente debe ejecutar el push.
+**Relación con finalize-process:** La acción finalize-process (paths.actionsPath/finalize-process/) incluye este paso como obligatorio; cuando el usuario pide «subir» o «finalizar» / «cerrar la tarea» (y se aplica el cierre), el agente debe ejecutar la sincronización vía skill autorizada.
 
 ---
 

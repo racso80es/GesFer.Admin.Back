@@ -22,7 +22,7 @@ related_actions:
   - spec
   - implementation
   - validate
-  - finalize
+  - finalize-process
 related_skills:
   - git-workspace-recon
   - git-branch-manager
