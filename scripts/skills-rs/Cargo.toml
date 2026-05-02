@@ -21,14 +21,6 @@ regex = "1"
 notify = "6"
 
 [[bin]]
-name = "iniciar_rama"
-path = "src/bin/iniciar_rama.rs"
-
-[[bin]]
-name = "merge_to_master_cleanup"
-path = "src/bin/merge_to_master_cleanup.rs"
-
-[[bin]]
 name = "invoke_command"
 path = "src/bin/invoke_command.rs"
 
@@ -37,12 +29,36 @@ name = "verify_pr_protocol"
 path = "src/bin/verify_pr_protocol.rs"
 
 [[bin]]
-name = "push_and_create_pr"
-path = "src/bin/push_and_create_pr.rs"
-
-[[bin]]
 name = "invoke_commit"
 path = "src/bin/invoke_commit.rs"
+
+[[bin]]
+name = "git_workspace_recon"
+path = "src/bin/git_workspace_recon.rs"
+
+[[bin]]
+name = "git_branch_manager"
+path = "src/bin/git_branch_manager.rs"
+
+[[bin]]
+name = "git_save_snapshot"
+path = "src/bin/git_save_snapshot.rs"
+
+[[bin]]
+name = "git_sync_remote"
+path = "src/bin/git_sync_remote.rs"
+
+[[bin]]
+name = "git_tactical_retreat"
+path = "src/bin/git_tactical_retreat.rs"
+
+[[bin]]
+name = "git_create_pr"
+path = "src/bin/git_create_pr.rs"
+
+[[bin]]
+name = "git_close_cycle"
+path = "src/bin/git_close_cycle.rs"
 
 [[bin]]
 name = "sddia_evolution_register"

@@ -10,9 +10,9 @@
 | implementation | Implementación (doc): touchpoints en código; no modifica código. | paths.actionsPath/implementation/ |
 | execution | Ejecución: aplicar al código los cambios del documento de implementación. | paths.actionsPath/execution/ |
 | validate | Validación: calidad pre-PR (build, tests, docs); validacion.md. | paths.actionsPath/validate/ |
-| finalize | Finalizar: cierre (commits, Evolution Logs, push, PR). Usa skill finalizar-git. | paths.actionsPath/finalize/ |
+| finalize-process | Cierre de proceso/tarea (commits, Evolution Logs, sync remoto y PR). Git S+: git-sync-remote + git-create-pr. | paths.actionsPath/finalize-process/ |
 | sddia-difusion | Difusión de SddIA: mantener .cursor/rules, .github alineados con SddIA. | paths.actionsPath/sddia-difusion/ |
 
-Orden típico en proceso feature: spec → clarify → planning → implementation → execution → validate → finalize.
+Orden típico en proceso feature: spec → clarify → planning → implementation → execution → validate → finalize-process.
 
 Contrato: actions-contract.json, actions-contract.md (raíz de actions).

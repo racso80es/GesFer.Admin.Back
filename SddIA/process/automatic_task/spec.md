@@ -17,13 +17,13 @@ phases:
 - description: Candidatos en raíz de paths.tasksPath y KAIZEN/; prioridad, fecha o indicación del usuario; sin colisión con ACTIVE/.
   id: '1'
   name: Identificación y triaje
-- description: Rama feat/ o fix/; mover unidad a paths.tasksPath/ACTIVE/; commit y push (vía skill/proceso).
+- description: Ejecutar git-workspace-recon para validar entorno limpio. Crear rama feat/ o fix/ con git-branch-manager. Mover unidad a paths.tasksPath/ACTIVE/; consolidar con git-save-snapshot; publicación incremental con git-sync-remote según política de bloqueo.
   id: '2'
   name: Activación y bloqueo
-- description: Ejecutar proceso objetivo (por defecto feature); leer carpeta-tarea si existe spec/plan; generar artefactos en paths.featurePath si aplica.
+- description: Ejecutar proceso objetivo (por defecto feature); leer carpeta-tarea si existe spec/plan; generar artefactos en paths.featurePath si aplica. Hitos atómicos con git-save-snapshot; emergencia git-tactical-retreat.
   id: '3'
   name: Ejecución
-- description: Mover unidad a DONE/; Evolution Log; finalize.md cuando aplique.
+- description: Mover unidad a DONE/; Evolution Log; finalize-process.md cuando aplique. Cierre git-sync-remote y git-create-pr enlazando documentación de tarea al cuerpo del PR cuando corresponda.
   id: '4'
   name: Finalización y archivo
 principles_ref: paths.principlesPath
@@ -38,10 +38,14 @@ related_actions:
 - execution
 - finalization
 related_skills:
-- iniciar-rama
-- finalizar-git
+- git-workspace-recon
+- git-branch-manager
+- git-save-snapshot
+- git-sync-remote
+- git-tactical-retreat
+- git-create-pr
 - invoke-command
-spec_version: 1.3.1
+spec_version: 2.0.0
 ---
 
 # Proceso: Automatic Task
@@ -76,21 +80,23 @@ Si **no** hay ningún `.md` pendiente en la raíz de `paths.tasksPath`, revisa l
 ### 2. Activación y Bloqueo (Activation)
 Transición a estado `ACTIVE` para evitar colisiones con otras IAs (Jules/Cursor).
 
+- **git-workspace-recon** antes de mutar el repositorio.
 - Mueve el archivo de la tarea **desde su origen** (raíz de `paths.tasksPath` o `paths.tasksPath/KAIZEN/`) hacia `paths.tasksPath/ACTIVE/`.
-- **Sincronización inmediata:** Realiza el primer commit con la reubicación del archivo de la tarea a su nueva ubicación `ACTIVE/` y haz push a origin en la rama actual. Esto bloquea el TODO.
-- Crea una nueva rama `feat/<nombre_feature>` o `fix/<nombre_fix>`.
+- **Sincronización inmediata:** Consolidar la reubicación con **git-save-snapshot** y publicar con **git-sync-remote** en la rama gestionada por **git-branch-manager** (`feat/<nombre_feature>` o `fix/<nombre_fix>`). Esto bloquea el TODO.
 
 ### 3. Ejecución (Execution)
 Inicia y continúa las instrucciones definidas en el proceso correspondiente, por defecto el proceso `feature` (definido en `SddIA/process/feature/spec.md`).
 
 - Esto implica generar la documentación de la tarea (objectives, spec, clarify, plan, implementation, execution, validacion) en `paths.featurePath/<nombre_feature>`.
+- Consolidar hitos con **git-save-snapshot**; ante corrupción de contexto, **git-tactical-retreat**.
 
 ### 4. Finalización y Archivo (Finalization)
 Transición a estado `DONE` tras el cumplimiento del proceso.
 
 - Mueve el archivo de la tarea de `paths.tasksPath/ACTIVE/` a `paths.tasksPath/DONE/`.
 - Actualiza el log de evolución del producto (`paths.evolutionPath` / `paths.evolutionLogFile` según Cúmulo) con un resumen de la intervención, enlazando al archivo en `DONE/`.
-- Genera la documentación de finalización del proceso feature (`finalize.md`).
+- Genera la documentación de finalización del proceso feature (`finalize-process.md`).
+- **git-sync-remote** y **git-create-pr** cuando el cierre deba publicar rama e integrar objetivos/validación en el cuerpo del PR.
 
 ## Estructura de carpetas requerida
 Para el correcto funcionamiento de este proceso, el repositorio debe mantener la siguiente jerarquía bajo `paths.tasksPath`:
@@ -106,4 +112,5 @@ Para el correcto funcionamiento de este proceso, el repositorio debe mantener la
 
 ## Historial de versión del spec
 
+- **2.0.0:** Arsenal táctico Git S+ (git-workspace-recon, git-branch-manager, git-save-snapshot, git-sync-remote, git-tactical-retreat, git-create-pr); obsolescencia de iniciar-rama/finalizar-git en este spec.
 - **1.3.1:** Frontmatter alineado con process-contract (contract_ref, principles_ref, persist_ref, phases, paths, process_interface_compliance, related_skills); introducción estándar con ubicación e interfaz de proceso.

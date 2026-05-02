@@ -27,9 +27,9 @@
     {
       "trigger": "subir",
       "when": "El usuario pide subir, subir la rama o subir a la nube (publicar rama en origin)",
-      "behavior": "Ejecutar git push: git branch --show-current luego git push -u origin <rama>. PowerShell. Reportar éxito o error. No solo documentar; ejecutar.",
+      "behavior": "Invocar la skill git-sync-remote (paths.skillCapsules.git-sync-remote) con envelope JSON. Reportar éxito o error desde message/feedback/result. No ejecutar git push/branch directo.",
       "list_source": "—",
-      "response": "Ejecutar push y confirmar resultado."
+      "response": "Invocar git-sync-remote y confirmar resultado."
     }
   ],
   "cumulo_ref": "SddIA/agents/cumulo.json",

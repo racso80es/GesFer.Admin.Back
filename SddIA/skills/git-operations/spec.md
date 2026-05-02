@@ -1,8 +1,8 @@
 ---
 common_workflows:
-  finalize: git push origin <branch_name>
-  save_progress: 'git commit -m ''<type>: <short_description>'''
-  start_task: git checkout -b <type>/<description>
+  finalize-process: git-sync-remote (skills) + git-create-pr (skills)
+  save_progress: "git-save-snapshot (skills) con Conventional Commits"
+  start_task: "git-branch-manager (skills) para feat/fix"
 contract_ref: paths.skillsDefinitionPath/skills-contract.md (Cúmulo)
 rules:
 - 'STRICT PROHIBITION: Never commit directly to ''master'' or ''main''.'
@@ -29,9 +29,9 @@ Uso seguro y semántico de Git: ramas feat/fix, commits convencionales, pre-push
 
 ## Common workflows
 
-- start_task: git checkout -b <type>/<description>
-- save_progress: git commit -m '<type>: <short_description>'
-- finalize: git push origin <branch_name>
+- start_task: git-branch-manager (suite Git S+)
+- save_progress: git-save-snapshot (suite Git S+)
+- finalize-process: git-sync-remote + git-create-pr (suite Git S+; no git push directo)
 
 ## Alcance
 

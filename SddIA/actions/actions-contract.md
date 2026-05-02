@@ -5,6 +5,7 @@ constraints:
 - 'Acciones de diseño/implementación: validar principios según principles-contract.'
 - 'Planning, implementation, execution: aplicar patrones según patterns-in-planning-implementation-execution.md.'
 - Cumplimiento obligatorio de Karma2Token para trazabilidad y seguridad.
+- 'Invariante de ejecución: una acción no invoca el sistema operativo, intérpretes ni scripts (.ps1, .bat, .sh, etc.) directamente; solo orquesta skills (paths.skillCapsules) y tools (paths.toolCapsules) registradas según sus contratos y capsule-json-io.'
 consumers:
 - paths.processPath
 - SddIA/agents/*.json
@@ -41,9 +42,15 @@ Cada acción tiene una **carpeta** en paths.actionsPath con identificador `<acti
 
 ## Restricciones
 
-- action_id en kebab-case (spec, clarify, planning, implementation, execution, validate, finalize, sddia-difusion).
+- action_id en kebab-case (spec, clarify, planning, implementation, execution, validate, finalize-process, sddia-difusion).
 - Salida de acciones en carpeta de tarea (paths.featurePath, paths.fixPath): un .md por acción con frontmatter YAML + Markdown. Sin .json separados. Patrón: SddIA/norms/features-documentation-pattern.md.
 - Rutas solo vía Cúmulo.
+
+## Invariantes de ejecución (innegociable)
+
+1. **Sin ejecución directa del SO:** Ninguna acción puede, en su definición operativa o en el flujo documentado en `spec.md`, prescribir la invocación directa de comandos del sistema operacional, intérpretes (`pwsh`, `cmd`, `bash`, …) ni ficheros script (`.ps1`, `.bat`, `.sh`, …) como mecanismo de implementación.
+2. **Solo orquestación registrada:** El único mecanismo permitido es **orquestar** entidades ya registradas: **skills** (`paths.skillCapsules`, definición en `paths.skillsDefinitionPath`) y **tools** (`paths.toolCapsules`, definición en `paths.toolsDefinitionPath`), con envelope **capsule-json-io** cuando la cápsula lo exija.
+3. **Separación de responsabilidades:** Quien ejecuta binarios encapsulados es la **skill** o la **tool**; la **acción** describe *qué* encadenar y bajo *qué* precondiciones, no *cómo* lanzar procesos ajenos al contrato.
 
 ## Consumidores
 

@@ -22,10 +22,28 @@ related_actions:
   - spec
   - implementation
   - validate
-  - finalize
+  - finalize-process
 related_skills:
-  - iniciar-rama
-spec_version: 1.0.0
+  - git-workspace-recon
+  - git-branch-manager
+  - git-save-snapshot
+  - git-sync-remote
+  - git-tactical-retreat
+  - git-create-pr
+phases:
+  - description: Ejecutar git-workspace-recon para validar entorno limpio. Tras confirmar, crear rama feat/create-skill-<skill-id> con git-branch-manager.
+    id: '0'
+    name: Preparar entorno
+  - description: Objetivos, spec y definición en paths.skillsDefinitionPath; cápsula y Rust. Consolidar hitos con git-save-snapshot; ante fallo estructural, git-tactical-retreat.
+    id: '1'
+    name: Especificación e implementación
+  - description: Validación según skills-contract y capsule-json-io.
+    id: '2'
+    name: Validar
+  - description: git-sync-remote; git-create-pr con resumen de objectives y validación en el cuerpo del PR. Evolution si cambia ./SddIA/.
+    id: '3'
+    name: Finalizar
+spec_version: 2.0.0
 triggers:
   - "Crear nueva skill en paths.skillsPath"
   - "Solicitud de creación de skill con skill-id"
@@ -40,7 +58,7 @@ Este documento define el **proceso de tarea** para crear una nueva **skill** en 
 El proceso **create-skill** define el procedimiento para incorporar una nueva skill al ecosistema de ejecución del repositorio:
 
 - **Definición (SddIA)**: `paths.skillsDefinitionPath/<skill-id>/` con `spec.md` (y `spec.json` si el contrato de skills lo requiere).
-- **Cápsula (entregable ejecutable)**: `paths.skillCapsules[<skill-id>]` (bajo `paths.skillsPath`) con `bin/<skill>.exe`, `manifest.json` y documentación.
+- **Cápsula (entregable ejecutable)**: `paths.skillCapsules[<skill-id>]` (bajo `paths.skillsPath`) con **`<skill>.exe` en la raíz de la cápsula**, `manifest.json` y documentación (contrato `SddIA/skills/skills-contract.md`).
 - **Índice**: actualización de `paths.skillsIndexPath`.
 - **Trazabilidad**: todo bajo **Karma2Token** y registro de evolution si cambia `./SddIA/`.
 
@@ -50,7 +68,7 @@ El proceso **create-skill** define el procedimiento para incorporar una nueva sk
 - **Definición (SddIA)**: `paths.skillsDefinitionPath/<skill-id>/`.
 - **Cápsula (implementación)**: `paths.skillCapsules[<skill-id>]`.
 
-Fases recomendadas: 0 Preparar entorno | 1 Objetivos y especificación | 2 Definición en SddIA | 3 Cápsula (Rust + envelope JSON) | 4 Índice + rutas | 5 Validación | 6 Cierre.
+Fases recomendadas: 0 **git-workspace-recon** + **git-branch-manager** (rama `feat/create-skill-<skill-id>`) | 1 Objetivos y especificación | 2 Definición en SddIA | 3 Cápsula (Rust + envelope JSON) con **git-save-snapshot** / **git-tactical-retreat** si aplica | 4 Índice + rutas | 5 Validación | 6 Cierre (**git-sync-remote**, **git-create-pr**).
 
 ## Restricciones
 
@@ -95,3 +113,4 @@ scripts/skills-rs/src/<skill-name>/
 - Norma: `SddIA/norms/commands-via-skills-or-tools.md`.
 - Envelope JSON: `SddIA/norms/capsule-json-io.md`.
 - Rutas: `SddIA/norms/paths-via-cumulo.md` (Cúmulo).
+- Portar este proceso a otro repo SddIA: `paths.processPath/create-skill/reproducir-create-skill-en-otros-entornos-sddia.md`.

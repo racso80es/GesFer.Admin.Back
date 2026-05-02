@@ -26,9 +26,16 @@ Cada skill tiene en este directorio una carpeta con:
 
 | skill_id | Descripción breve | Cápsula (paths.skillCapsules) |
 | :--- | :--- | :--- |
-| iniciar-rama | Crea rama feat/ o fix/ actualizada con master; inicio de acción. | iniciar-rama |
-| finalizar-git | Aceptar PR a master, unificar, eliminar rama, volver a master. | finalizar-git |
 | invoke-command | Interceptor de comandos de sistema (git, dotnet, npm, pwsh). | invoke-command |
+| invoke-commit | Operaciones de commit con parámetros directos (--message, --files, --all). | invoke-commit |
+| git-workspace-recon | Validación de entorno limpio y señalización de estado Git. | git-workspace-recon |
+| git-branch-manager | Gestión de rama (crear/cambiar/validar aislamiento) para feat/ y fix/. | git-branch-manager |
+| git-save-snapshot | Consolidación de hitos atómicos (snapshot/commit). | git-save-snapshot |
+| git-sync-remote | Sincronización segura con remoto (publicación/push). | git-sync-remote |
+| git-tactical-retreat | Protocolo de emergencia ante fallos estructurales. | git-tactical-retreat |
+| git-create-pr | Creación de Pull Request enlazando artefactos de tarea. | git-create-pr |
+| git-close-cycle | Cierre local post-fusión: troncal actualizado y rama de tarea eliminada. | git-close-cycle |
+| verify-pr-protocol | Validación protocolo PR: nomenclatura, build y tests de la solución. | verify-pr-protocol |
 | git-operations | Uso seguro de Git (ramas feat/fix, commits convencionales). | — |
 | documentation | Estándares SSOT y gestión de documentación. | — |
 | filesystem-ops | Operaciones de archivo seguras (PowerShell). | — |
@@ -39,5 +46,6 @@ Cada skill tiene en este directorio una carpeta con:
 ## Referencias
 
 - Contrato global: `skills-contract.md` (en este directorio; v2 + capsule-json-io).
+- **Portabilidad:** [reproducir-skills-en-otros-entornos-sddia.md](./reproducir-skills-en-otros-entornos-sddia.md) — checklist para reproducir skills en otro repo SddIA.
 - Cúmulo: `SddIA/agents/cumulo.json` → **paths.skillsDefinitionPath**, **paths.skillsPath**, **paths.skillCapsules**, **paths.skillsIndexPath**.
 - Índice de implementaciones: **paths.skillsIndexPath** (paths.skillsIndexPath, Cúmulo).

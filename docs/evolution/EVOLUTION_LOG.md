@@ -4,6 +4,7 @@ Registro de cierres de tareas con resumen de alcance y referencia a documentaci�
 
 
 [2026-04-30] [chore/correccion-auditoria-2026-04-30] Formalización de auditoría limpia. Finalizado.
+[2026-05-01] [feat/start-api-contract-alignment] Herramienta start-api alineada a contrato SddIA (health, puerto, build); skill verify-pr-protocol en cápsula. PR https://github.com/racso80es/GesFer.Admin.Back/pull/215. Documentación: docs/features/start-api-contract-alignment/. Finalizado.
 
 
 [2026-04-27] [chore/correccion-auditoria-2026-04-27] Formalización de auditoría limpia. Finalizado.

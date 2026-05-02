@@ -22,10 +22,16 @@
 
 | skill_id | Descripción | Cápsula |
 |----------|-------------|---------|
-| iniciar-rama | Crea rama feat/ o fix/ actualizada con master/main. Inicio de acción. | paths.skillCapsules.iniciar-rama |
-| finalizar-git | Aceptar PR a master, unificar, eliminar rama, volver a master. | paths.skillCapsules.finalizar-git |
 | invoke-command | Interceptor de comandos de sistema (git, dotnet, npm, pwsh). | paths.skillCapsules.invoke-command |
 | invoke-commit | Operaciones de commit con parámetros directos (--message, --files, --all). Sin ficheros .txt. | paths.skillCapsules.invoke-commit |
+| git-workspace-recon | Recon del workspace Git: status -s + diff --stat. | paths.skillCapsules.git-workspace-recon |
+| git-branch-manager | Gestión de ramas: git switch / git switch -c. | paths.skillCapsules.git-branch-manager |
+| git-save-snapshot | Snapshot: git add . + commit (tolerando nothing to commit). | paths.skillCapsules.git-save-snapshot |
+| git-sync-remote | Sync remoto: fetch + pull --rebase + push origin HEAD. | paths.skillCapsules.git-sync-remote |
+| git-tactical-retreat | Retreat: checkout -- path y/o reset --hard + clean -fd (guardado). | paths.skillCapsules.git-tactical-retreat |
+| git-create-pr | Crear PR vía gh pr create. | paths.skillCapsules.git-create-pr |
+| git-close-cycle | Post-fusión: checkout troncal, pull, fetch --prune, borrar rama de tarea local. | paths.skillCapsules.git-close-cycle |
+| verify-pr-protocol | Protocolo aceptación PR: nomenclatura, dotnet build, dotnet test. | paths.skillCapsules.verify-pr-protocol |
 | git-operations | Uso seguro de Git (ramas feat/fix, commits convencionales). | — |
 | documentation | Estándares SSOT y gestión de documentación. | — |
 | filesystem-ops | Operaciones de archivo seguras (PowerShell). | — |
@@ -43,7 +49,7 @@
 
 1. **Reconocer** que el usuario quiere ver o elegir una acción del ciclo de desarrollo.
 2. **Sugerir las acciones existentes** listando action_id y descripción breve.
-3. **Fuente del listado:** paths.actionsPath (Cúmulo) — cada acción en carpeta paths.actionsPath/<action-id>/ (spec.md, spec.json). Orden típico en el proceso feature: spec → clarify → planning → implementation → execution → validate → finalize.
+3. **Fuente del listado:** paths.actionsPath (Cúmulo) — cada acción en carpeta paths.actionsPath/<action-id>/ (spec.md). Orden típico en el proceso feature: spec → clarify → planning → implementation → execution → validate → finalize-process.
 4. **Formato de respuesta:** Tabla o lista clara en español con action_id y propósito.
 5. **Cierre:** Ofrecer seguir con una acción concreta: *"¿Cuál quieres ejecutar o sobre cuál necesitas detalle?"* Detalle: paths.actionsPath/<action-id>/ (archivo .md con frontmatter YAML).
 
@@ -57,7 +63,7 @@
 | implementation | Implementación (doc): indicar touchpoints en código y documento de implementación; no modifica código. |
 | execution | Ejecución: aplicar al código los cambios del documento de implementación. |
 | validate | Validación: comprobar calidad antes del PR (git diff, build, tests, docs); generar validacion.md. |
-| finalize | Finalizar: cierre del ciclo (commits, Evolution Logs, push, PR a master). Usa skill finalizar-git. |
+| finalize-process | Cierre de proceso/tarea (commits, Evolution Logs, sync remoto y PR). Git S+: git-sync-remote + git-create-pr (git-save-snapshot por hitos; git-tactical-retreat si emergencia). |
 | sddia-difusion | Difusión de SddIA: mantener .cursor/rules, .github y otros gestores IA alineados con AGENTS y SddIA/norms. |
 
 ---
@@ -92,16 +98,16 @@
 
 ## Disparador: subir (acción ejecutable)
 
-**Cuándo:** El usuario escribe **subir**, **subir la rama**, **subir a la nube** o pide explícitamente publicar la rama en el remoto (en el contexto de finalize o cierre).
+**Cuándo:** El usuario escribe **subir**, **subir la rama**, **subir a la nube** o pide explícitamente publicar la rama en el remoto (en el contexto de finalize-process o cierre).
 
 **Comportamiento:**
 
 1. **Reconocer** que el usuario quiere que la rama actual se publique en el remoto (`origin`).
-2. **Ejecutar el push:** Desde la raíz del repo, en PowerShell: obtener la rama actual con `git branch --show-current`, luego ejecutar `git push -u origin <rama_actual>`. Entorno: Windows, PowerShell; no usar bash.
-3. **Comprobar resultado:** Leer la salida del comando. Si hay error (credenciales, red, rama rechazada), informar al usuario con el mensaje de error. Si hay éxito (ej. `branch '...' set up to track 'origin/...'` o `Everything up-to-date`), confirmar que la rama está subida.
-4. **No sustituir por documentación:** El agente no debe limitarse a decir que «el paso es subir»; debe **ejecutar** el comando de push y reportar el resultado.
+2. **Ejecutar la sincronización remota:** Invocar la skill **git-sync-remote** (paths.skillCapsules.git-sync-remote) usando envelope JSON (SddIA/norms/capsule-json-io.md). El agente **no** ejecuta `git push` ni `git branch` directamente.
+3. **Comprobar resultado:** Leer el JSON de salida (message/feedback/result). Si hay error (credenciales, red, rama rechazada), informar al usuario con el mensaje de error; si hay éxito, confirmar que la rama quedó publicada o sincronizada.
+4. **No sustituir por documentación:** El agente no debe limitarse a decir que «el paso es subir»; debe **ejecutar** la skill y reportar el resultado.
 
-**Relación con finalize:** La acción finalize (paths.actionsPath/finalize/) incluye este paso como obligatorio; cuando el usuario pide «subir» o «finalizar» (y se aplica el cierre), el agente debe ejecutar el push.
+**Relación con finalize-process:** La acción finalize-process (paths.actionsPath/finalize-process/) incluye este paso como obligatorio; cuando el usuario pide «subir» o «finalizar» / «cerrar la tarea» (y se aplica el cierre), el agente debe ejecutar la sincronización vía skill autorizada.
 
 ---
 

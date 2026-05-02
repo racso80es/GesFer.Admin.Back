@@ -111,7 +111,7 @@ no_json: true
 
 ---
 
-### finalize.md (opcional)
+### finalize-process.md (opcional)
 
 | Campo frontmatter | Tipo | Obligatorio |
 |------------------|------|-------------|
@@ -120,7 +120,7 @@ no_json: true
 | branch | string | Opc. |
 | timestamp | string | Opc. |
 
-**Cuerpo:** Resumen de cierre, enlace al PR.
+**Cuerpo:** Resumen de cierre de proceso/tarea, enlace al PR.
 
 ## Nomenclatura
 

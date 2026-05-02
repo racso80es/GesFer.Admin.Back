@@ -12,24 +12,6 @@
   },
   "skills": [
     {
-      "skillId": "iniciar-rama",
-      "path": "iniciar-rama/",
-      "manifest": "iniciar-rama/manifest.json",
-      "launcher_bat": "iniciar-rama/Iniciar-Rama.bat",
-      "executable": "iniciar-rama/iniciar_rama.exe",
-      "description": "Crea rama feat/ o fix/ actualizada con master/main."
-    },
-    {
-      "skillId": "finalizar-git",
-      "path": "finalizar-git/",
-      "manifest": "finalizar-git/manifest.json",
-      "launcher_bat_pre_pr": "finalizar-git/Push-And-CreatePR.bat",
-      "launcher_bat_post_pr": "finalizar-git/Merge-To-Master-Cleanup.bat",
-      "executable_pre_pr": "finalizar-git/push_and_create_pr.exe",
-      "executable_post_pr": "finalizar-git/merge_to_master_cleanup.exe",
-      "description": "Pre-PR: push + crear PR. Post-PR: checkout troncal, borrar rama."
-    },
-    {
       "skillId": "invoke-command",
       "path": "invoke-command/",
       "manifest": "invoke-command/manifest.json",
@@ -52,6 +34,70 @@
       "launcher_bat": "sddia-evolution/Register.bat",
       "executable": "sddia-evolution/bin/sddia_evolution_register.exe",
       "description": "Registro evolution SddIA (UUID, índice, hash); validate y watch en la misma cápsula."
+    },
+    {
+      "skillId": "git-workspace-recon",
+      "path": "git-workspace-recon/",
+      "manifest": "git-workspace-recon/manifest.json",
+      "launcher_bat": "git-workspace-recon/Git-Workspace-Recon.bat",
+      "executable": "git-workspace-recon/git_workspace_recon.exe",
+      "description": "Reconocimiento del workspace Git: status -s + diff --stat."
+    },
+    {
+      "skillId": "git-branch-manager",
+      "path": "git-branch-manager/",
+      "manifest": "git-branch-manager/manifest.json",
+      "launcher_bat": "git-branch-manager/Git-Branch-Manager.bat",
+      "executable": "git-branch-manager/git_branch_manager.exe",
+      "description": "Gestión de ramas: git switch / git switch -c."
+    },
+    {
+      "skillId": "git-save-snapshot",
+      "path": "git-save-snapshot/",
+      "manifest": "git-save-snapshot/manifest.json",
+      "launcher_bat": "git-save-snapshot/Git-Save-Snapshot.bat",
+      "executable": "git-save-snapshot/git_save_snapshot.exe",
+      "description": "Snapshot: git add . + git commit -m (tolerando nothing to commit)."
+    },
+    {
+      "skillId": "git-sync-remote",
+      "path": "git-sync-remote/",
+      "manifest": "git-sync-remote/manifest.json",
+      "launcher_bat": "git-sync-remote/Git-Sync-Remote.bat",
+      "executable": "git-sync-remote/git_sync_remote.exe",
+      "description": "Sincronización con remoto: fetch + pull --rebase + push origin HEAD."
+    },
+    {
+      "skillId": "git-tactical-retreat",
+      "path": "git-tactical-retreat/",
+      "manifest": "git-tactical-retreat/manifest.json",
+      "launcher_bat": "git-tactical-retreat/Git-Tactical-Retreat.bat",
+      "executable": "git-tactical-retreat/git_tactical_retreat.exe",
+      "description": "Retreat: checkout -- <path> y/o reset --hard + clean -fd (guardado)."
+    },
+    {
+      "skillId": "git-create-pr",
+      "path": "git-create-pr/",
+      "manifest": "git-create-pr/manifest.json",
+      "launcher_bat": "git-create-pr/Git-Create-PR.bat",
+      "executable": "git-create-pr/git_create_pr.exe",
+      "description": "Crear Pull Request con gh pr create."
+    },
+    {
+      "skillId": "git-close-cycle",
+      "path": "git-close-cycle/",
+      "manifest": "git-close-cycle/manifest.json",
+      "launcher_bat": "git-close-cycle/Git-Close-Cycle.bat",
+      "executable": "git-close-cycle/git_close_cycle.exe",
+      "description": "Post-fusión: troncal actualizado, fetch --prune, eliminar rama de tarea (-d/-D)."
+    },
+    {
+      "skillId": "verify-pr-protocol",
+      "path": "verify-pr-protocol/",
+      "manifest": "verify-pr-protocol/manifest.json",
+      "launcher_bat": "verify-pr-protocol/Verify-PR-Protocol.bat",
+      "executable": "verify-pr-protocol/verify_pr_protocol.exe",
+      "description": "Protocolo aceptación PR: nomenclatura, dotnet build, dotnet test (SddIA/norms/pr-acceptance-protocol.md)."
     }
   ]
 }
