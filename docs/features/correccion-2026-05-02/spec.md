@@ -1,11 +1,24 @@
 ---
 feature_name: correccion-2026-05-02
+created: "2026-05-02"
+base:
+  - docs/audits/AUDITORIA_2026_05_02.md
+scope:
+  in_scope:
+    - Formalizar la auditoría limpia.
+    - Generar documentación (objectives.md, spec.md, validacion.md).
+  out_scope:
+    - Modificaciones de código fuente.
 ---
-# Especificación: Corrección Auditoría 2026-05-02
 
-## Detalles Técnicos
-La auditoría del 2026-05-02 determinó que el sistema cumple con todos los estándares requeridos (100% de salud). El uso de `.Result` en `AuthorizeSystemOrAdminAttribute.cs` fue revisado y validado como legítimo.
+# Especificación de Corrección de Auditoría 2026-05-02
 
-## Acciones Realizadas
-- No se requirieron modificaciones en el código fuente.
-- Se documenta el estado limpio del proyecto para mantener el historial del proceso de auditoría y mejora continua.
+## Objetivo
+Cumplir el contrato de `correccion-auditorias` registrando los resultados del reporte S+ de la auditoría del día 2026-05-02.
+
+## Análisis
+La auditoría de hoy arrojó 100% en todas las métricas de salud (Arquitectura, Nomenclatura, Estabilidad Async). No hay Pain Points (Críticos o Medios) reportados, el código compila y pasa las pruebas. El uso de `.Result` en `AuthorizeSystemOrAdminAttribute.cs` ha sido validado como legítimo.
+
+## Criterios de Validación
+- Archivos generados correctamente en la carpeta de características.
+- Pruebas E2E y unitarias continúan pasando.

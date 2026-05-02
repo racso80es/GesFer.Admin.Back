@@ -1,11 +1,17 @@
 ---
 feature_name: correccion-2026-05-02
+created: "2026-05-02"
+process: correccion-auditorias
 ---
-# Objetivos: Corrección Auditoría 2026-05-02
 
-## Objetivo
-Formalizar el resultado de la auditoría del 2026-05-02, la cual no presentó hallazgos críticos ni medios (100% de métricas de salud en Arquitectura, Nomenclatura y Estabilidad Async).
+# Objetivos de Corrección de Auditoría 2026-05-02
+
+## Objetivo Principal
+Formalizar el proceso de corrección para el informe de auditoría del 2026-05-02.
 
 ## Alcance
-- Registrar la auditoría limpia.
-- Mantener actualizado el log de evolución.
+- Registrar que no hubo hallazgos críticos ni medios reportados.
+- Validar y finalizar el proceso `correccion-auditorias` para el día 2026-05-02.
+
+## Ley Aplicable
+Soberanía Documental y Process Integration.
