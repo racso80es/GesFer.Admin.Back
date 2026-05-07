@@ -18,6 +18,7 @@ public sealed class GetAllUsersHandler : IRequestHandler<GetAllUsersCommand, Lis
     public async Task<List<UserDto>> Handle(GetAllUsersCommand request, CancellationToken cancellationToken)
     {
         var users = await _context.Users
+            .AsNoTracking()
             .Where(u => u.CompanyId == request.CompanyId && u.DeletedAt == null)
             .OrderBy(u => u.Username)
             .ToListAsync(cancellationToken);

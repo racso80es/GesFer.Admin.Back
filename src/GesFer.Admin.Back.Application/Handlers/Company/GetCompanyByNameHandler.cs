@@ -32,6 +32,7 @@ public sealed class GetCompanyByNameHandler : IRequestHandler<GetCompanyByNameCo
             return null;
 
         var company = await _context.Companies
+            .AsNoTracking()
             .Where(c => c.DeletedAt == null && c.Name == name)
             .Select(c => new CompanyDto
             {
