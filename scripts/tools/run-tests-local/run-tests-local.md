@@ -10,7 +10,7 @@ Desde la raíz del repositorio:
 .\scripts\tools\run-tests-local\Run-Tests-Local.bat
 ```
 
-Parámetros (vía .ps1 o cuando se invoque la cápsula):
+Parámetros (cuando se invoque la cápsula):
 
 - **SkipPrepare** — No invocar prepare-full-env.
 - **SkipSeeds** — No invocar invoke-mysql-seeds.

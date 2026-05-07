@@ -4,6 +4,10 @@ Registro cronológico de cierres de tareas y PR. Formato por línea: `[YYYY-MM-D
 
 ---
 
+[2026-05-07] [feat/refactor_tool_run-test-local-fixes] Migrar run-tests-local a binario Rust con paridad E2E/scopes. [Hecho]
+
+---
+
 [2026-03-28] [chore/kaizen-mejoras-inmutabilidad-8408647499569422673] [Mejorar inmutabilidad convirtiendo Handlers a records] [Hecho].
 
 [2026-03-30] [feat/kaizen-2026-03-30] Tarea automática (Kaizen): Ejecución de script de auditoría sin hallazgos técnicos. Documentación generada en docs/features/kaizen-2026-03-30/. [Pendiente push/PR]

@@ -64,23 +64,17 @@ init → prepare (opcional) → seeds (opcional) → build → tests → done (o
 
 ## Estado de Implementación
 
-**Formato actual:** Script PowerShell (`.ps1`)  
-**Ubicación:** `scripts/tools/run-tests-local/Run-Tests-Local.ps1`
+**Formato actual:** Ejecutable Rust (`.exe`)
+**Ubicación:** `scripts/tools/run-tests-local/run_tests_local.exe`
 
 **Migración pendiente a Rust:**
-- Estado: Pendiente
+- Estado: Completado
 - Prioridad: Media
-- Notas: Esta herramienta aún no ha sido migrada a Rust. Se mantiene temporalmente el script `.ps1`.
 
-**Formato objetivo:** Ejecutable Rust (`.exe`)  
-**Ubicación objetivo:** `scripts/tools/run-tests-local/run_tests_local.exe`
-
-**Estándar futuro:** Una vez migrado, solo existirá el ejecutable `.exe`. No se deberá mantener el `.ps1`.
-
-### Invocación actual (PowerShell)
+### Invocación actual
 
 ```powershell
-& "scripts/tools/run-tests-local/Run-Tests-Local.ps1" [opciones]
+& "scripts/tools/run-tests-local/run_tests_local.exe" [opciones]
 ```
 
 ## Implementación
