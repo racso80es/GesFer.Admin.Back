@@ -18,6 +18,7 @@ public sealed class GetAllCompaniesHandler : IRequestHandler<GetAllCompaniesComm
     public async Task<IEnumerable<CompanyDto>> Handle(GetAllCompaniesCommand request, CancellationToken cancellationToken)
     {
         var companies = await _context.Companies
+            .AsNoTracking()
             .Where(c => c.DeletedAt == null)
             .OrderBy(c => c.Name)
             .Select(c => new CompanyDto

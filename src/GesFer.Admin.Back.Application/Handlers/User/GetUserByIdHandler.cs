@@ -18,6 +18,7 @@ public sealed class GetUserByIdHandler : IRequestHandler<GetUserByIdCommand, Use
     public async Task<UserDto?> Handle(GetUserByIdCommand request, CancellationToken cancellationToken)
     {
         var user = await _context.Users
+            .AsNoTracking()
             .FirstOrDefaultAsync(u => u.Id == request.Id && u.CompanyId == request.CompanyId && u.DeletedAt == null, cancellationToken);
 
         return user?.ToDto();

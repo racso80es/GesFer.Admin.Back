@@ -18,6 +18,7 @@ public sealed class GetCompanyByIdHandler : IRequestHandler<GetCompanyByIdComman
     public async Task<CompanyDto?> Handle(GetCompanyByIdCommand request, CancellationToken cancellationToken)
     {
         var company = await _context.Companies
+            .AsNoTracking()
             .Where(c => c.Id == request.Id && c.DeletedAt == null)
             .Select(c => new CompanyDto
             {
