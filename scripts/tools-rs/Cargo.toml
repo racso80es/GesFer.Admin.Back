@@ -34,3 +34,7 @@ path = "src/bin/start_api.rs"
 [[bin]]
 name = "run_test_e2e_local"
 path = "src/bin/run_test_e2e_local.rs"
+
+[[bin]]
+name = "run_tests_local"
+path = "src/bin/run_tests_local.rs"
