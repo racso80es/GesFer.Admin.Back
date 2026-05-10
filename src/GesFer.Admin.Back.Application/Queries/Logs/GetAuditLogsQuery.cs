@@ -22,7 +22,7 @@ public sealed class GetAuditLogsHandler : IRequestHandler<GetAuditLogsQuery, Aud
 
     public async Task<AuditLogsPagedResponseDto> Handle(GetAuditLogsQuery request, CancellationToken cancellationToken)
     {
-        var query = _context.AuditLogs.AsQueryable();
+        var query = _context.AuditLogs.AsNoTracking().AsQueryable();
 
         if (!string.IsNullOrEmpty(request.Action))
             query = query.Where(x => x.Action == request.Action);
