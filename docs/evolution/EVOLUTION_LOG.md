@@ -3,6 +3,9 @@
 Registro de cierres de tareas con resumen de alcance y referencia a documentación.
 
 
+[2026-05-10] [feat/kaizen-as-no-tracking] Agregado AsNoTracking a las consultas de logs. Finalizado.
+
+
 [2026-05-05] [chore/correccion-auditoria-2026-05-05] Formalización de auditoría limpia. Finalizado.
 
 
