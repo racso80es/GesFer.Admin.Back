@@ -3,6 +3,9 @@
 Registro de cierres de tareas con resumen de alcance y referencia a documentación.
 
 
+[2026-05-11] [jules-18004430040676367189-6b39f261] [Optimización de Query Handlers con AsNoTracking para evitar fugas termodinámicas en EF Core.] [Completado].
+
+
 [2026-05-05] [chore/correccion-auditoria-2026-05-05] Formalización de auditoría limpia. Finalizado.
 
 
