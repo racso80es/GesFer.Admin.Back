@@ -3,7 +3,7 @@
 Registro de cierres de tareas con resumen de alcance y referencia a documentación.
 
 
-[2026-05-09] [feat/correccion-2026-05-09] Añadido AsNoTracking en consultas de logs para prevenir memory leak termodinamico. [Completado].
+[2026-05-07] [chore/correccion-2026-05-07] Correcciones de auditoria S+, adicion de AsNoTracking en queries de logs. [Completado].
 
 
 [2026-05-05] [chore/correccion-auditoria-2026-05-05] Formalización de auditoría limpia. Finalizado.
