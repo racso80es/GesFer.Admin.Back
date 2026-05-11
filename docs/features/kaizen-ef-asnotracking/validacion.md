@@ -1,27 +1,19 @@
 ---
-feature_name: kaizen-ef-asnotracking
-branch: feat/kaizen-ef-asnotracking
-base_branch: main
-global: pass
-blocking: false
+feature_name: "kaizen-ef-asnotracking"
+branch: "jules-18004430040676367189-6b39f261"
+global:
+  - GesFer.Admin.Back.Application
 checks:
-  - name: Compilation
-    result: pass
-    message: Proyecto compila correctamente
-  - name: Tests
-    result: pass
-    message: Todas las pruebas pasan sin errores
+  - "Se verificó la inyección de AsNoTracking() en GetAuditLogsQuery.cs."
+  - "Se verificó la inyección de AsNoTracking() en GetLogsQuery.cs."
+  - "Se verificó que los handlers restantes ya implementan AsNoTracking()."
+  - "Se compiló la solución satisfactoriamente."
+  - "Se ejecutaron y pasaron las pruebas unitarias."
 git_changes:
   files_added: 4
-  files_modified: 6
+  files_modified: 3
   files_deleted: 0
+type: "validacion"
 ---
-# Informe de Validación: Optimización Termodinámica EF Core (AsNoTracking)
-
-## Resumen
-La fuga de rendimiento fue sellada inyectando `.AsNoTracking()` en las consultas de lectura.
-
-## Detalles de Validación
-- **Compilación:** OK
-- **Pruebas (Unitarias e Integración):** OK
-- **Revisión SddIA:** OK
+# Validación: Optimización Termodinámica EF Core (AsNoTracking)
+Se verificaron los cambios en los queries faltantes y la compilación de la aplicación.
