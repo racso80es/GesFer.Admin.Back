@@ -25,7 +25,7 @@ public sealed class GetLogsHandler : IRequestHandler<GetLogsQuery, LogsPagedResp
 
     public async Task<LogsPagedResponseDto> Handle(GetLogsQuery request, CancellationToken cancellationToken)
     {
-        var query = _context.Logs.AsQueryable();
+        var query = _context.Logs.AsNoTracking().AsQueryable();
 
         if (request.FromDate.HasValue)
             query = query.Where(x => x.TimeStamp >= request.FromDate.Value);
