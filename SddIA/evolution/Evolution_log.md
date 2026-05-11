@@ -27,3 +27,4 @@
 | 8aba101c-93b5-4b4f-b053-4108e952688c | 2026-05-01T14:05:29.628359200+00:00 | alta: skill git-close-cycle; finalize-process orquesta post-fusion |
 | b8c7d6e5-f4a3-4b2c-9d8e-7f6a5b4c3d2e | 2026-05-01T00:00:00+00:00 | alta: cápsula verify-pr-protocol + index + Cúmulo + difusión |
 | e4d5f6a7-b8c9-40d0-9f1a-2b3c4d5e6f7a | 2026-05-01T00:00:00+00:00 | modificacion: spec start-api ruta fuente Rust src/bin/start_api.rs |
+| 117d3518-0bd0-4849-bd2b-b2ed75730a90 | 2026-05-09T23:35:22.130148679+00:00 | Añadido AsNoTracking en consultas de logs para prevenir memory leak termodinamico. |
