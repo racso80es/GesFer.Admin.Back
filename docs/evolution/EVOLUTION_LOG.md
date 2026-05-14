@@ -3,6 +3,9 @@
 Registro de cierres de tareas con resumen de alcance y referencia a documentación.
 
 
+[2026-05-14] [feat/correccion-2026-05-14] Proceso de correccion de auditoria del 2026-05-14 registrado. [DONE].
+
+
 [2026-05-07] [chore/correccion-2026-05-07] Correcciones de auditoria S+, adicion de AsNoTracking en queries de logs. [Completado].
 
 
