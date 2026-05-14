@@ -3,6 +3,9 @@
 Registro de cierres de tareas con resumen de alcance y referencia a documentación.
 
 
+[2026-05-14] [feat/kaizen-asnotracking-queries] Verified AsNoTracking is present in queries. [DONE].
+
+
 [2026-05-07] [chore/correccion-2026-05-07] Correcciones de auditoria S+, adicion de AsNoTracking en queries de logs. [Completado].
 
 
