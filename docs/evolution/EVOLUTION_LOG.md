@@ -3,6 +3,9 @@
 Registro de cierres de tareas con resumen de alcance y referencia a documentación.
 
 
+[2026-05-15] [feat/correccion-2026-05-15] Formalización de auditoría limpia. Finalizado.
+
+
 [2026-05-07] [chore/correccion-2026-05-07] Correcciones de auditoria S+, adicion de AsNoTracking en queries de logs. [Completado].
 
 
