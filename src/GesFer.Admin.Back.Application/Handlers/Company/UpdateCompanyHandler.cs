@@ -26,6 +26,7 @@ public sealed class UpdateCompanyHandler : IRequestHandler<UpdateCompanyCommand,
 
         // Validar que no exista otra empresa con el mismo nombre (excepto la actual)
         var existingCompany = await _context.Companies
+            .AsNoTracking()
             .FirstOrDefaultAsync(c => c.Name == request.Dto.Name && c.Id != request.Id && c.DeletedAt == null, cancellationToken);
 
         if (existingCompany != null)
