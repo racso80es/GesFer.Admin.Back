@@ -22,12 +22,14 @@ public sealed class CreateUserHandler : IRequestHandler<CreateUserCommand, UserD
         var dto = request.Dto;
 
         var companyExists = await _context.Companies
+            .AsNoTracking()
             .AnyAsync(c => c.Id == dto.CompanyId && c.DeletedAt == null, cancellationToken);
 
         if (!companyExists)
             throw new InvalidOperationException($"No existe la CompanyId {dto.CompanyId}");
 
         var usernameExists = await _context.Users
+            .AsNoTracking()
             .AnyAsync(u => u.CompanyId == dto.CompanyId && u.Username == dto.Username && u.DeletedAt == null, cancellationToken);
 
         if (usernameExists)

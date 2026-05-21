@@ -27,6 +27,7 @@ public sealed class UpdateUserHandler : IRequestHandler<UpdateUserCommand, UserD
 
         // Unicidad Username por CompanyId (excluyendo el propio)
         var usernameExists = await _context.Users
+            .AsNoTracking()
             .AnyAsync(u =>
                     u.CompanyId == user.CompanyId
                     && u.Username == request.Dto.Username

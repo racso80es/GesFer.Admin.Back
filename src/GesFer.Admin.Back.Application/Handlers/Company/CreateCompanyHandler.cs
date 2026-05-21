@@ -22,6 +22,7 @@ public sealed class CreateCompanyHandler : IRequestHandler<CreateCompanyCommand,
     {
         // Validar que no exista una empresa con el mismo nombre
         var existingCompany = await _context.Companies
+            .AsNoTracking()
             .FirstOrDefaultAsync(c => c.Name == request.Dto.Name && c.DeletedAt == null, cancellationToken);
 
         if (existingCompany != null)
