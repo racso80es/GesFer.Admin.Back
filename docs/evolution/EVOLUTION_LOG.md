@@ -709,3 +709,10 @@ Se eliminaron los archivos `.ps1` (PowerShell scripts) de las cápsulas de skill
 - **paths.featurePath** tools-env-and-seeds — objectives.md.
 - `SddIA/tools/tools-contract.json` — Contrato de herramientas.
 - Rutas de herramientas (Cúmulo): **paths.toolsPath**, **paths.toolCapsules** (`SddIA/agents/cumulo.json`).
+
+[2025-05-22] [feat/kaizen-ensure-asnotracking] [Confirmed that all read-only queries in GesFer.Admin.Back.Application already use AsNoTracking()] [DONE].
+
+## [2025-05-22] feat/kaizen-ensure-asnotracking
+- **Resumen:** Verificación y validación de la presencia de AsNoTracking en los handlers de consultas de EF Core en `GesFer.Admin.Back.Application`.
+- **Resultado:** No se requirieron cambios en el código ya que todos los handlers ya utilizaban correctamente AsNoTracking. El proceso automático se completó generando la documentación requerida.
+- **Referencia:** docs/features/kaizen-ensure-asnotracking/objectives.md
