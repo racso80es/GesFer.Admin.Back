@@ -1,7 +1,9 @@
 ---
+title: "Finalizar Proceso Kaizen AsNoTracking"
 type: finalize
-feature_name: kaizen-asnotracking
-timestamp: 2026-05-10T12:00:00Z
+feature_id: "kaizen-asnotracking"
+status: "DONE"
 ---
-# Cierre de proceso
-El ciclo automático finalizó correctamente implementando AsNoTracking.
+
+# Proceso finalizado: Kaizen AsNoTracking
+La tarea se completó exitosamente aplicando `.AsNoTracking()` en las consultas de Entity Framework pertinentes.

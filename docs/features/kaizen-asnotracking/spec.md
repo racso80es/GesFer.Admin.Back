@@ -1,16 +1,34 @@
 ---
-feature_name: kaizen-asnotracking
-created: 2026-05-10
+title: "Especificación técnica para Kaizen AsNoTracking"
+feature_id: "kaizen-asnotracking"
 base:
-  - src/GesFer.Admin.Back.Application/Handlers/Company/CreateCompanyHandler.cs
-  - src/GesFer.Admin.Back.Application/Handlers/Company/UpdateCompanyHandler.cs
-  - src/GesFer.Admin.Back.Application/Handlers/User/CreateUserHandler.cs
-  - src/GesFer.Admin.Back.Application/Handlers/User/UpdateUserHandler.cs
+  - "src/GesFer.Admin.Back.Infrastructure/Services/AdminAuthService.cs"
+  - "src/GesFer.Admin.Back.UnitTests/Services/AuditLogServiceTests.cs"
 scope:
   in_scope:
-    - Agregar .AsNoTracking() a validaciones de unicidad FirstOrDefaultAsync y AnyAsync.
+    - "Añadir .AsNoTracking() a AuthenticateAsync en AdminAuthService"
+    - "Añadir .AsNoTracking() a logs en AuditLogServiceTests"
   out_scope:
-    - Modificar lógicas de negocio o validaciones adicionales.
+    - "Otras funciones no detectadas por grep"
 ---
-# Especificación técnica
-Modificar los Handlers identificados para incorporar `.AsNoTracking()` a aquellas consultas que no requieren el tracking del contexto de EF Core, específicamente en validaciones previas a mutaciones (como verificación de existencia de nombres o usuarios).
+
+# Especificación
+
+## Modificaciones de código
+1. En `src/GesFer.Admin.Back.Infrastructure/Services/AdminAuthService.cs`, método `AuthenticateAsync`:
+```csharp
+        var adminUser = await _context.AdminUsers
+            .AsNoTracking()
+            .Where(u => u.Username == normalizedUsername
+                && u.IsActive
+                && u.DeletedAt == null)
+            .FirstOrDefaultAsync();
+```
+
+2. En `src/GesFer.Admin.Back.UnitTests/Services/AuditLogServiceTests.cs`:
+```csharp
+        var log = await context.AuditLogs.AsNoTracking().FirstOrDefaultAsync();
+```
+```csharp
+        var log = await context.AuditLogs.AsNoTracking().FirstAsync();
+```

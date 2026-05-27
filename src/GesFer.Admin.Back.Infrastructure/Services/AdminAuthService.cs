@@ -31,6 +31,7 @@ public class AdminAuthService : IAdminAuthService
 
         // Buscar el usuario administrativo
         var adminUser = await _context.AdminUsers
+            .AsNoTracking()
             .Where(u => u.Username == normalizedUsername
                 && u.IsActive
                 && u.DeletedAt == null)
