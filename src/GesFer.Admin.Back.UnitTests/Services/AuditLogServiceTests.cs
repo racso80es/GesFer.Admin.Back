@@ -45,7 +45,7 @@ public class AuditLogServiceTests
         // Assert - usar el mismo DbContext (misma BD InMemory) que el servicio
         using var scope = _serviceProvider.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<AdminDbContext>();
-        var log = await context.AuditLogs.FirstOrDefaultAsync();
+        var log = await context.AuditLogs.AsNoTracking().FirstOrDefaultAsync();
         log.Should().NotBeNull();
         log!.CursorId.Should().Be(cursorId);
         log.Username.Should().Be(username);
@@ -100,7 +100,7 @@ public class AuditLogServiceTests
         // Assert
         using var scope = _serviceProvider.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<AdminDbContext>();
-        var log = await context.AuditLogs.FirstAsync();
+        var log = await context.AuditLogs.AsNoTracking().FirstAsync();
         log.Should().NotBeNull();
         log.AdditionalData.Should().BeNull();
         log.IsActive.Should().BeTrue();
