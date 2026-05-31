@@ -1,7 +1,16 @@
-1. Verify the project compile state
-2. Identify async voids and `.Result` using auditor script
-3. Analyze `List<T>` usage in Application/Api layers vs `IEnumerable<T>`
-4. Analyze `class` vs `sealed record` / `record` for DTOs/Requests/Responses and `sealed class` for Handlers in the Application layer
-5. Write the output to `docs/audits/AUDITORIA_YYYY_MM_DD.md`
-6. Commit the report
-7. Trigger `SddIA/process/correccion-auditorias` to execute corrections
+1. **Modificar firmas en `AdminJsonDataSeeder.cs` para soportar `CancellationToken`**
+   - Actualizar los métodos `SeedAllAsync`, `SeedUsersAsync`, `SeedLanguagesAsync`, `SeedCountriesAsync`, `SeedStatesAsync`, `SeedCitiesAsync`, `SeedPostalCodesAsync`, `SeedAdminUsersAsync`, `SeedCompaniesAsync` para aceptar `CancellationToken cancellationToken = default`.
+2. **Añadir `CancellationToken` y `AsNoTracking` a las operaciones de Entity Framework en `AdminJsonDataSeeder.cs`**
+   - Modificar las llamadas de `ToListAsync()` para incluir `cancellationToken` y `AsNoTracking()`.
+   - Modificar las llamadas de `SaveChangesAsync()` para incluir `cancellationToken`.
+3. **Modificar firmas en `WebAppExtensions.cs` para propagar el `CancellationToken` si es posible**
+   - Verificar si `SeedAllAsync()` es llamado con `CancellationToken` y propagarlo.
+4. **Modificar `AdminAuthService.cs` y `AuditLogService.cs`**
+   - Actualizar los métodos que realizan llamadas a EF Core para propagar `CancellationToken`.
+5. **Comprobar si hay otras llamadas a EF Core sin `CancellationToken`**
+   - Analizar el resto de la capa Application/Infrastructure y añadir la propagación donde falte.
+6. **Ejecutar pruebas unitarias**
+   - Usar `dotnet test src/GesFer.Admin.Back.sln --filter Category!=E2E` para asegurar que todo compila y pasa correctamente.
+7. **Completar pasos pre-commit**
+   - Ejecutar `pre_commit_instructions` para asegurar las validaciones y creación de archivos necesarios.
+   - Guardar los cambios.

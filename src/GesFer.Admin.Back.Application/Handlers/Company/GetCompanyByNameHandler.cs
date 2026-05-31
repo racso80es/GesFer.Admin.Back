@@ -65,7 +65,8 @@ public sealed class GetCompanyByNameHandler : IRequestHandler<GetCompanyByNameCo
                 action: "CompanyGetByNameNotFound",
                 httpMethod: HttpMethod,
                 path: Path,
-                additionalData: notFoundData);
+                additionalData: notFoundData,
+                cancellationToken: cancellationToken);
             return null;
         }
 
@@ -76,7 +77,8 @@ public sealed class GetCompanyByNameHandler : IRequestHandler<GetCompanyByNameCo
             action: "CompanyGetByNameSuccess",
             httpMethod: HttpMethod,
             path: Path,
-            additionalData: successData);
+            additionalData: successData,
+            cancellationToken: cancellationToken);
 
         return company;
     }
