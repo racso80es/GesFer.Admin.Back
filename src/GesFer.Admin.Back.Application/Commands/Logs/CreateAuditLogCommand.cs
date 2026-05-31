@@ -23,7 +23,8 @@ public sealed class CreateAuditLogHandler : IRequestHandler<CreateAuditLogComman
             request.Dto.Action ?? string.Empty,
             request.Dto.HttpMethod ?? string.Empty,
             request.Dto.Path ?? string.Empty,
-            request.Dto.AdditionalData
+            request.Dto.AdditionalData,
+            cancellationToken
         );
         return Unit.Value;
     }
