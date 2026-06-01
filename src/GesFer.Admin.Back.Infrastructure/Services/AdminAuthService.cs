@@ -21,7 +21,7 @@ public class AdminAuthService : IAdminAuthService
     /// <summary>
     /// Autentica un usuario administrativo por username y contraseña
     /// </summary>
-    public async Task<AdminUser?> AuthenticateAsync(string username, string password)
+    public async Task<AdminUser?> AuthenticateAsync(string username, string password, CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             return null;
@@ -34,7 +34,8 @@ public class AdminAuthService : IAdminAuthService
             .Where(u => u.Username == normalizedUsername
                 && u.IsActive
                 && u.DeletedAt == null)
-            .FirstOrDefaultAsync();
+            .AsNoTracking()
+            .FirstOrDefaultAsync(cancellationToken);
 
         if (adminUser == null)
             return null;
