@@ -59,7 +59,7 @@ public sealed class GetCompanyByNameHandler : IRequestHandler<GetCompanyByNameCo
         if (company == null)
         {
             var notFoundData = BuildAdditionalData(request.ClientIp, request.UserAgent, name, null);
-            await _auditService.LogActionAsync(
+            await _auditService.LogActionAsync(cancellationToken: cancellationToken,
                 cursorId: cursorId,
                 username: username,
                 action: "CompanyGetByNameNotFound",
@@ -70,7 +70,7 @@ public sealed class GetCompanyByNameHandler : IRequestHandler<GetCompanyByNameCo
         }
 
         var successData = BuildAdditionalData(request.ClientIp, request.UserAgent, name, company.Id);
-        await _auditService.LogActionAsync(
+        await _auditService.LogActionAsync(cancellationToken: cancellationToken,
             cursorId: cursorId,
             username: username,
             action: "CompanyGetByNameSuccess",

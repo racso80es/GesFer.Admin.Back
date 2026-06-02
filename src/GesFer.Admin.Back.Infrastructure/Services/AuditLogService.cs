@@ -26,7 +26,7 @@ public class AuditLogService : IAuditLogService
     /// Registra un log de auditoría con el Cursor ID del administrador.
     /// Usa Sequential GUIDs para el Id del log. Scope independiente para evitar conflictos de DbContext.
     /// </summary>
-    public async Task LogActionAsync(string cursorId, string username, string action, string httpMethod, string path, string? additionalData = null)
+    public async Task LogActionAsync(string cursorId, string username, string action, string httpMethod, string path, string? additionalData = null, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -47,7 +47,7 @@ public class AuditLogService : IAuditLogService
             };
 
             context.AuditLogs.Add(auditLog);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(cancellationToken);
             _logger.LogDebug("AuditLog registrado: Action={Action}, Username={Username}, Path={Path}", action, username, path);
         }
         catch (Exception ex)
