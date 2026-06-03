@@ -4,5 +4,5 @@ namespace GesFer.Admin.Back.Application.Common.Interfaces;
 
 public interface IAdminAuthService
 {
-    Task<AdminUser?> AuthenticateAsync(string username, string password);
+    Task<AdminUser?> AuthenticateAsync(string username, string password, CancellationToken cancellationToken = default);
 }
