@@ -111,12 +111,12 @@ public class AdminJsonDataSeeder
     /// Carga todos los seeds de Admin en orden: Languages -> Countries -> States -> Cities -> PostalCodes -> Companies -> AdminUsers.
     /// Responsabilidad única: carga conjunta de datos Admin para BD compartida.
     /// </summary>
-    public async Task<AdminSeedResult> SeedAllAsync()
+    public async Task<AdminSeedResult> SeedAllAsync(CancellationToken cancellationToken = default)
     {
         var result = new AdminSeedResult();
 
         // 1. Languages
-        var languagesResult = await SeedLanguagesAsync();
+        var languagesResult = await SeedLanguagesAsync(cancellationToken);
         if (languagesResult.Loaded)
         {
             result.Loaded = true;
@@ -124,7 +124,7 @@ public class AdminJsonDataSeeder
         }
 
         // 2. Countries
-        var countriesResult = await SeedCountriesAsync();
+        var countriesResult = await SeedCountriesAsync(cancellationToken);
         if (countriesResult.Loaded)
         {
             result.Loaded = true;
@@ -132,7 +132,7 @@ public class AdminJsonDataSeeder
         }
 
         // 3. States
-        var statesResult = await SeedStatesAsync();
+        var statesResult = await SeedStatesAsync(cancellationToken);
         if (statesResult.Loaded)
         {
             result.Loaded = true;
@@ -140,7 +140,7 @@ public class AdminJsonDataSeeder
         }
 
         // 4. Cities
-        var citiesResult = await SeedCitiesAsync();
+        var citiesResult = await SeedCitiesAsync(cancellationToken);
         if (citiesResult.Loaded)
         {
             result.Loaded = true;
@@ -148,7 +148,7 @@ public class AdminJsonDataSeeder
         }
 
         // 5. PostalCodes
-        var postalCodesResult = await SeedPostalCodesAsync();
+        var postalCodesResult = await SeedPostalCodesAsync(cancellationToken);
         if (postalCodesResult.Loaded)
         {
             result.Loaded = true;
@@ -156,7 +156,7 @@ public class AdminJsonDataSeeder
         }
 
         // 6. Companies
-        var companiesResult = await SeedCompaniesAsync();
+        var companiesResult = await SeedCompaniesAsync(cancellationToken);
         if (companiesResult.Loaded)
         {
             result.Loaded = true;
@@ -164,7 +164,7 @@ public class AdminJsonDataSeeder
         }
 
         // 7. Users (multi-tenant)
-        var usersResult = await SeedUsersAsync();
+        var usersResult = await SeedUsersAsync(cancellationToken);
         if (usersResult.Loaded)
         {
             result.Loaded = true;
@@ -172,7 +172,7 @@ public class AdminJsonDataSeeder
         }
 
         // 8. AdminUsers (usuarios administrativos)
-        var adminUsersResult = await SeedAdminUsersAsync();
+        var adminUsersResult = await SeedAdminUsersAsync(cancellationToken);
         if (adminUsersResult.Loaded)
         {
             result.Loaded = true;
@@ -184,7 +184,7 @@ public class AdminJsonDataSeeder
     /// <summary>
     /// Carga usuarios multi-tenant desde users.json.
     /// </summary>
-    public async Task<AdminSeedResult> SeedUsersAsync()
+    public async Task<AdminSeedResult> SeedUsersAsync(CancellationToken cancellationToken = default)
     {
         var result = new AdminSeedResult();
         var filePath = Path.Combine(_seedsPath, "users.json");
@@ -201,11 +201,11 @@ public class AdminJsonDataSeeder
 
         // Cache de companies válidas para evitar FKs/refs inválidas
         var validCompanyIds = new HashSet<Guid>(
-            await _context.Companies.IgnoreQueryFilters().Select(x => x.Id).ToListAsync()
+            await _context.Companies.IgnoreQueryFilters().Select(x => x.Id).ToListAsync(cancellationToken)
         );
 
         // Diccionario por (CompanyId, Username) para aplicar idempotencia y reactivación
-        var existingUsers = await _context.Users.IgnoreQueryFilters().ToListAsync();
+        var existingUsers = await _context.Users.IgnoreQueryFilters().ToListAsync(cancellationToken);
         var existingByKey = existingUsers
             .GroupBy(u => (u.CompanyId, u.Username))
             .ToDictionary(g => g.Key, g => g.First());
@@ -316,7 +316,7 @@ public class AdminJsonDataSeeder
 
         if (created > 0 || updated > 0)
         {
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
             result.Loaded = true;
             if (created > 0) result.Entities.Add($"{created} Users created");
             if (updated > 0) result.Entities.Add($"{updated} Users updated");
@@ -355,7 +355,7 @@ public class AdminJsonDataSeeder
         return BCrypt.Net.BCrypt.HashPassword(rawPassword);
     }
 
-    public async Task<AdminSeedResult> SeedLanguagesAsync()
+    public async Task<AdminSeedResult> SeedLanguagesAsync(CancellationToken cancellationToken = default)
     {
         var result = new AdminSeedResult();
         var filePath = Path.Combine(_seedsPath, "languages.json");
@@ -368,7 +368,7 @@ public class AdminJsonDataSeeder
         if (languages == null || !languages.Any()) return result;
 
         var existingIds = new HashSet<Guid>(
-            await _context.Languages.IgnoreQueryFilters().Select(x => x.Id).ToListAsync()
+            await _context.Languages.IgnoreQueryFilters().Select(x => x.Id).ToListAsync(cancellationToken)
         );
 
         int count = 0;
@@ -396,14 +396,14 @@ public class AdminJsonDataSeeder
         }
         if (count > 0)
         {
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
             result.Loaded = true;
             result.Entities.Add($"{count} Languages created");
         }
         return result;
     }
 
-    public async Task<AdminSeedResult> SeedCountriesAsync()
+    public async Task<AdminSeedResult> SeedCountriesAsync(CancellationToken cancellationToken = default)
     {
         var result = new AdminSeedResult();
         var filePath = Path.Combine(_seedsPath, "countries.json");
@@ -416,7 +416,7 @@ public class AdminJsonDataSeeder
         if (countries == null || !countries.Any()) return result;
 
         var existingIds = new HashSet<Guid>(
-            await _context.Countries.IgnoreQueryFilters().Select(x => x.Id).ToListAsync()
+            await _context.Countries.IgnoreQueryFilters().Select(x => x.Id).ToListAsync(cancellationToken)
         );
 
         int count = 0;
@@ -449,14 +449,14 @@ public class AdminJsonDataSeeder
         }
         if (count > 0)
         {
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
             result.Loaded = true;
             result.Entities.Add($"{count} Countries created");
         }
         return result;
     }
 
-    public async Task<AdminSeedResult> SeedStatesAsync()
+    public async Task<AdminSeedResult> SeedStatesAsync(CancellationToken cancellationToken = default)
     {
         var result = new AdminSeedResult();
         var filePath = Path.Combine(_seedsPath, "states.json");
@@ -469,7 +469,7 @@ public class AdminJsonDataSeeder
         if (states == null || !states.Any()) return result;
 
         var existingIds = new HashSet<Guid>(
-            await _context.States.IgnoreQueryFilters().Select(x => x.Id).ToListAsync()
+            await _context.States.IgnoreQueryFilters().Select(x => x.Id).ToListAsync(cancellationToken)
         );
 
         int count = 0;
@@ -502,14 +502,14 @@ public class AdminJsonDataSeeder
         }
         if (count > 0)
         {
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
             result.Loaded = true;
             result.Entities.Add($"{count} States created");
         }
         return result;
     }
 
-    public async Task<AdminSeedResult> SeedCitiesAsync()
+    public async Task<AdminSeedResult> SeedCitiesAsync(CancellationToken cancellationToken = default)
     {
         var result = new AdminSeedResult();
         var filePath = Path.Combine(_seedsPath, "cities.json");
@@ -522,7 +522,7 @@ public class AdminJsonDataSeeder
         if (cities == null || !cities.Any()) return result;
 
         var existingIds = new HashSet<Guid>(
-            await _context.Cities.IgnoreQueryFilters().Select(x => x.Id).ToListAsync()
+            await _context.Cities.IgnoreQueryFilters().Select(x => x.Id).ToListAsync(cancellationToken)
         );
 
         int count = 0;
@@ -554,7 +554,7 @@ public class AdminJsonDataSeeder
         }
         if (count > 0)
         {
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
             result.Loaded = true;
             result.Entities.Add($"{count} Cities created");
         }
@@ -564,7 +564,7 @@ public class AdminJsonDataSeeder
     /// <summary>
     /// Carga códigos postales desde postal-codes.json (maestro geo).
     /// </summary>
-    public async Task<AdminSeedResult> SeedPostalCodesAsync()
+    public async Task<AdminSeedResult> SeedPostalCodesAsync(CancellationToken cancellationToken = default)
     {
         var result = new AdminSeedResult();
         var filePath = Path.Combine(_seedsPath, "postal-codes.json");
@@ -577,7 +577,7 @@ public class AdminJsonDataSeeder
         if (postalCodes == null || !postalCodes.Any()) return result;
 
         var existingIds = new HashSet<Guid>(
-            await _context.PostalCodes.IgnoreQueryFilters().Select(x => x.Id).ToListAsync()
+            await _context.PostalCodes.IgnoreQueryFilters().Select(x => x.Id).ToListAsync(cancellationToken)
         );
 
         int count = 0;
@@ -609,7 +609,7 @@ public class AdminJsonDataSeeder
         }
         if (count > 0)
         {
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
             result.Loaded = true;
             result.Entities.Add($"{count} PostalCodes created");
         }
@@ -619,7 +619,7 @@ public class AdminJsonDataSeeder
     /// <summary>
     /// Carga usuarios administrativos desde admin-users.json
     /// </summary>
-    public async Task<AdminSeedResult> SeedAdminUsersAsync()
+    public async Task<AdminSeedResult> SeedAdminUsersAsync(CancellationToken cancellationToken = default)
     {
         var result = new AdminSeedResult();
         var filePath = Path.Combine(_seedsPath, "admin-users.json");
@@ -642,7 +642,7 @@ public class AdminJsonDataSeeder
             return result;
         }
 
-        var allUsers = await _context.AdminUsers.IgnoreQueryFilters().ToListAsync();
+        var allUsers = await _context.AdminUsers.IgnoreQueryFilters().ToListAsync(cancellationToken);
         var existingUsersDict = allUsers
             .GroupBy(u => u.Username)
             .ToDictionary(g => g.Key, g => g.First());
@@ -726,7 +726,7 @@ public class AdminJsonDataSeeder
 
         if (count > 0)
         {
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
             result.Loaded = true;
             result.Entities.Add($"{count} Admin User(s) created/updated");
         }
@@ -743,7 +743,7 @@ public class AdminJsonDataSeeder
     /// Carga empresas (Companies) desde companies.json usando AdminDbContext.
     /// Admin es SSOT para Company; en entornos con BD compartida, ejecutar este seed antes que el de Product.
     /// </summary>
-    public async Task<AdminSeedResult> SeedCompaniesAsync()
+    public async Task<AdminSeedResult> SeedCompaniesAsync(CancellationToken cancellationToken = default)
     {
         var result = new AdminSeedResult();
         var filePath = Path.Combine(_seedsPath, "companies.json");
@@ -862,7 +862,7 @@ public class AdminJsonDataSeeder
 
         if (processedCount > 0)
         {
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
             result.Loaded = true;
             result.Entities.Add($"{processedCount} Company(ies)");
         }
