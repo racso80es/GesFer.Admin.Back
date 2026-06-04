@@ -1,0 +1,4 @@
+{
+    "branch_name": "feat/kaizen-missing-asnotracking",
+    "commit_message": "Triaje y activación: Agregar AsNoTracking a consultas read-only"
+}

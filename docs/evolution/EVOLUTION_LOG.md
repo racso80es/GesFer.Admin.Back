@@ -709,3 +709,8 @@ Se eliminaron los archivos `.ps1` (PowerShell scripts) de las cápsulas de skill
 - **paths.featurePath** tools-env-and-seeds — objectives.md.
 - `SddIA/tools/tools-contract.json` — Contrato de herramientas.
 - Rutas de herramientas (Cúmulo): **paths.toolsPath**, **paths.toolCapsules** (`SddIA/agents/cumulo.json`).
+
+## 2026-06-04 — AsNoTracking Optimization (feat/kaizen-missing-asnotracking)
+**Rama:** feat/kaizen-missing-asnotracking.
+**Alcance:**
+- Optimización en memoria de Entity Framework añadiendo AsNoTracking en lecturas read-only.
