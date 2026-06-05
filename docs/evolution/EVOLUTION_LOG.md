@@ -709,3 +709,19 @@ Se eliminaron los archivos `.ps1` (PowerShell scripts) de las cápsulas de skill
 - **paths.featurePath** tools-env-and-seeds — objectives.md.
 - `SddIA/tools/tools-contract.json` — Contrato de herramientas.
 - Rutas de herramientas (Cúmulo): **paths.toolsPath**, **paths.toolCapsules** (`SddIA/agents/cumulo.json`).
+
+---
+
+## 2026-06-05 — Kaizen: Verificación de Auditoría (feat/correccion-2026-06-05)
+
+**Rama:** feat/correccion-2026-06-05
+
+**Alcance:**
+- Ejecución del proceso `correccion-auditorias` para validar estado limpio del repositorio.
+- Formalización del informe de auditoría 100% (AUDITORIA_2026_06_05.md).
+- Generación de artefactos requeridos (objectives.md, spec.md, validacion.md, finalize-process.md) en `docs/features/correccion-2026-06-05/`.
+
+**Referencias:**
+- Auditoría: `docs/audits/AUDITORIA_2026_06_05.md`
+- Documentación: `docs/features/correccion-2026-06-05/`
+- Tarea origen: `docs/tasks/DONE/Kaizen_2026_06_05_auditoria.md`
