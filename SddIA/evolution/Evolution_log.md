@@ -28,3 +28,4 @@
 | b8c7d6e5-f4a3-4b2c-9d8e-7f6a5b4c3d2e | 2026-05-01T00:00:00+00:00 | alta: cápsula verify-pr-protocol + index + Cúmulo + difusión |
 | e4d5f6a7-b8c9-40d0-9f1a-2b3c4d5e6f7a | 2026-05-01T00:00:00+00:00 | modificacion: spec start-api ruta fuente Rust src/bin/start_api.rs |
 | 117d3518-0bd0-4849-bd2b-b2ed75730a90 | 2026-05-09T23:35:22.130148679+00:00 | Añadido AsNoTracking en consultas de logs para prevenir memory leak termodinamico. |
+| 66a8afb5-c14b-42d5-8951-fdbbc278bd49 | 2026-06-05T00:30:15.761927588+00:00 | Formalización de auditoría limpia 2026-06-05 |
