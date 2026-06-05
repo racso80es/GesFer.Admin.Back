@@ -1,3 +1,5 @@
+using Moq;
+using System.Threading;
 using FluentAssertions;
 using System;
 using System.Threading.Tasks;
@@ -43,7 +45,7 @@ public class AdminAuthServiceTests
         await _dbContext.SaveChangesAsync();
 
         // Act
-        var result = await _authService.AuthenticateAsync("admin", password);
+        var result = await _authService.AuthenticateAsync("admin", password, default);
 
         // Assert
         result.Should().NotBeNull();
@@ -69,7 +71,7 @@ public class AdminAuthServiceTests
         await _dbContext.SaveChangesAsync();
 
         // Act
-        var result = await _authService.AuthenticateAsync("admin", "wrongpassword");
+        var result = await _authService.AuthenticateAsync("admin", "wrongpassword", default);
 
         // Assert
         result.Should().BeNull();
@@ -79,7 +81,7 @@ public class AdminAuthServiceTests
     public async Task AuthenticateAsync_ShouldReturnNull_WhenUserDoesNotExist()
     {
         // Act
-        var result = await _authService.AuthenticateAsync("nonexistent", "password");
+        var result = await _authService.AuthenticateAsync("nonexistent", "password", default);
 
         // Assert
         result.Should().BeNull();
@@ -110,7 +112,7 @@ public class AdminAuthServiceTests
         await _dbContext.SaveChangesAsync();
 
         // Act
-        var result = await _authService.AuthenticateAsync("inactive", password);
+        var result = await _authService.AuthenticateAsync("inactive", password, default);
 
         // Assert
         result.Should().BeNull();
@@ -142,7 +144,7 @@ public class AdminAuthServiceTests
         await _dbContext.SaveChangesAsync();
 
         // Act
-        var result = await _authService.AuthenticateAsync("deleted", password);
+        var result = await _authService.AuthenticateAsync("deleted", password, default);
 
         // Assert
         result.Should().BeNull();
@@ -155,7 +157,7 @@ public class AdminAuthServiceTests
     public async Task AuthenticateAsync_ShouldReturnNull_WhenUsernameIsIdNullOrEmpty(string? username)
     {
         // Act
-        var result = await _authService.AuthenticateAsync(username!, "password");
+        var result = await _authService.AuthenticateAsync(username!, "password", default);
 
         // Assert
         result.Should().BeNull();
@@ -168,7 +170,7 @@ public class AdminAuthServiceTests
     public async Task AuthenticateAsync_ShouldReturnNull_WhenPasswordIsIdNullOrEmpty(string? password)
     {
         // Act
-        var result = await _authService.AuthenticateAsync("admin", password!);
+        var result = await _authService.AuthenticateAsync("admin", password!, default);
 
         // Assert
         result.Should().BeNull();
