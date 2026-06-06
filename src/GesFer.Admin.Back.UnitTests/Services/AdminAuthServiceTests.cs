@@ -6,6 +6,7 @@ using GesFer.Admin.Back.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using GesFer.Admin.Back.Infrastructure.Services;
 using Xunit;
+using System.Threading;
 
 namespace GesFer.Admin.Back.UnitTests.Services;
 
@@ -43,7 +44,7 @@ public class AdminAuthServiceTests
         await _dbContext.SaveChangesAsync();
 
         // Act
-        var result = await _authService.AuthenticateAsync("admin", password);
+        var result = await _authService.AuthenticateAsync("admin", password, CancellationToken.None);
 
         // Assert
         result.Should().NotBeNull();
@@ -69,7 +70,7 @@ public class AdminAuthServiceTests
         await _dbContext.SaveChangesAsync();
 
         // Act
-        var result = await _authService.AuthenticateAsync("admin", "wrongpassword");
+        var result = await _authService.AuthenticateAsync("admin", "wrongpassword", CancellationToken.None);
 
         // Assert
         result.Should().BeNull();
@@ -79,7 +80,7 @@ public class AdminAuthServiceTests
     public async Task AuthenticateAsync_ShouldReturnNull_WhenUserDoesNotExist()
     {
         // Act
-        var result = await _authService.AuthenticateAsync("nonexistent", "password");
+        var result = await _authService.AuthenticateAsync("nonexistent", "password", CancellationToken.None);
 
         // Assert
         result.Should().BeNull();
@@ -110,7 +111,7 @@ public class AdminAuthServiceTests
         await _dbContext.SaveChangesAsync();
 
         // Act
-        var result = await _authService.AuthenticateAsync("inactive", password);
+        var result = await _authService.AuthenticateAsync("inactive", password, CancellationToken.None);
 
         // Assert
         result.Should().BeNull();
@@ -142,7 +143,7 @@ public class AdminAuthServiceTests
         await _dbContext.SaveChangesAsync();
 
         // Act
-        var result = await _authService.AuthenticateAsync("deleted", password);
+        var result = await _authService.AuthenticateAsync("deleted", password, CancellationToken.None);
 
         // Assert
         result.Should().BeNull();
@@ -155,7 +156,7 @@ public class AdminAuthServiceTests
     public async Task AuthenticateAsync_ShouldReturnNull_WhenUsernameIsIdNullOrEmpty(string? username)
     {
         // Act
-        var result = await _authService.AuthenticateAsync(username!, "password");
+        var result = await _authService.AuthenticateAsync(username!, "password", CancellationToken.None);
 
         // Assert
         result.Should().BeNull();
@@ -168,12 +169,9 @@ public class AdminAuthServiceTests
     public async Task AuthenticateAsync_ShouldReturnNull_WhenPasswordIsIdNullOrEmpty(string? password)
     {
         // Act
-        var result = await _authService.AuthenticateAsync("admin", password!);
+        var result = await _authService.AuthenticateAsync("admin", password!, CancellationToken.None);
 
         // Assert
         result.Should().BeNull();
     }
-
-    // Note: RefreshTokenAsync tests are skipped as the method is not present in IAdminAuthService/AdminAuthService.
-    // Note: IsBlocked tests are skipped as AdminUser entity does not have an IsBlocked property (IsActive is used).
 }
