@@ -41,7 +41,7 @@ public sealed class AdminLoginHandler : IRequestHandler<AdminLoginCommand, Admin
                 return AdminLoginResult.ValidationError("Usuario y contraseña son requeridos");
             }
 
-            var adminUser = await _authService.AuthenticateAsync(request.UserName, request.Password);
+            var adminUser = await _authService.AuthenticateAsync(request.UserName, request.Password, cancellationToken);
 
             if (adminUser == null)
             {
