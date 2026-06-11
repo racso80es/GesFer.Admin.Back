@@ -40,7 +40,7 @@ public class AdminAuthIntegrationTests
         var context = scope.ServiceProvider.GetRequiredService<AdminDbContext>();
         var auditLogs = await context.AuditLogs
             .Where(a => a.Action == "LoginSuccess" && a.Username == "admin")
-            .ToListAsync();
+            .ToListAsync(System.Threading.CancellationToken.None);
 
         auditLogs.Should().NotBeEmpty("el login exitoso debe registrar un AuditLog con Action=LoginSuccess");
         var log = auditLogs.OrderByDescending(a => a.ActionTimestamp).First();
@@ -113,7 +113,7 @@ public class AdminAuthIntegrationTests
         var context = scope.ServiceProvider.GetRequiredService<AdminDbContext>();
         var auditLogs = await context.AuditLogs
             .Where(a => a.Action == "LoginFailed" && a.Username == "admin")
-            .ToListAsync();
+            .ToListAsync(System.Threading.CancellationToken.None);
 
         auditLogs.Should().NotBeEmpty("el login fallido debe registrar un AuditLog con Action=LoginFailed");
         var log = auditLogs.OrderByDescending(a => a.ActionTimestamp).First();
