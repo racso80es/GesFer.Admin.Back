@@ -40,7 +40,7 @@ public class AuditLogServiceTests
         var additionalData = "{ \"key\": \"value\" }";
 
         // Act
-        await _auditLogService.LogActionAsync(cursorId, username, action, httpMethod, path, additionalData);
+        await _auditLogService.LogActionAsync(cursorId, username, action, httpMethod, path, additionalData, default);
 
         // Assert - usar el mismo DbContext (misma BD InMemory) que el servicio
         using var scope = _serviceProvider.CreateScope();
@@ -77,7 +77,7 @@ public class AuditLogServiceTests
         var failService = new AuditLogService(failProvider, _loggerMock.Object);
 
         // Act
-        Func<Task> act = async () => await failService.LogActionAsync("cursor", "user", "action", "POST", "/path", null);
+        Func<Task> act = async () => await failService.LogActionAsync("cursor", "user", "action", "POST", "/path", null, default);
 
         // Assert
         await act.Should().NotThrowAsync();
@@ -95,7 +95,7 @@ public class AuditLogServiceTests
     public async Task LogActionAsync_ShouldHandleNullAdditionalData_AndSetIsActive()
     {
         // Act
-        await _auditLogService.LogActionAsync("cursor", "user", "action", "POST", "/path", null);
+        await _auditLogService.LogActionAsync("cursor", "user", "action", "POST", "/path", null, default);
 
         // Assert
         using var scope = _serviceProvider.CreateScope();
