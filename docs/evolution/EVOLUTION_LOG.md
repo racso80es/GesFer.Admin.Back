@@ -709,3 +709,6 @@ Se eliminaron los archivos `.ps1` (PowerShell scripts) de las cápsulas de skill
 - **paths.featurePath** tools-env-and-seeds — objectives.md.
 - `SddIA/tools/tools-contract.json` — Contrato de herramientas.
 - Rutas de herramientas (Cúmulo): **paths.toolsPath**, **paths.toolCapsules** (`SddIA/agents/cumulo.json`).
+
+## [2026-06-14] Audit and Cleanup
+- Fixed missing CancellationToken in AdminAuthIntegrationTests.cs.
