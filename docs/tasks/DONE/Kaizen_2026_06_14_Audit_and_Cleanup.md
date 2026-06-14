@@ -1,6 +1,6 @@
 ---
 priority: high
-created: $(date -I)
+created: 2026-06-14
 title: "Audit and Cleanup: Ensure AsNoTracking and CancellationTokens"
 ---
 
