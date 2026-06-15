@@ -43,7 +43,7 @@ public class AdminApiE2ETests : IClassFixture<E2EFixture>
         var context = scope.ServiceProvider.GetRequiredService<AdminDbContext>();
         var auditLogs = await context.AuditLogs
             .Where(a => a.Action == "LoginSuccess" && a.Username == "admin")
-            .ToListAsync();
+            .ToListAsync(CancellationToken.None);
 
         auditLogs.Should().NotBeEmpty("el login exitoso debe persistir un registro en AuditLogs");
         var log = auditLogs.OrderByDescending(a => a.ActionTimestamp).First();
@@ -65,7 +65,7 @@ public class AdminApiE2ETests : IClassFixture<E2EFixture>
         var context = scope.ServiceProvider.GetRequiredService<AdminDbContext>();
         var auditLogs = await context.AuditLogs
             .Where(a => a.Action == "LoginFailed" && a.Username == "admin")
-            .ToListAsync();
+            .ToListAsync(CancellationToken.None);
 
         auditLogs.Should().NotBeEmpty("el login fallido debe persistir un registro LoginFailed en AuditLogs");
     }

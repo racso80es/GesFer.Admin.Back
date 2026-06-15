@@ -56,7 +56,7 @@ public class E2EFixture : WebApplicationFactory<Program>, IAsyncLifetime
         await context.Database.EnsureCreatedAsync();
 
         var seeder = scope.ServiceProvider.GetRequiredService<AdminJsonDataSeeder>();
-        await seeder.SeedAllAsync();
+        await seeder.SeedAllAsync(CancellationToken.None);
     }
 
     public new async Task DisposeAsync()

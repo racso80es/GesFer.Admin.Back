@@ -43,7 +43,7 @@ public class CreateCompanyHandlerTests
         result.TaxId.Should().Be(dto.TaxId);
         result.Address.Should().Be(dto.Address);
         result.IsActive.Should().BeTrue();
-        var saved = await context.Companies.FirstOrDefaultAsync(c => c.Id == result.Id);
+        var saved = await context.Companies.FirstOrDefaultAsync(c => c.Id == result.Id, CancellationToken.None);
         saved.Should().NotBeNull();
         saved!.Name.Should().Be(dto.Name);
     }
