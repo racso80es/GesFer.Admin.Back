@@ -62,7 +62,7 @@ public class AdminWebAppFactory : WebApplicationFactory<Program>, IAsyncLifetime
 
         // Run Seeders (Companies first - Admin SSOT; then Admin Users)
         var seeder = scope.ServiceProvider.GetRequiredService<AdminJsonDataSeeder>();
-        await seeder.SeedAllAsync();
+        await seeder.SeedAllAsync(CancellationToken.None);
     }
 
     public new async Task DisposeAsync()

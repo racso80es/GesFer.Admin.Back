@@ -41,7 +41,7 @@ public class DeleteCompanyHandlerTests
         await handler.Handle(command, CancellationToken.None);
 
         // Assert
-        var deletedCompany = await context.Companies.IgnoreQueryFilters().FirstOrDefaultAsync(c => c.Id == companyId);
+        var deletedCompany = await context.Companies.IgnoreQueryFilters().FirstOrDefaultAsync(c => c.Id == companyId, CancellationToken.None);
         deletedCompany.Should().NotBeNull();
         deletedCompany!.DeletedAt.Should().NotBeNull();
         deletedCompany.IsActive.Should().BeFalse();
