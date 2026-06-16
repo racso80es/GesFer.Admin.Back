@@ -709,3 +709,11 @@ Se eliminaron los archivos `.ps1` (PowerShell scripts) de las cápsulas de skill
 - **paths.featurePath** tools-env-and-seeds — objectives.md.
 - `SddIA/tools/tools-contract.json` — Contrato de herramientas.
 - Rutas de herramientas (Cúmulo): **paths.toolsPath**, **paths.toolCapsules** (`SddIA/agents/cumulo.json`).
+
+[2026-06-16] [feat/kaizen-ef-core-as-no-tracking] [Auditada la correcta aplicación de AsNoTracking en la capa de Application, con resultado 100% libre de errores. Documentación de kaizen generada y completada.] [DONE]
+
+### 2026-06-16: Kaizen EF Core AsNoTracking
+**Resumen:** Realizada una revisión en profundidad bajo la iniciativa Kaizen para validar el cumplimiento de la norma de prevención de fugas de memoria, comprobando el uso sistemático de `AsNoTracking()` en las consultas de sólo lectura con Entity Framework Core. El análisis confirmó un cumplimiento del 100% de la directiva en las capas de aplicación y de infraestructura (Unit tests y handlers revisados), sin ser necesarias mutaciones de código.
+**Referencias:**
+- **paths.tasksPath/DONE/** Kaizen_2026_06_16_ef_core_as_no_tracking.md
+- **paths.featurePath** kaizen-ef-core-as-no-tracking — objectives.md
