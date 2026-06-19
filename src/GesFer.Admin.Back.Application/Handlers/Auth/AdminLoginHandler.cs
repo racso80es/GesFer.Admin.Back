@@ -41,7 +41,7 @@ public sealed class AdminLoginHandler : IRequestHandler<AdminLoginCommand, Admin
                 return AdminLoginResult.ValidationError("Usuario y contraseña son requeridos");
             }
 
-            var adminUser = await _authService.AuthenticateAsync(request.UserName, request.Password);
+            var adminUser = await _authService.AuthenticateAsync(request.UserName, request.Password, cancellationToken);
 
             if (adminUser == null)
             {
@@ -52,7 +52,8 @@ public sealed class AdminLoginHandler : IRequestHandler<AdminLoginCommand, Admin
                     action: "LoginFailed",
                     httpMethod: HttpMethod,
                     path: LoginPath,
-                    additionalData: additionalData);
+                    additionalData: additionalData,
+                    cancellationToken: cancellationToken);
 
                 return AdminLoginResult.AuthFailure("Credenciales administrativas inválidas");
             }
@@ -79,7 +80,8 @@ public sealed class AdminLoginHandler : IRequestHandler<AdminLoginCommand, Admin
                 action: "LoginSuccess",
                 httpMethod: HttpMethod,
                 path: LoginPath,
-                additionalData: successAdditionalData);
+                additionalData: successAdditionalData,
+                cancellationToken: cancellationToken);
 
             return AdminLoginResult.Success(response);
         }
