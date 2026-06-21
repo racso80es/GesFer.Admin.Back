@@ -41,7 +41,7 @@ public class AdminLoginHandlerTests
         result.IsSuccess.Should().BeFalse();
         result.HttpStatusCode.Should().Be(400);
         result.ErrorMessage.Should().Be("Usuario y contraseña son requeridos");
-        _mockAuthService.Verify(s => s.AuthenticateAsync(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+        _mockAuthService.Verify(s => s.AuthenticateAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Never);
         _mockAuditService.Verify(s => s.LogActionAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string?>()), Times.Never);
     }
 
@@ -55,14 +55,14 @@ public class AdminLoginHandlerTests
         result.IsSuccess.Should().BeFalse();
         result.HttpStatusCode.Should().Be(400);
         result.ErrorMessage.Should().Be("Usuario y contraseña son requeridos");
-        _mockAuthService.Verify(s => s.AuthenticateAsync(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+        _mockAuthService.Verify(s => s.AuthenticateAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Never);
     }
 
     [Fact]
     public async Task Handle_WithInvalidCredentials_ShouldReturnAuthFailure_AndLogAudit()
     {
         var command = new AdminLoginCommand("invalid", "wrong", "127.0.0.1", "Mozilla/5.0");
-        _mockAuthService.Setup(s => s.AuthenticateAsync("invalid", "wrong"))
+        _mockAuthService.Setup(s => s.AuthenticateAsync("invalid", "wrong", It.IsAny<CancellationToken>()))
             .ReturnsAsync((AdminUser?)null);
 
         var result = await _handler.Handle(command, default);
@@ -92,7 +92,7 @@ public class AdminLoginHandlerTests
             Email = "admin@example.com"
         };
         var command = new AdminLoginCommand("admin", "admin123", "192.168.1.1", "Postman");
-        _mockAuthService.Setup(s => s.AuthenticateAsync("admin", "admin123"))
+        _mockAuthService.Setup(s => s.AuthenticateAsync("admin", "admin123", It.IsAny<CancellationToken>()))
             .ReturnsAsync(adminUser);
         _mockJwtService.Setup(s => s.GenerateAdminToken(userId.ToString(), "admin", userId))
             .Returns("jwt-token");
